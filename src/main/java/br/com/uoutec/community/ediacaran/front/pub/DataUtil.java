@@ -24,7 +24,7 @@ public class DataUtil {
 	}
 	
 	public static Map<?,?> decode(String o) {
-		return (Map<?, ?>)gson.fromJson(o, Object.class);
+		return (Map<?,?>)gson.fromJson(o, Object.class);
 	}
 	
 }

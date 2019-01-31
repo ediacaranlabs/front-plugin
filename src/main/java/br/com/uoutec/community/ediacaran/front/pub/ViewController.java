@@ -3,6 +3,9 @@ package br.com.uoutec.community.ediacaran.front.pub;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -44,24 +47,97 @@ public class ViewController {
 	public WebResultAction show(@Basic(bean="path")String path, WebResultAction result
 			) throws IOException, PluginException {
 		
-		File dta = new File(serverBootstrap.getWebapp(), path);
+		Map<Object,Object> vars = loadPageData(path);
+		String view             = getPageView(vars);
 		
-		if(!dta.exists() || !dta.canRead()) {
+		if(view == null) {
 			return result.setResponseStatus(HttpStatus.NOT_FOUND);
 		}
 		
-		String text = readData(dta);
-		Map<?,?> data = DataUtil.decode(text);
+		result.setView(view, true);
+		result.add("vars", vars);
+		
+		return result;
+	}
+	
+	private String getPageView(Map<Object,Object> vars) throws PluginException {
+		
+		Object type;
+		
+		if(vars == null || (type = vars.get("template")) == null){
+			return null;
+		}
 		
 		PluginMetadata pmd = pluginManager.findById(PluginInstaller.PLUGIN);
 		PluginPropertyValue ppv = pmd.getValue("template");
 		String template = ppv.getValue();
 		
-		Object type = data.get("template");
+		return "/plugins/community/ediacaran/front/" + template + "/" + type + ".jsp";
+	}
+	
+	private Map<Object,Object> loadPageData(String path) throws IOException{
 		
-		result.setView("/plugins/community/ediacaran/front/" + template + "/" + type + ".jsp", true);
-		result.add("vars", data);
-		return result;
+		File fData              = new File(serverBootstrap.getWebapp(), path);
+		Map<Object,Object> data = getData(fData);
+		
+		if(data != null) {
+			
+			List<Map<Object,Object>> incData = loadIncludes(data);
+			
+			Map<Object,Object> vars = new HashMap<Object,Object>();
+			
+			for(Map<Object,Object> i: incData) {
+				vars.putAll(i);
+			}
+			
+			vars.putAll(data);
+			return vars;
+		}
+		
+		return null;
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<Map<Object,Object>> loadIncludes(Map<Object,Object> data) throws IOException{
+		
+		List<Object> inc = (List<Object>)data.get("includes");
+		
+		List<Map<Object,Object>> incData = new ArrayList<Map<Object,Object>>();
+		
+		if(inc != null) {
+			
+			for(Object i: inc) {
+				
+				File fInc = new File(serverBootstrap.getWebapp(), String.valueOf(i));
+				Map<Object,Object> dataInc = getData(fInc);
+				
+				if(dataInc != null) {
+					incData.add(dataInc);
+				}
+				
+			}
+			
+		}
+		
+		return incData;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private Map<Object,Object> getData(File dta) throws IOException{
+		
+		dta = dta.getCanonicalFile();
+		
+		if(!dta.getAbsolutePath().startsWith(serverBootstrap.getWebapp().getAbsolutePath())) {
+			return null;
+		}
+		
+		if(!dta.exists() || !dta.canRead()) {
+			return null;
+		}
+		
+		String text = readData(dta);
+		return (Map<Object, Object>) DataUtil.decode(text);
 	}
 	
 	private String readData(File f) throws IOException {
@@ -84,4 +160,5 @@ public class ViewController {
 			}
 		}
 	}
+	
 }
