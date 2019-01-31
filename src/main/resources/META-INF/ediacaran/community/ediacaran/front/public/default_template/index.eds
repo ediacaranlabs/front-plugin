@@ -1,0 +1,65 @@
+[
+	{
+		code: "title",
+		name: "Title",
+		type: "TEXT",
+		description: "Título da página",
+		comment: "",
+		empty: false,
+		min: 1,
+		max: 256,
+		regex: null,
+		order: 0
+	},
+	{
+		code: "top",
+		name: "Top",
+		type: "OBJECT",
+		description: "Mensagem do topo",
+		comment: "",
+		empty: false,
+		min: 0,
+		max: 0,
+		regex: null,
+		order: 0,
+		properties: [
+			{
+				code: "content",
+				name: "Content",
+				type: "TEXT",
+				description: "Texto",
+				comment: "",
+				empty: false,
+				min: 1,
+				max: 256,
+				regex: null,
+				order: 0
+			},
+			{
+				code: "linkTitle",
+				name: "Title of link",
+				type: "TEXT",
+				description: "Título do link",
+				comment: "",
+				empty: false,
+				min: 1,
+				max: 256,
+				regex: null,
+				order: 0
+			},
+			{
+				code: "linkText",
+				name: "Text of link",
+				type: "TEXT",
+				description: "Texto do link",
+				comment: "",
+				empty: false,
+				min: 1,
+				max: 256,
+				regex: null,
+				order: 0
+			},
+			
+		] 
+	}
+]

@@ -23,6 +23,9 @@
   <!-- Theme skin -->
   <link href="/plugins/community/ediacaran/front/default_template/skins/default.css" rel="stylesheet" />
   
+  <!-- boxed bg -->
+  <link id="bodybg" href="/plugins/community/ediacaran/front/default_template/bodybg/bg1.css" rel="stylesheet" type="text/css" />
+  
   <!-- Fav and touch icons -->
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="default_template/ico/apple-touch-icon-144-precomposed.png" />
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="default_template/ico/apple-touch-icon-114-precomposed.png" />
@@ -111,41 +114,34 @@
         </div>
       </div>
     </header>
-    
-    <!-- end header -->
-    <c:if test="${!empty vars['slider']}">
-    <c:set var="item" value="${vars['slider']}" scope="request"/>
-    <jsp:include page="/plugins/community/ediacaran/front/${plugins.front.template}/includes/index/slider/${vars['slider']['template']}.jsp"/>
-    </c:if>
 
-    <c:if test="${!empty vars['cta']}">
-    <c:set var="item" value="${vars['cta']}" scope="request"/>
-	<jsp:include page="/plugins/community/ediacaran/front/${plugins.front.template}/includes/index/cta/${vars['cta']['template']}.jsp"/>
-    </c:if>
-    
-    <section id="content">
-      <div class="container">
-	    <c:set var="item" value="${vars['body']}" scope="request"/>
-		<jsp:include page="/plugins/community/ediacaran/front/${plugins.front.template}/includes/index/${vars['body']['template']}.jsp"/>
-      </div>
-    </section>
-    
-    <section id="bottom">
+    <section id="inner-headline">
       <div class="container">
         <div class="row">
-          <div class="span12">
-            <div class="aligncenter">
-              <div id="twitter-wrapper">
-                <div id="twitter">
-                </div>
-              </div>
+          <div class="span4">
+            <div class="inner-heading">
+              <h2>${vars['title']}</h2>
             </div>
+          </div>
+          <div class="span8">
+            <ul class="breadcrumb">
+              <c:forEach items="${vars['breadcrumb']}" var="item">
+              <li><a href="${item.link}"><c:if test="${!empty item.icon}"><i class="${item.icon}"></i></c:if>${item.text}</a><i class="icon-angle-right"></i></li>
+              </c:forEach>
+              <li class="active">${vars['title']}</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
     
-    <footer>
+    <section id="content">
+      <div class="container">
+        <jsp:include page="/plugins/community/ediacaran/front/${plugins.front.template}/includes/page/${vars['body']['template']}.jsp"/>
+      </div>
+    </section>
+    
+        <footer>
       <div class="container">
         <div class="row">
 	    <c:forEach items="${vars['footer']['itens']}" var="item" varStatus="_count">
