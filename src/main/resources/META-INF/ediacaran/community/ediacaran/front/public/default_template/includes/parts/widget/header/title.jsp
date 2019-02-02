@@ -11,7 +11,6 @@
 			<div class="span8">
 				<ul class="breadcrumb">
 	    			<c:forEach items="${entity['breadcrumb']}" var="item">
-					</c:forEach>
 					<li>
 						<a href="${item['link']}">
 						<c:if test="${!empty item['icon']}">
@@ -21,6 +20,7 @@
 						</a>
 						<i class="icon-angle-right"></i>
 					</li>
+					</c:forEach>
 					
 					<li class="active">${vars['title']}</li>
 				</ul>
