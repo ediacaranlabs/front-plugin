@@ -46,7 +46,7 @@
     
     <section id="content">
       <div class="container">
-        <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/page/${vars['body']['template']}.jsp"/>
+        <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/widget/body/${vars['body']['template']}.jsp"/>
       </div>
     </section>
     

@@ -1,9 +1,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="entity" value="${entity}"/>
         <div class="row">
           <div class="span12">
             <div class="row">
             
-            <c:forEach items="${item['itens']}" var="box" varStatus="count">
+            <c:forEach items="${entity['content']}" var="box" varStatus="count">
               <div class="span3">
                 <div class="box aligncenter">
                   <div class="aligncenter icon">
