@@ -1,5 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="entity" value="${entity}"/>
+<c:set var="entity" value="${requestScope.entity}"/>
 <c:forEach items="${entity['content']}" var="item" varStatus="count">
 
 	<c:if test="${entity['separator'] == 'true' && count.index > 0}">
@@ -14,6 +14,6 @@
 	</c:if>
 	
 	<c:set var="entity" value="${item}" scope="request"/>
-	<jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/${item['template']}.jsp"/>
+	<jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/${requestScope.entity['template']}.jsp"/>
 	
 </c:forEach>

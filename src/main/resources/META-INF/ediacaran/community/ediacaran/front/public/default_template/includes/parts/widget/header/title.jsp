@@ -1,5 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="entity" value="${entity}"/>
+<c:set var="entity" value="${requestScope.entity}"/>
 <section id="inner-headline">
 	<div class="container">
 		<div class="row">
