@@ -127,21 +127,6 @@
       </div>
     </section>
     
-    <section id="bottom">
-      <div class="container">
-        <div class="row">
-          <div class="span12">
-            <div class="aligncenter">
-              <div id="twitter-wrapper">
-                <div id="twitter">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
     <footer>
       <div class="container">
         <div class="row">

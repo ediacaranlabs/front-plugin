@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="span4">
 				<div class="inner-heading">
-					<h2>${vars['title']}</h2>
+					<h2>${entity['title']}</h2>
 				</div>
 			</div>
 			<div class="span8">
