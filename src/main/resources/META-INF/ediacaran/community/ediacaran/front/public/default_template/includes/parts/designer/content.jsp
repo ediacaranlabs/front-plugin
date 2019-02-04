@@ -2,9 +2,7 @@
 <c:set var="entity" value="${requestScope.entity}"/>
            <c:choose>
            	<c:when test="${entity['content'].getClass().simpleName == 'String'}">
-           	<div class="span12">
-           		${entity['content']}
-        	</div>
+     		${entity['content']}
            	</c:when>
            	<c:otherwise>
            	<c:set var="entity" value="${entity['content']}" scope="request"/>
