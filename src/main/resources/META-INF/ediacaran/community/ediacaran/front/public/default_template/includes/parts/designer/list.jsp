@@ -14,6 +14,7 @@
 	</c:if>
 	
 	<c:set var="entity" value="${item}" scope="request"/>
+	<c:set var="width" value="12" scope="request"/>
 	<jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/${requestScope.entity['template']}.jsp"/>
 	
 </c:forEach>
