@@ -1,4 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page trimDirectiveWhitespaces="true" %>
 <c:set var="entity" value="${requestScope.entity}"/>
 <c:set var="accordionID" value="${empty requestScope.accordionID? 1 : requestScope.accordionID + 1}" scope="request"/>
 <div class="accordion" id="accordion${requestScope.accordionID}">
