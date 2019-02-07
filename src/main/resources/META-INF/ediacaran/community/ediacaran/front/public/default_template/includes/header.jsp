@@ -9,7 +9,7 @@
   <link href="/plugins/community/ediacaran/front/default_template/css/flexslider.css" rel="stylesheet" />
   
   <!-- Theme skin -->
-  <link href="/plugins/community/ediacaran/front/default_template/skins/default.css" rel="stylesheet" />
+  <link href="/plugins/community/ediacaran/front/default_template/skins/${vars['skin']}.css" rel="stylesheet" />
   
   <!-- Fav and touch icons -->
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="default_template/ico/apple-touch-icon-144-precomposed.png" />
