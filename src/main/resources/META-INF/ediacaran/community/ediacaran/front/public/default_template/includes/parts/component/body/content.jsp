@@ -1,7 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page trimDirectiveWhitespaces="true" %>
 <c:set var="entity" value="${requestScope.entity}"/>
-<c:if test="${entity['body-wrapper']}"><div class="row"></c:if>
+<c:if test="${entity['wrapper']}"><div class="row"></c:if>
 	<c:if test="${!empty entity['title']}">
 		<c:if test="${entity['title-wrapper']}"><div class="span${requestScope.width}"></c:if>
 			<h4>${entity['title']}</h4>
@@ -20,4 +20,4 @@
 			<c:if test="${entity['content-wrapper']}"></div></c:if>
 		</c:otherwise>
 	</c:choose>
-<c:if test="${entity['body-wrapper']}"></div></c:if>
+<c:if test="${entity['wrapper']}"></div></c:if>
