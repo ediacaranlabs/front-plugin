@@ -2,7 +2,9 @@
 <%@page trimDirectiveWhitespaces="true" %>
 <c:set var="entity" value="${requestScope.entity}"/>
 <c:set var="accordionID" value="${empty requestScope.accordionID? 1 : requestScope.accordionID + 1}" scope="request"/>
-<div class="accordion" id="accordion${requestScope.accordionID}">
+<c:set var="ignore" value="['class']" scope="request" />
+<c:set var="class"  value="${!empty entity['properties']['class']? ' '.concat(entity['properties']['class']) : ''}"/>
+<div class="accordion${class}" id="accordion${requestScope.accordionID}" <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>
 <c:forEach var="item" items="${entity['content']}" varStatus="count">
   <div class="accordion-group">
     <div class="accordion-heading">

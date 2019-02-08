@@ -1,7 +1,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page trimDirectiveWhitespaces="true" %>
 <c:set var="entity" value="${requestScope.entity}"/>
-<c:if test="${entity['wrapper']}"><div class="row"></c:if>
+<c:set var="ignore" value="['class']" scope="request" />
+<c:set var="class"  value="${!empty entity['properties']['class']? ' '.concat(entity['properties']['class']) : ''}"/>
+<c:if test="${entity['wrapper']}"><div class="row${class}" <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />></c:if>
+<c:if test="${empty entity['wrapper'] && !empty entity['properties']}"><div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp"/>></c:if>
 	<c:if test="${!empty entity['title']}">
 		<c:if test="${entity['title-wrapper']}"><div class="span${requestScope.width}"></c:if>
 			<h4>${entity['title']}</h4>
@@ -20,4 +23,5 @@
 			<c:if test="${entity['content-wrapper']}"></div></c:if>
 		</c:otherwise>
 	</c:choose>
+<c:if test="${empty entity['wrapper'] && !empty entity['properties']}"></div></c:if>
 <c:if test="${entity['wrapper']}"></div></c:if>
