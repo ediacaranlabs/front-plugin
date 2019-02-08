@@ -12,8 +12,8 @@
   <link href="/plugins/community/ediacaran/front/default_template/skins/${vars['skin']}.css" rel="stylesheet" />
   
   <!-- Fav and touch icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="default_template/ico/apple-touch-icon-144-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="default_template/ico/apple-touch-icon-114-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="default_template/ico/apple-touch-icon-72-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" href="default_template/ico/apple-touch-icon-57-precomposed.png" />
-  <link rel="shortcut icon" href="default_template/ico/favicon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="templates/default_template/ico/apple-touch-icon-144-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="templates/default_template/ico/apple-touch-icon-114-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="templates/default_template/ico/apple-touch-icon-72-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" href="templates/default_template/ico/apple-touch-icon-57-precomposed.png" />
+  <link rel="shortcut icon" href="templates/default_template/ico/favicon.png" />
