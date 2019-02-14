@@ -8,7 +8,12 @@
 
 <%-- monta o atributo class --%>
 <c:set var="class"  value="${!empty entity['type']? 'btn-'.concat(entity['type']) : ''}"/>
+<c:set var="class"  value="${!empty class && !empty entity['drop-type']? class.concat(' ') : class}${!empty entity['drop-type']? 'drop'.concat(entity['drop-type']) : ''}"/>
 <c:set var="class"  value="${!empty class && !empty entity['class']? class.concat(' ') : class}${!empty entity['class']? entity['class'] : ''}"/>
+
+<%-- monta o atributo class do button --%>
+<c:set var="buttonClass"  value="${!empty entity['button-type']? 'btn-'.concat(entity['button-type']) : ''}"/>
+<c:set var="buttonClass"  value="${!empty buttonClass && !empty entity['button-size']? buttonClass.concat(' ') : buttonClass}${!empty entity['button-size']? 'btn-'.concat(entity['button-size']) : ''}"/>
 
 <%-- monta o atributo class do button --%>
 <c:set var="buttonClass"  value="${!empty entity['button-type']? 'btn-'.concat(entity['button-type']) : ''}"/>
