@@ -3,12 +3,14 @@
 
 <%-- define a entidade --%>
 <c:set var="entity" value="${requestScope.entity}"/>
+<c:set var="ignore" value="['class']" scope="request" />
 
 <%-- monta a tag class--%>
 <c:set var="class"  value="${!empty entity['size']? 'input-'.concat(entity['size']) : ''}"/>
 <c:set var="class"  value="${!empty class && entity['search']? class.concat(' ') : class}${entity['search']? 'search-query' : ''}"/>
 <c:set var="class"  value="${!empty class && !empty entity['block']? class.concat(' ') : class}${!empty entity['block']? 'input-block-level' : ''}"/>
 <c:set var="class"  value="${!empty class && entity['enabled'] == 'false'? class.concat(' ') : class}${entity['enabled'] == 'false'? 'uneditable-input' : ''}"/>
+<c:set var="class"  value="${!empty class && !empty entity['class']? class.concat(' ') : class}${!empty entity['class']? entity['class'] : ''}"/>
 
 <%-- inicia o div para agrupar prepend e append--%>
 <c:if test="${'text' eq entity['type'] && (!empty entity['prepend'] || !empty entity['append'])}">
@@ -39,13 +41,13 @@
 		<label class="control-label" for="${entity['name']}">${entity['label']}</label>
 		<div class="controls">
 		<c:set var="ignore" value="['class']" scope="request" />
-		<input type="text" name="${entity['name']}" placeholder="${entity['placeholder']}" class="${class}"  <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>
+		<input type="text" name="${entity['name']}" placeholder="${entity['placeholder']}" class="${class}" value="${entity['value']}" ${entity['enabled'] == 'false'? ' disabled' : '' } <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>
 		</div>
 	</div>
 	</c:when>
 	<c:otherwise>
 		<%-- constrói somente o campo --%>
-		<input type="${entity['type']}" name="${entity['name']}" placeholder="${entity['placeholder']}" class="${class}"  <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>
+		<input type="${entity['type']}" name="${entity['name']}" placeholder="${entity['placeholder']}" class="${class}" value="${entity['value']}" ${entity['enabled'] == 'false'? ' disabled' : '' } <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>
 	</c:otherwise>
 </c:choose>
 
