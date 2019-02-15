@@ -13,7 +13,7 @@
 <c:set var="class"  value="${!empty class && !empty entity['class']? class.concat(' ') : class}${!empty entity['class']? entity['class'] : ''}"/>
 
 <%-- inicia o div para agrupar prepend e append--%>
-<c:if test="${'text' eq entity['type'] && (!empty entity['prepend'] || !empty entity['append'])}">
+<c:if test="${!('hidden' eq entity['type']) && (!empty entity['prepend'] || !empty entity['append'])}">
 <c:set var="append"  value="${!empty entity['prepend']? 'input-prepend' : ''}"/>
 <c:set var="append"  value="${!empty append && !empty entity['append']? append.concat(' ') : append}${!empty entity['append']? 'input-append' : ''}"/>
 	<c:if test="${!empty append}">
@@ -22,7 +22,7 @@
 </c:if>
 
 <%-- conteudo do prepend --%>
-<c:if test="${'text' eq entity['type'] && !empty entity['prepend']}">
+<c:if test="${!('hidden' eq entity['type']) && !empty entity['prepend']}">
 	<c:choose>
 		<c:when test="${entity['prepend'].getClass().simpleName == 'String'}">
 			<span class="add-on">${entity['prepend']}</span>
@@ -36,7 +36,7 @@
 
 <c:choose>
 	<%-- constrói o campo com label --%>
-	<c:when test="${'text' eq entity['type'] && !empty entity['label']}">
+	<c:when test="${!('hidden' eq entity['type']) && !empty entity['label']}">
 	<div class="control-group">
 		<label class="control-label" for="${entity['name']}">${entity['label']}</label>
 		<div class="controls">
@@ -52,7 +52,7 @@
 </c:choose>
 
 <%-- conteudo do append --%>
-<c:if test="${'text' eq entity['type'] && !empty entity['append']}">
+<c:if test="${!('hidden' eq entity['type']) && !empty entity['append']}">
 	<c:choose>
 		<c:when test="${entity['append'].getClass().simpleName == 'String'}">
 			<span class="add-on">${entity['append']}</span>
@@ -65,7 +65,7 @@
 </c:if>
 
 <%-- encerra o div para agrupar prepend e append--%>
-<c:if test="${'text' eq entity['type'] && (!empty entity['prepend'] || !empty entity['append'])}">
+<c:if test="${!('hidden' eq entity['type']) && (!empty entity['prepend'] || !empty entity['append'])}">
 	<c:if test="${!empty append}">
 	</div>
 	</c:if>
