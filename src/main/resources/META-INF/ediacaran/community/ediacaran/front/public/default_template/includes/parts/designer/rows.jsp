@@ -3,6 +3,8 @@
 <c:set var="entity" value="${requestScope.entity}"/>
 <c:forEach items="${entity['content']}" var="item" varStatus="count">
 	<c:set var="entity" value="${item}" scope="request"/>
+	<c:set var="oldWidth" value="${width}"/>
 	<c:set var="width" value="${empty requestScope.width? '12' : requestScope.width}" scope="request"/>
 	<jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/${requestScope.entity['template']}.jsp"/>
+	<c:set var="width" value="${oldWidth}"/>
 </c:forEach>

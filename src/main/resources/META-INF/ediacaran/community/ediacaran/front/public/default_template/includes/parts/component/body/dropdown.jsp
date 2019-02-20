@@ -7,19 +7,16 @@
 <c:set var="quote" value="\"" scope="request" />
 
 <%-- monta o atributo class --%>
-<c:set var="class"  value="${!empty entity['type']? 'btn-'.concat(entity['type']) : ''}"/>
+<c:set var="class"  value="btn-group"/>
+<c:set var="class"  value="${!empty class && !empty entity['type']?      class.concat(' ') : class}${!empty entity['type']? 'btn-'.concat(entity['type']) : ''}"/>
 <c:set var="class"  value="${!empty class && !empty entity['drop-type']? class.concat(' ') : class}${!empty entity['drop-type']? 'drop'.concat(entity['drop-type']) : ''}"/>
-<c:set var="class"  value="${!empty class && !empty entity['class']? class.concat(' ') : class}${!empty entity['class']? entity['class'] : ''}"/>
+<c:set var="class"  value="${!empty class && !empty entity['class']?     class.concat(' ') : class}${!empty entity['class']? entity['class'] : ''}"/>
 
 <%-- monta o atributo class do button --%>
 <c:set var="buttonClass"  value="${!empty entity['button-type']? 'btn-'.concat(entity['button-type']) : ''}"/>
 <c:set var="buttonClass"  value="${!empty buttonClass && !empty entity['button-size']? buttonClass.concat(' ') : buttonClass}${!empty entity['button-size']? 'btn-'.concat(entity['button-size']) : ''}"/>
 
-<%-- monta o atributo class do button --%>
-<c:set var="buttonClass"  value="${!empty entity['button-type']? 'btn-'.concat(entity['button-type']) : ''}"/>
-<c:set var="buttonClass"  value="${!empty buttonClass && !empty entity['button-size']? buttonClass.concat(' ') : buttonClass}${!empty entity['button-size']? 'btn-'.concat(entity['button-size']) : ''}"/>
-
-<div class="btn-group ${class}" <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>
+<div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>
 	<c:choose>
 		<%-- label --%>
 		<c:when test="${entity['label'].getClass().simpleName == 'String'}">
