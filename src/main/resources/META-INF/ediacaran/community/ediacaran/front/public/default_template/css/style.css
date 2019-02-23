@@ -937,12 +937,12 @@ form#commentform textarea {
   color: #DE5E60;
 }
 
-#thumbs {
+ul.portfolio-thumbs {
   margin: 0;
   padding: 0;
 }
 
-#thumbs li {
+ul.portfolio-thumbs li {
   list-style-type: none;
 }
 

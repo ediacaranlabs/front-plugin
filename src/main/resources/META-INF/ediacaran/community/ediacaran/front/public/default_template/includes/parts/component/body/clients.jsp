@@ -13,8 +13,7 @@
 <div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>
 	<div class="span12">
 		<h4>${entity['title']}</h4>
-		<ul id="mycarousel"
-			class="jcarousel-skin-tango recent-jcarousel clients">
+		<ul class="carousel jcarousel-skin-tango recent-jcarousel clients">
 			<c:forEach items="${entity['itens']}" var="i" varStatus="count">
 				<li><a href="${i['link']}"> <img src="${i['logo']}"
 						class="client-logo" alt="" />

@@ -5,6 +5,7 @@
 <%-- define a entidade --%>
 <c:set var="entity" value="${requestScope.entity}"/>
 <c:set var="ignore" value="['class']" scope="request" />
+<c:set var="portfolioID" value="${empty requestScope.portfolioID? 1 : requestScope.portfolioID + 1}" scope="request"/>
 <c:set var="quote" value="\"" />
 
 <%-- atributo class --%>
@@ -24,12 +25,12 @@
 		</c:if>
 
 	<div class="row">
-		<ul id="thumbs" class="portfolio">
+		<ul class="portfolio-thumbs">
 			<!-- Item Project and Filter Name -->
-			<c:set var="cols" value="${12/entity['cols']}" />
+			<c:set var="cols" value="${(requestScope.width/entity['cols'] < 1.0)? 1 : requestScope.width/entity['cols']}" />
 			<c:forEach items="${entity['content']}" var="i" varStatus="count">
 				<li class="item-thumbs span${fn:substringBefore(cols,'.')} design"
-					data-id="id-${count.index}" data-type="${i['type']}">
+					data-id="id-${requestScope.portfolioID}-${count.index}" data-type="${i['type']}">
 					<!-- Fancybox - Gallery Enabled - Title - Full Image --> <a
 					class="hover-wrap fancybox" data-fancybox-group="${i['group']}"
 					title="${i['title']}" href="${i['image']}"> <span

@@ -134,8 +134,7 @@ jQuery(document).ready(function($) {
     return false;
   });
 
-  $('#mycarousel').jcarousel();
-  $('#mycarousel1').jcarousel();
+  $('.carousel').jcarousel();
 
   //flexslider
   $('.flexslider').flexslider();
