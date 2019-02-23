@@ -9,6 +9,7 @@
 <%-- atributo class --%>
 <c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ') : class}${!empty entity['properties']['class']? entity['properties']['class']  : '' }"/>
 
+<p class="${class}" <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>
 <c:forEach items="${entity['content']}" var="item" varStatus="count">
 
 	<c:set var="oldWidth" value="${width}"/>
@@ -25,3 +26,4 @@
 	</c:choose>
 
 </c:forEach>
+</p>

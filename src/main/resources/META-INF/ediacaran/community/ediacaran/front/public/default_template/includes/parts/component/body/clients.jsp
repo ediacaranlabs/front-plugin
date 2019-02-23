@@ -11,7 +11,7 @@
 <c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ') : class}${!empty entity['properties']['class']? entity['properties']['class'] : ''}"/>
 
 <div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>
-	<div class="span12">
+	<div class="span${requestScope.width}">
 		<h4>${entity['title']}</h4>
 		<ul class="carousel jcarousel-skin-tango recent-jcarousel clients">
 			<c:forEach items="${entity['itens']}" var="i" varStatus="count">

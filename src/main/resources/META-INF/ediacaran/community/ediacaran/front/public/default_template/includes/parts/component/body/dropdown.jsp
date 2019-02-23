@@ -40,7 +40,7 @@
 			<i class="icon-${entity['icon']}"></i>
 			</c:if>
 			${entity['label']}
-			<i class="caret" style="margin-left: 15px"></i>
+			<i class="caret" style="margin-left: 25px"></i>
 		</a>
 		</c:if>
 		<%-- /not split-button --%>
