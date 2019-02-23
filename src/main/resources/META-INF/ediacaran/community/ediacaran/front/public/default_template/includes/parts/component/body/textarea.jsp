@@ -4,24 +4,34 @@
 <%-- define a entidade --%>
 <c:set var="entity" value="${requestScope.entity}"/>
 <c:set var="ignore" value="['class']" scope="request" />
+<c:set var="quote" value="\"" />
 
-<%-- monta a tag class--%>
-<c:set var="class"  value="${!empty entity['block']? 'input-block-level' : ''}"/>
-<c:set var="class"  value="${!empty class && !empty entity['class']? class.concat(' ') : class}${!empty entity['class']? entity['class'] : ''}"/>
+<%-- atributo class --%>
+<c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ') : class}${!empty entity['properties']['class']? entity['properties']['class']  : '' }"/>
+
+<%-- atributos --%>
+<c:set var="attr" value="${!empty attr && !empty entity['accept-charset']? attr.concat(' ') : attr}${!empty entity['accept-charset']? 'accept-charset='.concat(quote).concat(entity['accept-charset']).concat(quote) : '' }"/>
+<c:set var="attr" value="${!empty attr && entity['enabled'] == 'false'?    attr.concat(' ') : attr}${entity['enabled'] == 'false'?    'disabled'                                                                     : '' }"/>
+
+<c:set var="attr" value="${!empty attr? attr.concat(' ') : attr}${'name='.concat(quote).concat(entity['name']).concat(quote) }"/>
+<c:set var="attr" value="${!empty attr? attr.concat(' ') : attr}${'rows='.concat(quote).concat(empty entity['rows']? 3 : entity['rows']).concat(quote) }"/>
+<c:set var="attr" value="${!empty attr? attr.concat(' ') : attr}${'placeholder='.concat(quote).concat(entity['placeholder']).concat(quote) }"/>
+<c:set var="attr" value="${!empty attr? attr.concat(' ') : attr}${'class='.concat(quote).concat(class).concat(quote) }"/>
 
 <c:choose>
-	<%-- constrói o campo com label --%>
 	<c:when test="${!empty entity['label']}">
-	<div class="control-group">
+	<%-- constrói o campo com label --%>
+	<div class="control-group ${class}" <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp"/>>
 		<label class="control-label" for="${entity['name']}">${entity['label']}</label>
 		<div class="controls">
-		<c:set var="ignore" value="['class']" scope="request" />
-		<textarea name="${entity['name']}" rows="${empty entity['rows']? '3' : entity['rows']}" placeholder="${entity['placeholder']}" class="${class}" ${entity['enabled'] == 'false'? ' disabled' : '' } <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>${entity['value']}</textarea>
+		<textarea ${attr}>${entity['value']}</textarea>
 		</div>
 	</div>
+	<%-- /constrói o campo com label --%>
 	</c:when>
 	<c:otherwise>
 		<%-- constrói somente o campo --%>
-		<textarea name="${entity['name']}" rows="${empty entity['rows']? '3' : entity['rows']}" placeholder="${entity['placeholder']}" class="${class}" ${entity['enabled'] == 'false'? ' disabled' : '' } <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>${entity['value']}</textarea>
+		<textarea ${attr} class="${class}" <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>${entity['value']}</textarea>
+		<%-- /constrói somente o campo --%>
 	</c:otherwise>
 </c:choose>
