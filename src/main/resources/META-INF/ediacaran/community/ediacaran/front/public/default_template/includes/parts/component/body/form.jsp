@@ -21,7 +21,10 @@
 <c:set var="attr" value="${!empty attr && !empty entity['novalidate']?     attr.concat(' ') : attr}${empty entity['novalidate']?     '' : 'novalidate='.concat(quote).concat(entity['novalidate']).concat(quote)         }"/>
 <c:set var="attr" value="${!empty attr && !empty entity['target']?         attr.concat(' ') : attr}${empty entity['target']?         '' : 'target='.concat(quote).concat(entity['target']).concat(quote)                 }"/>
 
-<form ${attr} class="${class}">
+
+<c:set var="formControls" value="${!('inline' eq entity['type'])}" scope="request"/>
+
+<form ${attr} class="${class}" <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>
 
 	<%-- corpo do formulário --%>
 	<c:choose>
@@ -30,31 +33,9 @@
 		</c:when>
 		<c:otherwise>
 			<c:set var="entity" value="${entity['content']}" scope="request" />
-				<jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/${requestScope.entity['template']}.jsp" />
-		</c:otherwise>
-	</c:choose>
-	<%-- /corpo do formulário --%>
-	
-	<%-- controles do formulário --%>
-	<c:if test="${!empty entity['controls']}">
-	<c:if test="${entity['controls']['wrapper']}">
-	<div class="control-group">
-	    <div class="controls">			
-	</c:if>
-	<c:choose>
-		<c:when test="${entity['controls']['content'].getClass().simpleName == 'String'}">
-			${entity['controls']['content']}
-		</c:when>
-		<c:otherwise>
-			<c:set var="entity" value="${entity['controls']['content']}" scope="request" />
 			<jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/${requestScope.entity['template']}.jsp" />
 		</c:otherwise>
 	</c:choose>
-	<c:if test="${entity['controls']['wrapper']}">
-		</div>
-	</div>
-	</c:if>
-	</c:if>
-	<%-- /controles do formulário --%>
+	<%-- /corpo do formulário --%>
 	
 </form>
