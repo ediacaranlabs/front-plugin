@@ -4,7 +4,9 @@
 <%-- define a entidade --%>
 <c:set var="entity" value="${requestScope.entity}"/>
 
-<h5 class="widgetheading">${entity['title']}</h5>
+<%-- define a entidade --%>
+<c:set var="entity" value="${requestScope.entity}"/>
+
 <ul class="link-list">
 	<c:forEach items="${entity['content']}" var="i">
 		<li><a href="${i['link']}">${i['text']}</a></li>
