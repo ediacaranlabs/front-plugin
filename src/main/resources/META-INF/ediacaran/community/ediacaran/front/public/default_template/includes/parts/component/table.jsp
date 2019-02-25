@@ -32,11 +32,11 @@
 					<c:otherwise>
 						<%-- col sem template --%>
 						<c:if test="${empty col['template']}">
-						<c:set var="entity"    value="${col}" scope="request"/>
-						<c:set var="ignore"    value="['']" scope="request" />
-						<c:set var="attNames"  value="abbr;align;axis;bgcolor;char;charoff;colspan;headers;height;nowrap;rowspan;scope;sorted;valign;width" scope="request" />
-						<c:set var="attValues" value="{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v}" scope="request" />
-						<c:set var="attValues" value="{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n}" scope="request" />
+						<c:set var="entity"     value="${col}" scope="request"/>
+						<c:set var="ignore"     value="['']" scope="request" />
+						<c:set var="attNames"   value="abbr;align;axis;bgcolor;char;charoff;colspan;headers;height;nowrap;rowspan;scope;sorted;valign;width" scope="request" />
+						<c:set var="attValues"  value="{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v}" scope="request" />
+						<c:set var="attRenames" value="{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n}" scope="request" />
 						<th <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>${col['content']}</th>
 						</c:if>
 						<%-- /col sem template --%>
@@ -75,10 +75,10 @@
 		<%-- rows --%>
 		<c:forEach items="${entity['rows']}" var="row">
 		
-		<c:set var="entity"    value="${row}" scope="request"/>
-		<c:set var="attNames"  value="align;bgcolor;char;charoff;valign;rowspan" scope="request" />
-		<c:set var="attValues" value="{v};{v};{v};{v};{v};{v}" scope="request" />
-		<c:set var="attValues" value="{n};{n};{n};{n};{n};{n}" scope="request" />
+		<c:set var="entity"     value="${row}" scope="request"/>
+		<c:set var="attNames"   value="align;bgcolor;char;charoff;valign" scope="request" />
+		<c:set var="attValues"  value="{v};{v};{v};{v};{v}" scope="request" />
+		<c:set var="attRenames" value="{n};{n};{n};{n};{n}" scope="request" />
 		
 		<tr <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>
 		
@@ -93,11 +93,11 @@
 				<c:otherwise>
 					<%-- col sem template --%>
 					<c:if test="${empty col['template']}">
-					<c:set var="entity"    value="${col}" scope="request"/>
-					<c:set var="ignore"    value="['']" scope="request" />
-					<c:set var="attNames"  value="abbr;align;axis;bgcolor;char;charoff;colspan;headers;height;nowrap;rowspan;scope;sorted;valign;width" scope="request" />
-					<c:set var="attValues" value="{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v}" scope="request" />
-					<c:set var="attValues" value="{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n}" scope="request" />
+					<c:set var="entity"     value="${col}" scope="request"/>
+					<c:set var="ignore"     value="['']" scope="request" />
+					<c:set var="attNames"   value="abbr;align;axis;bgcolor;char;charoff;colspan;headers;height;nowrap;rowspan;scope;sorted;valign;width" scope="request" />
+					<c:set var="attValues"  value="{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v}" scope="request" />
+					<c:set var="attRenames" value="{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n}" scope="request" />
 					<td <jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/designer/properties.jsp" />>${col['content']}</td>
 					</c:if>
 					<%-- /col sem template --%>
