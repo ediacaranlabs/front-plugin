@@ -19,8 +19,12 @@
 	<%-- header --%>
 	<c:if test="${!empty entity['header']}">
 		
+		<c:catch var="headerTemplateError">
+			<c:set var="headerTemplate" value="${entity['header']['template']}"/>
+		</c:catch>
+	
 		<%-- default --%>
-		<c:if test="${fn:length(entity['header']) >= 0}">
+		<c:if test="${empty headerTemplate}">
 		<thead>
 			<tr>
 				<c:forEach items="${entity['header']}" var="col">
@@ -58,7 +62,7 @@
 		<%-- /default --%>
 	
 		<%-- template --%>
-		<c:if test="${fn:length(entity['header']) <= 0}">
+		<c:if test="${!empty headerTemplate}">
 			<c:set var="entity" value="${entity['header']}" scope="request"/>
 			<jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/${requestScope.entity['template']}.jsp" />
 		</c:if>	
@@ -70,7 +74,12 @@
 	<%-- body --%>
 	
 	<%-- default body --%>
-	<c:if test="${fn:length(entity['rows']) >= 0}">
+	
+	<c:catch var="bodyTemplateError">
+		<c:set var="bodyTemplate" value="${entity['rows']['template']}"/>
+	</c:catch>
+		
+	<c:if test="${empty bodyTemplate}">
 	<tbody>
 		<%-- rows --%>
 		<c:forEach items="${entity['rows']}" var="row">
@@ -119,9 +128,9 @@
 	</tbody>
 	</c:if>
 	<%-- default body --%>
-	
+
 	<%-- template --%>
-	<c:if test="${fn:length(entity['rows']) <= 0}">
+	<c:if test="${!empty bodyTemplate}">
 		<c:set var="entity" value="${entity['rows']}" scope="request"/>
 		<jsp:include page="/plugins/community/ediacaran/front/default_template/includes/parts/${requestScope.entity['template']}.jsp" />
 	</c:if>	
