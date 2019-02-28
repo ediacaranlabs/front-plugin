@@ -1,9 +1,6 @@
   <!-- javascript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="/plugins/community/ediacaran/front/default_template/js/jquery.js"></script>
-  <script src="/plugins/community/ediacaran/front/default_template/js/jquery.easing.1.3.js"></script>
-  <script src="/plugins/community/ediacaran/front/default_template/js/bootstrap.js"></script>
   <script src="/plugins/community/ediacaran/front/default_template/js/jcarousel/jquery.jcarousel.min.js"></script>
   <script src="/plugins/community/ediacaran/front/default_template/js/jquery.fancybox.pack.js"></script>
   <script src="/plugins/community/ediacaran/front/default_template/js/jquery.fancybox-media.js"></script>
@@ -19,3 +16,16 @@
 
   <!-- Template Custom JavaScript File -->
   <script src="/plugins/community/ediacaran/front/default_template/js/custom.js"></script>
+  
+  <script type="text/javascript">
+	
+	messages.setDefaultLanguage('pt-BR');
+	messages.addSupportedLanguages('pt-BR');
+	
+	$.AppContext.vars.contextPath = "";
+	$.AppContext.vars.painel      = "#content-body";
+	$.AppContext.vars.dialog      = "#defaultDialog";
+	$.AppContext.vars.language    = messages.getLanguage();
+	
+   </script>
+  
