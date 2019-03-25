@@ -8,6 +8,8 @@
   <link href="/plugins/community/ediacaran/front/default_template/css/fancybox/jquery.fancybox.css" rel="stylesheet">
   <link href="/plugins/community/ediacaran/front/default_template/css/jcarousel.css" rel="stylesheet" />
   <link href="/plugins/community/ediacaran/front/default_template/css/flexslider.css" rel="stylesheet" />
+
+  <link href="/plugins/community/ediacaran/front/default_template/css/intro.css" rel="stylesheet" />
   
   <!-- Theme skin -->
   <link href="/plugins/community/ediacaran/front/default_template/skins/${vars['skin']}.css" rel="stylesheet" />
