@@ -9,7 +9,7 @@
 <%-- atributo class --%>
 <c:set var="class"  value="btn"/>
 <c:set var="class"  value="${!empty class && !empty entity['size']?                class.concat(' ') : class}${!empty entity['size']?                'btn-'.concat(entity['size']) : ''}"/>
-<c:set var="class"  value="${!empty class && !empty entity['type']?                class.concat(' ') : class}${!empty entity['type']?                'btn-'.concat(entity['type']) : ''}"/>
+<c:set var="class"  value="${!empty class                         ?                class.concat(' ') : class}${!empty entity['type']?                'btn-'.concat(entity['type']) : 'btn-primary'}"/>
 <c:set var="class"  value="${!empty class && !empty entity['block']?               class.concat(' ') : class}${!empty entity['block']?               'btn-block-level'             : ''}"/>
 <c:set var="class"  value="${!empty class && entity['enabled'] == 'false'?         class.concat(' ') : class}${entity['enabled'] == 'false'?         'disabled'                    : ''}"/>
 

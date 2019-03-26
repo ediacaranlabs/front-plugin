@@ -7,12 +7,12 @@
 <section id="inner-headline">
 	<div class="container">
 		<div class="row">
-			<div class="span4">
+			<div class="col-4">
 				<div class="inner-heading">
 					<h2>${entity['title']}</h2>
 				</div>
 			</div>
-			<div class="span8">
+			<div class="col-8">
 				<ul class="breadcrumb">
 					<c:forEach items="${entity['breadcrumb']}" var="item">
 					<li>
@@ -22,7 +22,7 @@
 						</c:if>
 						${item['text']}
 						</a>
-						<i class="icon-angle-right"></i>
+						<i class="fa fa-angle-right"></i>
 					</li>
 					</c:forEach>
 					<li class="active">${vars['title']}</li>

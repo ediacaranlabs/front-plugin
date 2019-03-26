@@ -59,8 +59,43 @@ li {
     border-bottom: 1px solid #303030;
 }
 
-.btn-theme:hover, .btn-theme:focus, .btn-theme:active {
-    background: #18191a;
-    color: #fff;
-    border: 1px solid #18191a;
+.breadcrumb {
+  float:left;
+  padding:10px 0 10px 0;
+  margin:0;
+  list-style: none;
+  background: none;
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+}
+
+.breadcrumb > li {
+  display: inline-block;
+  text-shadow: none;
+  font-size:12px;
+  margin:0;
+}
+
+.breadcrumb > li {
+	padding-right: 10px;
+}
+
+.breadcrumb > li i {
+	padding-left: 10px;
+}
+
+.breadcrumb > .active {
+  color: #797979;
+}
+
+@media (max-width: 767px) {
+  #inner-headline .breadcrumb {
+    float: left;
+    clear: both;
+    width: 100%;
+  }
+  .breadcrumb>li {
+    font-size: 13px;
+  }
 }

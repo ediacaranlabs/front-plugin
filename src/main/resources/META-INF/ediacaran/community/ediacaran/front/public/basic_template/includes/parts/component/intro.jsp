@@ -19,13 +19,13 @@
 				<div class="row">
 				<c:choose>
 					<c:when test="${entity['content'].getClass().simpleName == 'String'}">
-						<c:if test="${entity['content-wrapper']}"><div class="span${requestScope.width}"></c:if>
+						<c:if test="${entity['content-wrapper']}"><div class="col-12"></c:if>
 						${entity['content']}
 						<c:if test="${entity['content-wrapper']}"></div></c:if>
 					</c:when>
 					<c:otherwise>
 						<c:set var="entity" value="${entity['content']}" scope="request" />
-						<c:if test="${entity['content-wrapper']}"><div class="span${requestScope.width}"></c:if>
+						<c:if test="${entity['content-wrapper']}"><div class="col-12"></c:if>
 							<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 						<c:if test="${entity['content-wrapper']}"></div></c:if>
 					</c:otherwise>

@@ -19,23 +19,33 @@
 
 <div ${attr} id="accordion${requestScope.accordionID}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 <c:forEach var="item" items="${entity['content']}" varStatus="count">
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion${requestScope.accordionID}" href="#collapse${requestScope.accordionID}_${count.index}">${item['title']}</a>
-    </div>
-    <div id="collapse${requestScope.accordionID}_${count.index}" class="accordion-body collapse${count.index == 0? ' in' : ''}">
-      <div class="accordion-inner">
-        <c:choose>
-        	<c:when test="${item['content'].getClass().simpleName == 'String'}">
+<div class="card">
+	<div class="card-header"
+		id="heading${requestScope.accordionID}_${count.index}">
+		<a class="btn btn-link" data-toggle="collapse"
+			data-target="#collapse${requestScope.accordionID}_${count.index}"
+			aria-expanded="true"
+			aria-controls="collapse${requestScope.accordionID}_${count.index}">
+			${item['title']} </a>
+	</div>
+
+	<div id="collapse${requestScope.accordionID}_${count.index}"
+		class="collapse"
+		aria-labelledby="heading${requestScope.accordionID}_${count.index}"
+		data-parent="#accordion${requestScope.accordionID}">
+		<div class="card-body">
+			<c:choose>
+				<c:when test="${item['content'].getClass().simpleName == 'String'}">
         		${item['content']}
        		</c:when>
-        	<c:otherwise>
-        		<c:set var="entity" value="${item['content']}" scope="request"/>
-        		<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp"/>
-        	</c:otherwise>
-        </c:choose>
-      </div>
-    </div>
-  </div>
+				<c:otherwise>
+					<c:set var="entity" value="${item['content']}" scope="request" />
+					<jsp:include
+						page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</div>
+</div>
 </c:forEach>
 </div>

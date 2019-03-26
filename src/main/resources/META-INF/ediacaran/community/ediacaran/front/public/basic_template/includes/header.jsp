@@ -4,6 +4,7 @@
   <link href="/plugins/community/ediacaran/front/basic_template/css/bootstrap.css" rel="stylesheet" />
   <link href="/plugins/community/ediacaran/front/basic_template/css/style.css" rel="stylesheet" />
   <link href="/plugins/community/ediacaran/front/basic_template/css/overwrite.css" rel="stylesheet" />
+  <link href="/plugins/community/ediacaran/front/basic_template/css/intro.css" rel="stylesheet" />
 
   <link href="/plugins/community/ediacaran/front/basic_template/css/fancybox/jquery.fancybox.css" rel="stylesheet">
   <link href="/plugins/community/ediacaran/front/basic_template/css/jcarousel.css" rel="stylesheet" />
