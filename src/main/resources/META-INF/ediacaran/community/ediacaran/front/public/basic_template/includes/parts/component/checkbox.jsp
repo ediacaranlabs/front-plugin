@@ -7,9 +7,9 @@
 <c:set var="quote" value="\"" />
 
 <%-- atributo class--%>
-<c:set var="class"  value="checkbox"/>
-<c:set var="class"  value="${!empty class && entity['enabled'] == 'false'? class.concat(' ') : class}${entity['enabled'] == 'false'? 'uneditable-input' : ''}"/>
-<c:set var="class"  value="${!empty class && entity['inline']?             class.concat(' ') : class}${entity['inline']?             'inline'           : ''}"/>
+<c:set var="class"  value=""/>
+<c:set var="class"  value="${!empty class && entity['enabled'] == 'false'? class.concat(' ') : class}${entity['enabled'] == 'false'? 'uneditable-input'  : ''}"/>
+<c:set var="class"  value="${!empty class && entity['inline']?             class.concat(' ') : class}${entity['inline']?             'form-check-inline' : ''}"/>
 
 <%-- atributos --%>
 <c:set var="attr" value=                                                                       "type=\"checkbox\""/>
@@ -19,14 +19,17 @@
 <c:set var="attr" value="${!empty attr && entity['selected']?           attr.concat(' ') : attr}${entity['selected']?           'checked'                                                    : ''}"/>
 <%--<c:set var="attr" value="${!empty attr && !empty class?                 attr.concat(' ') : attr}${empty class?                  ''         : 'class='.concat(quote).concat(class).concat(quote)          }"/>--%>
 
+
 <c:if test="${requestScope.formControls}">
-	<div class="control-group ${entity['properties']['class']}">
+	<div class="control-group ${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 		<div class="controls">
 </c:if>
-<label <c:if test="${empty requestScope.formControls}">class="${class} ${entity['properties']['class']}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" /></c:if>>
-  <input ${attr}>
-  ${entity['label']}
-</label>
+<div class="form-check ${empty requestScope.formControls? class : ''}" <c:if test="${empty requestScope.formControls}"><jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" /></c:if>>
+  <input class="form-check-input" ${attr}>
+  <label class="form-check-label">
+    ${entity['label']}
+  </label>
+</div>
 <c:if test="${requestScope.formControls}">
 		</div>
 	</div>

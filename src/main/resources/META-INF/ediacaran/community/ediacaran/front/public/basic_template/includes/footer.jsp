@@ -1,4 +1,4 @@
-  <script src="/plugins/community/ediacaran/front/basic_template/js/jcarousel/jquery.jcarousel.min.js"></script>
+  <script src="/plugins/community/ediacaran/front/basic_template/js/owl.carousel.min.js"></script>
   <script src="/plugins/community/ediacaran/front/basic_template/js/jquery.fancybox.pack.js"></script>
   <script src="/plugins/community/ediacaran/front/basic_template/js/jquery.fancybox-media.js"></script>
   <script src="/plugins/community/ediacaran/front/basic_template/js/google-code-prettify/prettify.js"></script>

@@ -501,3 +501,88 @@ blockquote cite {
 ul.breadcrumb li a:hover {
   text-decoration: none;
 }
+
+/* clients */
+
+.owl-carousel{
+}
+
+.owl-carousel .owl-stage-outer{
+	padding-top: 40px;
+}
+
+.owl-carousel .owl-dots{
+	display: none;
+}
+
+.owl-carousel .owl-prev{
+	position: absolute;
+	top: -0px;
+	left: calc(100% - 70px);
+	width: 32px;
+	height: 32px;
+}
+
+.owl-carousel .owl-next{
+	position: absolute;
+	top: -0px;
+	left: calc(100% - 32px);
+	width: 32px;
+	height: 32px;
+}
+
+.owl-prev, .owl-next {
+	background-color: #444 !important;
+}
+
+.owl-prev:hover, .owl-next:hover {
+	background-color: #F03C02 !important;
+}
+
+.owl-prev span{
+	font-size: 32px;
+	width: 32px;
+	height: 32px;
+}
+
+.owl-next span{
+	font-size: 32px;
+	width: 32px;
+	height: 32px;
+}
+
+.owl-carousel {
+  list-style: none;
+  float: left;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.owl-carousel .item {
+  position: relative;
+  float: left;
+  width: 155px;
+  margin: 0;
+  border: 4px solid #e9e9e9;
+}
+
+.owl-carousel .item:hover {
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+}
+
+.owl-carousel .item img {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.owl-carousel .item img:hover {
+  opacity: 1;
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+}

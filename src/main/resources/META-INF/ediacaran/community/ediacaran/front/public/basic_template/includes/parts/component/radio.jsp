@@ -6,14 +6,31 @@
 <c:set var="ignore" value="['class']" scope="request" />
 <c:set var="quote" value="\"" />
 
-<%-- monta a tag class--%>
-<c:set var="class"  value="radio"/>
-<c:set var="class"  value="${!empty class && entity['enabled'] == 'false'?         class.concat(' ') : class}${entity['enabled'] == 'false'?         'uneditable-input'            : '' }"/>
-<c:set var="class"  value="${!empty class && entity['inline']?                     class.concat(' ') : class}${entity['inline']?                     'inline'                      : '' }"/>
-<c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ') : class}${!empty entity['properties']['class']? entity['properties']['class'] : '' }"/>
+<%-- atributo class--%>
+<c:set var="class"  value=""/>
+<c:set var="class"  value="${!empty class && entity['enabled'] == 'false'? class.concat(' ') : class}${entity['enabled'] == 'false'? 'uneditable-input'  : ''}"/>
+<c:set var="class"  value="${!empty class && entity['inline']?             class.concat(' ') : class}${entity['inline']?             'form-check-inline' : ''}"/>
 
-<label class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
-  <input type="radio" name="${entity['name']}" value="${entity['value']}" ${entity['enabled'] == 'false'? ' disabled' : '' }
-  ${entity['selected']? ' checked' : '' }>
-  ${entity['label']}
-</label>
+<%-- atributos --%>
+<c:set var="attr" value=                                                                       "type=\"radio\""/>
+<c:set var="attr" value="${!empty attr && entity['enabled'] == 'false'? attr.concat(' ') : attr}${entity['enabled'] == 'false'? 'disabled' : ''}"/>
+<c:set var="attr" value="${!empty attr && !empty entity['name']?        attr.concat(' ') : attr}${!empty entity['name']?        'name='.concat(quote).concat(entity['name']).concat(quote)   : ''}"/>
+<c:set var="attr" value="${!empty attr && !empty entity['value']?       attr.concat(' ') : attr}${!empty entity['value']?       'value='.concat(quote).concat(entity['value']).concat(quote) : ''}"/>
+<c:set var="attr" value="${!empty attr && entity['selected']?           attr.concat(' ') : attr}${entity['selected']?           'checked'                                                    : ''}"/>
+<%--<c:set var="attr" value="${!empty attr && !empty class?                 attr.concat(' ') : attr}${empty class?                  ''         : 'class='.concat(quote).concat(class).concat(quote)          }"/>--%>
+
+
+<c:if test="${requestScope.formControls}">
+	<div class="control-group ${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+		<div class="controls">
+</c:if>
+<div class="form-check ${empty requestScope.formControls? class : ''}" <c:if test="${empty requestScope.formControls}"><jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" /></c:if>>
+  <input class="form-check-input" ${attr}>
+  <label class="form-check-label">
+    ${entity['label']}
+  </label>
+</div>
+<c:if test="${requestScope.formControls}">
+		</div>
+	</div>
+</c:if>
