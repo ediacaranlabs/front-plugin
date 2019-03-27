@@ -26,21 +26,19 @@
 
 	<div class="row">
 		<ul class="portfolio-thumbs">
-			<!-- Item Project and Filter Name -->
-			<c:set var="cols" value="${(requestScope.width/entity['cols'] < 1.0)? 1 : requestScope.width/entity['cols']}" />
+			<c:set var="cols" value="${(12/entity['cols'] < 1.0)? 1 : 12/entity['cols']}" />
 			<c:forEach items="${entity['content']}" var="i" varStatus="count">
-				<li class="item-thumbs span${fn:substringBefore(cols,'.')} design"
+				<li class="item-thumbs col-${fn:substringBefore(cols,'.')} design"
 					data-id="id-${requestScope.portfolioID}-${count.index}" data-type="${i['type']}">
-					<!-- Fancybox - Gallery Enabled - Title - Full Image --> <a
+					<a
 					class="hover-wrap fancybox" data-fancybox-group="${i['group']}"
 					title="${i['title']}" href="${i['image']}"> <span
 						class="overlay-img"></span> <span
 						class="overlay-img-thumb font-icon-plus"></span>
-				</a> <!-- Thumb Image and Description --> <img src="${i['icon']}"
+				</a>  <img src="${i['icon']}"
 					alt="${i['content']}">
 				</li>
 			</c:forEach>
-			<!-- End Item Project -->
 		</ul>
 	</div>
 <c:if test="${!empty class || !empty entity['properties']}">
