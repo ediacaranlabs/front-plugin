@@ -7,7 +7,7 @@
 <c:set var="quote" value="\"" />
 
 <%-- monta o atributo class --%>
-<c:set var="class"  value=                                                                                  "${!empty entity['type']?                'img-'.concat(entity['type'])             : ''}"/>
+<c:set var="class"  value=                                                                                  "${!empty entity['type']?                entity['type']                            : ''}"/>
 <c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ') : class}${!empty entity['properties']['class']? ' '.concat(entity['properties']['class']) : ''}"/>
 
 <%-- monta o atributo style --%>

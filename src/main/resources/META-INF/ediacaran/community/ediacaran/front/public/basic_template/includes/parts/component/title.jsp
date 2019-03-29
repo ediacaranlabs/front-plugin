@@ -7,12 +7,12 @@
 <section id="inner-headline">
 	<div class="container">
 		<div class="row">
-			<div class="col-4">
+			<div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
 				<div class="inner-heading">
 					<h2>${entity['title']}</h2>
 				</div>
 			</div>
-			<div class="col-8">
+			<div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
 				<ul class="breadcrumb">
 					<c:forEach items="${entity['breadcrumb']}" var="item">
 					<li>
