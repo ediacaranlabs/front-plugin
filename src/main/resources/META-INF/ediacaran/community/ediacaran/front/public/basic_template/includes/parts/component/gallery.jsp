@@ -27,14 +27,15 @@
 	<div class="row">
 		<ul class="portfolio-thumbs">
 			<c:set var="cols" value="${(12/entity['cols'] < 1.0)? 1 : 12/entity['cols']}" />
+			<c:set var="cols" value="${fn:substringBefore(cols,'.')}" />
 			<c:forEach items="${entity['content']}" var="i" varStatus="count">
-				<li class="item-thumbs col-${fn:substringBefore(cols,'.')} design"
+				<li class="item-thumbs col-sm-12 col-md-6 col-lg-${cols} col-xl-${cols}"
 					data-id="id-${requestScope.portfolioID}-${count.index}" data-type="${i['type']}">
 					<a
 					class="hover-wrap fancybox" data-fancybox-group="${i['group']}"
 					title="${i['title']}" href="${i['image']}"> <span
 						class="overlay-img"></span> <span
-						class="overlay-img-thumb font-icon-plus"></span>
+						class="overlay-img-thumb fa fa-plus"></span>
 				</a>  <img src="${i['icon']}"
 					alt="${i['content']}">
 				</li>

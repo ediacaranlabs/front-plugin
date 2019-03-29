@@ -4,7 +4,7 @@ jQuery(document).ready(function($){
 if (jQuery().quicksand) {
 
  	// Clone applications to get a second collection
-	var $data = $(".portfolio").clone();
+	var $data = $(".portfolio-thumbs").clone();
 	
 	//NOTE: Only filter on the main portfolio page, not on the subcategory pages
 	$('.filter li').click(function(e) {
@@ -17,7 +17,7 @@ if (jQuery().quicksand) {
 		} else {
 			var $filteredData = $data.find('.item-thumbs[data-type=' + filterClass + ']');
 		}
-		$(".portfolio").quicksand($filteredData, {
+		$(".portfolio-thumbs").quicksand($filteredData, {
 			duration: 600,
 			adjustHeight: 'auto'
 		}, function () {
@@ -31,7 +31,12 @@ if (jQuery().quicksand) {
 				},
 				helpers : {
 					title : { type: 'inside' },
-				}
+				},
+			    tpl: {
+				    closeBtn : '<a title="Close" class="fancybox-item fancybox-close" href="javascript:;"><i class="fa fa-remove"></i></a>',
+				    next     : '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"><span><i class="fa fa-angle-right"></i></span></a>',
+				    prev     : '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"><span><i class="fa fa-angle-left"></i></span></a>'
+			    }
 			});
 
 
