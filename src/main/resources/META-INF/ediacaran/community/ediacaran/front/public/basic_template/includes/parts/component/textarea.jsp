@@ -21,17 +21,15 @@
 <c:choose>
 	<c:when test="${!empty entity['label']}">
 	<%-- constrói o campo com label --%>
-	<div class="control-group ${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp"/>>
-		<label class="control-label" for="${entity['name']}">${entity['label']}</label>
-		<div class="controls">
+	<div class="form-group ${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp"/>>
+		<label for="${entity['name']}">${entity['label']}</label>
 		<textarea ${attr}>${entity['value']}</textarea>
-		</div>
 	</div>
 	<%-- /constrói o campo com label --%>
 	</c:when>
 	<c:otherwise>
 		<%-- constrói somente o campo --%>
-		<textarea ${attr} class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>${entity['value']}</textarea>
+		<textarea ${attr} class="form-control ${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>${entity['value']}</textarea>
 		<%-- /constrói somente o campo --%>
 	</c:otherwise>
 </c:choose>

@@ -8,6 +8,7 @@
 <c:set var="quote" value="\""/>
 
 <%-- monta a tag class--%>
+<c:set var="class"  value=""/>
 <c:set var="class"  value="${!empty class && entity['enabled'] == 'false'? class.concat(' ') : class}${entity['enabled'] == 'false'? 'uneditable-input' : ''}"/>
 <c:set var="class"  value="${!empty class && entity['inline']?             class.concat(' ') : class}${entity['inline']?             'inline'           : ''}"/>
 <c:set var="class"  value="${!empty class && !empty entity['class']?       class.concat(' ') : class}${!empty entity['class']?       entity['class']    : ''}"/>
@@ -15,18 +16,18 @@
 <%-- atributos --%>
 <c:set var="attr" value="${!empty attr? attr.concat(' ') : attr}${'name='.concat(quote).concat(entity['name']).concat(quote) }"/>
 
-<c:set var="attr" value="${!empty attr && !entity['multiple']?  attr : attr.concat(' ')}${!entity['multiple']?  '' : 'multiple='.concat(quote).concat(multiple).concat(quote)   }"/>
-<c:set var="attr" value="${!empty attr && empty entity['rows']? attr : attr.concat(' ')}${empty entity['rows']? '' : fn:substringBefore('size='.concat(quote).concat(entity['rows']),'.').concat(quote) }"/>
+<c:set var="attr" value="${!empty attr && empty entity['label']?  attr : attr.concat(' ')}${empty entity['label']? '' : 'class='.concat(quote).concat('form-control').concat(quote)   }"/>
+<c:set var="attr" value="${!empty attr && !entity['multiple']?    attr : attr.concat(' ')}${!entity['multiple']?    '' : 'multiple='.concat(quote).concat(multiple).concat(quote)   }"/>
+<c:set var="attr" value="${!empty attr && empty entity['rows']?   attr : attr.concat(' ')}${empty entity['rows']?   '' : fn:substringBefore('size='.concat(quote).concat(entity['rows']),'.').concat(quote) }"/>
 
 <%-- label --%>
 <c:if test="${!empty entity['label']}">
-<div class="control-group ${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp"/>>
-	<label class="control-label" for="${entity['name']}">${entity['label']}</label>
-	<div class="controls">
+<div class="form-group ${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp"/>>
+	<label for="${entity['name']}">${entity['label']}</label>
 </c:if>
 <%-- /label --%>
 
-	<select ${attr} <c:if test="${empty entity['label']}">class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp"/></c:if>>
+	<select ${attr} <c:if test="${empty entity['label']}">class="form-control ${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp"/></c:if>>
 	<%-- values --%>
 		<c:forEach items="${entity['options']}" var="option">
 		<%-- options agrupados --%>
@@ -49,7 +50,6 @@
 		
 <%-- label --%>
 <c:if test="${!empty entity['label']}">
-	</div>
 </div>
 </c:if>
 <%-- /label --%>

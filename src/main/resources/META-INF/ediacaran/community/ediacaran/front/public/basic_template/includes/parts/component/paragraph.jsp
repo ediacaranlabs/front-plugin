@@ -12,9 +12,6 @@
 <p class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 <c:forEach items="${entity['content']}" var="item" varStatus="count">
 
-	<c:set var="oldWidth" value="${width}"/>
-	<c:set var="width" value="${empty requestScope.width? '12' : requestScope.width}" scope="request"/>
-
 	<c:choose>
 		<c:when test="${item.getClass().simpleName == 'String'}">
 			${item}

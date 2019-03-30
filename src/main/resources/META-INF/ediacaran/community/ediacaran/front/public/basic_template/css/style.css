@@ -753,3 +753,21 @@ ul.portfolio-categ li.active a:hover, ul.portfolio-categ li a:hover, ul.portfoli
 }
 
 @media (max-width: 360px) {}
+
+/* link-list */
+
+ul.link-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.link-list li {
+  margin: 0;
+  padding: 2px 0 2px 0;
+  list-style: none;
+}
+
+footer ul.link-list li a {
+  color: #919191;
+}
