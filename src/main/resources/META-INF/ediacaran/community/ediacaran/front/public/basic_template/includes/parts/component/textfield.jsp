@@ -7,7 +7,7 @@
 <c:set var="quote" value="\"" />
 
 <%-- atributo class --%>
-<c:set var="class"  value="${!empty class && !empty entity['size']?                class.concat(' ') : class}${!empty entity['size']?                'input-'.concat(entity['size']) : ''}"/>
+<c:set var="class"  value="${!empty class && !empty entity['size']?                class.concat(' ') : class}${!empty entity['size']?                'col-'.concat(entity['size']) : ''}"/>
 <c:set var="class"  value="${!empty class && entity['search']?                     class.concat(' ') : class}${entity['search']?                     'search-query'                  : ''}"/>
 <c:set var="class"  value="${!empty class && !empty entity['block']?               class.concat(' ') : class}${!empty entity['block']?               'input-block-level'             : ''}"/>
 <c:set var="class"  value="${!empty class && entity['enabled'] == 'false'?         class.concat(' ') : class}${entity['enabled'] == 'false'?         'uneditable-input'              : ''}"/>
@@ -21,59 +21,47 @@
 <c:set var="attr" value="${!empty attr? attr.concat(' ') : attr}${'value='.concat(quote).concat(entity['value']).concat(quote) }"/>
 <c:set var="attr" value="${!empty attr? attr.concat(' ') : attr}${'placeholder='.concat(quote).concat(entity['placeholder']).concat(quote) }"/>
 
-<%-- inicia o div para agrupar prepend e append--%>
-<c:if test="${!('hidden' eq entity['type']) && (!empty entity['prepend'] || !empty entity['append'])}">
-<c:set var="append"  value=                                                                        "${!empty entity['prepend']? 'input-prepend' : ''}"/>
-<c:set var="append"  value="${!empty append && !empty entity['append']? append.concat(' ') : append}${!empty entity['append']?  'input-append'  : ''}"/>
-</c:if>
-
-<c:if test="${!empty append}">
-<div class="${append.concat(' ').concat(class)}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
-</c:if>
-
-<%-- conteudo do prepend --%>
-<c:if test="${!('hidden' eq entity['type']) && !empty entity['prepend']}">
-	<c:choose>
-		<c:when test="${entity['prepend'].getClass().simpleName == 'String'}">
-			<span class="add-on">${entity['prepend']}</span>
-		</c:when>
-		<c:otherwise>
-			<c:set var="entity" value="${entity['prepend']}" scope="request" />
-			<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
-		</c:otherwise>
-	</c:choose>
-</c:if>
-
-<c:choose>
-	<c:when test="${empty append && !empty entity['label']}">
-	<%-- constrói o campo com label --%>
-	<div class="control-group">
-		<label class="control-label" for="${entity['name']}">${entity['label']}</label>
-		<div class="controls">
-		<input ${attr} class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<c:if test="${!(entity['type'] eq 'hidden') && (!empty entity['prepend'] || !empty entity['append']) }">
+<div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+	
+	<c:if test="${!empty entity['label']}">
+	<label for="input_${entity['name']}">entity['label']</label>
+	</c:if>
+	<c:if test="${empty entity['label']}">
+	<label class="sr-only" for="input_${entity['name']}">entity['label']</label>
+	</c:if>
+	
+	<div class="input-group">
+	
+		<c:if test="${!empty entity['prepend']}">
+		<div class="input-group-prepend">
+			<c:choose>
+				<c:when test="${entity['prepend'].getClass().simpleName == 'String'}">
+					<div class="input-group-text">${entity['prepend']}</div>
+				</c:when>
+				<c:otherwise>
+					<c:set var="entity" value="${entity['prepend']}" scope="request" />
+					<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+				</c:otherwise>
+			</c:choose>
 		</div>
+		</c:if>
+		
+		<input ${attr} class="form-control" id="input_${entity['name']}">
+		
+		<c:if test="${!empty entity['append']}">
+		<div class="input-group-append">
+			<c:choose>
+				<c:when test="${entity['append'].getClass().simpleName == 'String'}">
+					<div class="input-group-text">${entity['append']}</div>
+				</c:when>
+				<c:otherwise>
+					<c:set var="entity" value="${entity['append']}" scope="request" />
+					<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+				</c:otherwise>
+			</c:choose>
+		</div>
+		</c:if>		
 	</div>
-	</c:when>
-	<c:otherwise>
-		<%-- constrói somente o campo --%>
-		<input ${attr} <c:if test="${empty append}">class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" /></c:if>>
-	</c:otherwise>
-</c:choose>
-
-<%-- conteudo do append --%>
-<c:if test="${!('hidden' eq entity['type']) && !empty entity['append']}">
-	<c:choose>
-		<c:when test="${entity['append'].getClass().simpleName == 'String'}">
-			<span class="add-on">${entity['append']}</span>
-		</c:when>
-		<c:otherwise>
-			<c:set var="entity" value="${entity['append']}" scope="request" />
-			<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
-		</c:otherwise>
-	</c:choose>
-</c:if>
-
-<%-- encerra o div para agrupar prepend e append--%>
-<c:if test="${!empty append}">
 </div>
 </c:if>

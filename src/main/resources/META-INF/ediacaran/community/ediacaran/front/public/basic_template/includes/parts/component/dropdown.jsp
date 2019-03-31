@@ -8,21 +8,23 @@
 
 <%-- monta o atributo class --%>
 <c:set var="class"  value="btn-group"/>
-<c:set var="class"  value="${!empty class && !empty entity['type']?      class.concat(' ') : class}${!empty entity['type']? 'btn-'.concat(entity['type']) : ''}"/>
-<c:set var="class"  value="${!empty class && !empty entity['drop-type']? class.concat(' ') : class}${!empty entity['drop-type']? 'drop'.concat(entity['drop-type']) : ''}"/>
 <c:set var="class"  value="${!empty class && !empty entity['class']?     class.concat(' ') : class}${!empty entity['class']? entity['class'] : ''}"/>
 
 <%-- monta o atributo class do button --%>
-<c:set var="buttonClass"  value="${!empty entity['button-type']? 'btn-'.concat(entity['button-type']) : ''}"/>
-<c:set var="buttonClass"  value="${!empty buttonClass && !empty entity['button-size']? buttonClass.concat(' ') : buttonClass}${!empty entity['button-size']? 'btn-'.concat(entity['button-size']) : ''}"/>
+<c:set var="buttonClass"  value="btn"/>
+<c:set var="buttonClass"  value="${!empty buttonClass && !empty entity['button']['size']       ? buttonClass.concat(' ') : buttonClass}${!empty entity['button']['size']       ? 'btn-'.concat(entity['button']['size']) : ''}"/>
+<c:set var="buttonClass"  value="${!empty buttonClass                                          ? buttonClass.concat(' ') : buttonClass}${!empty entity['button']['type']       ? 'btn-'.concat(entity['button']['type']) : ''}"/>
+<c:set var="buttonClass"  value="${!empty buttonClass && entity['button']['enabled'] == 'false'? buttonClass.concat(' ') : buttonClass}${entity['button']['enabled'] == 'false'? 'disabled'                              : ''}"/>
 
+<c:if test="${entity['wrapper'] != 'false'}">
 <div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+</c:if>
 	<c:choose>
 		<%-- label --%>
 		<c:when test="${entity['label'].getClass().simpleName == 'String'}">
 		<%-- split-button --%>
 		<c:if test="${entity['split-button']}">
-		<a class="btn ${buttonClass}" href="#">
+		<a class="${buttonClass}" href="#">
 			<c:if test="${!empty entity['icon']}">
 			<i class="icon-${entity['icon']}"></i>
 			</c:if>
@@ -35,7 +37,7 @@
 		<%-- /split-button --%>
 		<%-- not split-button --%>
 		<c:if test="${!entity['split-button']}">
-		<a class="dropdown-toggle btn ${buttonClass}" data-toggle="dropdown" href="#">
+		<a class="dropdown-toggle ${buttonClass}" data-toggle="dropdown" href="#">
 			<c:if test="${!empty entity['icon']}">
 			<i class="icon-${entity['icon']}"></i>
 			</c:if>
@@ -72,4 +74,6 @@
 		</c:forEach>
 	</ul>
 	<%-- /menu --%>
+<c:if test="${entity['wrapper'] != 'false'}">	
 </div>
+</c:if>

@@ -1,3 +1,8 @@
+.solidline {
+    border-top: 1px solid #e6e6e6;
+    margin: 0 0 30px;
+}
+
 #content {
     position: relative;
     background: #fff;
