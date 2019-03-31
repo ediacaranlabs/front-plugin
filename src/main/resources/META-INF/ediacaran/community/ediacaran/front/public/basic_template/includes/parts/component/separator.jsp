@@ -12,7 +12,7 @@
 
 <!-- divider -->
 <div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
-  <div class="span${requestScope.width}">
+  <div class="col-12">
     <div class="solidline">
     </div>
   </div>
