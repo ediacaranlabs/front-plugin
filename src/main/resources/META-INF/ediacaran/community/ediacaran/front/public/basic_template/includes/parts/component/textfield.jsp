@@ -21,15 +21,14 @@
 <c:set var="attr" value="${!empty attr? attr.concat(' ') : attr}${'value='.concat(quote).concat(entity['value']).concat(quote) }"/>
 <c:set var="attr" value="${!empty attr? attr.concat(' ') : attr}${'placeholder='.concat(quote).concat(entity['placeholder']).concat(quote) }"/>
 
+<c:if test="${!empty entity['label']}">
+<label for="input_${entity['name']}">${entity['label']}</label>
+</c:if>
+<c:if test="${empty entity['label']}">
+<label class="sr-only" for="input_${entity['name']}">${entity['label']}</label>
+</c:if>
+
 <c:if test="${!(entity['type'] eq 'hidden') && (!empty entity['prepend'] || !empty entity['append']) }">
-<div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
-	
-	<c:if test="${!empty entity['label']}">
-	<label for="input_${entity['name']}">entity['label']</label>
-	</c:if>
-	<c:if test="${empty entity['label']}">
-	<label class="sr-only" for="input_${entity['name']}">entity['label']</label>
-	</c:if>
 	
 	<div class="input-group">
 	
@@ -63,5 +62,9 @@
 		</div>
 		</c:if>		
 	</div>
-</div>
+	
+</c:if>
+
+<c:if test="${(entity['type'] eq 'hidden') || (empty entity['prepend'] && empty entity['append']) }">
+	<input ${attr} class="form-control" id="input_${entity['name']}">
 </c:if>

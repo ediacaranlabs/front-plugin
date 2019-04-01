@@ -26,7 +26,7 @@
 		<c:if test="${entity['split-button']}">
 		<a class="${buttonClass}" href="#">
 			<c:if test="${!empty entity['icon']}">
-			<i class="icon-${entity['icon']}"></i>
+			<i class="fa fa-${entity['icon']}"></i>
 			</c:if>
 			${entity['label']}
 		</a>
@@ -39,7 +39,7 @@
 		<c:if test="${!entity['split-button']}">
 		<a class="dropdown-toggle ${buttonClass}" data-toggle="dropdown" href="#">
 			<c:if test="${!empty entity['icon']}">
-			<i class="icon-${entity['icon']}"></i>
+			<i class="fa fa-${entity['icon']}"></i>
 			</c:if>
 			${entity['label']}
 			<i class="caret" style="margin-left: 25px"></i>
