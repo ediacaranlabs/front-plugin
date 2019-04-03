@@ -11,7 +11,7 @@
 <c:set var="class"  value=""/>
 <c:set var="class"  value="${!empty class && entity['enabled'] == 'false'? class.concat(' ') : class}${entity['enabled'] == 'false'? 'uneditable-input' : ''}"/>
 <c:set var="class"  value="${!empty class && entity['inline']?             class.concat(' ') : class}${entity['inline']?             'inline'           : ''}"/>
-<c:set var="class"  value="${!empty class && !empty entity['class']?       class.concat(' ') : class}${!empty entity['class']?       entity['class']    : ''}"/>
+<c:set var="class"  value="${!empty class && !empty entity['properties']['class']?       class.concat(' ') : class}${!empty entity['properties']['class']?       entity['properties']['class']    : ''}"/>
 
 <%-- atributos --%>
 <c:set var="attr" value="${!empty attr? attr.concat(' ') : attr}${'name='.concat(quote).concat(entity['name']).concat(quote) }"/>

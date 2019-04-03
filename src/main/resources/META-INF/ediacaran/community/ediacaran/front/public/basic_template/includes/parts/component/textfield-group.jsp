@@ -22,11 +22,44 @@
 <c:set var="attr" value="${!empty attr? attr.concat(' ') : attr}${'placeholder='.concat(quote).concat(entity['placeholder']).concat(quote) }"/>
 
 <div class="form-group ${class}">
+	
 	<c:if test="${!empty entity['label']}">
 	<label for="input_${entity['name']}">${entity['label']}</label>
 	</c:if>
 	<c:if test="${empty entity['label']}">
 	<label class="sr-only" for="input_${entity['name']}">${entity['label']}</label>
 	</c:if>
-	<input ${attr} class="form-control ${inputClass}" id="input_${entity['name']}">
+	
+	<div class="input-group" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+	
+		<c:if test="${!empty entity['prepend']}">
+		<div class="input-group-prepend">
+			<c:choose>
+				<c:when test="${entity['prepend'].getClass().simpleName == 'String'}">
+					<div class="input-group-text">${entity['prepend']}</div>
+				</c:when>
+				<c:otherwise>
+					<c:set var="entity" value="${entity['prepend']}" scope="request" />
+					<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+				</c:otherwise>
+			</c:choose>
+		</div>
+		</c:if>
+		
+		<input ${attr} class="form-control ${inputClass}" id="input_${entity['name']}">
+		
+		<c:if test="${!empty entity['append']}">
+		<div class="input-group-append">
+			<c:choose>
+				<c:when test="${entity['append'].getClass().simpleName == 'String'}">
+					<div class="input-group-text">${entity['append']}</div>
+				</c:when>
+				<c:otherwise>
+					<c:set var="entity" value="${entity['append']}" scope="request" />
+					<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+				</c:otherwise>
+			</c:choose>
+		</div>
+		</c:if>		
+	</div>
 </div>
