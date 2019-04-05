@@ -12,7 +12,7 @@
 
 <div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
   <div class="text-center">
-  	<span class="fa-stack fa-2x">
+  	<span class="fa-stack fa-3x">
   		<i class="fa fa-circle fa-stack-2x"></i>
     	<i class="fa ${entity['icon']} fa-stack-1x fa-inverse"></i>
     </span>
