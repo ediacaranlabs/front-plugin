@@ -4,11 +4,11 @@
 <c:forEach items="${entity['content']}" var="item" varStatus="count">
 	<c:set var="entity" value="${item}" scope="request"/>
 
-	<c:if test="${item['row-wrapper']}">
+	<c:if test="${empty item['row-wrapper']? entity['wrapper'] : item['row-wrapper']}">
 	<div class="row">
 	</c:if>
 	<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp"/>
-	<c:if test="${item['row-wrapper']}">
+	<c:if test="${empty item['row-wrapper']? entity['wrapper'] : item['row-wrapper']}">
 	</div>
 	</c:if>
 </c:forEach>
