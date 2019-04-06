@@ -18,14 +18,6 @@
 
 <c:set var="attr" value="${!empty attr?                 attr.concat(' ') : attr}${'type='.concat(quote).concat((empty entity['action']? 'button' : entity['action'])).concat(quote)}"/>
 
-<c:if test="${requestScope.formControls}">
-	<div class="control-group ${entity['properties']['class']}">
-		<div class="controls">
-</c:if>
 <button ${attr} class="${class}" <c:if test="${empty requestScope.formControls}">class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" /></c:if>>
 ${entity['label']}
 </button>
-<c:if test="${requestScope.formControls}">
-		</div>
-	</div>
-</c:if>
