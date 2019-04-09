@@ -7,12 +7,12 @@
 <c:set var="quote" value="\"" />
 
 <%-- atributo class --%>
-<c:set var="class"  value=                                                                    "${empty entity['type']?  '' : entity['type'] }"/>
+<c:set var="class"  value=                                                                                  "${!empty entity['type']               ? 'list-'.concat(entity['type'])            : ''}"/>
 <c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ') : class}${!empty entity['properties']['class']? ' '.concat(entity['properties']['class']) : ''}"/>
 
 <ol class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 	<c:forEach var="item" items="${entity['content']}">
-		<li>
+		<li ${entity['type'] == 'inline'? 'class='.concat(quote).concat('list-inline-item').concat(quote) : ''}>
 		<c:choose>
 			<c:when test="${item.getClass().simpleName == 'String'}">
 		     		${item}
