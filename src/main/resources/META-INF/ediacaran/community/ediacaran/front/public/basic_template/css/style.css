@@ -776,3 +776,20 @@ ul.link-list li {
 footer ul.link-list li a {
   color: #919191;
 }
+
+/* landing section */
+
+.section-heading-spacer {
+    float: left;
+    width: 200px;
+    border-top: 3px solid #e7e7e7;
+}
+
+.section-heading {
+    margin-bottom: 30px;
+}
+
+.lead {
+    font-size: 18px;
+    font-weight: 400;
+}
