@@ -111,17 +111,20 @@
       <div id="sub-footer">
         <div class="container">
           <div class="row">
-            <div class="span6">
+            <div class="col-lg-6">
               <div class="copyright">
                 <p>
                   <span>${vars['copyright']}</span>
                 </p>
               </div>
             </div>
-            <div class="span6">
+            <div class="col-lg-6">
               <ul class="social-network">
 			    <c:forEach items="${vars['socialNetwork']}" var="item">
-			    <li><a href="${item['link']}" data-placement="bottom" title="${item['title']}"><i class="${item['icon']} icon-square"></i></a></li>
+			    <li><a href="${item['link']}" data-placement="bottom" title="${item['title']}">
+					<span class="fa-stack fa-2x">
+				    	<i class="fa ${item['icon']} fa-stack-1x fa-inverse"></i>
+				    </span>			    
               	</c:forEach>
               </ul>
             </div>
@@ -130,7 +133,12 @@
       </div>
     </footer>
 
-  <a href="#" class="scrollup"><i class="icon-chevron-up icon-square icon-32 active"></i></a>
+  <a href="#" class="scrollup">
+	<span class="fa-stack fa-1x">
+  		<i class="fa fa-square fa-stack-2x active"></i>
+    	<i class="fa fa-chevron-up fa-stack-1x fa-inverse"></i>
+    </span>			    
+  </a>
   
   <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/footer.jsp"/>
     

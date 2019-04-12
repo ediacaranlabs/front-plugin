@@ -378,7 +378,26 @@ a.nivo-prevNav:before {
 
 [class^="fa-"].active,
 [class*=" fa-"].active {
-    background-color: #F03C02;
+	color: #F03C02;
+}
+
+/* widget */
+
+footer .widgetheading {
+    position: relative;
+}
+
+.widgetheading {
+    width: 100%;
+    padding: 0;
+}
+
+footer .widgetheading {
+    position: relative;
+}
+
+footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
+    color: #eee;
 }
 
 /* accordion */
@@ -792,4 +811,74 @@ footer ul.link-list li a {
 .lead {
     font-size: 18px;
     font-weight: 400;
+}
+
+/* scrollup */
+
+a.scrollup {
+    outline: 0;
+}
+.scrollup {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    bottom: 0px;
+    right: 20px;
+}
+
+.icon-square, .icon-rounded, .icon-plain, .icon-circled {
+    margin: 10px 10px 10px 0;
+    display: inline-block !important;
+    text-align: center !important;
+    color: #fff;
+    width: 18px;
+    height: 18px;
+    padding: 3px;
+    font-size: 12px;
+    line-height: 18px;
+    text-shadow: none;
+    cursor: pointer;
+}
+
+/* footer */
+
+footer {
+	border-top: 10px solid #1c1c1c;
+    background: #111;
+    padding: 50px 0 0 0;
+    margin: 50px 0 0 0;
+    color: #bbb;
+}
+
+#sub-footer {
+    background: #0a0a0a;
+    text-shadow: none;
+    color: #5d5d5d;
+    padding: 0;
+    padding-top: 30px;
+    margin: 20px 0 0 0;
+}
+
+.copyright {
+    text-align: left;
+    font-size: 12px;
+    color: #ddd;
+}
+
+#sub-footer p {
+    margin: 0;
+    padding: 0;
+}
+
+#sub-footer ul.social-network {
+    float: right;
+}
+
+ul.social-network {
+    list-style: none;
+    margin: 0;
+}
+
+ul.social-network li {
+    display: inline;
 }

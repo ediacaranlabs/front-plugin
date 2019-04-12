@@ -99,3 +99,8 @@ li {
     font-size: 13px;
   }
 }
+
+.widget h4, .widget h5 {
+    font-weight: 300;
+    margin-bottom: 20px;
+}
