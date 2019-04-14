@@ -4,7 +4,7 @@
 <%-- define a entidade --%>
 <c:set var="entity" value="${requestScope.entity}"/>
 <ul class="breadcrumb">
-	<c:forEach items="${entity['breadcrumb']}" var="item">
+	<c:forEach items="${entity['content']}" var="item">
 	<li>
 		<a href="${item['link']}"> 
 		<c:if test="${!empty item['icon']}">
