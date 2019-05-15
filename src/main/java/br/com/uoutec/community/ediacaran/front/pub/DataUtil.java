@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.pub;
 
+import java.io.Reader;
 import java.lang.reflect.Modifier;
 import java.util.Map;
 
@@ -25,6 +26,10 @@ public class DataUtil {
 	
 	public static Map<?,?> decode(String o) {
 		return (Map<?,?>)gson.fromJson(o, Object.class);
+	}
+
+	public static Map<?,?> decode(Reader value) {
+		return (Map<?,?>)gson.fromJson(value, Object.class);
 	}
 	
 }

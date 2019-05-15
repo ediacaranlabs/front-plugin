@@ -1,78 +1,79 @@
-package br.com.uoutec.community.ediacaran.front.pub;
+package br.com.uoutec.community.ediacaran.front;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.brandao.brutos.annotation.Action;
-import org.brandao.brutos.annotation.ActionStrategy;
-import org.brandao.brutos.annotation.Basic;
-import org.brandao.brutos.annotation.Controller;
-import org.brandao.brutos.annotation.Transient;
-import org.brandao.brutos.annotation.web.WebActionStrategyType;
-import org.brandao.brutos.web.HttpStatus;
-import org.brandao.brutos.web.WebResultAction;
-
+import br.com.uoutec.application.EntityContext;
 import br.com.uoutec.application.se.ApplicationBootstrapProvider;
 import br.com.uoutec.community.ediacaran.PluginManager;
 import br.com.uoutec.community.ediacaran.ServerBootstrap;
-import br.com.uoutec.community.ediacaran.front.PluginInstaller;
-import br.com.uoutec.community.ediacaran.plugins.PluginException;
+import br.com.uoutec.community.ediacaran.front.pub.DataUtil;
 import br.com.uoutec.community.ediacaran.plugins.PluginMetadata;
 import br.com.uoutec.community.ediacaran.plugins.PluginPropertyValue;
 
-//@Controller
-//@Singleton
-//@ActionStrategy(WebActionStrategyType.DETACHED)
-public class ViewController {
+public class FrontEdiacaranServlet extends HttpServlet{
 
-	@Transient
-	@Inject
-	private PluginManager pluginManager;
-	
+	private static final long serialVersionUID = -1401919198240749640L;
+
 	private ServerBootstrap serverBootstrap;
 	
-	public ViewController() {
+	private PluginManager pluginManager;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
 		this.serverBootstrap = (ServerBootstrap) ApplicationBootstrapProvider.getBootstrap();
+		this.pluginManager = EntityContext.getEntity(PluginManager.class);
 	}
 	
-	@Action("/{path:[^\\s\\.]{1,256}\\.edc$}")
-	public WebResultAction show(@Basic(bean="path")String path, WebResultAction result
-			) throws IOException, PluginException {
+	public void doGet(HttpServletRequest req,
+			HttpServletResponse res) throws ServletException,IOException {
+	
+		String path = req.getRequestURI().substring(req.getContextPath().length());
 		
 		Map<Object,Object> vars = loadPageData(path);
 		String view             = getPageView(vars);
 		
 		if(view == null) {
-			return result.setResponseStatus(HttpStatus.NOT_FOUND);
+			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return;
 		}
 		
-		result.setView(view, true);
-		result.add("vars", vars);
-		
-		return result;
+		req.setAttribute("vars", vars);
+		req.getRequestDispatcher(view).include(req, res);
+		res.addHeader("Content-Type", "text/html; charset=utf-8");
 	}
 	
-	private String getPageView(Map<Object,Object> vars) throws PluginException {
+	private String getPageView(Map<Object,Object> vars) throws ServletException {
 		
-		Object type;
-		
-		if(vars == null || (type = vars.get("template")) == null){
-			return null;
+		try {
+			Object type;
+			
+			if(vars == null || (type = vars.get("template")) == null){
+				return null;
+			}
+			
+			PluginMetadata pmd = pluginManager.findById(PluginInstaller.PLUGIN);
+			PluginPropertyValue ppv = pmd.getValue("template");
+			String template = ppv.getValue();
+			
+			return "/plugins/community/ediacaran/front/" + template + "/" + type + ".jsp";
 		}
-		
-		PluginMetadata pmd = pluginManager.findById(PluginInstaller.PLUGIN);
-		PluginPropertyValue ppv = pmd.getValue("template");
-		String template = ppv.getValue();
-		
-		return "/plugins/community/ediacaran/front/" + template + "/" + type + ".jsp";
+		catch(Throwable e) {
+			throw new ServletException(e);
+		}
 	}
 	
 	private Map<Object,Object> loadPageData(String path) throws IOException{
@@ -136,10 +137,12 @@ public class ViewController {
 			return null;
 		}
 		
-		String text = readData(dta);
-		return (Map<Object, Object>) DataUtil.decode(text);
+		InputStreamReader ir = new InputStreamReader(new FileInputStream(dta), "UTF-8");
+		//String text = readData(dta);
+		return (Map<Object, Object>) DataUtil.decode(ir);
 	}
 	
+	/*
 	private String readData(File f) throws IOException {
 		byte[] b = new byte[2048];
 		int l;
@@ -150,7 +153,7 @@ public class ViewController {
 			fin = new FileInputStream(f);
 			
 			while((l = fin.read(b)) != -1) {
-				builder.append(new String(b, 0, l));
+				builder.append(new String(b, 0, l, "UTF-8"));
 			}
 			return builder.toString();
 		}
@@ -160,5 +163,5 @@ public class ViewController {
 			}
 		}
 	}
-	
+	 */
 }
