@@ -276,8 +276,10 @@ public class StringPattern {
     
     public void toWriter(Writer writter, Object ... params) throws IOException{
         
-        if(vars.isEmpty())
+        if(vars.isEmpty()) {
+        	writter.write(this.original);
             return;
+        }
         
         for(int i=0;i<vars.size();i++ ){
             StringPatternVar p = vars.get(i);
@@ -287,6 +289,36 @@ public class StringPattern {
             }
 
             writter.write(String.valueOf(params[p.getIndex()]));
+            
+            if(p.getEnd() != null){
+            	writter.write(p.getEnd());
+            }
+            
+        }
+        
+    }
+
+    public void toWriter(Writer writter, Map<String, Object> params) throws IOException{
+        
+        if(vars.isEmpty()) {
+        	writter.write(this.original);
+            return;
+        }
+        
+        for(int i=0;i<vars.size();i++ ){
+            StringPatternVar p = vars.get(i);
+            
+            if(i == 0 && p.getStart() != null){
+                writter.write(p.getStart());
+            }
+
+            Object v = params.get(p.getId());
+            
+            if(v instanceof StringPattern) {
+            	((StringPattern)v).toWriter(writter, params);
+            }
+            else
+            	writter.write(String.valueOf(v));
             
             if(p.getEnd() != null){
             	writter.write(p.getEnd());
