@@ -10,6 +10,8 @@ import org.brandao.brutos.bean.BeanInstance;
 
 public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 
+	public static final String ID_COUNT   = "_component_id_count";
+
 	@SuppressWarnings("serial")
 	private static final Set<String> props = new HashSet<String>() {{
 		add("accesskey");
@@ -89,6 +91,21 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 		}
 	}
 	
+    protected Object setProperty(String name, Object newValue) {
+		Object old = (Integer) this.getJspContext().getAttribute(name);
+		this.getJspContext().setAttribute(name, newValue);
+    	return old;
+    }
+
+    protected Object getProperty(String name) {
+    	return getProperty(name, null);
+    }
+    
+    protected Object getProperty(String name, Object defaultValue) {
+		Object val = (Integer) this.getJspContext().getAttribute(name);
+    	return val == null? defaultValue : val;
+    }
+    
 	public String getAccesskey() {
 		return accesskey;
 	}
@@ -146,6 +163,13 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 	}
 
 	public String getId() {
+		
+		if(id == null) {
+			Integer acc = (Integer) this.getJspContext().getAttribute(ID_COUNT);
+			getJspContext().setAttribute(ID_COUNT, acc == null? 0 : acc.intValue() + 1);
+			return String.valueOf(acc);
+		}
+		
 		return id;
 	}
 
