@@ -53,7 +53,9 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 			
 	private String title;
 
-	public String toAttrs(Map<String,String> template) {
+	private String template;
+	
+	public String toAttrs(Map<String,String> template, Set<String> ignore) {
 		try {
 			StringBuilder sb = new StringBuilder();
 			BeanInstance i = new BeanInstance(this, EdiacaranSimpleTagSupport.class);
@@ -62,7 +64,7 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 				
 				Object v = i.get(p);
 				
-				if(v != null) {
+				if((ignore == null || !ignore.contains(p)) && v != null) {
 					
 					if(sb.length() != 0) {
 						sb.append(" ");
@@ -70,7 +72,11 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 					
 					String t = template != null? template.get(p) : null;
 					
-					sb.append(p).append("=\"").append(t == null? v : t.replace("$1", String.valueOf(v))).append("\"");
+					sb
+						.append(p.equals("classType")? "class" : p)
+						.append("=\"")
+							.append(t == null? v : t.replace("$1", String.valueOf(v)))
+						.append("\"");
 					
 				}
 				
@@ -185,6 +191,14 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(String template) {
+		this.template = template;
 	}
 	
 }

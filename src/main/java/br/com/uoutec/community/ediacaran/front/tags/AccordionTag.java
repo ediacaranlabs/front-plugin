@@ -1,45 +1,78 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Writer;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import br.com.uoutec.community.ediacaran.front.StringPattern;
+import br.com.uoutec.community.ediacaran.front.StringPattern.AbstractVarParser;
 
 public class AccordionTag extends EdiacaranSimpleTagSupport {
 
 	public static final String ACCORDION_ID_ATTR    = "_accordion_id";
 	
+	public static final String ACCORDION_ID_COUNT    = "_accordion_id_count";
+	
 	public static final String ACCORDION_COUNT_ATTR = "_accordion_count";
 	
-	private static final StringPattern TEMPLATE_BEFORE = new StringPattern(
-			"<div {attr} id=\"accordion{accordionID}\">\r\n"
-		);
-	
-	private static final StringPattern TEMPLATE_AFTER = new StringPattern(
-		"</div>\r\n" 
+	private static final StringPattern TEMPLATE = new StringPattern(
+			"<div {attr} id=\"accordion{accordionID}\">\r\n" + 
+			"	{content}\r\n" +
+			"</div>\r\n" 
 	);
+	
+	@SuppressWarnings("serial")
+	private static final Set<String> ignore = new HashSet<String>() {{
+		add("id");
+	}};
 	
 	public AccordionTag() {
 	}
 	
     public void doTag() throws JspException, IOException{
+    	
     	Integer oldCount = null;
+    	
     	try {
-			Integer accordionID = (Integer) this.getJspContext().getAttribute(ACCORDION_ID_ATTR);
-			this.getJspContext().setAttribute(ACCORDION_ID_ATTR, accordionID = accordionID == null? 0 : accordionID.intValue() + 1);
-			
+    		
+    		Object accordionID;
+    		
+    		if(this.getId() == null) {
+				Integer acc = (Integer) this.getJspContext().getAttribute(ACCORDION_ID_COUNT);
+				this.getJspContext().setAttribute(ACCORDION_ID_COUNT, accordionID = acc == null? 0 : acc.intValue() + 1);
+    		}
+    		else {
+    			accordionID = this.getId();
+    		}
+    		
+			this.getJspContext().setAttribute(ACCORDION_ID_ATTR, accordionID);
+    		
 			oldCount = (Integer) this.getJspContext().getAttribute(ACCORDION_COUNT_ATTR);
 			this.getJspContext().setAttribute(ACCORDION_COUNT_ATTR, 0);
 			
-			JspWriter out = this.getJspContext().getOut();			
-			TEMPLATE_BEFORE.toWriter(out, super.toAttrs(null), accordionID);
-			getJspBody().invoke(out);
-			TEMPLATE_AFTER.toWriter(out);
+			JspWriter out = this.getJspContext().getOut();
+			
+			TEMPLATE.toWriter(
+					out, 
+					super.toAttrs(null, ignore), 
+					accordionID,
+					new AbstractVarParser() {
+						
+						public void parse(Writer writter) throws IOException {
+							try {
+								getJspBody().invoke(writter);
+							}
+							catch(Throwable e) {
+								throw new IllegalStateException(e);
+							}
+						}
+						
+					}
+				);
     	}
     	catch(Throwable e) {
     		throw new IllegalStateException(e);

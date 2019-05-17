@@ -1,0 +1,3 @@
+<div {attr} id="accordion{accordionID}"> 
+	{accordion-item}
+</div> 

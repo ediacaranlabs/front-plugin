@@ -288,7 +288,17 @@ public class StringPattern {
                 writter.write(p.getStart());
             }
 
-            writter.write(String.valueOf(params[p.getIndex()]));
+            Object v = params[p.getIndex()];
+            
+            if(v instanceof VarParser) {
+            	((VarParser)v).parse(writter);
+            }
+            else
+            if(v instanceof StringPattern) {
+            	((StringPattern)v).toWriter(writter, params);
+            }
+            else
+            	writter.write(String.valueOf(v));
             
             if(p.getEnd() != null){
             	writter.write(p.getEnd());
@@ -314,6 +324,10 @@ public class StringPattern {
 
             Object v = params.get(p.getId());
             
+            if(v instanceof VarParser) {
+            	((VarParser)v).parse(writter);
+            }
+            else
             if(v instanceof StringPattern) {
             	((StringPattern)v).toWriter(writter, params);
             }
@@ -365,4 +379,24 @@ public class StringPattern {
 		return vars;
 	}
     
+	public static interface VarParser{
+		
+		void parse(Writer writter) throws IOException;
+		
+		String parse() throws IOException;
+	}
+	
+	public static abstract class AbstractVarParser implements VarParser{
+
+		@Override
+		public void parse(Writer writter) throws IOException {
+		}
+
+		@Override
+		public String parse() throws IOException {
+			return null;
+		}
+
+		
+	}
 }
