@@ -39,7 +39,7 @@ public class AccordionTag extends EdiacaranSimpleTagSupport {
 			vars.put("accordion-item", new JspFragmentVarParser(getJspBody()));
 			
 			TemplatesManager.getTemplatesManager()
-				.apply(TEMPLATE, vars, getJspContext().getOut());
+				.apply(this.getTemplate() == null? TEMPLATE : this.getTemplate(), vars, getJspContext().getOut());
     	}
     	catch(Throwable e) {
     		throw new IllegalStateException(e);

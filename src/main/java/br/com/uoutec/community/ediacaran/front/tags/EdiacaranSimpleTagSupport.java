@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -12,10 +13,12 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 
 	public static final String ID_COUNT   = "_component_id_count";
 
+	public static final String ATTR_FORMAT = "([a-z-_]+)=([^\\;]+)";
+
 	@SuppressWarnings("serial")
 	private static final Set<String> props = new HashSet<String>() {{
 		add("accesskey");
-		add("classType");
+		add("classType");   
 		add("contenteditable");
 		add("contextmenu");
 		add("dir");
@@ -55,6 +58,8 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 			
 	private String title;
 
+	private String attr;
+	
 	private String template;
 	
 	public String toAttrs(Map<String,String> template, Set<String> ignore) {
@@ -89,6 +94,15 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 		catch(Throwable e) {
 			throw new IllegalStateException(e);
 		}
+	}
+	
+	private Map<String,String> getAttrs(){
+		if(attr == null) {
+			return null;
+		}
+		
+		Map<String,String> a = new HashMap<String,String>();
+		
 	}
 	
     protected Object setProperty(String name, Object newValue) {

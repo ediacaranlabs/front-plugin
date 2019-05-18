@@ -25,7 +25,7 @@ public class AccordionItemTag extends EdiacaranSimpleTagSupport {
 			vars.put("content",     new JspFragmentVarParser(getJspBody()));
 			
 			TemplatesManager.getTemplatesManager()
-				.apply(TEMPLATE, vars, getJspContext().getOut());
+				.apply(this.getTemplate() == null? TEMPLATE : this.getTemplate(), vars, getJspContext().getOut());
 			
 			this.setProperty(AccordionTag.ACCORDION_COUNT_ATTR, count.intValue() + 1);
     	}

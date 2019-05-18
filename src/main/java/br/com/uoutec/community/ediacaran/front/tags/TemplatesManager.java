@@ -46,8 +46,13 @@ public class TemplatesManager {
 	}
 	
 	public void addtemplate(String name, String resource) throws IOException {
-		Resource r = loader.getResource(resource);
+		
+		Resource r      = loader.getResource(resource);
 		StringPattern t = templateLoader.load(r, charset);
+		
+		if(t == null) {
+			throw new IllegalStateException("template not found: " + resource);
+		}
 		
 		if(templates.containsKey(name)) {
 			throw new IllegalStateException("has been added: " + name);
@@ -56,21 +61,24 @@ public class TemplatesManager {
 		templates.put(name, t);
 	}
 
-	public StringPattern getTemplate(String name) {
-		StringPattern p = templates.get(name);
-		return p == null? defaultTemplates.get(name) : p;
+	public StringPattern getTemplate(String template) {
+		StringPattern p = templates.get(template);
+		return p == null? defaultTemplates.get(template) : p;
 	}
 	
-	public void apply(String name, Map<String,Object> vars, Writer out) throws IOException {
-		StringPattern p = getTemplate(name);
+	public void apply(String template, Map<String,Object> vars, Writer out) throws IOException {
+		
+		StringPattern p = getTemplate(template);
 		
 		if(p == null) {
-			throw new IllegalStateException("template not found: " + name);
+			synchronized(TemplatesManager.class) {
+				addtemplate(template, template);
+			}
 		}
 		
 		p.toWriter(out, vars);
 	}
-	
+
 	public void removetemplate(String name){
 		templates.remove(name);
 	}
