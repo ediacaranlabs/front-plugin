@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -34,7 +33,7 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 	
 	private String accesskey;
 	
-	private String classType;
+	private String classStyle;
 	
 	private Boolean contenteditable;
 	
@@ -58,7 +57,7 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 			
 	private String title;
 
-	private String attr;
+	private String extAttrs;
 	
 	private String template;
 	
@@ -80,7 +79,7 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 					String t = template != null? template.get(p) : null;
 					
 					sb
-						.append(p.equals("classType")? "class" : p)
+						.append(p.equals("classStyle")? "class" : p)
 						.append("=\"")
 							.append(t == null? v : t.replace("$1", String.valueOf(v)))
 						.append("\"");
@@ -89,20 +88,20 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 				
 			}
 			
+			if(this.extAttrs != null) {
+				
+				if(sb.length() != 0) {
+					sb.append(" ");
+				}
+				
+				sb.append(this.extAttrs);
+			}
+			
 			return sb.toString();
 		}
 		catch(Throwable e) {
 			throw new IllegalStateException(e);
 		}
-	}
-	
-	private Map<String,String> getAttrs(){
-		if(attr == null) {
-			return null;
-		}
-		
-		Map<String,String> a = new HashMap<String,String>();
-		
 	}
 	
     protected Object setProperty(String name, Object newValue) {
@@ -128,12 +127,20 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 		this.accesskey = accesskey;
 	}
 
-	public String getClassType() {
-		return classType;
+	public String getClassStyle() {
+		return classStyle;
 	}
 
-	public void setClassType(String classType) {
-		this.classType = classType;
+	public void setClassStyle(String classStyle) {
+		this.classStyle = classStyle;
+	}
+
+	public String getExtAttrs() {
+		return extAttrs;
+	}
+
+	public void setExtAttrs(String extAttrs) {
+		this.extAttrs = extAttrs;
 	}
 
 	public Boolean getContenteditable() {
