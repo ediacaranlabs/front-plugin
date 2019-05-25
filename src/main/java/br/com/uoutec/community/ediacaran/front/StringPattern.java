@@ -332,7 +332,9 @@ public class StringPattern {
             	((StringPattern)v).toWriter(writter, params);
             }
             else
+            if(v != null) {
             	writter.write(String.valueOf(v));
+            }
             
             if(p.getEnd() != null){
             	writter.write(p.getEnd());

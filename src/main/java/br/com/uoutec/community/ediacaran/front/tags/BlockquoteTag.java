@@ -8,7 +8,9 @@ import javax.servlet.jsp.JspException;
 
 public class BlockquoteTag extends EdiacaranSimpleTagSupport {
 
-	public static final String TEMPLATE = "bootstrap4/templates/components/blockquote";
+	public static final String TEMPLATE      = "bootstrap4/templates/components/blockquote";
+	
+	public static final String CITE_TEMPLATE = "bootstrap4/templates/components/cite";
 	
 	private String cite;
 	
@@ -21,7 +23,7 @@ public class BlockquoteTag extends EdiacaranSimpleTagSupport {
 			Map<String, Object> vars = new HashMap<String, Object>();
 			vars.put("attr", super.toAttrs(null, null));
 			vars.put("body", new JspFragmentVarParser(getJspBody()));
-			vars.put("cite", cite == null? "" : "<cite>" + this.cite + "</cite>");
+			vars.put("cite", this.cite == null? null : new TemplateVarParser(CITE_TEMPLATE).put("content", this.cite));
 			
 			TemplatesManager.getTemplatesManager()
 				.apply(
