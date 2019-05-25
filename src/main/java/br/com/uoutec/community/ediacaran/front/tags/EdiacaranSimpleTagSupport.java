@@ -1,9 +1,11 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
@@ -61,6 +63,21 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 	
 	private String template;
 	
+    public void doTag() throws JspException, IOException {
+		StringBuilder b = 
+				new StringBuilder("<div ")
+				.append(this.toAttrs(null, null))
+				.append(" >");
+		getJspContext().getOut().write(b.toString());
+    	
+    	doInnerTag();
+    	
+		getJspContext().getOut().write("</div>");
+    }
+	
+    public void doInnerTag() throws JspException, IOException {
+    }
+    
 	public String toAttrs(Map<String,String> template, Set<String> ignore) {
 		try {
 			StringBuilder sb = new StringBuilder();

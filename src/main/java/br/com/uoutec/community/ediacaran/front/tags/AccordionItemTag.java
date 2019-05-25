@@ -8,7 +8,7 @@ import javax.servlet.jsp.JspException;;
 
 public class AccordionItemTag extends EdiacaranSimpleTagSupport {
 
-	public static final String TEMPLATE = "accordion-item";
+	public static final String TEMPLATE = "bootstrap4/templates/components/accordion-item";
 
 	private String title;
 	

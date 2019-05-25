@@ -10,7 +10,7 @@ import javax.servlet.jsp.JspException;
 
 public class AccordionTag extends EdiacaranSimpleTagSupport {
 
-	public static final String TEMPLATE             = "accordion";
+	public static final String TEMPLATE             = "bootstrap4/templates/components/accordion";
 	
 	public static final String ACCORDION_ATTR       = "_accordion";
 	
