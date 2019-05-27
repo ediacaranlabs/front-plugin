@@ -1,0 +1,4 @@
+<ul {attr} class="breadcrumb {class}">
+	{path}
+	<li class="active">{title}</li>
+</ul>

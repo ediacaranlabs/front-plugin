@@ -1,0 +1,7 @@
+<li>
+	<a href="{lnk}">
+	{icon} 
+	{text}
+	</a>
+	<i class="fa fa-angle-right"></i>
+</li>
