@@ -1,0 +1,4 @@
+<span {attr} class="fa-stack fa-{size}x {class}">
+	<i class="fa fa-{bg} fa-stack-{bg-size}x"></i>
+	<i class="fa fa-{icon} fa-stack-{icon-size}x fa-inverse"></i>
+</span>
