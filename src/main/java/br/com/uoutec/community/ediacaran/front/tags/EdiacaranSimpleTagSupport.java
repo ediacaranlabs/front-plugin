@@ -1,6 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -17,7 +18,7 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 	public static final String ATTR_FORMAT = "([a-z-_]+)=([^\\;]+)";
 
 	@SuppressWarnings("serial")
-	private static final Set<String> props = new HashSet<String>() {{
+	protected static final Set<String> DEFAULT_ATTRS = Collections.unmodifiableSet(new HashSet<String>() {{
 		add("accesskey");
 		add("classType");   
 		add("contenteditable");
@@ -31,7 +32,7 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 		add("style");
 		add("tabindex");
 		add("title");
-	}};
+	}});
 	
 	private String accesskey;
 	
@@ -78,12 +79,16 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
     public void doInnerTag() throws JspException, IOException {
     }
     
+    protected Set<String> getDefaultAttributes(){
+    	return DEFAULT_ATTRS;
+    }
+    
 	public String toAttrs(Map<String,String> template, Set<String> ignore) {
 		try {
 			StringBuilder sb = new StringBuilder();
-			BeanInstance i = new BeanInstance(this, EdiacaranSimpleTagSupport.class);
+			BeanInstance i = new BeanInstance(this);
 			
-			for(String p: props) {
+			for(String p: getDefaultAttributes()) {
 				
 				Object v = i.get(p);
 				
