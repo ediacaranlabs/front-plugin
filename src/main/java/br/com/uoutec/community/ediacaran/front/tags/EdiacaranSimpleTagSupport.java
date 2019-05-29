@@ -2,6 +2,7 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -18,21 +19,28 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
 	public static final String ATTR_FORMAT = "([a-z-_]+)=([^\\;]+)";
 
 	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = Collections.unmodifiableSet(new HashSet<String>() {{
-		add("accesskey");
-		add("classType");   
-		add("contenteditable");
-		add("contextmenu");
-		add("dir");
-		add("draggable");
-		add("hidden");
-		add("id");
-		add("lang");
-		add("spellcheck");
-		add("style");
-		add("tabindex");
-		add("title");
-	}});
+	protected static final Set<String> DEFAULT_ATTRS = 
+		Collections.unmodifiableSet(new HashSet<String>() {{
+			add("accesskey");
+			add("classType");   
+			add("contenteditable");
+			add("contextmenu");
+			add("dir");
+			add("draggable");
+			add("hidden");
+			add("id");
+			add("lang");
+			add("spellcheck");
+			add("style");
+			add("tabindex");
+			add("title");
+		}});
+
+	protected static final Set<String> DEFAULT_EMPTY_ATTRIBUTES = 
+			Collections.unmodifiableSet(new HashSet<String>());
+	
+	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>());
 	
 	private String accesskey;
 	
@@ -67,7 +75,7 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
     public void doTag() throws JspException, IOException {
 		StringBuilder b = 
 				new StringBuilder("<div ")
-				.append(this.toAttrs(null, null))
+				.append(this.toAttrs())
 				.append(" >");
 		getJspContext().getOut().write(b.toString());
     	
@@ -82,31 +90,41 @@ public abstract class EdiacaranSimpleTagSupport extends SimpleTagSupport{
     protected Set<String> getDefaultAttributes(){
     	return DEFAULT_ATTRS;
     }
+
+    protected Set<String> getEmptyAttributes(){
+    	return DEFAULT_EMPTY_ATTRIBUTES;
+    }
     
-	public String toAttrs(Map<String,String> template, Set<String> ignore) {
+    protected Map<String, AttributeParser> getAttributeParsers(){
+    	return DEFAULT_ATTRIBUTE_PARSERS;
+    }
+    
+	public String toAttrs() {
 		try {
 			StringBuilder sb = new StringBuilder();
 			BeanInstance i = new BeanInstance(this);
+			Map<String, AttributeParser> parsers = getAttributeParsers();
+			Set<String> emptyAttrs = getEmptyAttributes();
 			
 			for(String p: getDefaultAttributes()) {
 				
 				Object v = i.get(p);
 				
-				if((ignore == null || !ignore.contains(p)) && v != null) {
-					
-					if(sb.length() != 0) {
-						sb.append(" ");
-					}
-					
-					String t = template != null? template.get(p) : null;
-					
-					sb
-						.append(p.equals("classStyle")? "class" : p)
-						.append("=\"")
-							.append(t == null? v : t.replace("$1", String.valueOf(v)))
-						.append("\"");
-					
+				if(emptyAttrs.contains(p)) {
+					continue;
 				}
+				
+				if(sb.length() != 0) {
+					sb.append(" ");
+				}
+				
+				AttributeParser parser = parsers.get(p);
+				
+				sb
+					.append(p.equals("classStyle")? "class" : p)
+					.append("=\"")
+						.append(parser == null? v : parser.toAttribute(v))
+					.append("\"");
 				
 			}
 			

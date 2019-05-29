@@ -10,10 +10,10 @@ import javax.servlet.jsp.JspException;
 
 public class BreadcrumbTag extends EdiacaranSimpleTagSupport {
 
-	public static final String TEMPLATE             = "bootstrap4/templates/components/breadcrumb";
+	public static final String TEMPLATE = "bootstrap4/templates/components/breadcrumb";
 	
 	@SuppressWarnings("serial")
-	private static final Set<String> ignore = new HashSet<String>() {{
+	private static final Set<String> empty = new HashSet<String>() {{
 		add("class");
 	}};
 	
@@ -22,11 +22,15 @@ public class BreadcrumbTag extends EdiacaranSimpleTagSupport {
 	public BreadcrumbTag() {
 	}
 	
+    protected Set<String> getEmptyAttributes(){
+    	return empty;
+    }
+	
     public void doTag() throws JspException, IOException{
     	
     	try {
 			Map<String, Object> vars = new HashMap<String, Object>();
-			vars.put("attr",  super.toAttrs(null, ignore));
+			vars.put("attr",  super.toAttrs());
 			vars.put("title", title);
 			vars.put("class", super.getClassStyle());
 			vars.put("path",  new JspFragmentVarParser(getJspBody()));
