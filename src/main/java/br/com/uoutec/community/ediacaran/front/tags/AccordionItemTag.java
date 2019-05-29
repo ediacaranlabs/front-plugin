@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.servlet.jsp.JspException;;
 
-public class AccordionItemTag extends EdiacaranSimpleTagSupport {
+public class AccordionItemTag extends BasicTag {
 
 	public static final String TEMPLATE = "bootstrap4/templates/components/accordion-item";
 

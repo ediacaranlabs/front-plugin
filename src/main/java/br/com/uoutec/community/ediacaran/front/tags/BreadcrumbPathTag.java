@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
-public class BreadcrumbPathTag extends EdiacaranSimpleTagSupport {
+public class BreadcrumbPathTag extends BasicTag {
 
 	public static final String TEMPLATE = "bootstrap4/templates/components/breadcrumb-path";
 	

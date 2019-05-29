@@ -8,7 +8,7 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-public class IconTag extends EdiacaranSimpleTagSupport {
+public class IconTag extends BasicTag {
 
 	public static final String TEMPLATE       = "bootstrap4/templates/components/icon";
 	

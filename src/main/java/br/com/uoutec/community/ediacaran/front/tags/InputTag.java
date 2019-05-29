@@ -6,13 +6,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class EdiacaranInputTagSupport extends EdiacaranSimpleTagSupport{
+public abstract class InputTag extends FormComponentTag{
 
 	public static final String ID_COUNT   = "_component_id_count";
 
 	@SuppressWarnings("serial")
-	private static final Set<String> ATTRS = new HashSet<String>(EdiacaranSimpleTagSupport.DEFAULT_ATTRS) {{
-		add("enabled");
+	private static final Set<String> DEFAULT_ATTRS = new HashSet<String>(FormComponentTag.DEFAULT_ATTRS) {{
 		add("max");
 		add("maxlength");
 		add("min");
@@ -21,21 +20,12 @@ public abstract class EdiacaranInputTagSupport extends EdiacaranSimpleTagSupport
 		add("required");
 		add("size");
 		add("step");
-		add("value");
 		add("name");
-		add("type");
 		add("accept");
 		add("alt");
 		add("checked");
 		add("src");
 		add("autocomplete");
-		add("autofocus");
-		add("form");
-		add("formaction");
-		add("formenctype");
-		add("formmethod");
-		add("formnovalidate");
-		add("formtarget");
 		add("height");
 		add("width");
 		add("list");
@@ -44,53 +34,53 @@ public abstract class EdiacaranInputTagSupport extends EdiacaranSimpleTagSupport
 	}};
 	
 	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(EdiacaranSimpleTagSupport.DEFAULT_ATTRIBUTE_PARSERS){{
+	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(FormComponentTag.DEFAULT_ATTRIBUTE_PARSERS){{
 			
-			put("enabled", new AttributeParser() {
+			put("enabled", new AttributeParserImp() {
 				
 				@Override
-				public Object toAttribute(Object value) {
+				public Object toValue(Object value) {
 					return value != null && !((Boolean)value)? "disabled" : "";
 				}
 			});
 
-			put("readonly", new AttributeParser() {
+			put("readonly", new AttributeParserImp() {
 				
 				@Override
-				public Object toAttribute(Object value) {
+				public Object toValue(Object value) {
 					return value != null && ((Boolean)value)? "readonly" : "";
 				}
 			});
 
-			put("required", new AttributeParser() {
+			put("required", new AttributeParserImp() {
 				
 				@Override
-				public Object toAttribute(Object value) {
+				public Object toValue(Object value) {
 					return value != null && ((Boolean)value)? "required" : "";
 				}
 			});
 
-			put("autocomplete", new AttributeParser() {
+			put("autocomplete", new AttributeParserImp() {
 				
 				@Override
-				public Object toAttribute(Object value) {
+				public Object toValue(Object value) {
 					return value == null? "" : ((Boolean)value)? "on" : "off";
 				}
 			});
 
-			put("autofocus", new AttributeParser() {
+			put("autofocus", new AttributeParserImp() {
 				
 				@Override
-				public Object toAttribute(Object value) {
+				public Object toValue(Object value) {
 					return value != null && ((Boolean)value)? "autofocus" : "";
 				}
 			});
 
-			put("multiple", new AttributeParser() {
+			put("multiple", new AttributeParserImp() {
 				
 				@Override
-				public Object toAttribute(Object value) {
+				public Object toValue(Object value) {
 					return value != null && ((Boolean)value)? "multiple" : "";
 				}
 			});
@@ -156,11 +146,11 @@ public abstract class EdiacaranInputTagSupport extends EdiacaranSimpleTagSupport
 	private String placeholder;
 	
     protected Set<String> getDefaultAttributes(){
-    	return ATTRS;
+    	return DEFAULT_ATTRS;
     }
 	
     protected Map<String, AttributeParser> getAttributeParsers(){
-    	return ATTRIBUTE_PARSERS;
+    	return DEFAULT_ATTRIBUTE_PARSERS;
     }
 
 	public Boolean getEnabled() {

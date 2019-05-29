@@ -1,37 +1,59 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.jsp.tagext.BodyTagSupport;
+public class BasicTag extends AbstractTag{
 
-import org.brandao.brutos.bean.BeanInstance;
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_ATTRS = 
+		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_ATTRS) {{
+			add("accesskey");
+			add("classType");   
+			add("contenteditable");
+			add("contextmenu");
+			add("dir");
+			add("draggable");
+			add("hidden");
+			add("lang");
+			add("spellcheck");
+			add("style");
+			add("tabindex");
+			add("title");
+		}});
 
-public abstract class EdiacaranBodyTagSupport extends BodyTagSupport{
-
-	private static final long serialVersionUID = -4340864362251565376L;
+	protected static final Set<String> DEFAULT_EMPTY_ATTRIBUTES = 
+			Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_EMPTY_ATTRIBUTES));
 	
 	@SuppressWarnings("serial")
-	private static final Set<String> props = new HashSet<String>() {{
-		add("accesskey");
-		add("classType");
-		add("contenteditable");
-		add("contextmenu");
-		add("dir");
-		add("draggable");
-		add("hidden");
-		add("id");
-		add("lang");
-		add("spellcheck");
-		add("style");
-		add("tabindex");
-		add("title");
-	}};
+	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_ATTRIBUTE_PARSERS){{
+				
+				put("classType", new AttributeParserImp() {
+					
+					@Override
+					public String toName(String value) {
+						return value == null? null : "class";
+					}
+					
+				});
+
+				put("draggable", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value) {
+						return value != null && (Boolean)value? "true" : "false";
+					}
+				});
+				
+			}});
 	
 	private String accesskey;
 	
-	private String classType;
+	private String classStyle;
 	
 	private Boolean contenteditable;
 	
@@ -43,8 +65,6 @@ public abstract class EdiacaranBodyTagSupport extends BodyTagSupport{
 
 	private Boolean hidden;
 
-	private	String id;
-
 	private String lang;
 	
 	private Boolean spellcheck;
@@ -55,36 +75,18 @@ public abstract class EdiacaranBodyTagSupport extends BodyTagSupport{
 			
 	private String title;
 
-	public String toAttrs(Map<String,String> template) {
-		try {
-			StringBuilder sb = new StringBuilder();
-			BeanInstance i = new BeanInstance(this, EdiacaranBodyTagSupport.class);
-			
-			for(String p: props) {
-				
-				Object v = i.get(p);
-				
-				if(v != null) {
-					
-					if(sb.length() != 0) {
-						sb.append(" ");
-					}
-					
-					String t = template != null? template.get(p) : null;
-					
-					sb.append(p).append("=\"").append(t == null? v : t.replace("$1", String.valueOf(v))).append("\"");
-					
-				}
-				
-			}
-			
-			return sb.toString();
-		}
-		catch(Throwable e) {
-			throw new IllegalStateException(e);
-		}
-	}
-	
+    protected Set<String> getDefaultAttributes(){
+    	return DEFAULT_ATTRS;
+    }
+
+    protected Set<String> getEmptyAttributes(){
+    	return DEFAULT_EMPTY_ATTRIBUTES;
+    }
+    
+    protected Map<String, AttributeParser> getAttributeParsers(){
+    	return DEFAULT_ATTRIBUTE_PARSERS;
+    }
+    
 	public String getAccesskey() {
 		return accesskey;
 	}
@@ -93,12 +95,12 @@ public abstract class EdiacaranBodyTagSupport extends BodyTagSupport{
 		this.accesskey = accesskey;
 	}
 
-	public String getClassType() {
-		return classType;
+	public String getClassStyle() {
+		return classStyle;
 	}
 
-	public void setClassType(String classType) {
-		this.classType = classType;
+	public void setClassStyle(String classStyle) {
+		this.classStyle = classStyle;
 	}
 
 	public Boolean getContenteditable() {
@@ -139,14 +141,6 @@ public abstract class EdiacaranBodyTagSupport extends BodyTagSupport{
 
 	public void setHidden(Boolean hidden) {
 		this.hidden = hidden;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getLang() {
