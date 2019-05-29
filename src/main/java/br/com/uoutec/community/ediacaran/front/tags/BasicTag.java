@@ -1,10 +1,13 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import javax.servlet.jsp.JspException;
 
 public class BasicTag extends AbstractTag{
 
@@ -86,6 +89,10 @@ public class BasicTag extends AbstractTag{
     protected Map<String, AttributeParser> getAttributeParsers(){
     	return DEFAULT_ATTRIBUTE_PARSERS;
     }
+    
+	@Override
+	public void doInnerTag() throws JspException, IOException {
+	}
     
 	public String getAccesskey() {
 		return accesskey;

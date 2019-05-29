@@ -18,6 +18,8 @@ public abstract class AbstractTag extends SimpleTagSupport{
 
 	public static final String ATTR_FORMAT = "([a-z-_]+)=([^\\;]+)";
 
+	public static final String PARENT_TAG = AbstractTag.class.getSimpleName() + ":parent";
+	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
@@ -37,20 +39,29 @@ public abstract class AbstractTag extends SimpleTagSupport{
 	
 	private String template;
 	
+	private boolean wrapper;
+	
     public void doTag() throws JspException, IOException {
-		StringBuilder b = 
-				new StringBuilder("<div ")
+		
+		if(wrapper) {
+			StringBuilder b = new StringBuilder("<div ")
 				.append(this.toAttrs())
 				.append(" >");
-		getJspContext().getOut().write(b.toString());
+			getJspContext().getOut().write(b.toString());
+		}
     	
+		Object oldParent = getProperty(PARENT_TAG);
+		
+		setProperty(PARENT_TAG, this);
     	doInnerTag();
+    	setProperty(PARENT_TAG, oldParent);
     	
-		getJspContext().getOut().write("</div>");
+    	if(wrapper) {
+    		getJspContext().getOut().write("</div>");
+    	}
     }
 	
-    public void doInnerTag() throws JspException, IOException {
-    }
+    public abstract void doInnerTag() throws JspException, IOException;
     
     protected Set<String> getDefaultAttributes(){
     	return DEFAULT_ATTRS;
@@ -137,7 +148,7 @@ public abstract class AbstractTag extends SimpleTagSupport{
 		if(id == null) {
 			Integer acc = (Integer) this.getJspContext().getAttribute(ID_COUNT);
 			getJspContext().setAttribute(ID_COUNT, acc == null? 0 : acc.intValue() + 1);
-			return String.valueOf(acc);
+			return id = String.valueOf(acc);
 		}
 		
 		return id;

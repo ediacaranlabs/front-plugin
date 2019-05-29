@@ -3,26 +3,13 @@ package br.com.uoutec.community.ediacaran.front.tags;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
 public class ButtonTag extends AbstractTag {
 
 	public static final String TEMPLATE = "bootstrap4/templates/components/button";
-	
-	@SuppressWarnings("serial")
-	private static final Set<String> empty = new HashSet<String>() {{
-		add("classStyle");
-		add("label");
-		add("size");
-		add("type");
-		add("block");
-		add("enabled");
-		add("outline");
-	}};
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
@@ -55,15 +42,12 @@ public class ButtonTag extends AbstractTag {
 	public ButtonTag() {
 	}
 	
-    protected Set<String> getEmptyAttributes(){
-    	return empty;
-    }
-	
     protected Map<String, AttributeParser> getAttributeParsers(){
     	return ATTRIBUTE_PARSERS;
     }
     
-    public void doTag() throws JspException, IOException{
+	@Override
+	public void doInnerTag() throws JspException, IOException {
     	
     	try {
 			Map<String, Object> vars = new HashMap<String, Object>();

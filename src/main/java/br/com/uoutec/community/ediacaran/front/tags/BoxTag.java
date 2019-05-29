@@ -2,20 +2,13 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
 public class BoxTag extends BasicTag {
 
-	public static final String TEMPLATE             = "bootstrap4/templates/components/box";
-	
-	@SuppressWarnings("serial")
-	private static final Set<String> ignore = new HashSet<String>() {{
-		add("class");
-	}};
+	public static final String TEMPLATE = "bootstrap4/templates/components/box";
 	
 	private String icon;
 	
@@ -28,11 +21,11 @@ public class BoxTag extends BasicTag {
 	public BoxTag() {
 	}
 	
-    public void doTag() throws JspException, IOException{
+    public void doInnerTag() throws JspException, IOException{
     	
     	try {
 			Map<String, Object> vars = new HashMap<String, Object>();
-			vars.put("attr",    super.toAttrs(null, ignore));
+			vars.put("attr",    super.toAttrs());
 			vars.put("icon",    icon);
 			vars.put("title",   title);
 			vars.put("lnk",     lnk);

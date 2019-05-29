@@ -2,22 +2,16 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-public class IconTag extends BasicTag {
+public class IconTag extends AbstractTag {
 
 	public static final String TEMPLATE       = "bootstrap4/templates/components/icon";
 	
 	public static final String TEMPLATE_STACK = "bootstrap4/templates/components/icon-stack";
-	
-	@SuppressWarnings("serial")
-	private static final Set<String> ignore = new HashSet<String>() {{
-		add("class");
-	}};
 	
 	private Integer size;
 	
@@ -32,7 +26,11 @@ public class IconTag extends BasicTag {
 	public IconTag() {
 	}
 	
-    public void doTag() throws JspException, IOException{
+    protected Set<String> getEmptyAttributes(){
+    	return DEFAULT_EMPTY_ATTRIBUTES;
+    }
+	
+    public void doInnerTag() throws JspException, IOException{
     	
     	try {
 			size     = size == null? 3 : size;
@@ -46,8 +44,7 @@ public class IconTag extends BasicTag {
 			vars.put("bg", bg);
 			vars.put("icon", name);
 			vars.put("icon-size", iconSize);
-			vars.put("attr", super.toAttrs(null, ignore));
-			vars.put("class", this.getClassStyle());
+			vars.put("attr", super.toAttrs());
 			
 			TemplatesManager.getTemplatesManager()
 				.apply(

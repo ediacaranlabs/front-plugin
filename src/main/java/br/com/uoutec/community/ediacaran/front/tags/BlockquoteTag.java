@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
-public class BlockquoteTag extends BasicTag {
+public class BlockquoteTag extends AbstractTag {
 
 	public static final String TEMPLATE      = "bootstrap4/templates/components/blockquote";
 	
@@ -17,11 +17,12 @@ public class BlockquoteTag extends BasicTag {
 	public BlockquoteTag() {
 	}
 	
-    public void doTag() throws JspException, IOException{
+	@Override
+	public void doInnerTag() throws JspException, IOException {
     	
     	try {
 			Map<String, Object> vars = new HashMap<String, Object>();
-			vars.put("attr", super.toAttrs(null, null));
+			vars.put("attr", super.toAttrs());
 			vars.put("body", new JspFragmentVarParser(getJspBody()));
 			vars.put("cite", this.cite == null? null : new TemplateVarParser(CITE_TEMPLATE).put("content", this.cite));
 			

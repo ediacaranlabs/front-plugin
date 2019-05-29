@@ -1,15 +1,15 @@
 <div class="card"> 
 	<div class="card-header"  
-		id="heading{accordionID}_{count}">  
+		id="heading{count}">  
 		<a class="btn btn-link" data-toggle="collapse"  
-			data-target="#collapse{accordionID}_{count}"  
+			data-target="#collapse{count}"  
 			aria-expanded="true"  
-			aria-controls="collapse{accordionID}_{count}">  
+			aria-controls="collapse{count}">  
 			{title} </a>  
 	</div>  
-	<div id="collapse{accordionID}_{count}"  
+	<div id="collapse{count}"  
 		class="collapse"  
-		aria-labelledby="heading{accordionID}_{count}"  
+		aria-labelledby="heading{count}"  
 		data-parent="#accordion{accordionID}">  
 		<div class="card-body"> 
            {content} 
