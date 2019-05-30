@@ -9,13 +9,13 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-public class CheckboxTag extends AbstractTag {
+public class CheckboxTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "bootstrap4/templates/components/checkbox";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_ATTRS) {{
+		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_ATTRS) {{
 			add("name");
 			add("value");
 			add("selected");
@@ -23,8 +23,8 @@ public class CheckboxTag extends AbstractTag {
 		}});
 	
 	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(FormComponentTag.DEFAULT_ATTRIBUTE_PARSERS){{
+	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_ATTRIBUTE_PARSERS){{
 			
 			put("selected", new AttributeParserImp() {
 				
@@ -63,7 +63,11 @@ public class CheckboxTag extends AbstractTag {
 	}
 	
     protected Map<String, AttributeParser> getAttributeParsers(){
-    	return ATTRIBUTE_PARSERS;
+    	return DEFAULT_ATTRIBUTE_PARSERS;
+    }
+    
+    protected Set<String> getDefaultAttributes(){
+    	return DEFAULT_ATTRS;
     }
     
 	@Override
@@ -74,7 +78,7 @@ public class CheckboxTag extends AbstractTag {
 			
 			vars.put("enalbed", enabled != null && !enabled? " uneditable-input" : "");
 			vars.put("inline",  inline != null && inline? " form-check-inline" : "");
-			vars.put("label",   label);
+			vars.put("label",   label == null? new JspFragmentVarParser(getJspBody()) : label);
 			vars.put("attr",    super.toAttrs());
 			
 			TemplatesManager.getTemplatesManager()
@@ -86,36 +90,28 @@ public class CheckboxTag extends AbstractTag {
     	
     }
 
-	public String getLabel() {
-		return label;
+	public String getName() {
+		return name;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getSize() {
-		return size;
+	public String getValue() {
+		return value;
 	}
 
-	public void setSize(String size) {
-		this.size = size;
+	public void setValue(String value) {
+		this.value = value;
 	}
 
-	public String getType() {
-		return type;
+	public Boolean getSelected() {
+		return selected;
 	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Boolean getBlock() {
-		return block;
-	}
-
-	public void setBlock(Boolean block) {
-		this.block = block;
+	public void setSelected(Boolean selected) {
+		this.selected = selected;
 	}
 
 	public Boolean getEnabled() {
@@ -126,12 +122,20 @@ public class CheckboxTag extends AbstractTag {
 		this.enabled = enabled;
 	}
 
-	public String getActionType() {
-		return actionType;
+	public String getLabel() {
+		return label;
 	}
 
-	public void setActionType(String actionType) {
-		this.actionType = actionType;
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public Boolean getInline() {
+		return inline;
+	}
+
+	public void setInline(Boolean inline) {
+		this.inline = inline;
 	}
 
 }
