@@ -51,7 +51,7 @@ public abstract class AbstractTag extends SimpleTagSupport{
 		}
     	
 		Object oldParent = getProperty(PARENT_TAG);
-		
+
 		setProperty(PARENT_TAG, this);
     	doInnerTag();
     	setProperty(PARENT_TAG, oldParent);

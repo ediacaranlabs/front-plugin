@@ -14,7 +14,7 @@ import br.com.uoutec.application.scanner.vfs.Vfs;
 
 public class TagTemplateSearch {
 
-	public static final String PATH = "META-INF/tags/templates";
+	public static final String PATH = "META-INF/ediacaran/tags";
 	
 	private ClassLoader classLoader;
 	

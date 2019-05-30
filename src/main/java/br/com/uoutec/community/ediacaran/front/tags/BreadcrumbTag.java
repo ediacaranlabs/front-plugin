@@ -2,37 +2,25 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-public class BreadcrumbTag extends BasicTag {
+public class BreadcrumbTag extends AbstractTag {
 
 	public static final String TEMPLATE = "bootstrap4/templates/components/breadcrumb";
-	
-	@SuppressWarnings("serial")
-	private static final Set<String> empty = new HashSet<String>() {{
-		add("class");
-	}};
 	
 	private String title;
 	
 	public BreadcrumbTag() {
 	}
 	
-    protected Set<String> getEmptyAttributes(){
-    	return empty;
-    }
-	
-    public void doTag() throws JspException, IOException{
+    public void doInnerTag() throws JspException, IOException{
     	
     	try {
 			Map<String, Object> vars = new HashMap<String, Object>();
 			vars.put("attr",  super.toAttrs());
 			vars.put("title", title);
-			vars.put("class", super.getClassStyle());
 			vars.put("path",  new JspFragmentVarParser(getJspBody()));
 			
 			TemplatesManager.getTemplatesManager()

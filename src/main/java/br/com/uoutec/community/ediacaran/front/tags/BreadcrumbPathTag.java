@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
-public class BreadcrumbPathTag extends BasicTag {
+public class BreadcrumbPathTag extends AbstractTag {
 
 	public static final String TEMPLATE = "bootstrap4/templates/components/breadcrumb-path";
 	
@@ -21,7 +21,7 @@ public class BreadcrumbPathTag extends BasicTag {
 	public BreadcrumbPathTag() {
 	}
 	
-    public void doTag() throws JspException, IOException{
+    public void doInnerTag() throws JspException, IOException{
     	
     	try {
 			Map<String, Object> vars = new HashMap<String, Object>();

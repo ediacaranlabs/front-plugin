@@ -1,4 +1,4 @@
-<div {attr} class="box text-center {class}">
+<div {attr} class="box text-center">
   <div class="text-center">
   	<span class="fa-stack fa-3x">
   		<i class="fa fa-circle fa-stack-2x"></i>
