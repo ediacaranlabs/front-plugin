@@ -165,5 +165,13 @@ public abstract class AbstractTag extends SimpleTagSupport{
 	public void setTemplate(String template) {
 		this.template = template;
 	}
+
+	public boolean isWrapper() {
+		return wrapper;
+	}
+
+	public void setWrapper(boolean wrapper) {
+		this.wrapper = wrapper;
+	}
 	
 }
