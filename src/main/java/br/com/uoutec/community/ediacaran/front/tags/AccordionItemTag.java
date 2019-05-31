@@ -8,7 +8,7 @@ import javax.servlet.jsp.JspException;;
 
 public class AccordionItemTag extends BasicTag {
 
-	public static final String TEMPLATE = "bootstrap4/templates/components/accordion-item";
+	public static final String TEMPLATE = "/bootstrap4/templates/components/accordion-item";
 
 	public static final String ACCORDION_COUNT_ATTR = AccordionItemTag.class.getSimpleName();
 	

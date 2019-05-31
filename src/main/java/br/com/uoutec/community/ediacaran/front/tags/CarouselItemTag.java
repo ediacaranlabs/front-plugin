@@ -8,7 +8,7 @@ import javax.servlet.jsp.JspException;;
 
 public class CarouselItemTag extends BasicTag {
 
-	public static final String TEMPLATE   = "bootstrap4/templates/components/carousel-item";
+	public static final String TEMPLATE   = "/bootstrap4/templates/components/carousel-item";
 
 	private String lnk;
 	

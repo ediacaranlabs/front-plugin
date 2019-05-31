@@ -54,7 +54,7 @@ public class TagTemplateSearch {
 				search(Vfs.getDir(f.toURL()), templates);
 			}
 			else {
-				templates.add(loader.getResource(ResourceLoader.CLASSPATH_URL_PREFIX + f.getRelativePath()));
+				templates.add(loader.getResource(ResourceLoader.CLASSPATH_URL_PREFIX + PATH + "/" + f.getRelativePath()));
 			}
 			
 		}

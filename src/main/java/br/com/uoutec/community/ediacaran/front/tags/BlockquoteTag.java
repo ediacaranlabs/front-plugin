@@ -8,9 +8,9 @@ import javax.servlet.jsp.JspException;
 
 public class BlockquoteTag extends AbstractTag {
 
-	public static final String TEMPLATE      = "bootstrap4/templates/components/blockquote";
+	public static final String TEMPLATE      = "/bootstrap4/templates/components/blockquote";
 	
-	public static final String CITE_TEMPLATE = "bootstrap4/templates/components/cite";
+	public static final String CITE_TEMPLATE = "/bootstrap4/templates/components/cite";
 	
 	private String cite;
 	

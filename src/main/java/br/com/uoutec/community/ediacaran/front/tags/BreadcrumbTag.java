@@ -8,7 +8,7 @@ import javax.servlet.jsp.JspException;
 
 public class BreadcrumbTag extends AbstractTag {
 
-	public static final String TEMPLATE = "bootstrap4/templates/components/breadcrumb";
+	public static final String TEMPLATE = "/bootstrap4/templates/components/breadcrumb";
 	
 	private String title;
 	

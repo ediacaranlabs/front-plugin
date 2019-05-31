@@ -9,11 +9,11 @@ import javax.servlet.jsp.JspException;
 
 public class ButtonTag extends AbstractTag {
 
-	public static final String TEMPLATE = "bootstrap4/templates/components/button";
+	public static final String TEMPLATE = "/bootstrap4/templates/components/button";
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(FormComponentTag.DEFAULT_ATTRIBUTE_PARSERS){{
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_ATTRIBUTE_PARSERS){{
 			
 			put("actionType", new AttributeParserImp() {
 				

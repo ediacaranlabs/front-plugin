@@ -9,9 +9,9 @@ import javax.servlet.jsp.JspException;
 
 public class IconTag extends AbstractTag {
 
-	public static final String TEMPLATE       = "bootstrap4/templates/components/icon";
+	public static final String TEMPLATE       = "/bootstrap4/templates/components/icon";
 	
-	public static final String TEMPLATE_STACK = "bootstrap4/templates/components/icon-stack";
+	public static final String TEMPLATE_STACK = "/bootstrap4/templates/components/icon-stack";
 	
 	private Integer size;
 	

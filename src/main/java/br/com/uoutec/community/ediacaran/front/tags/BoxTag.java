@@ -8,7 +8,7 @@ import javax.servlet.jsp.JspException;
 
 public class BoxTag extends BasicTag {
 
-	public static final String TEMPLATE = "bootstrap4/templates/components/box";
+	public static final String TEMPLATE = "/bootstrap4/templates/components/box";
 	
 	private String icon;
 	

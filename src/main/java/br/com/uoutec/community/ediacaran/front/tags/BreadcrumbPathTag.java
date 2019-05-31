@@ -8,9 +8,9 @@ import javax.servlet.jsp.JspException;
 
 public class BreadcrumbPathTag extends AbstractTag {
 
-	public static final String TEMPLATE = "bootstrap4/templates/components/breadcrumb-path";
+	public static final String TEMPLATE = "/bootstrap4/templates/components/breadcrumb-path";
 	
-	public static final String TEMPLATE_ICON = "bootstrap4/templates/components/icon";
+	public static final String TEMPLATE_ICON = "/bootstrap4/templates/components/icon";
 	
 	private String icon;
 	

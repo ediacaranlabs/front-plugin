@@ -11,7 +11,7 @@ import javax.servlet.jsp.JspException;
 
 public class CheckboxTag extends ComponentFormTag {
 
-	public static final String TEMPLATE = "bootstrap4/templates/components/checkbox";
+	public static final String TEMPLATE = "/bootstrap4/templates/components/checkbox";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -27,6 +27,11 @@ public class CheckboxTag extends ComponentFormTag {
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_ATTRIBUTE_PARSERS){{
 			
 			put("selected", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value) {
+					return null;
+				}
 				
 				@Override
 				public Object toValue(Object value) {

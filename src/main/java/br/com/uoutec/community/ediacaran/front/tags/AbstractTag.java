@@ -86,7 +86,7 @@ public abstract class AbstractTag extends SimpleTagSupport{
 				
 				Object v = i.get(p);
 				
-				if(emptyAttrs.contains(p)) {
+				if(v == null || emptyAttrs.contains(p)) {
 					continue;
 				}
 				
@@ -96,11 +96,15 @@ public abstract class AbstractTag extends SimpleTagSupport{
 				
 				AttributeParser parser = parsers.get(p);
 				
-				sb
-					.append(p.equals("classStyle")? "class" : p)
-					.append("=\"")
-						.append(parser == null? v : parser.toValue(v))
-					.append("\"");
+				p = parser == null? p : parser.toName(p);
+				v = parser == null? v : parser.toValue(v);
+				
+				if(p != null) {
+					sb.append(p).append("=\"").append(v).append("\"");
+				}
+				else {
+					sb.append(v);
+				}
 				
 			}
 			
@@ -121,7 +125,7 @@ public abstract class AbstractTag extends SimpleTagSupport{
 	}
 	
     protected Object setProperty(String name, Object newValue) {
-		Object old = (Integer) this.getJspContext().getAttribute(name);
+		Object old = this.getJspContext().getAttribute(name);
 		this.getJspContext().setAttribute(name, newValue);
     	return old;
     }

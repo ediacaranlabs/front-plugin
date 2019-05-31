@@ -9,9 +9,9 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-public abstract class FormTag extends AbstractTag {
+public class FormTag extends AbstractTag {
 
-	public static final String TEMPLATE = "bootstrap4/templates/components/form";
+	public static final String TEMPLATE = "/bootstrap4/templates/components/form";
 	
 	public static final String FORM = FormTag.class.getSimpleName() + ":form";
 	
@@ -85,6 +85,10 @@ public abstract class FormTag extends AbstractTag {
     	
     }
 
+	@Override
+	public void doInnerTag() throws JspException, IOException {
+	}
+	
 	public String getAcceptCharset() {
 		return acceptCharset;
 	}
@@ -124,5 +128,5 @@ public abstract class FormTag extends AbstractTag {
 	public void setTarget(String target) {
 		this.target = target;
 	}
-    
+
 }

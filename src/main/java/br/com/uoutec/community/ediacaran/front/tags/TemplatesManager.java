@@ -10,7 +10,6 @@ import java.util.concurrent.ConcurrentMap;
 import org.brandao.brutos.io.DefaultResourceLoader;
 import org.brandao.brutos.io.Resource;
 import org.brandao.brutos.io.ResourceLoader;
-import org.brandao.brutos.scanner.vfs.Vfs;
 
 import br.com.uoutec.community.ediacaran.front.StringPattern;
 
@@ -26,10 +25,11 @@ public class TemplatesManager {
 	
 	private String charset;
 	
-	public TemplatesManager(TemplateLoader templateLoader, ResourceLoader loader, String charset) {
+	public TemplatesManager(TemplateLoader templateLoader, ResourceLoader loader, String charset) throws IOException {
 		this.templateLoader = templateLoader;
 		this.loader = loader;
 		this.charset = charset;
+		loadDefaultTemplates();
 	}
 
 	public void loadDefaultTemplates() throws IOException {
@@ -38,7 +38,8 @@ public class TemplatesManager {
 		List<Resource> l = tts.lisTagTemplates();
 		
 		for(Resource r: l) {
-			String name     = Vfs.getRelativePath(r.getURL()).substring(TagTemplateSearch.PATH.length()).substring(0, 4);
+			String name     = r.getName();
+			name            = r.getName().substring(TagTemplateSearch.PATH.length(), name.length() - 4);
 			StringPattern t = templateLoader.load(r, charset);
 			defaultTemplates.put(name, t);
 		}
@@ -86,7 +87,12 @@ public class TemplatesManager {
 	private static TemplatesManager templatesManager;
 	
 	static {
-		templatesManager = new TemplatesManager(new TemplateLoader(), new DefaultResourceLoader(), "UTF-8");
+		try {
+			templatesManager = new TemplatesManager(new TemplateLoader(), new DefaultResourceLoader(), "UTF-8");
+		}
+		catch(Throwable e) {
+			throw new ExceptionInInitializerError(e);
+		}
 	}
 
 	public static void setTemplatesManager(TemplatesManager value) {
