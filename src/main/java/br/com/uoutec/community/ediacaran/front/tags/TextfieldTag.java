@@ -9,14 +9,17 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-public class CheckboxTag extends ComponentFormTag {
+public class TextfieldTag extends ComponentFormTag {
 
-	public static final String TEMPLATE = "/bootstrap4/templates/components/checkbox";
+	public static final String TEMPLATE = "/bootstrap4/templates/components/textfiled";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_ATTRS) {{
+			add("name");
+			add("value");
 			add("selected");
+			add("enabled");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -35,20 +38,31 @@ public class CheckboxTag extends ComponentFormTag {
 					return value != null && (Boolean)value? "checked" : "";
 				}
 			});
+
+			put("enabled", new AttributeParserImp() {
+				
+				@Override
+				public Object toValue(Object value) {
+					return value != null && !(Boolean)value? "disabled" : "";
+				}
+			});
 			
 		}});
 	
-	/* ------------ Attr ---------------*/
+	//Attrs
+	private String name;
+
+	private String value;
 	
-	private Boolean selected;
+	private Boolean enabled;
 	
-	/* ------------ Prop ---------------*/
+	//props
 	
 	private String label;
 	
 	private Boolean inline;
 	
-	public CheckboxTag() {
+	public TextfieldTag() {
 	}
 	
     protected Map<String, AttributeParser> getAttributeParsers(){
@@ -65,7 +79,7 @@ public class CheckboxTag extends ComponentFormTag {
     	try {
 			Map<String, Object> vars = new HashMap<String, Object>();
 			
-			vars.put("enalbed", this.getEnabled() != null && !this.getEnabled()? " uneditable-input" : "");
+			vars.put("enalbed", enabled != null && !enabled? " uneditable-input" : "");
 			vars.put("inline",  inline != null && inline? " form-check-inline" : "");
 			vars.put("label",   label == null? new JspFragmentVarParser(getJspBody()) : label);
 			vars.put("attr",    super.toAttrs());
@@ -79,12 +93,36 @@ public class CheckboxTag extends ComponentFormTag {
     	
     }
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 	public Boolean getSelected() {
 		return selected;
 	}
 
 	public void setSelected(Boolean selected) {
 		this.selected = selected;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public String getLabel() {

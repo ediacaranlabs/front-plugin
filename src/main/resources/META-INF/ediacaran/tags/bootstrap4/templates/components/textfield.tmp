@@ -1,0 +1,2 @@
+<label class="sr-only" for="{name}">{label}</label>
+<input ${attr} class="form-control}">

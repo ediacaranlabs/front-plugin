@@ -16,10 +16,7 @@ public class RadioTag extends ComponentFormTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_ATTRS) {{
-			add("name");
-			add("value");
 			add("selected");
-			add("enabled");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -38,27 +35,14 @@ public class RadioTag extends ComponentFormTag {
 					return value != null && (Boolean)value? "checked" : "";
 				}
 			});
-
-			put("enabled", new AttributeParserImp() {
-				
-				@Override
-				public Object toValue(Object value) {
-					return value != null && !(Boolean)value? "disabled" : "";
-				}
-			});
 			
 		}});
 	
-	//Attrs
-	private String name;
-
-	private String value;
+	/* ------------ Attr ---------------*/
 	
 	private Boolean selected;
 	
-	private Boolean enabled;
-	
-	//props
+	/* ------------ Prop ---------------*/
 	
 	private String label;
 	
@@ -81,7 +65,7 @@ public class RadioTag extends ComponentFormTag {
     	try {
 			Map<String, Object> vars = new HashMap<String, Object>();
 			
-			vars.put("enalbed", enabled != null && !enabled? " uneditable-input" : "");
+			vars.put("enalbed", this.getEnabled() != null && !this.getEnabled()? " uneditable-input" : "");
 			vars.put("inline",  inline != null && inline? " form-check-inline" : "");
 			vars.put("label",   label == null? new JspFragmentVarParser(getJspBody()) : label);
 			vars.put("attr",    super.toAttrs());
@@ -95,36 +79,12 @@ public class RadioTag extends ComponentFormTag {
     	
     }
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
 	public Boolean getSelected() {
 		return selected;
 	}
 
 	public void setSelected(Boolean selected) {
 		this.selected = selected;
-	}
-
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
 	}
 
 	public String getLabel() {

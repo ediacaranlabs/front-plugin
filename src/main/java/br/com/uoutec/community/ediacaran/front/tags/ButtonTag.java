@@ -3,17 +3,28 @@ package br.com.uoutec.community.ediacaran.front.tags;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-public class ButtonTag extends AbstractTag {
+public class ButtonTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/bootstrap4/templates/components/button";
 	
 	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_ATTRS = 
+		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_ATTRS) {{
+			add("action");
+			add("ctype");
+			add("method");
+			add("target");
+		}});
+	
+	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_ATTRIBUTE_PARSERS){{
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_ATTRIBUTE_PARSERS){{
 			
 			put("actionType", new AttributeParserImp() {
 				
@@ -23,8 +34,54 @@ public class ButtonTag extends AbstractTag {
 				}
 			});
 
+			put("action", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value) {
+					return value == null? null : "formaction";
+				}
+			});
+
+			put("ctype", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value) {
+					return value == null? null : "formenctype";
+				}
+			});
+
+			put("method", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value) {
+					return value == null? null : "formmethod";
+				}
+			});
+
+			put("target", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value) {
+					return value == null? null : "formtarget";
+				}
+			});
+			
 		}});
-		
+
+	/* ------------ Attr ---------------*/
+	
+	private String action;
+	
+	private String ctype;
+	
+	private String method;
+	
+	private String target;
+
+	private String actionType; //submit
+	
+	/* ------------ Prop ---------------*/
+	
 	private String label;
 	
 	private String size;
@@ -33,17 +90,17 @@ public class ButtonTag extends AbstractTag {
 	
 	private Boolean block;
 	
-	private Boolean enabled;
-	
-	private String actionType; //submit
-	
 	private Boolean outline;
 
 	public ButtonTag() {
 	}
 	
     protected Map<String, AttributeParser> getAttributeParsers(){
-    	return ATTRIBUTE_PARSERS;
+    	return DEFAULT_ATTRIBUTE_PARSERS;
+    }
+    
+    protected Set<String> getDefaultAttributes(){
+    	return DEFAULT_ATTRS;
     }
     
 	@Override
@@ -58,7 +115,7 @@ public class ButtonTag extends AbstractTag {
 			
 			vars.put("block",   block == null? "" : block? " btn-block" : "");
 			
-			vars.put("enabled", enabled != null && !enabled? " disabled" : "");
+			vars.put("enabled", this.getEnabled() != null && !this.getEnabled()? " disabled" : "");
 			
 			vars.put("attr",    super.toAttrs());
 			
@@ -72,6 +129,46 @@ public class ButtonTag extends AbstractTag {
     	}
     	
     }
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	public String getCtype() {
+		return ctype;
+	}
+
+	public void setCtype(String ctype) {
+		this.ctype = ctype;
+	}
+
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
+	}
+
+	public String getTarget() {
+		return target;
+	}
+
+	public void setTarget(String target) {
+		this.target = target;
+	}
+
+	public Boolean getOutline() {
+		return outline;
+	}
+
+	public void setOutline(Boolean outline) {
+		this.outline = outline;
+	}
 
 	public String getLabel() {
 		return label;
@@ -103,14 +200,6 @@ public class ButtonTag extends AbstractTag {
 
 	public void setBlock(Boolean block) {
 		this.block = block;
-	}
-
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
 	}
 
 	public String getActionType() {
