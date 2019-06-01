@@ -49,6 +49,7 @@ public class RadioTag extends ComponentFormTag {
 	private Boolean inline;
 	
 	public RadioTag() {
+		setComponentType("radio");
 	}
 	
     protected Map<String, AttributeParser> getAttributeParsers(){
@@ -68,6 +69,7 @@ public class RadioTag extends ComponentFormTag {
 			vars.put("enalbed", this.getEnabled() != null && !this.getEnabled()? " uneditable-input" : "");
 			vars.put("inline",  inline != null && inline? " form-check-inline" : "");
 			vars.put("label",   label == null? new JspFragmentVarParser(getJspBody()) : label);
+			vars.put("name",    super.getName());
 			vars.put("attr",    super.toAttrs());
 			
 			TemplatesManager.getTemplatesManager()

@@ -24,6 +24,8 @@ public abstract class ComponentFormTag extends AbstractTag {
 			add("name");
 			add("value");
 			add("enabled");
+			add("componentType");
+			add("form");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -37,10 +39,20 @@ public abstract class ComponentFormTag extends AbstractTag {
 					return value != null && !(Boolean)value? "disabled" : "";
 				}
 			});
+
+			put("componentType", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value) {
+					return value == null? null : "type";
+				}
+			});
 			
 		}});
 	
 	/* ------------ Attr ---------------*/
+	
+	private String componentType;
 	
 	private String name;
 
@@ -48,6 +60,8 @@ public abstract class ComponentFormTag extends AbstractTag {
 	
 	private Boolean enabled;
 
+	private String form;
+	
 	public ComponentFormTag() {
 	}
 	
@@ -117,6 +131,22 @@ public abstract class ComponentFormTag extends AbstractTag {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public String getForm() {
+		return form;
+	}
+
+	public void setForm(String form) {
+		this.form = form;
+	}
+
+	public String getComponentType() {
+		return componentType;
+	}
+
+	public void setComponentType(String componentType) {
+		this.componentType = componentType;
 	}
 
 	public Boolean getEnabled() {

@@ -16,17 +16,23 @@ public class TextfieldTag extends ComponentFormTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_ATTRS) {{
-			add("name");
-			add("value");
-			add("selected");
-			add("enabled");
+			add("autocomplete");
+			add("autofocus");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_ATTRIBUTE_PARSERS){{
 			
-			put("selected", new AttributeParserImp() {
+			put("autocomplete", new AttributeParserImp() {
+				
+				@Override
+				public Object toValue(Object value) {
+					return value != null && (Boolean)value? "on" : "off";
+				}
+			});
+
+			put("readonly", new AttributeParserImp() {
 				
 				@Override
 				public String toName(String value) {
@@ -35,34 +41,53 @@ public class TextfieldTag extends ComponentFormTag {
 				
 				@Override
 				public Object toValue(Object value) {
-					return value != null && (Boolean)value? "checked" : "";
+					return value != null && (Boolean)value? "readonly" : "";
 				}
+				
 			});
 
-			put("enabled", new AttributeParserImp() {
+			put("required", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value) {
+					return null;
+				}
 				
 				@Override
 				public Object toValue(Object value) {
-					return value != null && !(Boolean)value? "disabled" : "";
+					return value != null && (Boolean)value? "readonly" : "";
 				}
+				
 			});
 			
 		}});
 	
-	//Attrs
-	private String name;
+	/* ------------ Attr ---------------*/
+	
+	private Boolean autocomplete;
+	
+	private Boolean autofocus;
 
-	private String value;
+	private Integer maxlength;
 	
-	private Boolean enabled;
+	private Integer minlength;
 	
-	//props
+	private String pattern;
+	
+	private String placeholder;
+	
+	private Boolean readonly;
+
+	private Boolean required;
+	
+	/* ------------ Prop ---------------*/
 	
 	private String label;
 	
 	private Boolean inline;
 	
 	public TextfieldTag() {
+		super.setComponentType("text");
 	}
 	
     protected Map<String, AttributeParser> getAttributeParsers(){
@@ -79,9 +104,10 @@ public class TextfieldTag extends ComponentFormTag {
     	try {
 			Map<String, Object> vars = new HashMap<String, Object>();
 			
-			vars.put("enalbed", enabled != null && !enabled? " uneditable-input" : "");
-			vars.put("inline",  inline != null && inline? " form-check-inline" : "");
-			vars.put("label",   label == null? new JspFragmentVarParser(getJspBody()) : label);
+			vars.put("enabled", this.getEnabled() != null && !this.getEnabled()? " uneditable-input" : "");
+			vars.put("label",   label);
+			vars.put("empty",   label == null? "sr-only" : null);
+			vars.put("name",    super.getName());
 			vars.put("attr",    super.toAttrs());
 			
 			TemplatesManager.getTemplatesManager()
@@ -93,36 +119,68 @@ public class TextfieldTag extends ComponentFormTag {
     	
     }
 
-	public String getName() {
-		return name;
+	public Boolean getAutocomplete() {
+		return autocomplete;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setAutocomplete(Boolean autocomplete) {
+		this.autocomplete = autocomplete;
 	}
 
-	public String getValue() {
-		return value;
+	public Boolean getAutofocus() {
+		return autofocus;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setAutofocus(Boolean autofocus) {
+		this.autofocus = autofocus;
 	}
 
-	public Boolean getSelected() {
-		return selected;
+	public Integer getMaxlength() {
+		return maxlength;
 	}
 
-	public void setSelected(Boolean selected) {
-		this.selected = selected;
+	public void setMaxlength(Integer maxlength) {
+		this.maxlength = maxlength;
 	}
 
-	public Boolean getEnabled() {
-		return enabled;
+	public Integer getMinlength() {
+		return minlength;
 	}
 
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
+	public void setMinlength(Integer minlength) {
+		this.minlength = minlength;
+	}
+
+	public String getPattern() {
+		return pattern;
+	}
+
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
+	}
+
+	public String getPlaceholder() {
+		return placeholder;
+	}
+
+	public void setPlaceholder(String placeholder) {
+		this.placeholder = placeholder;
+	}
+
+	public Boolean getReadonly() {
+		return readonly;
+	}
+
+	public void setReadonly(Boolean readonly) {
+		this.readonly = readonly;
+	}
+
+	public Boolean getRequired() {
+		return required;
+	}
+
+	public void setRequired(Boolean required) {
+		this.required = required;
 	}
 
 	public String getLabel() {
