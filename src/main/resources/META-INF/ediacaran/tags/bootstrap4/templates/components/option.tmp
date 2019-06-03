@@ -1,0 +1,5 @@
+<label class="{empty}" for="{name}">{label}</label>
+<select class="form-control {enabled} {size}" {attr}>
+	{options}
+</select>
+

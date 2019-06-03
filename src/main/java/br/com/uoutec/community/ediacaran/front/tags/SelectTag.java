@@ -11,7 +11,7 @@ import javax.servlet.jsp.JspException;
 
 public class SelectTag extends ComponentFormTag {
 
-	public static final String TEMPLATE = "/bootstrap4/templates/components/textfield";
+	public static final String TEMPLATE = "/bootstrap4/templates/components/select";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -19,6 +19,7 @@ public class SelectTag extends ComponentFormTag {
 			add("autofocus");
 			add("readonly");
 			add("required");
+			add("multiple");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -53,6 +54,20 @@ public class SelectTag extends ComponentFormTag {
 				
 			});
 			
+			put("multiple", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value) {
+					return null;
+				}
+				
+				@Override
+				public Object toValue(Object value) {
+					return value != null && (Boolean)value? "multiple" : "";
+				}
+				
+			});
+			
 		}});
 	
 	/* ------------ Attr ---------------*/
@@ -63,6 +78,8 @@ public class SelectTag extends ComponentFormTag {
 
 	private Boolean required;
 	
+	private Boolean multiple;
+	
 	/* ------------ Prop ---------------*/
 	
 	private String label;
@@ -70,7 +87,6 @@ public class SelectTag extends ComponentFormTag {
 	private String size;
 
 	public SelectTag() {
-		super.setComponentType("text");
 	}
 	
     protected Map<String, AttributeParser> getAttributeParsers(){
@@ -133,6 +149,22 @@ public class SelectTag extends ComponentFormTag {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public Boolean getMultiple() {
+		return multiple;
+	}
+
+	public void setMultiple(Boolean multiple) {
+		this.multiple = multiple;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
 	}
 
 }
