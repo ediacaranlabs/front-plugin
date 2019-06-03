@@ -9,19 +9,14 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-public class TextfieldTag extends ComponentFormTag {
+public class SelectTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/bootstrap4/templates/components/textfield";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_ATTRS) {{
-			add("autocomplete");
 			add("autofocus");
-			add("maxlength");
-			add("minlength");
-			add("pattern");
-			add("placeholder");
 			add("readonly");
 			add("required");
 		}});
@@ -30,14 +25,6 @@ public class TextfieldTag extends ComponentFormTag {
 	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_ATTRIBUTE_PARSERS){{
 			
-			put("autocomplete", new AttributeParserImp() {
-				
-				@Override
-				public Object toValue(Object value) {
-					return value != null && (Boolean)value? "on" : "off";
-				}
-			});
-
 			put("readonly", new AttributeParserImp() {
 				
 				@Override
@@ -70,17 +57,7 @@ public class TextfieldTag extends ComponentFormTag {
 	
 	/* ------------ Attr ---------------*/
 	
-	private Boolean autocomplete;
-	
 	private Boolean autofocus;
-
-	private Integer maxlength;
-	
-	private Integer minlength;
-	
-	private String pattern;
-	
-	private String placeholder;
 	
 	private Boolean readonly;
 
@@ -92,7 +69,7 @@ public class TextfieldTag extends ComponentFormTag {
 	
 	private String size;
 
-	public TextfieldTag() {
+	public SelectTag() {
 		super.setComponentType("text");
 	}
 	
@@ -126,52 +103,12 @@ public class TextfieldTag extends ComponentFormTag {
     	
     }
 
-	public Boolean getAutocomplete() {
-		return autocomplete;
-	}
-
-	public void setAutocomplete(Boolean autocomplete) {
-		this.autocomplete = autocomplete;
-	}
-
 	public Boolean getAutofocus() {
 		return autofocus;
 	}
 
 	public void setAutofocus(Boolean autofocus) {
 		this.autofocus = autofocus;
-	}
-
-	public Integer getMaxlength() {
-		return maxlength;
-	}
-
-	public void setMaxlength(Integer maxlength) {
-		this.maxlength = maxlength;
-	}
-
-	public Integer getMinlength() {
-		return minlength;
-	}
-
-	public void setMinlength(Integer minlength) {
-		this.minlength = minlength;
-	}
-
-	public String getPattern() {
-		return pattern;
-	}
-
-	public void setPattern(String pattern) {
-		this.pattern = pattern;
-	}
-
-	public String getPlaceholder() {
-		return placeholder;
-	}
-
-	public void setPlaceholder(String placeholder) {
-		this.placeholder = placeholder;
 	}
 
 	public Boolean getReadonly() {

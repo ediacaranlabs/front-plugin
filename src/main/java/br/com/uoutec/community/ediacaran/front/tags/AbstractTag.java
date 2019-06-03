@@ -24,13 +24,25 @@ public abstract class AbstractTag extends SimpleTagSupport{
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
 			add("id");
+			add("classStyle");
 		}});
 
 	protected static final Set<String> DEFAULT_EMPTY_ATTRIBUTES = 
 			Collections.unmodifiableSet(new HashSet<String>());
 	
+	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>());
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
+				
+				put("classStyle", new AttributeParserImp() {
+					
+					@Override
+					public String toName(String value) {
+						return value == null? null : "class";
+					}
+				});
+				
+			}});
 	
 
 	private	String id;
@@ -38,6 +50,8 @@ public abstract class AbstractTag extends SimpleTagSupport{
 	private String extAttrs;
 	
 	private String template;
+	
+	private String classStyle;
 	
 	private boolean wrapper;
 	
@@ -151,7 +165,7 @@ public abstract class AbstractTag extends SimpleTagSupport{
 		
 		if(id == null) {
 			Integer acc = (Integer) this.getJspContext().getAttribute(ID_COUNT);
-			getJspContext().setAttribute(ID_COUNT, acc == null? 0 : acc.intValue() + 1);
+			getJspContext().setAttribute(ID_COUNT, acc = acc == null? 0 : acc.intValue() + 1);
 			return id = String.valueOf(acc);
 		}
 		
@@ -176,6 +190,14 @@ public abstract class AbstractTag extends SimpleTagSupport{
 
 	public void setWrapper(boolean wrapper) {
 		this.wrapper = wrapper;
+	}
+
+	public String getClassStyle() {
+		return classStyle;
+	}
+
+	public void setClassStyle(String classStyle) {
+		this.classStyle = classStyle;
 	}
 	
 }

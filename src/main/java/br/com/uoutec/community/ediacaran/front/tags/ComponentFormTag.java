@@ -14,7 +14,7 @@ import br.com.uoutec.community.ediacaran.front.StringPattern;
 
 public abstract class ComponentFormTag extends AbstractTag {
 
-	public static final String TEMPLATE = "bootstrap4/templates/components/form-control";
+	public static final String TEMPLATE = "bootstrap4/templates/components/form-group";
 	
 	public static final String FORM = ComponentFormTag.class.getSimpleName() + ":form";
 	
@@ -62,6 +62,8 @@ public abstract class ComponentFormTag extends AbstractTag {
 
 	private String form;
 	
+	private Boolean group;
+	
 	public ComponentFormTag() {
 	}
 	
@@ -75,7 +77,8 @@ public abstract class ComponentFormTag extends AbstractTag {
 	
     public void doTag() throws JspException, IOException {
 		
-    	if(getProperty(FORM) == null) {
+    	if(group == null || !group) {
+    	//if(getProperty(FORM) == null) {
     		super.doTag();
     		return;
     	}
@@ -87,7 +90,7 @@ public abstract class ComponentFormTag extends AbstractTag {
     	try {
 			Map<String, Object> vars = new HashMap<String, Object>();
 			
-			vars.put("attr",    super.toAttrs());
+			//vars.put("attr",    super.toAttrs());
 			vars.put("component", new StringPattern.AbstractVarParser() {
 				
 				@Override
@@ -113,12 +116,20 @@ public abstract class ComponentFormTag extends AbstractTag {
     	
     }
 	
-	public String toAttrs() {
-		return getProperty(FORM) == null? super.toAttrs() : "";
-	}
+	//public String toAttrs() {
+	//	return getProperty(FORM) == null? super.toAttrs() : "";
+	//}
 
 	public String getName() {
 		return name;
+	}
+
+	public Boolean getGroup() {
+		return group;
+	}
+
+	public void setGroup(Boolean group) {
+		this.group = group;
 	}
 
 	public void setName(String name) {
