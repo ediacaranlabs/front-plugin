@@ -20,6 +20,7 @@ public class SelectTag extends ComponentFormTag {
 			add("readonly");
 			add("required");
 			add("multiple");
+			add("sizeList");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -49,7 +50,16 @@ public class SelectTag extends ComponentFormTag {
 				
 				@Override
 				public Object toValue(Object value) {
-					return value != null && (Boolean)value? "readonly" : "";
+					return value != null && (Boolean)value? "required" : "";
+				}
+				
+			});
+
+			put("sizeList", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value) {
+					return value == null? null : "size";
 				}
 				
 			});
@@ -79,6 +89,8 @@ public class SelectTag extends ComponentFormTag {
 	private Boolean required;
 	
 	private Boolean multiple;
+	
+	private Integer sizeList;
 	
 	/* ------------ Prop ---------------*/
 	
@@ -165,6 +177,14 @@ public class SelectTag extends ComponentFormTag {
 
 	public void setSize(String size) {
 		this.size = size;
+	}
+
+	public Integer getSizeList() {
+		return sizeList;
+	}
+
+	public void setSizeList(Integer sizeList) {
+		this.sizeList = sizeList;
 	}
 
 }
