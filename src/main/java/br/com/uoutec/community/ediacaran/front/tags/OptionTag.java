@@ -37,6 +37,20 @@ public class OptionTag extends ComponentFormTag {
 				}
 				
 			});
+
+			put("selected", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value) {
+					return null;
+				}
+				
+				@Override
+				public Object toValue(Object value) {
+					return value != null && (Boolean)value? "selected" : "";
+				}
+				
+			});
 			
 		}});
 	
