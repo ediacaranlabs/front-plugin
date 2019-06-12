@@ -1,0 +1,30 @@
+<%-- label --%>
+<a class="${btn-class}" href="#">
+	{icon}{label}
+</a>
+<a class="dropdown-toggle btn {btn-class}" data-toggle="dropdown" href="#">
+	<span class="caret"></span>
+</a>
+<%-- /label --%>
+
+<%-- menu --%>
+<ul class="dropdown-menu">
+	<c:forEach items="${entity['itens']}" var="item">
+		<c:choose>
+		<c:when test="${item['divider']}">
+		<li class="divider"></li>
+		</c:when>
+		<c:otherwise>
+		<li${!item['enabled']? ' class='.concat(quote).concat('disabled').concat(quote) : ''}>
+			<a href="${!item['enabled']? item['link'] : '#'}">
+				<c:if test="${!empty item['icon']}">
+				<i class="icon-${item['icon']}"></i>
+				</c:if>
+				${item['label']}
+			</a>
+		</li>
+		</c:otherwise>
+		</c:choose>
+	</c:forEach>
+</ul>
+<%-- /menu --%>
