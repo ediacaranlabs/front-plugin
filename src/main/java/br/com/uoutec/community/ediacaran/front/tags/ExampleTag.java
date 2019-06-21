@@ -6,74 +6,69 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class ImageTag  extends AbstractTag {
+public class ExampleTag  extends AbstractTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/image";
+	public static final String TEMPLATE  = "";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_ATTRS) {{
-			add("src");
+			//add("");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_ATTRIBUTE_PARSERS){{
+			/*
+			put("", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value) {
+					return value;
+				}
+				
+				@Override
+				public Object toValue(Object value) {
+					return value;
+				}
+				
+			});
+			*/
+			
 		}});
 
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
-			add("style");
-			add("align");
+			//add("");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
-				put("style", new AttributeParserImp() {
+				/*
+				put("", new AttributeParserImp() {
+					
+					@Override
+					public String toName(String value) {
+						return value;
+					}
 					
 					@Override
 					public Object toValue(Object value) {
-						if("rounded".equals(value)) {
-							return " rounded";
-						}
-						else
-						if("circle".equals(value)) {
-							return " rounded-circle";
-						}
-						else
-							return " img-" + value;
+						return value;
 					}
 					
 				});
-				
-				put("align", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value) {
-						if("center".equals(value)) {
-							return " mx-auto d-block";
-						}
-						else
-							return " float-" + value;
-					}
-					
-				});
+				*/
 				
 			}});
 	
 	/* ------------ Attr ---------------*/
 	
-	private String src;
-
 	/* ------------ Prop ---------------*/
 	
-	private String style; //fluid, thumbnail, rounded, circle (img-<...> | rounded | rounded-circle)
-	
-	private String align; //left, right, center (float-<...> | mx-auto d-block)
-	
-	public ImageTag() {
+	public ExampleTag() {
 	}
 	
     protected String getDefaultTemplate() {
@@ -99,29 +94,5 @@ public class ImageTag  extends AbstractTag {
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
-
-	public String getSrc() {
-		return src;
-	}
-
-	public void setSrc(String src) {
-		this.src = src;
-	}
-
-	public String getStyle() {
-		return style;
-	}
-
-	public void setStyle(String style) {
-		this.style = style;
-	}
-
-	public String getAlign() {
-		return align;
-	}
-
-	public void setAlign(String align) {
-		this.align = align;
-	}
     
 }

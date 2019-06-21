@@ -84,7 +84,28 @@ public abstract class AbstractTag extends SimpleTagSupport{
     	}
     }
 	
-    public abstract void doInnerTag() throws JspException, IOException;
+    public void doInnerTag() throws JspException, IOException{
+    	
+    	try {
+			Map<String, Object> vars = getValues();
+			
+			TemplatesManager.getTemplatesManager()
+				.apply(
+						this.getTemplate() == null? 
+								getDefaultTemplate() : 
+								getTemplate(), 
+						vars, getJspContext().getOut()
+				);
+    	}
+    	catch(Throwable e) {
+    		throw new IllegalStateException(e);
+    	}
+    	
+    }
+    
+    protected String getDefaultTemplate() {
+    	throw new UnsupportedOperationException();
+    }
     
     protected Set<String> getDefaultAttributes(){
     	return DEFAULT_ATTRS;
