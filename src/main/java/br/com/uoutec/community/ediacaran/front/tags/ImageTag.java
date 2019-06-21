@@ -40,6 +40,48 @@ public class ImageTag  extends AbstractTag {
 			
 		}});
 
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>() {{
+			add("style");
+			add("align");
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
+				put("style", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value) {
+						if("rounded".equals(value)) {
+							return " rounded";
+						}
+						else
+						if("circle".equals(value)) {
+							return " rounded-circle";
+						}
+						else
+							return " img-" + value;
+					}
+					
+				});
+				
+				put("align", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value) {
+						if("center".equals(value)) {
+							return " mx-auto d-block";
+						}
+						else
+							return " float-" + value;
+					}
+					
+				});
+				
+			}});
+	
 	/* ------------ Attr ---------------*/
 	
 	private String src;
@@ -56,18 +98,12 @@ public class ImageTag  extends AbstractTag {
     public void doInnerTag() throws JspException, IOException{
     	
     	try {
-			Map<String, Object> vars = new HashMap<String, Object>();
-			vars.put("attr",           super.toAttrs());
-			vars.put("style",   style == null? null : (style.equals("rounded")? " rounded") : (style.eq) );
-			vars.put("type",    this.style == null? "" : new String(" btn-").concat(this.style));
-			vars.put("size",    this.size == null? "" : new String(" btn-").concat(this.size));
-			vars.put("variation",    this.variation == null? "" : new String(" drop").concat(this.variation));
-			vars.put("itens", new JspFragmentVarParser(getJspBody()));
+			Map<String, Object> vars = super.getValues();
 			
 			TemplatesManager.getTemplatesManager()
 				.apply(
 						this.getTemplate() == null? 
-								(split == null || !split? TEMPLATE : TEMPLATE2) : 
+								TEMPLATE : 
 								this.getTemplate(), 
 						vars, getJspContext().getOut()
 				);
@@ -77,5 +113,25 @@ public class ImageTag  extends AbstractTag {
     	}
     	
     }
-	
+
+    protected Set<String> getDefaultAttributes(){
+    	return DEFAULT_ATTRS;
+    }
+
+    protected Set<String> getEmptyAttributes(){
+    	return DEFAULT_EMPTY_ATTRIBUTES;
+    }
+    
+    protected Map<String, AttributeParser> getAttributeParsers(){
+    	return DEFAULT_ATTRIBUTE_PARSERS;
+    }
+
+    protected Set<String> getDefaultProperties(){
+    	return DEFAULT_PROPS;
+    }
+
+    protected Map<String, AttributeParser> getPropertyParsers(){
+    	return DEFAULT_PROPERTY_PARSERS;
+    }
+    
 }

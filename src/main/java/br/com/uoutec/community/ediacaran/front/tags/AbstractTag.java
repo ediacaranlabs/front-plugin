@@ -44,6 +44,15 @@ public abstract class AbstractTag extends SimpleTagSupport{
 				
 			}});
 	
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>() {{
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
+			}});
 
 	private	String id;
 
@@ -88,8 +97,20 @@ public abstract class AbstractTag extends SimpleTagSupport{
     protected Map<String, AttributeParser> getAttributeParsers(){
     	return DEFAULT_ATTRIBUTE_PARSERS;
     }
-    
+
+    protected Set<String> getDefaultProperties(){
+    	return DEFAULT_PROPS;
+    }
+
+    protected Map<String, AttributeParser> getPropertyParsers(){
+    	return DEFAULT_PROPERTY_PARSERS;
+    }
+
 	public String toAttrs() {
+		return getAttrList();
+	}
+	
+	private String getAttrList() {
 		try {
 			StringBuilder sb = new StringBuilder();
 			BeanInstance i = new BeanInstance(this);
@@ -132,6 +153,35 @@ public abstract class AbstractTag extends SimpleTagSupport{
 			}
 			
 			return sb.toString();
+		}
+		catch(Throwable e) {
+			throw new IllegalStateException(e);
+		}
+	}
+	
+	public Map<String, Object> getValues() {
+		try {
+			BeanInstance i = new BeanInstance(this);
+			Map<String, AttributeParser> parsers = getPropertyParsers();
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("attr", this.getAttrList());
+			
+			for(String k: getDefaultProperties()) {
+				
+				Object v = i.get(k);
+				
+				AttributeParser parser = parsers.get(k);
+				
+				k = parser == null? k : parser.toName(k);
+				v = parser == null? v : parser.toValue(v);
+				
+				if(k != null && !k.isEmpty()) {
+					map.put(k, v);
+				}
+			}
+			
+			return map;
 		}
 		catch(Throwable e) {
 			throw new IllegalStateException(e);
