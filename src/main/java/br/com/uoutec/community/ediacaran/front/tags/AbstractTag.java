@@ -14,11 +14,13 @@ import org.brandao.brutos.bean.BeanInstance;
 
 public abstract class AbstractTag extends SimpleTagSupport{
 
-	public static final String ID_COUNT   = "_component_id_count";
+	public static final String WRAPPER_TEMPLATE		= "bootstrap4/templates/components/wrapper";
+	
+	public static final String ID_COUNT				= "_component_id_count";
 
-	public static final String ATTR_FORMAT = "([a-z-_]+)=([^\\;]+)";
+	public static final String ATTR_FORMAT			= "([a-z-_]+)=([^\\;]+)";
 
-	public static final String PARENT_TAG = AbstractTag.class.getSimpleName() + ":parent";
+	public static final String PARENT_TAG			= AbstractTag.class.getSimpleName() + ":parent";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -65,23 +67,30 @@ public abstract class AbstractTag extends SimpleTagSupport{
 	private boolean wrapper;
 	
     public void doTag() throws JspException, IOException {
-		
-		if(wrapper) {
-			StringBuilder b = new StringBuilder("<div ")
-				.append(this.toAttrs())
-				.append(" >");
-			getJspContext().getOut().write(b.toString());
-		}
-    	
-		Object oldParent = getProperty(PARENT_TAG);
 
+		Object oldParent = getProperty(PARENT_TAG);
 		setProperty(PARENT_TAG, this);
-    	doInnerTag();
+    	
+    	if(!wrapper) {
+	    	doInnerTag();
+    	}
+    	else {
+    		Map<String, Object> tagVars = getValues();
+    		
+    		Map<String, Object> vars = new HashMap<String, Object>();
+    		vars.putAll(tagVars);
+    		vars.put("content", 
+    				new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars));
+
+    		TemplatesManager.getTemplatesManager()
+    		.apply(
+    				getWrapperTemplate(), 
+    				vars, getJspContext().getOut()
+    		);
+    	}
+    	
     	setProperty(PARENT_TAG, oldParent);
     	
-    	if(wrapper) {
-    		getJspContext().getOut().write("</div>");
-    	}
     }
 	
     public void doInnerTag() throws JspException, IOException{
@@ -101,6 +110,10 @@ public abstract class AbstractTag extends SimpleTagSupport{
     		throw new IllegalStateException(e);
     	}
     	
+    }
+    
+    protected String getWrapperTemplate() {
+    	return WRAPPER_TEMPLATE;
     }
     
     protected String getDefaultTemplate() {

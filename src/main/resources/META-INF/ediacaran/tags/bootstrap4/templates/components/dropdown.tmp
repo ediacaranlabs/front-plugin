@@ -1,8 +1,6 @@
-<div {attr} class="btn-group{variation}">
   <button type="button" class="btn{type}{size} dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     {label}
   </button>
   <div class="dropdown-menu">
   	{itens}
   </div>
-</div>
