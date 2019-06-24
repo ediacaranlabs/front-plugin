@@ -1,0 +1,3 @@
+<div {attr} class="input-group-append">
+	{content}
+</div>
