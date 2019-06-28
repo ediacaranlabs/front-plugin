@@ -34,6 +34,8 @@ public class GalleryTag  extends AbstractTag {
 	
 	/* ------------ Prop ---------------*/
 	
+	private Integer cols;
+	
 	public GalleryTag() {
 	}
 	
@@ -66,5 +68,13 @@ public class GalleryTag  extends AbstractTag {
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
+
+	public Integer getCols() {
+		return cols;
+	}
+
+	public void setCols(Integer cols) {
+		this.cols = cols;
+	}
     
 }

@@ -54,12 +54,6 @@ public class GalleryFilterTag  extends AbstractTag {
 	public GalleryFilterTag() {
 	}
 	
-	public Map<String, Object> getValues() {
-		Map<String, Object> vals = super.getValues();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
-	}
-	
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }
