@@ -1,19 +1,14 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.jsp.JspException;
+public class GalleryImageTag  extends AbstractTag {
 
-public class GalleryTag  extends AbstractTag {
-
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/gallery";
-	
-	public static final String PARENT = GalleryTag.class.getSimpleName() + ":PARENT";
+	public static final String TEMPLATE  = "/bootstrap4/templates/components/gallery-filter";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -28,6 +23,11 @@ public class GalleryTag  extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("title");
+			add("filter");
+			add("icon");
+			add("src");
+			add("text");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -38,33 +38,30 @@ public class GalleryTag  extends AbstractTag {
 	/* ------------ Attr ---------------*/
 	
 	/* ------------ Prop ---------------*/
+
+	private String title;
 	
-	private Integer cols;
+	private String filter;
 	
-	private int nextImage;
+	private String icon;
 	
-	public GalleryTag() {
-		this.nextImage = 1;
+	private String src;
+			
+	private String text;
+	
+	public GalleryImageTag() {
 	}
 	
-	public int getNextImageID() {
-		return nextImage++;
-	}
-	
-    public void doTag() throws JspException, IOException {
-    	getJspContext().setAttribute(PARENT, this);
-    	super.doTag();
-    	getJspContext().removeAttribute(PARENT);
-    }
-	
-    	
 	public Map<String, Object> getValues() {
+		GalleryTag tag = (GalleryTag) getJspContext().getAttribute(GalleryTag.PARENT);
 		Map<String, Object> vals = super.getValues();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
+		vals.put("cols",  tag.getCols());
+		vals.put("id",    tag.getId());
+		vals.put("index", tag.getNextImageID());
 		return vals;
 	}
-	
-    protected String getDefaultTemplate() {
+
+	protected String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
@@ -88,12 +85,44 @@ public class GalleryTag  extends AbstractTag {
     	return DEFAULT_PROPERTY_PARSERS;
     }
 
-	public Integer getCols() {
-		return cols;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setCols(Integer cols) {
-		this.cols = cols == null? 1 : (int)(12.0/cols.doubleValue() < 1? 1 : 12.0/cols.doubleValue());
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getFilter() {
+		return filter;
+	}
+
+	public void setFilter(String filter) {
+		this.filter = filter;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public String getSrc() {
+		return src;
+	}
+
+	public void setSrc(String src) {
+		this.src = src;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
     
 }
