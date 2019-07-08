@@ -11,7 +11,9 @@ import javax.servlet.jsp.JspException;
 
 public class ListTag  extends AbstractTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/list";
+	public static final String TEMPLATE   = "/bootstrap4/templates/components/list";
+	
+	public static final String TEMPLATE2  = "/bootstrap4/templates/components/ordered-list";
 	
 	public static final String PARENT = ListTag.class.getSimpleName() + ":PARENT";
 	
@@ -48,7 +50,7 @@ public class ListTag  extends AbstractTag {
 	
 	/* ------------ Prop ---------------*/
 	
-	private String style; //inline, unstyled
+	private String style; //inline, unstyled, ordered
 	
 	public ListTag() {
 	}
@@ -66,7 +68,7 @@ public class ListTag  extends AbstractTag {
     }
 	
     protected String getDefaultTemplate() {
-    	return TEMPLATE;
+    	return "ordered".equals(this.style)? TEMPLATE2 : TEMPLATE;
     }
 
     protected Set<String> getDefaultAttributes(){
