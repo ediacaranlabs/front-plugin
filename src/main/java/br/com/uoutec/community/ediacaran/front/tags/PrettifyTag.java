@@ -50,7 +50,7 @@ public class PrettifyTag  extends AbstractTag {
 	
 	public Map<String, Object> getValues() {
 		Map<String, Object> vals = super.getValues();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
+		vals.put("content", new EscapeVarParser(getJspBody()));
 		return vals;
 	}
 	
