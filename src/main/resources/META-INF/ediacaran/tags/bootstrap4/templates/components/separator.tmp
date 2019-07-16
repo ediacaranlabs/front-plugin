@@ -1,0 +1,6 @@
+<div {attr} class="row">
+  <div class="col-12">
+    <div class="solidline">
+    </div>
+  </div>
+</div>
