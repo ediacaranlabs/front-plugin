@@ -6,18 +6,33 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class SideBarTag  extends AbstractTag {
+public class TableColTag  extends AbstractTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/sidebar";
+	public static final String TEMPLATE  = "/bootstrap4/templates/components/table-col-header";
+	
+	public static final String TEMPLATE_2  = "/bootstrap4/templates/components/table-col";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_ATTRS) {{
+			add("size");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_ATTRIBUTE_PARSERS){{
+			put("size", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value) {
+					return "colspan";
+				}
+				
+				@Override
+				public Object toValue(Object value) {
+					return value != null && (Integer)value > 1 ? (Integer)value - 1: "";
+				}
+			});
 		}});
 
 	@SuppressWarnings("serial")
@@ -28,41 +43,26 @@ public class SideBarTag  extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
-				put("size", new AttributeParserImp() {
-					
-					@Override
-					public String toName(String value) {
-						return null;
-					}
-					
-					@Override
-					public Object toValue(Object value) {
-						return value == null? "col-lg-1 col-xl-1" : "col-lg-" + value + " col-xl-" + value;
-					}
-				});
 			}});
 	
 	/* ------------ Attr ---------------*/
 	
-	/* ------------ Prop ---------------*/
-	
 	private Integer size;
 	
-	private String align;
+	/* ------------ Prop ---------------*/
 	
-	public SideBarTag() {
+	public TableColTag() {
 	}
 	
 	public Map<String, Object> getValues() {
-		int offset = "right".equalsIgnoreCase(this.align)? (this.size == null? 11 : 12 - this.size) : -1; 
 		Map<String, Object> vals = super.getValues();
 		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		vals.put("offset", offset <= 0? "" : "offset-lg-" + offset + " offset-xl-" + offset);
 		return vals;
 	}
 	
     protected String getDefaultTemplate() {
-    	return TEMPLATE;
+    	Object parent = this.getParentTag();
+    	return parent instanceof TableHeaderTag? TEMPLATE : TEMPLATE_2;
     }
 
     protected Set<String> getDefaultAttributes(){
@@ -84,5 +84,14 @@ public class SideBarTag  extends AbstractTag {
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
+
+	public Integer getSize() {
+		return size;
+	}
+
+	public void setSize(Integer size) {
+		this.size = size;
+	}
+
 
 }

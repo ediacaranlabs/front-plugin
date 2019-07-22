@@ -112,6 +112,10 @@ public abstract class AbstractTag extends SimpleTagSupport{
     	
     }
     
+    public Object getParentTag() {
+    	return getProperty(PARENT_TAG);
+    }
+    
     protected String getWrapperTemplate() {
     	return WRAPPER_TEMPLATE;
     }

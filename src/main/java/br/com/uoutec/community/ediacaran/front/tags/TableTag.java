@@ -6,9 +6,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class SideBarTag  extends AbstractTag {
+public class TableTag  extends AbstractTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/sidebar";
+	public static final String TEMPLATE  = "/bootstrap4/templates/components/table";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -28,7 +28,7 @@ public class SideBarTag  extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
-				put("size", new AttributeParserImp() {
+				put("style", new AttributeParserImp() {
 					
 					@Override
 					public String toName(String value) {
@@ -37,7 +37,7 @@ public class SideBarTag  extends AbstractTag {
 					
 					@Override
 					public Object toValue(Object value) {
-						return value == null? "col-lg-1 col-xl-1" : "col-lg-" + value + " col-xl-" + value;
+						return value == null? "" : "table-" + value;
 					}
 				});
 			}});
@@ -46,18 +46,14 @@ public class SideBarTag  extends AbstractTag {
 	
 	/* ------------ Prop ---------------*/
 	
-	private Integer size;
+	private String style;
 	
-	private String align;
-	
-	public SideBarTag() {
+	public TableTag() {
 	}
 	
 	public Map<String, Object> getValues() {
-		int offset = "right".equalsIgnoreCase(this.align)? (this.size == null? 11 : 12 - this.size) : -1; 
 		Map<String, Object> vals = super.getValues();
 		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		vals.put("offset", offset <= 0? "" : "offset-lg-" + offset + " offset-xl-" + offset);
 		return vals;
 	}
 	
@@ -84,5 +80,13 @@ public class SideBarTag  extends AbstractTag {
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
+	}
 
 }
