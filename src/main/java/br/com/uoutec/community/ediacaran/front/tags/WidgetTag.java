@@ -1,13 +1,10 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.jsp.JspException;
 
 public class WidgetTag  extends ComponentFormTag {
 
@@ -15,30 +12,24 @@ public class WidgetTag  extends ComponentFormTag {
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_ATTRS) {{
-			//add("");
+		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_ATTRS) {{
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_ATTRIBUTE_PARSERS){{
-			/*
-			put("", new AttributeParserImp() {
-				
-				@Override
-				public String toName(String value) {
-					return value;
-				}
-				
-				@Override
-				public Object toValue(Object value) {
-					return value;
-				}
-				
-			});
-			*/
-			
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_ATTRIBUTE_PARSERS){{
 		}});
+
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("title");
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+			}});
 
 	/* ------------ Attr ---------------*/
 	
@@ -49,26 +40,34 @@ public class WidgetTag  extends ComponentFormTag {
 	public WidgetTag() {
 	}
 	
-    public void doInnerTag() throws JspException, IOException{
-    	
-    	try {
-			Map<String, Object> vars = new HashMap<String, Object>();
-			vars.put("attr",    super.toAttrs());
-			vars.put("title",   this.title);
-			vars.put("content", new JspFragmentVarParser(getJspBody()));
-			
-			TemplatesManager.getTemplatesManager()
-				.apply(
-						this.getTemplate() == null? 
-								TEMPLATE : 
-								this.getTemplate(), 
-						vars, getJspContext().getOut()
-				);
-    	}
-    	catch(Throwable e) {
-    		throw new IllegalStateException(e);
-    	}
-    	
+	public Map<String, Object> getValues() {
+		Map<String, Object> vals = super.getValues();
+		vals.put("content", new JspFragmentVarParser(getJspBody()));
+		return vals;
+	}
+	
+    protected String getDefaultTemplate() {
+    	return TEMPLATE;
+    }
+
+    protected Set<String> getDefaultAttributes(){
+    	return DEFAULT_ATTRS;
+    }
+
+    protected Set<String> getEmptyAttributes(){
+    	return DEFAULT_EMPTY_ATTRIBUTES;
+    }
+    
+    protected Map<String, AttributeParser> getAttributeParsers(){
+    	return DEFAULT_ATTRIBUTE_PARSERS;
+    }
+
+    protected Set<String> getDefaultProperties(){
+    	return DEFAULT_PROPS;
+    }
+
+    protected Map<String, AttributeParser> getPropertyParsers(){
+    	return DEFAULT_PROPERTY_PARSERS;
     }
 
 	public String getTitle() {
