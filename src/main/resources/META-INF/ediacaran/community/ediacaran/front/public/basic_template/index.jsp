@@ -11,7 +11,7 @@
   <meta name="description" content="${vars['description']}" />
   <meta name="author" content="${vars['author']}" />
 
-  <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/header.jsp"/>
+  <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/head.jsp"/>
 
 </head>
 
