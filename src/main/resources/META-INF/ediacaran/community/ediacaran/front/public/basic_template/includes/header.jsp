@@ -1,28 +1,28 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page trimDirectiveWhitespaces="true" %>
-<%@taglib uri="META-INF/tags/bootstrap4/components.tld" prefix="ec"%>
-<%@taglib uri="META-INF/tags/bootstrap4/designer.tld"   prefix="ed"%>
+<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components.tld" prefix="ec"%>
+<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer.tld" prefix="ed"%>
     <!-- start header -->
     <header>
       <ed:container>
-      	<ec:row classStyle="nomargin">
-      		<ec:col>
+      	<ed:row classStyle="nomargin">
+      		<ed:col>
 	            <div class="headnav">
 	            	<ec:list>
 	            		<ec:list-item><a href="${vars['signup']['link']}" data-toggle="modal">${vars['signup']['text']}</a></ec:list-item>
 	            		<ec:list-item><a href="${vars['signin']['link']}" data-toggle="modal">${vars['signin']['text']}</a></ec:list-item>
 	            	</ec:list>
 	            </div>
-      		</ec:col>
-      	</ec:row>
-      	<ec:row>
-      		<ec:col size="4">
+      		</ed:col>
+      	</ed:row>
+      	<ed:row>
+      		<ed:col size="4">
 	            <div class="logo">
 	              <a href="${vars['logo']['link']}"><img src="${vars['logo']['image']}" alt="" class="logo" /></a>
 	              <h1>${vars['logo']['text']}</h1>
 	            </div>
-      		</ec:col>
-      		<ec:col size="8">
+      		</ed:col>
+      		<ed:col size="8">
       			<ec:menu-bar>
       				<ec:menu-body>
       					<ec:menu-itens>
@@ -43,8 +43,8 @@
       					</ec:menu-itens>
       				</ec:menu-body>
       			</ec:menu-bar>
-      		</ec:col>
-      	</ec:row>
+      		</ed:col>
+      	</ed:row>
       </ed:container>
     </header>
     <!-- end header -->

@@ -48,7 +48,6 @@ public class LoadDataTag  extends AbstractTag {
 	}
 	
     public void doInnerTag() throws JspException, IOException{
-    	super.doInnerTag();
     	ServerBootstrap sb     = (ServerBootstrap) ApplicationBootstrapProvider.getBootstrap();
     	Map<Object,Object> dta = ReadData.loadData(file, sb.getWebapp());
     	super.getJspContext().setAttribute(var == null? "vars" : var, dta);
