@@ -6,11 +6,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class MenuItemTag  extends AbstractTag {
+public class MenuBodyTag  extends AbstractTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/menu-item";
-	
-	public static final String TEMPLATE2  = "/bootstrap4/templates/components/menu-bar-item";
+	public static final String TEMPLATE  = "/bootstrap4/templates/components/menu-body";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -25,8 +23,6 @@ public class MenuItemTag  extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
-			add("link");
-			add("label");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -38,15 +34,17 @@ public class MenuItemTag  extends AbstractTag {
 	
 	/* ------------ Prop ---------------*/
 	
-	private String link;
+	public MenuBodyTag() {
+	}
 	
-	private String label;
-	
-	public MenuItemTag() {
+	public Map<String, Object> getValues() {
+		Map<String, Object> vals = super.getValues();
+		vals.put("content", new JspFragmentVarParser(getJspBody()));
+		return vals;
 	}
 	
     protected String getDefaultTemplate() {
-    	return getProperty(PARENT_TAG) instanceof MenuItensTag? TEMPLATE2 : TEMPLATE;
+    	return TEMPLATE;
     }
 
     protected Set<String> getDefaultAttributes(){
@@ -68,21 +66,5 @@ public class MenuItemTag  extends AbstractTag {
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
-
-	public String getLink() {
-		return link;
-	}
-
-	public void setLink(String link) {
-		this.link = link;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
 
 }

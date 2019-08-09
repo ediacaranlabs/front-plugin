@@ -24,20 +24,24 @@
       		</ec:col>
       		<ec:col size="8">
       			<ec:menu-bar>
-					<c:forEach items="${vars['menu']}" var="menu">
-						<c:choose>
-							<c:when test="${empty menu['link']}">
-								<ec:menu name="${menu['name']}">
-									<c:forEach items="${menu['itens']}" var="item">
-										<ec:menu-item link="${item['link']}">${item['name']}</ec:menu-item>
-									</c:forEach>
-								</ec:menu>
-							</c:when>
-							<c:otherwise>
-								<ec:menu-item link="${menu['link']}">${menu['name']}</ec:menu-item>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
+      				<ec:menu-body>
+      					<ec:menu-itens>
+							<c:forEach items="${vars['menu']}" var="menu">
+								<c:choose>
+									<c:when test="${empty menu['link']}">
+										<ec:menu name="${menu['name']}">
+											<c:forEach items="${menu['itens']}" var="item">
+												<ec:menu-item link="${item['link']}">${item['name']}</ec:menu-item>
+											</c:forEach>
+										</ec:menu>
+									</c:when>
+									<c:otherwise>
+										<ec:menu-item link="${menu['link']}">${menu['name']}</ec:menu-item>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+      					</ec:menu-itens>
+      				</ec:menu-body>
       			</ec:menu-bar>
       		</ec:col>
       	</ec:row>
