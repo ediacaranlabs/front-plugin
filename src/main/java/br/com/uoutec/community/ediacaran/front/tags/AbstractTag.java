@@ -26,7 +26,6 @@ public abstract class AbstractTag extends SimpleTagSupport{
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
 			add("id");
-			add("classStyle");
 		}});
 
 	protected static final Set<String> DEFAULT_EMPTY_ATTRIBUTES = 
@@ -49,6 +48,7 @@ public abstract class AbstractTag extends SimpleTagSupport{
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
+			add("classStyle");
 		}});
 	
 	@SuppressWarnings("serial")

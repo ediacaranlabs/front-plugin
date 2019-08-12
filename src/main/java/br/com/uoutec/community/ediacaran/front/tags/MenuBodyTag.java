@@ -13,6 +13,7 @@ public class MenuBodyTag  extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_ATTRS) {{
+			remove("id");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -23,6 +24,7 @@ public class MenuBodyTag  extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("id");
 		}});
 	
 	@SuppressWarnings("serial")

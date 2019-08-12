@@ -40,7 +40,7 @@ public class ListTag  extends AbstractTag {
 					
 					@Override
 					public Object toValue(Object value) {
-						return "list-" + value;
+						return value == null? null : "list-" + value;
 					}
 					
 				});
