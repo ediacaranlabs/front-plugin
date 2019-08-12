@@ -237,7 +237,7 @@ public abstract class AbstractTag extends SimpleTagSupport{
     }
     
     protected Object getProperty(String name, Object defaultValue) {
-		Object val = (Integer) this.getJspContext().getAttribute(name);
+		Object val = this.getJspContext().getAttribute(name);
     	return val == null? defaultValue : val;
     }
     

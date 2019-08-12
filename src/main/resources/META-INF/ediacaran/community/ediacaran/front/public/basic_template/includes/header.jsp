@@ -1,7 +1,8 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page trimDirectiveWhitespaces="true" %>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components.tld" prefix="ec"%>
-<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer.tld" prefix="ed"%>
+<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer.tld"   prefix="ed"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"                                  prefix="c"%>
     <!-- start header -->
     <header>
       <ed:container>
@@ -29,14 +30,14 @@
 							<c:forEach items="${vars['menu']}" var="menu">
 								<c:choose>
 									<c:when test="${empty menu['link']}">
-										<ec:menu name="${menu['name']}">
+										<ec:menu label="${menu['name']}">
 											<c:forEach items="${menu['itens']}" var="item">
-												<ec:menu-item link="${item['link']}">${item['name']}</ec:menu-item>
+												<ec:menu-item link="${item['link']}" label="${item['name']}"/>
 											</c:forEach>
 										</ec:menu>
 									</c:when>
 									<c:otherwise>
-										<ec:menu-item link="${menu['link']}">${menu['name']}</ec:menu-item>
+										<ec:menu-item link="${menu['link']}" label="${menu['name']}"/>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
