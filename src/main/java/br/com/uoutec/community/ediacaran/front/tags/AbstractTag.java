@@ -1,6 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -68,9 +69,6 @@ public abstract class AbstractTag extends SimpleTagSupport{
 	
     public void doTag() throws JspException, IOException {
 
-		Object oldParent = getProperty(PARENT_TAG);
-		setProperty(PARENT_TAG, this);
-    	
     	if(!wrapper) {
 	    	doInnerTag();
     	}
@@ -79,17 +77,9 @@ public abstract class AbstractTag extends SimpleTagSupport{
     		
     		Map<String, Object> vars = new HashMap<String, Object>();
     		vars.putAll(tagVars);
-    		vars.put("content", 
-    				new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars));
-
-    		TemplatesManager.getTemplatesManager()
-    		.apply(
-    				getWrapperTemplate(), 
-    				vars, getJspContext().getOut()
-    		);
+    		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars));
+    		applyTemplate(getWrapperTemplate(), vars, getJspContext().getOut());
     	}
-    	
-    	setProperty(PARENT_TAG, oldParent);
     	
     }
 	
@@ -97,18 +87,24 @@ public abstract class AbstractTag extends SimpleTagSupport{
     	
     	try {
 			Map<String, Object> vars = getValues();
-			
-			TemplatesManager.getTemplatesManager()
-				.apply(
-						this.getTemplate() == null? 
-								getDefaultTemplate() : 
-								getTemplate(), 
-						vars, getJspContext().getOut()
-				);
+			applyTemplate(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars, getJspContext().getOut() );
     	}
     	catch(Throwable e) {
     		throw new IllegalStateException(e);
     	}
+    	
+    }
+    
+    private void applyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException {
+		
+    	Object oldParent = getProperty(PARENT_TAG);
+		setProperty(PARENT_TAG, this);
+		
+		TemplatesManager
+		.getTemplatesManager().apply(template, vars, out);
+		
+    	setProperty(PARENT_TAG, oldParent);
     	
     }
     
