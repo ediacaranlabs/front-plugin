@@ -80,8 +80,6 @@ public class MenuBarTag  extends AbstractTag {
 	
 	private String position; //top, bottom, sticky
 	
-	private String expand; //sm, md, lg, xl
-	
 	public MenuBarTag() {
 	}
 	
