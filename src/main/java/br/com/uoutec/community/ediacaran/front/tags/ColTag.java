@@ -41,8 +41,8 @@ public class ColTag  extends AbstractTag {
 	public ColTag() {
 	}
 	
-	public Map<String, Object> getValues() {
-		Map<String, Object> vals = super.getValues();
+	public Map<String, Object> prepareVars() {
+		Map<String, Object> vals = super.prepareVars();
 		String sizeStyle   = size == null? "col" : "col-sm-12 col-md-12 " + "col-lg-" + size + " col-xl-" + size;
 		String offsetStyle = offset == null? "" : "offset-lg-" + offset + " offset-xl-" + offset;
 		vals.put("size", sizeStyle + " " + offsetStyle);

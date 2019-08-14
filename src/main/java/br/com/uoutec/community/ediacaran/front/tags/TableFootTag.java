@@ -37,8 +37,8 @@ public class TableFootTag  extends AbstractTag {
 	public TableFootTag() {
 	}
 	
-	public Map<String, Object> getValues() {
-		Map<String, Object> vals = super.getValues();
+	public Map<String, Object> prepareVars() {
+		Map<String, Object> vals = super.prepareVars();
 		vals.put("content", new JspFragmentVarParser(getJspBody()));
 		return vals;
 	}

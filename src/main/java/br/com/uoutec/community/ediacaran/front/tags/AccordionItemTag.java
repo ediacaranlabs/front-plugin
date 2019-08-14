@@ -30,6 +30,7 @@ public class AccordionItemTag extends AbstractTag {
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
 			add("title");
 			add("count");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -44,6 +45,8 @@ public class AccordionItemTag extends AbstractTag {
 	private int count;
 	
 	private String title;
+	
+	private JspFragmentVarParser content;
 	
 	public AccordionItemTag() {
 	}
@@ -74,6 +77,11 @@ public class AccordionItemTag extends AbstractTag {
     	
     }
 
+	public Map<String, Object> prepareVars() {
+		this.content = new JspFragmentVarParser(getJspBody());
+		return super.prepareVars();
+	}
+    
 	public String getTitle() {
 		return title;
 	}

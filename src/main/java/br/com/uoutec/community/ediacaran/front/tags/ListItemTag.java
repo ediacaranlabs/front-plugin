@@ -48,11 +48,11 @@ public class ListItemTag  extends AbstractTag {
 	public ListItemTag() {
 	}
 	
-	public Map<String, Object> getValues() {
+	public Map<String, Object> prepareVars() {
 		ListTag list = (ListTag) getJspContext().getAttribute(ListTag.PARENT);
 		this.inline  = "inline".equals(list.getStyle());
 		
-		Map<String, Object> vals = super.getValues();
+		Map<String, Object> vals = super.prepareVars();
 		vals.put("content", new JspFragmentVarParser(getJspBody()));
 		return vals;
 	}

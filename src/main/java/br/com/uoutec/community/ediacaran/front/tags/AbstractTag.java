@@ -68,44 +68,54 @@ public abstract class AbstractTag extends SimpleTagSupport{
 	private boolean wrapper;
 	
     public void doTag() throws JspException, IOException {
-
-    	if(!wrapper) {
+    	if(!wrapper)
 	    	doInnerTag();
-    	}
-    	else {
-    		Map<String, Object> tagVars = getValues();
-    		
-    		Map<String, Object> vars = new HashMap<String, Object>();
-    		vars.putAll(tagVars);
-    		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars));
-    		applyTemplate(getWrapperTemplate(), vars, getJspContext().getOut());
-    	}
-    	
+    	else
+    		doWrapperTag();
     }
 	
-    public void doInnerTag() throws JspException, IOException{
+    protected void doWrapperTag() throws JspException, IOException{
     	
-    	try {
-			Map<String, Object> vars = getValues();
-			applyTemplate(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars, getJspContext().getOut() );
-    	}
-    	catch(Throwable e) {
-    		throw new IllegalStateException(e);
-    	}
-    	
+		Map<String, Object> tagVars = prepareVars();
+		Map<String, Object> vars = new HashMap<String, Object>();
+		
+		vars.putAll(tagVars);
+		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars));
+		
+		applyTemplate(getWrapperTemplate(), vars, getJspContext().getOut());
+    }
+    
+    protected void doInnerTag() throws JspException, IOException{
+		Map<String, Object> vars = prepareVars();
+		applyTemplate(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars, getJspContext().getOut() );
+    }
+    
+    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException {
     }
     
     private void applyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
 		
-    	Object oldParent = getProperty(PARENT_TAG);
-		setProperty(PARENT_TAG, this);
+    	Object oldParent = getParentTag();
+    	setParentTag(this);
+		
+		beforeApplyTemplate(template, vars, out);
 		
 		TemplatesManager
 		.getTemplatesManager().apply(template, vars, out);
 		
-    	setProperty(PARENT_TAG, oldParent);
-    	
+		afterApplyTemplate(template, vars, out);
+		
+    	setParentTag(oldParent);
+    }
+    
+    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException {
+    }
+    
+    public void setParentTag(Object tag) {
+    	setProperty(PARENT_TAG, tag);
     }
     
     public Object getParentTag() {
@@ -193,7 +203,7 @@ public abstract class AbstractTag extends SimpleTagSupport{
 		}
 	}
 	
-	public Map<String, Object> getValues() {
+	protected Map<String, Object> prepareVars() {
 		try {
 			BeanInstance i = new BeanInstance(this);
 			Map<String, AttributeParser> parsers = getPropertyParsers();
@@ -214,6 +224,7 @@ public abstract class AbstractTag extends SimpleTagSupport{
 					map.put(k, v);
 				}
 			}
+			
 			
 			return map;
 		}

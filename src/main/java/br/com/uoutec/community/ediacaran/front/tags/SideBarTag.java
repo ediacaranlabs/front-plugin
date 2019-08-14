@@ -53,9 +53,9 @@ public class SideBarTag  extends AbstractTag {
 	public SideBarTag() {
 	}
 	
-	public Map<String, Object> getValues() {
+	public Map<String, Object> prepareVars() {
 		int offset = "right".equalsIgnoreCase(this.align)? (this.size == null? 11 : 12 - this.size) : -1; 
-		Map<String, Object> vals = super.getValues();
+		Map<String, Object> vals = super.prepareVars();
 		vals.put("content", new JspFragmentVarParser(getJspBody()));
 		vals.put("offset", offset <= 0? "" : "offset-lg-" + offset + " offset-xl-" + offset);
 		return vals;

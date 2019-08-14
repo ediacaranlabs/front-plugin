@@ -49,8 +49,8 @@ public class LandingSectionTag  extends AbstractTag {
 	public LandingSectionTag() {
 	}
 	
-	public Map<String, Object> getValues() {
-		Map<String, Object> vals = super.getValues();
+	public Map<String, Object> prepareVars() {
+		Map<String, Object> vals = super.prepareVars();
 		vals.put("align-left",  "right".equals(align)? " col-lg-offset-1 col-sm-push-6" : "" );
 		vals.put("align-right", "right".equals(align)? " col-lg-offset-2" : "col-sm-pull-6" );
 		vals.put("content", new JspFragmentVarParser(getJspBody()));

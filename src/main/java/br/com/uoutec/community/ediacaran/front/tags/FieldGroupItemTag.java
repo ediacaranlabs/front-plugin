@@ -42,14 +42,14 @@ public class FieldGroupItemTag  extends AbstractTag {
 	public FieldGroupItemTag() {
 	}
 	
-	public Map<String, Object> getValues() {
+	public Map<String, Object> prepareVars() {
 		if(text == null) {
-			Map<String, Object> vals = super.getValues();
+			Map<String, Object> vals = super.prepareVars();
 			vals.put("content", new JspFragmentVarParser(getJspBody()));
 			return vals;
 		}
 		else {
-			return super.getValues();
+			return super.prepareVars();
 		}
 	}
 	
