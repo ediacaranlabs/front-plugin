@@ -3,13 +3,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import br.com.uoutec.community.ediacaran.front.StringPattern;
 
-public class NivoTag extends BodyTagSupport {
+public class NivoTag extends AbstractBodyTag {
 
 	private static final long serialVersionUID = 748182107582888257L;
 
@@ -81,6 +83,30 @@ public class NivoTag extends BodyTagSupport {
 
 		return SKIP_BODY;
 	}
+	
+    protected String getDefaultTemplate() {
+    	return TEMPLATE;
+    }
+
+    protected Set<String> getDefaultAttributes(){
+    	return DEFAULT_ATTRS;
+    }
+
+    protected Set<String> getEmptyAttributes(){
+    	return DEFAULT_EMPTY_ATTRIBUTES;
+    }
+    
+    protected Map<String, AttributeParser> getAttributeParsers(){
+    	return DEFAULT_ATTRIBUTE_PARSERS;
+    }
+
+    protected Set<String> getDefaultProperties(){
+    	return DEFAULT_PROPS;
+    }
+
+    protected Map<String, AttributeParser> getPropertyParsers(){
+    	return DEFAULT_PROPERTY_PARSERS;
+    }
 	
 	public String getButton() {
 		return button;

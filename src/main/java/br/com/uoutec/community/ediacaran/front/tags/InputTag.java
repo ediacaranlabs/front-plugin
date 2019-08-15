@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+@Deprecated
 public abstract class InputTag extends FormComponentTag{
 
 	public static final String ID_COUNT   = "_component_id_count";
