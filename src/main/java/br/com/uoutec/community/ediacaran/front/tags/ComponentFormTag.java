@@ -67,14 +67,6 @@ public abstract class ComponentFormTag extends AbstractTag {
 	public ComponentFormTag() {
 	}
 	
-    protected Map<String, AttributeParser> getAttributeParsers(){
-    	return DEFAULT_ATTRIBUTE_PARSERS;
-    }
-    
-    protected Set<String> getDefaultAttributes(){
-    	return DEFAULT_ATTRS;
-    }
-	
     public void doTag() throws JspException, IOException {
 		
     	if(group == null || !group) {
@@ -116,10 +108,30 @@ public abstract class ComponentFormTag extends AbstractTag {
     	
     }
 	
-	//public String toAttrs() {
-	//	return getProperty(FORM) == null? super.toAttrs() : "";
-	//}
+    protected String getDefaultTemplate() {
+    	return TEMPLATE;
+    }
 
+    protected Set<String> getDefaultAttributes(){
+    	return DEFAULT_ATTRS;
+    }
+
+    protected Set<String> getEmptyAttributes(){
+    	return DEFAULT_EMPTY_ATTRIBUTES;
+    }
+    
+    protected Map<String, AttributeParser> getAttributeParsers(){
+    	return DEFAULT_ATTRIBUTE_PARSERS;
+    }
+
+    protected Set<String> getDefaultProperties(){
+    	return DEFAULT_PROPS;
+    }
+
+    protected Map<String, AttributeParser> getPropertyParsers(){
+    	return DEFAULT_PROPERTY_PARSERS;
+    }
+    
 	public String getName() {
 		return name;
 	}

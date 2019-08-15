@@ -13,8 +13,6 @@ public class AccordionItemTag extends AbstractTag {
 
 	public static final String TEMPLATE = "/bootstrap4/templates/components/accordion-item";
 
-	public static final String ACCORDION_COUNT_ATTR = AccordionItemTag.class.getSimpleName();
-	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_ATTRS) {{
@@ -29,8 +27,8 @@ public class AccordionItemTag extends AbstractTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
 			add("title");
-			add("count");
 			add("content");
+			add("parentID");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -42,53 +40,70 @@ public class AccordionItemTag extends AbstractTag {
 	
 	/* ------------ Prop ---------------*/
 	
-	private int count;
-	
 	private String title;
 	
+	/* ------------ Private Prop ---------------*/
+	
 	private JspFragmentVarParser content;
+	
+	private String parentID;
 	
 	public AccordionItemTag() {
 	}
 	
     public void doTag() throws JspException, IOException{
-    	
-    	try {
-    		AccordionTag parent = (AccordionTag)getProperty(PARENT_TAG);
-			Integer count       = (Integer)this.getProperty(ACCORDION_COUNT_ATTR);
-			this.setProperty(ACCORDION_COUNT_ATTR, count = count == null? 0 : count.intValue() + 1);
-			
-			Map<String,Object> vars = new HashMap<String,Object>();
-			vars.put("count",       count);
-			vars.put("title",       title);
-			vars.put("accordionID", parent.getId());
-			vars.put("content",     new JspFragmentVarParser(getJspBody()));
-			
-			TemplatesManager.getTemplatesManager()
-				.apply(this.getTemplate() == null? TEMPLATE : this.getTemplate(), vars, getJspContext().getOut());
-			
-    	}
-    	catch(IllegalStateException e) {
-    		throw e;
-    	}
-    	catch(Throwable e) {
-    		throw new IllegalStateException(e);
-    	}
-    	
+    	Object parentTag = getParentTag();
+		this.content = new JspFragmentVarParser(getJspBody());
+		this.parentID = parentTag == null? null : ((AccordionTag)parentTag).getId();
+		super.doTag();
     }
 
-	public Map<String, Object> prepareVars() {
-		this.content = new JspFragmentVarParser(getJspBody());
-		return super.prepareVars();
-	}
+    protected String getDefaultTemplate() {
+    	return TEMPLATE;
+    }
+
+    protected Set<String> getDefaultAttributes(){
+    	return DEFAULT_ATTRS;
+    }
+
+    protected Set<String> getEmptyAttributes(){
+    	return DEFAULT_EMPTY_ATTRIBUTES;
+    }
+    
+    protected Map<String, AttributeParser> getAttributeParsers(){
+    	return DEFAULT_ATTRIBUTE_PARSERS;
+    }
+
+    protected Set<String> getDefaultProperties(){
+    	return DEFAULT_PROPS;
+    }
+
+    protected Map<String, AttributeParser> getPropertyParsers(){
+    	return DEFAULT_PROPERTY_PARSERS;
+    }
     
 	public String getTitle() {
 		return title;
 	}
 
-
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
+	}
+
+	public String getParentID() {
+		return parentID;
+	}
+
+	public void setParentID(String parentID) {
+		this.parentID = parentID;
 	}	
     
 }
