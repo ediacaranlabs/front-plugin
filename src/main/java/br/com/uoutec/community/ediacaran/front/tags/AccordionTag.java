@@ -26,9 +26,7 @@ public class AccordionTag extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
-			add("title");
 			add("content");
-			add("parentID");
 		}});
 	
 	@SuppressWarnings("serial")

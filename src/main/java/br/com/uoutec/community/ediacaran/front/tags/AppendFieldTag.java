@@ -1,10 +1,13 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import javax.servlet.jsp.JspException;
 
 public class AppendFieldTag  extends AbstractTag {
 
@@ -23,6 +26,7 @@ public class AppendFieldTag  extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -34,7 +38,14 @@ public class AppendFieldTag  extends AbstractTag {
 	
 	/* ------------ Prop ---------------*/
 	
+	private JspFragmentVarParser content;
+	
 	public AppendFieldTag() {
+	}
+	
+	public void doTag() throws JspException, IOException {
+		this.content = new JspFragmentVarParser(getJspBody());
+		super.doTag();
 	}
 	
 	public Map<String, Object> prepareVars() {
@@ -66,5 +77,13 @@ public class AppendFieldTag  extends AbstractTag {
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
+	}
     
 }

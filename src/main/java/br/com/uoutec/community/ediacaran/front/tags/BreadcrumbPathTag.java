@@ -1,17 +1,50 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.jsp.JspException;
 
 public class BreadcrumbPathTag extends AbstractTag {
 
 	public static final String TEMPLATE = "/bootstrap4/templates/components/breadcrumb-path";
 	
 	public static final String TEMPLATE_ICON = "/bootstrap4/templates/components/icon";
+	
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_ATTRS = 
+		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_ATTRS) {{
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_ATTRIBUTE_PARSERS){{
+		}});
+
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("icon");
+			add("text");
+			add("lnk");
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+				put("icon", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value) {
+						return value == null? null : new TemplateVarParser(TEMPLATE_ICON).put("icon", value).put("size", 1);
+					}
+				});
+			}});
+	
+	/* ------------ Attr ---------------*/
+	
+	/* ------------ Prop ---------------*/
 	
 	private String icon;
 	
@@ -22,23 +55,6 @@ public class BreadcrumbPathTag extends AbstractTag {
 	public BreadcrumbPathTag() {
 	}
 	
-    public void doInnerTag() throws JspException, IOException{
-    	
-    	try {
-			Map<String, Object> vars = new HashMap<String, Object>();
-			vars.put("icon",  icon == null? null : new TemplateVarParser(TEMPLATE_ICON).put("icon", icon).put("size", 1));
-			vars.put("text", text);
-			vars.put("lnk", lnk);
-			
-			TemplatesManager.getTemplatesManager()
-				.apply(this.getTemplate() == null? TEMPLATE : this.getTemplate(), vars, getJspContext().getOut());
-    	}
-    	catch(Throwable e) {
-    		throw new IllegalStateException(e);
-    	}
-    	
-    }
-    
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }
@@ -62,5 +78,29 @@ public class BreadcrumbPathTag extends AbstractTag {
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public String getLnk() {
+		return lnk;
+	}
+
+	public void setLnk(String lnk) {
+		this.lnk = lnk;
+	}
     
 }
