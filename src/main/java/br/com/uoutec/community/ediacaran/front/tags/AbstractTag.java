@@ -39,7 +39,7 @@ public abstract class AbstractTag extends SimpleTagSupport{
 				put("classStyle", new AttributeParserImp() {
 					
 					@Override
-					public String toName(String value) {
+					public String toName(String value, Object component) {
 						return value == null? null : "class";
 					}
 				});
@@ -175,8 +175,8 @@ public abstract class AbstractTag extends SimpleTagSupport{
 				
 				AttributeParser parser = parsers.get(p);
 				
-				p = parser == null? p : parser.toName(p);
-				v = parser == null? v : parser.toValue(v);
+				p = parser == null? p : parser.toName(p, this);
+				v = parser == null? v : parser.toValue(v, this);
 				
 				if(p != null) {
 					sb.append(p).append("=\"").append(v).append("\"");
@@ -217,8 +217,8 @@ public abstract class AbstractTag extends SimpleTagSupport{
 				
 				AttributeParser parser = parsers.get(k);
 				
-				k = parser == null? k : parser.toName(k);
-				v = parser == null? v : parser.toValue(v);
+				k = parser == null? k : parser.toName(k, this);
+				v = parser == null? v : parser.toValue(v, this);
 				
 				if(k != null && !k.isEmpty()) {
 					map.put(k, v);

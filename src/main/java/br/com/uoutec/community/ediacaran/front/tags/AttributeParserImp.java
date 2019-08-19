@@ -3,12 +3,12 @@ package br.com.uoutec.community.ediacaran.front.tags;
 public class AttributeParserImp implements AttributeParser{
 
 	@Override
-	public String toName(String value) {
+	public String toName(String value, Object component) {
 		return value;
 	}
 
 	@Override
-	public Object toValue(Object value) {
+	public Object toValue(Object value, Object component) {
 		return value == null? null : String.valueOf(value);
 	}
 

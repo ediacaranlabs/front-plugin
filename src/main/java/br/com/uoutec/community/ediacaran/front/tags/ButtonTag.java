@@ -1,13 +1,10 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.jsp.JspException;
 
 public class ButtonTag extends ComponentFormTag {
 
@@ -29,7 +26,7 @@ public class ButtonTag extends ComponentFormTag {
 			put("actionType", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value) {
+				public String toName(String value, Object component) {
 					return value == null? null : "type";
 				}
 			});
@@ -37,7 +34,7 @@ public class ButtonTag extends ComponentFormTag {
 			put("action", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value) {
+				public String toName(String value, Object component) {
 					return value == null? null : "formaction";
 				}
 			});
@@ -45,7 +42,7 @@ public class ButtonTag extends ComponentFormTag {
 			put("ctype", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value) {
+				public String toName(String value, Object component) {
 					return value == null? null : "formenctype";
 				}
 			});
@@ -53,7 +50,7 @@ public class ButtonTag extends ComponentFormTag {
 			put("method", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value) {
+				public String toName(String value, Object component) {
 					return value == null? null : "formmethod";
 				}
 			});
@@ -61,13 +58,63 @@ public class ButtonTag extends ComponentFormTag {
 			put("target", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value) {
+				public String toName(String value, Object component) {
 					return value == null? null : "formtarget";
 				}
 			});
 			
 		}});
 
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("label");
+			add("size");
+			add("type");
+			add("block");
+			add("outline");
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+				
+				put("size", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return value == null? "" : new String(" btn-").concat(String.valueOf(value));
+					}
+				});
+
+				put("type", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						Boolean outline = ((ButtonTag)component).getOutline();
+						return new String(" btn-").concat(outline != null && outline ? "outline-" : "").concat(value == null? "primary" : String.valueOf(value));
+					}
+				});
+				
+				put("block", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return value == null? "" : (Boolean)value? " btn-block" : "";
+					}
+				});
+				
+				put("enabled", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						Boolean enabled = ((ButtonTag)component).getEnabled();
+						return enabled != null && !enabled? " disabled" : "";
+					}
+				});
+				
+			}});
+	
 	/* ------------ Attr ---------------*/
 	
 	private String action;
@@ -95,33 +142,6 @@ public class ButtonTag extends ComponentFormTag {
 	public ButtonTag() {
 	}
 	
-	@Override
-	public void doInnerTag() throws JspException, IOException {
-    	
-    	try {
-			Map<String, Object> vars = new HashMap<String, Object>();
-			
-			vars.put("size",    size == null? "" : new String(" btn-").concat(size));
-			
-			vars.put("type",    new String(" btn-").concat(outline != null && outline ? "outline-" : "").concat(type == null? "primary" : type));
-			
-			vars.put("block",   block == null? "" : block? " btn-block" : "");
-			
-			vars.put("enabled", this.getEnabled() != null && !this.getEnabled()? " disabled" : "");
-			
-			vars.put("attr",    super.toAttrs());
-			
-			vars.put("label",   label);
-			
-			TemplatesManager.getTemplatesManager()
-				.apply(this.getTemplate() == null? TEMPLATE : this.getTemplate(), vars, getJspContext().getOut());
-    	}
-    	catch(Throwable e) {
-    		throw new IllegalStateException(e);
-    	}
-    	
-    }
-
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }

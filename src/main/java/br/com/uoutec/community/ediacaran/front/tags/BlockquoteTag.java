@@ -1,13 +1,10 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.jsp.JspException;
 
 public class BlockquoteTag extends AbstractTag {
 
@@ -35,11 +32,20 @@ public class BlockquoteTag extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+				
 				put("cite", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return value == null? null : new TemplateVarParser(CITE_TEMPLATE).put("content", value);
+					}
+				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((BlockquoteTag)component).getJspBody());
 					}
 				});
 			}});
@@ -55,11 +61,6 @@ public class BlockquoteTag extends AbstractTag {
 	public BlockquoteTag() {
 	}
 	
-	public void doTag() throws JspException, IOException {
-		this.content = new JspFragmentVarParser(getJspBody());
-		super.doTag();
-	}
-
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }

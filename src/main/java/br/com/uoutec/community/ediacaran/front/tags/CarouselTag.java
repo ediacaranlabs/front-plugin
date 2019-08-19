@@ -1,7 +1,9 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,26 +13,40 @@ public class CarouselTag extends AbstractTag {
 
 	public static final String TEMPLATE = "/bootstrap4/templates/components/carousel";
 	
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_ATTRS = 
+		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_ATTRS) {{
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_ATTRIBUTE_PARSERS){{
+		}});
+
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+			}});
+	
+	/* ------------ Attr ---------------*/
+	
+	/* ------------ Prop ---------------*/
+	
+	private JspFragmentVarParser content;
+	
 	public CarouselTag() {
 	}
 	
-    public void doInnerTag() throws JspException, IOException{
-    	
-    	try {
-			Map<String, Object> vars = new HashMap<String, Object>();
-			vars.put("attr",           super.toAttrs());
-			vars.put("accordionID",    this.getId());
-			vars.put("carousel-itens", new JspFragmentVarParser(getJspBody()));
-			
-			TemplatesManager.getTemplatesManager()
-				.apply(this.getTemplate() == null? TEMPLATE : this.getTemplate(), vars, getJspContext().getOut());
-    	}
-    	catch(Throwable e) {
-    		throw new IllegalStateException(e);
-    	}
-    	
-    }
-
+	public void doTag() throws JspException, IOException {
+		this.content = new JspFragmentVarParser(getJspBody());
+		super.doTag();
+	}
+	
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }
@@ -54,5 +70,13 @@ public class CarouselTag extends AbstractTag {
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
+	}
     
 }
