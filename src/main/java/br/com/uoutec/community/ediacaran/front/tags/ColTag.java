@@ -23,11 +23,35 @@ public class ColTag  extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("size");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+
+				put("size", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						ColTag c = (ColTag)component;
+						Integer size = c.getSize();
+						Integer offset = c.getOffset();
+						String sizeStyle   = size == null? "col" : "col-sm-12 col-md-12 " + "col-lg-" + size + " col-xl-" + size;
+						String offsetStyle = offset == null? "" : "offset-lg-" + offset + " offset-xl-" + offset;
+						return sizeStyle + " " + offsetStyle;
+					}
+				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((ColTag)component).getJspBody());
+					}
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -38,16 +62,9 @@ public class ColTag  extends AbstractTag {
 	
 	private Integer offset;
 	
-	public ColTag() {
-	}
+	private JspFragmentVarParser content;
 	
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		String sizeStyle   = size == null? "col" : "col-sm-12 col-md-12 " + "col-lg-" + size + " col-xl-" + size;
-		String offsetStyle = offset == null? "" : "offset-lg-" + offset + " offset-xl-" + offset;
-		vals.put("size", sizeStyle + " " + offsetStyle);
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
+	public ColTag() {
 	}
 	
     protected String getDefaultTemplate() {
@@ -88,6 +105,14 @@ public class ColTag  extends AbstractTag {
 
 	public void setOffset(Integer offset) {
 		this.offset = offset;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
 
 }

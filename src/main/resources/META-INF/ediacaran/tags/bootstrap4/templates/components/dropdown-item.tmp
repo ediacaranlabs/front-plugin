@@ -1,5 +1,5 @@
 <li {attr}>
-	<a href="{link}">
+	<a href="{src}">
 		{content}
 	</a>
 </li>

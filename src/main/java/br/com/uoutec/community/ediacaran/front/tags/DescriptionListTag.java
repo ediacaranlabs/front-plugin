@@ -28,11 +28,20 @@ public class DescriptionListTag  extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((DescriptionListTag)component).getJspBody());
+					}
+				});
 			}});
 	
 	/* ------------ Attr ---------------*/
 	
 	/* ------------ Prop ---------------*/
+	
+	private JspFragmentVarParser content;
 	
 	public DescriptionListTag() {
 	}
@@ -60,11 +69,13 @@ public class DescriptionListTag  extends AbstractTag {
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
-    
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
+
+	public JspFragmentVarParser getContent() {
+		return content;
 	}
-	
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
+	}
+    
 }

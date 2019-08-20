@@ -38,7 +38,7 @@ public class CheckboxTag extends ComponentFormTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_PROPS) {{
-			add("enabled");
+			add("inline");
 		}});
 	
 	@SuppressWarnings("serial")

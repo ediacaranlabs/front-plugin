@@ -20,6 +20,18 @@ public class DropdownSeparatorTag  extends AbstractTag {
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_ATTRIBUTE_PARSERS){{
 		}});
 
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("size");
+			add("content");
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+			}});
+	
 	/* ------------ Attr ---------------*/
 	
 	/* ------------ Prop ---------------*/

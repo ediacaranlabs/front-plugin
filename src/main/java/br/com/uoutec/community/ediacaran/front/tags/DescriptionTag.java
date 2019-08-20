@@ -27,6 +27,7 @@ public class DescriptionTag  extends AbstractTag {
 			add("truncate");
 			add("titleWidth");
 			add("contentWidth");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -35,7 +36,7 @@ public class DescriptionTag  extends AbstractTag {
 				put("truncate", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return "text-truncate";
 					}
 					
@@ -44,7 +45,7 @@ public class DescriptionTag  extends AbstractTag {
 				put("titleWidth", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return value == null? 3 : value;
 					}
 					
@@ -53,10 +54,18 @@ public class DescriptionTag  extends AbstractTag {
 				put("contentWidth", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return value == null? 9 : value;
 					}
 					
+				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((DescriptionTag)component).getJspBody());
+					}
 				});
 				
 			}});
@@ -72,6 +81,8 @@ public class DescriptionTag  extends AbstractTag {
 	private Integer titleWidth;
 	
 	private Integer contentWidth;
+	
+	private JspFragmentVarParser content;
 	
 	public DescriptionTag() {
 	}
@@ -100,12 +111,6 @@ public class DescriptionTag  extends AbstractTag {
     	return DEFAULT_PROPERTY_PARSERS;
     }
     
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -136,6 +141,14 @@ public class DescriptionTag  extends AbstractTag {
 
 	public void setContentWidth(Integer contentWidth) {
 		this.contentWidth = contentWidth;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
 	
 }
