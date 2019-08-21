@@ -40,7 +40,7 @@ public class DropdownTag  extends ComponentFormTag {
 				put("style", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return " btn-" + value;
 					}
 					
@@ -49,7 +49,7 @@ public class DropdownTag  extends ComponentFormTag {
 				put("size", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return " btn-" + value;
 					}
 					
@@ -58,7 +58,7 @@ public class DropdownTag  extends ComponentFormTag {
 				put("variation", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return " drop" + value;
 					}
 					

@@ -23,24 +23,28 @@ public class FieldGroupTag  extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((FieldGroupTag)component).getJspBody());
+					}
+				});
 			}});
 	
 	/* ------------ Attr ---------------*/
 	
 	/* ------------ Prop ---------------*/
 	
-	public FieldGroupTag() {
-	}
+	private JspFragmentVarParser content;
 	
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
+	public FieldGroupTag() {
 	}
 	
     protected String getDefaultTemplate() {
@@ -66,5 +70,13 @@ public class FieldGroupTag  extends AbstractTag {
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
+	}
     
 }

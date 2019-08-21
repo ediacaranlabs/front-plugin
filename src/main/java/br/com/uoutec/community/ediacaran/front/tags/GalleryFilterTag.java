@@ -34,7 +34,7 @@ public class GalleryFilterTag  extends AbstractTag {
 				put("active", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return value != null && (Boolean)value? " active" : "";
 					}
 					
