@@ -52,13 +52,11 @@ public class GalleryImageTag  extends AbstractTag {
 	public GalleryImageTag() {
 	}
 	
-	public Map<String, Object> prepareVars() {
+	protected void afterPrepareVars(Map<String, Object> vars) {
 		GalleryTag tag = (GalleryTag) getJspContext().getAttribute(GalleryTag.PARENT);
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("cols",  tag.getCols());
-		vals.put("id",    tag.getId());
-		vals.put("index", tag.getNextImageID());
-		return vals;
+		vars.put("cols",  tag.getCols());
+		vars.put("id",    tag.getId());
+		vars.put("index", tag.getNextImageID());
 	}
 
 	protected String getDefaultTemplate() {

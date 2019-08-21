@@ -94,6 +94,10 @@ public abstract class AbstractTag extends SimpleTagSupport{
     		Writer out) throws IOException {
     }
     
+    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException {
+    }
+    
     private void applyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
 		
@@ -108,10 +112,6 @@ public abstract class AbstractTag extends SimpleTagSupport{
 		afterApplyTemplate(template, vars, out);
 		
     	setParentTag(oldParent);
-    }
-    
-    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
     }
     
     public void setParentTag(Object tag) {
@@ -203,11 +203,19 @@ public abstract class AbstractTag extends SimpleTagSupport{
 		}
 	}
 	
+	protected void beforePrepareVars(Map<String, Object> vars) {
+	}
+	
+	protected void afterPrepareVars(Map<String, Object> vars) {
+	}
+	
 	protected Map<String, Object> prepareVars() {
 		try {
-			BeanInstance i = new BeanInstance(this);
 			Map<String, AttributeParser> parsers = getPropertyParsers();
-			Map<String, Object> map = new HashMap<String, Object>();
+			Map<String, Object> map              = new HashMap<String, Object>();
+			BeanInstance i                       = new BeanInstance(this);
+			
+			this.beforePrepareVars(map);
 			
 			map.put("attr", this.getAttrList());
 			
@@ -225,6 +233,7 @@ public abstract class AbstractTag extends SimpleTagSupport{
 				}
 			}
 			
+			this.afterPrepareVars(map);
 			
 			return map;
 		}

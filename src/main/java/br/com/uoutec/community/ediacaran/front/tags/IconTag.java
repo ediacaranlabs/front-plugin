@@ -1,17 +1,73 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.jsp.JspException;
 
 public class IconTag extends AbstractTag {
 
 	public static final String TEMPLATE       = "/bootstrap4/templates/components/icon";
 	
 	public static final String TEMPLATE_STACK = "/bootstrap4/templates/components/icon-stack";
+	
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_ATTRS = 
+		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_ATTRS) {{
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_ATTRIBUTE_PARSERS){{
+		}});
+
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("size");
+			add("bgSize");
+			add("iconSize");
+			add("bg");
+			add("name");
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+
+				put("bgSize", new AttributeParserImp() {
+					
+					@Override
+					public String toName(String value, Object component) {
+						return "bg-size";
+					}
+					
+				});
+				
+				put("iconSize", new AttributeParserImp() {
+					
+					@Override
+					public String toName(String value, Object component) {
+						return "icon-size";
+					}
+					
+				});
+				
+				put("icon", new AttributeParserImp() {
+					
+					@Override
+					public String toName(String value, Object component) {
+						return "name";
+					}
+					
+				});
+				
+			}});
+	
+	/* ------------ Attr ---------------*/
+	
+	/* ------------ Prop ---------------*/
 	
 	private Integer size;
 	
@@ -25,40 +81,9 @@ public class IconTag extends AbstractTag {
 	
 	public IconTag() {
 	}
-	
-    public void doInnerTag() throws JspException, IOException{
-    	
-    	try {
-			size     = size == null? 3 : size;
-			bgSize   = bgSize == null? size - 1 : bgSize;
-			iconSize = iconSize == null? bgSize - 1 : iconSize;
-			
-			Map<String, Object> vars = new HashMap<String, Object>();
-			
-			vars.put("size", size);
-			vars.put("bg-size", bgSize);
-			vars.put("bg", bg);
-			vars.put("icon", name);
-			vars.put("icon-size", iconSize);
-			vars.put("attr", super.toAttrs());
-			
-			TemplatesManager.getTemplatesManager()
-				.apply(
-					this.getTemplate() == null? 
-							bg != null? TEMPLATE_STACK : TEMPLATE : 
-							this.getTemplate(), 
-					vars, 
-					getJspContext().getOut()
-				);
-    	}
-    	catch(Throwable e) {
-    		throw new IllegalStateException(e);
-    	}
-    	
-    }
 
     protected String getDefaultTemplate() {
-    	return TEMPLATE;
+    	return bg != null? TEMPLATE_STACK : TEMPLATE;
     }
 
     protected Set<String> getDefaultAttributes(){
@@ -82,7 +107,7 @@ public class IconTag extends AbstractTag {
     }
     
 	public Integer getSize() {
-		return size;
+		return size == null? 3 : size;
 	}
 
 	public void setSize(Integer size) {
@@ -90,7 +115,7 @@ public class IconTag extends AbstractTag {
 	}
 
 	public Integer getBgSize() {
-		return bgSize;
+		return bgSize == null? getSize() - 1 : bgSize;
 	}
 
 	public void setBgSize(Integer bgSize) {
@@ -98,7 +123,7 @@ public class IconTag extends AbstractTag {
 	}
 
 	public Integer getIconSize() {
-		return iconSize;
+		return iconSize == null? getBgSize() - 1 : iconSize;
 	}
 
 	public void setIconSize(Integer iconSize) {
