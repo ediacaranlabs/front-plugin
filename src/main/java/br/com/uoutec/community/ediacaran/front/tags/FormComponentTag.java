@@ -1,14 +1,8 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 @Deprecated
 public abstract class FormComponentTag extends BasicTag{
-
+/*
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = new HashSet<String>(BasicTag.DEFAULT_ATTRS) {{
 		add("autofocus");
@@ -163,5 +157,5 @@ public abstract class FormComponentTag extends BasicTag{
 	public void setFormtarget(String formtarget) {
 		this.formtarget = formtarget;
 	}
-    
+*/    
 }

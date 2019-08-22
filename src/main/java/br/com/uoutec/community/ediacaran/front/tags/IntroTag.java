@@ -24,6 +24,7 @@ public class IntroTag  extends AbstractTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
 			add("bgImage");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -32,11 +33,21 @@ public class IntroTag  extends AbstractTag {
 				put("bgImage", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return "background: url(" + value + ") no-repeat center center; background-size: cover;";
 					}
 					
 				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((IntroTag)component).getJspBody());
+					}
+					
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -45,13 +56,9 @@ public class IntroTag  extends AbstractTag {
 	
 	private String bgImage;
 	
-	public IntroTag() {
-	}
+	private JspFragmentVarParser content;
 	
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
+	public IntroTag() {
 	}
 	
     protected String getDefaultTemplate() {
@@ -84,6 +91,14 @@ public class IntroTag  extends AbstractTag {
 
 	public void setBgImage(String bgImage) {
 		this.bgImage = bgImage;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
     
 }

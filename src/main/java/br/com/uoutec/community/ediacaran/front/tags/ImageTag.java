@@ -34,7 +34,7 @@ public class ImageTag  extends AbstractTag {
 				put("style", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						if("rounded".equals(value)) {
 							return " rounded";
 						}
@@ -51,7 +51,7 @@ public class ImageTag  extends AbstractTag {
 				put("align", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						if("center".equals(value)) {
 							return " mx-auto d-block";
 						}

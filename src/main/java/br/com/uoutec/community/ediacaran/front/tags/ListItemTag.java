@@ -24,6 +24,7 @@ public class ListItemTag  extends AbstractTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
 			add("inline");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -32,11 +33,22 @@ public class ListItemTag  extends AbstractTag {
 				put("inline", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return value != null && (Boolean)value? "list-inline-item" : "";
 					}
 					
 				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((ListItemTag)component).getJspBody());
+					}
+					
+				});
+				
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -45,16 +57,14 @@ public class ListItemTag  extends AbstractTag {
 	
 	private Boolean inline;
 	
+	private JspFragmentVarParser content;
+	
 	public ListItemTag() {
 	}
 	
-	public Map<String, Object> prepareVars() {
+	public void beforePrepareVars(Map<String, Object> vars) {
 		ListTag list = (ListTag) getJspContext().getAttribute(ListTag.PARENT);
 		this.inline  = "inline".equals(list.getStyle());
-		
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
 	}
 	
     protected String getDefaultTemplate() {
@@ -87,6 +97,14 @@ public class ListItemTag  extends AbstractTag {
 
 	public void setInline(Boolean inline) {
 		this.inline = inline;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
 
 }

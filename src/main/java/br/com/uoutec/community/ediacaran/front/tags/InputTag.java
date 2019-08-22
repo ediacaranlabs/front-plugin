@@ -1,14 +1,8 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 @Deprecated
 public abstract class InputTag extends FormComponentTag{
-
+/*
 	public static final String ID_COUNT   = "_component_id_count";
 
 	@SuppressWarnings("serial")
@@ -385,5 +379,5 @@ public abstract class InputTag extends FormComponentTag{
 	public void setPlaceholder(String placeholder) {
 		this.placeholder = placeholder;
 	}
-    
+*/    
 }

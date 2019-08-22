@@ -26,12 +26,23 @@ public class LandingSectionTag  extends AbstractTag {
 			add("name");
 			add("title");
 			add("img");
+			add("content");
 			//add("align"); align é align-left e align-right
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((LandingSectionTag)component).getJspBody());
+					}
+					
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -46,15 +57,14 @@ public class LandingSectionTag  extends AbstractTag {
 	
 	private String align;
 	
+	private JspFragmentVarParser content;
+	
 	public LandingSectionTag() {
 	}
 	
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("align-left",  "right".equals(align)? " col-lg-offset-1 col-sm-push-6" : "" );
-		vals.put("align-right", "right".equals(align)? " col-lg-offset-2" : "col-sm-pull-6" );
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
+	public void afterPrepareVars(Map<String, Object> vars) {
+		vars.put("align-left",  "right".equals(align)? " col-lg-offset-1 col-sm-push-6" : "" );
+		vars.put("align-right", "right".equals(align)? " col-lg-offset-2" : "col-sm-pull-6" );
 	}
 	
     protected String getDefaultTemplate() {
@@ -113,5 +123,12 @@ public class LandingSectionTag  extends AbstractTag {
 		this.align = align;
 	}
 
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
+	}
 
 }
