@@ -26,6 +26,7 @@ public class MenuBarTag  extends AbstractTag {
 			add("style");
 			add("background");
 			add("position");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -34,7 +35,7 @@ public class MenuBarTag  extends AbstractTag {
 				put("style", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return value == null? null : "navbar-" + value;
 					}
 				});
@@ -42,7 +43,7 @@ public class MenuBarTag  extends AbstractTag {
 				put("background", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return value == null? null : "bg-" + value;
 					}
 				});
@@ -50,7 +51,7 @@ public class MenuBarTag  extends AbstractTag {
 				put("position", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						
 						if(value == null) {
 							return null;
@@ -68,6 +69,15 @@ public class MenuBarTag  extends AbstractTag {
 					}
 				});
 				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((MenuBarTag)component).getJspBody());
+					}
+					
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -80,13 +90,9 @@ public class MenuBarTag  extends AbstractTag {
 	
 	private String position; //top, bottom, sticky
 	
-	public MenuBarTag() {
-	}
+	private JspFragmentVarParser content;
 	
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
+	public MenuBarTag() {
 	}
 	
     protected String getDefaultTemplate() {
@@ -135,6 +141,14 @@ public class MenuBarTag  extends AbstractTag {
 
 	public void setPosition(String position) {
 		this.position = position;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
 
 }

@@ -1,13 +1,12 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.jsp.JspException;
 
 import br.com.uoutec.application.se.ApplicationBootstrapProvider;
 import br.com.uoutec.community.ediacaran.ServerBootstrap;
@@ -47,11 +46,12 @@ public class LoadDataTag  extends AbstractTag {
 	public LoadDataTag() {
 	}
 	
-    public void doInnerTag() throws JspException, IOException{
+    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException {
     	ServerBootstrap sb     = (ServerBootstrap) ApplicationBootstrapProvider.getBootstrap();
     	Map<Object,Object> dta = ReadData.loadData(file, sb.getWebapp());
     	super.getJspContext().setAttribute(var == null? "vars" : var, dta);
-    }
+	}
 	
     protected String getDefaultTemplate() {
     	return TEMPLATE;

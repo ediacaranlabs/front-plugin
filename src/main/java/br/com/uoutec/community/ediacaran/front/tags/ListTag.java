@@ -1,13 +1,12 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.jsp.JspException;
 
 public class ListTag  extends AbstractTag {
 
@@ -31,6 +30,7 @@ public class ListTag  extends AbstractTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
 			add("style");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -39,11 +39,21 @@ public class ListTag  extends AbstractTag {
 				put("style", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return value == null? null : "list-" + value;
 					}
 					
 				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((ListTag)component).getJspBody());
+					}
+					
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -52,21 +62,21 @@ public class ListTag  extends AbstractTag {
 	
 	private String style; //inline, unstyled, ordered
 	
+	private JspFragmentVarParser content;
+	
 	public ListTag() {
 	}
 	
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
-	}
-	
-    public void doTag() throws JspException, IOException {
+    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException {
     	getJspContext().setAttribute(PARENT, this);
-    	super.doTag();
+    }
+    
+    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException {
     	getJspContext().removeAttribute(PARENT);
     }
-	
+
     protected String getDefaultTemplate() {
     	return "ordered".equals(this.style)? TEMPLATE2 : TEMPLATE;
     }
@@ -97,6 +107,14 @@ public class ListTag  extends AbstractTag {
 
 	public void setStyle(String style) {
 		this.style = style;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
 
 }
