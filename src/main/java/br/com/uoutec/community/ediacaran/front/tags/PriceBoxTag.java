@@ -27,11 +27,20 @@ public class PriceBoxTag  extends AbstractTag {
 			add("terms");
 			add("action");
 			add("label");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((PriceBoxTag)component).getJspBody());
+					}
+					
+				});
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -46,13 +55,9 @@ public class PriceBoxTag  extends AbstractTag {
 	
 	private String label;
 	
-	public PriceBoxTag() {
-	}
+	private JspFragmentVarParser content;
 	
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
+	public PriceBoxTag() {
 	}
 	
     protected String getDefaultTemplate() {
@@ -109,6 +114,14 @@ public class PriceBoxTag  extends AbstractTag {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
     
 }

@@ -1,13 +1,10 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.jsp.JspException;
 
 public class OptionTag extends ComponentFormTag {
 
@@ -27,12 +24,12 @@ public class OptionTag extends ComponentFormTag {
 			put("enabled", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value) {
+				public String toName(String value, Object component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value) {
+				public Object toValue(Object value, Object component) {
 					return value != null && !(Boolean)value? "" : "disabled";
 				}
 				
@@ -41,18 +38,37 @@ public class OptionTag extends ComponentFormTag {
 			put("selected", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value) {
+				public String toName(String value, Object component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value) {
+				public Object toValue(Object value, Object component) {
 					return value != null && (Boolean)value? "selected" : "";
 				}
 				
 			});
 			
 		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("content");
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((OptionTag)component).getJspBody());
+					}
+					
+				});
+			}});
 	
 	/* ------------ Attr ---------------*/
 	
@@ -62,27 +78,11 @@ public class OptionTag extends ComponentFormTag {
 	
 	/* ------------ Prop ---------------*/
 
+	private JspFragmentVarParser content;
+	
 	public OptionTag() {
 	}
 	
-	@Override
-	public void doInnerTag() throws JspException, IOException {
-    	
-    	try {
-			Map<String, Object> vars = new HashMap<String, Object>();
-			
-			vars.put("attr",    super.toAttrs());
-			vars.put("content", new JspFragmentVarParser(getJspBody()));
-			
-			TemplatesManager.getTemplatesManager()
-				.apply(this.getTemplate() == null? TEMPLATE : this.getTemplate(), vars, getJspContext().getOut());
-    	}
-    	catch(Throwable e) {
-    		throw new IllegalStateException(e);
-    	}
-    	
-    }
-
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }
@@ -121,6 +121,14 @@ public class OptionTag extends ComponentFormTag {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
 
 }

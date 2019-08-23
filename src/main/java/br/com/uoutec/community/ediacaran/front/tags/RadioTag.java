@@ -26,12 +26,12 @@ public class RadioTag extends ComponentFormTag {
 			put("selected", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value) {
+				public String toName(String value, Object component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value) {
+				public Object toValue(Object value, Object component) {
 					return value != null && (Boolean)value? "checked" : "";
 				}
 			});

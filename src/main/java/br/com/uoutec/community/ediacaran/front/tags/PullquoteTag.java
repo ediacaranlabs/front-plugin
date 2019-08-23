@@ -24,6 +24,7 @@ public class PullquoteTag  extends AbstractTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
 			add("align");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -32,11 +33,21 @@ public class PullquoteTag  extends AbstractTag {
 				put("align", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return "pullquote-" + (value == null? "left" : value);
 					}
 					
 				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((PullquoteTag)component).getJspBody());
+					}
+					
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -45,13 +56,9 @@ public class PullquoteTag  extends AbstractTag {
 	
 	private String align;
 	
-	public PullquoteTag() {
-	}
+	private JspFragmentVarParser content;
 	
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
+	public PullquoteTag() {
 	}
 	
     protected String getDefaultTemplate() {
@@ -84,6 +91,14 @@ public class PullquoteTag  extends AbstractTag {
 
 	public void setAlign(String align) {
 		this.align = align;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
 
 }

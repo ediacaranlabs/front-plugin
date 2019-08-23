@@ -24,6 +24,7 @@ public class PrettifyTag  extends AbstractTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
 			add("linenums");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -32,11 +33,21 @@ public class PrettifyTag  extends AbstractTag {
 				put("linenums", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return value != null && (Boolean)value? " linenums" : "";
 					}
 					
 				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((PrettifyTag)component).getJspBody());
+					}
+					
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -45,13 +56,9 @@ public class PrettifyTag  extends AbstractTag {
 	
 	private Boolean linenums;
 	
-	public PrettifyTag() {
-	}
+	private JspFragmentVarParser content;
 	
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new EscapeVarParser(getJspBody()));
-		return vals;
+	public PrettifyTag() {
 	}
 	
     protected String getDefaultTemplate() {
@@ -84,6 +91,14 @@ public class PrettifyTag  extends AbstractTag {
 
 	public void setLinenums(Boolean linenums) {
 		this.linenums = linenums;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
     
 }
