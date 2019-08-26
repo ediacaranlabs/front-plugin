@@ -36,7 +36,7 @@ public class BreadcrumbPathTag extends AbstractTag {
 				put("icon", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return value == null? null : new TemplateVarParser(TEMPLATE_ICON).put("icon", value).put("size", 1);
 					}
 				});

@@ -23,6 +23,8 @@ public class TableTag  extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("style");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -31,15 +33,25 @@ public class TableTag  extends AbstractTag {
 				put("style", new AttributeParserImp() {
 					
 					@Override
-					public String toName(String value) {
+					public String toName(String value, Object component) {
 						return null;
 					}
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return value == null? "" : "table-" + value;
 					}
 				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((TableTag)component).getJspBody());
+					}
+					
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -48,13 +60,9 @@ public class TableTag  extends AbstractTag {
 	
 	private String style;
 	
-	public TableTag() {
-	}
+	private JspFragmentVarParser content;
 	
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
+	public TableTag() {
 	}
 	
     protected String getDefaultTemplate() {
@@ -87,6 +95,14 @@ public class TableTag  extends AbstractTag {
 
 	public void setStyle(String style) {
 		this.style = style;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
 
 }

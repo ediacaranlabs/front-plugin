@@ -22,12 +22,12 @@ public class TableRowTag  extends AbstractTag {
 			put("size", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value) {
+				public String toName(String value, Object component) {
 					return "rowspan";
 				}
 				
 				@Override
-				public Object toValue(Object value) {
+				public Object toValue(Object value, Object component) {
 					return value != null && (Integer)value > 1 ? (Integer)value - 1: "";
 				}
 			});
@@ -36,11 +36,20 @@ public class TableRowTag  extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_PROPERTY_PARSERS){{
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((TableRowTag)component).getJspBody());
+					}
+					
+				});
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -49,13 +58,9 @@ public class TableRowTag  extends AbstractTag {
 	
 	/* ------------ Prop ---------------*/
 	
-	public TableRowTag() {
-	}
+	private JspFragmentVarParser content;
 	
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
+	public TableRowTag() {
 	}
 	
     protected String getDefaultTemplate() {
@@ -90,5 +95,12 @@ public class TableRowTag  extends AbstractTag {
 		this.size = size;
 	}
 
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
+	}
 
 }

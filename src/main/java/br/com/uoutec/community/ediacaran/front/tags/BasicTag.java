@@ -38,7 +38,7 @@ public class BasicTag extends AbstractTag{
 				put("classType", new AttributeParserImp() {
 					
 					@Override
-					public String toName(String value) {
+					public String toName(String value, Object component) {
 						return value == null? null : "class";
 					}
 					
@@ -47,7 +47,7 @@ public class BasicTag extends AbstractTag{
 				put("draggable", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return value != null && (Boolean)value? "true" : "false";
 					}
 				});

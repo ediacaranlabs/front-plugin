@@ -40,6 +40,7 @@ public class RadioTag extends ComponentFormTag {
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_PROPS) {{
 			add("label");
 			add("inline");
+			add("enabled");
 		}});
 	
 	@SuppressWarnings("serial")
