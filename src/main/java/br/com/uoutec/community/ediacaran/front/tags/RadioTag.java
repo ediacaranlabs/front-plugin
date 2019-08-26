@@ -1,13 +1,10 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.jsp.JspException;
 
 public class RadioTag extends ComponentFormTag {
 
@@ -38,6 +35,45 @@ public class RadioTag extends ComponentFormTag {
 			
 		}});
 	
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_PROPS) {{
+			add("label");
+			add("inline");
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_PROPERTY_PARSERS){{
+				put("enalbed", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						Boolean enabled = ((RadioTag)component).getEnabled();
+						return enabled != null && !enabled? " uneditable-input" : "";
+					}
+					
+				});
+				
+				put("inline", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return value != null && (Boolean)value? " form-check-inline" : "";
+					}
+					
+				});
+				
+				put("label", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return value == null? new JspFragmentVarParser(((RadioTag)component).getJspBody()) : value;
+					}
+					
+				});
+			}});
+	
 	/* ------------ Attr ---------------*/
 	
 	private Boolean selected;
@@ -52,27 +88,6 @@ public class RadioTag extends ComponentFormTag {
 		setComponentType("radio");
 	}
 	
-	@Override
-	public void doInnerTag() throws JspException, IOException {
-    	
-    	try {
-			Map<String, Object> vars = new HashMap<String, Object>();
-			
-			vars.put("enalbed", this.getEnabled() != null && !this.getEnabled()? " uneditable-input" : "");
-			vars.put("inline",  inline != null && inline? " form-check-inline" : "");
-			vars.put("label",   label == null? new JspFragmentVarParser(getJspBody()) : label);
-			vars.put("name",    super.getName());
-			vars.put("attr",    super.toAttrs());
-			
-			TemplatesManager.getTemplatesManager()
-				.apply(this.getTemplate() == null? TEMPLATE : this.getTemplate(), vars, getJspContext().getOut());
-    	}
-    	catch(Throwable e) {
-    		throw new IllegalStateException(e);
-    	}
-    	
-    }
-
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }

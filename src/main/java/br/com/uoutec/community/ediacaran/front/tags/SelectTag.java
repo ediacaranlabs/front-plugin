@@ -1,13 +1,12 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.jsp.JspException;
 
 public class SelectTag extends ComponentFormTag {
 
@@ -30,12 +29,12 @@ public class SelectTag extends ComponentFormTag {
 			put("readonly", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value) {
+				public String toName(String value, Object component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value) {
+				public Object toValue(Object value, Object component) {
 					return value != null && (Boolean)value? "readonly" : "";
 				}
 				
@@ -44,12 +43,12 @@ public class SelectTag extends ComponentFormTag {
 			put("required", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value) {
+				public String toName(String value, Object component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value) {
+				public Object toValue(Object value, Object component) {
 					return value != null && (Boolean)value? "required" : "";
 				}
 				
@@ -58,7 +57,7 @@ public class SelectTag extends ComponentFormTag {
 			put("sizeList", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value) {
+				public String toName(String value, Object component) {
 					return value == null? null : "size";
 				}
 				
@@ -67,18 +66,50 @@ public class SelectTag extends ComponentFormTag {
 			put("multiple", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value) {
+				public String toName(String value, Object component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value) {
+				public Object toValue(Object value, Object component) {
 					return value != null && (Boolean)value? "multiple" : "";
 				}
 				
 			});
 			
 		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_PROPS) {{
+			add("label");
+			add("inline");
+			add("size");
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_PROPERTY_PARSERS){{
+				put("enalbed", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						Boolean enabled = ((RadioTag)component).getEnabled();
+						return enabled != null && !enabled? " uneditable-input" : "";
+					}
+					
+				});
+				
+				put("size", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return value != null? new String("form-control-").concat((String)value) : "";
+					}
+					
+				});
+				
+			}});
 	
 	/* ------------ Attr ---------------*/
 	
@@ -101,28 +132,11 @@ public class SelectTag extends ComponentFormTag {
 	public SelectTag() {
 	}
 	
-	@Override
-	public void doInnerTag() throws JspException, IOException {
-    	
-    	try {
-			Map<String, Object> vars = new HashMap<String, Object>();
-			
-			vars.put("enabled", this.getEnabled() != null && !this.getEnabled()? " uneditable-input" : "");
-			vars.put("label",   label);
-			vars.put("empty",   label == null? "sr-only" : null);
-			vars.put("name",    super.getName());
-			vars.put("size",    size != null? new String("form-control-").concat(size) : "");
-			vars.put("attr",    super.toAttrs());
-			
-			TemplatesManager.getTemplatesManager()
-				.apply(this.getTemplate() == null? TEMPLATE : this.getTemplate(), vars, getJspContext().getOut());
-    	}
-    	catch(Throwable e) {
-    		throw new IllegalStateException(e);
-    	}
-    	
+    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException {
+		vars.put("empty",   label == null? "sr-only" : null);
     }
-
+	
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }
