@@ -1,5 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,6 +25,9 @@ public class SideBarTag  extends AbstractTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_PROPS) {{
+			add("size");
+			add("align");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -31,15 +36,25 @@ public class SideBarTag  extends AbstractTag {
 				put("size", new AttributeParserImp() {
 					
 					@Override
-					public String toName(String value) {
+					public String toName(String value, Object component) {
 						return null;
 					}
 					
 					@Override
-					public Object toValue(Object value) {
+					public Object toValue(Object value, Object component) {
 						return value == null? "col-lg-1 col-xl-1" : "col-lg-" + value + " col-xl-" + value;
 					}
 				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((SideBarTag)component).getJspBody());
+					}
+					
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -50,16 +65,16 @@ public class SideBarTag  extends AbstractTag {
 	
 	private String align;
 	
+	private JspFragmentVarParser content;
+	
 	public SideBarTag() {
 	}
 	
-	public Map<String, Object> prepareVars() {
+    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException {
 		int offset = "right".equalsIgnoreCase(this.align)? (this.size == null? 11 : 12 - this.size) : -1; 
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		vals.put("offset", offset <= 0? "" : "offset-lg-" + offset + " offset-xl-" + offset);
-		return vals;
-	}
+		vars.put("offset", offset <= 0? "" : "offset-lg-" + offset + " offset-xl-" + offset);
+    }
 	
     protected String getDefaultTemplate() {
     	return TEMPLATE;
@@ -84,5 +99,29 @@ public class SideBarTag  extends AbstractTag {
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
+
+	public Integer getSize() {
+		return size;
+	}
+
+	public void setSize(Integer size) {
+		this.size = size;
+	}
+
+	public String getAlign() {
+		return align;
+	}
+
+	public void setAlign(String align) {
+		this.align = align;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
+	}
 
 }
