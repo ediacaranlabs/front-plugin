@@ -90,7 +90,7 @@ public class SelectTag extends ComponentFormTag {
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_PROPERTY_PARSERS){{
-				put("enalbed", new AttributeParserImp() {
+				put("enabled", new AttributeParserImp() {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
