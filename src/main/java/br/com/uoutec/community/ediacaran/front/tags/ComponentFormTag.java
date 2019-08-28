@@ -12,7 +12,7 @@ import javax.servlet.jsp.JspException;
 
 import br.com.uoutec.community.ediacaran.front.StringPattern;
 
-public abstract class ComponentFormTag extends AbstractTag {
+public abstract class ComponentFormTag extends AbstractSimpleTag {
 
 	public static final String TEMPLATE = "bootstrap4/templates/components/form-group";
 	
@@ -20,7 +20,7 @@ public abstract class ComponentFormTag extends AbstractTag {
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_ATTRS) {{
+		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_ATTRS) {{
 			add("name");
 			add("value");
 			add("enabled");
@@ -30,7 +30,7 @@ public abstract class ComponentFormTag extends AbstractTag {
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_ATTRIBUTE_PARSERS){{
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_ATTRIBUTE_PARSERS){{
 			
 			put("enabled", new AttributeParserImp() {
 				

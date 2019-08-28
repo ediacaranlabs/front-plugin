@@ -9,11 +9,11 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-public class BasicTag extends AbstractTag{
+public class BasicTag extends AbstractSimpleTag{
 
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_ATTRS) {{
+		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_ATTRS) {{
 			add("accesskey");
 			add("classType");   
 			add("contenteditable");
@@ -29,11 +29,11 @@ public class BasicTag extends AbstractTag{
 		}});
 
 	protected static final Set<String> DEFAULT_EMPTY_ATTRIBUTES = 
-			Collections.unmodifiableSet(new HashSet<String>(AbstractTag.DEFAULT_EMPTY_ATTRIBUTES));
+			Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_EMPTY_ATTRIBUTES));
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractTag.DEFAULT_ATTRIBUTE_PARSERS){{
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_ATTRIBUTE_PARSERS){{
 				
 				put("classType", new AttributeParserImp() {
 					

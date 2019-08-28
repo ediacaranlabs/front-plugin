@@ -13,7 +13,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
-public abstract class AbstractTag extends SimpleTagSupport{
+public abstract class AbstractSimpleTag extends SimpleTagSupport{
 
 	public static final String WRAPPER_TEMPLATE		= "bootstrap4/templates/components/wrapper";
 	
@@ -21,7 +21,7 @@ public abstract class AbstractTag extends SimpleTagSupport{
 
 	public static final String ATTR_FORMAT			= "([a-z-_]+)=([^\\;]+)";
 
-	public static final String PARENT_TAG			= AbstractTag.class.getSimpleName() + ":parent";
+	public static final String PARENT_TAG			= AbstractSimpleTag.class.getSimpleName() + ":parent";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

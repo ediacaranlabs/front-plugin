@@ -40,7 +40,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 				put("classStyle", new AttributeParserImp() {
 					
 					@Override
-					public String toName(String value) {
+					public String toName(String value, Object component) {
 						return value == null? null : "class";
 					}
 				});
@@ -68,14 +68,22 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 	
 	private boolean wrapper;
 	
-    public void doTag() throws JspException, IOException {
-    	if(!wrapper)
-	    	doInnerTag();
-    	else
-    		doWrapperTag();
+    public int doAfterBody() throws JspException {
+    	try {
+	    	
+    		if(!wrapper)
+	    		doInnerAfterBody();
+	    	else
+	    		doWrapperAfterBody();
+	    	
+	    	return SKIP_BODY;
+    	}
+    	catch(Throwable e) {
+    		throw new JspException(e);
+    	}
     }
 	
-    protected void doWrapperTag() throws JspException, IOException{
+    protected void doWrapperAfterBody() throws IOException{
     	
 		Map<String, Object> tagVars = prepareVars();
 		Map<String, Object> vars = new HashMap<String, Object>();
@@ -83,15 +91,19 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 		vars.putAll(tagVars);
 		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars));
 		
-		applyTemplate(getWrapperTemplate(), vars, getJspContext().getOut());
+		applyTemplate(getWrapperTemplate(), vars, getBodyContent().getEnclosingWriter());
     }
     
-    protected void doInnerTag() throws JspException, IOException{
+    protected void doInnerAfterBody() throws IOException {
 		Map<String, Object> vars = prepareVars();
-		applyTemplate(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars, getJspContext().getOut() );
+		applyTemplate(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars, getBodyContent().getEnclosingWriter());
     }
     
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException {
+    }
+    
+    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
     }
     
@@ -109,10 +121,6 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 		afterApplyTemplate(template, vars, out);
 		
     	setParentTag(oldParent);
-    }
-    
-    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
     }
     
     public void setParentTag(Object tag) {
@@ -176,8 +184,8 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 				
 				AttributeParser parser = parsers.get(p);
 				
-				p = parser == null? p : parser.toName(p);
-				v = parser == null? v : parser.toValue(v);
+				p = parser == null? p : parser.toName(p, this);
+				v = parser == null? v : parser.toValue(v, this);
 				
 				if(p != null) {
 					sb.append(p).append("=\"").append(v).append("\"");
@@ -204,11 +212,19 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 		}
 	}
 	
+	protected void beforePrepareVars(Map<String, Object> vars) {
+	}
+	
+	protected void afterPrepareVars(Map<String, Object> vars) {
+	}
+	
 	protected Map<String, Object> prepareVars() {
 		try {
-			BeanInstance i = new BeanInstance(this);
 			Map<String, AttributeParser> parsers = getPropertyParsers();
-			Map<String, Object> map = new HashMap<String, Object>();
+			Map<String, Object> map              = new HashMap<String, Object>();
+			BeanInstance i                       = new BeanInstance(this);
+			
+			this.beforePrepareVars(map);
 			
 			map.put("attr", this.getAttrList());
 			
@@ -218,14 +234,15 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 				
 				AttributeParser parser = parsers.get(k);
 				
-				k = parser == null? k : parser.toName(k);
-				v = parser == null? v : parser.toValue(v);
+				k = parser == null? k : parser.toName(k, this);
+				v = parser == null? v : parser.toValue(v, this);
 				
 				if(k != null && !k.isEmpty()) {
 					map.put(k, v);
 				}
 			}
 			
+			this.afterPrepareVars(map);
 			
 			return map;
 		}
@@ -295,5 +312,5 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 	public void setClassStyle(String classStyle) {
 		this.classStyle = classStyle;
 	}
-	
+    
 }
