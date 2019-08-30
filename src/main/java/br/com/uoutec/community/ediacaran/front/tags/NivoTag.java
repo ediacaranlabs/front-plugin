@@ -2,6 +2,9 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -32,22 +35,47 @@ public class NivoTag extends AbstractBodyTag {
 			"						</div>\r\n"
 		);
 
-	private static final StringPattern NIVO_TEMPLATE = new StringPattern(
-			"	<!-- Slider -->\r\n" + 
-			"	<div>\r\n" + 
-			"		<div class=\"nivo-slider\">\r\n" +
-			"           {images}\r\n" +
-			"		</div>\r\n" + 
-			"		<div class=\"container\">\r\n" + 
-			"			<div class=\"row\">\r\n" + 
-			"				<div class=\"col-12\">\r\n" + 
-			"                    {captions}\r\n" +
-			"				</div>\r\n" + 
-			"			</div>\r\n" + 
-			"		</div>\r\n" + 
-			"	</div>\r\n" + 
-			"	<!-- end slider -->\r\n"
-		);
+	public static final String TEMPLATE  = "/bootstrap4/templates/components/gallery-filter";
+	
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_ATTRS = 
+		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_ATTRS) {{
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_ATTRIBUTE_PARSERS){{
+		}});
+
+	@SuppressWarnings("serial")
+	protected static final Set<String> DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
+			add("bgImage");
+			add("content");
+		}});
+	
+	@SuppressWarnings("serial")
+	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_PROPERTY_PARSERS){{
+				put("bgImage", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return "background: url(" + value + ") no-repeat center center; background-size: cover;";
+					}
+					
+				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((IntroTag)component).getJspBody());
+					}
+					
+				});
+				
+			}});
 	
 	private List<Object[]> itens;
 

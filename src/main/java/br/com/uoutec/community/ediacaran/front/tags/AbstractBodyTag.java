@@ -10,7 +10,6 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
@@ -70,7 +69,6 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 	
     public int doAfterBody() throws JspException {
     	try {
-	    	
     		if(!wrapper)
 	    		doInnerAfterBody();
 	    	else
@@ -252,8 +250,8 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 	}
 	
     protected Object setProperty(String name, Object newValue) {
-		Object old = this.getJspContext().getAttribute(name);
-		this.getJspContext().setAttribute(name, newValue);
+		Object old = pageContext.getAttribute(name);
+		pageContext.setAttribute(name, newValue);
     	return old;
     }
 
@@ -262,7 +260,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     }
     
     protected Object getProperty(String name, Object defaultValue) {
-		Object val = this.getJspContext().getAttribute(name);
+		Object val = pageContext.getAttribute(name);
     	return val == null? defaultValue : val;
     }
     
@@ -275,10 +273,9 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 	}
 
 	public String getId() {
-		
 		if(id == null) {
-			Integer acc = (Integer) this.getJspContext().getAttribute(ID_COUNT);
-			getJspContext().setAttribute(ID_COUNT, acc = acc == null? 0 : acc.intValue() + 1);
+			Integer acc = (Integer) pageContext.getAttribute(ID_COUNT);
+			pageContext.setAttribute(ID_COUNT, acc = acc == null? 0 : acc.intValue() + 1);
 			return id = String.valueOf(acc);
 		}
 		
