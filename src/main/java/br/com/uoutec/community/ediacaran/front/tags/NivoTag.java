@@ -18,10 +18,7 @@ public class NivoTag extends AbstractBodyTag {
 
 	private static final long serialVersionUID = 748182107582888257L;
 
-	private static final StringPattern NIVO_IMAGE_TEMPLATE = new StringPattern(
-			"				<img src=\"{image}\" alt=\"{alt}\"\r\n" + 
-			"					title=\"#caption-{count}\" />\r\n"
-		);
+	private static final String NIVO_IMAGE = "/bootstrap4/templates/components/nivo-image";
 	
 	private static final StringPattern NIVO_CAPTION_TEMPLATE = new StringPattern(
 			"						<div class=\"nivo-caption\" id=\"caption-{count}\">\r\n" + 
@@ -104,6 +101,13 @@ public class NivoTag extends AbstractBodyTag {
 
 			JspWriter out = bodyContent.getEnclosingWriter();
 			out.write(NIVO_TEMPLATE.toString(images,caption));
+			
+			
+			new TemplateVarParser(TEMPLATE)
+				.put(
+					"images", new TemplateVarParser(NIVO_IMAGE)
+				);
+
 		} 
 		catch (IOException e) {
 			throw new IllegalStateException(e);
