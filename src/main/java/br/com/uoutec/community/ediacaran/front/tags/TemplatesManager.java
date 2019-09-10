@@ -80,6 +80,19 @@ public class TemplatesManager {
 		p.toWriter(out, vars);
 	}
 
+	public void apply(String template, Writer out, Object ... vars) throws IOException {
+		
+		StringPattern p = getTemplate(template);
+		
+		if(p == null) {
+			synchronized(TemplatesManager.class) {
+				addtemplate(template, template);
+			}
+		}
+		
+		p.toWriter(out, vars);
+	}
+	
 	public void removetemplate(String name){
 		templates.remove(name);
 	}

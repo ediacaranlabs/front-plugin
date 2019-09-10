@@ -1,7 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -50,17 +49,7 @@ public class NivoItemTag extends AbstractSimpleTag {
     	JspTag parent = super.getParent();
     	
     	if(parent instanceof NivoTag) {
-    		StringWriter sw = new StringWriter();
-    		
-    		getJspBody().invoke(sw);
-    		
-    		((NivoTag)parent)
-    			.getItens().add(new Object[] {
-    				this.image,
-    				this.title,
-    				this.link,
-    				sw
-    			});
+    		((NivoTag)parent).add(this.image, this.title, this.link);
     	}
     	
     }
