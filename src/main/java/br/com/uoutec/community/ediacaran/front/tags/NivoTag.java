@@ -9,11 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.BodyTagSupport;
-
-import br.com.uoutec.community.ediacaran.front.StringPattern;
-
 public class NivoTag extends AbstractBodyTag {
 
 	private static final long serialVersionUID = 748182107582888257L;
@@ -39,31 +34,12 @@ public class NivoTag extends AbstractBodyTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
-			add("bgImage");
-			add("content");
+			add("button");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_PROPERTY_PARSERS){{
-				put("bgImage", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						return "background: url(" + value + ") no-repeat center center; background-size: cover;";
-					}
-					
-				});
-				
-				put("content", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						return new JspFragmentVarParser(((NivoTag)component).getBodyContent());
-					}
-					
-				});
-				
 			}});
 	
 	private List<Object[]> images;
