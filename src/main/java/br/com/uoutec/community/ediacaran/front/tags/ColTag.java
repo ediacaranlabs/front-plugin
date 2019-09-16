@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class ColTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/designer/col";
+	public static final String TEMPLATE  = "/bootstrap4/designer/col";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

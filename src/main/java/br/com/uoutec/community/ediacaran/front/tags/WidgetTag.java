@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class WidgetTag  extends ComponentFormTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/widget";
+	public static final String TEMPLATE  = "/bootstrap4/components/widget";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

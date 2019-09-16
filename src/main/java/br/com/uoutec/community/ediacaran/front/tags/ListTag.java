@@ -10,9 +10,9 @@ import java.util.Set;
 
 public class ListTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE   = "/bootstrap4/templates/components/list";
+	public static final String TEMPLATE   = "/bootstrap4/components/list";
 	
-	public static final String TEMPLATE2  = "/bootstrap4/templates/components/ordered-list";
+	public static final String TEMPLATE2  = "/bootstrap4/components/ordered-list";
 	
 	public static final String PARENT = ListTag.class.getSimpleName() + ":PARENT";
 	

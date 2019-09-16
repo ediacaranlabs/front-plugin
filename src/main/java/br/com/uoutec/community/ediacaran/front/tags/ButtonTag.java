@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class ButtonTag extends ComponentFormTag {
 
-	public static final String TEMPLATE = "/bootstrap4/templates/components/button";
+	public static final String TEMPLATE = "/bootstrap4/components/button";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

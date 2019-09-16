@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class FormTag extends AbstractSimpleTag {
 
-	public static final String TEMPLATE = "/bootstrap4/templates/components/form";
+	public static final String TEMPLATE = "/bootstrap4/components/form";
 	
 	public static final String FORM = FormTag.class.getSimpleName() + ":form";
 	

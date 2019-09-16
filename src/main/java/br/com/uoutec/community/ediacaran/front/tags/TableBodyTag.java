@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class TableBodyTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/table-body";
+	public static final String TEMPLATE  = "/bootstrap4/components/table-body";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

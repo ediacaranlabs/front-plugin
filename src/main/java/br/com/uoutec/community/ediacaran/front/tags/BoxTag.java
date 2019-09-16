@@ -11,7 +11,7 @@ import javax.servlet.jsp.JspException;
 
 public class BoxTag extends AbstractSimpleTag {
 
-	public static final String TEMPLATE = "/bootstrap4/templates/components/box";
+	public static final String TEMPLATE = "/bootstrap4/components/box";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

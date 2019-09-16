@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class FieldGroupTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/field-group";
+	public static final String TEMPLATE  = "/bootstrap4/components/field-group";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

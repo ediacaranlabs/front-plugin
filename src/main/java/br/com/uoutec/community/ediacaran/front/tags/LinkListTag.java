@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class LinkListTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/link-list";
+	public static final String TEMPLATE  = "/bootstrap4/components/link-list";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

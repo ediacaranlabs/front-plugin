@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class LandingSectionTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/landing-section";
+	public static final String TEMPLATE  = "/bootstrap4/components/landing-section";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

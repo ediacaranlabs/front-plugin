@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class TextfieldTag extends ComponentFormTag {
 
-	public static final String TEMPLATE = "/bootstrap4/templates/components/textfield";
+	public static final String TEMPLATE = "/bootstrap4/components/textfield";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

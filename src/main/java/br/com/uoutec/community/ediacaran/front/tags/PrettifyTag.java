@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class PrettifyTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/prettify";
+	public static final String TEMPLATE  = "/bootstrap4/components/prettify";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

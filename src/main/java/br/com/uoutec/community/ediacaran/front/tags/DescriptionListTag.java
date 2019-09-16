@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class DescriptionListTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/description-list";
+	public static final String TEMPLATE  = "/bootstrap4/components/description-list";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

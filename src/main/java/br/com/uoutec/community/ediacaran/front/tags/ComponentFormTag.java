@@ -14,7 +14,7 @@ import br.com.uoutec.community.ediacaran.front.StringPattern;
 
 public abstract class ComponentFormTag extends AbstractSimpleTag {
 
-	public static final String TEMPLATE = "bootstrap4/templates/components/form-group";
+	public static final String TEMPLATE = "bootstrap4/components/form-group";
 	
 	public static final String FORM = ComponentFormTag.class.getSimpleName() + ":form";
 	

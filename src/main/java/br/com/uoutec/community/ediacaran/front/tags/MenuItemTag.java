@@ -8,9 +8,9 @@ import java.util.Set;
 
 public class MenuItemTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/menu-item";
+	public static final String TEMPLATE  = "/bootstrap4/components/menu-item";
 	
-	public static final String TEMPLATE2  = "/bootstrap4/templates/components/menu-bar-item";
+	public static final String TEMPLATE2  = "/bootstrap4/components/menu-bar-item";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

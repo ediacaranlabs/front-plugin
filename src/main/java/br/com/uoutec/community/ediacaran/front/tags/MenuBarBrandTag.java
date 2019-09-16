@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class MenuBarBrandTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/menu-bar-brand";
+	public static final String TEMPLATE  = "/bootstrap4/components/menu-bar-brand";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

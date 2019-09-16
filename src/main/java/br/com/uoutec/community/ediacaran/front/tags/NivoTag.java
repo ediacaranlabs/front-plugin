@@ -15,11 +15,11 @@ public class NivoTag extends AbstractBodyTag {
 
 	private static final String EMPTY_IMG_ALT = "";
 	
-	private static final String NIVO_IMAGE = "/bootstrap4/templates/components/nivo-image";
+	private static final String NIVO_IMAGE = "/bootstrap4/components/nivo-image";
 	
-	private static final String NIVO_CAPTION = "/bootstrap4/templates/components/nivo-caption";
+	private static final String NIVO_CAPTION = "/bootstrap4/components/nivo-caption";
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/nivo";
+	public static final String TEMPLATE  = "/bootstrap4/components/nivo";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

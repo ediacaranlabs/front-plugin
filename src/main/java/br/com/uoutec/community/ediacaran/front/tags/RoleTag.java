@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class RoleTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/role";
+	public static final String TEMPLATE  = "/bootstrap4/components/role";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

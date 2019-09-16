@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class SeparatorTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/separator";
+	public static final String TEMPLATE  = "/bootstrap4/components/separator";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

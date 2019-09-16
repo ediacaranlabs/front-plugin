@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class DropdownSeparatorTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/dropdown-separator";
+	public static final String TEMPLATE  = "/bootstrap4/components/dropdown-separator";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

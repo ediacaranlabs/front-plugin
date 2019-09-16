@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class GalleryImagesTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/gallery-images";
+	public static final String TEMPLATE  = "/bootstrap4/components/gallery-images";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

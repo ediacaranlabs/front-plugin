@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class FlexsliderItemTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/flexslider-item";
+	public static final String TEMPLATE  = "/bootstrap4/components/flexslider-item";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

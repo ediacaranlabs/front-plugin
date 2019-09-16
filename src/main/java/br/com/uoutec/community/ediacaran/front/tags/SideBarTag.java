@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class SideBarTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/sidebar";
+	public static final String TEMPLATE  = "/bootstrap4/components/sidebar";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

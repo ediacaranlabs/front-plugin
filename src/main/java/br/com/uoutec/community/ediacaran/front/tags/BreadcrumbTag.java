@@ -11,7 +11,7 @@ import javax.servlet.jsp.JspException;
 
 public class BreadcrumbTag extends AbstractSimpleTag {
 
-	public static final String TEMPLATE = "/bootstrap4/templates/components/breadcrumb";
+	public static final String TEMPLATE = "/bootstrap4/components/breadcrumb";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

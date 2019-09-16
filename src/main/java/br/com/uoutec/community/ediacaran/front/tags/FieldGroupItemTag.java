@@ -8,9 +8,9 @@ import java.util.Set;
 
 public class FieldGroupItemTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/field-group-item";
+	public static final String TEMPLATE  = "/bootstrap4/components/field-group-item";
 	
-	public static final String TEMPLATE2  = "/bootstrap4/templates/components/content";
+	public static final String TEMPLATE2  = "/bootstrap4/components/content";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

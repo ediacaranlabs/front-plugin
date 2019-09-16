@@ -11,7 +11,7 @@ import javax.servlet.jsp.JspException;
 
 public class AccordionTag extends AbstractSimpleTag {
 
-	public static final String TEMPLATE = "/bootstrap4/templates/components/accordion";
+	public static final String TEMPLATE = "/bootstrap4/components/accordion";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class IntroTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/intro";
+	public static final String TEMPLATE  = "/bootstrap4/components/intro";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

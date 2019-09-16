@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class PrependFieldTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/prepend-field";
+	public static final String TEMPLATE  = "/bootstrap4/components/prepend-field";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

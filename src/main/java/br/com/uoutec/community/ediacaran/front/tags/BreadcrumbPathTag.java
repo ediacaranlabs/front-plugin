@@ -8,9 +8,9 @@ import java.util.Set;
 
 public class BreadcrumbPathTag extends AbstractSimpleTag {
 
-	public static final String TEMPLATE = "/bootstrap4/templates/components/breadcrumb-path";
+	public static final String TEMPLATE = "/bootstrap4/components/breadcrumb-path";
 	
-	public static final String TEMPLATE_ICON = "/bootstrap4/templates/components/icon";
+	public static final String TEMPLATE_ICON = "/bootstrap4/components/icon";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

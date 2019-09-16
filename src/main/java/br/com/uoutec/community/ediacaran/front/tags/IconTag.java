@@ -8,9 +8,9 @@ import java.util.Set;
 
 public class IconTag extends AbstractSimpleTag {
 
-	public static final String TEMPLATE       = "/bootstrap4/templates/components/icon";
+	public static final String TEMPLATE       = "/bootstrap4/components/icon";
 	
-	public static final String TEMPLATE_STACK = "/bootstrap4/templates/components/icon-stack";
+	public static final String TEMPLATE_STACK = "/bootstrap4/components/icon-stack";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

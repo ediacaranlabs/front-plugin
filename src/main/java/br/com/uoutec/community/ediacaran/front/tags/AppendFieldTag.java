@@ -11,7 +11,7 @@ import javax.servlet.jsp.JspException;
 
 public class AppendFieldTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/append-field";
+	public static final String TEMPLATE  = "/bootstrap4/components/append-field";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

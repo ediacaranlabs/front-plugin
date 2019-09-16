@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class GalleryTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/gallery";
+	public static final String TEMPLATE  = "/bootstrap4/components/gallery";
 	
 	public static final String PARENT = GalleryTag.class.getSimpleName() + ":PARENT";
 	

@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class MenuBodyTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/menu-body";
+	public static final String TEMPLATE  = "/bootstrap4/components/menu-body";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

@@ -8,9 +8,9 @@ import java.util.Set;
 
 public class BlockquoteTag extends AbstractSimpleTag {
 
-	public static final String TEMPLATE      = "/bootstrap4/templates/components/blockquote";
+	public static final String TEMPLATE      = "/bootstrap4/components/blockquote";
 	
-	public static final String CITE_TEMPLATE = "/bootstrap4/templates/components/cite";
+	public static final String CITE_TEMPLATE = "/bootstrap4/components/cite";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

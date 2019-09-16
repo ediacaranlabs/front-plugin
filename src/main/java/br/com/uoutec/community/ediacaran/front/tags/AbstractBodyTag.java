@@ -15,7 +15,7 @@ import org.brandao.brutos.bean.BeanInstance;
 
 public abstract class AbstractBodyTag extends BodyTagSupport{
 
-	public static final String WRAPPER_TEMPLATE		= "bootstrap4/templates/components/wrapper";
+	public static final String WRAPPER_TEMPLATE		= "bootstrap4/components/wrapper";
 	
 	public static final String ID_COUNT				= "_component_id_count";
 

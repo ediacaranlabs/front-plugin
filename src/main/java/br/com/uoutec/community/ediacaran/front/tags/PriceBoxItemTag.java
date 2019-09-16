@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class PriceBoxItemTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/price-box-tem";
+	public static final String TEMPLATE  = "/bootstrap4/components/price-box-tem";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

@@ -11,7 +11,7 @@ import javax.servlet.jsp.JspException;
 
 public class CarouselTag extends AbstractSimpleTag {
 
-	public static final String TEMPLATE = "/bootstrap4/templates/components/carousel";
+	public static final String TEMPLATE = "/bootstrap4/components/carousel";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
