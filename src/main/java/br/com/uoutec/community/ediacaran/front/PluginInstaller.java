@@ -1,5 +1,7 @@
 package br.com.uoutec.community.ediacaran.front;
 
+import java.io.IOException;
+
 import org.brandao.brutos.ClassUtil;
 import org.brandao.brutos.io.DefaultResourceLoader;
 
@@ -30,10 +32,18 @@ public class PluginInstaller extends AbstractPluginInstaller {
 	public static final String TEMPLATE_PROPERTY = "template";
 	
 	public void install() throws PluginException {
-		
+		try{
+			this.installTemplateManager();
+		}
+		catch(Throwable e) {
+			throw new PluginException(e);
+		}
 	}
 	
-	private void installTemplateManager() throws PluginException {
+	private void installTemplateManager() 
+			throws PluginException, InstantiationException, IllegalAccessException, 
+			ClassNotFoundException, IOException {
+		
 		PluginManager pm = EntityContext.getEntity(PluginManager.class);
 		PluginMetadata pmd = pm.findById(PLUGIN);
 		
@@ -41,12 +51,10 @@ public class PluginInstaller extends AbstractPluginInstaller {
 		
 		TemplateCache tc = (TemplateCache) ClassUtil.getInstance(cp.getValue());
 		
-		PluginPropertyValue ppv = pmd.getValue(TEMPLATE_PROPERTY);
-		String template = ppv.getValue();
-		
-		return "/plugins/community/ediacaran/front/" + template + "/" + type + ".jsp";
-		
 		TemplatesManager templatesManager = new TemplatesManager(
-				new TemplateLoader(), new DefaultResourceLoader(), pmd.getPath().get, tc, "UTF-8");
+				new TemplateLoader(), new DefaultResourceLoader(), tc, "UTF-8");
+		
+		TemplatesManager.setTemplatesManager(templatesManager);
 	}
+	
 }

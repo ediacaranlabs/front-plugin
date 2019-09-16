@@ -29,13 +29,10 @@ public class TemplatesManager {
 	
 	private String charset;
 	
-	private String basePath;
-	
-	public TemplatesManager(TemplateLoader templateLoader, ResourceLoader loader, String basePath, TemplateCache cache, String charset) throws IOException {
+	public TemplatesManager(TemplateLoader templateLoader, ResourceLoader loader, TemplateCache cache, String charset) throws IOException {
 		this.templateLoader = templateLoader;
 		this.loader = loader;
 		this.charset = charset;
-		this.basePath = basePath;
 		this.cache = cache;
 		//loadDefaultTemplates();
 	}
@@ -64,7 +61,9 @@ public class TemplatesManager {
 		PluginPropertyValue ppv = pmd.getValue(PluginInstaller.TEMPLATE_PROPERTY);
 		String template = ppv.getValue();
 		
-		Resource r      = loader.getResource("/plugins/community/ediacaran/front/" + template + "/" + resource + ".tmp");
+		String pr = "file://" + pmd.getPath().getBase() + "/tags" + "/" + template + "/" + resource;
+		
+		Resource r      = loader.getResource(pr);
 		StringPattern t = templateLoader.load(r, charset);
 		
 		if(t == null) {
@@ -135,10 +134,6 @@ public class TemplatesManager {
 
 	public String getCharset() {
 		return charset;
-	}
-
-	public String getBasePath() {
-		return basePath;
 	}
 
 	public static void setTemplatesManager(TemplatesManager value) {
