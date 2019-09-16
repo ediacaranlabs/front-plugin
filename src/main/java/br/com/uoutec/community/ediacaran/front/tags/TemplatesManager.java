@@ -2,22 +2,26 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
-import org.brandao.brutos.io.DefaultResourceLoader;
 import org.brandao.brutos.io.Resource;
 import org.brandao.brutos.io.ResourceLoader;
 
+import br.com.uoutec.application.EntityContext;
+import br.com.uoutec.community.ediacaran.PluginManager;
+import br.com.uoutec.community.ediacaran.front.PluginInstaller;
 import br.com.uoutec.community.ediacaran.front.StringPattern;
+import br.com.uoutec.community.ediacaran.plugins.PluginException;
+import br.com.uoutec.community.ediacaran.plugins.PluginMetadata;
+import br.com.uoutec.community.ediacaran.plugins.PluginPropertyValue;
 
 public class TemplatesManager {
 
-	private ConcurrentMap<String, StringPattern> defaultTemplates = new ConcurrentHashMap<String, StringPattern>();
+	//private ConcurrentMap<String, StringPattern> defaultTemplates = new ConcurrentHashMap<String, StringPattern>();
 
-	private ConcurrentMap<String, StringPattern> templates = new ConcurrentHashMap<String, StringPattern>();
+	//private ConcurrentMap<String, StringPattern> templates = new ConcurrentHashMap<String, StringPattern>();
+	
+	private TemplateCache cache;
 	
 	private TemplateLoader templateLoader;
 	
@@ -25,13 +29,18 @@ public class TemplatesManager {
 	
 	private String charset;
 	
-	public TemplatesManager(TemplateLoader templateLoader, ResourceLoader loader, String charset) throws IOException {
+	private String basePath;
+	
+	public TemplatesManager(TemplateLoader templateLoader, ResourceLoader loader, String basePath, TemplateCache cache, String charset) throws IOException {
 		this.templateLoader = templateLoader;
 		this.loader = loader;
 		this.charset = charset;
-		loadDefaultTemplates();
+		this.basePath = basePath;
+		this.cache = cache;
+		//loadDefaultTemplates();
 	}
 
+	/*
 	public void loadDefaultTemplates() throws IOException {
 		
 		TagTemplateSearch tts = new TagTemplateSearch(loader);
@@ -45,29 +54,35 @@ public class TemplatesManager {
 		}
 		
 	}
+	*/
 	
-	public void addtemplate(String name, String resource) throws IOException {
+	protected void addtemplate(String name, String resource) throws IOException, PluginException {
 		
-		Resource r      = loader.getResource(resource);
+		PluginManager pm = EntityContext.getEntity(PluginManager.class);
+		PluginMetadata pmd = pm.findById(PluginInstaller.PLUGIN);
+		
+		PluginPropertyValue ppv = pmd.getValue(PluginInstaller.TEMPLATE_PROPERTY);
+		String template = ppv.getValue();
+		
+		Resource r      = loader.getResource("/plugins/community/ediacaran/front/" + template + "/" + resource + ".tmp");
 		StringPattern t = templateLoader.load(r, charset);
 		
 		if(t == null) {
 			throw new IllegalStateException("template not found: " + resource);
 		}
 		
-		if(templates.containsKey(name)) {
+		if(cache.contains(name)) {
 			throw new IllegalStateException("has been added: " + name);
 		}
 		
-		templates.put(name, t);
+		cache.register(name, t);
 	}
 
 	public StringPattern getTemplate(String template) {
-		StringPattern p = templates.get(template);
-		return p == null? defaultTemplates.get(template) : p;
+		return cache.get(template);
 	}
 	
-	public void apply(String template, Map<String,Object> vars, Writer out) throws IOException {
+	public void apply(String template, Map<String,Object> vars, Writer out) throws IOException, PluginException {
 		
 		StringPattern p = getTemplate(template);
 		
@@ -80,7 +95,7 @@ public class TemplatesManager {
 		p.toWriter(out, vars);
 	}
 
-	public void apply(String template, Writer out, Object ... vars) throws IOException {
+	public void apply(String template, Writer out, Object ... vars) throws IOException, PluginException {
 		
 		StringPattern p = getTemplate(template);
 		
@@ -94,11 +109,12 @@ public class TemplatesManager {
 	}
 	
 	public void removetemplate(String name){
-		templates.remove(name);
+		cache.remove(name);
 	}
 
 	private static TemplatesManager templatesManager;
 	
+	/*
 	static {
 		try {
 			templatesManager = new TemplatesManager(new TemplateLoader(), new DefaultResourceLoader(), "UTF-8");
@@ -106,6 +122,23 @@ public class TemplatesManager {
 		catch(Throwable e) {
 			throw new ExceptionInInitializerError(e);
 		}
+	}
+	*/
+	
+	public TemplateLoader getTemplateLoader() {
+		return templateLoader;
+	}
+
+	public ResourceLoader getLoader() {
+		return loader;
+	}
+
+	public String getCharset() {
+		return charset;
+	}
+
+	public String getBasePath() {
+		return basePath;
 	}
 
 	public static void setTemplatesManager(TemplatesManager value) {

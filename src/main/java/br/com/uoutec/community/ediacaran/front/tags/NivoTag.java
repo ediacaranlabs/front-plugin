@@ -19,7 +19,7 @@ public class NivoTag extends AbstractBodyTag {
 	
 	private static final String NIVO_CAPTION = "/bootstrap4/templates/components/nivo-caption";
 
-	public static final String TEMPLATE  = "/bootstrap4/templates/components/gallery-filter";
+	public static final String TEMPLATE  = "/bootstrap4/templates/components/nivo";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
