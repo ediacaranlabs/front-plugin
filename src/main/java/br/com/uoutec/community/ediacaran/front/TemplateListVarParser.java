@@ -1,11 +1,9 @@
-package br.com.uoutec.community.ediacaran.front.tags;
+package br.com.uoutec.community.ediacaran.front;
 
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
-
-import br.com.uoutec.community.ediacaran.front.StringPattern.AbstractVarParser;
 
 public class TemplateListVarParser  extends AbstractVarParser{
 
@@ -39,7 +37,7 @@ public class TemplateListVarParser  extends AbstractVarParser{
 	@Override
 	public void parse(Writer writter) throws IOException {
 		try {
-			TemplatesManager tm = TemplatesManager.getTemplatesManager();
+			TemplatesManager tm = TemplatesManagerProvider.getTemplatesManager();
 			for(Object[] o: vars) {
 				tm.apply(template, writter, o);
 			}

@@ -13,7 +13,13 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
+import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.front.TemplatesManagerException;
+import br.com.uoutec.community.ediacaran.front.TemplatesManagerProvider;
+
 public abstract class AbstractBodyTag extends BodyTagSupport{
+
+	private static final long serialVersionUID = -6892960845331892542L;
 
 	public static final String WRAPPER_TEMPLATE		= "bootstrap4/components/wrapper";
 	
@@ -81,7 +87,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     	}
     }
 	
-    protected void doWrapperAfterBody() throws IOException{
+    protected void doWrapperAfterBody() throws IOException, TemplatesManagerException{
     	
 		Map<String, Object> tagVars = prepareVars();
 		Map<String, Object> vars = new HashMap<String, Object>();
@@ -92,7 +98,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 		applyTemplate(getWrapperTemplate(), vars, getBodyContent().getEnclosingWriter());
     }
     
-    protected void doInnerAfterBody() throws IOException {
+    protected void doInnerAfterBody() throws IOException, TemplatesManagerException {
 		Map<String, Object> vars = prepareVars();
 		applyTemplate(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars, getBodyContent().getEnclosingWriter());
     }
@@ -106,14 +112,14 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     }
     
     private void applyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
+    		Writer out) throws IOException, TemplatesManagerException {
 		
     	Object oldParent = getParentTag();
     	setParentTag(this);
 		
 		beforeApplyTemplate(template, vars, out);
 		
-		TemplatesManager
+		TemplatesManagerProvider
 		.getTemplatesManager().apply(template, vars, out);
 		
 		afterApplyTemplate(template, vars, out);

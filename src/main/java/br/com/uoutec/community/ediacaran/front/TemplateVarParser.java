@@ -1,11 +1,9 @@
-package br.com.uoutec.community.ediacaran.front.tags;
+package br.com.uoutec.community.ediacaran.front;
 
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
-
-import br.com.uoutec.community.ediacaran.front.StringPattern.AbstractVarParser;
 
 public class TemplateVarParser  extends AbstractVarParser{
 
@@ -40,7 +38,7 @@ public class TemplateVarParser  extends AbstractVarParser{
 	@Override
 	public void parse(Writer writter) throws IOException {
 		try {
-			TemplatesManager.getTemplatesManager()
+			TemplatesManagerProvider.getTemplatesManager()
 			.apply(
 				template, 
 				vars, 

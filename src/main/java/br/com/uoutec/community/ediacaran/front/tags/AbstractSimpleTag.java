@@ -13,6 +13,10 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
+import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.front.TemplatesManagerException;
+import br.com.uoutec.community.ediacaran.front.TemplatesManagerProvider;
+
 public abstract class AbstractSimpleTag extends SimpleTagSupport{
 
 	public static final String WRAPPER_TEMPLATE		= "bootstrap4/components/wrapper";
@@ -68,13 +72,18 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
 	private boolean wrapper;
 	
     public void doTag() throws JspException, IOException {
-    	if(!wrapper)
-	    	doInnerTag();
-    	else
-    		doWrapperTag();
+    	try {
+	    	if(!wrapper)
+		    	doInnerTag();
+	    	else
+	    		doWrapperTag();
+    	}
+	    catch(TemplatesManagerException e) {
+	    	throw new JspException(e);
+	    }
     }
 	
-    protected void doWrapperTag() throws JspException, IOException{
+    protected void doWrapperTag() throws JspException, IOException, TemplatesManagerException{
     	
 		Map<String, Object> tagVars = prepareVars();
 		Map<String, Object> vars = new HashMap<String, Object>();
@@ -85,7 +94,7 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
 		applyTemplate(getWrapperTemplate(), vars, getJspContext().getOut());
     }
     
-    protected void doInnerTag() throws JspException, IOException{
+    protected void doInnerTag() throws JspException, IOException, TemplatesManagerException{
 		Map<String, Object> vars = prepareVars();
 		applyTemplate(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars, getJspContext().getOut() );
     }
@@ -99,14 +108,14 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     }
     
     private void applyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
+    		Writer out) throws IOException, TemplatesManagerException {
 		
     	Object oldParent = getParentTag();
     	setParentTag(this);
 		
 		beforeApplyTemplate(template, vars, out);
 		
-		TemplatesManager
+		TemplatesManagerProvider
 		.getTemplatesManager().apply(template, vars, out);
 		
 		afterApplyTemplate(template, vars, out);

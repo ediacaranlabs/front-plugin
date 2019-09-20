@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
+
 public class BreadcrumbPathTag extends AbstractSimpleTag {
 
 	public static final String TEMPLATE = "/bootstrap4/components/breadcrumb-path";

@@ -1,10 +1,8 @@
-package br.com.uoutec.community.ediacaran.front.tags;
+package br.com.uoutec.community.ediacaran.front;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import br.com.uoutec.community.ediacaran.front.PluginInstaller;
-import br.com.uoutec.community.ediacaran.front.StringPattern;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
 import br.com.uoutec.community.ediacaran.plugins.PluginMetadata;
 import br.com.uoutec.community.ediacaran.plugins.PluginPropertyValue;
@@ -15,7 +13,7 @@ public class HashMapTemplateCache implements TemplateCache{
 	
 	@Override
 	public void configure(PluginMetadata config) throws PluginException {
-		PluginPropertyValue cacheSize = config.getValue(PluginInstaller.CACHE_SIZE);
+		PluginPropertyValue cacheSize = config.getValue(PluginInstaller.CACHE_SIZE_PROPERTY);
 		int cacheSizeValue            = Integer.parseInt(cacheSize.getValue());
 		this.map                      = new MaxSizeHashMap<String, StringPattern>(cacheSizeValue);
 	}

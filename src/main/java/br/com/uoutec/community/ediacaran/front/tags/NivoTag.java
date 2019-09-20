@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import br.com.uoutec.community.ediacaran.front.TemplateListVarParser;
+import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
+
 public class NivoTag extends AbstractBodyTag {
 
 	private static final long serialVersionUID = 748182107582888257L;

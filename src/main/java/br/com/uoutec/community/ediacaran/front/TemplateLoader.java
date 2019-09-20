@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front.tags;
+package br.com.uoutec.community.ediacaran.front;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,8 +7,6 @@ import java.nio.charset.Charset;
 
 import org.brandao.brutos.io.Resource;
 import org.brandao.brutos.io.ResourceLoader;
-
-import br.com.uoutec.community.ediacaran.front.StringPattern;
 
 public class TemplateLoader {
 

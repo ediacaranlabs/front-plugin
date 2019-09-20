@@ -10,7 +10,8 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-import br.com.uoutec.community.ediacaran.front.StringPattern;
+import br.com.uoutec.community.ediacaran.front.AbstractVarParser;
+import br.com.uoutec.community.ediacaran.front.TemplatesManagerProvider;
 
 public abstract class ComponentFormTag extends AbstractSimpleTag {
 
@@ -83,7 +84,7 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 			Map<String, Object> vars = new HashMap<String, Object>();
 			
 			//vars.put("attr",    super.toAttrs());
-			vars.put("component", new StringPattern.AbstractVarParser() {
+			vars.put("component", new AbstractVarParser() {
 				
 				@Override
 				public void parse(Writer writter) throws IOException {
@@ -96,7 +97,7 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 				
 			});
 			
-			TemplatesManager.getTemplatesManager()
+			TemplatesManagerProvider.getTemplatesManager()
 				.apply(this.getTemplate() == null? TEMPLATE : this.getTemplate(), vars, getJspContext().getOut());
     	}
     	catch(Throwable e) {

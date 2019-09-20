@@ -1,6 +1,5 @@
-package br.com.uoutec.community.ediacaran.front.tags;
+package br.com.uoutec.community.ediacaran.front;
 
-import br.com.uoutec.community.ediacaran.front.StringPattern;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
 import br.com.uoutec.community.ediacaran.plugins.PluginMetadata;
 

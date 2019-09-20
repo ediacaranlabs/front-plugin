@@ -5,7 +5,7 @@ import java.io.Writer;
 
 import javax.servlet.jsp.tagext.JspFragment;
 
-import br.com.uoutec.community.ediacaran.front.StringPattern.AbstractVarParser;
+import br.com.uoutec.community.ediacaran.front.AbstractVarParser;
 
 public class JspFragmentVarParser extends AbstractVarParser{
 
