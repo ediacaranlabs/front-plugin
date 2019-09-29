@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
@@ -7,8 +8,6 @@ import java.util.Map;
 import org.brandao.brutos.io.Resource;
 import org.brandao.brutos.io.ResourceLoader;
 
-import br.com.uoutec.application.EntityContext;
-import br.com.uoutec.community.ediacaran.PluginManager;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
 import br.com.uoutec.community.ediacaran.plugins.PluginMetadata;
 import br.com.uoutec.community.ediacaran.plugins.PluginPropertyValue;
@@ -25,24 +24,22 @@ public class TemplatesManagerImp implements TemplatesManager {
 	
 	private String charset;
 	
-	public TemplatesManagerImp(TemplateLoader templateLoader, ResourceLoader loader, TemplateCache cache, String charset) throws IOException {
+	public TemplatesManagerImp(TemplateLoader templateLoader, ResourceLoader loader, 
+			TemplateCache cache, PluginMetadata pluginMetadata, String charset) throws IOException {
 		this.templateLoader = templateLoader;
 		this.loader = loader;
 		this.charset = charset;
 		this.cache = cache;
+		this.pluginMetadata = pluginMetadata;
 	}
 
-	protected void addtemplate(String name, String resource) throws IOException, PluginException {
+	protected StringPattern addtemplate(String name, String resource) throws IOException, PluginException {
 		
-		PluginManager pm   = EntityContext.getEntity(PluginManager.class);
-		PluginMetadata pmd = pm.findById(PluginInstaller.PLUGIN);
+		File file = new File(pluginMetadata.getPath().getBase() + "/tags" + "/" + resource + ".tmp");
 		
-		PluginPropertyValue ppv = pmd.getValue(PluginInstaller.TEMPLATE_PROPERTY);
-		String template = ppv.getValue();
+		file = file.getCanonicalFile();
 		
-		String pr = "file://" + pmd.getPath().getBase() + "/tags" + "/" + template + "/" + resource;
-		
-		Resource r      = loader.getResource(pr);
+		Resource r      = loader.getResource(file.toURI().toString());
 		StringPattern t = templateLoader.load(r, charset);
 		
 		if(t == null) {
@@ -54,6 +51,7 @@ public class TemplatesManagerImp implements TemplatesManager {
 		}
 		
 		cache.register(name, t);
+		return t;
 	}
 
 	public StringPattern getTemplate(String template) {
@@ -71,7 +69,7 @@ public class TemplatesManagerImp implements TemplatesManager {
 			
 			if(p == null) {
 				synchronized(TemplatesManager.class) {
-					addtemplate(fullTemplate, fullTemplate);
+					p = addtemplate(fullTemplate, fullTemplate);
 				}
 			}
 			

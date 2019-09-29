@@ -9,14 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import org.brandao.brutos.annotation.Action;
-import org.brandao.brutos.annotation.ActionStrategy;
 import org.brandao.brutos.annotation.Basic;
-import org.brandao.brutos.annotation.Controller;
 import org.brandao.brutos.annotation.Transient;
-import org.brandao.brutos.annotation.web.WebActionStrategyType;
 import org.brandao.brutos.web.HttpStatus;
 import org.brandao.brutos.web.WebResultAction;
 

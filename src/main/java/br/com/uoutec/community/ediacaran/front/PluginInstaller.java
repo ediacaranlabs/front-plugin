@@ -14,17 +14,17 @@ import br.com.uoutec.community.ediacaran.system.AbstractPluginInstaller;
 
 public class PluginInstaller extends AbstractPluginInstaller {
 
-	public static final String PACKAGE = "community";
+	public static final String PACKAGE 					= "community";
 
-	public static final String PROVIDER = "ediacaran";
+	public static final String PROVIDER 				= "ediacaran";
 
-	public static final String PLUGIN = "front";
+	public static final String PLUGIN 					= "front";
 	
-	public static final String CACHE_SIZE_PROPERTY = "cache_size";
+	public static final String CACHE_SIZE_PROPERTY 		= "cache_size";
 	
-	public static final String CACHE_PROVIDER_PROPERTY = "cache_provider";
+	public static final String CACHE_PROVIDER_PROPERTY 	= "cache_provider";
 	
-	public static final String TEMPLATE_PROPERTY = "template";
+	public static final String TEMPLATE_PROPERTY 		= "template";
 	
 	public void install() throws PluginException {
 		try{
@@ -45,9 +45,10 @@ public class PluginInstaller extends AbstractPluginInstaller {
 		PluginPropertyValue cp = pmd.getValue(CACHE_PROVIDER_PROPERTY);
 		
 		TemplateCache tc = (TemplateCache) ClassUtil.getInstance(cp.getValue());
+		tc.configure(pmd);
 		
 		TemplatesManager templatesManager = new TemplatesManagerImp(
-				new TemplateLoader(), new DefaultResourceLoader(), tc, "UTF-8");
+				new TemplateLoader(), new DefaultResourceLoader(), tc, pmd, "UTF-8");
 		
 		TemplatesManagerProvider.setTemplatesManager(templatesManager);
 	}

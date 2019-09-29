@@ -10,6 +10,7 @@ import java.util.Set;
 
 import br.com.uoutec.application.se.ApplicationBootstrapProvider;
 import br.com.uoutec.community.ediacaran.ServerBootstrap;
+import br.com.uoutec.community.ediacaran.front.TemplatesManagerException;
 
 public class LoadDataTag  extends AbstractSimpleTag {
 
@@ -53,6 +54,10 @@ public class LoadDataTag  extends AbstractSimpleTag {
     	super.getJspContext().setAttribute(var == null? "vars" : var, dta);
 	}
 	
+    protected void applyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException, TemplatesManagerException {
+    }
+    
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }

@@ -13,8 +13,6 @@ public interface TemplatesManager {
 
 	void apply(String template, Writer out, Object ... vars) throws TemplatesManagerException;
 	
-	void removetemplate(String name);
-
 	TemplateLoader getTemplateLoader();
 
 	ResourceLoader getLoader();

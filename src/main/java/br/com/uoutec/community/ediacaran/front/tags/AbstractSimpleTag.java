@@ -90,13 +90,37 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
 		
 		vars.putAll(tagVars);
 		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars));
+		Writer out = getJspContext().getOut();
+		String template = getWrapperTemplate();
 		
-		applyTemplate(getWrapperTemplate(), vars, getJspContext().getOut());
+    	Object oldParent = getParentTag();
+    	setParentTag(this);
+		
+		beforeApplyTemplate(template, vars, out);
+
+		applyTemplate(template, vars, out);
+		
+		afterApplyTemplate(template, vars, out);
+		
+    	setParentTag(oldParent);
     }
     
     protected void doInnerTag() throws JspException, IOException, TemplatesManagerException{
+
 		Map<String, Object> vars = prepareVars();
-		applyTemplate(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars, getJspContext().getOut() );
+		Writer out = getJspContext().getOut();
+    	
+    	Object oldParent = getParentTag();
+    	setParentTag(this);
+		
+		beforeApplyTemplate(template, vars, out);
+
+		applyTemplate(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars, out);
+		
+		afterApplyTemplate(template, vars, out);
+		
+    	setParentTag(oldParent);
+    	
     }
     
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
@@ -107,22 +131,15 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     		Writer out) throws IOException {
     }
     
-    private void applyTemplate(String template, Map<String,Object> vars, 
+    protected void applyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException, TemplatesManagerException {
-		
-    	Object oldParent = getParentTag();
-    	setParentTag(this);
-		
-		beforeApplyTemplate(template, vars, out);
-		
 		TemplatesManagerProvider
 		.getTemplatesManager().apply(template, vars, out);
-		
-		afterApplyTemplate(template, vars, out);
-		
-    	setParentTag(oldParent);
     }
     
+    protected void applyTemplate() {
+    	
+    }
     public void setParentTag(Object tag) {
     	setProperty(PARENT_TAG, tag);
     }
