@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.jsp.tagext.JspFragment;
+
 public class TextfieldTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/bootstrap4/components/textfield";
@@ -83,21 +85,33 @@ public class TextfieldTag extends ComponentFormTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						Boolean enabled = ((RadioTag)component).getEnabled();
+						Boolean enabled = ((TextfieldTag)component).getEnabled();
 						return enabled != null && !enabled? " uneditable-input" : "";
 					}
 					
 				});
-				
+
 				put("label", new AttributeParserImp() {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? new JspFragmentVarParser(((TextfieldTag)component).getJspBody()) : value;
+						
+						if(value == null) {
+							
+							JspFragment body = ((TextfieldTag)component).getJspBody();
+							
+							if(body == null) {
+								return null;
+							}
+							
+							return new JspFragmentVarParser(body);
+						}
+						
+						return value;
 					}
 					
 				});
-				
+
 				put("size", new AttributeParserImp() {
 					
 					@Override

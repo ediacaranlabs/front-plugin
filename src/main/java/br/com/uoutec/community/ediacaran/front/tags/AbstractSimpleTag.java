@@ -19,7 +19,7 @@ import br.com.uoutec.community.ediacaran.front.TemplatesManagerProvider;
 
 public abstract class AbstractSimpleTag extends SimpleTagSupport{
 
-	public static final String WRAPPER_TEMPLATE		= "bootstrap4/components/wrapper";
+	public static final String WRAPPER_TEMPLATE		= "/bootstrap4/components/wrapper";
 	
 	public static final String ID_COUNT				= "_component_id_count";
 
@@ -86,40 +86,44 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     protected void doWrapperTag() throws JspException, IOException, TemplatesManagerException{
     	
 		Map<String, Object> tagVars = prepareVars();
-		Map<String, Object> vars = new HashMap<String, Object>();
+		Map<String, Object> vars    = new HashMap<String, Object>();
+		Writer out                  = getJspContext().getOut();
+		String template             = getWrapperTemplate();
 		
 		vars.putAll(tagVars);
 		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars));
-		Writer out = getJspContext().getOut();
-		String template = getWrapperTemplate();
 		
-    	Object oldParent = getParentTag();
-    	setParentTag(this);
 		
 		beforeApplyTemplate(template, vars, out);
 
+    	Object oldParent = getParentTag();
+    	setParentTag(this);
+    	
 		applyTemplate(template, vars, out);
+    	
+		setParentTag(oldParent);
 		
 		afterApplyTemplate(template, vars, out);
 		
-    	setParentTag(oldParent);
     }
     
     protected void doInnerTag() throws JspException, IOException, TemplatesManagerException{
 
 		Map<String, Object> vars = prepareVars();
-		Writer out = getJspContext().getOut();
+		Writer out               = getJspContext().getOut();
+    	String template          = this.getTemplate() == null? getDefaultTemplate() : getTemplate();
     	
+		beforeApplyTemplate(template, vars, out);
+
     	Object oldParent = getParentTag();
     	setParentTag(this);
 		
-		beforeApplyTemplate(template, vars, out);
-
-		applyTemplate(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars, out);
+    	applyTemplate(template, vars, out);
+		
+    	setParentTag(oldParent);
 		
 		afterApplyTemplate(template, vars, out);
 		
-    	setParentTag(oldParent);
     	
     }
     

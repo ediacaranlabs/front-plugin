@@ -1,21 +1,14 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
-import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.jsp.JspException;
-
-import br.com.uoutec.community.ediacaran.front.AbstractVarParser;
-import br.com.uoutec.community.ediacaran.front.TemplatesManagerProvider;
-
 public abstract class ComponentFormTag extends AbstractSimpleTag {
 
-	public static final String TEMPLATE = "bootstrap4/components/form-group";
+	public static final String TEMPLATE = "/bootstrap4/components/form-group";
 	
 	public static final String FORM = ComponentFormTag.class.getSimpleName() + ":form";
 	
@@ -66,53 +59,13 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 	private Boolean group;
 	
 	public ComponentFormTag() {
+		super.setWrapper(true);
 	}
 	
-    public void doTag() throws JspException, IOException {
-		
-    	if(group == null || !group) {
-    	//if(getProperty(FORM) == null) {
-    		super.doTag();
-    		return;
-    	}
-		
-		Object oldParent = getProperty(PARENT_TAG);
-
-		setProperty(PARENT_TAG, this);
-		
-    	try {
-			Map<String, Object> vars = new HashMap<String, Object>();
-			
-			//vars.put("attr",    super.toAttrs());
-			vars.put("component", new AbstractVarParser() {
-				
-				@Override
-				public void parse(Writer writter) throws IOException {
-					try {
-						doInnerTag();
-					} catch (JspException e) {
-						throw new IOException(e);
-					}
-				}
-				
-			});
-			
-			TemplatesManagerProvider.getTemplatesManager()
-				.apply(this.getTemplate() == null? TEMPLATE : this.getTemplate(), vars, getJspContext().getOut());
-    	}
-    	catch(Throwable e) {
-    		throw new IllegalStateException(e);
-    	}
-		
-    	doInnerTag();
-    	setProperty(PARENT_TAG, oldParent);
-    	
-    }
-	
-    protected String getDefaultTemplate() {
+    protected String getWrapperTemplate() {
     	return TEMPLATE;
     }
-
+	
     protected Set<String> getDefaultAttributes(){
     	return DEFAULT_ATTRS;
     }

@@ -29,7 +29,7 @@
       					<ec:menu-itens>
 							<c:forEach items="${vars['menu']}" var="menu">
 								<c:choose>
-									<c:when test="${empty menu['link']}">
+									<c:when test="${!empty menu['itens']}">
 										<ec:menu label="${menu['name']}">
 											<c:forEach items="${menu['itens']}" var="item">
 												<ec:menu-item link="${item['link']}" label="${item['name']}"/>

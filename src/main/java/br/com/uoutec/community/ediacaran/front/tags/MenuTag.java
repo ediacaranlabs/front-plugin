@@ -23,6 +23,7 @@ public class MenuTag  extends AbstractSimpleTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
+			add("id");
 			add("label");
 			add("content");
 		}});

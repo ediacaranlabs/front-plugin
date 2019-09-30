@@ -46,7 +46,7 @@ public class MenuItemTag  extends AbstractSimpleTag {
 	}
 	
     protected String getDefaultTemplate() {
-    	return getProperty(PARENT_TAG) instanceof MenuTag? TEMPLATE : TEMPLATE2;
+    	return getParentTag() instanceof MenuTag? TEMPLATE : TEMPLATE2;
     }
 
     protected Set<String> getDefaultAttributes(){
