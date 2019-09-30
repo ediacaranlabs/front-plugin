@@ -59,7 +59,6 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 	private Boolean group;
 	
 	public ComponentFormTag() {
-		super.setWrapper(true);
 	}
 	
     protected String getWrapperTemplate() {
