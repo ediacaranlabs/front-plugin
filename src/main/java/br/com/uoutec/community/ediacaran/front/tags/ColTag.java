@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.jsp.tagext.JspFragment;
+
 public class ColTag  extends AbstractSimpleTag {
 
 	public static final String TEMPLATE  = "/bootstrap4/designer/col";
@@ -48,7 +50,8 @@ public class ColTag  extends AbstractSimpleTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return new JspFragmentVarParser(((ColTag)component).getJspBody());
+						JspFragment jspBody = ((ColTag)component).getJspBody();
+						return jspBody == null? null : new JspFragmentVarParser(jspBody);
 					}
 				});
 				
