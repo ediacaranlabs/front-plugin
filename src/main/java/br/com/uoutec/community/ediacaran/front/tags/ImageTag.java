@@ -43,7 +43,7 @@ public class ImageTag  extends AbstractSimpleTag {
 							return " rounded-circle";
 						}
 						else
-							return " img-" + value;
+							return value == null? null : " img-" + value;
 					}
 					
 				});
@@ -56,7 +56,7 @@ public class ImageTag  extends AbstractSimpleTag {
 							return " mx-auto d-block";
 						}
 						else
-							return " float-" + value;
+							return value == null? null : " float-" + value;
 					}
 					
 				});
