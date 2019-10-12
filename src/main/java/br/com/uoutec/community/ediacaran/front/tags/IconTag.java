@@ -29,7 +29,6 @@ public class IconTag extends AbstractSimpleTag {
 			add("bgSize");
 			add("iconSize");
 			add("bg");
-			add("name");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -76,8 +75,6 @@ public class IconTag extends AbstractSimpleTag {
 	private Integer iconSize;
 	
 	private String bg;
-	
-	private String name;
 	
 	public IconTag() {
 	}
@@ -136,14 +133,6 @@ public class IconTag extends AbstractSimpleTag {
 
 	public void setBg(String bg) {
 		this.bg = bg;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 }

@@ -9,9 +9,9 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-public class BoxTag extends AbstractSimpleTag {
+public class BoxBodyTag extends AbstractSimpleTag {
 
-	public static final String TEMPLATE = "/bootstrap4/components/box";
+	public static final String TEMPLATE = "/bootstrap4/components/box-body";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -39,7 +39,7 @@ public class BoxTag extends AbstractSimpleTag {
 	
 	private JspFragmentVarParser content;
 	
-	public BoxTag() {
+	public BoxBodyTag() {
 	}
 	
 	public void doTag() throws JspException, IOException {
@@ -70,7 +70,7 @@ public class BoxTag extends AbstractSimpleTag {
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
-    
+
 	public JspFragmentVarParser getContent() {
 		return content;
 	}
