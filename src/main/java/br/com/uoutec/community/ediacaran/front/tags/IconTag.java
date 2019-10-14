@@ -29,6 +29,7 @@ public class IconTag extends AbstractSimpleTag {
 			add("bgSize");
 			add("iconSize");
 			add("bg");
+			add("icon");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -53,15 +54,6 @@ public class IconTag extends AbstractSimpleTag {
 					
 				});
 				
-				put("icon", new AttributeParserImp() {
-					
-					@Override
-					public String toName(String value, Object component) {
-						return "name";
-					}
-					
-				});
-				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -75,6 +67,8 @@ public class IconTag extends AbstractSimpleTag {
 	private Integer iconSize;
 	
 	private String bg;
+	
+	private String icon;
 	
 	public IconTag() {
 	}
@@ -133,6 +127,14 @@ public class IconTag extends AbstractSimpleTag {
 
 	public void setBg(String bg) {
 		this.bg = bg;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 }
