@@ -1,7 +1,0 @@
-<img src="{image}" alt="" class="img-thumbnail" />
-<div class="roles">
-	<p class="lead">
-		<strong>{name}</strong>
-	</p>
-	<p>{roleName}</p>
-</div>
