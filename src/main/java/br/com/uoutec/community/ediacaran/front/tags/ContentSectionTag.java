@@ -6,9 +6,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class TitleTag  extends AbstractSimpleTag {
+public class ContentSectionTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/components/title";
+	public static final String TEMPLATE  = "/bootstrap4/components/content-section";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -34,7 +34,7 @@ public class TitleTag  extends AbstractSimpleTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return new JspFragmentVarParser(((TitleTag)component).getJspBody());
+						return new JspFragmentVarParser(((ContentSectionTag)component).getJspBody());
 					}
 					
 				});
@@ -44,11 +44,11 @@ public class TitleTag  extends AbstractSimpleTag {
 	
 	/* ------------ Prop ---------------*/
 	
-	private String text;
+	private String title;
 	
 	private JspFragmentVarParser content;
 	
-	public TitleTag() {
+	public ContentSectionTag() {
 	}
 	
     protected String getDefaultTemplate() {
@@ -75,12 +75,12 @@ public class TitleTag  extends AbstractSimpleTag {
     	return DEFAULT_PROPERTY_PARSERS;
     }
 
-	public String getText() {
-		return text;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public JspFragmentVarParser getContent() {
