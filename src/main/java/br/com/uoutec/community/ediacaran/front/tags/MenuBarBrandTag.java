@@ -24,6 +24,7 @@ public class MenuBarBrandTag  extends AbstractSimpleTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
 			add("content");
+			add("href");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -42,6 +43,8 @@ public class MenuBarBrandTag  extends AbstractSimpleTag {
 	/* ------------ Attr ---------------*/
 	
 	/* ------------ Prop ---------------*/
+	
+	private String href;
 	
 	private JspFragmentVarParser content;
 	
@@ -78,6 +81,14 @@ public class MenuBarBrandTag  extends AbstractSimpleTag {
 
 	public void setContent(JspFragmentVarParser content) {
 		this.content = content;
+	}
+
+	public String getHref() {
+		return href;
+	}
+
+	public void setHref(String href) {
+		this.href = href;
 	}
 
 }

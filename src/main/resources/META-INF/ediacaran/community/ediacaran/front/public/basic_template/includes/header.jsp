@@ -25,19 +25,23 @@
       		</ed:col>
       		<ed:col size="8">
       			<ec:menu-bar>
+      				<!--<ec:menu-bar-brand href="/">UoU Technology</ec:menu-bar-brand>-->
       				<ec:menu-body>
       					<ec:menu-itens>
 							<c:forEach items="${vars['menu']}" var="menu">
 								<c:choose>
 									<c:when test="${!empty menu['itens']}">
-										<ec:menu label="${menu['name']}">
-											<c:forEach items="${menu['itens']}" var="item">
-												<ec:menu-item link="${item['link']}" label="${item['name']}"/>
-											</c:forEach>
+										<ec:menu>
+											<ec:menu-label>${menu['name']}</ec:menu-label>
+												<ec:menu-itens>
+													<c:forEach items="${menu['itens']}" var="item">
+														<ec:menu-item href="${item['link']}">${item['name']}</ec:menu-item>
+													</c:forEach>
+												</ec:menu-itens>
 										</ec:menu>
 									</c:when>
 									<c:otherwise>
-										<ec:menu-item link="${menu['link']}" label="${menu['name']}"/>
+										<ec:menu-item href="${item['link']}">${menu['name']}</ec:menu-item>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
