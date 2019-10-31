@@ -24,8 +24,6 @@ public class MenuTag  extends AbstractSimpleTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
 			add("id");
-			add("label");
-			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -44,8 +42,6 @@ public class MenuTag  extends AbstractSimpleTag {
 	/* ------------ Attr ---------------*/
 	
 	/* ------------ Prop ---------------*/
-	
-	private String label;
 	
 	private JspFragmentVarParser content;
 	
@@ -75,14 +71,6 @@ public class MenuTag  extends AbstractSimpleTag {
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
 
 	public JspFragmentVarParser getContent() {
 		return content;

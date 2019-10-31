@@ -8,11 +8,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class MenuItensTag  extends AbstractSimpleTag {
+public class MenuLabelTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/components/menu-itens";
-	
-	public static final String TEMPLATE_2  = "/bootstrap4/components/menu-itens-menu";
+	public static final String TEMPLATE  = "/bootstrap4/components/menu-label";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -37,7 +35,7 @@ public class MenuItensTag  extends AbstractSimpleTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return new JspFragmentVarParser(((MenuItensTag)component).getJspBody());
+						return new JspFragmentVarParser(((MenuLabelTag)component).getJspBody());
 					}
 					
 				});
@@ -49,18 +47,16 @@ public class MenuItensTag  extends AbstractSimpleTag {
 	
 	private JspFragmentVarParser content;
 	
-	public MenuItensTag() {
+	public MenuLabelTag() {
 	}
 	
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
-    	if(getParentTag() instanceof MenuTag) {
-    		vars.put("parent-id", ((MenuTag)getParentTag()).getId());
-    	}
+    	vars.put("parent-id", ((MenuTag)getParentTag()).getId());
     }
 	
     protected String getDefaultTemplate() {
-    	return getParentTag() instanceof MenuTag? TEMPLATE_2 : TEMPLATE;
+    	return TEMPLATE;
     }
 
     protected Set<String> getDefaultAttributes(){

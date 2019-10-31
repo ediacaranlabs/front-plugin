@@ -26,12 +26,20 @@ public class MenuItemTag  extends AbstractSimpleTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
 			add("link");
-			add("label");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_PROPERTY_PARSERS){{
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((MenuItemTag)component).getJspBody());
+					}
+					
+				});
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -40,7 +48,7 @@ public class MenuItemTag  extends AbstractSimpleTag {
 	
 	private String link;
 	
-	private String label;
+	private JspFragmentVarParser content;
 	
 	public MenuItemTag() {
 	}
@@ -77,12 +85,12 @@ public class MenuItemTag  extends AbstractSimpleTag {
 		this.link = link;
 	}
 
-	public String getLabel() {
-		return label;
+	public JspFragmentVarParser getContent() {
+		return content;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
 
 }
