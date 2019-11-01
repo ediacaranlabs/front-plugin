@@ -8,9 +8,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class MenuBodyTag  extends AbstractSimpleTag {
+public class MenuTogglerTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/components/menu-body";
+	public static final String TEMPLATE  = "/bootstrap4/components/menu-toggler";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -36,7 +36,7 @@ public class MenuBodyTag  extends AbstractSimpleTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return new JspFragmentVarParser(((MenuBodyTag)component).getJspBody());
+						return new JspFragmentVarParser(((MenuTogglerTag)component).getJspBody());
 					}
 					
 				});
@@ -50,7 +50,7 @@ public class MenuBodyTag  extends AbstractSimpleTag {
 	
 	private JspFragmentVarParser content;
 	
-	public MenuBodyTag() {
+	public MenuTogglerTag() {
 	}
 	
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
@@ -97,14 +97,6 @@ public class MenuBodyTag  extends AbstractSimpleTag {
 
 	public void setContent(JspFragmentVarParser content) {
 		this.content = content;
-	}
-
-	public String getMenuID() {
-		return menuID;
-	}
-
-	public void setMenuID(String menuID) {
-		this.menuID = menuID;
 	}
 
 }
