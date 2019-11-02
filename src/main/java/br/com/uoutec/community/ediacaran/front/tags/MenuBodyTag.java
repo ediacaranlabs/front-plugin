@@ -47,7 +47,7 @@ public class MenuBodyTag  extends AbstractSimpleTag {
 	/* ------------ Prop ---------------*/
 	
 	private String menuID;
-	
+
 	private JspFragmentVarParser content;
 	
 	public MenuBodyTag() {
