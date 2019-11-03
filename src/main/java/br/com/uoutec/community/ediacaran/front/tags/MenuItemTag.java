@@ -25,7 +25,7 @@ public class MenuItemTag  extends AbstractSimpleTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
-			add("link");
+			add("href");
 			add("content");
 		}});
 	
@@ -46,7 +46,7 @@ public class MenuItemTag  extends AbstractSimpleTag {
 	
 	/* ------------ Prop ---------------*/
 	
-	private String link;
+	private String href;
 	
 	private JspFragmentVarParser content;
 	
@@ -54,7 +54,7 @@ public class MenuItemTag  extends AbstractSimpleTag {
 	}
 	
     protected String getDefaultTemplate() {
-    	return getParentTag() instanceof MenuTag? TEMPLATE : TEMPLATE2;
+    	return getProperty(MenuTag.CONTEXT_ID) != null? TEMPLATE : TEMPLATE2;
     }
 
     protected Set<String> getDefaultAttributes(){
@@ -77,12 +77,12 @@ public class MenuItemTag  extends AbstractSimpleTag {
     	return DEFAULT_PROPERTY_PARSERS;
     }
 
-	public String getLink() {
-		return link;
+	public String getHref() {
+		return href;
 	}
 
-	public void setLink(String link) {
-		this.link = link;
+	public void setHref(String href) {
+		this.href = href;
 	}
 
 	public JspFragmentVarParser getContent() {

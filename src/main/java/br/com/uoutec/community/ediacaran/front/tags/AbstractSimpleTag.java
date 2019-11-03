@@ -109,6 +109,8 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     
     protected void doInnerTag() throws JspException, IOException, TemplatesManagerException{
 
+    	setProperty(getClass().getName() + ":CONTEXT", this);
+    	
 		Map<String, Object> vars = prepareVars();
 		Writer out               = getJspContext().getOut();
     	String template          = this.getTemplate() == null? getDefaultTemplate() : getTemplate();
@@ -119,11 +121,10 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     	setParentTag(this);
 		
     	applyTemplate(template, vars, out);
-		
     	setParentTag(oldParent);
-		
 		afterApplyTemplate(template, vars, out);
 		
+    	setProperty(getClass().getName() + ":CONTEXT", null);    	
     	
     }
     

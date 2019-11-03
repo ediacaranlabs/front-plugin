@@ -56,15 +56,14 @@ public class MenuTogglerTag  extends AbstractSimpleTag {
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
     	
-    	if(menuID != null) {
-    		vars.put("menu-id", menuID);
+    	Object id = menuID == null? ((MenuBarTag)getProperty(MenuBarTag.CONTEXT_ID)).getId() : menuID;
+    	
+    	if(id == null) {
+    		throw new RuntimeException("menu id not found");
     	}
-    	else
-    	if(getParentTag() instanceof MenuTag) {
-    		vars.put("menu-id", ((MenuTag)getParentTag()).getId());
-    	}
-    	else
-    		throw new RuntimeException("menu id not found"); 
+    	
+    	vars.put("menu-id", id);
+    	
     }
 	
     protected String getDefaultTemplate() {

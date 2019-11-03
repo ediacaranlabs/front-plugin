@@ -8,6 +8,8 @@ import java.util.Set;
 
 public class MenuTag  extends AbstractSimpleTag {
 
+	public static final String CONTEXT_ID = MenuTag.class.getName() + ":CONTEXT";
+
 	public static final String TEMPLATE  = "/bootstrap4/components/menu";
 	
 	@SuppressWarnings("serial")
@@ -24,6 +26,7 @@ public class MenuTag  extends AbstractSimpleTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
 			add("id");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")

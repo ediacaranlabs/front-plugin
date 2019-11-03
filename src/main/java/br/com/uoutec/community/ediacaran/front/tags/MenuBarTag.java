@@ -8,6 +8,8 @@ import java.util.Set;
 
 public class MenuBarTag  extends AbstractSimpleTag {
 
+	public static final String CONTEXT_ID = MenuBarTag.class.getName() + ":CONTEXT";
+	
 	public static final String TEMPLATE  = "/bootstrap4/components/menu-bar";
 	
 	@SuppressWarnings("serial")

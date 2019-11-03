@@ -1,7 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
-import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -49,18 +47,20 @@ public class MenuItensTag  extends AbstractSimpleTag {
 	
 	private JspFragmentVarParser content;
 	
+	private MenuTag menu;
+	
 	public MenuItensTag() {
 	}
 	
-    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
-    	if(getParentTag() instanceof MenuTag) {
-    		vars.put("parent-id", ((MenuTag)getParentTag()).getId());
+	protected void beforePrepareVars(Map<String, Object> vars) {
+		menu = (MenuTag)getProperty(MenuTag.CONTEXT_ID);
+    	if(menu != null) {
+    		vars.put("parent-id", menu.getId());
     	}
     }
 	
     protected String getDefaultTemplate() {
-    	return getParentTag() instanceof MenuTag? TEMPLATE_2 : TEMPLATE;
+    	return menu != null? TEMPLATE_2 : TEMPLATE;
     }
 
     protected Set<String> getDefaultAttributes(){
