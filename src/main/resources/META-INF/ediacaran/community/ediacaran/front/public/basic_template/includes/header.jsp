@@ -24,7 +24,7 @@
 	            </div>
       		</ed:col>
       		<ed:col size="8">
-      			<ec:menu-bar>
+      			<ec:menu-bar expand="sm">
       				<!--<ec:menu-bar-brand href="/">UoU Technology</ec:menu-bar-brand>-->
       				<ec:menu-toggler><ec:icon icon="bars"/></ec:menu-toggler>
       				<ec:menu-body>

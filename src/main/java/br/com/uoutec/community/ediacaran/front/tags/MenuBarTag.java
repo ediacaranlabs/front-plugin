@@ -29,6 +29,7 @@ public class MenuBarTag  extends AbstractSimpleTag {
 			add("background");
 			add("position");
 			add("content");
+			add("expand");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -70,7 +71,16 @@ public class MenuBarTag  extends AbstractSimpleTag {
 						}
 					}
 				});
-				
+
+				put("expand", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return value == null? "navbar-expand" : "navbar-expand-" + value;
+					}
+					
+				});
+
 				put("content", new AttributeParserImp() {
 					
 					@Override
@@ -91,6 +101,8 @@ public class MenuBarTag  extends AbstractSimpleTag {
 	private String background; //dark, primary
 	
 	private String position; //top, bottom, sticky
+	
+	private String expand; //sm, md, lg, xl
 	
 	private JspFragmentVarParser content;
 	
@@ -151,6 +163,14 @@ public class MenuBarTag  extends AbstractSimpleTag {
 
 	public void setContent(JspFragmentVarParser content) {
 		this.content = content;
+	}
+
+	public String getExpand() {
+		return expand;
+	}
+
+	public void setExpand(String expand) {
+		this.expand = expand;
 	}
 
 }
