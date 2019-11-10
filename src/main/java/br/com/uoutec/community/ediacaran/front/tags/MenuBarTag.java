@@ -30,6 +30,7 @@ public class MenuBarTag  extends AbstractSimpleTag {
 			add("position");
 			add("content");
 			add("expand");
+			add("sidebar");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -90,11 +91,22 @@ public class MenuBarTag  extends AbstractSimpleTag {
 					
 				});
 				
+				put("sidebar", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return value == null? "" : "sidebar";
+					}
+					
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
 	
 	/* ------------ Prop ---------------*/
+	
+	private Boolean sidebar;
 	
 	private String style; //light, dark
 	
@@ -171,6 +183,14 @@ public class MenuBarTag  extends AbstractSimpleTag {
 
 	public void setExpand(String expand) {
 		this.expand = expand;
+	}
+
+	public Boolean getSidebar() {
+		return sidebar;
+	}
+
+	public void setSidebar(Boolean sidebar) {
+		this.sidebar = sidebar;
 	}
 
 }
