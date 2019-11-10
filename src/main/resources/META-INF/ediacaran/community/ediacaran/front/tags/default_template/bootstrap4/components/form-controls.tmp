@@ -1,0 +1,5 @@
+<div {attr} class="control-group">
+	<div class="controls">
+	{component}
+	</div>
+</div>

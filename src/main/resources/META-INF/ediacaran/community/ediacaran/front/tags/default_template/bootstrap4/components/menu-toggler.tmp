@@ -1,0 +1,4 @@
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#{menu-id}" aria-controls="{menu-id}" 
+   aria-expanded="false" aria-label="Toggle navigation">
+   {content}
+</button>

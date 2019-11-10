@@ -1,0 +1,6 @@
+<div class="form-check">
+  <input class="form-check-input {enabled}" {attr}>
+  <label class="form-check-label">
+    {label}
+  </label>
+</div>

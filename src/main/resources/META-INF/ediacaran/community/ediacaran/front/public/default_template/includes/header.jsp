@@ -2,14 +2,6 @@
   <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700" rel="stylesheet">
   <link href="/plugins/community/ediacaran/front/default_template/css/bootstrap.css" rel="stylesheet" />
   <link href="/plugins/community/ediacaran/front/default_template/css/bootstrapValidator.min.css" rel="stylesheet">
-  <link href="/plugins/community/ediacaran/front/default_template/css/bootstrap-responsive.css" rel="stylesheet" />
-  <link href="/plugins/community/ediacaran/front/default_template/css/style.css" rel="stylesheet" />
-  
-  <link href="/plugins/community/ediacaran/front/default_template/css/fancybox/jquery.fancybox.css" rel="stylesheet">
-  <link href="/plugins/community/ediacaran/front/default_template/css/jcarousel.css" rel="stylesheet" />
-  <link href="/plugins/community/ediacaran/front/default_template/css/flexslider.css" rel="stylesheet" />
-
-  <link href="/plugins/community/ediacaran/front/default_template/css/intro.css" rel="stylesheet" />
   
   <!-- Theme skin -->
   <link href="/plugins/community/ediacaran/front/default_template/skins/${vars['skin']}.css" rel="stylesheet" />
@@ -22,7 +14,6 @@
   <link rel="shortcut icon" href="templates/default_template/ico/favicon.png" />
 
   <script src="/plugins/community/ediacaran/front/default_template/js/jquery.js"></script>
-  <script src="/plugins/community/ediacaran/front/default_template/js/jquery.easing.1.3.js"></script>
   <script src="/plugins/community/ediacaran/front/default_template/js/bootstrapValidator/bootstrapValidator.min.js"></script>
   <script src="/plugins/community/ediacaran/front/default_template/js/bootstrap.js"></script>
 

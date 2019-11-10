@@ -1,0 +1,3 @@
+<div {attr} class="box text-center">
+	{content}
+</div>

@@ -1,0 +1,3 @@
+<div {attr} class="{size} {classStyle}">
+{content}
+</div>

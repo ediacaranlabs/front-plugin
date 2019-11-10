@@ -1,0 +1,3 @@
+<table {attr} class="table {style}">
+	{content}
+</table>
