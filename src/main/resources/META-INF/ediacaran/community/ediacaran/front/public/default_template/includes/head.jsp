@@ -4,5 +4,4 @@
   <link href="/plugins/community/ediacaran/front/default_template/css/bootstrap.css" rel="stylesheet" />
 
   <script src="/plugins/community/ediacaran/front/default_template/js/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
   <script src="/plugins/community/ediacaran/front/default_template/js/bootstrap.js"></script>
