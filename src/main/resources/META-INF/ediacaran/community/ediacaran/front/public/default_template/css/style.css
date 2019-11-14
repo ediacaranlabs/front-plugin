@@ -1,0 +1,203 @@
+@import url('font-awesome.css');
+/* === custom icon === */
+
+@import url('custom-fonts.css');
+
+/*===================================
+General
+===================================*/
+body {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6em;
+  color: #656565;
+}
+
+a:active {
+  outline: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+.row, .row-fluid {
+  padding-bottom: 30px;
+}
+
+.row .row, .row-fluid .row-fluid {
+  padding-bottom: 30px;
+}
+
+@media (min-width: 768px)
+nav {
+    padding-left: 1.5rem!important;
+}
+@media (min-width: 768px)
+nav {
+    padding-right: 1.5rem!important;
+}
+@media (min-width: 768px)
+nav {
+    -webkit-box-orient: horizontal!important;
+    -webkit-box-direction: normal!important;
+    -ms-flex-direction: row!important;
+    flex-direction: row!important;
+    -webkit-box-align: center!important;
+    -ms-flex-align: center!important;
+    align-items: center!important;
+}
+
+@media (min-width: 768px)
+nav .navbar-collapse {
+    margin-right: 1rem!important;
+}
+@media (min-width: 768px)
+nav .navbar-collapse {
+    margin-bottom: 0!important;
+}
+@media (min-width: 768px)
+nav .navbar-collapse {
+    margin-top: 0!important;
+}
+
+ nav .navbar-collapse .navbar-nav{
+ 	float: right; 
+ }
+ 
+
+nav .navbar-collapse .navbar-nav a {
+    color: #343a40!important;
+} 
+
+/* ===================================
+Inner - Section: page headline
+==================================== */
+
+.inner-headline {
+  background: #252525;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  color: #fefefe;
+}
+
+.inner-headline .inner-heading h2 {
+  color: #fff;
+  margin: 20px 0 0 0;
+}
+
+/* --- breadcrumbs --- */
+
+.breadcrumb {
+  float:left;
+  padding:10px 0 10px 0;
+  margin:0;
+  list-style: none;
+  background: none;
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+}
+
+.breadcrumb > li {
+  display: inline-block;
+  *display: inline;
+  text-shadow: none;
+  font-size:12px;
+  *zoom: 1;
+  margin:0;
+}
+
+.breadcrumb > .active {
+  color: #797979;
+}
+
+.inner-headline ul.breadcrumb {
+  margin: 30px 0 0;
+  float: right;
+}
+
+.inner-headline ul.breadcrumb li {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.inner-headline ul.breadcrumb li {
+  font-size: 13px;
+  color: #ddd;
+}
+
+.inner-headline ul.breadcrumb li i {
+  color: #dedede;
+}
+
+.inner-headline ul.breadcrumb li a {
+  color: #fff;
+}
+
+ul.breadcrumb li a:hover {
+  text-decoration: none;
+}
+
+.inner-headline ul.breadcrumb li [class^="fa"] {
+    display: inline-block;
+    width: 1.25em;
+    text-align: center;
+}
+
+#Sidebar
+
+/* ===================================
+Sidebar
+==================================== */
+
+.sidebar .navbar-nav{
+    flex-direction: column;
+}
+.sidebar .navbar-nav .dropdown-menu {
+	position: unset;
+}
+
+.sidebar .dropdown-menu {
+    min-width: 180px;
+    list-style: none;
+    background: unset;
+    border-radius: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border: 0;
+}
+
+.sidebar .dropdown-menu .dropdown-item {
+    float: none;
+    font-size: 13px;
+    margin-left: 20px;
+    margin-right: 0;
+    color: #999999;
+    text-decoration: none;
+    text-shadow: none;
+    border-right: none;
+    border-left: none;
+}
+
+.sidebar .dropdown-menu .dropdown-item:hover,
+.sidebar .dropdown-menu .dropdown-item:focus {
+  color: #cf1a07;
+}
+
+.sidebar .navbar .navbar-nav li a {
+    text-transform: none;
+}
+
+.sidebar .navbar .navbar-nav li .dropdown-menu a:hover {
+    background-color: transparent;
+}
+
+.sidebar .navbar-expand .navbar-nav .nav-link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
