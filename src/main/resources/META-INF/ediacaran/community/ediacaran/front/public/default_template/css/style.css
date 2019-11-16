@@ -30,6 +30,10 @@ a:active {
   padding-bottom: 30px;
 }
 
+nav {
+    font-family: monospace;
+}
+
 @media (min-width: 768px)
 nav {
     padding-left: 1.5rem!important;
@@ -68,7 +72,7 @@ nav .navbar-collapse {
  
 
 nav .navbar-collapse .navbar-nav a {
-    color: #343a40!important;
+    color: #343a40;
 } 
 
 /* ===================================
@@ -147,19 +151,144 @@ ul.breadcrumb li a:hover {
     text-align: center;
 }
 
-#Sidebar
+/* ===================================
+Content Page
+==================================== */
+.content-nomargin {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.content-nomargin .content{
+	padding-top: 50px;
+    padding-left: 220px;
+    padding-right: 10px;
+    overflow: hidden;
+}
+
+.content-nomargin .row:last-child{
+    padding-right: 0px !important;
+    margin-right: 0px !important;
+}
+
+.content-nomargin .col-1, 
+.content-nomargin .col-2, 
+.content-nomargin .col-3, 
+.content-nomargin .col-4, 
+.content-nomargin .col-5, 
+.content-nomargin .col-6, 
+.content-nomargin .col-7, 
+.content-nomargin .col-8, 
+.content-nomargin .col-9, 
+.content-nomargin .col-10, 
+.content-nomargin .col-11, 
+.content-nomargin .col-12, 
+.content-nomargin .col, 
+.content-nomargin .col-auto, 
+.content-nomargin .col-sm-1, 
+.content-nomargin .col-sm-2, 
+.content-nomargin .col-sm-3, 
+.content-nomargin .col-sm-4, 
+.content-nomargin .col-sm-5, 
+.content-nomargin .col-sm-6, 
+.content-nomargin .col-sm-7, 
+.content-nomargin .col-sm-8, 
+.content-nomargin .col-sm-9, 
+.content-nomargin .col-sm-10, 
+.content-nomargin .col-sm-11, 
+.content-nomargin .col-sm-12, 
+.content-nomargin .col-sm, 
+.content-nomargin .col-sm-auto, 
+.content-nomargin .col-md-1, 
+.content-nomargin .col-md-2, 
+.content-nomargin .col-md-3, 
+.content-nomargin .col-md-4, 
+.content-nomargin .col-md-5, 
+.content-nomargin .col-md-6, 
+.content-nomargin .col-md-7, 
+.content-nomargin .col-md-8, 
+.content-nomargin .col-md-9, 
+.content-nomargin .col-md-10, 
+.content-nomargin .col-md-11, 
+.content-nomargin .col-md-12, 
+.content-nomargin .col-md, 
+.content-nomargin .col-md-auto, 
+.content-nomargin .col-lg-1, 
+.content-nomargin .col-lg-2, 
+.content-nomargin .col-lg-3, 
+.content-nomargin .col-lg-4, 
+.content-nomargin .col-lg-5, 
+.content-nomargin .col-lg-6, 
+.content-nomargin .col-lg-7, 
+.content-nomargin .col-lg-8, 
+.content-nomargin .col-lg-9, 
+.content-nomargin .col-lg-10, 
+.content-nomargin .col-lg-11, 
+.content-nomargin .col-lg-12, 
+.content-nomargin .col-lg, 
+.content-nomargin .col-lg-auto, 
+.content-nomargin .col-xl-1, 
+.content-nomargin .col-xl-2, 
+.content-nomargin .col-xl-3, 
+.content-nomargin .col-xl-4, 
+.content-nomargin .col-xl-5, 
+.content-nomargin .col-xl-6, 
+.content-nomargin .col-xl-7, 
+.content-nomargin .col-xl-8, 
+.content-nomargin .col-xl-9, 
+.content-nomargin .col-xl-10, 
+.content-nomargin .col-xl-11, 
+.content-nomargin .col-xl-12, 
+.content-nomargin .col-xl, 
+.content-nomargin .col-xl-auto{
+
+}
 
 /* ===================================
 Sidebar
 ==================================== */
+.sidebar{
+    position: absolute;
+    width: 200px;	
+	background: rgba(0, 0, 0, 0.10);
+    height: 100%;
+    font-family: monospace;
+}
 
-.sidebar .navbar-nav{
+.sidebar .navbar-collapse{
+	position: absolute;
+    top: 0;
+    right: 0;
+    width: 100% !important;
+    left: 0;
+    z-index: 20;
+}
+
+.sidebar .navbar-nav {
+	width: 100% !important;
+}
+
+.sidebar .navbar-nav .nav-item {
+	font-weight:bold;
+ 	padding-top: 5px;
+ 	padding-bottom: 5px;
+ 	border-bottom: 1px #ffffff solid;
+}
+
+.sidebar .navbar-nav .nav-item:hover {
+	background-color: #1c1c1c21;
+}
+
+.sidebar .navbar-nav {
     flex-direction: column;
 }
 .sidebar .navbar-nav .dropdown-menu {
 	position: unset;
 }
-
+.sidebar .dropdown-toggle::after{
+ }
+ 
 .sidebar .dropdown-menu {
     min-width: 180px;
     list-style: none;
@@ -186,18 +315,23 @@ Sidebar
 
 .sidebar .dropdown-menu .dropdown-item:hover,
 .sidebar .dropdown-menu .dropdown-item:focus {
-  color: #cf1a07;
+	color: #ddd;
 }
 
 .sidebar .navbar .navbar-nav li a {
-    text-transform: none;
+	color: #ddd;
+	text-transform: none;
 }
 
-.sidebar .navbar .navbar-nav li .dropdown-menu a:hover {
-    background-color: transparent;
+.sidebar .nav-item a:hover {
+	color: #000000;
 }
 
-.sidebar .navbar-expand .navbar-nav .nav-link {
+.sidebar .navbar-expand .navbar-nav .navbar-nav .nav-link {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
+}
+
+.sidebar .nav-link i:first-child{
+	padding-right: 15px;
 }
