@@ -26,6 +26,7 @@ public class MenuItensTag  extends AbstractSimpleTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
 			add("content");
+			add("align");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -39,6 +40,19 @@ public class MenuItensTag  extends AbstractSimpleTag {
 					}
 					
 				});
+				
+				put("align", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						if(value == null) {
+							return null;
+						}
+						
+						return "left".equals(value)? " mr-auto" : " ml-auto";
+					}
+					
+				});
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -49,6 +63,8 @@ public class MenuItensTag  extends AbstractSimpleTag {
 	
 	private MenuTag menu;
 	
+	private String align; //left right
+	 
 	public MenuItensTag() {
 	}
 	
@@ -89,6 +105,14 @@ public class MenuItensTag  extends AbstractSimpleTag {
 
 	public void setContent(JspFragmentVarParser content) {
 		this.content = content;
+	}
+
+	public String getAlign() {
+		return align;
+	}
+
+	public void setAlign(String align) {
+		this.align = align;
 	}
 
 }

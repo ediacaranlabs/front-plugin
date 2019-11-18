@@ -98,4 +98,12 @@ public class MenuTogglerTag  extends AbstractSimpleTag {
 		this.content = content;
 	}
 
+	public String getMenuID() {
+		return menuID;
+	}
+
+	public void setMenuID(String menuID) {
+		this.menuID = menuID;
+	}
+
 }

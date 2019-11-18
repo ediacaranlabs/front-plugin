@@ -77,7 +77,7 @@ public class MenuBarTag  extends AbstractSimpleTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? "navbar-expand" : "navbar-expand-" + value;
+						return value == null? "navbar-expand-lg" : "navbar-expand-" + value;
 					}
 					
 				});
