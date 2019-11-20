@@ -30,50 +30,16 @@ a:active {
   padding-bottom: 30px;
 }
 
-nav {
-    font-family: monospace;
+/* ===================================
+Navbar
+==================================== */
+nav a{
+	color: #656565;
 }
 
-@media (min-width: 768px)
-nav {
-    padding-left: 1.5rem!important;
+nav a:hover{
+	color: #a5a5a5;
 }
-@media (min-width: 768px)
-nav {
-    padding-right: 1.5rem!important;
-}
-@media (min-width: 768px)
-nav {
-    -webkit-box-orient: horizontal!important;
-    -webkit-box-direction: normal!important;
-    -ms-flex-direction: row!important;
-    flex-direction: row!important;
-    -webkit-box-align: center!important;
-    -ms-flex-align: center!important;
-    align-items: center!important;
-}
-
-@media (min-width: 768px)
-nav .navbar-collapse {
-    margin-right: 1rem!important;
-}
-@media (min-width: 768px)
-nav .navbar-collapse {
-    margin-bottom: 0!important;
-}
-@media (min-width: 768px)
-nav .navbar-collapse {
-    margin-top: 0!important;
-}
-
- nav .navbar-collapse .navbar-nav{
- 	float: right; 
- }
- 
-
-nav .navbar-collapse .navbar-nav a {
-    color: #343a40;
-} 
 
 /* ===================================
 Inner - Section: page headline
@@ -152,111 +118,34 @@ ul.breadcrumb li a:hover {
 }
 
 /* ===================================
-Content Page
+Sidebar
 ==================================== */
-.content-nomargin {
+section[class^="sidebar"] {
     position: relative;
     margin: 0;
     padding: 0;
 }
 
-.content-nomargin .content{
+section[class^="sidebar"] .content{
 	padding-top: 50px;
     padding-left: 220px;
     padding-right: 10px;
     overflow: hidden;
 }
 
-.content-nomargin .row:last-child{
+section[class^="sidebar"] .row:last-child{
     padding-right: 0px !important;
     margin-right: 0px !important;
 }
 
-.content-nomargin .col-1, 
-.content-nomargin .col-2, 
-.content-nomargin .col-3, 
-.content-nomargin .col-4, 
-.content-nomargin .col-5, 
-.content-nomargin .col-6, 
-.content-nomargin .col-7, 
-.content-nomargin .col-8, 
-.content-nomargin .col-9, 
-.content-nomargin .col-10, 
-.content-nomargin .col-11, 
-.content-nomargin .col-12, 
-.content-nomargin .col, 
-.content-nomargin .col-auto, 
-.content-nomargin .col-sm-1, 
-.content-nomargin .col-sm-2, 
-.content-nomargin .col-sm-3, 
-.content-nomargin .col-sm-4, 
-.content-nomargin .col-sm-5, 
-.content-nomargin .col-sm-6, 
-.content-nomargin .col-sm-7, 
-.content-nomargin .col-sm-8, 
-.content-nomargin .col-sm-9, 
-.content-nomargin .col-sm-10, 
-.content-nomargin .col-sm-11, 
-.content-nomargin .col-sm-12, 
-.content-nomargin .col-sm, 
-.content-nomargin .col-sm-auto, 
-.content-nomargin .col-md-1, 
-.content-nomargin .col-md-2, 
-.content-nomargin .col-md-3, 
-.content-nomargin .col-md-4, 
-.content-nomargin .col-md-5, 
-.content-nomargin .col-md-6, 
-.content-nomargin .col-md-7, 
-.content-nomargin .col-md-8, 
-.content-nomargin .col-md-9, 
-.content-nomargin .col-md-10, 
-.content-nomargin .col-md-11, 
-.content-nomargin .col-md-12, 
-.content-nomargin .col-md, 
-.content-nomargin .col-md-auto, 
-.content-nomargin .col-lg-1, 
-.content-nomargin .col-lg-2, 
-.content-nomargin .col-lg-3, 
-.content-nomargin .col-lg-4, 
-.content-nomargin .col-lg-5, 
-.content-nomargin .col-lg-6, 
-.content-nomargin .col-lg-7, 
-.content-nomargin .col-lg-8, 
-.content-nomargin .col-lg-9, 
-.content-nomargin .col-lg-10, 
-.content-nomargin .col-lg-11, 
-.content-nomargin .col-lg-12, 
-.content-nomargin .col-lg, 
-.content-nomargin .col-lg-auto, 
-.content-nomargin .col-xl-1, 
-.content-nomargin .col-xl-2, 
-.content-nomargin .col-xl-3, 
-.content-nomargin .col-xl-4, 
-.content-nomargin .col-xl-5, 
-.content-nomargin .col-xl-6, 
-.content-nomargin .col-xl-7, 
-.content-nomargin .col-xl-8, 
-.content-nomargin .col-xl-9, 
-.content-nomargin .col-xl-10, 
-.content-nomargin .col-xl-11, 
-.content-nomargin .col-xl-12, 
-.content-nomargin .col-xl, 
-.content-nomargin .col-xl-auto{
-
-}
-
-/* ===================================
-Sidebar
-==================================== */
-.sidebar{
+section[class^="sidebar"] nav{
     position: absolute;
     width: 200px;	
-	background: rgba(0, 0, 0, 0.10);
+	background: transparent;
     height: 100%;
-    font-family: monospace;
 }
 
-.sidebar .navbar-collapse{
+section[class^="sidebar"] .navbar-collapse{
 	position: absolute;
     top: 0;
     right: 0;
@@ -265,31 +154,34 @@ Sidebar
     z-index: 20;
 }
 
-.sidebar .navbar-nav {
+section[class^="sidebar"] .navbar-nav {
 	width: 100% !important;
 }
 
-.sidebar .navbar-nav .nav-item {
-	font-weight:bold;
+section[class^="sidebar"] nav a{
+	color: #656565;
+}
+
+section[class^="sidebar"] nav a:hover{
+	color: #a5a5a5;
+}
+
+section[class^="sidebar"] .navbar-nav .nav-item {
  	padding-top: 5px;
  	padding-bottom: 5px;
- 	border-bottom: 1px #ffffff solid;
+ 	border-bottom: 1px rgba(0, 0, 0, 0.10) solid;
 }
 
-.sidebar .navbar-nav .nav-item:hover {
-	background-color: #1c1c1c21;
-}
-
-.sidebar .navbar-nav {
+section[class^="sidebar"] .navbar-nav {
     flex-direction: column;
 }
-.sidebar .navbar-nav .dropdown-menu {
+section[class^="sidebar"] .navbar-nav .dropdown-menu {
 	position: unset;
 }
-.sidebar .dropdown-toggle::after{
- }
+section[class^="sidebar"] .dropdown-toggle::after{
+}
  
-.sidebar .dropdown-menu {
+section[class^="sidebar"] .dropdown-menu {
     min-width: 180px;
     list-style: none;
     background: unset;
@@ -301,7 +193,7 @@ Sidebar
     border: 0;
 }
 
-.sidebar .dropdown-menu .dropdown-item {
+section[class^="sidebar"] .dropdown-menu .dropdown-item {
     float: none;
     font-size: 13px;
     margin-left: 20px;
@@ -313,25 +205,28 @@ Sidebar
     border-left: none;
 }
 
-.sidebar .dropdown-menu .dropdown-item:hover,
-.sidebar .dropdown-menu .dropdown-item:focus {
+section[class^="sidebar"] .dropdown-menu .dropdown-item:hover,
+section[class^="sidebar"] .dropdown-menu .dropdown-item:focus {
 	color: #ddd;
 }
 
-.sidebar .navbar .navbar-nav li a {
-	color: #ddd;
-	text-transform: none;
-}
-
-.sidebar .nav-item a:hover {
-	color: #000000;
-}
-
-.sidebar .navbar-expand .navbar-nav .navbar-nav .nav-link {
+section[class^="sidebar"] .navbar-expand .navbar-nav .navbar-nav .nav-link {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
 }
 
-.sidebar .nav-link i:first-child{
+section[class^="sidebar"] .nav-link i:first-child{
 	padding-right: 15px;
+}
+
+@media (max-width: 991.98px){
+	
+	section[class^="sidebar"] nav:not(.show) {
+	    display: none;
+	}
+	
+	section[class^="sidebar"] .content:not(.show) {
+	    padding-left: 10px;
+	}
+	
 }
