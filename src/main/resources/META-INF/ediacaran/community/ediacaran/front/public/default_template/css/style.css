@@ -151,7 +151,7 @@ section[class^="sidebar"] .row:last-child{
 }
 
 section[class^="sidebar"] nav{
-	background-color: aqua;
+	background-color: transparent;
 	margin-left: 0px;
     min-width: 250px;
     max-width: 250px;
@@ -229,6 +229,7 @@ section[class^="sidebar"] .dropdown-item {
 section[class^="sidebar"] .dropdown-menu .dropdown-item:hover,
 section[class^="sidebar"] .dropdown-menu .dropdown-item:focus {
 	color: #ddd;
+	background-color: transparent;
 }
 
 section[class^="sidebar"] .navbar-expand .navbar-nav .navbar-nav .nav-link {
