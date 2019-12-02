@@ -4,4 +4,5 @@
   <link href="/plugins/community/ediacaran/front/default_template/css/bootstrap.css" rel="stylesheet" />
   <link href="/plugins/community/ediacaran/front/default_template/css/style.css" rel="stylesheet" />
   <link href="/plugins/community/ediacaran/front/default_template/css/nivo.css" rel="stylesheet" />
+  <link href="/plugins/community/ediacaran/front/default_template/css/cta.css" rel="stylesheet" />
   
