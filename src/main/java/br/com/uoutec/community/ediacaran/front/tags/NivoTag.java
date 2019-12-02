@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.jsp.JspException;
+
 import br.com.uoutec.community.ediacaran.front.TemplateListVarParser;
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
 
@@ -52,14 +54,25 @@ public class NivoTag extends AbstractBodyTag {
 	private String button;
 	
 	public NivoTag() {
-		this.images  = new ArrayList<Object[]>();
-		this.caption = new ArrayList<Object[]>();
 	}
 	
 	public void add(String img, String link, String title) {
 		images.add(new Object[] {img, EMPTY_IMG_ALT, images.size()});
 		caption.add(new Object[] {caption.size(), link, title, link, button == null? "Read more" : button });
 	}
+	
+    public int doStartTag() throws JspException {
+		this.images  = new ArrayList<Object[]>();
+		this.caption = new ArrayList<Object[]>();
+        return EVAL_BODY_BUFFERED;
+    }
+
+
+    public int doEndTag() throws JspException {
+		this.images  = null;
+		this.caption = null;
+    	return super.doEndTag();
+    }
 	
 	public int doAfterBody() {
 

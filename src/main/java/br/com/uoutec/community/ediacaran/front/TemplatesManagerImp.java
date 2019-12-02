@@ -84,11 +84,14 @@ public class TemplatesManagerImp implements TemplatesManager {
 	public void apply(String template, Writer out, Object ... vars) throws TemplatesManagerException {
 		
 		try {
-			StringPattern p = getTemplate(template);
+			PluginPropertyValue ppv = pluginMetadata.getValue(PluginInstaller.TEMPLATE_PROPERTY);
+			String fullTemplate     = ppv.getValue() + template;
+			
+			StringPattern p = getTemplate(fullTemplate);
 			
 			if(p == null) {
 				synchronized(TemplatesManager.class) {
-					addtemplate(template, template);
+					addtemplate(fullTemplate, fullTemplate);
 				}
 			}
 			
