@@ -56,9 +56,9 @@ public class NivoTag extends AbstractBodyTag {
 	public NivoTag() {
 	}
 	
-	public void add(String img, String link, String title) {
+	public void add(String img, String title, String link, String content) {
 		images.add(new Object[] {img, EMPTY_IMG_ALT, images.size()});
-		caption.add(new Object[] {caption.size(), link, title, link, button == null? "Read more" : button });
+		caption.add(new Object[] {caption.size(), title, content, link, button == null? "Read more" : button });
 	}
 	
     public int doStartTag() throws JspException {
