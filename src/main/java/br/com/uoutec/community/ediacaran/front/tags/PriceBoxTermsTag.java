@@ -6,9 +6,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class PriceBoxTag  extends AbstractSimpleTag {
+public class PriceBoxTermsTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/components/price-box";
+	public static final String TEMPLATE  = "/bootstrap4/components/price-box-terms";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -24,7 +24,6 @@ public class PriceBoxTag  extends AbstractSimpleTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
 			add("content");
-			add("attractiveness");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -34,15 +33,7 @@ public class PriceBoxTag  extends AbstractSimpleTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return new JspFragmentVarParser(((PriceBoxTag)component).getJspBody());
-					}
-					
-				});
-				put("attractiveness", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						return value == null? "" : " attrac-" + value;
+						return new JspFragmentVarParser(((PriceBoxTermsTag)component).getJspBody());
 					}
 					
 				});
@@ -54,9 +45,7 @@ public class PriceBoxTag  extends AbstractSimpleTag {
 	
 	private JspFragmentVarParser content;
 	
-	private String attractiveness;
-	
-	public PriceBoxTag() {
+	public PriceBoxTermsTag() {
 	}
 	
     protected String getDefaultTemplate() {
@@ -91,12 +80,4 @@ public class PriceBoxTag  extends AbstractSimpleTag {
 		this.content = content;
 	}
 
-	public String getAttractiveness() {
-		return attractiveness;
-	}
-
-	public void setAttractiveness(String attractiveness) {
-		this.attractiveness = attractiveness;
-	}
-    
 }

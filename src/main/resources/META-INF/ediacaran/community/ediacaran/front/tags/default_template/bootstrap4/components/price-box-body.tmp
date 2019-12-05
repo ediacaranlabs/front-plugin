@@ -1,0 +1,5 @@
+<div class="pricing-content">
+  <ul>
+    {content}
+  </ul>
+</div>
