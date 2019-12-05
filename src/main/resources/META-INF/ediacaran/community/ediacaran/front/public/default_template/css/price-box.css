@@ -34,7 +34,7 @@
 
 .pricing-content {
   background: #fff;
-  text-align: center;
+  /*text-align: center;*/
   font-size: 14px;
 }
 
@@ -46,13 +46,32 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  font-weight: 500;
 }
 
 .pricing-content ul li {
+  color: #d8d8d8;	
+  position: relative;
   border-bottom: 1px solid #e9e9e9;
   list-style: none;
-  padding: 15px 0 15px 0;
+  padding: 13px 10px 13px 45px;
   margin: 0 0 0 0;
+}
+
+.pricing-content li.active i {
+    display: block;
+}
+
+.pricing-content li.active {
+    color: #000000;
+}
+
+.pricing-content ul li i{
+    left: 25px;
+    line-height: 1;
+    position: absolute;
+    top: 16px;
+    display: none;
 }
 
 .pricing-action {
@@ -91,7 +110,7 @@
   display: block;
 }
 
-.pricing-box-alt.special .pricing-heading {
+.pricing-box-alt.attrac-special .pricing-heading {
   background: #fcfcfc;
   text-align: center;
   padding: 40px 0 1px 0;
@@ -100,7 +119,7 @@
   color: #fff;
 }
 
-.pricing-box-alt.special .pricing-heading h3 {
+.pricing-box-alt.attrac-special .pricing-heading h3 {
   color: #fff;
 }
 

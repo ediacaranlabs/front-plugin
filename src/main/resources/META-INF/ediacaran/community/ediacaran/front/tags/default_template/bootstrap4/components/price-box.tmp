@@ -1,4 +1,4 @@
-<div {attr} class="pricing-box-alt">
+<div {attr} class="pricing-box-alt {attractiveness}">
   <div class="pricing-heading">
     <h3>{title}</h3>
   </div>

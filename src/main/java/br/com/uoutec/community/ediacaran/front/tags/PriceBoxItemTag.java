@@ -34,7 +34,7 @@ public class PriceBoxItemTag  extends AbstractSimpleTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? " <i class=\"icon-ok\"></i>" : "";
+						return value != null && (Boolean)value? " class=\"active\"" : "";
 					}
 					
 				});

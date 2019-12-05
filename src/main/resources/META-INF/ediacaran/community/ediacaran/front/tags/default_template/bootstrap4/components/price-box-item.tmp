@@ -1,1 +1,1 @@
-<li>{checked}{content}</li>
+<li{checked}><i class="icon-ok"></i> {content}</li>

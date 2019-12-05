@@ -28,6 +28,7 @@ public class PriceBoxTag  extends AbstractSimpleTag {
 			add("action");
 			add("label");
 			add("content");
+			add("attractiveness");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -38,6 +39,14 @@ public class PriceBoxTag  extends AbstractSimpleTag {
 					@Override
 					public Object toValue(Object value, Object component) {
 						return new JspFragmentVarParser(((PriceBoxTag)component).getJspBody());
+					}
+					
+				});
+				put("attractiveness", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return value == null? "" : " attrac-" + value;
 					}
 					
 				});
@@ -56,6 +65,8 @@ public class PriceBoxTag  extends AbstractSimpleTag {
 	private String label;
 	
 	private JspFragmentVarParser content;
+	
+	private String attractiveness;
 	
 	public PriceBoxTag() {
 	}
@@ -122,6 +133,14 @@ public class PriceBoxTag  extends AbstractSimpleTag {
 
 	public void setContent(JspFragmentVarParser content) {
 		this.content = content;
+	}
+
+	public String getAttractiveness() {
+		return attractiveness;
+	}
+
+	public void setAttractiveness(String attractiveness) {
+		this.attractiveness = attractiveness;
 	}
     
 }
