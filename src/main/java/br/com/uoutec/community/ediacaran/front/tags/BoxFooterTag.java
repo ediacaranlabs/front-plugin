@@ -1,13 +1,10 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.jsp.JspException;
 
 public class BoxFooterTag extends AbstractSimpleTag {
 
@@ -26,11 +23,20 @@ public class BoxFooterTag extends AbstractSimpleTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_PROPERTY_PARSERS){{
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((BoxFooterTag)component).getJspBody());
+					}
+					
+				});
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -42,11 +48,6 @@ public class BoxFooterTag extends AbstractSimpleTag {
 	public BoxFooterTag() {
 	}
 	
-	public void doTag() throws JspException, IOException {
-		this.content = new JspFragmentVarParser(getJspBody());
-		super.doTag();
-	}
-    
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }

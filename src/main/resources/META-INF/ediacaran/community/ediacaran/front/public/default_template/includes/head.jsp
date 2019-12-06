@@ -6,4 +6,5 @@
   <link href="/plugins/community/ediacaran/front/default_template/css/nivo.css" rel="stylesheet" />
   <link href="/plugins/community/ediacaran/front/default_template/css/cta.css" rel="stylesheet" />
   <link href="/plugins/community/ediacaran/front/default_template/css/price-box.css" rel="stylesheet" />
+  <link href="/plugins/community/ediacaran/front/default_template/css/box.css" rel="stylesheet" />
   

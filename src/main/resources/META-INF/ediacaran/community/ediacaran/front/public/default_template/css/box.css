@@ -1,0 +1,30 @@
+.box img {
+    background-color: #ff4400;	
+}
+
+.box button {
+    background-color: #ff4400;	
+    border-color: #ff4400;
+}
+
+.box button:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: #ff4400;
+    border-color: #ff4400;
+}
+
+.box button:hover {
+    color: #fff;
+    background-color: #e73e00;
+    border-color: #e73e00;
+}
+
+.box h6 {
+    font-family: 'Open Sans', sans-serif;
+    color: #353535;
+    font-weight: 300;
+    line-height: 1.5em;
+    margin-top: 0;
+	font-size: 22px;
+    margin-bottom: 20px;    
+}
