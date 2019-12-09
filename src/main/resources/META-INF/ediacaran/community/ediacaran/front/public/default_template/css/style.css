@@ -240,3 +240,80 @@ section[class^="sidebar"] .navbar-expand .navbar-nav .navbar-nav .nav-link {
 section[class^="sidebar"] .nav-link i:first-child{
 	padding-right: 15px;
 }
+/* ===================================
+footer
+==================================== */
+
+footer {
+    background: #111;
+    padding: 50px 0 0 0;
+    color: #bbb;
+	font-family: 'Open Sans', sans-serif;    
+}
+
+footer .widget {
+    position: relative;
+}
+
+footer .widget h5 {
+    font-weight: 300;
+    margin-bottom: 20px;
+	color: #eee;
+	font-size: 24px;
+}
+
+footer .widget strong {
+    font-weight: bold;
+}
+
+footer .widget address {
+    line-height: 1.6em;
+}
+
+footer .widget ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+footer .widget ul li {
+    margin: 0;
+    padding: 2px 0 2px 0;
+    list-style: none;
+}
+
+footer .widget ul li a {
+    color: #919191;
+}
+
+.sub-footer {
+    background: #0a0a0a;
+    text-shadow: none;
+    color: #5d5d5d;
+    padding: 0;
+    padding-top: 30px;
+    margin: 20px 0 0 0;
+}
+
+
+.sub-footer .social-network a {
+    color: #444;
+}
+
+.sub-footer .social-network a:hover {
+	color: #ff4400;
+}
+
+.sub-footer .social-network ul{
+    float: right;
+}
+
+.sub-footer .social-network ul {
+    list-style: none;
+    margin: 0;
+}
+
+.sub-footer .social-network ul li {
+    display: inline;
+}
+
