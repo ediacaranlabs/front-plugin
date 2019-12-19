@@ -145,6 +145,15 @@ section[class^="sidebar"] .content .show {
 }
 */
 
+section[class^="content"]{
+	padding-bottom: 30px;
+	padding-top: 30px;
+}
+
+section[class^="content bg2"]{
+	background-color: rgba(0, 0, 0, 0.07);
+}
+
 section[class^="sidebar"] .row:last-child{
     padding-right: 0px !important;
     margin-right: 0px !important;
