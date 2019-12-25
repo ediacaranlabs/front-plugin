@@ -12,6 +12,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
+import org.brandao.brutos.web.WebInvoker;
 
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
 import br.com.uoutec.community.ediacaran.front.TemplatesManagerException;
@@ -286,6 +287,12 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     protected Object getProperty(String name, Object defaultValue) {
 		Object val = this.getJspContext().getAttribute(name);
     	return val == null? defaultValue : val;
+    }
+    
+    protected String getRequestPath() {
+    	String path = WebInvoker.getCurrentApplicationContext().getMvcRequest().getRequestId();
+    	int index = path.lastIndexOf("/");
+    	return index == -1? path : path.substring(0, index);
     }
     
 	public String getExtAttrs() {

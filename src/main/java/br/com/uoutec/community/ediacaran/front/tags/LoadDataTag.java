@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collections;
@@ -49,8 +50,9 @@ public class LoadDataTag  extends AbstractSimpleTag {
 	
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
+    	
     	ServerBootstrap sb     = (ServerBootstrap) ApplicationBootstrapProvider.getBootstrap();
-    	Map<Object,Object> dta = ReadData.loadData(file, sb.getWebapp());
+    	Map<Object,Object> dta = ReadData.loadData(file, new File(sb.getWebapp(), super.getRequestPath()));
     	super.getJspContext().setAttribute(var == null? "vars" : var, dta);
 	}
 	
