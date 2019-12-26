@@ -18,8 +18,8 @@ public class ReadData {
 		Map<Object,Object> data = getData(fData, basepath);
 		
 		if(data != null) {
-			
-			List<Map<Object,Object>> incData = loadIncludes(data, basepath);
+			File parentFData = fData.getParentFile().getCanonicalFile();
+			List<Map<Object,Object>> incData = loadIncludes(data, parentFData);
 			
 			Map<Object,Object> vars = new HashMap<Object,Object>();
 			

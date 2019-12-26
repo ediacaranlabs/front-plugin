@@ -8,11 +8,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
-import org.brandao.brutos.web.WebInvoker;
 
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
 import br.com.uoutec.community.ediacaran.front.TemplatesManagerException;
@@ -290,9 +291,27 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     }
     
     protected String getRequestPath() {
-    	String path = WebInvoker.getCurrentApplicationContext().getMvcRequest().getRequestId();
-    	int index = path.lastIndexOf("/");
-    	return index == -1? path : path.substring(0, index);
+    	
+    	PageContext pc = (PageContext)super.getJspContext();
+    	HttpServletRequest request = (HttpServletRequest)pc.getRequest();
+    	
+		String include = (String) request.getAttribute("javax.servlet.include.request_uri");
+		
+		if(include != null) {
+			return parseRequestId(
+					include, 
+					(String)request.getAttribute("javax.servlet.include.context_path"));
+		}
+		else {
+			return parseRequestId(
+					request.getRequestURI(), 
+					request.getContextPath());
+		}
+    	
+    }
+    
+    private String parseRequestId(String path, String contextPath){
+        return path.substring( contextPath.length(), path.length() );
     }
     
 	public String getExtAttrs() {
