@@ -12,14 +12,15 @@ import br.com.uoutec.community.ediacaran.front.pub.DataUtil;
 
 public class ReadData {
 
-	public static Map<Object,Object> loadData(String path, File basepath) throws IOException{
+	public static Map<Object,Object> loadData(String path, File root, File requestFile) throws IOException{
 		
-		File fData              = new File(basepath, path);
-		Map<Object,Object> data = getData(fData, basepath);
+		File baseFile			= requestFile.getParentFile();
+		File fData              = new File(baseFile, path);
+		Map<Object,Object> data = getData(fData, root);
 		
 		if(data != null) {
 			File parentFData = fData.getParentFile().getCanonicalFile();
-			List<Map<Object,Object>> incData = loadIncludes(data, parentFData);
+			List<Map<Object,Object>> incData = loadIncludes(data, root, parentFData);
 			
 			Map<Object,Object> vars = new HashMap<Object,Object>();
 			
@@ -36,7 +37,7 @@ public class ReadData {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static List<Map<Object,Object>> loadIncludes(Map<Object,Object> data, File basepath) throws IOException{
+	private static List<Map<Object,Object>> loadIncludes(Map<Object,Object> data, File root, File basepath) throws IOException{
 		
 		List<Object> inc = (List<Object>)data.get("includes");
 		
@@ -47,7 +48,7 @@ public class ReadData {
 			for(Object i: inc) {
 				
 				File fInc = new File(basepath, String.valueOf(i));
-				Map<Object,Object> dataInc = getData(fInc, basepath);
+				Map<Object,Object> dataInc = getData(fInc, root);
 				
 				if(dataInc != null) {
 					incData.add(dataInc);
@@ -61,11 +62,11 @@ public class ReadData {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static Map<Object,Object> getData(File dta, File basepath) throws IOException{
+	private static Map<Object,Object> getData(File dta, File root) throws IOException{
 		
 		dta = dta.getCanonicalFile();
 		
-		if(!dta.getAbsolutePath().startsWith(basepath.getAbsolutePath())) {
+		if(!dta.getAbsolutePath().startsWith(root.getAbsolutePath())) {
 			return null;
 		}
 		

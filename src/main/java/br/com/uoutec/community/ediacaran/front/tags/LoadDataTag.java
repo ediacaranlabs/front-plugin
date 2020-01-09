@@ -52,7 +52,11 @@ public class LoadDataTag  extends AbstractSimpleTag {
     		Writer out) throws IOException {
     	
     	ServerBootstrap sb     = (ServerBootstrap) ApplicationBootstrapProvider.getBootstrap();
-    	Map<Object,Object> dta = ReadData.loadData(file, new File(sb.getWebapp(), super.getRequestPath()));
+    	Map<Object,Object> dta = ReadData.loadData(
+    								file, 
+									sb.getWebapp().getCanonicalFile(), 
+									new File(sb.getWebapp(), super.getRequestPath()));
+    	
     	super.getJspContext().setAttribute(var == null? "vars" : var, dta);
 	}
 	
