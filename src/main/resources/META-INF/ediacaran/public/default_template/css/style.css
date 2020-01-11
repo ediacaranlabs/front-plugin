@@ -7,11 +7,10 @@
 General
 ===================================*/
 body {
-  font-family: 'Open Sans', Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 1.6em;
-  color: #656565;
+  font-family: arial,sans-serif;
+  font-size: 13px;
+  line-height: 1.57;
+  color: #545454;
 }
 
 a:active {
@@ -30,6 +29,13 @@ a:active {
   padding-bottom: 30px;
 }
 
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 /* ===================================
 Navbar
 ==================================== */
@@ -41,6 +47,9 @@ nav a:hover{
 	color: #a5a5a5;
 }
 
+.navbar{
+	padding: 0 0;
+}
 /* ===================================
 Inner - Section: page headline
 ==================================== */

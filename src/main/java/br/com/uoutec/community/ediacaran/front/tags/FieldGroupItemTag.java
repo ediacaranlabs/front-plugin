@@ -45,7 +45,7 @@ public class FieldGroupItemTag  extends AbstractSimpleTag {
 	
 	/* ------------ Prop ---------------*/
 	
-	private String text;
+	private Boolean text;
 	
 	private JspFragmentVarParser content;
 	
@@ -53,7 +53,7 @@ public class FieldGroupItemTag  extends AbstractSimpleTag {
 	}
 	
     protected String getDefaultTemplate() {
-    	return text == null? TEMPLATE2 : TEMPLATE;
+    	return text == null || text? TEMPLATE : TEMPLATE2;
     }
 
     protected Set<String> getDefaultAttributes(){
@@ -76,11 +76,11 @@ public class FieldGroupItemTag  extends AbstractSimpleTag {
     	return DEFAULT_PROPERTY_PARSERS;
     }
 
-	public String getText() {
+	public Boolean getText() {
 		return text;
 	}
 
-	public void setText(String text) {
+	public void setText(Boolean text) {
 		this.text = text;
 	}
 

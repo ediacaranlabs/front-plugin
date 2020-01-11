@@ -1,16 +1,24 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import br.com.uoutec.community.ediacaran.front.TemplatesManagerException;
+
 public class FormTag extends AbstractSimpleTag {
 
 	public static final String TEMPLATE = "/bootstrap4/components/form";
 	
 	public static final String FORM = FormTag.class.getSimpleName() + ":form";
+	
+	public static final String VERTICAL_FORM = FormTag.class.getSimpleName() + ":vertical_form";
+	
+	public static final String VERTICAL_FORM_VALUE = "true";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -40,6 +48,7 @@ public class FormTag extends AbstractSimpleTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
 			add("content");
+			add("style");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -57,9 +66,20 @@ public class FormTag extends AbstractSimpleTag {
 						return new JspFragmentVarParser(((FormTag)component).getJspBody());
 					}
 				});
+				
+				put("style", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return "inline".equals(value)? "form-inline " : "";
+					}
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
+	
+	private String style; // inline, horizontal, vertical
 	
 	private String acceptCharset;
 	
@@ -78,6 +98,20 @@ public class FormTag extends AbstractSimpleTag {
 	public FormTag() {
 	}
 
+    protected void applyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException, TemplatesManagerException {
+    	
+    	if("vertical".equals(this.style)) {
+	    	Object old = super.setProperty(VERTICAL_FORM, VERTICAL_FORM_VALUE);
+	    	super.applyTemplate(template, vars, out);
+	    	super.setProperty(VERTICAL_FORM, old);
+    	}
+    	else {
+	    	super.applyTemplate(template, vars, out);
+    	}
+    	
+    }
+	
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }
@@ -150,4 +184,12 @@ public class FormTag extends AbstractSimpleTag {
 		this.content = content;
 	}
 
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
+	}
+	
 }

@@ -1,3 +1,3 @@
-<form {attr}>
+<form {attr}class="{inline}">
 {form-body}
 </form>

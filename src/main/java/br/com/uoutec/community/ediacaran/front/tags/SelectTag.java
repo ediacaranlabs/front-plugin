@@ -83,8 +83,8 @@ public class SelectTag extends ComponentFormTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_PROPS) {{
 			add("label");
-			add("inline");
 			add("size");
+			add("options");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -109,6 +109,14 @@ public class SelectTag extends ComponentFormTag {
 					
 				});
 				
+				put("options", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((SelectTag)component).getJspBody());
+					}
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -129,6 +137,8 @@ public class SelectTag extends ComponentFormTag {
 	
 	private String size;
 
+	private JspFragmentVarParser options;
+	
 	public SelectTag() {
 	}
 	
@@ -215,6 +225,14 @@ public class SelectTag extends ComponentFormTag {
 
 	public void setSizeList(Integer sizeList) {
 		this.sizeList = sizeList;
+	}
+
+	public JspFragmentVarParser getOptions() {
+		return options;
+	}
+
+	public void setOptions(JspFragmentVarParser options) {
+		this.options = options;
 	}
 
 }

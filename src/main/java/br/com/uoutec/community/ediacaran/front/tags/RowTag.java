@@ -10,6 +10,8 @@ public class RowTag  extends AbstractSimpleTag {
 
 	public static final String TEMPLATE  = "/bootstrap4/designer/row";
 	
+	public static final String TEMPLATE_FORM  = "/bootstrap4/designer/row-form";
+	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_ATTRS) {{
@@ -49,7 +51,7 @@ public class RowTag  extends AbstractSimpleTag {
 	}
 	
     protected String getDefaultTemplate() {
-    	return TEMPLATE;
+    	return FormTag.VERTICAL_FORM_VALUE.equals(super.getProperty(FormTag.VERTICAL_FORM))? TEMPLATE_FORM : TEMPLATE;
     }
 
     protected Set<String> getDefaultAttributes(){
