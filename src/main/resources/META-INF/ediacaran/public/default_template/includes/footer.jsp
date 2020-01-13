@@ -144,6 +144,9 @@
 	<script src="/plugins/community/ediacaran/front/default_template/js/jquery.min.js"></script>
 	<script src="/plugins/community/ediacaran/front/default_template/js/jquery.nivo.slider.js"></script>	
 	<script src="/plugins/community/ediacaran/front/default_template/js/bootstrap.js"></script>
+	<script src="/plugins/community/ediacaran/front/default_template/js/bootstrapValidator/bootstrapValidator.min.js"></script>
 	<script src="/plugins/community/ediacaran/front/default_template/js/sidebar.js"></script>	
 	<script src="/plugins/community/ediacaran/front/default_template/js/nivo.js"></script>	
+  	<script src="/plugins/community/ediacaran/front/default_template/js/messages.js" charset="utf-8"></script>
+	<script	src="/plugins/community/ediacaran/front/default_template/js/regex-patterns.js" charset="utf-8"></script>
   

@@ -38,11 +38,16 @@ public class ColTag  extends AbstractSimpleTag {
 					@Override
 					public Object toValue(Object value, Object component) {
 						ColTag c = (ColTag)component;
-						Integer size = c.getSize();
+						
+						Integer size   = c.getSize();
 						Integer offset = c.getOffset();
-						String sizeStyle   = size == null? "col" : "col-sm-12 col-md-12 " + "col-lg-" + size + " col-xl-" + size;
-						String offsetStyle = offset == null? "" : "offset-lg-" + offset + " offset-xl-" + offset;
-						return sizeStyle + " " + offsetStyle;
+						Integer order  = c.getOrder();
+						
+						String sizeStyle   = size == null?   "col" : "col-sm-12 col-md-12 " + "col-lg-" + size + " col-xl-" + size;
+						String offsetStyle = offset == null? ""    : "offset-lg-" + offset + " offset-xl-" + offset;
+						String orderStyle  = order == null?  ""    : "order-lg-" + order + " order-xl-" + order;
+						
+						return sizeStyle + " " + offsetStyle + " " + orderStyle;
 					}
 				});
 				
@@ -64,6 +69,8 @@ public class ColTag  extends AbstractSimpleTag {
 	private Integer size;
 	
 	private Integer offset;
+	
+	private Integer order;
 	
 	private JspFragmentVarParser content;
 	
@@ -116,6 +123,14 @@ public class ColTag  extends AbstractSimpleTag {
 
 	public void setContent(JspFragmentVarParser content) {
 		this.content = content;
+	}
+
+	public Integer getOrder() {
+		return order;
+	}
+
+	public void setOrder(Integer order) {
+		this.order = order;
 	}
 
 }
