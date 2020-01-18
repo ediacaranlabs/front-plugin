@@ -75,6 +75,19 @@ public class FormTag extends AbstractSimpleTag {
 					}
 				});
 				
+				put("update", new AttributeParserImp() {
+					
+					@Override
+					public String toName(String value, Object component) {
+						return "dest-content";
+					}
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return value;
+					}
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -95,12 +108,16 @@ public class FormTag extends AbstractSimpleTag {
 
 	private JspFragmentVarParser content;
 	
+	private String update;
+	
 	public FormTag() {
 	}
 
     protected void applyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException, TemplatesManagerException {
     	
+    	Object oldForm = super.setProperty(FORM, this);
+    	/*
     	if("vertical".equals(this.style)) {
 	    	Object old = super.setProperty(VERTICAL_FORM, VERTICAL_FORM_VALUE);
 	    	super.applyTemplate(template, vars, out);
@@ -109,7 +126,10 @@ public class FormTag extends AbstractSimpleTag {
     	else {
 	    	super.applyTemplate(template, vars, out);
     	}
+    	*/
     	
+    	super.applyTemplate(template, vars, out);
+    	super.setProperty(FORM, oldForm);
     }
 	
     protected String getDefaultTemplate() {
@@ -190,6 +210,14 @@ public class FormTag extends AbstractSimpleTag {
 
 	public void setStyle(String style) {
 		this.style = style;
+	}
+
+	public String getUpdate() {
+		return update;
+	}
+
+	public void setUpdate(String update) {
+		this.update = update;
 	}
 	
 }

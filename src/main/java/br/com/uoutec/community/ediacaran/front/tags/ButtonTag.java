@@ -17,6 +17,7 @@ public class ButtonTag extends ComponentFormTag {
 			add("ctype");
 			add("method");
 			add("target");
+			add("actionType");
 		}});
 	
 	@SuppressWarnings("serial")

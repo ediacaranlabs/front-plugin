@@ -151,7 +151,7 @@ public class TextfieldTag extends ComponentFormTag {
 		super.setComponentType("text");
 	}
 	
-    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
+    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
 		vars.put("empty",   label == null? "sr-only" : null);
     }

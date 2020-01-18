@@ -33,11 +33,6 @@ public class TableTag  extends AbstractSimpleTag {
 				put("style", new AttributeParserImp() {
 					
 					@Override
-					public String toName(String value, Object component) {
-						return null;
-					}
-					
-					@Override
 					public Object toValue(Object value, Object component) {
 						return value == null? "" : "table-" + value;
 					}

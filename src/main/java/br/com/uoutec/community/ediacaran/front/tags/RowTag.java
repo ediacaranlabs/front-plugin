@@ -51,7 +51,7 @@ public class RowTag  extends AbstractSimpleTag {
 	}
 	
     protected String getDefaultTemplate() {
-    	return FormTag.VERTICAL_FORM_VALUE.equals(super.getProperty(FormTag.VERTICAL_FORM))? TEMPLATE_FORM : TEMPLATE;
+    	return FormTag.FORM != null? TEMPLATE_FORM : TEMPLATE;
     }
 
     protected Set<String> getDefaultAttributes(){
