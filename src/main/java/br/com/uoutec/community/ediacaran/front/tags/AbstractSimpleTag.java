@@ -325,8 +325,12 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
 	public String getId() {
 		
 		if(id == null) {
-			Integer acc = (Integer) this.getJspContext().getAttribute(ID_COUNT);
-			getJspContext().setAttribute(ID_COUNT, acc = acc == null? 0 : acc.intValue() + 1);
+			PageContext pageContext    = (PageContext) getJspContext();  
+			HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
+			
+			Integer acc = (Integer) request.getAttribute(ID_COUNT);
+			request.setAttribute(ID_COUNT, acc = acc == null? 0 : acc.intValue() + 1);
+			
 			return id = getClass().getSimpleName().toLowerCase() + String.valueOf(acc);
 		}
 		

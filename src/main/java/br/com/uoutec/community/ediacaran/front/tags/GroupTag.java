@@ -6,9 +6,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class RowTag  extends AbstractSimpleTag {
+public class GroupTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/designer/row";
+	public static final String TEMPLATE  = "/bootstrap4/designer/group";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -34,7 +34,7 @@ public class RowTag  extends AbstractSimpleTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return new JspFragmentVarParser(((RowTag)component).getJspBody());
+						return new JspFragmentVarParser(((GroupTag)component).getJspBody());
 					}
 					
 				});
@@ -43,7 +43,7 @@ public class RowTag  extends AbstractSimpleTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? "row" : value + "-row";
+						return value == null? "" : "-group";
 					}
 					
 				});
@@ -58,7 +58,7 @@ public class RowTag  extends AbstractSimpleTag {
 	
 	private String style; //form
 	
-	public RowTag() {
+	public GroupTag() {
 	}
 	
     protected String getDefaultTemplate() {

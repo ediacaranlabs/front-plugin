@@ -1,3 +1,0 @@
-<div {attr} class="form-row {classStyle}">
-{content}
-</div>
