@@ -1,0 +1,1 @@
+{ rule: "{name}", message: "{message}", params: [{params}] }

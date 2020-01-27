@@ -1,0 +1,11 @@
+<script language="javascript">
+	$.AppContext.onload(function(){
+	
+		$.AppContext.validator.addRules({
+			form: "{form}", 
+			field: "{input}", 
+			rules: [{rules}]
+		});
+		
+	});
+</script>
