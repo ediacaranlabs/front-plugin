@@ -22,6 +22,8 @@ public class ValidatorTag extends AbstractBodyTag {
 
 	public static final String TEMPLATE_RULE  = "/bootstrap4/components/form-rule-validator";
 	
+	public static final String TEMPLATE_RULE_PARAM  = "/bootstrap4/components/form-rule-validator";
+	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_ATTRS) {{
@@ -72,11 +74,23 @@ public class ValidatorTag extends AbstractBodyTag {
 		}
 		
 		try {
+			TemplateListVarParser rules = new TemplateListVarParser(TEMPLATE_RULE);
+			
+			for(ValidatorEntity ve: this.validator) {
+				
+				TemplateListVarParser params = new TemplateListVarParser(TEMPLATE_RULE_PARAM);
+				
+				for(ValidatorParamEntity p: ve.params) {
+					params.add(p.getName(), p.getValue());
+				}
+				
+				rules.add( ve.getName(), ve.getMessage(), params);
+			}
 			
 			new TemplateVarParser(TEMPLATE)
 				.put("form", form.getId())
 				.put("field", field.getName())
-				.put("rules", new TemplateListVarParser(TEMPLATE_RULE, images))
+				.put("rules", rules)
 				.parse(bodyContent.getEnclosingWriter());
 		} 
 		catch (IOException e) {
