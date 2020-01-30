@@ -1,11 +1,9 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,15 +12,15 @@ import javax.servlet.jsp.JspException;
 import br.com.uoutec.community.ediacaran.front.TemplateListVarParser;
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
 
-public class ValidatorTag extends AbstractBodyTag {
+public class FieldValidatorTag extends AbstractBodyTag {
 
 	private static final long serialVersionUID = 748182107582888257L;
 
-	public static final String TEMPLATE  = "/bootstrap4/components/form-validator";
+	public static final String TEMPLATE  = "/bootstrap4/components/field-validator";
 
-	public static final String TEMPLATE_RULE  = "/bootstrap4/components/form-rule-validator";
+	public static final String TEMPLATE_RULE  = "/bootstrap4/components/field-rule-validator";
 	
-	public static final String TEMPLATE_RULE_PARAM  = "/bootstrap4/components/form-rule-validator";
+	public static final String TEMPLATE_RULE_PARAM  = "/bootstrap4/components/field-rule-validator-param";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -45,14 +43,17 @@ public class ValidatorTag extends AbstractBodyTag {
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_PROPERTY_PARSERS){{
 			}});
 	
-	private List<ValidatorEntity> validator;
+	private Set<ValidatorEntity> validator;
 	
-	public ValidatorTag() {
-		this.validator = new ArrayList<ValidatorEntity>();
+	public FieldValidatorTag() {
+		this.validator = new HashSet<ValidatorEntity>();
 	}
 	
-	
-    public int doStartTag() throws JspException {
+    public Set<ValidatorEntity> getValidator() {
+		return validator;
+	}
+
+	public int doStartTag() throws JspException {
         return EVAL_BODY_BUFFERED;
     }
 
@@ -84,7 +85,7 @@ public class ValidatorTag extends AbstractBodyTag {
 					params.add(p.getName(), p.getValue());
 				}
 				
-				rules.add( ve.getName(), ve.getMessage(), params);
+				rules.add(ve.getName(), ve.getMessage(), params);
 			}
 			
 			new TemplateVarParser(TEMPLATE)
@@ -130,13 +131,13 @@ public class ValidatorTag extends AbstractBodyTag {
 		
 		private String message;
 		
-		private List<ValidatorParamEntity> params;
+		private Set<ValidatorParamEntity> params;
 
 		public ValidatorEntity(String name, String message) {
 			super();
 			this.name = name;
 			this.message = message;
-			this.params = new ArrayList<ValidatorParamEntity>();
+			this.params = new HashSet<ValidatorParamEntity>();
 		}
 
 		public String getName() {
@@ -147,8 +148,33 @@ public class ValidatorTag extends AbstractBodyTag {
 			return message;
 		}
 
-		public List<ValidatorParamEntity> getParams() {
+		public Set<ValidatorParamEntity> getParams() {
 			return params;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			ValidatorEntity other = (ValidatorEntity) obj;
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (!name.equals(other.name))
+				return false;
+			return true;
 		}
 		
 	}
@@ -171,6 +197,31 @@ public class ValidatorTag extends AbstractBodyTag {
 
 		public String getValue() {
 			return value;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			ValidatorParamEntity other = (ValidatorParamEntity) obj;
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (!name.equals(other.name))
+				return false;
+			return true;
 		}
 		
 	}
