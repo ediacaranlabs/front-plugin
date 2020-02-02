@@ -1,6 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,6 +12,7 @@ import javax.servlet.jsp.JspException;
 
 import br.com.uoutec.community.ediacaran.front.TemplateListVarParser;
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.front.TemplatesManagerException;
 
 public class FieldValidatorTag extends AbstractBodyTag {
 
@@ -100,6 +102,40 @@ public class FieldValidatorTag extends AbstractBodyTag {
 
 		return SKIP_BODY;
 	}
+	
+    protected void applyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException, TemplatesManagerException {
+    	
+		TemplateListVarParser rules = new TemplateListVarParser(TEMPLATE_RULE);
+		
+		for(ValidatorEntity ve: this.validator) {
+			
+			TemplateListVarParser params = new TemplateListVarParser(TEMPLATE_RULE_PARAM);
+			
+			for(ValidatorParamEntity p: ve.params) {
+				params.add(p.getName(), p.getValue());
+			}
+			
+			rules.add(ve.getName(), ve.getMessage(), params);
+		}
+		
+		FormTag form = (FormTag) super.getProperty(FormTag.FORM, null);
+		ComponentFormTag field = (ComponentFormTag)super.getParentTag();
+		
+		if(form == null) {
+			throw new IllegalStateException("form not found");
+		}
+		
+		if(field == null) {
+			throw new IllegalStateException("field not found");
+		}
+		
+		new TemplateVarParser(TEMPLATE)
+			.put("form", form.getId())
+			.put("field", field.getName())
+			.put("rules", rules)
+			.parse(out);
+    }
 	
     protected String getDefaultTemplate() {
     	return TEMPLATE;

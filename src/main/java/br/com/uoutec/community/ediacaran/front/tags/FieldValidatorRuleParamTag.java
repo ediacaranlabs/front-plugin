@@ -43,7 +43,31 @@ public class FieldValidatorRuleParamTag extends AbstractBodyTag {
 	
 	private ValidatorParamEntity param;
 	
-    public void doInitBody() throws JspException {
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public ValidatorParamEntity getParam() {
+		return param;
+	}
+
+	public void setParam(ValidatorParamEntity param) {
+		this.param = param;
+	}
+
+	public void doInitBody() throws JspException {
 		FieldValidatorTag tag = (FieldValidatorTag)super.getParentTag();
 		
 		if(tag == null) {

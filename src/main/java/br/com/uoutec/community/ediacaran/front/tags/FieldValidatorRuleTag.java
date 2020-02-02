@@ -42,7 +42,31 @@ public class FieldValidatorRuleTag extends AbstractBodyTag {
 	
 	private ValidatorEntity validator;
 	
-    public void doInitBody() throws JspException {
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public ValidatorEntity getValidator() {
+		return validator;
+	}
+
+	public void setValidator(ValidatorEntity validator) {
+		this.validator = validator;
+	}
+
+	public void doInitBody() throws JspException {
 		FieldValidatorTag tag = (FieldValidatorTag)super.getParentTag();
 		
 		if(tag == null) {

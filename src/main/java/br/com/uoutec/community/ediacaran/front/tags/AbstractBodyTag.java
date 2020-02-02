@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
@@ -19,15 +20,15 @@ import br.com.uoutec.community.ediacaran.front.TemplatesManagerProvider;
 
 public abstract class AbstractBodyTag extends BodyTagSupport{
 
-	private static final long serialVersionUID = -6892960845331892542L;
+	private static final long serialVersionUID = -5353589232919296817L;
 
-	public static final String WRAPPER_TEMPLATE		= "bootstrap4/components/wrapper";
+	public static final String WRAPPER_TEMPLATE		= "/bootstrap4/components/wrapper";
 	
 	public static final String ID_COUNT				= "_component_id_count";
 
 	public static final String ATTR_FORMAT			= "([a-z-_]+)=([^\\;]+)";
 
-	public static final String PARENT_TAG			= AbstractBodyTag.class.getSimpleName() + ":parent";
+	public static final String PARENT_TAG			= AbstractSimpleTag.class.getSimpleName() + ":parent";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -73,34 +74,66 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 	
 	private boolean wrapper;
 	
-    public int doAfterBody() throws JspException {
-    	try {
-    		if(!wrapper)
-	    		doInnerAfterBody();
-	    	else
-	    		doWrapperAfterBody();
-	    	
-	    	return SKIP_BODY;
-    	}
-    	catch(Throwable e) {
-    		throw new JspException(e);
-    	}
+	private Object oldParent;
+	
+    public void doInitBody() throws JspException {
+    	setProperty(getClass().getName() + ":CONTEXT", this);
+    	
+    	oldParent = getParentTag();
+    	setParentTag(this);
     }
 	
-    protected void doWrapperAfterBody() throws IOException, TemplatesManagerException{
+    public int doAfterBody() throws JspException {
+    	try {
+    		applyTemplate();
+        	setParentTag(oldParent);
+        	setProperty(getClass().getName() + ":CONTEXT", null);    	
+        	return SKIP_BODY;
+    	}
+	    catch(TemplatesManagerException e) {
+	    	throw new JspException(e);
+	    } 
+    	catch (IOException e) {
+	    	throw new JspException(e);
+		}
+    	
+    }
+
+    protected void applyTemplate() throws TemplatesManagerException, JspException, IOException{
+    	if(!wrapper) {
+    		applySimpleTemplate();
+    	}
+    	else {
+    		applyWrapperTemplate();
+    	}
+    }
+    
+    protected void applyWrapperTemplate() throws JspException, IOException, TemplatesManagerException{
     	
 		Map<String, Object> tagVars = prepareVars();
-		Map<String, Object> vars = new HashMap<String, Object>();
+		Map<String, Object> vars    = new HashMap<String, Object>();
+		Writer out                  = getBodyContent().getEnclosingWriter();
+		String template             = getWrapperTemplate();
 		
 		vars.putAll(tagVars);
 		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars));
 		
-		applyTemplate(getWrapperTemplate(), vars, getBodyContent().getEnclosingWriter());
+		beforeApplyTemplate(template, vars, out);
+		applyTemplate(template, vars, out);
+		afterApplyTemplate(template, vars, out);
     }
     
-    protected void doInnerAfterBody() throws IOException, TemplatesManagerException {
+    protected void applySimpleTemplate() throws JspException, IOException, TemplatesManagerException{
+
+    	setProperty(getClass().getName() + ":CONTEXT", this);
+    	
 		Map<String, Object> vars = prepareVars();
-		applyTemplate(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars, getBodyContent().getEnclosingWriter());
+		Writer out               = getBodyContent().getEnclosingWriter();
+    	String template          = this.getTemplate() == null? getDefaultTemplate() : getTemplate();
+    	
+		beforeApplyTemplate(template, vars, out);
+    	applyTemplate(template, vars, out);
+		afterApplyTemplate(template, vars, out);
     }
     
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
@@ -111,20 +144,10 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     		Writer out) throws IOException {
     }
     
-    private void applyTemplate(String template, Map<String,Object> vars, 
+    protected void applyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException, TemplatesManagerException {
-		
-    	Object oldParent = getParentTag();
-    	setParentTag(this);
-		
-		beforeApplyTemplate(template, vars, out);
-		
 		TemplatesManagerProvider
 		.getTemplatesManager().apply(template, vars, out);
-		
-		afterApplyTemplate(template, vars, out);
-		
-    	setParentTag(oldParent);
     }
     
     public void setParentTag(Object tag) {
@@ -270,6 +293,29 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     	return val == null? defaultValue : val;
     }
     
+    protected String getRequestPath() {
+    	
+    	HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
+    	
+		String include = (String) request.getAttribute("javax.servlet.include.request_uri");
+		
+		if(include != null) {
+			return parseRequestId(
+					include, 
+					(String)request.getAttribute("javax.servlet.include.context_path"));
+		}
+		else {
+			return parseRequestId(
+					request.getRequestURI(), 
+					request.getContextPath());
+		}
+    	
+    }
+    
+    private String parseRequestId(String path, String contextPath){
+        return path.substring( contextPath.length(), path.length() );
+    }
+    
 	public String getExtAttrs() {
 		return extAttrs;
 	}
@@ -279,10 +325,14 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 	}
 
 	public String getId() {
+		
 		if(id == null) {
-			Integer acc = (Integer) pageContext.getAttribute(ID_COUNT);
-			pageContext.setAttribute(ID_COUNT, acc = acc == null? 0 : acc.intValue() + 1);
-			return id = String.valueOf(acc);
+			HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
+			
+			Integer acc = (Integer) request.getAttribute(ID_COUNT);
+			request.setAttribute(ID_COUNT, acc = acc == null? 0 : acc.intValue() + 1);
+			
+			return id = getClass().getSimpleName().toLowerCase() + String.valueOf(acc);
 		}
 		
 		return id;
