@@ -67,6 +67,7 @@ public class FieldValidatorRuleTag extends AbstractBodyTag {
 	}
 
 	public void doInitBody() throws JspException {
+		
 		FieldValidatorTag tag = (FieldValidatorTag)super.getParentTag();
 		
 		if(tag == null) {
@@ -74,10 +75,12 @@ public class FieldValidatorRuleTag extends AbstractBodyTag {
 		}
     	
 		this.validator = new ValidatorEntity(name, message);
+		
+		super.doInitBody();
     }
 	
     public int doAfterBody() throws JspException {
-    	
+    	super.doAfterBody();
     	FieldValidatorTag tag = (FieldValidatorTag)super.getParentTag();
     	tag.getValidator().add(validator);
     	
@@ -86,4 +89,8 @@ public class FieldValidatorRuleTag extends AbstractBodyTag {
     	return SKIP_BODY;
     }
 	
+    protected String getDefaultTemplate() {
+    	return null;
+    }
+    
 }

@@ -131,6 +131,9 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 		Writer out               = getBodyContent().getEnclosingWriter();
     	String template          = this.getTemplate() == null? getDefaultTemplate() : getTemplate();
     	
+    	if(template == null)
+    		return;
+    	
 		beforeApplyTemplate(template, vars, out);
     	applyTemplate(template, vars, out);
 		afterApplyTemplate(template, vars, out);

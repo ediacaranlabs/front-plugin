@@ -37,7 +37,6 @@ public class FieldValidatorTag extends AbstractBodyTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
-			add("button");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -47,6 +46,10 @@ public class FieldValidatorTag extends AbstractBodyTag {
 	
 	private Set<ValidatorEntity> validator;
 	
+	private FormTag form;
+	
+	private ComponentFormTag field;
+	
 	public FieldValidatorTag() {
 		this.validator = new HashSet<ValidatorEntity>();
 	}
@@ -54,19 +57,10 @@ public class FieldValidatorTag extends AbstractBodyTag {
     public Set<ValidatorEntity> getValidator() {
 		return validator;
 	}
-
-	public int doStartTag() throws JspException {
-        return EVAL_BODY_BUFFERED;
-    }
-
-
-    public int doEndTag() throws JspException {
-    	return super.doEndTag();
-    }
 	
-	public int doAfterBody() {
-		FormTag form = (FormTag) super.getProperty(FormTag.FORM, null);
-		ComponentFormTag field = (ComponentFormTag)super.getParentTag();
+    public void doInitBody() throws JspException {
+		form = (FormTag) super.getProperty(FormTag.FORM, null);
+		field = (ComponentFormTag)super.getParentTag();
 		
 		if(form == null) {
 			throw new IllegalStateException("form not found");
@@ -75,34 +69,10 @@ public class FieldValidatorTag extends AbstractBodyTag {
 		if(field == null) {
 			throw new IllegalStateException("field not found");
 		}
-		
-		try {
-			TemplateListVarParser rules = new TemplateListVarParser(TEMPLATE_RULE);
-			
-			for(ValidatorEntity ve: this.validator) {
-				
-				TemplateListVarParser params = new TemplateListVarParser(TEMPLATE_RULE_PARAM);
-				
-				for(ValidatorParamEntity p: ve.params) {
-					params.add(p.getName(), p.getValue());
-				}
-				
-				rules.add(ve.getName(), ve.getMessage(), params);
-			}
-			
-			new TemplateVarParser(TEMPLATE)
-				.put("form", form.getId())
-				.put("field", field.getName())
-				.put("rules", rules)
-				.parse(bodyContent.getEnclosingWriter());
-		} 
-		catch (IOException e) {
-			throw new IllegalStateException(e);
-		}
 
-		return SKIP_BODY;
-	}
-	
+		super.doInitBody();
+    }
+    
     protected void applyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException, TemplatesManagerException {
     	
@@ -117,17 +87,6 @@ public class FieldValidatorTag extends AbstractBodyTag {
 			}
 			
 			rules.add(ve.getName(), ve.getMessage(), params);
-		}
-		
-		FormTag form = (FormTag) super.getProperty(FormTag.FORM, null);
-		ComponentFormTag field = (ComponentFormTag)super.getParentTag();
-		
-		if(form == null) {
-			throw new IllegalStateException("form not found");
-		}
-		
-		if(field == null) {
-			throw new IllegalStateException("field not found");
 		}
 		
 		new TemplateVarParser(TEMPLATE)

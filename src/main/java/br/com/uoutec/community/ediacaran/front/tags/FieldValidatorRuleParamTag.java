@@ -68,7 +68,7 @@ public class FieldValidatorRuleParamTag extends AbstractBodyTag {
 	}
 
 	public void doInitBody() throws JspException {
-		FieldValidatorTag tag = (FieldValidatorTag)super.getParentTag();
+		FieldValidatorRuleTag tag = (FieldValidatorRuleTag)super.getParentTag();
 		
 		if(tag == null) {
 			throw new IllegalStateException("validator not found");
@@ -78,13 +78,17 @@ public class FieldValidatorRuleParamTag extends AbstractBodyTag {
     }
 	
     public int doAfterBody() throws JspException {
-    	
-    	ValidatorEntity tag = (ValidatorEntity)super.getParentTag();
-    	tag.getParams().add(param);
+    	FieldValidatorRuleTag tag = (FieldValidatorRuleTag)super.getParentTag();
+    	ValidatorEntity ve = tag.getValidator();
+    	ve.getParams().add(param);
     	
 		this.param = null;
 		
     	return SKIP_BODY;
     }
-	
+
+    protected String getDefaultTemplate() {
+    	return null;
+    }
+    
 }
