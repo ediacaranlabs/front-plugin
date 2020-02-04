@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringPattern {
@@ -50,7 +51,7 @@ public class StringPattern {
         	if(chars[i] == '{'){
         		
         		if(firstOpenKeys == -1){
-        			frags.add(uri.substring(startFrag, i));
+        			frags.add(decode(uri.substring(startFrag, i)));
         			firstOpenKeys = i;
         		}
         		
@@ -103,7 +104,7 @@ public class StringPattern {
         	if(startFrag == uri.length())
                 frags.add(null);
         	else
-        		frags.add(uri.substring(startFrag, uri.length()));
+        		frags.add(decode(uri.substring(startFrag, uri.length())));
         }
         
 
@@ -148,6 +149,19 @@ public class StringPattern {
         
     }
 
+    private String decode(String value) {
+    	String pattern = "&#(\\d{1,3});";
+    	Pattern r = Pattern.compile(pattern);
+    	Matcher m = r.matcher(value);
+    	while(m.find()) {
+    		String charCodeSTR = m.group(1);
+    		int charInt = Integer.parseInt(charCodeSTR);
+    		String charValue = Character.toString((char)(charInt & 0xFF));
+    		value = m.replaceAll(charValue);
+    	}
+    	return value;
+    }
+    
     private String createPreRegex(){
         StringBuilder result = new StringBuilder();
         

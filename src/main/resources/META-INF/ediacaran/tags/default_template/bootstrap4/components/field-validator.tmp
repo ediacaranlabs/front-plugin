@@ -1,11 +1,11 @@
 <script language="javascript">
-	$.AppContext.onload(function(){
+	$.AppContext.onload(function()&#123;
 	
-		$.AppContext.validator.addRules({
+		$.AppContext.validator.addRules(&#123;
 			form: "{form}", 
 			field: "{input}", 
 			rules: [{rules}]
-		});
+		&#125;);
 		
-	});
+	&#125;);
 </script>
