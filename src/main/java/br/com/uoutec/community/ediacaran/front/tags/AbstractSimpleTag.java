@@ -89,7 +89,7 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     	
 		Map<String, Object> tagVars = prepareVars();
 		Map<String, Object> vars    = new HashMap<String, Object>();
-		Writer out                  = getJspContext().getOut();
+		Writer out                  = getOut();
 		String template             = getWrapperTemplate();
 		
 		vars.putAll(tagVars);
@@ -114,7 +114,7 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     	setProperty(getClass().getName() + ":CONTEXT", this);
     	
 		Map<String, Object> vars = prepareVars();
-		Writer out               = getJspContext().getOut();
+		Writer out               = getOut();
     	String template          = this.getTemplate() == null? getDefaultTemplate() : getTemplate();
     	
 		beforeApplyTemplate(template, vars, out);
@@ -128,6 +128,10 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
 		
     	setProperty(getClass().getName() + ":CONTEXT", null);    	
     	
+    }
+    
+    protected Writer getOut() {
+    	return getJspContext().getOut();
     }
     
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
