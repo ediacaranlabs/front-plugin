@@ -48,6 +48,8 @@ public class FieldValidatorRuleParamTag extends AbstractSimpleTag {
 	
 	private String value;
 	
+	private Boolean raw;
+	
 	private JspFragmentVarParser content;
 
 	private ByteArrayOutputStream bout;
@@ -56,7 +58,7 @@ public class FieldValidatorRuleParamTag extends AbstractSimpleTag {
 	
 	public FieldValidatorRuleParamTag() {
     	this.bout = new ByteArrayOutputStream();
-    	this.contentWriter = new PrintWriter(bout);
+    	this.contentWriter = new PrintWriter(bout, true);
 	}
 	
     protected Writer getOut() {
@@ -65,8 +67,17 @@ public class FieldValidatorRuleParamTag extends AbstractSimpleTag {
 	
     protected void afterApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
+    	
+    	this.contentWriter.flush();
+    	
     	byte[] bValue = this.bout.toByteArray();
     	this.value = new String(bValue, "utf-8");
+    	
+    	if(raw == null || !raw) {
+	    	this.value = value.replaceAll("^[\\t\\n\\s]+", "");
+	    	this.value = value.replaceAll("[\\t\\n\\s]+$", "");
+	    	this.value = "\"" + value + "\"";
+    	}
     	
     	FieldValidatorRuleTag tag = (FieldValidatorRuleTag)super.getParentTag();
     	tag.getValidator().getParams().add(new ValidatorParamEntity(this.name, this.value));
@@ -95,6 +106,14 @@ public class FieldValidatorRuleParamTag extends AbstractSimpleTag {
 
 	public void setContent(JspFragmentVarParser content) {
 		this.content = content;
+	}
+
+	public Boolean getRaw() {
+		return raw;
+	}
+
+	public void setRaw(Boolean raw) {
+		this.raw = raw;
 	}
 
 	protected String getDefaultTemplate() {
