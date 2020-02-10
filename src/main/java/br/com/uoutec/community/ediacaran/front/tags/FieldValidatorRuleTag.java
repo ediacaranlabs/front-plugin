@@ -41,6 +41,8 @@ public class FieldValidatorRuleTag extends AbstractBodyTag {
 	private String message;
 	
 	private ValidatorEntity validator;
+
+	private Boolean raw;
 	
     public String getName() {
 		return name;
@@ -66,6 +68,14 @@ public class FieldValidatorRuleTag extends AbstractBodyTag {
 		this.validator = validator;
 	}
 
+	public Boolean getRaw() {
+		return raw;
+	}
+
+	public void setRaw(Boolean raw) {
+		this.raw = raw;
+	}
+
 	public void doInitBody() throws JspException {
 		
 		FieldValidatorTag tag = (FieldValidatorTag)super.getParentTag();
@@ -74,7 +84,11 @@ public class FieldValidatorRuleTag extends AbstractBodyTag {
 			throw new IllegalStateException("field not found");
 		}
     	
-		this.validator = new ValidatorEntity(name, message);
+    	if(raw == null || !raw) {
+    		message = "\"" + message + "\"";
+    	}
+    	
+    	this.validator = new ValidatorEntity(name, message);
 		
 		super.doInitBody();
     }
