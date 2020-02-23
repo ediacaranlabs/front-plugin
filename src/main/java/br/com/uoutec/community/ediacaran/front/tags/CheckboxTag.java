@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.jsp.tagext.JspFragment;
+
 public class CheckboxTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/bootstrap4/components/checkbox";
@@ -39,6 +41,7 @@ public class CheckboxTag extends ComponentFormTag {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_PROPS) {{
 			add("inline");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -65,7 +68,16 @@ public class CheckboxTag extends ComponentFormTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? new JspFragmentVarParser(((CheckboxTag)component).getJspBody()) : value;
+						return value;
+					}
+				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						JspFragment jspBody = ((CheckboxTag)component).getJspBody();
+						return jspBody == null? null : new JspFragmentVarParser(jspBody);
 					}
 				});
 				
@@ -80,6 +92,8 @@ public class CheckboxTag extends ComponentFormTag {
 	private String label;
 	
 	private Boolean inline;
+
+	private JspFragmentVarParser content;
 	
 	public CheckboxTag() {
 		setComponentType("checkbox");
@@ -131,6 +145,14 @@ public class CheckboxTag extends ComponentFormTag {
 
 	public void setInline(Boolean inline) {
 		this.inline = inline;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
 
 }

@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.jsp.tagext.JspFragment;
+
 public class SelectTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/bootstrap4/components/select";
@@ -113,7 +115,8 @@ public class SelectTag extends ComponentFormTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return new JspFragmentVarParser(((SelectTag)component).getJspBody());
+						JspFragment jspBody = ((SelectTag)component).getJspBody();
+						return jspBody == null? null : new JspFragmentVarParser(jspBody);
 					}
 				});
 				

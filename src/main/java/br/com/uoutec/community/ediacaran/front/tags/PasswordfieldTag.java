@@ -76,6 +76,7 @@ public class PasswordfieldTag extends ComponentFormTag {
 			add("name");
 			add("size");
 			add("enabled");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -95,18 +96,6 @@ public class PasswordfieldTag extends ComponentFormTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						
-						if(value == null) {
-							
-							JspFragment body = ((PasswordfieldTag)component).getJspBody();
-							
-							if(body == null) {
-								return null;
-							}
-							
-							return new JspFragmentVarParser(body);
-						}
-						
 						return value;
 					}
 					
@@ -119,6 +108,15 @@ public class PasswordfieldTag extends ComponentFormTag {
 						return value != null? new String("form-control-").concat((String)value) : "";
 					}
 					
+				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						JspFragment jspBody = ((PasswordfieldTag)component).getJspBody();
+						return jspBody == null? null : new JspFragmentVarParser(jspBody);
+					}
 				});
 				
 			}});
@@ -147,6 +145,8 @@ public class PasswordfieldTag extends ComponentFormTag {
 	
 	private String size;
 
+	private JspFragmentVarParser content;
+	
 	public PasswordfieldTag() {
 		super.setComponentType("password");
 	}
@@ -258,6 +258,14 @@ public class PasswordfieldTag extends ComponentFormTag {
 
 	public void setSize(String size) {
 		this.size = size;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
 
 }

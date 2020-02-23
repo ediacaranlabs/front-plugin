@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.jsp.tagext.JspFragment;
+
 public class RadioTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/bootstrap4/components/radio";
@@ -41,6 +43,7 @@ public class RadioTag extends ComponentFormTag {
 			add("label");
 			add("inline");
 			add("enabled");
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -69,10 +72,20 @@ public class RadioTag extends ComponentFormTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? new JspFragmentVarParser(((RadioTag)component).getJspBody()) : value;
+						return value;
 					}
 					
 				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						JspFragment jspBody = ((RadioTag)component).getJspBody();
+						return jspBody == null? null : new JspFragmentVarParser(jspBody);
+					}
+				});
+				
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -84,6 +97,8 @@ public class RadioTag extends ComponentFormTag {
 	private String label;
 	
 	private Boolean inline;
+	
+	private JspFragmentVarParser content;
 	
 	public RadioTag() {
 		setComponentType("radio");
@@ -135,6 +150,14 @@ public class RadioTag extends ComponentFormTag {
 
 	public void setInline(Boolean inline) {
 		this.inline = inline;
+	}
+
+	public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
 	}
 
 }

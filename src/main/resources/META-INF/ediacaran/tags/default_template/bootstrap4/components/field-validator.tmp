@@ -3,7 +3,7 @@
 	
 		$.AppContext.validator.addRules(&#123;
 			form: "{form}", 
-			field: "{input}", 
+			field: "{field}", 
 			rules: [{rules}]
 		&#125;);
 		

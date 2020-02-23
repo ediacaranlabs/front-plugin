@@ -1,1 +1,1 @@
-&#123; rule: "{name}", message: {message}, params: [{params}] &#125;
+&#123; rule: "{name}", message: {message}, params: [{params}] &#125;,
