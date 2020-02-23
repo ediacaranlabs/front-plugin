@@ -1,20 +1,20 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.JspFragment;
 
 import br.com.uoutec.community.ediacaran.front.tags.FieldValidatorTag.ValidatorEntity;
 
-public class FieldValidatorRuleTag extends AbstractBodyTag {
+public class FieldValidatorRuleTag extends AbstractSimpleTag {
 
-	private static final long serialVersionUID = 748182107582888257L;
-
-	public static final String TEMPLATE  = "";
+	public static final String TEMPLATE  = "/bootstrap4/components/content";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -29,12 +29,21 @@ public class FieldValidatorRuleTag extends AbstractBodyTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractBodyTag.DEFAULT_PROPS) {{
+			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractBodyTag.DEFAULT_PROPERTY_PARSERS){{
-			}});
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						JspFragment body = ((FieldValidatorRuleTag)component).getJspBody();
+						return body == null? null : new JspFragmentVarParser(body);
+					}
+				});
+		}});
 	
 	private String name;
 	
@@ -43,6 +52,8 @@ public class FieldValidatorRuleTag extends AbstractBodyTag {
 	private ValidatorEntity validator;
 
 	private Boolean raw;
+	
+	private JspFragmentVarParser content;
 	
     public String getName() {
 		return name;
@@ -76,8 +87,17 @@ public class FieldValidatorRuleTag extends AbstractBodyTag {
 		this.raw = raw;
 	}
 
-	public void doInitBody() throws JspException {
-		
+    public JspFragmentVarParser getContent() {
+		return content;
+	}
+
+	public void setContent(JspFragmentVarParser content) {
+		this.content = content;
+	}
+
+	protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException {
+    	
 		FieldValidatorTag tag = (FieldValidatorTag)super.getParentTag();
 		
 		if(tag == null) {
@@ -89,22 +109,39 @@ public class FieldValidatorRuleTag extends AbstractBodyTag {
     	}
     	
     	this.validator = new ValidatorEntity(name, message);
-		
-		super.doInitBody();
+    	
     }
-	
-    public int doAfterBody() throws JspException {
-    	super.doAfterBody();
+    
+    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
+    		Writer out) throws IOException {
     	FieldValidatorTag tag = (FieldValidatorTag)super.getParentTag();
     	tag.getValidator().add(validator);
     	
 		this.validator = null;
-		
-    	return SKIP_BODY;
     }
 	
     protected String getDefaultTemplate() {
-    	return null;
+    	return TEMPLATE;
+    }
+	
+    protected Set<String> getDefaultAttributes(){
+    	return DEFAULT_ATTRS;
+    }
+
+    protected Set<String> getEmptyAttributes(){
+    	return DEFAULT_EMPTY_ATTRIBUTES;
+    }
+    
+    protected Map<String, AttributeParser> getAttributeParsers(){
+    	return DEFAULT_ATTRIBUTE_PARSERS;
+    }
+
+    protected Set<String> getDefaultProperties(){
+    	return DEFAULT_PROPS;
+    }
+
+    protected Map<String, AttributeParser> getPropertyParsers(){
+    	return DEFAULT_PROPERTY_PARSERS;
     }
     
 }
