@@ -1,7 +1,35 @@
 
 $.AppContext.validator = {
 		
+		isConfigured: function (formID){
+			var $bv = $('#' + formID).data('bootstrapValidator');
+			return typeof $bv !== "undefined";
+		},
+		
+		configureForm: function(formID){
+			$('#' + formID)
+			.bootstrapValidator({
+				feedbackIcons : {
+					valid : ' icon-ok',
+					invalid : ' icon-remove',
+					validating : ' icon-refresh'
+				}
+			});
+		},
+		
 		addRules: function (rules){
+			
+			if(!this.isConfigured(rules.form)){
+				this.configureForm(rules.form);
+			}
+			
+			var validator = this.createValidatorField(rules);
+			
+			$('#' + rules.form).bootstrapValidator('addField', rules.field, validator);	
+		},
+		
+		createValidatorField: function(rules){
+			
 			var validator = {
 					validators: {}
 			};
@@ -10,7 +38,7 @@ $.AppContext.validator = {
 				validator.validators[r.rule] = this.getValidatorRule(r);
 			}
 			//console.log(rules.form + "-> " + rules.field + ": " + JSON.stringify(validator));
-			 $('#' + rules.form).bootstrapValidator('addField', rules.field, validator );	
+			return validator;
 		},
 		
 		getValidatorRule: function (rule){
