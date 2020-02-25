@@ -51,7 +51,6 @@ public class FieldValidatorTag extends AbstractBodyTag {
 	private ComponentFormTag field;
 	
 	public FieldValidatorTag() {
-		this.validator = new HashSet<ValidatorEntity>();
 	}
 	
     public Set<ValidatorEntity> getValidator() {
@@ -59,6 +58,7 @@ public class FieldValidatorTag extends AbstractBodyTag {
 	}
 	
     public void doInitBody() throws JspException {
+		validator = new HashSet<ValidatorEntity>();
 		form = (FormTag) super.getProperty(FormTag.FORM, null);
 		field = (ComponentFormTag)super.getParentTag();
 		
@@ -71,6 +71,13 @@ public class FieldValidatorTag extends AbstractBodyTag {
 		}
 
 		super.doInitBody();
+    }
+    
+    public int doAfterBody() throws JspException {
+    	validator = null;
+    	form      = null;
+    	field     = null;
+    	return super.doAfterBody();
     }
     
     protected void applyTemplate(String template, Map<String,Object> vars, 
