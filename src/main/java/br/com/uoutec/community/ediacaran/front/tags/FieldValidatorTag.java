@@ -74,10 +74,14 @@ public class FieldValidatorTag extends AbstractBodyTag {
     }
     
     public int doAfterBody() throws JspException {
-    	validator = null;
-    	form      = null;
-    	field     = null;
-    	return super.doAfterBody();
+    	try {
+    		return super.doAfterBody();
+    	}
+    	finally {
+        	validator = null;
+        	form      = null;
+        	field     = null;
+    	}
     }
     
     protected void applyTemplate(String template, Map<String,Object> vars, 
