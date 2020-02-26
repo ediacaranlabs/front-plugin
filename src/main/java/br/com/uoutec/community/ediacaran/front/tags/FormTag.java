@@ -28,6 +28,7 @@ public class FormTag extends AbstractSimpleTag {
 			add("enctype");
 			add("method");
 			add("target");
+			add("update");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -42,6 +43,19 @@ public class FormTag extends AbstractSimpleTag {
 				}
 			});
 
+			put("update", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value, Object component) {
+					return "dest-content";
+				}
+				
+				@Override
+				public Object toValue(Object value, Object component) {
+					return value;
+				}
+			});
+			
 		}});
 	
 	@SuppressWarnings("serial")
@@ -75,18 +89,6 @@ public class FormTag extends AbstractSimpleTag {
 					}
 				});
 				
-				put("update", new AttributeParserImp() {
-					
-					@Override
-					public String toName(String value, Object component) {
-						return "dest-content";
-					}
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						return value;
-					}
-				});
 				
 			}});
 	
@@ -104,11 +106,11 @@ public class FormTag extends AbstractSimpleTag {
 	
 	private String target;
 	
+	private String update;
+	
 	/* ------------ Prop ---------------*/
 
 	private JspFragmentVarParser content;
-	
-	private String update;
 	
 	public FormTag() {
 	}

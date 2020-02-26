@@ -21,7 +21,7 @@ public class ButtonTag extends ComponentFormTag {
 		}});
 	
 	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
+	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_ATTRIBUTE_PARSERS){{
 			
 			put("actionType", new AttributeParserImp() {
