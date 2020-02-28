@@ -46,9 +46,9 @@ public class FieldValidatorTag extends AbstractBodyTag {
 	
 	private Set<ValidatorEntity> validator;
 	
-	private FormTag form;
+	private String form;
 	
-	private ComponentFormTag field;
+	private String field;
 	
 	public FieldValidatorTag() {
 	}
@@ -59,8 +59,34 @@ public class FieldValidatorTag extends AbstractBodyTag {
 	
     public void doInitBody() throws JspException {
 		validator = new HashSet<ValidatorEntity>();
-		form = (FormTag) super.getProperty(FormTag.FORM, null);
-		field = (ComponentFormTag)super.getParentTag();
+		
+		if(form == null) {
+			Object formTag = super.getProperty(FormTag.FORM, null);
+			if(formTag != null) {
+				if(formTag instanceof FormTag) {
+					form = ((FormTag)formTag).getId();
+				}
+				else {
+					throw new JspException("invalid form tag: " + formTag);
+				}
+			}
+		}
+
+		if(field == null) {
+			Object componentFormTag = super.getParentTag();
+			
+			if(componentFormTag != null) {
+				if(componentFormTag instanceof ComponentFormTag) {
+					field = ((ComponentFormTag)componentFormTag).getName();
+				}
+				else {
+					throw new JspException("invalid field tag: " + componentFormTag);
+				}
+			}
+		}
+		
+		//form = ((FormTag) super.getProperty(FormTag.FORM, null)).getId();
+		//field = ((ComponentFormTag)super.getParentTag()).getName();
 		
 		if(form == null) {
 			throw new IllegalStateException("form not found");
@@ -101,8 +127,8 @@ public class FieldValidatorTag extends AbstractBodyTag {
 		}
 		
 		new TemplateVarParser(TEMPLATE)
-			.put("form", form.getId())
-			.put("field", field.getName())
+			.put("form", form)
+			.put("field", field)
 			.put("rules", rules)
 			.parse(out);
     }
