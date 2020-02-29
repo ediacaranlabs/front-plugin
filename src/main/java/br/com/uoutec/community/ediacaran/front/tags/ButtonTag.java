@@ -18,6 +18,7 @@ public class ButtonTag extends ComponentFormTag {
 			add("method");
 			add("target");
 			add("actionType");
+			remove("classStyle");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -74,6 +75,7 @@ public class ButtonTag extends ComponentFormTag {
 			add("type");
 			add("block");
 			add("outline");
+			add("classStyle");
 		}});
 	
 	@SuppressWarnings("serial")

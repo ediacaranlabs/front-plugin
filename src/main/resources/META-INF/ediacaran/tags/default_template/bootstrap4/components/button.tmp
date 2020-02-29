@@ -1,3 +1,3 @@
-<button {attr} class="btn{size}{type}{block}{enabled}" >
+<button {attr} class="btn{size}{type}{block}{enabled} {classStyle}" >
 {label}
 </button>

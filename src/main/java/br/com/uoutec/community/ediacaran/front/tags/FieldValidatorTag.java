@@ -57,7 +57,23 @@ public class FieldValidatorTag extends AbstractBodyTag {
 		return validator;
 	}
 	
-    public void doInitBody() throws JspException {
+    public String getForm() {
+		return form;
+	}
+
+	public void setForm(String form) {
+		this.form = form;
+	}
+
+	public String getField() {
+		return field;
+	}
+
+	public void setField(String field) {
+		this.field = field;
+	}
+
+	public void doInitBody() throws JspException {
 		validator = new HashSet<ValidatorEntity>();
 		
 		if(form == null) {

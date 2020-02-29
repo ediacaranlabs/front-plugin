@@ -15,11 +15,13 @@ public class ColTag  extends AbstractSimpleTag {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_ATTRS) {{
+			remove("classStyle");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_ATTRIBUTE_PARSERS){{
+			remove("classStyle");
 		}});
 
 	@SuppressWarnings("serial")

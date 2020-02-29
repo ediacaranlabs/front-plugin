@@ -33,6 +33,7 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
 			add("id");
+			add("classStyle");
 		}});
 
 	protected static final Set<String> DEFAULT_EMPTY_ATTRIBUTES = 
