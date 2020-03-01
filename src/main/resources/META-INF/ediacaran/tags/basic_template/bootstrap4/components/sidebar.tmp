@@ -1,5 +1,0 @@
-<div class="{size} {offset}">
-	<aside class="left-sidebar">
-		{content}
-	</aside>
-</div>

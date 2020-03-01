@@ -1,3 +1,0 @@
-<nav class="navbar {expand} {style} {background} {position} {sidebar}">
-  {content}
-</nav>

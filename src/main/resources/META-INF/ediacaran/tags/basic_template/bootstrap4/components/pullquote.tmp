@@ -1,3 +1,0 @@
-<span {attr} class={align}>
-{content}
-</span>

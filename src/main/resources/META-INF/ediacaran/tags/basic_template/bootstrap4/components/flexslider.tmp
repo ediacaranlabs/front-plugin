@@ -1,5 +1,0 @@
-<div {attr} class="flexslider">
-	<ul class="slides">
-		{imgs}
-	</ul>
-</div>

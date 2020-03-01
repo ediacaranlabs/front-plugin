@@ -1,4 +1,0 @@
-<div {attr} class="widget">
-<h5 class="widgetheading">{title}</h5>
-{content}
-</div>

@@ -1,3 +1,0 @@
-<a class="nav-link dropdown-toggle" href="#" id="{parent-id}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	{content}
-</a>

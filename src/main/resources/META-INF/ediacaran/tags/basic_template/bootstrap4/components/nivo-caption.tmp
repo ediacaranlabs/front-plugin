@@ -1,9 +1,0 @@
-<div class="nivo-caption" id="caption-{count}"> 
-	<div> 
-		<h2>
-			<strong>{title}</strong> 
-		</h2>
-		<p>{content}</p>
-		<a href="{link}" class="btn btn-nivo">{btn_message}</a> 
-	</div> 
-</div>

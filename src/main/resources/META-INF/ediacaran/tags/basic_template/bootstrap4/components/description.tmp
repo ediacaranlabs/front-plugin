@@ -1,2 +1,0 @@
- <dt class="col-sm-{titleWidth}{truncate}">{title}</dt>
- <dd class="col-sm-{contentWidth}">{content}</dd>

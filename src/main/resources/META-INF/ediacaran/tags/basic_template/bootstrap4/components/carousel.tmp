@@ -1,3 +1,0 @@
-<div {attr} class="owl-carousel owl-theme">
-{content}
-</div>

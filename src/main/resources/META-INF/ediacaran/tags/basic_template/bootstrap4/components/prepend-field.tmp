@@ -1,3 +1,0 @@
-<div {attr} class="input-group-prepend">
-	{content}
-</div>

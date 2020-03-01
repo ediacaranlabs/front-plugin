@@ -1,4 +1,0 @@
-<ul {attr} class="breadcrumb">
-	{path}
-	<li class="active">{title}</li>
-</ul>
