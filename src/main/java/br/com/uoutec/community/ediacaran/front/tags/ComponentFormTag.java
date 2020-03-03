@@ -29,6 +29,11 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 			put("enabled", new AttributeParserImp() {
 				
 				@Override
+				public String toName(String value, Object component) {
+					return null;
+				}
+				
+				@Override
 				public Object toValue(Object value, Object component) {
 					return value != null && !(Boolean)value? "disabled" : "";
 				}
@@ -40,6 +45,7 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 				public String toName(String value, Object component) {
 					return value == null? null : "type";
 				}
+				
 			});
 			
 		}});
