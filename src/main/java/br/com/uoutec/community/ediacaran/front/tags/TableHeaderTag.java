@@ -48,12 +48,6 @@ public class TableHeaderTag  extends AbstractSimpleTag {
 	public TableHeaderTag() {
 	}
 	
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("content", new JspFragmentVarParser(getJspBody()));
-		return vals;
-	}
-	
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }

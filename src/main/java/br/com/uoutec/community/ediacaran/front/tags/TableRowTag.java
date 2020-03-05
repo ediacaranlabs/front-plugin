@@ -8,7 +8,9 @@ import java.util.Set;
 
 public class TableRowTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/components/table-row";
+	public static final String TEMPLATE  = "/bootstrap4/components/table-row-header";
+	
+	public static final String TEMPLATE_2  = "/bootstrap4/components/table-row";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -64,7 +66,8 @@ public class TableRowTag  extends AbstractSimpleTag {
 	}
 	
     protected String getDefaultTemplate() {
-    	return TEMPLATE;
+    	Object parent = this.getParentTag();
+    	return parent instanceof TableHeaderTag? TEMPLATE : TEMPLATE_2;
     }
 
     protected Set<String> getDefaultAttributes(){
