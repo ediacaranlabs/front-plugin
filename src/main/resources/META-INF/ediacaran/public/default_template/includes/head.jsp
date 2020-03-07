@@ -12,6 +12,8 @@
 <script src="/plugins/community/ediacaran/front/default_template/js/jquery.min.js"></script>
 <script src="/plugins/community/ediacaran/front/default_template/js/jquery.nivo.slider.js"></script>	
 <script	src="/plugins/community/ediacaran/front/default_template/js/application.js" charset="utf-8"></script>
+<script	src="/plugins/community/ediacaran/front/default_template/js/application.validator.js" charset="utf-8"></script>
+<script	src="/plugins/community/ediacaran/front/default_template/js/application.event.js" charset="utf-8"></script>
 <script src="/plugins/community/ediacaran/front/default_template/js/bootstrap.js"></script>
 <script src="/plugins/community/ediacaran/front/default_template/js/bootstrapValidator/bootstrapValidator.min.js"></script>
 <script src="/plugins/community/ediacaran/front/default_template/js/sidebar.js"></script>	
