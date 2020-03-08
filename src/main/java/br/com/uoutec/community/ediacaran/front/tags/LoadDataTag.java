@@ -55,7 +55,10 @@ public class LoadDataTag  extends AbstractSimpleTag {
     	Map<Object,Object> dta = ReadData.loadData(
     								file, 
 									sb.getWebapp().getCanonicalFile(), 
-									new File(sb.getWebapp(), super.getRequestPath()));
+									file.startsWith("/")? 
+										sb.getWebapp() : 
+										new File(sb.getWebapp(), super.getRequestPath())
+								);
     	
     	super.getJspContext().setAttribute(var == null? "vars" : var, dta);
 	}
