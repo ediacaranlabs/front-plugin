@@ -69,7 +69,10 @@ public class TemplatesManagerImp implements TemplatesManager {
 			
 			if(p == null) {
 				synchronized(TemplatesManager.class) {
-					p = addtemplate(fullTemplate, fullTemplate);
+					p = getTemplate(fullTemplate);
+					if(p == null) {
+						p = addtemplate(fullTemplate, fullTemplate);
+					}
 				}
 			}
 			

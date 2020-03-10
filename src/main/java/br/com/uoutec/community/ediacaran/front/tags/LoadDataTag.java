@@ -54,7 +54,7 @@ public class LoadDataTag  extends AbstractSimpleTag {
     	ServerBootstrap sb     = (ServerBootstrap) ApplicationBootstrapProvider.getBootstrap();
     	Map<Object,Object> dta = ReadData.loadData(
     								file, 
-									sb.getWebapp().getCanonicalFile(), 
+									sb.getWebapp()/*.getCanonicalFile()*/, 
 									file.startsWith("/")? 
 										sb.getWebapp() : 
 										new File(sb.getWebapp(), super.getRequestPath())

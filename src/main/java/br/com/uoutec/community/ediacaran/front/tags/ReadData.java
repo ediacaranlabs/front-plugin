@@ -14,7 +14,7 @@ public class ReadData {
 
 	public static Map<Object,Object> loadData(String path, File root, File requestFile) throws IOException{
 		
-		File baseFile			= requestFile.getParentFile();
+		File baseFile			= root.equals(requestFile)? requestFile : requestFile.getParentFile();
 		File fData              = new File(baseFile, path);
 		Map<Object,Object> data = getData(fData, root);
 		
