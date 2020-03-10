@@ -43,7 +43,7 @@ public class RadioTag extends ComponentFormTag {
 			add("label");
 			add("inline");
 			add("enabled");
-			add("content");
+			//add("content");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -72,20 +72,23 @@ public class RadioTag extends ComponentFormTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value;
+						RadioTag tag = (RadioTag)component;
+						JspFragment jspBody = tag.getJspBody();
+						return jspBody == null? value : new JspFragmentVarParser(jspBody);
 					}
 					
 				});
-				
+				/*
 				put("content", new AttributeParserImp() {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						JspFragment jspBody = ((RadioTag)component).getJspBody();
-						return jspBody == null? null : new JspFragmentVarParser(jspBody);
+						RadioTag tag = (RadioTag)component;
+						JspFragment jspBody = tag.getJspBody();
+						return jspBody == null? tag.getL : new JspFragmentVarParser(jspBody);
 					}
 				});
-				
+				*/
 			}});
 	
 	/* ------------ Attr ---------------*/
@@ -98,7 +101,7 @@ public class RadioTag extends ComponentFormTag {
 	
 	private Boolean inline;
 	
-	private JspFragmentVarParser content;
+	//private JspFragmentVarParser content;
 	
 	public RadioTag() {
 		setComponentType("radio");
@@ -151,7 +154,7 @@ public class RadioTag extends ComponentFormTag {
 	public void setInline(Boolean inline) {
 		this.inline = inline;
 	}
-
+/*
 	public JspFragmentVarParser getContent() {
 		return content;
 	}
@@ -159,5 +162,5 @@ public class RadioTag extends ComponentFormTag {
 	public void setContent(JspFragmentVarParser content) {
 		this.content = content;
 	}
-
+*/
 }
