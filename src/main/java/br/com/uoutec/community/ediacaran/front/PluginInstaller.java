@@ -7,10 +7,10 @@ import org.brandao.brutos.io.DefaultResourceLoader;
 
 import br.com.uoutec.application.EntityContext;
 import br.com.uoutec.community.ediacaran.PluginManager;
+import br.com.uoutec.community.ediacaran.core.system.AbstractPluginInstaller;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
 import br.com.uoutec.community.ediacaran.plugins.PluginMetadata;
 import br.com.uoutec.community.ediacaran.plugins.PluginPropertyValue;
-import br.com.uoutec.community.ediacaran.system.AbstractPluginInstaller;
 
 public class PluginInstaller extends AbstractPluginInstaller {
 
