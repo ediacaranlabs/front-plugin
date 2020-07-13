@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.brandao.brutos.ClassUtil;
 import org.brandao.brutos.io.DefaultResourceLoader;
 
-import br.com.uoutec.application.EntityContext;
+import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.PluginManager;
 import br.com.uoutec.community.ediacaran.core.system.AbstractPluginInstaller;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
@@ -39,7 +39,7 @@ public class PluginInstaller extends AbstractPluginInstaller {
 			throws PluginException, InstantiationException, IllegalAccessException, 
 			ClassNotFoundException, IOException {
 		
-		PluginManager pm   = EntityContext.getEntity(PluginManager.class);
+		PluginManager pm   = EntityContextPlugin.getEntity(PluginManager.class);
 		PluginMetadata pmd = pm.findById(PLUGIN);
 		
 		PluginPropertyValue cp = pmd.getValue(CACHE_PROVIDER_PROPERTY);
