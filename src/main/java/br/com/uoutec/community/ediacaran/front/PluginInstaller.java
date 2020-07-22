@@ -11,6 +11,7 @@ import br.com.uoutec.community.ediacaran.core.system.AbstractPluginInstaller;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
 import br.com.uoutec.community.ediacaran.plugins.PluginMetadata;
 import br.com.uoutec.community.ediacaran.plugins.PluginPropertyValue;
+import br.com.uoutec.community.ediacaran.plugins.PluginsProperties;
 
 public class PluginInstaller extends AbstractPluginInstaller {
 
@@ -39,12 +40,10 @@ public class PluginInstaller extends AbstractPluginInstaller {
 			throws PluginException, InstantiationException, IllegalAccessException, 
 			ClassNotFoundException, IOException {
 		
-		PluginManager pm   = EntityContextPlugin.getEntity(PluginManager.class);
-		PluginMetadata pmd = pm.findById(PLUGIN);
+		PluginsProperties pp   = EntityContextPlugin.getEntity(PluginsProperties.class);
+		String cacheProvider = pp.getString(PLUGIN + "." + CACHE_PROVIDER_PROPERTY, HashMapTemplateCache.class.getName());
 		
-		PluginPropertyValue cp = pmd.getValue(CACHE_PROVIDER_PROPERTY);
-		
-		TemplateCache tc = (TemplateCache) ClassUtil.getInstance(cp.getValue());
+		TemplateCache tc = (TemplateCache) ClassUtil.getInstance(cacheProvider);
 		tc.configure(pmd);
 		
 		TemplatesManager templatesManager = new TemplatesManagerImp(
