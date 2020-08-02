@@ -9,12 +9,11 @@ import org.brandao.brutos.io.Resource;
 import org.brandao.brutos.io.ResourceLoader;
 
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
-import br.com.uoutec.community.ediacaran.plugins.PluginMetadata;
-import br.com.uoutec.community.ediacaran.plugins.PluginPropertyValue;
+import br.com.uoutec.community.ediacaran.plugins.PluginsProperties;
 
 public class TemplatesManagerImp implements TemplatesManager {
 
-	private PluginMetadata pluginMetadata;
+	private PluginsProperties pluginsProperties;
 	
 	private TemplateCache cache;
 	
@@ -24,18 +23,21 @@ public class TemplatesManagerImp implements TemplatesManager {
 	
 	private String charset;
 	
+	private String plugin;
+	
 	public TemplatesManagerImp(TemplateLoader templateLoader, ResourceLoader loader, 
-			TemplateCache cache, PluginMetadata pluginMetadata, String charset) throws IOException {
+			TemplateCache cache, PluginsProperties pluginsProperties, String plugin, String charset) throws IOException {
 		this.templateLoader = templateLoader;
 		this.loader = loader;
 		this.charset = charset;
 		this.cache = cache;
-		this.pluginMetadata = pluginMetadata;
+		this.plugin = plugin;
+		this.pluginsProperties = pluginsProperties;
 	}
 
 	protected StringPattern addtemplate(String name, String resource) throws IOException, PluginException {
 		
-		File file = new File(pluginMetadata.getPath().getBase() + "/tags" + "/" + resource + ".tmp");
+		File file = new File(pluginsProperties.getPath(plugin) + "/tags" + "/" + resource + ".tmp");
 		
 		file = file.getCanonicalFile();
 		
@@ -62,8 +64,8 @@ public class TemplatesManagerImp implements TemplatesManager {
 		
 		try {
 			
-			PluginPropertyValue ppv = pluginMetadata.getValue(PluginInstaller.TEMPLATE_PROPERTY);
-			String fullTemplate     = ppv.getValue() + template;
+			String tp = pluginsProperties.getString(plugin, PluginInstaller.TEMPLATE_PROPERTY);
+			String fullTemplate     = tp + template;
 			
 			StringPattern p = getTemplate(fullTemplate);
 			
@@ -87,8 +89,8 @@ public class TemplatesManagerImp implements TemplatesManager {
 	public void apply(String template, Writer out, Object ... vars) throws TemplatesManagerException {
 		
 		try {
-			PluginPropertyValue ppv = pluginMetadata.getValue(PluginInstaller.TEMPLATE_PROPERTY);
-			String fullTemplate     = ppv.getValue() + template;
+			String tp = pluginsProperties.getString(plugin, PluginInstaller.TEMPLATE_PROPERTY);
+			String fullTemplate     = tp + template;
 			
 			StringPattern p = getTemplate(fullTemplate);
 			

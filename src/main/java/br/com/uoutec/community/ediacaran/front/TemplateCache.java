@@ -1,11 +1,11 @@
 package br.com.uoutec.community.ediacaran.front;
 
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
-import br.com.uoutec.community.ediacaran.plugins.PluginMetadata;
+import br.com.uoutec.community.ediacaran.plugins.PluginsProperties;
 
 public interface TemplateCache {
 
-	void configure(PluginMetadata config) throws PluginException;
+	void configure(PluginsProperties config) throws PluginException;
 	
 	boolean contains(String name);
 	
