@@ -8,6 +8,7 @@ import org.brandao.brutos.io.DefaultResourceLoader;
 import br.com.uoutec.community.ediacaran.core.system.AbstractPluginInstaller;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
+import br.com.uoutec.community.ediacaran.plugins.PluginProperties;
 import br.com.uoutec.community.ediacaran.plugins.PluginsProperties;
 
 public class PluginInstaller extends AbstractPluginInstaller {
@@ -37,15 +38,17 @@ public class PluginInstaller extends AbstractPluginInstaller {
 			throws PluginException, InstantiationException, IllegalAccessException, 
 			ClassNotFoundException, IOException {
 		
-		PluginsProperties pp   = EntityContextPlugin.getEntity(PluginsProperties.class);
-		String cacheProvider = pp.getString(PLUGIN, CACHE_PROVIDER_PROPERTY);
+		PluginsProperties pps = EntityContextPlugin.getEntity(PluginsProperties.class);
+		PluginProperties pp   = pps.getPluginProperties(PLUGIN);
+		String cacheProvider  = pp.getString(CACHE_PROVIDER_PROPERTY);
+		
 		cacheProvider = cacheProvider == null? HashMapTemplateCache.class.getName() : cacheProvider;
 		
 		TemplateCache tc = (TemplateCache) ClassUtil.getInstance(cacheProvider);
 		tc.configure(pp);
 		
 		TemplatesManager templatesManager = new TemplatesManagerImp(
-				new TemplateLoader(), new DefaultResourceLoader(), tc, pp, PLUGIN, "UTF-8");
+				new TemplateLoader(), new DefaultResourceLoader(), tc, pp, "UTF-8");
 		
 		TemplatesManagerProvider.setTemplatesManager(templatesManager);
 	}

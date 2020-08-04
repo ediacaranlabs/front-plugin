@@ -4,18 +4,16 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
-import br.com.uoutec.community.ediacaran.plugins.PluginMetadata;
-import br.com.uoutec.community.ediacaran.plugins.PluginPropertyValue;
+import br.com.uoutec.community.ediacaran.plugins.PluginProperties;
 
 public class HashMapTemplateCache implements TemplateCache{
 
 	private Map<String, StringPattern> map;
 	
 	@Override
-	public void configure(PluginMetadata config) throws PluginException {
-		PluginPropertyValue cacheSize = config.getValue(PluginInstaller.CACHE_SIZE_PROPERTY);
-		int cacheSizeValue            = Integer.parseInt(cacheSize.getValue());
-		this.map                      = new MaxSizeHashMap<String, StringPattern>(cacheSizeValue);
+	public void configure(PluginProperties config) throws PluginException {
+		int cacheSize = config.getInt(PluginInstaller.CACHE_SIZE_PROPERTY);
+		this.map      = new MaxSizeHashMap<String, StringPattern>(cacheSize);
 	}
 
 	@Override

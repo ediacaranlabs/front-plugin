@@ -9,11 +9,11 @@ import org.brandao.brutos.io.Resource;
 import org.brandao.brutos.io.ResourceLoader;
 
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
-import br.com.uoutec.community.ediacaran.plugins.PluginsProperties;
+import br.com.uoutec.community.ediacaran.plugins.PluginProperties;
 
 public class TemplatesManagerImp implements TemplatesManager {
 
-	private PluginsProperties pluginsProperties;
+	private PluginProperties pluginProperties;
 	
 	private TemplateCache cache;
 	
@@ -23,21 +23,18 @@ public class TemplatesManagerImp implements TemplatesManager {
 	
 	private String charset;
 	
-	private String plugin;
-	
 	public TemplatesManagerImp(TemplateLoader templateLoader, ResourceLoader loader, 
-			TemplateCache cache, PluginsProperties pluginsProperties, String plugin, String charset) throws IOException {
+			TemplateCache cache, PluginProperties pluginProperties, String charset) throws IOException {
 		this.templateLoader = templateLoader;
 		this.loader = loader;
 		this.charset = charset;
 		this.cache = cache;
-		this.plugin = plugin;
-		this.pluginsProperties = pluginsProperties;
+		this.pluginProperties = pluginProperties;
 	}
 
 	protected StringPattern addtemplate(String name, String resource) throws IOException, PluginException {
 		
-		File file = new File(pluginsProperties.getPath(plugin) + "/tags" + "/" + resource + ".tmp");
+		File file = new File(pluginProperties.getPath() + "/tags" + "/" + resource + ".tmp");
 		
 		file = file.getCanonicalFile();
 		
@@ -64,7 +61,7 @@ public class TemplatesManagerImp implements TemplatesManager {
 		
 		try {
 			
-			String tp = pluginsProperties.getString(plugin, PluginInstaller.TEMPLATE_PROPERTY);
+			String tp = pluginProperties.getString(PluginInstaller.TEMPLATE_PROPERTY);
 			String fullTemplate     = tp + template;
 			
 			StringPattern p = getTemplate(fullTemplate);
@@ -89,7 +86,7 @@ public class TemplatesManagerImp implements TemplatesManager {
 	public void apply(String template, Writer out, Object ... vars) throws TemplatesManagerException {
 		
 		try {
-			String tp = pluginsProperties.getString(plugin, PluginInstaller.TEMPLATE_PROPERTY);
+			String tp = pluginProperties.getString(PluginInstaller.TEMPLATE_PROPERTY);
 			String fullTemplate     = tp + template;
 			
 			StringPattern p = getTemplate(fullTemplate);
