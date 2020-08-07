@@ -2,9 +2,9 @@ package br.com.uoutec.community.ediacaran.front;
 
 import java.io.IOException;
 
-import org.brandao.brutos.ClassUtil;
 import org.brandao.brutos.io.DefaultResourceLoader;
 
+import br.com.uoutec.application.ClassUtil;
 import br.com.uoutec.community.ediacaran.core.system.AbstractPluginInstaller;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
@@ -44,7 +44,9 @@ public class PluginInstaller extends AbstractPluginInstaller {
 		
 		cacheProvider = cacheProvider == null? HashMapTemplateCache.class.getName() : cacheProvider;
 		
-		TemplateCache tc = (TemplateCache) ClassUtil.getInstance(cacheProvider);
+		Class<? extends TemplateCache> cacheProviderClass = 
+				(Class<? extends TemplateCache>) ClassUtil.get(cacheProvider, getClass().getClassLoader());
+		TemplateCache tc = EntityContextPlugin.getEntity(cacheProviderClass);//(TemplateCache) ClassUtil.getInstance(cacheProvider, getClass().getClassLoader());
 		tc.configure(pp);
 		
 		TemplatesManager templatesManager = new TemplatesManagerImp(
