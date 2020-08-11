@@ -68,7 +68,7 @@ public class ViewController {
 		PluginPropertyValue ppv = pmd.getValue("template");
 		String template = ppv.getValue();
 		
-		return "/plugins/community/ediacaran/front/" + template + "/" + type + ".jsp";
+		return "/" + template + "/" + type + ".jsp";
 	}
 	
 	private Map<Object,Object> loadPageData(String path) throws IOException{

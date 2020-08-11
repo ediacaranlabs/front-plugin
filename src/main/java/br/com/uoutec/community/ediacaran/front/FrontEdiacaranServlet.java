@@ -69,7 +69,7 @@ public class FrontEdiacaranServlet extends HttpServlet{
 			PluginPropertyValue ppv = pmd.getValue("template");
 			String template = ppv.getValue();
 			
-			return "/plugins/community/ediacaran/front/" + template + "/" + type + ".jsp";
+			return "/" + template + "/" + type + ".jsp";
 		}
 		catch(Throwable e) {
 			throw new ServletException(e);
