@@ -5,16 +5,14 @@ import java.io.IOException;
 import org.brandao.brutos.io.DefaultResourceLoader;
 
 import br.com.uoutec.application.ClassUtil;
-import br.com.uoutec.community.ediacaran.core.system.AbstractPluginInstaller;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
 import br.com.uoutec.community.ediacaran.plugins.PluginProperties;
 import br.com.uoutec.community.ediacaran.plugins.PluginsProperties;
-import br.com.uoutec.community.ediacaran.system.WebPlugin;
+import br.com.uoutec.community.ediacaran.system.AbstractWebPluginInstaller;
 
 public class PluginInstaller 
-	extends AbstractPluginInstaller
-	implements WebPlugin {
+	extends AbstractWebPluginInstaller {
 
 	public static final String PACKAGE 					= "community";
 
@@ -37,6 +35,7 @@ public class PluginInstaller
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void installTemplateManager() 
 			throws PluginException, InstantiationException, IllegalAccessException, 
 			ClassNotFoundException, IOException {
@@ -48,8 +47,8 @@ public class PluginInstaller
 		cacheProvider = cacheProvider == null? HashMapTemplateCache.class.getName() : cacheProvider;
 		
 		Class<? extends TemplateCache> cacheProviderClass = 
-				(Class<? extends TemplateCache>) ClassUtil.get(cacheProvider, getClass().getClassLoader());
-		TemplateCache tc = EntityContextPlugin.getEntity(cacheProviderClass);//(TemplateCache) ClassUtil.getInstance(cacheProvider, getClass().getClassLoader());
+				(Class<? extends TemplateCache>) ClassUtil.get(cacheProvider);
+		TemplateCache tc = EntityContextPlugin.getEntity(cacheProviderClass);
 		tc.configure(pp);
 		
 		TemplatesManager templatesManager = new TemplatesManagerImp(
