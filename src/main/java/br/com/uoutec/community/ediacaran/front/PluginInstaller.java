@@ -10,8 +10,11 @@ import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
 import br.com.uoutec.community.ediacaran.plugins.PluginProperties;
 import br.com.uoutec.community.ediacaran.plugins.PluginsProperties;
+import br.com.uoutec.community.ediacaran.system.WebPlugin;
 
-public class PluginInstaller extends AbstractPluginInstaller {
+public class PluginInstaller 
+	extends AbstractPluginInstaller
+	implements WebPlugin {
 
 	public static final String PACKAGE 					= "community";
 
