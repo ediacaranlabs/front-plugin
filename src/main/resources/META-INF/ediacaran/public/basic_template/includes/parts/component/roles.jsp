@@ -7,7 +7,7 @@
 <c:set var="quote" value="\"" />
 
 <c:if test="${!empty entity['properties']}"><div <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp"/>></c:if>
-<img src="${pageContext.request.contextPath}${entity['image']}" alt="" class="img-thumbnail" />
+<img src="${entity['image']}" alt="" class="img-thumbnail" />
 <div class="roles">
 	<p class="lead">
 		<strong>${entity['name']}</strong>

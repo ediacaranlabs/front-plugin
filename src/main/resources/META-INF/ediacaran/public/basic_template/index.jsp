@@ -56,7 +56,7 @@
 								</li>
 							</c:when>
 							<c:otherwise>
-								<li class="nav-item"><a href="${pageContext.request.contextPath}${menu['link']}" class="nav-link">${menu['name']}</a></li>
+								<li class="nav-item"><a href="${menu['link']}" class="nav-link">${menu['name']}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -74,7 +74,7 @@
 								</li>
 							</c:when>
 							<c:otherwise>
-								<li class="nav-item"><a class="dropdown-item" href="${pageContext.request.contextPath}${menu.resource}">${menu.fullName}</a></li>
+								<li class="nav-item"><a class="dropdown-item" href="${menu.resource}">${menu.fullName}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>

@@ -17,7 +17,7 @@
 <div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 	<ul class="slides">
 		<c:forEach var="item" items="${entity['content']}">
-		<li><img src="${pageContext.request.contextPath}${item}" alt="" /></li>
+		<li><img src="${item}" alt="" /></li>
 		</c:forEach>
 	</ul>
 </div>

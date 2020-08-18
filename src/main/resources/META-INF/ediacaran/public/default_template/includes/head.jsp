@@ -24,7 +24,7 @@
 	messages.setDefaultLanguage('pt-BR');
 	messages.addSupportedLanguages('pt-BR');
 
-	$.AppContext.vars.contextPath = "${pageContext.request.contextPath}";
+	$.AppContext.vars.contextPath = "";
 	$.AppContext.vars.painel      = "#content-body";
 	$.AppContext.vars.dialog      = "#defaultDialog";
 	$.AppContext.vars.language    = messages.getLanguage();
