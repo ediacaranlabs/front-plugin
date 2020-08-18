@@ -1,0 +1,4146 @@
+<taglib
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee web-jsptaglibrary_2_1.xsd"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	version="2.1">
+     
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>2.0</jsp-version>
+	<short-name>et</short-name>
+    <uri>https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components</uri>
+
+	<tag>
+		<name>nivo-slider</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.NivoTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um novo NIVO slider. Os slides podem ser adicionados com <nivo-slider-item/>
+Ex:
+<nivo-slider>
+	<nivo-slider-item image="/imgs/slide1.png" tile="Title1">Text Content</nivo-slider>
+</nivo-slider>
+]]></info>
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+	</tag>
+
+	<tag>
+		<name>nivo-slider-tem</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.NivoItemTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um novo slide.
+]]></info>
+		
+		<attribute>
+			<name>image</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<name>title</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<name>link</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	</tag>
+
+	<!-- Event -->
+	<tag>
+		<name>event</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.EventTag</tag-class>
+		<body-content>scriptless</body-content>
+
+		<!-- default attr -->
+
+		<!-- attr -->
+
+		<attribute>
+			<description></description>
+			<name>type</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description></description>
+			<name>component</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	<!-- /Event -->
+
+	<!-- Accordion -->
+
+	<tag>
+		<name>accordion</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.AccordionTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um novo acordeon. Os slides podem ser adicionados com <nivo-slider-item/>
+Ex:
+<accordion>
+	<accordion-item tile="Title1">Text Content</accordion-item>
+	<accordion-item tile="Title2">Text Content 2</accordion-item>
+</accordion>
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+	</tag>
+
+	<tag>
+		<name>accordion-item</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.AccordionItemTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um novo cartão ao acordeon.
+]]></info>
+
+		<attribute>
+			<name>title</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	</tag>
+
+	<!-- /Accordion -->
+
+	<!-- Blockquote -->
+	<tag>
+		<name>blockquote</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.BlockquoteTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um novo blockquote.
+Ex:
+<blockquote cite="Person">Text content</blockquote>
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<name>cite</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /Blockquote -->
+	
+	<!-- icon -->
+	
+	<tag>
+		<name>icon</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.IconTag</tag-class>
+		<body-content>empty</body-content>
+		<info><![CDATA[
+Adiciona um ícone. Size define o tamanho do comnponente, bgSize define o tamanho do plano de fundo,
+iconSize define o tamanho do ícone e bg define a imágem de fundo.
+Ex:
+<icon size="3" bg="circled " icon="briefcase"/>
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description>Tamanho do componente.</description>
+			<name>size</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Tamanho do plano de fundo.</description>
+			<name>bgSize</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Tamanho do ícone.</description>
+			<name>iconSize</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Plano de fundo.</description>
+			<name>bg</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Ícone</description>
+			<name>icon</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /icon -->	
+	
+	<!-- box -->
+	
+	<tag>
+		<name>box</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.BoxTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria uma nova caixa. Para adicionar o cabeçalho use <box-header/>, para o corpo use <box-body/> e para o rodapé use <box-footer/>.
+Ex:
+<box>
+	<box-header>
+		<icon size="3" bg="circled " icon="briefcase"/>
+	</box-header>
+	<box-body>
+		<h6>Title</h6>
+		<p>Lorem ipsum dolor sit amet, has ei ...</p>
+	</box-body>
+	<box-footer>
+		<a href="#">Learn more</a>
+	</box-footer>
+</box>
+]]>
+		</info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /box -->
+
+	<!-- box-header -->
+	
+	<tag>
+		<name>box-header</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.BoxHeaderTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Define o cabeçalho de uma caixa.
+]]></info>
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /box-header -->
+
+	<!-- box-body -->
+	
+	<tag>
+		<name>box-body</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.BoxBodyTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Define o corpo de uma caixa.
+]]></info>
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /box-body -->
+
+	<!-- box-footer -->
+	
+	<tag>
+		<name>box-footer</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.BoxFooterTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Define o rodapé de uma caixa.
+]]></info>
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /box-footer -->
+	
+	<!-- breadcrumb -->
+	
+	<tag>
+		<name>breadcrumb</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.BreadcrumbTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria um breadcrumb navigation.
+ex:
+<ec:breadcrumb title="Local">
+    <ec:breadcrumb-path icon="home" text="" lnk="#"/>
+</ec:breadcrumb>
+]]></info>
+
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<!-- attrs -->
+		
+		<attribute>
+			<name>title</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /breadcrumb -->
+		
+	<!-- breadcrumb-path -->
+	
+	<tag>
+		<name>breadcrumb-path</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.BreadcrumbPathTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Usado para montar o caminho de um breadcrumb navigation. 
+]]></info>
+		<!-- attrs -->
+		
+		<attribute>
+			<name>icon</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<name>text</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<name>lnk</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /breadcrumb-path -->
+	
+	<!-- button -->
+	
+	<tag>
+		<name>button</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.ButtonTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria um botão.
+Ex:
+<ec:button outline="true" type="secondary" label="Search"/> 
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description></description>
+			<name>classStyle</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>action</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>ctype</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>method</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>target</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define o rótulo do botão</description>
+			<name>label</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Define o tamanho do botão. Pode ser usar lg ou sm.</description>
+			<name>size</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Define o tipo do botão. Pode ser primary, secondary, success, danger, warning, info, light ou dark.</description>
+			<name>type</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Habilita o estilo block-level.</description>
+			<name>block</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Habilita o botão.</description>
+			<name>enabled</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Define o tipo de ação do botão. Pode ser submit, button ou reset.</description>
+			<name>actionType</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Remove a cor de fundo do botão.</description>
+			<name>outline</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /button -->
+
+	<!-- caruousel -->
+	
+	<tag>
+		<name>carousel</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.CarouselTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info>
+<![CDATA[
+Cria um carousel.
+Ex:
+<carousel>
+    <carousel-item img="/image.jpg" lnk="resource1.jsp"/>
+    <carousel-item img="/image2.jpg" lnk="resource2.jsp"/>
+</carousel> 
+]]></info>
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+	</tag>
+	
+	<!-- /caruousel -->
+	
+	<!-- caruousel-item -->
+	
+	<tag>
+		<name>carousel-item</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.CarouselItemTag</tag-class>
+		<body-content>empty</body-content>
+		<info><![CDATA[
+Adiciona um novo item ao carousel.
+Ex:
+<carousel>
+    <carousel-item img="/image.jpg" lnk="resource1.jsp"/>
+    <carousel-item img="/image2.jpg" lnk="resource2.jsp"/>
+</carousel> 
+]]></info>
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+	</tag>
+	
+	<!-- /caruousel-item -->	
+
+	<!-- form -->
+	
+	<tag>
+		<name>form</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.FormTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria um formulário.
+Ex:
+<form action="/path">
+</form> 
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description></description>
+			<name>classStyle</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<name>acceptCharset</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<name>action</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<name>enctype</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<name>method</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<name>target</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<name>update</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /form -->
+
+	<!-- checkbox -->
+	
+	<tag>
+		<name>checkbox</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.CheckboxTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria um botão checkbox.
+Ex:
+<checkbox name="item1" label="Select item 1" value="1" selected="true"/> 
+<checkbox name="item1" label="Select item 2" value="2" selected="true"/> 
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<name>selected</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<name>enabled</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<name>inline</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /checkbox -->	
+			
+			
+	<!-- radio -->
+	
+	<tag>
+		<name>radio</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.RadioTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria um botão radio.
+Ex:
+<radio name="item1" label="Select item 1" value="1" selected="true"/> 
+<radio name="item1" label="Select item 2" value="2"/> 
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- Form attr -->
+		
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<name>enabled</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<attribute>
+			<name>selected</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<name>inline</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /radio -->
+	
+	<!-- textfield -->
+	
+	<tag>
+		<name>textfield</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TextfieldTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria um campo texto.
+Ex:
+<textfield name="item1" label="Field"/> 
+]]></info>
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- Form attr -->
+		
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<name>enabled</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>autocomplete</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>autofocus</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>maxlength</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>minlength</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>pattern</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>placeholder</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>required</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>group</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /textfield -->
+		
+	<!-- passwordfield -->
+	
+	<tag>
+		<name>passwordfield</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.PasswordfieldTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria um campo senha.
+Ex:
+<passwordfield name="item1" label="Field"/> 
+]]></info>
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- Form attr -->
+		
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<name>enabled</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>autocomplete</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>autofocus</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>maxlength</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>minlength</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>pattern</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>placeholder</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>required</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>group</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /passwordfield -->		
+	<!-- select -->
+	
+	<tag>
+		<name>select</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.SelectTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria um campo select.
+Ex:
+<select name="car" label="Cars">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+</select>
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- Form attr -->
+		
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<name>enabled</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>autofocus</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>required</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>multiple</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>size</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>sizeList</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+
+	
+	</tag>
+	
+	<!-- /select -->
+	
+	<!-- option -->
+	
+	<tag>
+		<name>option</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.OptionTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona uma opção em um campo select.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- Form attr -->
+		
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<name>enabled</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>selected</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+	
+	</tag>
+	
+	<!-- /option -->
+		
+	<!-- textarea -->
+	
+	<tag>
+		<name>textarea</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TextareaTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria um campo textarea.
+Ex:
+<textarea name="text" label="Text">
+	text text text
+</textarea>
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- Form attr -->
+		
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<name>enabled</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>autocomplete</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>autofocus</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>maxlength</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>placeholder</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>required</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>cols</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>rows</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /textarea -->
+
+	<!-- dropdown -->
+	
+	<tag>
+		<name>dropdown</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.DropdownTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria um menu drop-down.&#13;&#10;
+Ex:&#13;&#10;
+<dropdown label="menu" style="primary" variation="left">&#13;&#10;
+	<dropdown-item src="#">Item 1</dropdown-item>&#13;&#10;
+	<dropdown-item src="#">Item 2</dropdown-item>&#13;&#10;
+	<dropdown-item src="#">Item 3</dropdown-item>&#13;&#10;
+	<dropdown-separator/>&#13;&#10;
+	<dropdown-item src="#">Item 4</dropdown-item>&#13;&#10;
+</dropdown>&#13;&#10;
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description>Define o rótulo.</description>
+			<name>label</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Define o estilo. (ex: primary, secondary, success)</description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Define o tamanho. (ex: lg, sm)</description>
+			<name>size</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Habilita o split button.</description>
+			<name>split</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Define o modo como o menu abre. (ex: up, right, left)</description>
+			<name>variation</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /dropdown -->
+
+	<!-- dropdown-item -->
+	
+	<tag>
+		<name>dropdown-item</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.DropdownItemTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um item no menu drop-down.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description>Define o local do recurso. (ex: http://www.uoutec.com.br/)</description>
+			<name>src</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /dropdown-item -->
+
+	<!-- dropdown-separator -->
+	
+	<tag>
+		<name>dropdown-separator</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.DropdownSeparatorTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um separador no menu drop-down.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description>Define o local do recurso. (ex: http://www.uoutec.com.br/)</description>
+			<name>src</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /dropdown-separator -->
+
+	<!-- flexslider -->
+	
+	<tag>
+		<name>flexslider</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.FlexsliderTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um Flex Slider.
+<flexslider>
+    <flexslider-item src="/img1.jpg" />
+    <flexslider-item src="/img2.jpg" />
+    <flexslider-item src="/img3.jpg" />
+</flexslider>
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /flexslider -->
+		
+	<!-- flexslider-item -->
+	
+	<tag>
+		<name>flexslider-item</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.FlexsliderItemTag</tag-class>
+		<body-content>empty</body-content>
+		<info><![CDATA[
+Adiciona uma imagem ao Flex Slider.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>Imagem.</description>
+			<name>src</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /flexslider-item -->
+		
+	<!-- widget -->
+	
+	<tag>
+		<name>widget</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.WidgetTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria um widget.
+Ex:
+<widget title="My widget">
+<p>content widget</p>
+</widget>
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>Título.</description>
+			<name>title</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /widget -->		
+	
+	<!-- image -->
+	
+	<tag>
+		<name>image</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.ImageTag</tag-class>
+		<body-content>empty</body-content>
+		<info><![CDATA[
+Cria uma imagem.
+Ex:
+<image src="/image.jpg" style="circle" align="center"/>
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description></description>
+			<name>classStyle</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>Local da imagem.</description>
+			<name>src</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Estilo da imagem. (ex: fluid, thumbnail, rounded, circle)</description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Alinhamento da imagem. (ex: left, right, center)</description>
+			<name>align</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /image -->	
+	
+	<!-- field-group -->
+	
+	<tag>
+		<name>field-group</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.FieldGroupTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria uma grupo de campos.&#13;&#10;
+Ex:&#13;&#10;
+<field-group>&#13;&#10;
+    <textfield name="search"/>&#13;&#10;
+    <append-field>&#13;&#10;
+    	<append-field-item>&#13;&#10;
+	        <ec:button outline="true" type="secondary" label="Search"/>&#13;&#10;
+    	</append-field-item>&#13;&#10;
+    </append-field>&#13;&#10;
+</field-group>&#13;&#10;
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /field-group -->
+	
+	<!-- prepend-field -->
+	
+	<tag>
+		<name>prepend-field</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.PrependFieldTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona conteúdo antes de um campo.
+Ex:
+<field-group>
+	<prepend-filed>
+		<prepend-field-item text="Search"/>
+	</prepend-field>
+    <textfield name="search"/>
+</field-group>
+]]></info>
+
+		<!-- default attr -->
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /prepend-field -->
+	
+	<!-- prepend-field-item -->
+	
+	<tag>
+		<name>prepend-field-item</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.FieldGroupItemTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um item antes de um campo.
+]]></info>
+
+		<!-- default attr -->
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>O conteudo é um texto.</description>
+			<name>text</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /prepend-field-item -->	
+	
+	<!-- append-field -->
+	
+	<tag>
+		<name>append-field</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.AppendFieldTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona conteúdo depois de um campo.&#13;&#10;
+Ex:&#13;&#10;
+<field-group>&#13;&#10;
+    <textfield name="search"/>&#13;&#10;
+    <append-field>&#13;&#10;
+    	<append-field-item>&#13;&#10;
+	        <ec:button outline="true" type="secondary" label="Search"/>&#13;&#10;
+    	</append-field-item>&#13;&#10;
+    </append-field>&#13;&#10;
+</field-group>&#13;&#10;
+]]></info>
+
+		<!-- default attr -->
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /append-field -->	
+
+	<!-- append-field-item -->
+	
+	<tag>
+		<name>append-field-item</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.FieldGroupItemTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um item depois de um campo.
+]]></info>
+
+		<!-- default attr -->
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>O conteudo é um texto.</description>
+			<name>text</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	
+	</tag>
+	
+	<!-- /append-field-item -->
+	
+	<!-- description-list -->
+	
+	<tag>
+		<name>description-list</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.DescriptionListTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria uma lista descritiva.
+<description-list>
+    <description title="Description lists">
+    	A description list is perfect for defining terms.
+    </description>
+    <description title="Euismod">
+        <p>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</p>
+        <p>Donec id elit non mi porta gravida at eget metus.</p>
+    </description>
+    <description title="Truncated term is truncated" truncate="true">
+        Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+    </description>
+</description-list>
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /description-list -->
+
+	<!-- /description -->
+	
+	<tag>
+		<name>description</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.DescriptionTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um item a uma lista descritiva.
+]]></info>
+
+		<!-- default attr -->
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>Define o titulo.</description>
+			<name>title</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Se verdadeiro, quebra o texto.</description>
+			<name>truncate</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Define a largura do título.</description>
+			<name>titleWidth</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Define a largura do texto.</description>
+			<name>contentWidth</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /description -->
+
+	<!-- gallery -->
+	
+	<tag>
+		<name>gallery</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.GalleryTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria uma galeria de imagens.
+	<gallery>
+		<gallery-filters>
+			<gallery-filter name="Room" code="room"/>
+			<gallery-filter name="Sala" code="sala"/>
+		</gallery-filters>
+		<gallery-images>
+			<gallery-image icon="/gallery/img0.jpg" text="Imagem description 0" src="/gallery/img_ico0.jpg" title="Image 0" filter="sala"/>
+			<gallery-image icon="/gallery/img1.jpg" text="Imagem description 1" src="/gallery/img_ico1.jpg" title="Image 1" filter="sala"/>
+			<gallery-image icon="/gallery/img2.jpg" text="Imagem description 2" src="/gallery/img_ico2.jpg" title="Image 2" filter="quarto"/>
+			<gallery-image icon="/gallery/img3.jpg" text="Imagem description 3" src="/gallery/img_ico3.jpg" title="Image 3" filter="quarto"/>
+		</gallery-images>
+	</gallery>
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description></description>
+			<name>cols</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /gallery -->
+
+	<!-- gallery-filters -->
+	
+	<tag>
+		<name>gallery-filters</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.GalleryFiltersTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona filtros em uma galeria.
+]]></info>
+
+		<!-- default attr -->
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /gallery-filters -->
+
+	<!-- gallery-filter -->
+	
+	<tag>
+		<name>gallery-filter</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.GalleryFilterTag</tag-class>
+		<body-content>empty</body-content>
+		<info><![CDATA[
+Adiciona um filtro em uma galeria.
+]]></info>
+
+		<!-- default attr -->
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description></description>
+			<name>code</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>active</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /gallery-filter -->
+	
+	<!-- gallery-images -->
+	
+	<tag>
+		<name>gallery-images</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.GalleryImagesTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona imagens em uma galeria.
+]]></info>
+
+		<!-- default attr -->
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /gallery-images -->
+	
+	<!-- gallery-image -->
+	
+	<tag>
+		<name>gallery-image</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.GalleryImageTag</tag-class>
+		<body-content>empty</body-content>
+		<info><![CDATA[
+Adiciona uma imagem em uma galeria.
+]]></info>
+
+		<!-- default attr -->
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description></description>
+			<name>title</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>filter</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>icon</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>src</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+			
+		<attribute>
+			<description></description>
+			<name>text</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /gallery-image -->		
+
+	<!-- intro -->
+	
+	<tag>
+		<name>intro</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.IntroTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um bloco intro.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>Imagem de fundo.</description>
+			<name>bgImage</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /intro -->		
+	
+	<!-- list -->
+	
+	<tag>
+		<name>list</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.ListTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria uma lista.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>Estilo da lista. (ex: inline, unstyled)</description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /list -->	
+	
+	<!-- list-item -->
+	
+	<tag>
+		<name>list-item</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.ListItemTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um item em uma lista
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /list-item -->
+		
+	<!-- prettify -->
+	
+	<tag>
+		<name>prettify</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.PrettifyTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria um prettify.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>Exibe ou não o número da linha.</description>
+			<name>linenums</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /prettify -->	
+
+	<!-- price-box -->
+	
+	<tag>
+		<name>price-box</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.PriceBoxTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria um price box.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>Atratividade</description>
+			<name>attractiveness</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /price-box -->	
+
+	<!-- price-box-header -->
+	
+	<tag>
+		<name>price-box-header</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.PriceBoxHeaderTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+	</tag>
+	
+	<!-- /price-header -->	
+
+	<!-- price-box-terms -->
+	
+	<tag>
+		<name>price-box-terms</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.PriceBoxTermsTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+	</tag>
+	
+	<!-- /price-box-terms -->	
+	
+	<!-- price-box-body -->
+	
+	<tag>
+		<name>price-box-body</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.PriceBoxBodyTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+	</tag>
+	
+	<!-- /price-box-body -->
+
+	<!-- price-box-body -->
+	
+	<tag>
+		<name>price-box-footer</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.PriceBoxFooterTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+	</tag>
+	
+	<!-- /price-box-footer -->
+			
+	<!-- price-box-item -->
+	
+	<tag>
+		<name>price-box-item</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.PriceBoxItemTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um item a um price box.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>Seleciona o item.</description>
+			<name>checked</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /price-box-item -->	
+
+	<!-- pullquote -->
+	
+	<tag>
+		<name>pullquote</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.PullquoteTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria uma citação.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>Alinhamento. (ex: left ou right)</description>
+			<name>align</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+	</tag>
+	
+	<!-- /pullquote -->	
+
+	<!-- separator -->
+	
+	<tag>
+		<name>separator</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.SeparatorTag</tag-class>
+		<body-content>empty</body-content>
+		<info><![CDATA[
+Cria um separador.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /separator -->	
+
+	<!-- table -->
+	
+	<tag>
+		<name>table</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TableTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria uma tabela.
+<table>
+	<table-header>
+		<table-col>ID</table-col>
+		<table-col>Description</table-col>
+	</table-header>
+	<table-body>
+		<table-row>
+			<table-col>1</table-col>
+			<table-col>Teste 1</table-col>
+		</table-row>
+		<table-row>
+			<table-col>2</table-col>
+			<table-col>Teste 2</table-col>
+		</table-row>
+	</table-body>
+</table>
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+		<attribute>
+			<description></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /table -->	
+
+	<!-- table-header -->
+	
+	<tag>
+		<name>table-header</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TableHeaderTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona o cabeçalho em uma tabela.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+	</tag>
+	
+	<!-- /table-header -->	
+
+	<!-- table-col -->
+	
+	<tag>
+		<name>table-col</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TableColTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria uma coluna em uma linha.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+		<attribute>
+			<description></description>
+			<name>size</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description></description>
+			<name>classStyle</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /table-col -->	
+
+	<!-- table-body -->
+	
+	<tag>
+		<name>table-body</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TableBodyTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona o corpo em uma tabela.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+	</tag>
+	
+	<!-- /table-body -->	
+
+	<!-- table-row -->
+	
+	<tag>
+		<name>table-row</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TableRowTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona uma linha uma tabela.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+		<attribute>
+			<description></description>
+			<name>size</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description></description>
+			<name>classStyle</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /table-row -->	
+
+	<!-- table-foot -->
+	
+	<tag>
+		<name>table-foot</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TableFootTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona o rodapé em uma tabela.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+	</tag>
+	
+	<!-- /table-foot -->	
+	
+	<!-- title -->
+	
+	<tag>
+		<name>content-section</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.ContentSectionTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona uma seção.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+		<attribute>
+			<description>Titulo</description>
+			<name>title</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+	</tag>
+	
+	<!-- /title -->	
+	
+	<!-- landing-section -->
+	
+	<tag>
+		<name>landing-section</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.LandingSectionTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona uma seção em uma landing page.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+		<attribute>
+			<description>Nome</description>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Título</description>
+			<name>title</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>img</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>align</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+	</tag>
+	
+	<!-- /landing-section -->	
+	
+	<!-- menu-bar -->
+	
+	<tag>
+		<name>menu-bar</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.MenuBarTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona uma barra de menu.
+<menu-bar>
+	<menu-body>
+		<menu-itens>
+			<menu label="menu 1">
+				<menu-item link="#" label="item 1"/>
+				<menu-item link="#" label="item 2"/>
+				<menu-item link="#" label="item 3"/>
+			</menu>
+			<menu-item link="#" label="menu 2"/>
+		</menu-itens>
+	</menu-body>
+</menu-bar>
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+		<attribute>
+			<description>Se verdadeiro, menu vertical.</description>
+			<name>sidebar</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Estilo da barra do menus. (ex: light, dark)</description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Estilo do fundo da barra de menus. (ex: dark, primary)</description>
+			<name>background</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Posição da barra de menus. (ex: top, bottom, sticky)</description>
+			<name>position</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define o expand. (ex: sm, md, lg, xl)</description>
+			<name>expand</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /menu-bar -->	
+	
+	<!-- menu-bar-brand -->
+	
+	<tag>
+		<name>menu-bar-brand</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.MenuBarBrandTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Exibe o logo ou nome do site.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description>Link.</description>
+			<name>href</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /menu-bar-brand -->
+	
+	<!-- menu-label-->
+	
+	<tag>
+		<name>menu-label</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.MenuLabelTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Define o Nome do menu. 
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /menu-label -->
+	
+	<!-- menu-item -->
+	
+	<tag>
+		<name>menu-item</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.MenuItemTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um item em um menu. 
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+		<attribute>
+			<description>Link.</description>
+			<name>href</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /menu-item -->	
+	
+	<!-- menu-toggler -->
+	
+	<tag>
+		<name>menu-toggler</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.MenuTogglerTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Usado para acionar o menu.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>Menu.</description>
+			<name>menuID</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /menu-toggler -->	
+		
+	<!-- menu-body -->
+	
+	<tag>
+		<name>menu-body</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.MenuBodyTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Cria o corpo do menu.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<!-- attr -->
+	
+		<attribute>
+			<description>Menu.</description>
+			<name>menuID</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+	</tag>
+	
+	<!-- /menu-body -->	
+	
+	<!-- menu-itens -->
+	
+	<tag>
+		<name>menu-itens</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.MenuItensTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona itens em um menu.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+		<attribute>
+			<description>Alinhamento dos itens (left, right).</description>
+			<name>align</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /menu-itens -->
+
+	<!-- menu -->
+	
+	<tag>
+		<name>menu</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.MenuTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um menu.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+	</tag>
+	
+	<!-- /menu -->
+
+	<!-- load-data -->
+	
+	<tag>
+		<name>load-data</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.LoadDataTag</tag-class>
+		<body-content>empty</body-content>
+		<info><![CDATA[
+Carrega dados de um arquivo.
+]]></info>
+
+		<!-- default attr -->
+
+		<!-- attr -->
+		<attribute>
+			<description>Arquivo contendo os dados da página.</description>
+			<name>file</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+	
+		<attribute>
+			<description>Nome da variável onde os dados serão carregados.</description>
+			<name>var</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /load-data -->
+
+	<!-- field-validator -->
+	
+	<tag>
+		<name>field-validator</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.FieldValidatorTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+	
+		<!-- attr -->
+
+		<attribute>
+			<description>Identificação do formulário</description>
+			<name>form</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Nome do campo</description>
+			<name>field</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /field-validator -->
+
+	<!-- field-validator-rule -->
+	
+	<tag>
+		<name>field-validator-rule</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.FieldValidatorRuleTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+	
+		<!-- attr -->
+		<attribute>
+			<description></description>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>raw</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>message</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /field-validator-rule -->
+
+	<!-- field-validator-param -->
+	
+	<tag>
+		<name>field-validator-param</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.FieldValidatorRuleParamTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+	
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>raw</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /field-validator-param -->
+	
+</taglib>
