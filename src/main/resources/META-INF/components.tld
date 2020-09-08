@@ -4142,5 +4142,46 @@ Carrega dados de um arquivo.
 	</tag>
 	
 	<!-- /field-validator-param -->
+
+	<!-- setBundle -->
+	
+	<tag>
+		<name>setBundle</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.BundleTag</tag-class>
+		<body-content>empty</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+	
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>locale</name>
+			<required>false</required>
+			<type>java.util.Locale</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>var</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+		
+		<attribute>
+			<description></description>
+			<name>basename</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /setBundle -->
 	
 </taglib>
