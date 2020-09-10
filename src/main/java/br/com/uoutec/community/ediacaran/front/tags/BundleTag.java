@@ -50,5 +50,29 @@ public class BundleTag extends AbstractSimpleTag {
 		
     	super.setProperty(var, value);
     }
+
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
+
+	public String getVar() {
+		return var;
+	}
+
+	public void setVar(String var) {
+		this.var = var;
+	}
+
+	public String getBasename() {
+		return basename;
+	}
+
+	public void setBasename(String basename) {
+		this.basename = basename;
+	}
 	
 }
