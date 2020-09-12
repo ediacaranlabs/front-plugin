@@ -28,7 +28,7 @@ import br.com.uoutec.community.ediacaran.plugins.PluginPropertyValue;
 //@Singleton
 //@ActionStrategy(WebActionStrategyType.DETACHED)
 public class ViewController {
-
+/*
 	@Transient
 	@Inject
 	private PluginManager pluginManager;
@@ -156,5 +156,5 @@ public class ViewController {
 			}
 		}
 	}
-	
+*/	
 }

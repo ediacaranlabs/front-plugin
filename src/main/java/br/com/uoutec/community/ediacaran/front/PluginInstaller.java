@@ -8,7 +8,7 @@ import br.com.uoutec.application.ClassUtil;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
 import br.com.uoutec.community.ediacaran.plugins.PluginProperties;
-import br.com.uoutec.community.ediacaran.plugins.PluginsProperties;
+import br.com.uoutec.community.ediacaran.plugins.PluginsSuppliers;
 import br.com.uoutec.community.ediacaran.system.AbstractWebPluginInstaller;
 
 public class PluginInstaller 
@@ -40,8 +40,8 @@ public class PluginInstaller
 			throws PluginException, InstantiationException, IllegalAccessException, 
 			ClassNotFoundException, IOException {
 		
-		PluginsProperties pps = EntityContextPlugin.getEntity(PluginsProperties.class);
-		PluginProperties pp   = pps.getPluginProperties(PLUGIN);
+		PluginsSuppliers ps = EntityContextPlugin.getEntity(PluginsSuppliers.class);
+		PluginProperties pp   = ps.getSupplier(PROVIDER).getProperties(PLUGIN);
 		String cacheProvider  = pp.getString(CACHE_PROVIDER_PROPERTY);
 		
 		cacheProvider = cacheProvider == null? HashMapTemplateCache.class.getName() : cacheProvider;

@@ -19,7 +19,8 @@ import br.com.uoutec.application.se.ApplicationBootstrapProvider;
 import br.com.uoutec.community.ediacaran.ServerBootstrap;
 import br.com.uoutec.community.ediacaran.front.pub.DataUtil;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.community.ediacaran.plugins.PluginsProperties;
+import br.com.uoutec.community.ediacaran.plugins.PluginProperties;
+import br.com.uoutec.community.ediacaran.plugins.PluginsSuppliers;
 
 public class FrontEdiacaranServlet extends HttpServlet{
 
@@ -27,13 +28,14 @@ public class FrontEdiacaranServlet extends HttpServlet{
 
 	private ServerBootstrap serverBootstrap;
 	
-	private PluginsProperties pluginsProperties;
+	private PluginProperties pluginProperties;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		this.serverBootstrap = (ServerBootstrap) ApplicationBootstrapProvider.getBootstrap();
-		this.pluginsProperties = EntityContextPlugin.getEntity(PluginsProperties.class);
+		PluginsSuppliers pluginsSuppliers = EntityContextPlugin.getEntity(PluginsSuppliers.class);
+		this.pluginProperties = pluginsSuppliers.getSupplier(PluginInstaller.PROVIDER).getProperties(PluginInstaller.PLUGIN);
 	}
 	
 	public void doGet(HttpServletRequest req,
@@ -63,7 +65,7 @@ public class FrontEdiacaranServlet extends HttpServlet{
 				return null;
 			}
 			
-			String template = pluginsProperties.getString(PluginInstaller.PLUGIN, "template");
+			String template = pluginProperties.getString("template");
 			return "/" + template + "/" + type + ".jsp";
 		}
 		catch(Throwable e) {
