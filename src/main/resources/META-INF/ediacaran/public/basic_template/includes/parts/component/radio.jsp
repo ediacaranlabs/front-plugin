@@ -21,10 +21,10 @@
 
 
 <c:if test="${requestScope.formControls}">
-	<div class="control-group ${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+	<div class="control-group ${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 		<div class="controls">
 </c:if>
-<div class="form-check ${empty requestScope.formControls? class : ''}" <c:if test="${empty requestScope.formControls}"><jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" /></c:if>>
+<div class="form-check ${empty requestScope.formControls? class : ''}" <c:if test="${empty requestScope.formControls}"><jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" /></c:if>>
   <input class="form-check-input" ${attr}>
   <label class="form-check-label">
     ${entity['label']}

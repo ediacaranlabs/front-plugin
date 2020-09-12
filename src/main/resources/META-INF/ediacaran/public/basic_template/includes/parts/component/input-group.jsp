@@ -11,7 +11,7 @@
 <c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ') : class}${!empty entity['properties']['class']? entity['properties']['class']   : ''    }"/>
 
 <c:if test="${requestScope.formControls}">
-	<div class="control-group ${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+	<div class="control-group ${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 		<div class="controls">
 </c:if>
 
@@ -22,7 +22,7 @@
 <label class="sr-only" for="input_${entity['name']}">${entity['label']}</label>
 </c:if>
 	
-<div class="input-group ${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<div class="input-group ${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 	<c:if test="${!empty entity['prepend']}">
 		<div class="input-group-prepend">
 		<c:choose>
@@ -31,7 +31,7 @@
 			</c:when>
 			<c:otherwise>
 				<c:set var="entity" value="${entity['prepend']}" scope="request" />
-				<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+				<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 			</c:otherwise>
 		</c:choose>
 		</div>
@@ -39,7 +39,7 @@
 	
 	<c:forEach items="${entity['content']}" var="item">
 		<c:set var="entity" value="${item}" scope="request" />
-		<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+		<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 	</c:forEach>
 	
 	<c:if test="${!empty entity['append']}">
@@ -50,7 +50,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:set var="entity" value="${entity['append']}" scope="request" />
-					<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+					<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 				</c:otherwise>
 			</c:choose>
 		</div>

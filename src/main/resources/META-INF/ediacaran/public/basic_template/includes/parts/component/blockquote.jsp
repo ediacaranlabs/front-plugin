@@ -4,7 +4,7 @@
 <%-- define a entidade --%>
 <c:set var="entity" value="${requestScope.entity}" />
 
-<blockquote <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<blockquote <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 	<i class="fa fa-quote-left fa-2x"></i>
 	${entity['content']}
 	<c:if test="${!empty entity['cite']}"> 

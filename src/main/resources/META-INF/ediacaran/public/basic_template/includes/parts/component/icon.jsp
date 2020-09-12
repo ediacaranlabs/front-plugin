@@ -12,4 +12,4 @@
 <c:set var="class"  value="${!empty class && !empty entity['class']?               class.concat(' ')              : class}${!empty entity['class']?               entity['class']                           : ''}"/>
 <c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ')              : class}${!empty entity['properties']['class']? ' '.concat(entity['properties']['class']) : ''}"/>
 
-<i class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />></i>
+<i class="${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />></i>

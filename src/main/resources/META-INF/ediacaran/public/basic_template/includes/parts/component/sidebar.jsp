@@ -24,14 +24,14 @@
 <c:set var="barClass"  value="${!empty barClass && !empty requestScope.entity['properties']['class']? barClass.concat(' ') : barClass}${!empty requestScope.entity['properties']['class']? requestScope.entity['properties']['class']   : '' }"/>
 </c:if>
 
-<div class="${barClass}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<div class="${barClass}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 	<aside class="left-sidebar">
 		<c:choose>
 			<c:when test="${requestScope.entity.getClass().simpleName == 'String'}">
 		     		${requestScope.entity}
 			</c:when>
 			<c:otherwise>
-				<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+				<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 			</c:otherwise>
 		</c:choose>
 	</aside>
@@ -49,14 +49,14 @@
 <c:set var="contentClass"  value="${!empty contentClass && !empty requestScope.entity['properties']['class']? contentClass.concat(' ') : contentClass}${!empty requestScope.entity['properties']['class']? requestScope.entity['properties']['class']   : '' }"/>
 </c:if>
 
-<div class="${contentClass}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<div class="${contentClass}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 	<article>
 		<c:choose>
 			<c:when test="${requestScope.entity.getClass().simpleName == 'String'}">
 		     		${requestScope.entity}
 			</c:when>
 			<c:otherwise>
-				<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+				<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 			</c:otherwise>
 		</c:choose>
 	</article>
@@ -74,14 +74,14 @@
 <c:set var="barClass"  value="${!empty barClass && !empty requestScope.entity['properties']['class']? barClass.concat(' ') : barClass}${!empty requestScope.entity['properties']['class']? requestScope.entity['properties']['class']   : '' }"/>
 </c:if>
 
-<div class="${barClass}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<div class="${barClass}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 	<aside class="right-sidebar">
 		<c:choose>
 			<c:when test="${requestScope.entity.getClass().simpleName == 'String'}">
 		     		${requestScope.entity}
 			</c:when>
 			<c:otherwise>
-				<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+				<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 			</c:otherwise>
 		</c:choose>
 	</aside>

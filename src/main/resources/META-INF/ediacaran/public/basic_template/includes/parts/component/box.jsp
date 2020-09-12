@@ -10,7 +10,7 @@
 <c:set var="class"  value="box text-center"/>
 <c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ') : class}${!empty entity['properties']['class']? ' '.concat(entity['properties']['class']) : ''}"/>
 
-<div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<div class="${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
   <div class="text-center">
   	<span class="fa-stack fa-3x">
   		<i class="fa fa-circle fa-stack-2x"></i>

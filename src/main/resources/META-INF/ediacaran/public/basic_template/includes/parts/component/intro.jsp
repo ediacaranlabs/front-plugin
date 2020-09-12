@@ -13,7 +13,7 @@
 <c:set var="style"  value="${!empty style && !empty entity['background-image']   ? style.concat(' ') : style}${!empty entity['background-image']   ? 'background: url('.concat(pageContext.request.contextPath).concat(entity['background-image']).concat(') no-repeat center center; background-size: cover;') : ''}"/>
 <c:set var="style"  value="${!empty style && !empty entity['properties']['style']? style.concat(' ') : style}${!empty entity['properties']['style']? entity['properties']['style'] : ''}"/>
 
-<div style="${style}" class="intro-header${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<div style="${style}" class="intro-header${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 	<div class="container">
 			<div class="intro-message">
 				<div class="row">
@@ -26,7 +26,7 @@
 					<c:otherwise>
 						<c:set var="entity" value="${entity['content']}" scope="request" />
 						<c:if test="${entity['content-wrapper']}"><div class="col-12"></c:if>
-							<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+							<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 						<c:if test="${entity['content-wrapper']}"></div></c:if>
 					</c:otherwise>
 				</c:choose>

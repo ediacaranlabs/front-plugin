@@ -17,7 +17,7 @@
 <c:set var="attr" value="${!empty attr && entity['selected']?           attr.concat(' ') : attr}${entity['selected']?     'checked'                                                    : ''}"/>
 <c:set var="attr" value="${!empty attr && !empty class?                 attr.concat(' ') : attr}${!empty class?           'class='.concat(quote).concat(class).concat(quote)           : ''}"/>
 
-<div ${attr} id="accordion${requestScope.accordionID}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<div ${attr} id="accordion${requestScope.accordionID}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 <c:forEach var="item" items="${entity['content']}" varStatus="count">
 <div class="card">
 	<div class="card-header"
@@ -41,7 +41,7 @@
 				<c:otherwise>
 					<c:set var="entity" value="${item['content']}" scope="request" />
 					<jsp:include
-						page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+						page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 				</c:otherwise>
 			</c:choose>
 		</div>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
@@ -23,13 +24,15 @@ public class BundleTag extends AbstractSimpleTag {
 	}
 
     public void doTag() throws JspException, IOException {
+    	
+    	PageContext pc = (PageContext)super.getJspContext();
+    	HttpServletRequest request = (HttpServletRequest)pc.getRequest();
+    	
 		String packageID;
 		Locale currentLocale;
 		
     	if(basename == null) {
-			
-			String reqID = super.getRequestPath();
-			packageID = LanguageManager.TEMPLATE_PACKAGE + (reqID.startsWith("/")? reqID : "/" + reqID);
+			packageID = LanguageManager.TEMPLATE_PACKAGE + request.getRequestURI().split("\\.")[0];
     	}
     	else {
     		packageID = LanguageManager.TEMPLATE_PACKAGE + "/" + basename;

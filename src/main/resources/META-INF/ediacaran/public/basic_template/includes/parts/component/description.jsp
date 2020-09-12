@@ -25,7 +25,7 @@
 <%-- atributos opcionais --%>
 <c:set var="attr" value="${!empty attr && !empty class? attr.concat(' ') : attr}${empty class? '' : 'class='.concat(quote).concat(class).concat(quote)}"/>
 
-<dl ${attr} <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<dl ${attr} <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 	<c:forEach var="group" items="${entity['content']}">
 	
 	<c:set var="groupDtClass"  value="${dtClass}${!empty dtClass && group['text-truncate']? ' ' : ''}${group['text-truncate']? 'text-truncate' : ''}"/>

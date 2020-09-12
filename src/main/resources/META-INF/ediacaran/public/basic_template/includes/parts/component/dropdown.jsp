@@ -17,7 +17,7 @@
 <c:set var="buttonClass"  value="${!empty buttonClass && entity['button']['enabled'] == 'false'? buttonClass.concat(' ') : buttonClass}${entity['button']['enabled'] == 'false'? 'disabled'                              : ''}"/>
 
 <c:if test="${entity['wrapper'] != 'false'}">
-<div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<div class="${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 </c:if>
 	<c:choose>
 		<%-- label --%>
@@ -49,7 +49,7 @@
 		</c:when>
 		<c:otherwise>
 			<c:set var="entity" value="${entity['label']}" scope="request" />
-			<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+			<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 		</c:otherwise>
 	</c:choose>
 	<%-- /label --%>

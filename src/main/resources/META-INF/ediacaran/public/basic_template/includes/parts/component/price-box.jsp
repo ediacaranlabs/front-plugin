@@ -11,7 +11,7 @@
 <c:set var="class"  value="${!empty class && entity['special']?                    class.concat(' ') : class}${entity['special']?                    'special'                     : '' }"/>
 <c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ') : class}${!empty entity['properties']['class']? entity['properties']['class'] : '' }"/>
 
-<div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<div class="${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
   <div class="pricing-heading">
     <h3>${entity['title']}</h3>
   </div>

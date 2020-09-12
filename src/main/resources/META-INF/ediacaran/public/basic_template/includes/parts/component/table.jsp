@@ -15,7 +15,7 @@
 <c:set var="class"  value="${!empty class && !empty entity['type']?                class.concat(' ') : class}${empty entity['type']?                 ''                              : 'table-'.concat(entity['type']) }"/>
 <c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ') : class}${!empty entity['properties']['class']? entity['properties']['class']   : ''                              }"/>
 
-<table class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<table class="${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 	<%-- header --%>
 	<c:if test="${!empty entity['header']}">
 		
@@ -41,14 +41,14 @@
 						<c:set var="attNames"   value="abbr;align;axis;bgcolor;char;charoff;colspan;headers;height;nowrap;rowspan;scope;sorted;valign;width" scope="request" />
 						<c:set var="attValues"  value="{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v}" scope="request" />
 						<c:set var="attRenames" value="{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n}" scope="request" />
-						<th <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>${col['content']}</th>
+						<th <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>${col['content']}</th>
 						</c:if>
 						<%-- /col sem template --%>
 	
 						<%-- col com template --%>
 						<c:if test="${col['template']}">
 						<c:set var="entity" value="${col}" scope="request"/>
-						<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+						<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 						</c:if>
 						<%-- /col com template --%>
 					</c:otherwise>
@@ -64,7 +64,7 @@
 		<%-- template --%>
 		<c:if test="${!empty headerTemplate}">
 			<c:set var="entity" value="${entity['header']}" scope="request"/>
-			<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+			<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 		</c:if>	
 		<%-- /template --%>
 	
@@ -89,7 +89,7 @@
 		<c:set var="attValues"  value="{v};{v};{v};{v};{v}" scope="request" />
 		<c:set var="attRenames" value="{n};{n};{n};{n};{n}" scope="request" />
 		
-		<tr <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+		<tr <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 		
 			<c:forEach items="${row['cols']}" var="col">
 			<%-- col --%>
@@ -107,14 +107,14 @@
 					<c:set var="attNames"   value="abbr;align;axis;bgcolor;char;charoff;colspan;headers;height;nowrap;rowspan;scope;sorted;valign;width" scope="request" />
 					<c:set var="attValues"  value="{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v};{v}" scope="request" />
 					<c:set var="attRenames" value="{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n};{n}" scope="request" />
-					<td <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>${col['content']}</td>
+					<td <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>${col['content']}</td>
 					</c:if>
 					<%-- /col sem template --%>
 
 					<%-- col com template --%>
 					<c:if test="${col['template']}">
 					<c:set var="entity" value="${col}" scope="request"/>
-					<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+					<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 					</c:if>
 					<%-- /col com template --%>
 				</c:otherwise>
@@ -132,7 +132,7 @@
 	<%-- template --%>
 	<c:if test="${!empty bodyTemplate}">
 		<c:set var="entity" value="${entity['rows']}" scope="request"/>
-		<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+		<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 	</c:if>	
 	<%-- /template --%>
 	

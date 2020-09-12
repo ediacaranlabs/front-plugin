@@ -15,7 +15,7 @@
 		</c:when>
 		<c:otherwise>
 			<c:set var="entity" value="${item}" scope="request" />
-			<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+			<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 		</c:otherwise>
 	</c:choose>
 	</div>

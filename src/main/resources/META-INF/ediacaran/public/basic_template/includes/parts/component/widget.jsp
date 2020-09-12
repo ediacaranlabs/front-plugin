@@ -10,7 +10,7 @@
 <c:set var="class"  value=                                                                                  "widget"/>
 <c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ') : class}${!empty entity['properties']['class']? ' '.concat(entity['properties']['class']) : ''}"/>
 
-<div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<div class="${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 <h5 class="widgetheading">${entity['title']}</h5>
 <c:choose>
 	<c:when test="${entity['content'].getClass().simpleName == 'String'}">
@@ -18,7 +18,7 @@
 	</c:when>
 	<c:otherwise>
 		<c:set var="entity" value="${entity['content']}" scope="request" />
-		<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+		<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 	</c:otherwise>
 </c:choose>
 </div>

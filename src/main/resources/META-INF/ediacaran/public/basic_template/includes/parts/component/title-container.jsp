@@ -6,7 +6,7 @@
 <c:set var="ignore" value="[]" scope="request" />
 <c:set var="quote" value="\"" />
 
-<section id="inner-headline" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<section id="inner-headline" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 	<div class="container">
 	<c:choose>
 		<c:when test="${entity['content'].getClass().simpleName == 'String'}">
@@ -14,7 +14,7 @@
 		</c:when>
 		<c:otherwise>
 			<c:set var="entity" value="${entity['content']}" scope="request" />
-			<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+			<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 		</c:otherwise>
 	</c:choose>
 	</div>

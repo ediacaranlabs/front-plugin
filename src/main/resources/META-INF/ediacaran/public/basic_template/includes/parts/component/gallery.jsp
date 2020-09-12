@@ -12,7 +12,7 @@
 <c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ') : class}${!empty entity['properties']['class']? entity['properties']['class'] : ''}"/>
 
 <c:if test="${!empty class || !empty entity['properties']}">
-<div class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<div class="${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 </c:if>
 		<c:if test="${!empty entity['filters']}">
 			<ul class="portfolio-categ filter">

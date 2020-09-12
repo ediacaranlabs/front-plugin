@@ -24,7 +24,7 @@
 
 <c:set var="formControls" value="${!('inline' eq entity['type'])}" scope="request"/>
 
-<form ${attr} class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<form ${attr} class="${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 
 	<%-- corpo do formulário --%>
 	<c:choose>
@@ -33,7 +33,7 @@
 		</c:when>
 		<c:otherwise>
 			<c:set var="entity" value="${entity['content']}" scope="request" />
-			<jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
+			<jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/${requestScope.entity['template']}.jsp" />
 		</c:otherwise>
 	</c:choose>
 	<%-- /corpo do formulário --%>

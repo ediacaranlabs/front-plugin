@@ -11,7 +11,7 @@
   <meta name="description" content="${vars['description']}" />
   <meta name="author" content="${vars['author']}" />
 
-  <c:import context="/plugins/community/ediacaran/front" url="/basic_template/includes/head.jsp"/>
+  <c:import context="/plugins/ediacaran/front" url="/basic_template/includes/head.jsp"/>
 
 </head>
 
@@ -91,12 +91,12 @@
     <!-- end header -->
     
     <c:set var="entity" value="${vars['header']}" scope="request"/>
-    <c:import context="/plugins/community/ediacaran/front" url="/basic_template/includes/parts/${entity['template']}.jsp"/>
+    <c:import context="/plugins/ediacaran/front" url="/basic_template/includes/parts/${entity['template']}.jsp"/>
         
     <section id="content">
       <div class="container">
 	    <c:set var="entity" value="${vars['body']}" scope="request"/>
-		<c:import context="/plugins/community/ediacaran/front" url="/basic_template/includes/parts/${vars['body']['template']}.jsp"/>
+		<c:import context="/plugins/ediacaran/front" url="/basic_template/includes/parts/${vars['body']['template']}.jsp"/>
       </div>
     </section>
 
@@ -104,7 +104,7 @@
       <div class="container">
         <div class="row">
 			<c:set var="entity" value="${vars['footer']}" scope="request"/>
-		    <c:import context="/plugins/community/ediacaran/front" url="/basic_template/includes/parts/${vars['footer']['template']}.jsp"/>
+		    <c:import context="/plugins/ediacaran/front" url="/basic_template/includes/parts/${vars['footer']['template']}.jsp"/>
         </div>
       </div>
       
@@ -140,7 +140,7 @@
     </span>			    
   </a>
   
-  <c:import context="/plugins/community/ediacaran/front" url="/basic_template/includes/footer.jsp"/>
+  <c:import context="/plugins/ediacaran/front" url="/basic_template/includes/footer.jsp"/>
     
 </body>
 </html>

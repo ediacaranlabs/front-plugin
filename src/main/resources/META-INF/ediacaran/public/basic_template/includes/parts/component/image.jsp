@@ -15,4 +15,4 @@
 <c:set var="style"  value=                                                                                     "${!empty entity['width'] ? 'width: '.concat(entity['width']).concat(';')   : ''}"/>
 <c:set var="style"  value="${!empty style && !empty entity['height']? style.concat(' ')                 : style}${!empty entity['height']? 'height: '.concat(entity['height']).concat(';') : ''}"/>
 
-<img src="${entity['src']}" class="${class}" style="${style}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<img src="${entity['src']}" class="${class}" style="${style}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>

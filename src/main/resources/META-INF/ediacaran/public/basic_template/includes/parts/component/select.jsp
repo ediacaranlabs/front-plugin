@@ -22,12 +22,12 @@
 
 <%-- label --%>
 <c:if test="${!empty entity['label']}">
-<div class="form-group ${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp"/>>
+<div class="form-group ${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp"/>>
 	<label for="${entity['name']}">${entity['label']}</label>
 </c:if>
 <%-- /label --%>
 
-	<select ${attr} <c:if test="${empty entity['label']}">class="form-control ${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp"/></c:if>>
+	<select ${attr} <c:if test="${empty entity['label']}">class="form-control ${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp"/></c:if>>
 	<%-- values --%>
 		<c:forEach items="${entity['options']}" var="option">
 		<%-- options agrupados --%>

@@ -6,7 +6,7 @@
 <c:set var="quote" value="\"" />
 
 <c:if test="${!empty entity['properties']}">
-<div <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
+<div <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp" />>
 </c:if>
 
 <c:if test="${empty entity['type'] || entity['type'] == 'left'}">

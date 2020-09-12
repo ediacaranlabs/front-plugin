@@ -11,6 +11,6 @@
 <c:set var="class"  value="prettyprint"/>
 <c:set var="class"  value="${!empty class && !empty entity['properties']['class']? class.concat(' ') : class}${!empty entity['properties']['class']? entity['properties']['class'] : ''}"/>
 
-<pre class="${class}" <jsp:include page="/plugins/community/ediacaran/front/basic_template/includes/parts/designer/properties.jsp"/>>
+<pre class="${class}" <jsp:include page="/plugins/ediacaran/front/basic_template/includes/parts/designer/properties.jsp"/>>
 <c:out value="${entity['content']}" escapeXml="true"/>
 </pre>
