@@ -28,11 +28,15 @@ public class BundleTag extends AbstractSimpleTag {
     	PageContext pc = (PageContext)super.getJspContext();
     	HttpServletRequest request = (HttpServletRequest)pc.getRequest();
     	
+    	String reqID = request.getRequestURI();
+    	reqID = reqID.split("\\.")[0];
+    	reqID = reqID.split("\\/", 3)[2];
+    	
 		String packageID;
 		Locale currentLocale;
 		
     	if(basename == null) {
-			packageID = LanguageManager.TEMPLATE_PACKAGE + request.getRequestURI().split("\\.")[0];
+			packageID = LanguageManager.TEMPLATE_PACKAGE + (reqID.startsWith("/")? reqID : "/" + reqID);
     	}
     	else {
     		packageID = LanguageManager.TEMPLATE_PACKAGE + "/" + basename;
