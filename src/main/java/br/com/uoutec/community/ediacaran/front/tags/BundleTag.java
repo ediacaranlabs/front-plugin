@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.jstl.fmt.LocalizationContext;
 
+import br.com.uoutec.community.ediacaran.ContextManager;
 import br.com.uoutec.community.ediacaran.core.system.registry.LanguageManager;
 
 public class BundleTag extends AbstractSimpleTag {
@@ -25,18 +26,15 @@ public class BundleTag extends AbstractSimpleTag {
 
     public void doTag() throws JspException, IOException {
     	
-    	PageContext pc = (PageContext)super.getJspContext();
-    	HttpServletRequest request = (HttpServletRequest)pc.getRequest();
-    	
-    	String reqID = request.getRequestURI();
+    	String reqID = super.getRequestPath();
     	reqID = reqID.split("\\.")[0];
-    	reqID = reqID.split("\\/", 3)[2];
+    	reqID = reqID.substring(ContextManager.BASE_CONTEXT.length());
     	
 		String packageID;
 		Locale currentLocale;
 		
     	if(basename == null) {
-			packageID = LanguageManager.TEMPLATE_PACKAGE + (reqID.startsWith("/")? reqID : "/" + reqID);
+			packageID = LanguageManager.TEMPLATE_PACKAGE + reqID;
     	}
     	else {
     		packageID = LanguageManager.TEMPLATE_PACKAGE + "/" + basename;
@@ -55,9 +53,17 @@ public class BundleTag extends AbstractSimpleTag {
 		
 		ResourceBundle value = lm.getResourceBundle(packageID, currentLocale);
 		
-    	super.setProperty(var, value);
+		if(value == null) {
+			throw new IllegalStateException(" not found: " + packageID);
+		}
+		
+    	super.setProperty(var, new LocalizationContext(value, locale));
     }
 
+    protected String parseRequestId(String path, String contextPath){
+    	return path;
+    }
+    
 	public Locale getLocale() {
 		return locale;
 	}

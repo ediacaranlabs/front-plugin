@@ -315,7 +315,7 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     	
     }
     
-    private String parseRequestId(String path, String contextPath){
+    protected String parseRequestId(String path, String contextPath){
         return path.substring( contextPath.length(), path.length() );
     }
     
