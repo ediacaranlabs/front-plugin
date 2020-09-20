@@ -23,17 +23,17 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 		this.data = data;
 	}
 
-	protected abstract String getGenericType();
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected T createInstance(T instance, boolean reload, boolean override, boolean validate) throws Throwable {
 
-		String type = getGenericType();
+		String type = getCodeType();
 		
-		EntityInheritanceUtil entityInheritanceUtil = 
-				EntityContextPlugin.getEntity(EntityInheritanceUtil.class);
-		Map<String, Class<?>> clazzMap = entityInheritanceUtil.getMap(getClass());
-		Class<? extends GenericPubEntity> ptype = (Class<? extends GenericPubEntity>) clazzMap.get(type);
+		EntityInheritanceUtil entityInheritanceUtil = EntityContextPlugin.getEntity(EntityInheritanceUtil.class);
+		Map<String, Class<?>> clazzMap = entityInheritanceUtil.getMap(getGenericType());
+		
+		Class<? extends GenericPubEntity> ptype;
+		
+		ptype = (Class<? extends GenericPubEntity>) (clazzMap == null? getGenericType() : (Class<? extends GenericPubEntity>) clazzMap.get(type));
 
 		GenericPubEntity p;
 		
@@ -51,6 +51,10 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 		
 	}
 
+	protected abstract String getCodeType();
+	
+	protected abstract Class<?> getGenericType();
+	
 	protected abstract void loadProperties(GenericPubEntity<T> e);
 	
 }
