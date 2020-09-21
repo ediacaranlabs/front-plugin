@@ -23,6 +23,23 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 		this.data = data;
 	}
 
+	public T rebuild(T instance, boolean reload, boolean override, boolean validate, boolean direct) throws Throwable {
+		
+		preRebuild(instance, reload, override, validate);
+		
+		if(validate){
+			validate(reload, override);
+		}
+		
+		instance = direct? 
+					super.createInstance(instance, reload, override, validate) : 
+					createInstance(instance, reload, override, validate);
+		
+		postRebuild(instance, reload, override, validate);
+		
+		return instance;
+	}
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected T createInstance(T instance, boolean reload, boolean override, boolean validate) throws Throwable {
 
@@ -46,8 +63,8 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 		
 		p.setData(data);
 		p.loadProperties(this);
-		
-		return (T) p.rebuild(instance, reload, override, validate);
+		return (T) p.rebuild(instance, reload, override, validate, true);
+		//return (T) p.rebuild(instance, reload, override, validate);
 		
 	}
 
