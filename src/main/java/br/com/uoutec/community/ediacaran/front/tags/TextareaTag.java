@@ -21,7 +21,6 @@ public class TextareaTag extends ComponentFormTag {
 			add("minlength");
 			add("pattern");
 			add("placeholder");
-			add("readonly");
 			add("required");
 			add("cols");
 			add("rows");
@@ -39,20 +38,6 @@ public class TextareaTag extends ComponentFormTag {
 				public Object toValue(Object value, Object component) {
 					return value != null && (Boolean)value? "on" : "off";
 				}
-			});
-
-			put("readonly", new AttributeParserImp() {
-				
-				@Override
-				public String toName(String value, Object component) {
-					return null;
-				}
-				
-				@Override
-				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "readonly" : "";
-				}
-				
 			});
 
 			put("required", new AttributeParserImp() {
@@ -117,8 +102,6 @@ public class TextareaTag extends ComponentFormTag {
 	
 	private String placeholder;
 	
-	private Boolean readonly;
-
 	private Boolean required;
 	
 	/* ------------ Prop ---------------*/
@@ -188,14 +171,6 @@ public class TextareaTag extends ComponentFormTag {
 
 	public void setPlaceholder(String placeholder) {
 		this.placeholder = placeholder;
-	}
-
-	public Boolean getReadonly() {
-		return readonly;
-	}
-
-	public void setReadonly(Boolean readonly) {
-		this.readonly = readonly;
 	}
 
 	public Boolean getRequired() {

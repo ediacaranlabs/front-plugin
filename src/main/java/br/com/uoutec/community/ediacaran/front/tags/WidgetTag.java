@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class WidgetTag  extends ComponentFormTag {
+public class WidgetTag  extends AbstractSimpleTag {
 
 	public static final String TEMPLATE  = "/bootstrap4/components/widget";
 	

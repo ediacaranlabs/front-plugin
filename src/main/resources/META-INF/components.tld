@@ -685,6 +685,14 @@ Ex:
 		</attribute>
 	
 		<attribute>
+			<description></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
 			<description>Habilita o botão.</description>
 			<name>enabled</name>
 			<required>false</required>
@@ -970,6 +978,14 @@ Ex:
 		</attribute>
 	
 		<attribute>
+			<description></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
 			<name>enabled</name>
 			<required>false</required>
 			<type>java.lang.String</type>
@@ -1047,6 +1063,14 @@ Ex:
 			<name>value</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
 			<fragment>true</fragment>
 		</attribute>
 		

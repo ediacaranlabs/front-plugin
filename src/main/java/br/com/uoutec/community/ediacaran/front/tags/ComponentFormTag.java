@@ -18,6 +18,7 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 			add("name");
 			add("value");
 			add("enabled");
+			add("readonly");
 			add("componentType");
 			add("form");
 		}});
@@ -39,6 +40,19 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 				}
 			});
 
+			put("readonly", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value, Object component) {
+					return null;
+				}
+				
+				@Override
+				public Object toValue(Object value, Object component) {
+					return value != null && !(Boolean)value? "readonly" : "";
+				}
+			});
+			
 			put("componentType", new AttributeParserImp() {
 				
 				@Override
@@ -60,6 +74,8 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 	
 	private Boolean enabled;
 
+	private Boolean readonly;
+	
 	private String form;
 	
 	private Boolean group;
@@ -137,6 +153,14 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public Boolean getReadonly() {
+		return readonly;
+	}
+
+	public void setReadonly(Boolean readonly) {
+		this.readonly = readonly;
 	}
 
 }
