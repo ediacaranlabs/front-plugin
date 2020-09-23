@@ -23,7 +23,6 @@ public class TextfieldTag extends ComponentFormTag {
 			add("minlength");
 			add("pattern");
 			add("placeholder");
-			add("required");
 		}});
 	
 	@SuppressWarnings("serial")
@@ -38,27 +37,12 @@ public class TextfieldTag extends ComponentFormTag {
 				}
 			});
 
-			put("required", new AttributeParserImp() {
-				
-				@Override
-				public String toName(String value, Object component) {
-					return null;
-				}
-				
-				@Override
-				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "readonly" : "";
-				}
-				
-			});
-			
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_PROPS) {{
 			add("label");
-			add("name");
 			add("size");
 			add("enabled");
 			add("content");
@@ -67,12 +51,14 @@ public class TextfieldTag extends ComponentFormTag {
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_PROPERTY_PARSERS){{
+
 				put("enabled", new AttributeParserImp() {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
 						Boolean enabled = ((TextfieldTag)component).getEnabled();
-						return enabled != null && !enabled? " uneditable-input" : "";
+						//return enabled != null && !enabled? " uneditable-input" : "";
+						return "";
 					}
 					
 				});
@@ -136,7 +122,7 @@ public class TextfieldTag extends ComponentFormTag {
 	
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
-		vars.put("empty",   label == null? "sr-only" : null);
+		vars.put("empty", label == null? "sr-only" : null);
     }
 	
     protected String getDefaultTemplate() {

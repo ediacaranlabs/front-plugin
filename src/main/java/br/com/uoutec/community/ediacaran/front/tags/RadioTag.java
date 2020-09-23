@@ -43,6 +43,7 @@ public class RadioTag extends ComponentFormTag {
 			add("label");
 			add("inline");
 			add("enabled");
+			add("label");
 			//add("content");
 		}});
 	
@@ -54,7 +55,8 @@ public class RadioTag extends ComponentFormTag {
 					@Override
 					public Object toValue(Object value, Object component) {
 						Boolean enabled = ((RadioTag)component).getEnabled();
-						return enabled != null && !enabled? " uneditable-input" : "";
+						//return enabled != null && !enabled? " uneditable-input" : "";
+						return "";
 					}
 					
 				});

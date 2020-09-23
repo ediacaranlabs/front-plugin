@@ -42,20 +42,24 @@ public class CheckboxTag extends ComponentFormTag {
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_PROPS) {{
 			add("inline");
 			add("content");
+			add("label");
+			add("enabled");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_PROPERTY_PARSERS){{
+
 				put("enabled", new AttributeParserImp() {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
 						Boolean enabled = ((CheckboxTag)component).getEnabled();
-						return enabled != null && !enabled? " uneditable-input" : "";
+						//return enabled != null && !enabled? " uneditable-input" : "";
+						return "";
 					}
 				});
-				
+
 				put("inline", new AttributeParserImp() {
 					
 					@Override

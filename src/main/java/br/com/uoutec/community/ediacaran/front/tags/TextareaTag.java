@@ -72,8 +72,9 @@ public class TextareaTag extends ComponentFormTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						Boolean enabled = ((RadioTag)component).getEnabled();
-						return enabled != null && !enabled? " uneditable-input" : "";
+						Boolean enabled = ((TextareaTag)component).getEnabled();
+						//return enabled != null && !enabled? " uneditable-input" : "";
+						return "";
 					}
 					
 				});

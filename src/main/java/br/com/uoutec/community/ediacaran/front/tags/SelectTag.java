@@ -18,7 +18,6 @@ public class SelectTag extends ComponentFormTag {
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_ATTRS) {{
 			add("autofocus");
-			add("readonly");
 			add("required");
 			add("multiple");
 			add("sizeList");
@@ -28,20 +27,6 @@ public class SelectTag extends ComponentFormTag {
 	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_ATTRIBUTE_PARSERS){{
 			
-			put("readonly", new AttributeParserImp() {
-				
-				@Override
-				public String toName(String value, Object component) {
-					return null;
-				}
-				
-				@Override
-				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "readonly" : "";
-				}
-				
-			});
-
 			put("required", new AttributeParserImp() {
 				
 				@Override
@@ -87,17 +72,21 @@ public class SelectTag extends ComponentFormTag {
 			add("label");
 			add("size");
 			add("options");
+			add("enabled");
+			add("readonly");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_PROPERTY_PARSERS){{
+				
 				put("enabled", new AttributeParserImp() {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						Boolean enabled = ((RadioTag)component).getEnabled();
-						return enabled != null && !enabled? " uneditable-input" : "";
+						Boolean enabled = ((SelectTag)component).getEnabled();
+						//return enabled != null && !enabled? " uneditable-input" : "";
+						return "";
 					}
 					
 				});

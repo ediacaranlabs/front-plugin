@@ -17,6 +17,7 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_ATTRS) {{
 			add("name");
 			add("value");
+			add("required");
 			add("enabled");
 			add("readonly");
 			add("componentType");
@@ -40,6 +41,20 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 				}
 			});
 
+			put("required", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value, Object component) {
+					return null;
+				}
+				
+				@Override
+				public Object toValue(Object value, Object component) {
+					return value != null && (Boolean)value? "required" : "";
+				}
+				
+			});
+			
 			put("readonly", new AttributeParserImp() {
 				
 				@Override
@@ -49,7 +64,7 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && !(Boolean)value? "readonly" : "";
+					return value != null && (Boolean)value? "readonly" : "";
 				}
 			});
 			
@@ -74,6 +89,8 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 	
 	private Boolean enabled;
 
+	private Boolean required;
+	
 	private Boolean readonly;
 	
 	private String form;
@@ -129,6 +146,14 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public Boolean getRequired() {
+		return required;
+	}
+
+	public void setRequired(Boolean required) {
+		this.required = required;
 	}
 
 	public String getForm() {
