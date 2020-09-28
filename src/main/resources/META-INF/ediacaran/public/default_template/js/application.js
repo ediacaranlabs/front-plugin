@@ -133,7 +133,7 @@ $.AppContext.utils = {
 
 		/* send data function */
 		
-		submit: function ($form){
+		submit: function ($form, $resource = null, $dest = null){
 
 			var $bv = $form.data('bootstrapValidator');
 			
@@ -146,9 +146,9 @@ $.AppContext.utils = {
 				}
 			}
 			
-			var $action      = $form.attr('action');
+			var $action      = $resource == null? $form.attr('action') : $resource;
 			var $method      = $form.attr('method');
-			var $destContent = $form.attr('dest-content');
+			var $destContent = $dest == null? $form.attr('dest-content') : $dest;
 			
 		    $.ajax({
 		        type   : $method,
@@ -436,6 +436,18 @@ $.AppContext.openLink = function ($link){
 
 $.AppContext.loadContent = function ($destContent, $resource){
 	$.AppContext.utils.loadResourceContent($destContent, $resource);
+};
+
+$.AppContext.get = function ($destContent, $resource){
+	$.AppContext.utils.loadResourceContent($destContent, $resource);
+};
+
+$.AppContext.post = function ($form, $resource, $dest){
+	$.AppContext.utils.submit($form, $resource, $dest);
+};
+
+$.AppContext.loadContentForm = function ($form, $resource, $dest){
+	$.AppContext.utils.submit($form, $resource, $dest);
 };
 
 $.AppContext.loadContentOnPanel = function ($resource){
