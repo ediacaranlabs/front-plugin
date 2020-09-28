@@ -133,11 +133,11 @@ $.AppContext.utils = {
 
 		/* send data function */
 		
-		submit: function ($form, $resource = null, $dest = null){
-
+		submit: function ($form, $validate = true, $resource = null, $dest = null){
+			//alert($form + "\n" + $validate + "\n" + $resource + "\n" + $dest);
 			var $bv = $form.data('bootstrapValidator');
 			
-			if($bv){
+			if($validate && $bv){
 				$bv.resetForm();
 				$form.bootstrapValidator('validate');
 				
@@ -442,12 +442,12 @@ $.AppContext.get = function ($destContent, $resource){
 	$.AppContext.utils.loadResourceContent($destContent, $resource);
 };
 
-$.AppContext.post = function ($form, $resource, $dest){
-	$.AppContext.utils.submit($form, $resource, $dest);
+$.AppContext.post = function ($form, $validate = true, $resource = null, $dest = null){
+	$.AppContext.utils.submit($form, $validate, $resource, $dest);
 };
 
-$.AppContext.loadContentForm = function ($form, $resource, $dest){
-	$.AppContext.utils.submit($form, $resource, $dest);
+$.AppContext.loadContentForm = function ($form, $validate = true, $resource = null, $dest = null){
+	$.AppContext.utils.submit($form, $validate, $resource, $dest);
 };
 
 $.AppContext.loadContentOnPanel = function ($resource){
