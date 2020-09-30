@@ -20,6 +20,7 @@
 <script	src="/plugins/ediacaran/front/default_template/js/application.validator.js" charset="utf-8"></script>
 <script src="/plugins/ediacaran/front/default_template/js/nivo.js"></script>	
 <script	src="/plugins/ediacaran/front/default_template/js/application.event.js" charset="utf-8"></script>
+<script	src="/plugins/ediacaran/front/default_template/js/application.page.js" charset="utf-8"></script>
 <script type="text/javascript">
 	messages.setDefaultLanguage('pt-BR');
 	messages.addSupportedLanguages('pt-BR');
