@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front;
 
+@Deprecated
 public class TemplatesManagerProvider {
 
 	private static TemplatesManager templatesManager;

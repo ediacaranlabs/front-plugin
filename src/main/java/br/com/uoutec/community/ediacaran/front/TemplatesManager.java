@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.brandao.brutos.io.ResourceLoader;
 
+@Deprecated
 public interface TemplatesManager {
 
 	StringPattern getTemplate(String template);

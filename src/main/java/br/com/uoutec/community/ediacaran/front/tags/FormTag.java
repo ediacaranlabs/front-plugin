@@ -1,14 +1,11 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
 import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import br.com.uoutec.community.ediacaran.front.TemplatesManagerException;
 
 public class FormTag extends AbstractSimpleTag {
 
@@ -115,8 +112,8 @@ public class FormTag extends AbstractSimpleTag {
 	public FormTag() {
 	}
 
-    protected void applyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException, TemplatesManagerException {
+    protected void applyTemplate(String template, 
+    		Map<String,Object> vars, Writer out){
     	
     	Object oldForm = super.setProperty(FORM, this);
     	/*

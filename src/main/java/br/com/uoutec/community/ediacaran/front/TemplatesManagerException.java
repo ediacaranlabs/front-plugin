@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front;
 
+@Deprecated
 public class TemplatesManagerException extends RuntimeException {
 
 	private static final long serialVersionUID = -5424661536605156119L;

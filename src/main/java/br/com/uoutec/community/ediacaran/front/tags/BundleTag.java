@@ -10,10 +10,9 @@ import javax.servlet.jsp.jstl.fmt.LocalizationContext;
 
 import br.com.uoutec.community.ediacaran.ContextManager;
 import br.com.uoutec.community.ediacaran.core.system.registry.MessageBundle;
+import br.com.uoutec.community.ediacaran.system.Constants;
 
 public class BundleTag extends AbstractSimpleTag {
-	
-	public static final String LANGUAGE_MANAGER = "lang-manager";
 	
 	private Locale locale;
 	
@@ -49,7 +48,7 @@ public class BundleTag extends AbstractSimpleTag {
     		currentLocale = locale;
     	}
     	
-		MessageBundle lm = (MessageBundle)pageContext.getServletContext().getAttribute(LANGUAGE_MANAGER);
+		MessageBundle lm = (MessageBundle)pageContext.getServletContext().getAttribute(Constants.MESSAGEBUNDLE);
 		
 		ResourceBundle value = lm.getResourceBundle(packageID, currentLocale);
 		

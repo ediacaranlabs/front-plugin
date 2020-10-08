@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front;
+package br.com.uoutec.community.ediacaran.front.tema;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,9 +8,7 @@ import java.nio.charset.Charset;
 import org.brandao.brutos.io.Resource;
 import org.brandao.brutos.io.ResourceLoader;
 
-import br.com.uoutec.community.ediacaran.plugins.PublicBean;
-
-public class TemplateLoader implements PublicBean{
+public class TemplateLoader {
 
 	public StringPattern load(String resource, ResourceLoader loader, String charsetName) throws IOException {
 		Resource r = loader.getResource(resource);

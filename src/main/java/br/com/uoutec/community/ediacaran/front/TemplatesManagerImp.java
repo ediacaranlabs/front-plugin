@@ -11,6 +11,7 @@ import org.brandao.brutos.io.ResourceLoader;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
 import br.com.uoutec.community.ediacaran.plugins.PluginProperties;
 
+@Deprecated
 public class TemplatesManagerImp implements TemplatesManager {
 
 	private PluginProperties pluginProperties;

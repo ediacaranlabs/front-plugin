@@ -15,9 +15,11 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
+import br.com.uoutec.community.ediacaran.front.PluginInstaller;
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
-import br.com.uoutec.community.ediacaran.front.TemplatesManagerException;
-import br.com.uoutec.community.ediacaran.front.TemplatesManagerProvider;
+import br.com.uoutec.community.ediacaran.front.tema.Tema;
+import br.com.uoutec.community.ediacaran.front.tema.TemaException;
+import br.com.uoutec.community.ediacaran.front.tema.TemaRegistry;
 
 public abstract class AbstractSimpleTag extends SimpleTagSupport{
 
@@ -81,12 +83,12 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
 	    	else
 	    		doWrapperTag();
     	}
-	    catch(TemplatesManagerException e) {
+	    catch(TemaException e) {
 	    	throw new JspException(e);
 	    }
     }
 	
-    protected void doWrapperTag() throws JspException, IOException, TemplatesManagerException{
+    protected void doWrapperTag() throws JspException, IOException {
     	
 		Map<String, Object> tagVars = prepareVars();
 		Map<String, Object> vars    = new HashMap<String, Object>();
@@ -110,7 +112,7 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
 		
     }
     
-    protected void doInnerTag() throws JspException, IOException, TemplatesManagerException{
+    protected void doInnerTag() throws JspException, IOException {
 
     	setProperty(getClass().getName() + ":CONTEXT", this);
     	
@@ -143,10 +145,13 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     		Writer out) throws IOException {
     }
     
-    protected void applyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException, TemplatesManagerException {
-		TemplatesManagerProvider
-		.getTemplatesManager().apply(template, vars, out);
+    protected void applyTemplate(String template, 
+    		Map<String,Object> vars, Writer out){
+    	
+    	PageContext pageContext = (PageContext) getJspContext();
+    	TemaRegistry temaRegistry = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
+    	Tema tema = temaRegistry.getCurrentTema();
+    	tema.applyTagTemplate(template, vars, out);
     }
     
     protected void applyTemplate() {

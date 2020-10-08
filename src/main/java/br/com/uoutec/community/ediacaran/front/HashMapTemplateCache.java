@@ -6,6 +6,7 @@ import java.util.Map;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
 import br.com.uoutec.community.ediacaran.plugins.PluginProperties;
 
+@Deprecated
 public class HashMapTemplateCache implements TemplateCache{
 
 	private Map<String, StringPattern> map;

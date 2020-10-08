@@ -3,6 +3,7 @@ package br.com.uoutec.community.ediacaran.front;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
 import br.com.uoutec.community.ediacaran.plugins.PluginProperties;
 
+@Deprecated
 public interface TemplateCache {
 
 	void configure(PluginProperties config) throws PluginException;
