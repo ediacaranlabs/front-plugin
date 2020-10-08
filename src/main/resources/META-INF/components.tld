@@ -4207,5 +4207,55 @@ Carrega dados de um arquivo.
 	</tag>
 	
 	<!-- /setBundle -->
+
+	<!-- include -->
+	
+	<tag>
+		<name>include</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.IncludeTag</tag-class>
+		<body-content>empty</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+	
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>uri</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /include -->
+
+	<!-- setTemplatePackage -->
+	
+	<tag>
+		<name>setTemplatePackage</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.SetTemplatePackageTag</tag-class>
+		<body-content>empty</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+	
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /setTemplatePackage -->
 	
 </taglib>

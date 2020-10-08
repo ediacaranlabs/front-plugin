@@ -57,7 +57,7 @@ public class TemaImp implements Tema{
 	}
 
 	@Override
-	public String base() {
+	public String getBase() {
 		return base;
 	}
 

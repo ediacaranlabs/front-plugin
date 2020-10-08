@@ -15,8 +15,6 @@ public class IncludeTag extends AbstractSimpleTag {
 	
 	private String uri;
 	
-	private String packageName;
-	
 	public IncludeTag() {
 	}
 
@@ -26,8 +24,9 @@ public class IncludeTag extends AbstractSimpleTag {
     	TemaRegistry temaRegistry = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
     	Tema tema = temaRegistry.getCurrentTema();
     	
+    	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
     	String context = tema.getContext();
-    	String path = tema.getBase() +  "/" + packageName + uri;
+    	String path = tema.getBase() +  "/" + (packageName == null? SetTemplatePackageTag.DEFAULT_PACKAGE_NAME : packageName ) + uri;
     	
     	ServletContext servletContext = pageContext.getServletContext();
     	
@@ -59,13 +58,4 @@ public class IncludeTag extends AbstractSimpleTag {
 		this.uri = uri;
 	}
 
-	public String getPackageName() {
-		return packageName;
-	}
-
-	public void setPackageName(String packageName) {
-		this.packageName = packageName;
-	}
-    
-	
 }
