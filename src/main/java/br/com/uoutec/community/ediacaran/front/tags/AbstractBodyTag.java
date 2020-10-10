@@ -14,9 +14,11 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
+import br.com.uoutec.community.ediacaran.front.PluginInstaller;
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
-import br.com.uoutec.community.ediacaran.front.TemplatesManagerException;
-import br.com.uoutec.community.ediacaran.front.TemplatesManagerProvider;
+import br.com.uoutec.community.ediacaran.front.tema.Tema;
+import br.com.uoutec.community.ediacaran.front.tema.TemaException;
+import br.com.uoutec.community.ediacaran.front.tema.TemaRegistry;
 
 public abstract class AbstractBodyTag extends BodyTagSupport{
 
@@ -90,7 +92,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
         	setProperty(getClass().getName() + ":CONTEXT", null);    	
         	return SKIP_BODY;
     	}
-	    catch(TemplatesManagerException e) {
+	    catch(TemaException e) {
 	    	throw new JspException(e);
 	    } 
     	catch (IOException e) {
@@ -99,7 +101,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     	
     }
 
-    protected void applyTemplate() throws TemplatesManagerException, JspException, IOException{
+    protected void applyTemplate() throws TemaException, IOException{
     	if(!wrapper) {
     		applySimpleTemplate();
     	}
@@ -108,7 +110,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     	}
     }
     
-    protected void applyWrapperTemplate() throws JspException, IOException, TemplatesManagerException{
+    protected void applyWrapperTemplate() throws IOException, TemaException{
     	
 		Map<String, Object> tagVars = prepareVars();
 		Map<String, Object> vars    = new HashMap<String, Object>();
@@ -123,7 +125,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 		afterApplyTemplate(template, vars, out);
     }
     
-    protected void applySimpleTemplate() throws JspException, IOException, TemplatesManagerException{
+    protected void applySimpleTemplate() throws IOException, TemaException{
 
     	setProperty(getClass().getName() + ":CONTEXT", this);
     	
@@ -147,10 +149,14 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     		Writer out) throws IOException {
     }
     
-    protected void applyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException, TemplatesManagerException {
-		TemplatesManagerProvider
-		.getTemplatesManager().apply(template, vars, out);
+    protected void applyTemplate(String template, Map<String,Object> vars, Writer out) throws TemaException {
+    	
+    	TemaRegistry temaRegistry = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
+    	Tema tema = temaRegistry.getCurrentTema();
+    	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
+    	packageName = (packageName == null? SetTemplatePackageTag.DEFAULT_PACKAGE_NAME : packageName );
+    	tema.applyTagTemplate( "/" + packageName + template, vars, out);
+    	
     }
     
     public void setParentTag(Object tag) {

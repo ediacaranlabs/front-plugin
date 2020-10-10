@@ -25,12 +25,14 @@ public class IncludeTag extends AbstractSimpleTag {
     	Tema tema = temaRegistry.getCurrentTema();
     	
     	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
-    	String context = tema.getContext();
-    	String path = tema.getBase() +  "/" + (packageName == null? SetTemplatePackageTag.DEFAULT_PACKAGE_NAME : packageName ) + uri;
+    	packageName = packageName == null? SetTemplatePackageTag.DEFAULT_PACKAGE_NAME : packageName;
+
+    	String path = tema.getBase() +  "/" + packageName + uri;
     	
     	ServletContext servletContext = pageContext.getServletContext();
     	
     	String currentContext = servletContext.getContextPath().toLowerCase();
+    	String context = tema.getContext();
     	String temaContext = context == null? null : context.toLowerCase();
     	
     	if(temaContext != null && !currentContext.equals(temaContext)) {

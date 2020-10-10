@@ -2,6 +2,9 @@ package br.com.uoutec.community.ediacaran.front.tema;
 
 import java.io.Writer;
 import java.util.Map;
+import java.util.Set;
+
+import br.com.uoutec.community.ediacaran.front.tags.AttributeParser;
 
 public class TemaImp implements Tema{
 
@@ -59,6 +62,31 @@ public class TemaImp implements Tema{
 	@Override
 	public String getBase() {
 		return base;
+	}
+
+	@Override
+	public Set<String> getAttributes(Object tag) {
+		return null;
+	}
+
+	@Override
+	public Set<String> getEmptyAttributes(Object tag) {
+		return null;
+	}
+
+	@Override
+	public Map<String, AttributeParser> getAttributesParser(Object tag) {
+		return null;
+	}
+
+	@Override
+	public Set<String> getProperties(Object tag) {
+		return null;
+	}
+
+	@Override
+	public Map<String, AttributeParser> getPropertiesParse(Object tag) {
+		return null;
 	}
 
 }

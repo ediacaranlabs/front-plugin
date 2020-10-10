@@ -151,7 +151,9 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     	PageContext pageContext = (PageContext) getJspContext();
     	TemaRegistry temaRegistry = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
     	Tema tema = temaRegistry.getCurrentTema();
-    	tema.applyTagTemplate(template, vars, out);
+    	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
+    	packageName = (packageName == null? SetTemplatePackageTag.DEFAULT_PACKAGE_NAME : packageName );
+    	tema.applyTagTemplate( "/" + packageName + template, vars, out);
     }
     
     protected void applyTemplate() {
