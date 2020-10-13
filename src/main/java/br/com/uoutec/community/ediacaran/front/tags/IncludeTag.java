@@ -27,7 +27,7 @@ public class IncludeTag extends AbstractSimpleTag {
     	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
     	packageName = packageName == null? SetTemplatePackageTag.DEFAULT_PACKAGE_NAME : packageName;
 
-    	String path = tema.getBase() +  "/" + packageName + uri;
+    	String path = tema.getTemplate() +  "/" + packageName + uri;
     	
     	ServletContext servletContext = pageContext.getServletContext();
     	

@@ -38,7 +38,7 @@ public class TemaLoaderImp implements TemaLoader, PublicBean{
 	@Override
 	public Tema loadTema() {
 		try {
-			return new TemaImp(getTagTemplates(), context, base);
+			return null;//new TemaImp(getTagTemplates(), context, base);
 		}
 		catch(Throwable e) {
 			throw new TemaException(e);

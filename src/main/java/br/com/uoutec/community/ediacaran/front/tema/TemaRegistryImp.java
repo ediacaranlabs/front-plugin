@@ -17,36 +17,86 @@ public class TemaRegistryImp implements TemaRegistry, PublicBean{
 
 	private static final Logger logger = LoggerFactory.getLogger(TemaRegistry.class);
 	
-	private ConcurrentMap<String, TemaLoader> temas;
-	
-	private ConcurrentMap<String, Tema> cache;
+	private ConcurrentMap<String, TemaEntry> temas;
 	
 	private PluginData pluginData;
 	
 	@Inject
 	public TemaRegistryImp(PluginData pluginData) {
-		this.temas = new ConcurrentHashMap<String, TemaLoader>();
-		this.cache = new ConcurrentHashMap<String, Tema>();
+		this.temas = new ConcurrentHashMap<String, TemaEntry>();
 		this.pluginData = pluginData;
 	}
 	
 	@Override
-	public void registerTema(String name, TemaLoader tema) {
+	public synchronized void registerTemplate(String name, String template, String context, String packageName) throws TemaException{
 		//TODO: security
 		
-		if(temas.put(name, tema) != null) {
-			if(logger.isWarnEnabled()) {
-				logger.warn("tema {} has been added", name);
+		TemaEntry entry = temas.get(name);
+		
+		if(entry == null) {
+			
+			entry = new TemaEntry();
+			entry.name = name;
+			entry.path = template;
+			entry.context = context;
+			entry.packages = new ConcurrentHashMap<String, TemaPackage>();
+			entry.tema = new TemaImp(name, context, template, entry.packages);
+			
+			if(logger.isTraceEnabled()) {
+				logger.trace("tema created: {}[template={}, context={}, package={}]", name, template, context);
 			}
-		}
-		else
-		if(logger.isTraceEnabled()) {
-			logger.trace("language {} added", name);
+			
 		}
 		
+		if(packageName != null) {
+			
+			if(entry.packages.containsKey(packageName)) {
+				throw new TemaException("tema package has been added: " + name + "/" + packageName);
+			}
+			
+			TemaPackage temaPackage = new TemaPackage(packageName, "/" + packageName, new ConcurrentHashMap<String, TagTemplate>());
+			entry.packages.put(packageName, temaPackage);
+			
+			if(logger.isTraceEnabled()) {
+				logger.trace("tema added: {}[template={}, context={}, package={}]", name, entry.path, context, packageName);
+			}
+			
+		}
 		
 	}
 
+	@Override
+	public synchronized void registerTemplate(String name, String template, String packageName, TagTemplate tagTemplate) throws TemaException{
+		//TODO: security
+
+		TemaEntry entry = temas.get(name);
+		
+		if(entry == null) {
+			throw new TemaException("tema not found: " + name);
+		}
+		
+		TemaPackage temaPackage = entry.packages.get(packageName);
+		
+		if(temaPackage == null) {
+			throw new TemaException("tema package not found: " + name + "/" + packageName);
+		}
+		
+		ConcurrentMap<String, TagTemplate> tagTemplates = temaPackage.getTagTemplates();
+		
+		if(tagTemplates.put(template, tagTemplate) == null){
+			
+			if(logger.isTraceEnabled()) {
+				logger.trace("added tag template: {}[template={}, package={}]", name, template, packageName);
+			}
+			
+		}
+		else
+		if(logger.isTraceEnabled()) {
+			logger.trace("overridden tag template: {}[template={}, package={}]", name, template, packageName);
+		}
+		
+	}
+	
 	@Override
 	public Tema getCurrentTema() {
 		return getTema(pluginData.getPropertyValue("template"));
@@ -55,21 +105,13 @@ public class TemaRegistryImp implements TemaRegistry, PublicBean{
 	@Override
 	public Tema getTema(String name) {
 		
-		Tema tema = cache.get(name);
+		TemaEntry entry = temas.get(name);
 		
-		if(tema != null) {
-			return tema;
+		if(entry == null) {
+			throw new TemaException("tema not found: " + name);
 		}
 		
-		TemaLoader loader = temas.get(name);
-		
-		if(loader == null) {
-			throw new TemaException("tema loader not found: " + name);
-		}
-		
-		tema = loader.loadTema();
-		Tema cachedTema = cache.putIfAbsent(name, tema);
-		return cachedTema != null? cachedTema : tema;
+		return entry.tema;
 	}
 
 	@Override
@@ -85,6 +127,20 @@ public class TemaRegistryImp implements TemaRegistry, PublicBean{
 		if(logger.isTraceEnabled()) {
 			logger.trace("tema {} not found", name);
 		}
+		
+	}
+
+	private static class TemaEntry {
+		
+		public String name;
+		
+		public String context;
+		
+		public String path;
+		
+		public ConcurrentMap<String, TemaPackage> packages;
+		
+		public Tema tema;
 		
 	}
 
