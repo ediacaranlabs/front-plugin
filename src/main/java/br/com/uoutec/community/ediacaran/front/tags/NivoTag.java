@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,8 +10,11 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
+import br.com.uoutec.community.ediacaran.front.PluginInstaller;
 import br.com.uoutec.community.ediacaran.front.TemplateListVarParser;
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.front.tema.Tema;
+import br.com.uoutec.community.ediacaran.front.tema.TemaRegistry;
 
 public class NivoTag extends AbstractBodyTag {
 
@@ -76,15 +78,14 @@ public class NivoTag extends AbstractBodyTag {
 	
 	public int doAfterBody() {
 
-		try {
-			new TemplateVarParser(TEMPLATE)
-				.put("images", new TemplateListVarParser(NIVO_IMAGE, images))
-				.put("captions", new TemplateListVarParser(NIVO_CAPTION, caption))
-				.parse(bodyContent.getEnclosingWriter());
-		} 
-		catch (IOException e) {
-			throw new IllegalStateException(e);
-		}
+    	TemaRegistry temaRegistry = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
+    	Tema tema = temaRegistry.getCurrentTema();
+    	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
+		
+		new TemplateVarParser(TEMPLATE, packageName, tema)
+			.put("images", new TemplateListVarParser(NIVO_IMAGE, images))
+			.put("captions", new TemplateListVarParser(NIVO_CAPTION, caption))
+			.parse(bodyContent.getEnclosingWriter());
 
 		return SKIP_BODY;
 	}

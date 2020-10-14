@@ -9,8 +9,6 @@ public class SetTemplatePackageTag extends AbstractSimpleTag {
 	
 	public static final String PACKAGE_NAME = SetTemplatePackageTag.class.getSimpleName() + ":package-name";
 	
-	public static final String DEFAULT_PACKAGE_NAME = "front";
-	
 	private String name;
 	
 	public SetTemplatePackageTag() {

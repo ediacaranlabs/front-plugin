@@ -116,9 +116,12 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 		Map<String, Object> vars    = new HashMap<String, Object>();
 		Writer out                  = getBodyContent().getEnclosingWriter();
 		String template             = getWrapperTemplate();
+    	TemaRegistry temaRegistry   = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
+    	Tema tema                   = temaRegistry.getCurrentTema();
+    	String packageName          = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
 		
 		vars.putAll(tagVars);
-		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars));
+		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, tema, vars));
 		
 		beforeApplyTemplate(template, vars, out);
 		applyTemplate(template, vars, out);
@@ -154,9 +157,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     	TemaRegistry temaRegistry = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
     	Tema tema = temaRegistry.getCurrentTema();
     	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
-    	packageName = (packageName == null? SetTemplatePackageTag.DEFAULT_PACKAGE_NAME : packageName );
-    	tema.applyTagTemplate( "/" + packageName + template, vars, out);
-    	
+    	tema.applyTagTemplate(template, packageName, vars, out);
     }
     
     public void setParentTag(Object tag) {

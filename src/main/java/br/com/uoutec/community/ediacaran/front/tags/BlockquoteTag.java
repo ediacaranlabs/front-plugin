@@ -6,7 +6,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.jsp.PageContext;
+
+import br.com.uoutec.community.ediacaran.front.PluginInstaller;
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.front.tema.Tema;
+import br.com.uoutec.community.ediacaran.front.tema.TemaRegistry;
 
 public class BlockquoteTag extends AbstractSimpleTag {
 
@@ -39,7 +44,13 @@ public class BlockquoteTag extends AbstractSimpleTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? null : new TemplateVarParser(CITE_TEMPLATE).put("content", value);
+						
+						BlockquoteTag tag         = (BlockquoteTag)component;
+						TemaRegistry temaRegistry = (TemaRegistry)tag.getJspContext().getAttribute(PluginInstaller.TEMA_REGISTRY, PageContext.APPLICATION_SCOPE);
+				    	Tema tema = temaRegistry.getCurrentTema();
+				    	String packageName = (String)tag.getProperty(SetTemplatePackageTag.PACKAGE_NAME);
+						
+						return value == null? null : new TemplateVarParser(CITE_TEMPLATE, packageName, tema).put("content", value);
 					}
 				});
 				

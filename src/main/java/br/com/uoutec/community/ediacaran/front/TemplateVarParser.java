@@ -5,19 +5,28 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tema.Tema;
+import br.com.uoutec.community.ediacaran.front.tema.TemaException;
+
 public class TemplateVarParser  extends AbstractVarParser{
 
 	private String template;
 	
+	private String packageName;
+	
+	private Tema tema;
+	
 	private Map<String, Object> vars;
 	
-	public TemplateVarParser(String template) {
-		this(template, new HashMap<String, Object>());
+	public TemplateVarParser(String template, String packageName, Tema tema) {
+		this(template, packageName, tema, new HashMap<String, Object>());
 	}
 
-	public TemplateVarParser(String template, Map<String, Object> vars) {
+	public TemplateVarParser(String template, String packageName, Tema tema, Map<String, Object> vars) {
 		this.template = template;
 		this.vars = vars;
+		this.packageName = packageName;
+		this.tema = tema;
 	}
 	
 	public TemplateVarParser clear() {
@@ -36,18 +45,8 @@ public class TemplateVarParser  extends AbstractVarParser{
 	}
 	
 	@Override
-	public void parse(Writer writter) throws IOException {
-		try {
-			TemplatesManagerProvider.getTemplatesManager()
-			.apply(
-				template, 
-				vars, 
-				writter
-			);			
-		}
-		catch(Throwable e) {
-			throw new IllegalStateException(e);
-		}
+	public void parse(Writer writter) throws TemaException {
+		tema.applyTagTemplate(template, packageName, vars, writter);
 	}
 
 	@Override

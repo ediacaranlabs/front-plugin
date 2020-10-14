@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
 import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,9 +9,12 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
+import br.com.uoutec.community.ediacaran.front.PluginInstaller;
 import br.com.uoutec.community.ediacaran.front.TemplateListVarParser;
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
-import br.com.uoutec.community.ediacaran.front.TemplatesManagerException;
+import br.com.uoutec.community.ediacaran.front.tema.Tema;
+import br.com.uoutec.community.ediacaran.front.tema.TemaException;
+import br.com.uoutec.community.ediacaran.front.tema.TemaRegistry;
 
 public class FieldValidatorTag extends AbstractBodyTag {
 
@@ -127,7 +129,7 @@ public class FieldValidatorTag extends AbstractBodyTag {
     }
     
     protected void applyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException, TemplatesManagerException {
+    		Writer out) throws TemaException {
     	
 		TemplateListVarParser rules = new TemplateListVarParser(TEMPLATE_RULE);
 		
@@ -142,7 +144,11 @@ public class FieldValidatorTag extends AbstractBodyTag {
 			rules.add(ve.getName(), ve.getMessage(), params);
 		}
 		
-		new TemplateVarParser(TEMPLATE)
+    	TemaRegistry temaRegistry = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
+    	Tema tema = temaRegistry.getCurrentTema();
+    	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
+		
+		new TemplateVarParser(TEMPLATE, packageName, tema)
 			.put("form", form)
 			.put("field", field)
 			.put("rules", rules)

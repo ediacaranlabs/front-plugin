@@ -23,11 +23,8 @@ public class IncludeTag extends AbstractSimpleTag {
     	PageContext pageContext = (PageContext) getJspContext();
     	TemaRegistry temaRegistry = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
     	Tema tema = temaRegistry.getCurrentTema();
-    	
     	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
-    	packageName = packageName == null? SetTemplatePackageTag.DEFAULT_PACKAGE_NAME : packageName;
-
-    	String path = tema.getTemplate() +  "/" + packageName + uri;
+    	String path = tema.getTemplate(packageName) + uri;
     	
     	ServletContext servletContext = pageContext.getServletContext();
     	

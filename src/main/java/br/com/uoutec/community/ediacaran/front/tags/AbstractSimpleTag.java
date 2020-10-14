@@ -94,10 +94,13 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
 		Map<String, Object> vars    = new HashMap<String, Object>();
 		Writer out                  = getOut();
 		String template             = getWrapperTemplate();
+		PageContext pageContext     = (PageContext) getJspContext();
+    	TemaRegistry temaRegistry   = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
+    	Tema tema                   = temaRegistry.getCurrentTema();
+    	String packageName          = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
 		
 		vars.putAll(tagVars);
-		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), vars));
-		
+		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, tema, vars));
 		
 		beforeApplyTemplate(template, vars, out);
 
@@ -152,8 +155,7 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     	TemaRegistry temaRegistry = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
     	Tema tema = temaRegistry.getCurrentTema();
     	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
-    	packageName = (packageName == null? SetTemplatePackageTag.DEFAULT_PACKAGE_NAME : packageName );
-    	tema.applyTagTemplate( "/" + packageName + template, vars, out);
+    	tema.applyTagTemplate(template, packageName, vars, out);
     }
     
     protected void applyTemplate() {
