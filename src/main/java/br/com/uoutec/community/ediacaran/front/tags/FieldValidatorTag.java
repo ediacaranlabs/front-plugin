@@ -9,12 +9,9 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-import br.com.uoutec.community.ediacaran.front.PluginInstaller;
 import br.com.uoutec.community.ediacaran.front.TemplateListVarParser;
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
-import br.com.uoutec.community.ediacaran.front.tema.Tema;
 import br.com.uoutec.community.ediacaran.front.tema.TemaException;
-import br.com.uoutec.community.ediacaran.front.tema.TemaRegistry;
 
 public class FieldValidatorTag extends AbstractBodyTag {
 
@@ -144,11 +141,7 @@ public class FieldValidatorTag extends AbstractBodyTag {
 			rules.add(ve.getName(), ve.getMessage(), params);
 		}
 		
-    	TemaRegistry temaRegistry = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
-    	Tema tema = temaRegistry.getCurrentTema();
-    	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
-		
-		new TemplateVarParser(TEMPLATE, packageName, tema)
+		new TemplateVarParser(TEMPLATE, getTemaPackage(), getTema())
 			.put("form", form)
 			.put("field", field)
 			.put("rules", rules)

@@ -116,9 +116,8 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 		Map<String, Object> vars    = new HashMap<String, Object>();
 		Writer out                  = getBodyContent().getEnclosingWriter();
 		String template             = getWrapperTemplate();
-    	TemaRegistry temaRegistry   = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
-    	Tema tema                   = temaRegistry.getCurrentTema();
-    	String packageName          = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
+    	Tema tema                   = getTema();
+    	String packageName          = getTemaPackage();
 		
 		vars.putAll(tagVars);
 		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, tema, vars));
@@ -153,11 +152,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     }
     
     protected void applyTemplate(String template, Map<String,Object> vars, Writer out) throws TemaException {
-    	
-    	TemaRegistry temaRegistry = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
-    	Tema tema = temaRegistry.getCurrentTema();
-    	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
-    	tema.applyTagTemplate(template, packageName, vars, out);
+    	getTema().applyTagTemplate(template, getTemaPackage(), vars, out);
     }
     
     public void setParentTag(Object tag) {
@@ -286,6 +281,15 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 		catch(Throwable e) {
 			throw new IllegalStateException(e);
 		}
+	}
+	
+	protected Tema getTema() {
+    	TemaRegistry temaRegistry = (TemaRegistry)getProperty(PluginInstaller.TEMA_REGISTRY);
+    	return temaRegistry.getCurrentTema();
+	}
+	
+	protected String getTemaPackage() {
+    	return (String)getProperty(SetTemplatePackageTag.PACKAGE_NAME);
 	}
 	
     protected Object setProperty(String name, Object newValue) {

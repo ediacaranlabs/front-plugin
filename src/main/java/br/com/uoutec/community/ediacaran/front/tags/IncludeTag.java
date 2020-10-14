@@ -7,9 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
-import br.com.uoutec.community.ediacaran.front.PluginInstaller;
 import br.com.uoutec.community.ediacaran.front.tema.Tema;
-import br.com.uoutec.community.ediacaran.front.tema.TemaRegistry;
 
 public class IncludeTag extends AbstractSimpleTag {
 	
@@ -21,9 +19,9 @@ public class IncludeTag extends AbstractSimpleTag {
     public void doTag() throws JspException, IOException {
     	
     	PageContext pageContext = (PageContext) getJspContext();
-    	TemaRegistry temaRegistry = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
-    	Tema tema = temaRegistry.getCurrentTema();
-    	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
+    	Tema tema               = getTema();
+    	String packageName      = getTemaPackage();
+    	
     	String path = tema.getTemplate(packageName) + uri;
     	
     	ServletContext servletContext = pageContext.getServletContext();

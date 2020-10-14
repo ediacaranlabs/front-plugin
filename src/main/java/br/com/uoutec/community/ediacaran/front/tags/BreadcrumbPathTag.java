@@ -6,12 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.jsp.PageContext;
-
-import br.com.uoutec.community.ediacaran.front.PluginInstaller;
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
-import br.com.uoutec.community.ediacaran.front.tema.Tema;
-import br.com.uoutec.community.ediacaran.front.tema.TemaRegistry;
 
 public class BreadcrumbPathTag extends AbstractSimpleTag {
 
@@ -44,12 +39,8 @@ public class BreadcrumbPathTag extends AbstractSimpleTag {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						BreadcrumbPathTag tag     = (BreadcrumbPathTag)component;
-						TemaRegistry temaRegistry = (TemaRegistry)tag.getJspContext().getAttribute(PluginInstaller.TEMA_REGISTRY, PageContext.APPLICATION_SCOPE);
-				    	Tema tema = temaRegistry.getCurrentTema();
-				    	String packageName = (String)tag.getProperty(SetTemplatePackageTag.PACKAGE_NAME);
-
-				    	return value == null? null : new TemplateVarParser(TEMPLATE_ICON, packageName, tema).put("icon", value).put("size", 1);
+						BreadcrumbPathTag tag = (BreadcrumbPathTag)component;
+				    	return value == null? null : new TemplateVarParser(TEMPLATE_ICON, tag.getTemaPackage(), tag.getTema()).put("icon", value).put("size", 1);
 					}
 				});
 			}});

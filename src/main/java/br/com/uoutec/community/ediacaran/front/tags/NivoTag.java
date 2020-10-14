@@ -10,11 +10,8 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-import br.com.uoutec.community.ediacaran.front.PluginInstaller;
 import br.com.uoutec.community.ediacaran.front.TemplateListVarParser;
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
-import br.com.uoutec.community.ediacaran.front.tema.Tema;
-import br.com.uoutec.community.ediacaran.front.tema.TemaRegistry;
 
 public class NivoTag extends AbstractBodyTag {
 
@@ -78,11 +75,7 @@ public class NivoTag extends AbstractBodyTag {
 	
 	public int doAfterBody() {
 
-    	TemaRegistry temaRegistry = (TemaRegistry)pageContext.getServletContext().getAttribute(PluginInstaller.TEMA_REGISTRY);
-    	Tema tema = temaRegistry.getCurrentTema();
-    	String packageName = (String)pageContext.getAttribute(SetTemplatePackageTag.PACKAGE_NAME);
-		
-		new TemplateVarParser(TEMPLATE, packageName, tema)
+		new TemplateVarParser(TEMPLATE, getTemaPackage(), getTema())
 			.put("images", new TemplateListVarParser(NIVO_IMAGE, images))
 			.put("captions", new TemplateListVarParser(NIVO_CAPTION, caption))
 			.parse(bodyContent.getEnclosingWriter());
