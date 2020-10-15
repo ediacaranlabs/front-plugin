@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
-import br.com.uoutec.community.ediacaran.front.tema.Tema;
+import br.com.uoutec.community.ediacaran.system.tema.Tema;
 
 public class IncludeTag extends AbstractSimpleTag {
 	

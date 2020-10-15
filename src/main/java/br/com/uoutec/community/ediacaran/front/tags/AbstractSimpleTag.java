@@ -15,11 +15,11 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
-import br.com.uoutec.community.ediacaran.front.PluginInstaller;
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
-import br.com.uoutec.community.ediacaran.front.tema.Tema;
-import br.com.uoutec.community.ediacaran.front.tema.TemaException;
-import br.com.uoutec.community.ediacaran.front.tema.TemaRegistry;
+import br.com.uoutec.community.ediacaran.system.Constants;
+import br.com.uoutec.community.ediacaran.system.tema.Tema;
+import br.com.uoutec.community.ediacaran.system.tema.TemaException;
+import br.com.uoutec.community.ediacaran.system.tema.TemaRegistry;
 
 public abstract class AbstractSimpleTag extends SimpleTagSupport{
 
@@ -156,7 +156,7 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     }
     
 	protected Tema getTema() {
-    	TemaRegistry temaRegistry = (TemaRegistry)getProperty(PluginInstaller.TEMA_REGISTRY);
+    	TemaRegistry temaRegistry = (TemaRegistry)getProperty(Constants.TEMA_REGISTRY);
     	return temaRegistry.getCurrentTema();
 	}
 	

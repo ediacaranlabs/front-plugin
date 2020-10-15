@@ -26,8 +26,6 @@ public class PluginInstaller
 	
 	public static final String TEMPLATE_PROPERTY 		= "template";
 	
-	public static final String TEMA_REGISTRY 			= "tema-registry";
-	
 	public void install() throws PluginException {
 		try{
 			this.installTemplateManager();

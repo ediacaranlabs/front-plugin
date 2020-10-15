@@ -5,8 +5,8 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.uoutec.community.ediacaran.front.tema.Tema;
-import br.com.uoutec.community.ediacaran.front.tema.TemaException;
+import br.com.uoutec.community.ediacaran.system.tema.Tema;
+import br.com.uoutec.community.ediacaran.system.tema.TemaException;
 
 public class TemplateVarParser  extends AbstractVarParser{
 
