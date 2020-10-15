@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+
 public class GalleryImageTag  extends AbstractSimpleTag {
 
 	public static final String TEMPLATE  = "/bootstrap4/components/gallery-filter";

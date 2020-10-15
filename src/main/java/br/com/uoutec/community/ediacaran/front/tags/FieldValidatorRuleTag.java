@@ -11,6 +11,8 @@ import java.util.Set;
 import javax.servlet.jsp.tagext.JspFragment;
 
 import br.com.uoutec.community.ediacaran.front.tags.FieldValidatorTag.ValidatorEntity;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class FieldValidatorRuleTag extends AbstractSimpleTag {
 

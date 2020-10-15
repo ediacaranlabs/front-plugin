@@ -10,6 +10,9 @@ import java.util.Set;
 
 import javax.servlet.jsp.tagext.JspFragment;
 
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
+
 public class TextfieldTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/bootstrap4/components/textfield";

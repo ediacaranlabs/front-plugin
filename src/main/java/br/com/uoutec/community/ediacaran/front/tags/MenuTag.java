@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
+
 public class MenuTag  extends AbstractSimpleTag {
 
 	public static final String CONTEXT_ID = MenuTag.class.getName() + ":CONTEXT";

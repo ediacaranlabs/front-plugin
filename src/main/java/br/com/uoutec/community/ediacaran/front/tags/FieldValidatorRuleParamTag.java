@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Set;
 
 import br.com.uoutec.community.ediacaran.front.tags.FieldValidatorTag.ValidatorParamEntity;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class FieldValidatorRuleParamTag extends AbstractSimpleTag {
 

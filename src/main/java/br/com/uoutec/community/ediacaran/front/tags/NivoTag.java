@@ -12,6 +12,7 @@ import javax.servlet.jsp.JspException;
 
 import br.com.uoutec.community.ediacaran.front.TemplateListVarParser;
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 
 public class NivoTag extends AbstractBodyTag {
 

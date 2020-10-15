@@ -11,6 +11,7 @@ import java.util.Set;
 
 import br.com.uoutec.application.se.ApplicationBootstrapProvider;
 import br.com.uoutec.community.ediacaran.ServerBootstrap;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 
 public class LoadDataTag  extends AbstractSimpleTag {
 

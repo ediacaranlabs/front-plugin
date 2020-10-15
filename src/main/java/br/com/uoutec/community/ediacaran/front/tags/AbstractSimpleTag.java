@@ -17,6 +17,8 @@ import org.brandao.brutos.bean.BeanInstance;
 
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
 import br.com.uoutec.community.ediacaran.system.Constants;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.system.tema.Tema;
 import br.com.uoutec.community.ediacaran.system.tema.TemaException;
 import br.com.uoutec.community.ediacaran.system.tema.TemaRegistry;

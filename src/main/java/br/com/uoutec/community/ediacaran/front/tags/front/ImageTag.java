@@ -1,5 +1,6 @@
-package br.com.uoutec.community.ediacaran.front.tags;
+package br.com.uoutec.community.ediacaran.front.tags.front;
 
+import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,10 +9,11 @@ import java.util.Set;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.system.tema.TemaException;
 
-public class ImageTag  extends AbstractSimpleTag {
+public class ImageTag extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/components/image";
+	public static final String TEMPLATE  = "/components/image";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -65,66 +67,39 @@ public class ImageTag  extends AbstractSimpleTag {
 				});
 				
 			}});
-	
-	/* ------------ Attr ---------------*/
-	
-	private String src;
 
-	/* ------------ Prop ---------------*/
-	
-	private String style; //fluid, thumbnail, rounded, circle (img-<...> | rounded | rounded-circle)
-	
-	private String align; //left, right, center (float-<...> | mx-auto d-block)
-	
-	public ImageTag() {
-	}
-	
-    protected String getDefaultTemplate() {
-    	return TEMPLATE;
-    }
-
-    protected Set<String> getDefaultAttributes(){
-    	return DEFAULT_ATTRS;
-    }
-
-    protected Set<String> getEmptyAttributes(){
+    public Set<String> getEmptyAttributes(){
     	return DEFAULT_EMPTY_ATTRIBUTES;
     }
     
-    protected Map<String, AttributeParser> getAttributeParsers(){
+    public Map<String, AttributeParser> getAttributesParser(){
     	return DEFAULT_ATTRIBUTE_PARSERS;
     }
 
-    protected Set<String> getDefaultProperties(){
+    public Set<String> getProperties(){
     	return DEFAULT_PROPS;
     }
 
-    protected Map<String, AttributeParser> getPropertyParsers(){
+    public Map<String, AttributeParser> getPropertiesParse(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
 
-	public String getSrc() {
-		return src;
+	@Override
+	public void applyTagTemplate(Map<String, Object> vars, Writer out) throws TemaException {
+		// TODO Auto-generated method stub
+		
 	}
 
-	public void setSrc(String src) {
-		this.src = src;
+	@Override
+	public void applyTagTemplate(Writer out, Object... vars) throws TemaException {
+		// TODO Auto-generated method stub
+		
 	}
 
-	public String getStyle() {
-		return style;
+	@Override
+	public Set<String> getAttributes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	public void setStyle(String style) {
-		this.style = style;
-	}
-
-	public String getAlign() {
-		return align;
-	}
-
-	public void setAlign(String align) {
-		this.align = align;
-	}
-    
+	
 }

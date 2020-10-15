@@ -9,6 +9,9 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
+
 public class BasicTag extends AbstractSimpleTag{
 
 	@SuppressWarnings("serial")

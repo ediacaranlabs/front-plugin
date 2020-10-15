@@ -9,6 +9,8 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+
 public class AccordionTag extends AbstractSimpleTag {
 
 	public static final String TEMPLATE = "/bootstrap4/components/accordion";

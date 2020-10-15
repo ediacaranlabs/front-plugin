@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Set;
 
 import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class BlockquoteTag extends AbstractSimpleTag {
 

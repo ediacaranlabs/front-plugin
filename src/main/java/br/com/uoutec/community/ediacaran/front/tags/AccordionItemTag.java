@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.jsp.JspException;;
+import javax.servlet.jsp.JspException;
+
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;;
 
 public class AccordionItemTag extends AbstractSimpleTag {
 
