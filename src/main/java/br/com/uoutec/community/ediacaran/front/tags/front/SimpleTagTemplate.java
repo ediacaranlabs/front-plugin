@@ -8,9 +8,8 @@ import java.util.Set;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.tema.TagTemplate;
 
-public abstract class AbstractSimpleTag implements TagTemplate{
+public abstract class SimpleTagTemplate extends AbstractTagTemplate{
 
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -46,21 +45,29 @@ public abstract class AbstractSimpleTag implements TagTemplate{
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
 			}});
-
-    public Set<String> getEmptyAttributes(){
-    	return DEFAULT_EMPTY_ATTRIBUTES;
-    }
+	
+	public SimpleTagTemplate(String template) {
+		super(template);
+	}
     
-    public Map<String, AttributeParser> getAttributesParser(){
-    	return DEFAULT_ATTRIBUTE_PARSERS;
-    }
+	public Set<String> getAttributes(){
+		return DEFAULT_ATTRS;
+	}
+	
+	public Set<String> getEmptyAttributes(){
+		return DEFAULT_EMPTY_ATTRIBUTES;
+	}
+	
+	public Map<String, AttributeParser> getAttributesParser(){
+		return DEFAULT_ATTRIBUTE_PARSERS;
+	}
 
-    public Set<String> getProperties(){
-    	return DEFAULT_PROPS;
-    }
-
-    public Map<String, AttributeParser> getPropertiesParse(){
-    	return DEFAULT_PROPERTY_PARSERS;
-    }
+	public Set<String> getProperties(){
+		return DEFAULT_PROPS;
+	}
+	
+	public Map<String, AttributeParser> getPropertiesParse(){
+		return DEFAULT_PROPERTY_PARSERS;
+	}
 	
 }
