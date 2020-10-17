@@ -11,60 +11,6 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class ImageTag  extends AbstractSimpleTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/components/image";
-	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_ATTRS) {{
-			add("src");
-		}});
-	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_ATTRIBUTE_PARSERS){{
-		}});
-
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
-			add("style");
-			add("align");
-		}});
-	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_PROPERTY_PARSERS){{
-				put("style", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						if("rounded".equals(value)) {
-							return " rounded";
-						}
-						else
-						if("circle".equals(value)) {
-							return " rounded-circle";
-						}
-						else
-							return value == null? null : " img-" + value;
-					}
-					
-				});
-				
-				put("align", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						if("center".equals(value)) {
-							return " mx-auto d-block";
-						}
-						else
-							return value == null? null : " float-" + value;
-					}
-					
-				});
-				
-			}});
 	
 	/* ------------ Attr ---------------*/
 	
