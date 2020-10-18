@@ -7,12 +7,16 @@ import java.util.HashSet;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public class ImageTag extends AbstractTagTemplate {
+public class ImageComponent extends AbstractComponent {
+
+	public ImageComponent() throws Throwable {
+		super();
+	}
 
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 		
-		TEMPLATE  = "/front/components/image.tmp";
+		TEMPLATE  = "/default_template/front/components/image.tmp";
 		
 		DEFAULT_ATTRS = 
 			Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

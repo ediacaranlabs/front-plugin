@@ -9,7 +9,7 @@ import java.util.Set;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public abstract class ComponentFormTag extends AbstractSimpleTag {
+public abstract class ComponentFormTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE = "/bootstrap4/components/form-group";
 	
@@ -17,7 +17,7 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_ATTRS) {{
+		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
 			add("name");
 			add("value");
 			add("required");
@@ -29,7 +29,7 @@ public abstract class ComponentFormTag extends AbstractSimpleTag {
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_ATTRIBUTE_PARSERS){{
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_ATTRIBUTE_PARSERS){{
 			
 			put("enabled", new AttributeParserImp() {
 				

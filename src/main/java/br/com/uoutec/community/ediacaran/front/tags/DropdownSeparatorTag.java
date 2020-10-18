@@ -8,7 +8,7 @@ import java.util.Set;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 
-public class DropdownSeparatorTag  extends AbstractSimpleTag {
+public class DropdownSeparatorTag  extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/bootstrap4/components/dropdown-separator";
 	
@@ -24,14 +24,14 @@ public class DropdownSeparatorTag  extends AbstractSimpleTag {
 
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
+		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
 			add("size");
 			add("content");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_PROPERTY_PARSERS){{
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
 			}});
 	
 	/* ------------ Attr ---------------*/

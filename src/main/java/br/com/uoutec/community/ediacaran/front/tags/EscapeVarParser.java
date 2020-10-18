@@ -5,7 +5,7 @@ import java.io.Writer;
 
 import javax.servlet.jsp.tagext.JspFragment;
 
-import br.com.uoutec.community.ediacaran.front.AbstractVarParser;
+import br.com.uoutec.community.ediacaran.system.tema.AbstractVarParser;
 
 public class EscapeVarParser extends AbstractVarParser{
 

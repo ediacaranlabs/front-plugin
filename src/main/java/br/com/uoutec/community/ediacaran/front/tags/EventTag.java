@@ -9,7 +9,7 @@ import java.util.Set;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public class EventTag extends AbstractSimpleTag {
+public class EventTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/bootstrap4/components/event";
 	
@@ -62,8 +62,8 @@ public class EventTag extends AbstractSimpleTag {
 		if(component == null) {
 			Object cp = super.getParentTag();
 			if(cp != null) {
-				if(cp instanceof AbstractSimpleTag) {
-					component = ((AbstractSimpleTag)cp).getId();
+				if(cp instanceof AbstractSimpleComponent) {
+					component = ((AbstractSimpleComponent)cp).getId();
 				}
 				else
 				if(cp instanceof AbstractBodyTag) {

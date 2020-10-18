@@ -14,13 +14,13 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
-import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
 import br.com.uoutec.community.ediacaran.system.Constants;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.tema.Tema;
+import br.com.uoutec.community.ediacaran.system.tema.Theme;
 import br.com.uoutec.community.ediacaran.system.tema.TemaException;
 import br.com.uoutec.community.ediacaran.system.tema.TemaRegistry;
+import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
 public abstract class AbstractBodyTag extends BodyTagSupport{
 
@@ -32,7 +32,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 
 	public static final String ATTR_FORMAT			= "([a-z-_]+)=([^\\;]+)";
 
-	public static final String PARENT_TAG			= AbstractSimpleTag.class.getSimpleName() + ":parent";
+	public static final String PARENT_TAG			= AbstractSimpleComponent.class.getSimpleName() + ":parent";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -118,7 +118,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 		Map<String, Object> vars    = new HashMap<String, Object>();
 		Writer out                  = getBodyContent().getEnclosingWriter();
 		String template             = getWrapperTemplate();
-    	Tema tema                   = getTema();
+    	Theme tema                   = getTema();
     	String packageName          = getTemaPackage();
 		
 		vars.putAll(tagVars);
@@ -285,7 +285,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 		}
 	}
 	
-	protected Tema getTema() {
+	protected Theme getTema() {
     	TemaRegistry temaRegistry = (TemaRegistry)getProperty(Constants.TEMA_REGISTRY);
     	return temaRegistry.getCurrentTema();
 	}

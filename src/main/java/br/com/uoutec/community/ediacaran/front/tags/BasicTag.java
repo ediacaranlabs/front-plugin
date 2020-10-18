@@ -12,11 +12,11 @@ import javax.servlet.jsp.JspException;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public class BasicTag extends AbstractSimpleTag{
+public class BasicTag extends AbstractSimpleComponent{
 
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_ATTRS) {{
+		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
 			add("accesskey");
 			add("classType");   
 			add("contenteditable");
@@ -32,11 +32,11 @@ public class BasicTag extends AbstractSimpleTag{
 		}});
 
 	protected static final Set<String> DEFAULT_EMPTY_ATTRIBUTES = 
-			Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_EMPTY_ATTRIBUTES));
+			Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_EMPTY_ATTRIBUTES));
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_ATTRIBUTE_PARSERS){{
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_ATTRIBUTE_PARSERS){{
 				
 				put("classType", new AttributeParserImp() {
 					

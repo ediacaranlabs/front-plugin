@@ -9,7 +9,7 @@ import java.util.Set;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public class DescriptionTag  extends AbstractSimpleTag {
+public class DescriptionTag  extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/bootstrap4/components/description";
 	
@@ -25,7 +25,7 @@ public class DescriptionTag  extends AbstractSimpleTag {
 
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleTag.DEFAULT_PROPS) {{
+		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
 			add("title");
 			add("truncate");
 			add("titleWidth");
@@ -35,7 +35,7 @@ public class DescriptionTag  extends AbstractSimpleTag {
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleTag.DEFAULT_PROPERTY_PARSERS){{
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
 				put("truncate", new AttributeParserImp() {
 					
 					@Override

@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.tags.front;
 
+import java.io.File;
 import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,13 +8,16 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
+import br.com.uoutec.community.ediacaran.plugins.PluginData;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.tema.StringPattern;
+import br.com.uoutec.community.ediacaran.system.tema.Component;
 import br.com.uoutec.community.ediacaran.system.tema.TagTemplate;
 import br.com.uoutec.community.ediacaran.system.tema.TemaException;
+import br.com.uoutec.community.ediacaran.system.tema.TemplateLoader;
 
-public abstract class AbstractTagTemplate implements TagTemplate{
+public abstract class AbstractComponent implements Component{
 
 	protected String TEMPLATE;
 	
@@ -52,18 +56,31 @@ public abstract class AbstractTagTemplate implements TagTemplate{
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
 			}});
 	
-	private StringPattern sp;
+	private TagTemplate tagTemplate;
 	
-	public AbstractTagTemplate() {
+	public AbstractComponent() throws Throwable {
+		this.loadConfiguration();
+		this.loadTemplate();
 	}
 	
-	protected void loadConfiguration() {
+	protected void loadConfiguration(){
+	}
+	
+	protected void loadTemplate() throws Throwable {
+		
+		PluginData pd = EntityContextPlugin.getEntity(PluginData.class);
+		File file = new File(pd.getPath() + "/tags" + TEMPLATE);
+		
+		file = file.getCanonicalFile();
+		
+		TemplateLoader loader = new TemplateLoader();
+		this.tagTemplate = loader.load(file, "UTF-8");
 	}
 	
 	@Override
 	public void applyTagTemplate(Map<String, Object> vars, Writer out) throws TemaException {
 		try {
-			sp.toWriter(out, vars);
+			tagTemplate.toWriter(out, vars);
 		}
 		catch(Throwable e) {
 			throw new TemaException(e);
@@ -73,7 +90,7 @@ public abstract class AbstractTagTemplate implements TagTemplate{
 	@Override
 	public void applyTagTemplate(Writer out, Object... vars) throws TemaException {
 		try {
-			sp.toWriter(out, vars);
+			tagTemplate.toWriter(out, vars);
 		}
 		catch(Throwable e) {
 			throw new TemaException(e);
@@ -103,10 +120,6 @@ public abstract class AbstractTagTemplate implements TagTemplate{
 	@Override
 	public Map<String, AttributeParser> getPropertiesParse() {
 		return DEFAULT_PROPERTY_PARSERS;
-	}
-
-	protected String getTemplate() {
-		return TEMPLATE;
 	}
 	
 }

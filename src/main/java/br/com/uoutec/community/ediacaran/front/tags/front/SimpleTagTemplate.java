@@ -9,7 +9,7 @@ import java.util.Set;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public abstract class SimpleTagTemplate extends AbstractTagTemplate{
+public abstract class SimpleTagTemplate extends AbstractComponent{
 
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -46,10 +46,10 @@ public abstract class SimpleTagTemplate extends AbstractTagTemplate{
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
 			}});
 	
-	public SimpleTagTemplate(String template) {
-		super(template);
+	public SimpleTagTemplate() throws Throwable {
+		super();
 	}
-    
+	
 	public Set<String> getAttributes(){
 		return DEFAULT_ATTRS;
 	}

@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
-public class SetTemplatePackageTag extends AbstractSimpleTag {
+public class SetTemplatePackageTag extends AbstractSimpleComponent {
 	
 	public static final String PACKAGE_NAME = SetTemplatePackageTag.class.getSimpleName() + ":package-name";
 	

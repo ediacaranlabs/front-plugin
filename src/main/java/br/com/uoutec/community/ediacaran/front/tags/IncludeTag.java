@@ -7,9 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
-import br.com.uoutec.community.ediacaran.system.tema.Tema;
+import br.com.uoutec.community.ediacaran.system.tema.Theme;
 
-public class IncludeTag extends AbstractSimpleTag {
+public class IncludeTag extends AbstractSimpleComponent {
 	
 	private String uri;
 	
@@ -19,7 +19,7 @@ public class IncludeTag extends AbstractSimpleTag {
     public void doTag() throws JspException, IOException {
     	
     	PageContext pageContext = (PageContext) getJspContext();
-    	Tema tema               = getTema();
+    	Theme tema               = getTema();
     	String packageName      = getTemaPackage();
     	
     	String path = tema.getTemplate(packageName) + uri;

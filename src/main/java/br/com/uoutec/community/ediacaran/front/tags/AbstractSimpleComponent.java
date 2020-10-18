@@ -2,9 +2,7 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,58 +13,25 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
-import br.com.uoutec.community.ediacaran.front.TemplateVarParser;
 import br.com.uoutec.community.ediacaran.system.Constants;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.tema.Tema;
+import br.com.uoutec.community.ediacaran.system.tema.ComponentVars;
+import br.com.uoutec.community.ediacaran.system.tema.Theme;
 import br.com.uoutec.community.ediacaran.system.tema.TemaException;
 import br.com.uoutec.community.ediacaran.system.tema.TemaRegistry;
+import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
-public abstract class AbstractSimpleTag extends SimpleTagSupport{
+public abstract class AbstractSimpleComponent 
+	extends SimpleTagSupport 
+	implements ComponentVars{
 
-	public static final String WRAPPER_TEMPLATE		= "/bootstrap4/components/wrapper";
+	public static final String WRAPPER_TEMPLATE		= "/components/wrapper";
 	
 	public static final String ID_COUNT				= "_component_id_count";
 
 	public static final String ATTR_FORMAT			= "([a-z-_]+)=([^\\;]+)";
 
-	public static final String PARENT_TAG			= AbstractSimpleTag.class.getSimpleName() + ":parent";
-	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>() {{
-			add("id");
-			add("classStyle");
-		}});
-
-	protected static final Set<String> DEFAULT_EMPTY_ATTRIBUTES = 
-			Collections.unmodifiableSet(new HashSet<String>());
-	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
-				
-				put("classStyle", new AttributeParserImp() {
-					
-					@Override
-					public String toName(String value, Object component) {
-						return value == null? null : "class";
-					}
-				});
-				
-			}});
-	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>() {{
-			add("classStyle");
-		}});
-	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
-			}});
+	public static final String PARENT_TAG			= AbstractSimpleComponent.class.getSimpleName() + ":parent";
 
 	private	String id;
 
@@ -92,26 +57,24 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
 	
     protected void doWrapperTag() throws JspException, IOException {
     	
-		Map<String, Object> tagVars = prepareVars();
 		Map<String, Object> vars    = new HashMap<String, Object>();
 		Writer out                  = getOut();
 		String template             = getWrapperTemplate();
-    	Tema tema                   = getTema();
+    	Theme tema                   = getTema();
     	String packageName          = getTemaPackage();
 		
-		vars.putAll(tagVars);
-		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, tema, vars));
+		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, this, tema));
 		
-		beforeApplyTemplate(template, vars, out);
+		beforeApplyTemplate(template, out);
 
     	Object oldParent = getParentTag();
     	setParentTag(this);
     	
-		applyTemplate(template, vars, out);
+		applyTemplate(template, out);
     	
 		setParentTag(oldParent);
 		
-		afterApplyTemplate(template, vars, out);
+		afterApplyTemplate(template, out);
 		
     }
     
@@ -119,18 +82,18 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
 
     	setProperty(getClass().getName() + ":CONTEXT", this);
     	
-		Map<String, Object> vars = prepareVars();
 		Writer out               = getOut();
     	String template          = this.getTemplate() == null? getDefaultTemplate() : getTemplate();
     	
-		beforeApplyTemplate(template, vars, out);
+		beforeApplyTemplate(template, out);
 
     	Object oldParent = getParentTag();
     	setParentTag(this);
 		
-    	applyTemplate(template, vars, out);
+    	applyTemplate(template, out);
+    	
     	setParentTag(oldParent);
-		afterApplyTemplate(template, vars, out);
+		afterApplyTemplate(template, out);
 		
     	setProperty(getClass().getName() + ":CONTEXT", null);    	
     	
@@ -140,24 +103,17 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     	return getJspContext().getOut();
     }
     
-    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
+    protected void beforeApplyTemplate(String template, Writer out) throws IOException {
     }
     
-    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
+    protected void afterApplyTemplate(String template, Writer out) throws IOException {
     }
     
-    protected void applyTemplate(String template, 
-    		Map<String,Object> vars, Writer out){
-    	getTema().applyTagTemplate(template, getTemaPackage(), vars, out);
+    protected void applyTemplate(String template, Writer out){
+    	getTema().applyTagTemplate(template, getTemaPackage(), this, null, out);
     }
     
-    protected void applyTemplate() {
-    	
-    }
-    
-	protected Tema getTema() {
+	protected Theme getTema() {
     	TemaRegistry temaRegistry = (TemaRegistry)getProperty(Constants.TEMA_REGISTRY);
     	return temaRegistry.getCurrentTema();
 	}
@@ -178,46 +134,19 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
     	return WRAPPER_TEMPLATE;
     }
     
-    protected String getDefaultTemplate() {
-    	throw new UnsupportedOperationException();
-    }
+    protected abstract String getDefaultTemplate();
     
-    protected Set<String> getDefaultAttributes(){
-    	return DEFAULT_ATTRS;
-    }
-
-    protected Set<String> getEmptyAttributes(){
-    	return DEFAULT_EMPTY_ATTRIBUTES;
-    }
-    
-    protected Map<String, AttributeParser> getAttributeParsers(){
-    	return DEFAULT_ATTRIBUTE_PARSERS;
-    }
-
-    protected Set<String> getDefaultProperties(){
-    	return DEFAULT_PROPS;
-    }
-
-    protected Map<String, AttributeParser> getPropertyParsers(){
-    	return DEFAULT_PROPERTY_PARSERS;
-    }
-
-	public String toAttrs() {
-		return getAttrList();
-	}
-	
-	private String getAttrList() {
+	private String getAttrList(Map<String, AttributeParser> attributeParsers, 
+			Set<String> emptyAttributes, Set<String> defaultAttributes) {
 		try {
 			StringBuilder sb = new StringBuilder();
 			BeanInstance i = new BeanInstance(this);
-			Map<String, AttributeParser> parsers = getAttributeParsers();
-			Set<String> emptyAttrs = getEmptyAttributes();
 			
-			for(String p: getDefaultAttributes()) {
+			for(String p: defaultAttributes) {
 				
 				Object v = i.get(p);
 				
-				if(v == null || emptyAttrs.contains(p)) {
+				if(v == null || emptyAttributes.contains(p)) {
 					continue;
 				}
 				
@@ -225,7 +154,7 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
 					sb.append(" ");
 				}
 				
-				AttributeParser parser = parsers.get(p);
+				AttributeParser parser = attributeParsers.get(p);
 				
 				p = parser == null? p : parser.toName(p, this);
 				v = parser == null? v : parser.toValue(v, this);
@@ -261,21 +190,21 @@ public abstract class AbstractSimpleTag extends SimpleTagSupport{
 	protected void afterPrepareVars(Map<String, Object> vars) {
 	}
 	
-	protected Map<String, Object> prepareVars() {
+	public Map<String, Object> prepareVars(Map<String, AttributeParser> propertyParsers, Set<String> defaultProperties,
+			Map<String, AttributeParser> attributeParsers, Set<String> emptyAttributes, Set<String> defaultAttributes) {
 		try {
-			Map<String, AttributeParser> parsers = getPropertyParsers();
 			Map<String, Object> map              = new HashMap<String, Object>();
 			BeanInstance i                       = new BeanInstance(this);
 			
 			this.beforePrepareVars(map);
 			
-			map.put("attr", this.getAttrList());
+			map.put("attr", getAttrList(attributeParsers, emptyAttributes, defaultAttributes));
 			
-			for(String k: getDefaultProperties()) {
+			for(String k: defaultProperties) {
 				
 				Object v = i.get(k);
 				
-				AttributeParser parser = parsers.get(k);
+				AttributeParser parser = propertyParsers.get(k);
 				
 				k = parser == null? k : parser.toName(k, this);
 				v = parser == null? v : parser.toValue(v, this);

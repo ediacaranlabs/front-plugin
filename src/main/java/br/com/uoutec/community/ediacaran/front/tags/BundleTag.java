@@ -12,7 +12,7 @@ import br.com.uoutec.community.ediacaran.ContextManager;
 import br.com.uoutec.community.ediacaran.core.system.registry.MessageBundle;
 import br.com.uoutec.community.ediacaran.system.Constants;
 
-public class BundleTag extends AbstractSimpleTag {
+public class BundleTag extends AbstractSimpleComponent {
 	
 	private Locale locale;
 	

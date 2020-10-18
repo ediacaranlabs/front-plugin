@@ -14,7 +14,7 @@ import br.com.uoutec.community.ediacaran.front.tags.FieldValidatorTag.ValidatorE
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public class FieldValidatorRuleTag extends AbstractSimpleTag {
+public class FieldValidatorRuleTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/bootstrap4/components/content";
 	
