@@ -9,10 +9,6 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class ImageComponent extends AbstractComponent {
 
-	public ImageComponent() throws Throwable {
-		super();
-	}
-
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 		

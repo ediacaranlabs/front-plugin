@@ -10,11 +10,11 @@ import java.util.Set;
 import javax.servlet.jsp.JspException;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.TemaException;
+import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateListVarParser;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
-public class FieldValidatorTag extends AbstractBodyTag {
+public class FieldValidatorTag extends AbstractPanelComponent {
 
 	private static final long serialVersionUID = 748182107582888257L;
 
@@ -127,7 +127,7 @@ public class FieldValidatorTag extends AbstractBodyTag {
     }
     
     protected void applyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws TemaException {
+    		Writer out) throws ThemeException {
     	
 		TemplateListVarParser rules = new TemplateListVarParser(TEMPLATE_RULE);
 		

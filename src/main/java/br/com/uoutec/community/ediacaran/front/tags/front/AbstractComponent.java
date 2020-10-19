@@ -14,7 +14,7 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.system.tema.Component;
 import br.com.uoutec.community.ediacaran.system.tema.TagTemplate;
-import br.com.uoutec.community.ediacaran.system.tema.TemaException;
+import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateLoader;
 
 public abstract class AbstractComponent implements Component{
@@ -58,7 +58,7 @@ public abstract class AbstractComponent implements Component{
 	
 	private TagTemplate tagTemplate;
 	
-	public AbstractComponent() throws Throwable {
+	public AbstractComponent() {
 		this.loadConfiguration();
 		this.loadTemplate();
 	}
@@ -66,34 +66,39 @@ public abstract class AbstractComponent implements Component{
 	protected void loadConfiguration(){
 	}
 	
-	protected void loadTemplate() throws Throwable {
+	protected void loadTemplate() {
 		
-		PluginData pd = EntityContextPlugin.getEntity(PluginData.class);
-		File file = new File(pd.getPath() + "/tags" + TEMPLATE);
-		
-		file = file.getCanonicalFile();
-		
-		TemplateLoader loader = new TemplateLoader();
-		this.tagTemplate = loader.load(file, "UTF-8");
+		try {
+			PluginData pd = EntityContextPlugin.getEntity(PluginData.class);
+			File file = new File(pd.getPath() + "/tags" + TEMPLATE);
+			
+			file = file.getCanonicalFile();
+			
+			TemplateLoader loader = new TemplateLoader();
+			this.tagTemplate = loader.load(file, "UTF-8");
+		}
+		catch(Throwable e) {
+			throw new ThemeException(e);
+		}
 	}
 	
 	@Override
-	public void applyTagTemplate(Map<String, Object> vars, Writer out) throws TemaException {
+	public void applyTagTemplate(Map<String, Object> vars, Writer out) throws ThemeException {
 		try {
 			tagTemplate.toWriter(out, vars);
 		}
 		catch(Throwable e) {
-			throw new TemaException(e);
+			throw new ThemeException(e);
 		}
 	}
 
 	@Override
-	public void applyTagTemplate(Writer out, Object... vars) throws TemaException {
+	public void applyTagTemplate(Writer out, Object... vars) throws ThemeException {
 		try {
 			tagTemplate.toWriter(out, vars);
 		}
 		catch(Throwable e) {
-			throw new TemaException(e);
+			throw new ThemeException(e);
 		}
 	}
     

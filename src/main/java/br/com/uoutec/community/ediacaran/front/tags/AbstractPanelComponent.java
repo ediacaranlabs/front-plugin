@@ -17,22 +17,25 @@ import org.brandao.brutos.bean.BeanInstance;
 import br.com.uoutec.community.ediacaran.system.Constants;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.system.tema.ComponentVars;
 import br.com.uoutec.community.ediacaran.system.tema.Theme;
-import br.com.uoutec.community.ediacaran.system.tema.TemaException;
+import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
 import br.com.uoutec.community.ediacaran.system.tema.TemaRegistry;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
-public abstract class AbstractBodyTag extends BodyTagSupport{
+public abstract class AbstractPanelComponent 
+	extends BodyTagSupport
+	implements ComponentVars{
 
 	private static final long serialVersionUID = -5353589232919296817L;
 
-	public static final String WRAPPER_TEMPLATE		= "/bootstrap4/components/wrapper";
+	public static final String WRAPPER_TEMPLATE		= "/components/wrapper";
 	
 	public static final String ID_COUNT				= "_component_id_count";
 
 	public static final String ATTR_FORMAT			= "([a-z-_]+)=([^\\;]+)";
 
-	public static final String PARENT_TAG			= AbstractSimpleComponent.class.getSimpleName() + ":parent";
+	public static final String PARENT_TAG			= AbstractPanelComponent.class.getSimpleName() + ":parent";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
@@ -94,7 +97,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
         	setProperty(getClass().getName() + ":CONTEXT", null);    	
         	return SKIP_BODY;
     	}
-	    catch(TemaException e) {
+	    catch(ThemeException e) {
 	    	throw new JspException(e);
 	    } 
     	catch (IOException e) {
@@ -103,7 +106,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     	
     }
 
-    protected void applyTemplate() throws TemaException, IOException{
+    protected void applyTemplate() throws ThemeException, IOException{
     	if(!wrapper) {
     		applySimpleTemplate();
     	}
@@ -112,37 +115,48 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     	}
     }
     
-    protected void applyWrapperTemplate() throws IOException, TemaException{
+    protected void applyWrapperTemplate() throws IOException{
     	
-		Map<String, Object> tagVars = prepareVars();
-		Map<String, Object> vars    = new HashMap<String, Object>();
-		Writer out                  = getBodyContent().getEnclosingWriter();
-		String template             = getWrapperTemplate();
-    	Theme tema                   = getTema();
-    	String packageName          = getTemaPackage();
+		Map<String, Object> vars = new HashMap<String, Object>();
+		Writer out               = getBodyContent().getEnclosingWriter();
+		String template          = getWrapperTemplate();
+    	Theme tema               = getTema();
+    	String packageName       = getTemaPackage();
 		
-		vars.putAll(tagVars);
-		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, tema, vars));
+		vars.put("content",	new TemplateVarParser(getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, this, tema));
 		
 		beforeApplyTemplate(template, vars, out);
+
+    	Object oldParent = getParentTag();
+    	setParentTag(this);
+    	
 		applyTemplate(template, vars, out);
+    	
+		setParentTag(oldParent);
+		
 		afterApplyTemplate(template, vars, out);
+		
     }
-    
-    protected void applySimpleTemplate() throws IOException, TemaException{
+
+    protected void applySimpleTemplate() throws IOException {
 
     	setProperty(getClass().getName() + ":CONTEXT", this);
     	
-		Map<String, Object> vars = prepareVars();
-		Writer out               = getBodyContent().getEnclosingWriter();
-    	String template          = this.getTemplate() == null? getDefaultTemplate() : getTemplate();
+    	Writer out               = getBodyContent().getEnclosingWriter();
+    	String template          = getTemplate() == null? getDefaultTemplate() : getTemplate();
     	
-    	if(template == null)
-    		return;
+		beforeApplyTemplate(template, null, out);
+
+    	Object oldParent = getParentTag();
+    	setParentTag(this);
+		
+    	applyTemplate(template, null, out);
     	
-		beforeApplyTemplate(template, vars, out);
-    	applyTemplate(template, vars, out);
-		afterApplyTemplate(template, vars, out);
+    	setParentTag(oldParent);
+		afterApplyTemplate(template, null, out);
+		
+    	setProperty(getClass().getName() + ":CONTEXT", null);    	
+    	
     }
     
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
@@ -153,8 +167,8 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     		Writer out) throws IOException {
     }
     
-    protected void applyTemplate(String template, Map<String,Object> vars, Writer out) throws TemaException {
-    	getTema().applyTagTemplate(template, getTemaPackage(), vars, out);
+    protected void applyTemplate(String template, Map<String, Object> vars, Writer out){
+    	getTema().applyTagTemplate(template, getTemaPackage(), this, vars, out);
     }
     
     public void setParentTag(Object tag) {
@@ -192,23 +206,24 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
     protected Map<String, AttributeParser> getPropertyParsers(){
     	return DEFAULT_PROPERTY_PARSERS;
     }
-
-	public String toAttrs() {
-		return getAttrList();
+	
+	protected void beforePrepareVars(Map<String, Object> vars) {
 	}
 	
-	private String getAttrList() {
+	protected void afterPrepareVars(Map<String, Object> vars) {
+	}
+	
+	private String getAttrList(Map<String, AttributeParser> attributeParsers, 
+			Set<String> emptyAttributes, Set<String> defaultAttributes) {
 		try {
 			StringBuilder sb = new StringBuilder();
 			BeanInstance i = new BeanInstance(this);
-			Map<String, AttributeParser> parsers = getAttributeParsers();
-			Set<String> emptyAttrs = getEmptyAttributes();
 			
-			for(String p: getDefaultAttributes()) {
+			for(String p: defaultAttributes) {
 				
 				Object v = i.get(p);
 				
-				if(v == null || emptyAttrs.contains(p)) {
+				if(v == null || emptyAttributes.contains(p)) {
 					continue;
 				}
 				
@@ -216,7 +231,7 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 					sb.append(" ");
 				}
 				
-				AttributeParser parser = parsers.get(p);
+				AttributeParser parser = attributeParsers.get(p);
 				
 				p = parser == null? p : parser.toName(p, this);
 				v = parser == null? v : parser.toValue(v, this);
@@ -246,27 +261,21 @@ public abstract class AbstractBodyTag extends BodyTagSupport{
 		}
 	}
 	
-	protected void beforePrepareVars(Map<String, Object> vars) {
-	}
-	
-	protected void afterPrepareVars(Map<String, Object> vars) {
-	}
-	
-	protected Map<String, Object> prepareVars() {
+	public Map<String, Object> prepareVars(Map<String, AttributeParser> propertyParsers, Set<String> defaultProperties,
+			Map<String, AttributeParser> attributeParsers, Set<String> emptyAttributes, Set<String> defaultAttributes) {
 		try {
-			Map<String, AttributeParser> parsers = getPropertyParsers();
 			Map<String, Object> map              = new HashMap<String, Object>();
 			BeanInstance i                       = new BeanInstance(this);
 			
 			this.beforePrepareVars(map);
 			
-			map.put("attr", this.getAttrList());
+			map.put("attr", getAttrList(attributeParsers, emptyAttributes, defaultAttributes));
 			
-			for(String k: getDefaultProperties()) {
+			for(String k: defaultProperties) {
 				
 				Object v = i.get(k);
 				
-				AttributeParser parser = parsers.get(k);
+				AttributeParser parser = propertyParsers.get(k);
 				
 				k = parser == null? k : parser.toName(k, this);
 				v = parser == null? v : parser.toValue(v, this);

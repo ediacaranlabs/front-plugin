@@ -14,7 +14,7 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateListVarParser;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
-public class NivoTag extends AbstractBodyTag {
+public class NivoTag extends AbstractPanelComponent {
 
 	private static final long serialVersionUID = 748182107582888257L;
 

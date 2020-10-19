@@ -17,7 +17,7 @@ import br.com.uoutec.community.ediacaran.system.Constants;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.ComponentVars;
 import br.com.uoutec.community.ediacaran.system.tema.Theme;
-import br.com.uoutec.community.ediacaran.system.tema.TemaException;
+import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
 import br.com.uoutec.community.ediacaran.system.tema.TemaRegistry;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
@@ -50,7 +50,7 @@ public abstract class AbstractSimpleComponent
 	    	else
 	    		doWrapperTag();
     	}
-	    catch(TemaException e) {
+	    catch(ThemeException e) {
 	    	throw new JspException(e);
 	    }
     }
@@ -63,18 +63,18 @@ public abstract class AbstractSimpleComponent
     	Theme tema                   = getTema();
     	String packageName          = getTemaPackage();
 		
-		vars.put("content",	new TemplateVarParser(this.getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, this, tema));
+		vars.put("content",	new TemplateVarParser(getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, this, tema));
 		
-		beforeApplyTemplate(template, out);
+		beforeApplyTemplate(template, vars, out);
 
     	Object oldParent = getParentTag();
     	setParentTag(this);
     	
-		applyTemplate(template, out);
+		applyTemplate(template, vars, out);
     	
 		setParentTag(oldParent);
 		
-		afterApplyTemplate(template, out);
+		afterApplyTemplate(template, vars, out);
 		
     }
     
@@ -83,17 +83,17 @@ public abstract class AbstractSimpleComponent
     	setProperty(getClass().getName() + ":CONTEXT", this);
     	
 		Writer out               = getOut();
-    	String template          = this.getTemplate() == null? getDefaultTemplate() : getTemplate();
+    	String template          = getTemplate() == null? getDefaultTemplate() : getTemplate();
     	
-		beforeApplyTemplate(template, out);
+		beforeApplyTemplate(template, null, out);
 
     	Object oldParent = getParentTag();
     	setParentTag(this);
 		
-    	applyTemplate(template, out);
+    	applyTemplate(template, null, out);
     	
     	setParentTag(oldParent);
-		afterApplyTemplate(template, out);
+		afterApplyTemplate(template, null, out);
 		
     	setProperty(getClass().getName() + ":CONTEXT", null);    	
     	
@@ -103,14 +103,14 @@ public abstract class AbstractSimpleComponent
     	return getJspContext().getOut();
     }
     
-    protected void beforeApplyTemplate(String template, Writer out) throws IOException {
+    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
     }
     
-    protected void afterApplyTemplate(String template, Writer out) throws IOException {
+    protected void afterApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
     }
     
-    protected void applyTemplate(String template, Writer out){
-    	getTema().applyTagTemplate(template, getTemaPackage(), this, null, out);
+    protected void applyTemplate(String template, Map<String, Object> vars, Writer out){
+    	getTema().applyTagTemplate(template, getTemaPackage(), this, vars, out);
     }
     
 	protected Theme getTema() {

@@ -14,9 +14,6 @@ public class ImageComponent  extends AbstractSimpleComponent {
 	
 	private String align; //left, right, center (float-<...> | mx-auto d-block)
 	
-	public ImageComponent() {
-	}
-	
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }
