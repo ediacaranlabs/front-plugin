@@ -1,21 +1,24 @@
 package br.com.uoutec.community.ediacaran.front.tags.front;
 
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.jsp.JspException;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-import br.com.uoutec.community.ediacaran.front.tags.AbstractSimpleComponent;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;;
+public class ListComponent  extends AbstractSimpleComponent {
 
-public class AccordionItemComponent extends AbstractComponent {
-
-	public static final String TEMPLATE = "/components/accordion-item";
-
+	public static final String TEMPLATE   = "/bootstrap4/components/list";
+	
+	public static final String TEMPLATE2  = "/bootstrap4/components/ordered-list";
+	
+	public static final String PARENT = ListComponent.class.getSimpleName() + ":PARENT";
+	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
@@ -29,14 +32,31 @@ public class AccordionItemComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
-			add("title");
+			add("style");
 			add("content");
-			add("parentID");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
+				put("style", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return value == null? null : "list-" + value;
+					}
+					
+				});
+				
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((ListComponent)component).getJspBody());
+					}
+					
+				});
+				
 			}});
-    
+
 }

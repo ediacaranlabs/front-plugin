@@ -9,13 +9,12 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-import br.com.uoutec.community.ediacaran.front.tags.AbstractSimpleComponent;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 
-public class AccordionItemComponent extends AbstractComponent {
+public class AppendFieldComponent  extends AbstractComponent {
 
-	public static final String TEMPLATE = "/components/accordion-item";
-
+	public static final String TEMPLATE  = "/bootstrap4/components/append-field";
+	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
@@ -29,14 +28,11 @@ public class AccordionItemComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
-			add("title");
 			add("content");
-			add("parentID");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
 			}});
-    
 }

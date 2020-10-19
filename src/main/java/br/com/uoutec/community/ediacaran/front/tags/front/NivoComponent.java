@@ -1,21 +1,31 @@
 package br.com.uoutec.community.ediacaran.front.tags.front;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-import br.com.uoutec.community.ediacaran.front.tags.AbstractSimpleComponent;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.TemplateListVarParser;
+import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
-public class AccordionItemComponent extends AbstractComponent {
+public class NivoComponent extends AbstractPanelComponent {
 
-	public static final String TEMPLATE = "/components/accordion-item";
+	private static final long serialVersionUID = 748182107582888257L;
 
+	private static final String EMPTY_IMG_ALT = "";
+	
+	private static final String NIVO_IMAGE = "/bootstrap4/components/nivo-image";
+	
+	private static final String NIVO_CAPTION = "/bootstrap4/components/nivo-caption";
+
+	public static final String TEMPLATE  = "/bootstrap4/components/nivo";
+	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
@@ -29,14 +39,12 @@ public class AccordionItemComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
-			add("title");
-			add("content");
-			add("parentID");
+			add("button");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
 			}});
-    
+
 }

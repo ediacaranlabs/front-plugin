@@ -1,21 +1,20 @@
 package br.com.uoutec.community.ediacaran.front.tags.front;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.jsp.JspException;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-import br.com.uoutec.community.ediacaran.front.tags.AbstractSimpleComponent;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;;
+public class MenuItensComponent  extends AbstractSimpleComponent {
 
-public class AccordionItemComponent extends AbstractComponent {
-
-	public static final String TEMPLATE = "/components/accordion-item";
-
+	public static final String TEMPLATE  = "/bootstrap4/components/menu-itens";
+	
+	public static final String TEMPLATE_2  = "/bootstrap4/components/menu-itens-menu";
+	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
@@ -29,14 +28,34 @@ public class AccordionItemComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
-			add("title");
 			add("content");
-			add("parentID");
+			add("align");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
+				put("content", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return new JspFragmentVarParser(((MenuItensComponent)component).getJspBody());
+					}
+					
+				});
+				
+				put("align", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						if(value == null) {
+							return null;
+						}
+						
+						return "left".equals(value)? " mr-auto" : " ml-auto";
+					}
+					
+				});
 			}});
-    
+
 }

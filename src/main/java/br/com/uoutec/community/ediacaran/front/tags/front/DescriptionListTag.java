@@ -15,12 +15,12 @@ public class DescriptionListTag  extends AbstractSimpleComponent {
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_ATTRS) {{
+		Collections.unmodifiableSet(new HashSet<String>(ComponentFormComponent.DEFAULT_ATTRS) {{
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_ATTRIBUTE_PARSERS){{
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormComponent.DEFAULT_ATTRIBUTE_PARSERS){{
 		}});
 
 	@SuppressWarnings("serial")

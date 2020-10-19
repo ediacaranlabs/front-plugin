@@ -1,6 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.tags.front;
 
-import java.io.IOException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,13 +9,21 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-import br.com.uoutec.community.ediacaran.front.tags.AbstractSimpleComponent;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
+import br.com.uoutec.community.ediacaran.system.tema.TemplateListVarParser;
+import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
-public class AccordionItemComponent extends AbstractComponent {
+public class FieldValidatorComponent extends AbstractPanelComponent {
 
-	public static final String TEMPLATE = "/components/accordion-item";
+	private static final long serialVersionUID = 748182107582888257L;
 
+	public static final String TEMPLATE  = "/bootstrap4/components/field-validator";
+
+	public static final String TEMPLATE_RULE  = "/bootstrap4/components/field-rule-validator";
+	
+	public static final String TEMPLATE_RULE_PARAM  = "/bootstrap4/components/field-rule-validator-param";
+	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
@@ -29,14 +37,11 @@ public class AccordionItemComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
-			add("title");
-			add("content");
-			add("parentID");
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
 			}});
-    
+	
 }

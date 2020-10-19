@@ -9,7 +9,7 @@ import java.util.Set;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public class DropdownTag  extends ComponentFormTag {
+public class DropdownTag  extends ComponentFormComponent {
 
 	public static final String TEMPLATE  = "/bootstrap4/components/dropdown";
 	
@@ -19,17 +19,17 @@ public class DropdownTag  extends ComponentFormTag {
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_ATTRS) {{
+		Collections.unmodifiableSet(new HashSet<String>(ComponentFormComponent.DEFAULT_ATTRS) {{
 		}});
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_ATTRIBUTE_PARSERS){{
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormComponent.DEFAULT_ATTRIBUTE_PARSERS){{
 		}});
 
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_PROPS) {{
+		Collections.unmodifiableSet(new HashSet<String>(ComponentFormComponent.DEFAULT_PROPS) {{
 			add("label");
 			add("style");
 			add("size");
@@ -39,7 +39,7 @@ public class DropdownTag  extends ComponentFormTag {
 	
 	@SuppressWarnings("serial")
 	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_PROPERTY_PARSERS){{
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormComponent.DEFAULT_PROPERTY_PARSERS){{
 				put("style", new AttributeParserImp() {
 					
 					@Override

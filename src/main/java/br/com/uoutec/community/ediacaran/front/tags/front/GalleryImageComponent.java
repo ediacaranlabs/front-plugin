@@ -1,21 +1,17 @@
 package br.com.uoutec.community.ediacaran.front.tags.front;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.jsp.JspException;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 
-import br.com.uoutec.community.ediacaran.front.tags.AbstractSimpleComponent;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;;
+public class GalleryImageComponent  extends AbstractSimpleComponent {
 
-public class AccordionItemComponent extends AbstractComponent {
-
-	public static final String TEMPLATE = "/components/accordion-item";
-
+	public static final String TEMPLATE  = "/bootstrap4/components/gallery-filter";
+	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
@@ -30,8 +26,10 @@ public class AccordionItemComponent extends AbstractComponent {
 	protected static final Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
 			add("title");
-			add("content");
-			add("parentID");
+			add("filter");
+			add("icon");
+			add("src");
+			add("text");
 		}});
 	
 	@SuppressWarnings("serial")
