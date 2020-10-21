@@ -14,17 +14,17 @@ public class DropdownItemTag  extends ComponentFormComponent {
 	
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/bootstrap4/components/dropdown-item";
+		TEMPLATE  = "/components/dropdown-item";
 	
 	
 		DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(ComponentFormComponent.DEFAULT_ATTRS) {{
+		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
 			//add("");
 		}});
 	
 	
 		DEFAULT_ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormComponent.DEFAULT_ATTRIBUTE_PARSERS){{
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
 		}});
 
 	
