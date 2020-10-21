@@ -9,30 +9,33 @@ import java.util.Set;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public class EventComponent extends AbstractSimpleComponent {
+public class EventComponent extends AbstractComponent {
 
-	public static final String TEMPLATE  = "/bootstrap4/components/event";
 	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
+	protected void loadConfiguration() {
+
+		TEMPLATE  = "/bootstrap4/components/event";
+	
+	
+		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractPanelComponent.DEFAULT_ATTRS) {{
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
+	
+		DEFAULT_ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractPanelComponent.DEFAULT_ATTRIBUTE_PARSERS){{
 		}});
 
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
+	
+		DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(AbstractPanelComponent.DEFAULT_PROPS) {{
 			add("content");
 			add("type");
 			add("component");
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+	
+		DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractPanelComponent.DEFAULT_PROPERTY_PARSERS){{
 				put("content", new AttributeParserImp() {
 					
@@ -42,4 +45,5 @@ public class EventComponent extends AbstractSimpleComponent {
 					}
 				});
 		}});
+	}
 }

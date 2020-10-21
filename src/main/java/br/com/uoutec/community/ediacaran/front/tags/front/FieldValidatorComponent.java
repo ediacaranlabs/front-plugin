@@ -18,30 +18,40 @@ public class FieldValidatorComponent extends AbstractPanelComponent {
 
 	private static final long serialVersionUID = 748182107582888257L;
 
-	public static final String TEMPLATE  = "/bootstrap4/components/field-validator";
+	
+	protected void loadConfiguration() {
 
-	public static final String TEMPLATE_RULE  = "/bootstrap4/components/field-rule-validator";
+		TEMPLATE  = "/bootstrap4/components/field-validator";
+
 	
-	public static final String TEMPLATE_RULE_PARAM  = "/bootstrap4/components/field-rule-validator-param";
+	protected void loadConfiguration() {
+
+		TEMPLATE_RULE  = "/bootstrap4/components/field-rule-validator";
 	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
+	
+	protected void loadConfiguration() {
+
+		TEMPLATE_RULE_PARAM  = "/bootstrap4/components/field-rule-validator-param";
+	
+	
+		DEFAULT_ATTRS = 
+		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_ATTRIBUTE_PARSERS){{
+	
+		DEFAULT_ATTRIBUTE_PARSERS = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
 		}});
 
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
+	
+		DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
+	
+		DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
 			}});
 	
+	}
 }

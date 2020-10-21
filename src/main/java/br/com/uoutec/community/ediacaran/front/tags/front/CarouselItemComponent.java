@@ -11,28 +11,32 @@ import javax.servlet.jsp.JspException;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;;
 
-public class CarouselItemComponent extends AbstractSimpleComponent {
+public class CarouselItemComponent extends AbstractComponent {
 
-	public static final String TEMPLATE   = "/bootstrap4/components/carousel-item";
+	
+	protected void loadConfiguration() {
 
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
+		TEMPLATE   = "/bootstrap4/components/carousel-item";
+
+	
+		DEFAULT_ATTRS = 
+		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_ATTRIBUTE_PARSERS){{
+	
+		DEFAULT_ATTRIBUTE_PARSERS = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
 		}});
 
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
+	
+		DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
 			add("content");
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
+	
+		DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
 			}});
+	}
 }

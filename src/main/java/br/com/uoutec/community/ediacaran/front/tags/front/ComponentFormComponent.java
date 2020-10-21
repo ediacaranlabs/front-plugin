@@ -3,21 +3,20 @@ package br.com.uoutec.community.ediacaran.front.tags.front;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public abstract class ComponentFormComponent extends AbstractSimpleComponent {
+public abstract class ComponentFormComponent extends AbstractComponent {
 
-	public static final String TEMPLATE = "/bootstrap4/components/form-group";
-	
 	public static final String FORM = ComponentFormComponent.class.getSimpleName() + ":form";
 	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
+	protected void loadConfiguration() {
+
+		TEMPLATE = "/bootstrap4/components/form-group";
+	
+		DEFAULT_ATTRS = 
+		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
 			add("name");
 			add("value");
 			add("required");
@@ -27,9 +26,9 @@ public abstract class ComponentFormComponent extends AbstractSimpleComponent {
 			add("form");
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_ATTRIBUTE_PARSERS){{
+	
+		DEFAULT_ATTRIBUTE_PARSERS = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
 			
 			put("enabled", new AttributeParserImp() {
 				
@@ -82,4 +81,6 @@ public abstract class ComponentFormComponent extends AbstractSimpleComponent {
 			
 		}});
 
+	}
+	
 }

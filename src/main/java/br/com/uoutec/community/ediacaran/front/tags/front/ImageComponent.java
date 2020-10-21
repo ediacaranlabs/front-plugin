@@ -9,7 +9,7 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class ImageComponent extends AbstractComponent {
 
-	@SuppressWarnings("serial")
+	
 	protected void loadConfiguration() {
 		
 		TEMPLATE  = "/default_template/front/components/image.tmp";
@@ -19,7 +19,7 @@ public class ImageComponent extends AbstractComponent {
 				add("src");
 			}});
 		
-		DEFAULT_ATTRIBUTE_PARSERS = 
+		DEFAULT_DEFAULT_ATTRIBUTE_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
 			}});
 	
@@ -64,4 +64,5 @@ public class ImageComponent extends AbstractComponent {
 				}});
 	}
 
+	}
 }

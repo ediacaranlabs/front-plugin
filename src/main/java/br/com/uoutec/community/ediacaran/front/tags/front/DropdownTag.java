@@ -11,24 +11,33 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class DropdownTag  extends ComponentFormComponent {
 
-	public static final String TEMPLATE  = "/bootstrap4/components/dropdown";
 	
-	public static final String TEMPLATE2 = "/bootstrap4/components/split-dropdown";
+	protected void loadConfiguration() {
+
+		TEMPLATE  = "/bootstrap4/components/dropdown";
 	
-	public static final String TEMPLATE_WRAPPER = "/bootstrap4/components/dropdown-wrapper";
 	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
+	protected void loadConfiguration() {
+
+		TEMPLATE2 = "/bootstrap4/components/split-dropdown";
+	
+	
+	protected void loadConfiguration() {
+
+		TEMPLATE_WRAPPER = "/bootstrap4/components/dropdown-wrapper";
+	
+	
+		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormComponent.DEFAULT_ATTRS) {{
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
+	
+		DEFAULT_ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormComponent.DEFAULT_ATTRIBUTE_PARSERS){{
 		}});
 
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
+	
+		DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormComponent.DEFAULT_PROPS) {{
 			add("label");
 			add("style");
@@ -37,8 +46,8 @@ public class DropdownTag  extends ComponentFormComponent {
 			add("variation");
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+	
+		DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormComponent.DEFAULT_PROPERTY_PARSERS){{
 				put("style", new AttributeParserImp() {
 					
@@ -68,96 +77,5 @@ public class DropdownTag  extends ComponentFormComponent {
 				});
 				
 			}});
-	
-	/* ------------ Attr ---------------*/
-	
-	/* ------------ Prop ---------------*/
-	
-	private String label;
-	
-	private String style; //primary, secondary, success, info, warning, danger
-	
-	private String size; //lg, sm
-	
-	private Boolean split;
-	
-	private String variation; //up, right, left
-	
-	public DropdownTag() {
 	}
-	
-    protected String getWrapperTemplate() {
-    	return TEMPLATE_WRAPPER;
-    }
-    
-    protected String getDefaultTemplate() {
-    	return split == null || !split? TEMPLATE : TEMPLATE2;
-    }
-
-    protected Set<String> getDefaultAttributes(){
-    	return DEFAULT_ATTRS;
-    }
-
-    protected Set<String> getEmptyAttributes(){
-    	return DEFAULT_EMPTY_ATTRIBUTES;
-    }
-    
-    protected Map<String, AttributeParser> getAttributeParsers(){
-    	return DEFAULT_ATTRIBUTE_PARSERS;
-    }
-
-    protected Set<String> getDefaultProperties(){
-    	return DEFAULT_PROPS;
-    }
-
-    protected Map<String, AttributeParser> getPropertyParsers(){
-    	return DEFAULT_PROPERTY_PARSERS;
-    }
-    
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("itens", new JspFragmentVarParser(getJspBody()));
-		return vals;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public String getStyle() {
-		return style;
-	}
-
-	public void setStyle(String style) {
-		this.style = style;
-	}
-
-	public String getSize() {
-		return size;
-	}
-
-	public void setSize(String size) {
-		this.size = size;
-	}
-
-	public Boolean getSplit() {
-		return split;
-	}
-
-	public void setSplit(Boolean split) {
-		this.split = split;
-	}
-
-	public String getVariation() {
-		return variation;
-	}
-
-	public void setVariation(String variation) {
-		this.variation = variation;
-	}
-    
 }

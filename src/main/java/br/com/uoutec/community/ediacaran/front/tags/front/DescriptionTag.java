@@ -9,23 +9,26 @@ import java.util.Set;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public class DescriptionTag  extends AbstractSimpleComponent {
+public class DescriptionTag  extends AbstractComponent {
 
-	public static final String TEMPLATE  = "/bootstrap4/components/description";
 	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
+	protected void loadConfiguration() {
+
+		TEMPLATE  = "/bootstrap4/components/description";
+	
+	
+		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormComponent.DEFAULT_ATTRS) {{
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
+	
+		DEFAULT_ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormComponent.DEFAULT_ATTRIBUTE_PARSERS){{
 		}});
 
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
+	
+		DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
 			add("title");
 			add("truncate");
 			add("titleWidth");
@@ -33,9 +36,9 @@ public class DescriptionTag  extends AbstractSimpleComponent {
 			add("content");
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
+	
+		DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
 				put("truncate", new AttributeParserImp() {
 					
 					@Override
@@ -72,86 +75,5 @@ public class DescriptionTag  extends AbstractSimpleComponent {
 				});
 				
 			}});
-	
-	/* ------------ Attr ---------------*/
-	
-	/* ------------ Prop ---------------*/
-	
-	private String title;
-	
-	private Boolean truncate;
-	
-	private Integer titleWidth;
-	
-	private Integer contentWidth;
-	
-	private JspFragmentVarParser content;
-	
-	public DescriptionTag() {
 	}
-	
-    protected String getDefaultTemplate() {
-    	return TEMPLATE;
-    }
-
-    protected Set<String> getDefaultAttributes(){
-    	return DEFAULT_ATTRS;
-    }
-
-    protected Set<String> getEmptyAttributes(){
-    	return DEFAULT_EMPTY_ATTRIBUTES;
-    }
-    
-    protected Map<String, AttributeParser> getAttributeParsers(){
-    	return DEFAULT_ATTRIBUTE_PARSERS;
-    }
-
-    protected Set<String> getDefaultProperties(){
-    	return DEFAULT_PROPS;
-    }
-
-    protected Map<String, AttributeParser> getPropertyParsers(){
-    	return DEFAULT_PROPERTY_PARSERS;
-    }
-    
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public Boolean getTruncate() {
-		return truncate;
-	}
-
-	public void setTruncate(Boolean truncate) {
-		this.truncate = truncate;
-	}
-
-	public Integer getTitleWidth() {
-		return titleWidth;
-	}
-
-	public void setTitleWidth(Integer titleWidth) {
-		this.titleWidth = titleWidth;
-	}
-
-	public Integer getContentWidth() {
-		return contentWidth;
-	}
-
-	public void setContentWidth(Integer contentWidth) {
-		this.contentWidth = contentWidth;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
-	}
-	
 }

@@ -13,10 +13,13 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class TextareaComponent extends ComponentFormComponent {
 
-	public static final String TEMPLATE = "/bootstrap4/components/textfield";
 	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
+	protected void loadConfiguration() {
+
+		TEMPLATE = "/bootstrap4/components/textfield";
+	
+	
+		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormComponent.DEFAULT_ATTRS) {{
 			add("autocomplete");
 			add("autofocus");
@@ -31,8 +34,8 @@ public class TextareaComponent extends ComponentFormComponent {
 			remove("name");
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
+	
+		DEFAULT_DEFAULT_ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormComponent.DEFAULT_ATTRIBUTE_PARSERS){{
 			
 			put("autocomplete", new AttributeParserImp() {
@@ -59,8 +62,8 @@ public class TextareaComponent extends ComponentFormComponent {
 			
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
+	
+		DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormComponent.DEFAULT_PROPS) {{
 			add("label");
 			add("value");
@@ -68,8 +71,8 @@ public class TextareaComponent extends ComponentFormComponent {
 			add("enabled");
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+	
+		DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormComponent.DEFAULT_PROPERTY_PARSERS){{
 				put("enabled", new AttributeParserImp() {
 					
@@ -92,4 +95,5 @@ public class TextareaComponent extends ComponentFormComponent {
 				});
 			}});
 
+	}
 }

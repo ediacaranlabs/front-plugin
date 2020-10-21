@@ -8,23 +8,26 @@ import java.util.Set;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 
-public class GalleryImageComponent  extends AbstractSimpleComponent {
+public class GalleryImageComponent  extends AbstractComponent {
 
-	public static final String TEMPLATE  = "/bootstrap4/components/gallery-filter";
 	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
+	protected void loadConfiguration() {
+
+		TEMPLATE  = "/bootstrap4/components/gallery-filter";
+	
+	
+		DEFAULT_ATTRS = 
+		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_ATTRIBUTE_PARSERS){{
+	
+		DEFAULT_ATTRIBUTE_PARSERS = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
 		}});
 
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
+	
+		DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
 			add("title");
 			add("filter");
 			add("icon");
@@ -32,9 +35,10 @@ public class GalleryImageComponent  extends AbstractSimpleComponent {
 			add("text");
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
+	
+		DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
 			}});
     
+	}
 }

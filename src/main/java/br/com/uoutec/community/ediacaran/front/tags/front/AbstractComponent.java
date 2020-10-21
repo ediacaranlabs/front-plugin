@@ -21,7 +21,7 @@ public abstract class AbstractComponent implements Component{
 
 	protected String TEMPLATE;
 	
-	@SuppressWarnings("serial")
+	
 	protected Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
 			add("id");
@@ -31,7 +31,7 @@ public abstract class AbstractComponent implements Component{
 	protected Set<String> DEFAULT_EMPTY_ATTRIBUTES = 
 			Collections.unmodifiableSet(new HashSet<String>());
 	
-	@SuppressWarnings("serial")
+	
 	protected Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
 				
@@ -45,13 +45,13 @@ public abstract class AbstractComponent implements Component{
 				
 			}});
 	
-	@SuppressWarnings("serial")
+	
 	protected Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
 			add("classStyle");
 		}});
 	
-	@SuppressWarnings("serial")
+	
 	protected Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
 			}});

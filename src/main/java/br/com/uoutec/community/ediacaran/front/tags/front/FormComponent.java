@@ -10,9 +10,12 @@ import java.util.Set;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public class FormComponent extends AbstractSimpleComponent {
+public class FormComponent extends AbstractComponent {
 
-	public static final String TEMPLATE = "/bootstrap4/components/form";
+	
+	protected void loadConfiguration() {
+
+		TEMPLATE = "/bootstrap4/components/form";
 	
 	public static final String FORM = FormComponent.class.getSimpleName() + ":form";
 	
@@ -20,9 +23,9 @@ public class FormComponent extends AbstractSimpleComponent {
 	
 	public static final String VERTICAL_FORM_VALUE = "true";
 	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
+	
+		DEFAULT_ATTRS = 
+		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
 			add("acceptCharset");
 			add("action");
 			add("enctype");
@@ -31,9 +34,9 @@ public class FormComponent extends AbstractSimpleComponent {
 			add("update");
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_ATTRIBUTE_PARSERS){{
+	
+		DEFAULT_DEFAULT_ATTRIBUTE_PARSERS = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
 			
 			put("acceptCharset", new AttributeParserImp() {
 				
@@ -58,16 +61,16 @@ public class FormComponent extends AbstractSimpleComponent {
 			
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
+	
+		DEFAULT_PROPS = 
+		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
 			add("content");
 			add("style");
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
+	
+		DEFAULT_PROPERTY_PARSERS = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
 				put("content", new AttributeParserImp() {
 					
 					@Override
@@ -92,4 +95,5 @@ public class FormComponent extends AbstractSimpleComponent {
 				
 			}});
 	
+	}
 }

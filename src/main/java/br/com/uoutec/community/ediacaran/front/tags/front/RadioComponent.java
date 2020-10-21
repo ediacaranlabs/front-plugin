@@ -13,16 +13,19 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class RadioComponent extends ComponentFormComponent {
 
-	public static final String TEMPLATE = "/bootstrap4/components/radio";
 	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
+	protected void loadConfiguration() {
+
+		TEMPLATE = "/bootstrap4/components/radio";
+	
+	
+		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormComponent.DEFAULT_ATTRS) {{
 			add("selected");
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
+	
+		DEFAULT_DEFAULT_ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormComponent.DEFAULT_ATTRIBUTE_PARSERS){{
 			
 			put("selected", new AttributeParserImp() {
@@ -40,8 +43,8 @@ public class RadioComponent extends ComponentFormComponent {
 			
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
+	
+		DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(ComponentFormComponent.DEFAULT_PROPS) {{
 			add("label");
 			add("inline");
@@ -50,8 +53,8 @@ public class RadioComponent extends ComponentFormComponent {
 			//add("content");
 		}});
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+	
+		DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormComponent.DEFAULT_PROPERTY_PARSERS){{
 				put("enabled", new AttributeParserImp() {
 					
@@ -96,4 +99,5 @@ public class RadioComponent extends ComponentFormComponent {
 				*/
 			}});
 	
+	}
 }
