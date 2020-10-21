@@ -6,13 +6,13 @@ import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 
-public class BoxFooterComponent extends AbstractComponent {
+public class BreadcrumbIconComponent extends AbstractComponent {
 
 	
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/box-footer";
+		TEMPLATE = "/components/icon";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -24,10 +24,15 @@ public class BoxFooterComponent extends AbstractComponent {
 	
 		DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
-			add("content");
+			add("icon");
+			add("text");
+			add("lnk");
 		}});
+	
 	
 		DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS));
+    
 	}
+	
 }

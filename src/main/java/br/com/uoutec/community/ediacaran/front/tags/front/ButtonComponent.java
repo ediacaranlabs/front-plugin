@@ -3,22 +3,20 @@ package br.com.uoutec.community.ediacaran.front.tags.front;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
+import br.com.uoutec.community.ediacaran.front.tags.ButtonTag;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class ButtonComponent extends ComponentFormComponent {
-
 	
+	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/bootstrap4/components/button";
-	
+		TEMPLATE = "/components/button";
 	
 		DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(ComponentFormComponent.DEFAULT_ATTRS) {{
+		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
 			add("action");
 			add("ctype");
 			add("method");
@@ -27,9 +25,8 @@ public class ButtonComponent extends ComponentFormComponent {
 			remove("classStyle");
 		}});
 	
-	
-		DEFAULT_DEFAULT_ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormComponent.DEFAULT_ATTRIBUTE_PARSERS){{
+		DEFAULT_ATTRIBUTE_PARSERS = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
 			
 			put("actionType", new AttributeParserImp() {
 				
@@ -75,7 +72,7 @@ public class ButtonComponent extends ComponentFormComponent {
 
 	
 		DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(ComponentFormComponent.DEFAULT_PROPS) {{
+		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
 			add("label");
 			add("size");
 			add("type");
@@ -86,7 +83,7 @@ public class ButtonComponent extends ComponentFormComponent {
 	
 	
 		DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormComponent.DEFAULT_PROPERTY_PARSERS){{
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
 				
 				put("size", new AttributeParserImp() {
 					
@@ -100,7 +97,7 @@ public class ButtonComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						Boolean outline = ((ButtonComponent)component).getOutline();
+						Boolean outline = ((ButtonTag)component).getOutline();
 						return new String(" btn-").concat(outline != null && outline ? "outline-" : "").concat(value == null? "primary" : String.valueOf(value));
 					}
 				});
@@ -117,7 +114,7 @@ public class ButtonComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						Boolean enabled = ((ButtonComponent)component).getEnabled();
+						Boolean enabled = ((ButtonTag)component).getEnabled();
 						return enabled != null && !enabled? " disabled" : "";
 					}
 				});

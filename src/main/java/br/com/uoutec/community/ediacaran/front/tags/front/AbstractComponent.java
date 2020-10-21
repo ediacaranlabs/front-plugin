@@ -14,14 +14,14 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.system.tema.Component;
 import br.com.uoutec.community.ediacaran.system.tema.TagTemplate;
-import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateLoader;
+import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
 
 public abstract class AbstractComponent implements Component{
 
 	protected String TEMPLATE;
 	
-	
+	@SuppressWarnings("serial")
 	protected Set<String> DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
 			add("id");
@@ -32,6 +32,7 @@ public abstract class AbstractComponent implements Component{
 			Collections.unmodifiableSet(new HashSet<String>());
 	
 	
+	@SuppressWarnings("serial")
 	protected Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
 				
@@ -46,12 +47,14 @@ public abstract class AbstractComponent implements Component{
 			}});
 	
 	
+	@SuppressWarnings("serial")
 	protected Set<String> DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
 			add("classStyle");
 		}});
 	
 	
+	@SuppressWarnings("serial")
 	protected Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
 			}});

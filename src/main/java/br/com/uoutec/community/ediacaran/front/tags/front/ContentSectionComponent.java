@@ -6,13 +6,13 @@ import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 
-public class BoxFooterComponent extends AbstractComponent {
+public class ContentSectionComponent  extends AbstractComponent {
 
 	
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/box-footer";
+		TEMPLATE  = "/components/content-section";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -25,6 +25,7 @@ public class BoxFooterComponent extends AbstractComponent {
 		DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
 			add("content");
+			add("text");
 		}});
 	
 		DEFAULT_PROPERTY_PARSERS = 

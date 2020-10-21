@@ -11,9 +11,10 @@ public abstract class ComponentFormComponent extends AbstractComponent {
 
 	public static final String FORM = ComponentFormComponent.class.getSimpleName() + ":form";
 	
+	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/bootstrap4/components/form-group";
+		TEMPLATE = "/components/form-group";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

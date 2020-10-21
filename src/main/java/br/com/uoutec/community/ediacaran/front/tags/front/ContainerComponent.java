@@ -3,18 +3,16 @@ package br.com.uoutec.community.ediacaran.front.tags.front;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class ContainerComponent  extends AbstractComponent {
 
 	
+	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/bootstrap4/designer/container";
+		TEMPLATE  = "/designer/container";
 	
 	
 		DEFAULT_ATTRS = 
@@ -34,14 +32,6 @@ public class ContainerComponent  extends AbstractComponent {
 	
 	
 		DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
-				put("content", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						return new JspFragmentVarParser(((ContainerComponent)component).getJspBody());
-					}
-				});
-			}});
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS));
 	}
 }
