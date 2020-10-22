@@ -6,13 +6,13 @@ import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 
-public class AppendFieldComponent  extends AbstractComponent {
+public class DropdownSeparatorComponent  extends AbstractComponent {
 
 	
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/bootstrap4/components/append-field";
+		TEMPLATE  = "/components/dropdown-separator";
 	
 	
 		DEFAULT_ATTRS = 
@@ -27,6 +27,7 @@ public class AppendFieldComponent  extends AbstractComponent {
 	
 		DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
+			add("size");
 			add("content");
 		}});
 	
@@ -35,5 +36,4 @@ public class AppendFieldComponent  extends AbstractComponent {
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
 			}});
 	}
-	
 }
