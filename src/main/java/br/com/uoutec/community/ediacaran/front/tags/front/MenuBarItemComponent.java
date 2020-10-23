@@ -6,13 +6,13 @@ import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 
-public class MenuItemComponent  extends AbstractComponent {
+public class MenuBarItemComponent  extends AbstractComponent {
 
 	
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/menu-item";
+		TEMPLATE = "/components/menu-bar-item";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

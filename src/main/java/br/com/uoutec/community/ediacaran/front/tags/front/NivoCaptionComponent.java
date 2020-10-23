@@ -6,13 +6,12 @@ import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 
-public class MenuItemComponent  extends AbstractComponent {
+public class NivoCaptionComponent extends AbstractComponent {
 
-	
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/menu-item";
+		TEMPLATE  = "/components/nivo-caption";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -24,12 +23,12 @@ public class MenuItemComponent  extends AbstractComponent {
 	
 		DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
-			add("href");
-			add("content");
+			add("button");
 		}});
 	
 		DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS));
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
+			}});
 
 	}
 }

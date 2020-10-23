@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public class MenuItemComponent  extends AbstractComponent {
-
+public class MenuItensMenuComponent  extends AbstractComponent {
 	
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/menu-item";
+		TEMPLATE  = "/components/menu-itens-menu";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -24,12 +24,26 @@ public class MenuItemComponent  extends AbstractComponent {
 	
 		DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
-			add("href");
 			add("content");
+			add("align");
 		}});
 	
 		DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS));
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
+				
+				put("align", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						if(value == null) {
+							return null;
+						}
+						
+						return "left".equals(value)? " mr-auto" : " ml-auto";
+					}
+					
+				});
+			}});
 
 	}
 }
