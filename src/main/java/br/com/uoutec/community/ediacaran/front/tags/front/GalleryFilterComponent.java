@@ -3,8 +3,6 @@ package br.com.uoutec.community.ediacaran.front.tags.front;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
@@ -12,9 +10,10 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 public class GalleryFilterComponent  extends AbstractComponent {
 
 	
+	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/bootstrap4/components/gallery-filter";
+		TEMPLATE  = "/components/gallery-filter";
 	
 	
 		DEFAULT_ATTRS = 

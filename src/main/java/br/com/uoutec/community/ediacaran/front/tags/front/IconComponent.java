@@ -3,8 +3,6 @@ package br.com.uoutec.community.ediacaran.front.tags.front;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
@@ -12,25 +10,18 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 public class IconComponent extends AbstractComponent {
 
 	
+	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE       = "/bootstrap4/components/icon";
-	
-	
-	protected void loadConfiguration() {
-
-		TEMPLATE_STACK = "/bootstrap4/components/icon-stack";
-	
+		TEMPLATE = "/components/icon";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
 		}});
 	
-	
 		DEFAULT_ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
 		}});
-
 	
 		DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
@@ -40,7 +31,6 @@ public class IconComponent extends AbstractComponent {
 			add("bg");
 			add("icon");
 		}});
-	
 	
 		DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{

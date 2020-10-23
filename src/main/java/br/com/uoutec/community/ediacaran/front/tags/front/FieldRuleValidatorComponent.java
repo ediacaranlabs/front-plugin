@@ -6,13 +6,12 @@ import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 
-public class GalleryFiltersComponent  extends AbstractComponent {
+public class FieldRuleValidatorComponent extends AbstractComponent {
 
-	
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/gallery-filters";
+		TEMPLATE  = "/components/field-rule-validator";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -27,7 +26,8 @@ public class GalleryFiltersComponent  extends AbstractComponent {
 		}});
 	
 		DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS));
-    
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
+			}});
+	
 	}
 }

@@ -1,53 +1,59 @@
 package br.com.uoutec.community.ediacaran.front.tags.front;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
-import br.com.uoutec.community.ediacaran.front.tags.FieldValidatorTag.ValidatorParamEntity;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public class FieldValidatorRuleParamComponent extends AbstractComponent {
+public class IconStackComponent extends AbstractComponent {
 
 	
+	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/bootstrap4/components/content";
-	
+		TEMPLATE = "/components/icon-stack";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
 		}});
 	
-	
-		DEFAULT_DEFAULT_ATTRIBUTE_PARSERS = 
+		DEFAULT_ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
 		}});
 	
-	
 		DEFAULT_PROPS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
-			add("content");
+			add("size");
+			add("bgSize");
+			add("iconSize");
+			add("bg");
+			add("icon");
 		}});
-	
 	
 		DEFAULT_PROPERTY_PARSERS = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
-				put("content", new AttributeParserImp() {
+
+				put("bgSize", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
-						return new JspFragmentVarParser(((FieldValidatorRuleParamComponent)component).getJspBody());
+					public String toName(String value, Object component) {
+						return "bg-size";
 					}
+					
 				});
+				
+				put("iconSize", new AttributeParserImp() {
+					
+					@Override
+					public String toName(String value, Object component) {
+						return "icon-size";
+					}
+					
+				});
+				
 			}});
-	
+
 	}
 }
