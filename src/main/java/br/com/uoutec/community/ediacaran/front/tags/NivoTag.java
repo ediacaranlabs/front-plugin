@@ -1,18 +1,13 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateListVarParser;
-import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.system.tema.Theme;
 
 public class NivoTag extends AbstractPanelComponent {
 
@@ -20,32 +15,11 @@ public class NivoTag extends AbstractPanelComponent {
 
 	private static final String EMPTY_IMG_ALT = "";
 	
-	private static final String NIVO_IMAGE = "/bootstrap4/components/nivo-image";
+	private static final String NIVO_IMAGE = "/components/nivo-image";
 	
-	private static final String NIVO_CAPTION = "/bootstrap4/components/nivo-caption";
+	private static final String NIVO_CAPTION = "/components/nivo-caption";
 
-	public static final String TEMPLATE  = "/bootstrap4/components/nivo";
-	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
-		}});
-	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_ATTRIBUTE_PARSERS){{
-		}});
-
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
-			add("button");
-		}});
-	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
-			}});
+	public static final String TEMPLATE  = "/components/nivo";
 	
 	private List<Object[]> images;
 	
@@ -74,38 +48,15 @@ public class NivoTag extends AbstractPanelComponent {
     	return super.doEndTag();
     }
 	
-	public int doAfterBody() {
-
-		new TemplateVarParser(TEMPLATE, getPackageTheme(), getTheme())
-			.put("images", new TemplateListVarParser(NIVO_IMAGE, images))
-			.put("captions", new TemplateListVarParser(NIVO_CAPTION, caption))
-			.parse(bodyContent.getEnclosingWriter());
-
-		return SKIP_BODY;
+	public void beforePrepareVars(Map<String, Object> vars) {
+		String packageName = getPackageTheme();
+		Theme theme = getTheme();
+		vars.put("images", new TemplateListVarParser(NIVO_IMAGE, packageName, this, theme, images));
+		vars.put("captions", new TemplateListVarParser(NIVO_CAPTION, packageName, this, theme, caption));
 	}
 	
     protected String getDefaultTemplate() {
     	return TEMPLATE;
-    }
-
-    protected Set<String> getDefaultAttributes(){
-    	return DEFAULT_ATTRS;
-    }
-
-    protected Set<String> getEmptyAttributes(){
-    	return DEFAULT_EMPTY_ATTRIBUTES;
-    }
-    
-    protected Map<String, AttributeParser> getAttributeParsers(){
-    	return DEFAULT_ATTRIBUTE_PARSERS;
-    }
-
-    protected Set<String> getDefaultProperties(){
-    	return DEFAULT_PROPS;
-    }
-
-    protected Map<String, AttributeParser> getPropertyParsers(){
-    	return DEFAULT_PROPERTY_PARSERS;
     }
 	
 	public String getButton() {

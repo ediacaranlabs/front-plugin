@@ -1,100 +1,10 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-
-import javax.servlet.jsp.tagext.JspFragment;
-
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class RadioTag extends ComponentFormTag {
 
-	public static final String TEMPLATE = "/bootstrap4/components/radio";
-	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_ATTRS) {{
-			add("selected");
-		}});
-	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_ATTRIBUTE_PARSERS){{
-			
-			put("selected", new AttributeParserImp() {
-				
-				@Override
-				public String toName(String value, Object component) {
-					return null;
-				}
-				
-				@Override
-				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "checked" : "";
-				}
-			});
-			
-		}});
-	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_PROPS) {{
-			add("label");
-			add("inline");
-			add("enabled");
-			add("label");
-			//add("content");
-		}});
-	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_PROPERTY_PARSERS){{
-				put("enabled", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						Boolean enabled = ((RadioTag)component).getEnabled();
-						//return enabled != null && !enabled? " uneditable-input" : "";
-						return "";
-					}
-					
-				});
-				
-				put("inline", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? " form-check-inline" : "";
-					}
-					
-				});
-				
-				put("label", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						RadioTag tag = (RadioTag)component;
-						JspFragment jspBody = tag.getJspBody();
-						return jspBody == null? value : new JspFragmentVarParser(jspBody);
-					}
-					
-				});
-				/*
-				put("content", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						RadioTag tag = (RadioTag)component;
-						JspFragment jspBody = tag.getJspBody();
-						return jspBody == null? tag.getL : new JspFragmentVarParser(jspBody);
-					}
-				});
-				*/
-			}});
+	public static final String TEMPLATE = "/components/radio";
 	
 	/* ------------ Attr ---------------*/
 	
@@ -116,25 +26,9 @@ public class RadioTag extends ComponentFormTag {
     	return TEMPLATE;
     }
 
-    protected Set<String> getDefaultAttributes(){
-    	return DEFAULT_ATTRS;
-    }
-
-    protected Set<String> getEmptyAttributes(){
-    	return DEFAULT_EMPTY_ATTRIBUTES;
-    }
-    
-    protected Map<String, AttributeParser> getAttributeParsers(){
-    	return DEFAULT_ATTRIBUTE_PARSERS;
-    }
-
-    protected Set<String> getDefaultProperties(){
-    	return DEFAULT_PROPS;
-    }
-
-    protected Map<String, AttributeParser> getPropertyParsers(){
-    	return DEFAULT_PROPERTY_PARSERS;
-    }
+	public void beforePrepareVars(Map<String, Object> vars) {
+		this.content = new JspFragmentVarParser(getJspBody());
+	}
 	
 	public Boolean getSelected() {
 		return selected;
