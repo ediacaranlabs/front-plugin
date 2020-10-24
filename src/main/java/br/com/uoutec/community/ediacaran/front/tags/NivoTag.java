@@ -76,7 +76,7 @@ public class NivoTag extends AbstractPanelComponent {
 	
 	public int doAfterBody() {
 
-		new TemplateVarParser(TEMPLATE, getTemaPackage(), getTema())
+		new TemplateVarParser(TEMPLATE, getPackageTheme(), getTheme())
 			.put("images", new TemplateListVarParser(NIVO_IMAGE, images))
 			.put("captions", new TemplateListVarParser(NIVO_CAPTION, caption))
 			.parse(bodyContent.getEnclosingWriter());

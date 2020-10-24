@@ -55,4 +55,9 @@ public class IncludeTag extends AbstractSimpleComponent {
 		this.uri = uri;
 	}
 
+	@Override
+	protected String getDefaultTemplate() {
+		return null;
+	}
+
 }

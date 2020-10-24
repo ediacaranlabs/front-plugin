@@ -28,7 +28,7 @@ public abstract class AbstractComponent implements Component{
 			add("classStyle");
 		}});
 
-	protected Set<String> DEFAULT_EMPTY_ATTRIBUTES = 
+	protected Set<String> default_empty_attributes = 
 			Collections.unmodifiableSet(new HashSet<String>());
 	
 	
@@ -112,7 +112,7 @@ public abstract class AbstractComponent implements Component{
 
 	@Override
 	public Set<String> getEmptyAttributes() {
-		return DEFAULT_EMPTY_ATTRIBUTES;
+		return default_empty_attributes;
 	}
 
 	@Override

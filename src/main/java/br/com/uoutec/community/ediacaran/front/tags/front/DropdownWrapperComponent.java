@@ -28,6 +28,7 @@ public class DropdownWrapperComponent  extends AbstractComponent {
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
+			add("itens");
 			add("label");
 			add("style");
 			add("size");

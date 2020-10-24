@@ -27,5 +27,10 @@ public class SetTemplatePackageTag extends AbstractSimpleComponent {
 		this.name = name;
 	}
 
+	@Override
+	protected String getDefaultTemplate() {
+		return null;
+	}
+
     
 }

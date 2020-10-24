@@ -1,73 +1,14 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class DropdownTag  extends ComponentFormTag {
 
-	public static final String TEMPLATE  = "/bootstrap4/components/dropdown";
+	public static final String TEMPLATE  = "/components/dropdown";
 	
-	public static final String TEMPLATE2 = "/bootstrap4/components/split-dropdown";
+	public static final String TEMPLATE2 = "/components/split-dropdown";
 	
-	public static final String TEMPLATE_WRAPPER = "/bootstrap4/components/dropdown-wrapper";
-	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_ATTRS) {{
-		}});
-	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_ATTRIBUTE_PARSERS){{
-		}});
-
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(ComponentFormTag.DEFAULT_PROPS) {{
-			add("label");
-			add("style");
-			add("size");
-			add("split");
-			add("variation");
-		}});
-	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(ComponentFormTag.DEFAULT_PROPERTY_PARSERS){{
-				put("style", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						return " btn-" + value;
-					}
-					
-				});
-				
-				put("size", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						return " btn-" + value;
-					}
-					
-				});
-				
-				put("variation", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						return " drop" + value;
-					}
-					
-				});
-				
-			}});
+	public static final String TEMPLATE_WRAPPER = "/components/dropdown-wrapper";
 	
 	/* ------------ Attr ---------------*/
 	
@@ -83,6 +24,8 @@ public class DropdownTag  extends ComponentFormTag {
 	
 	private String variation; //up, right, left
 	
+	private JspFragmentVarParser itens;
+	
 	public DropdownTag() {
 	}
 	
@@ -94,30 +37,8 @@ public class DropdownTag  extends ComponentFormTag {
     	return split == null || !split? TEMPLATE : TEMPLATE2;
     }
 
-    protected Set<String> getDefaultAttributes(){
-    	return DEFAULT_ATTRS;
-    }
-
-    protected Set<String> getEmptyAttributes(){
-    	return DEFAULT_EMPTY_ATTRIBUTES;
-    }
-    
-    protected Map<String, AttributeParser> getAttributeParsers(){
-    	return DEFAULT_ATTRIBUTE_PARSERS;
-    }
-
-    protected Set<String> getDefaultProperties(){
-    	return DEFAULT_PROPS;
-    }
-
-    protected Map<String, AttributeParser> getPropertyParsers(){
-    	return DEFAULT_PROPERTY_PARSERS;
-    }
-    
-	public Map<String, Object> prepareVars() {
-		Map<String, Object> vals = super.prepareVars();
-		vals.put("itens", new JspFragmentVarParser(getJspBody()));
-		return vals;
+	public void beforePrepareVars(Map<String, Object> vars) {
+		this.itens = new JspFragmentVarParser(getJspBody());
 	}
 
 	public String getLabel() {
@@ -158,6 +79,14 @@ public class DropdownTag  extends ComponentFormTag {
 
 	public void setVariation(String variation) {
 		this.variation = variation;
+	}
+
+	public JspFragmentVarParser getItens() {
+		return itens;
+	}
+
+	public void setItens(JspFragmentVarParser itens) {
+		this.itens = itens;
 	}
     
 }

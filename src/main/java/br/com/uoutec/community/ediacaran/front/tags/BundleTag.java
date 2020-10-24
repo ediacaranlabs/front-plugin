@@ -86,5 +86,10 @@ public class BundleTag extends AbstractSimpleComponent {
 	public void setBasename(String basename) {
 		this.basename = basename;
 	}
+
+	@Override
+	protected String getDefaultTemplate() {
+		return null;
+	}
 	
 }

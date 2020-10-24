@@ -114,7 +114,7 @@ public abstract class AbstractSimpleComponent
     }
     
 	public Theme getTema() {
-    	TemaRegistry temaRegistry = (TemaRegistry)getProperty(Constants.TEMA_REGISTRY);
+    	TemaRegistry temaRegistry = (TemaRegistry)getProperty(Constants.THEME_REGISTRY);
     	return temaRegistry.getCurrentTema();
 	}
 	

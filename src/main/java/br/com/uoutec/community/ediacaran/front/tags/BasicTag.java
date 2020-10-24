@@ -1,61 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import javax.servlet.jsp.JspException;
-
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
-
-public class BasicTag extends AbstractSimpleComponent{
-
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
-			add("accesskey");
-			add("classType");   
-			add("contenteditable");
-			add("contextmenu");
-			add("dir");
-			add("draggable");
-			add("hidden");
-			add("lang");
-			add("spellcheck");
-			add("style");
-			add("tabindex");
-			add("title");
-		}});
-
-	protected static final Set<String> DEFAULT_EMPTY_ATTRIBUTES = 
-			Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_EMPTY_ATTRIBUTES));
-	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_ATTRIBUTE_PARSERS){{
-				
-				put("classType", new AttributeParserImp() {
-					
-					@Override
-					public String toName(String value, Object component) {
-						return value == null? null : "class";
-					}
-					
-				});
-
-				put("draggable", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? "true" : "false";
-					}
-				});
-				
-			}});
+public abstract class BasicTag extends AbstractSimpleComponent{
 	
 	private String accesskey;
 	
@@ -81,22 +26,6 @@ public class BasicTag extends AbstractSimpleComponent{
 			
 	private String title;
 
-    protected Set<String> getDefaultAttributes(){
-    	return DEFAULT_ATTRS;
-    }
-
-    protected Set<String> getEmptyAttributes(){
-    	return DEFAULT_EMPTY_ATTRIBUTES;
-    }
-    
-    protected Map<String, AttributeParser> getAttributeParsers(){
-    	return DEFAULT_ATTRIBUTE_PARSERS;
-    }
-    
-	@Override
-	public void doInnerTag() throws JspException, IOException {
-	}
-    
 	public String getAccesskey() {
 		return accesskey;
 	}

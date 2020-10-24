@@ -1,48 +1,23 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.Writer;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateListVarParser;
-import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.system.tema.Theme;
 
 public class FieldValidatorTag extends AbstractPanelComponent {
 
 	private static final long serialVersionUID = 748182107582888257L;
 
-	public static final String TEMPLATE  = "/bootstrap4/components/field-validator";
+	public static final String TEMPLATE  = "/components/field-validator";
 
-	public static final String TEMPLATE_RULE  = "/bootstrap4/components/field-rule-validator";
+	public static final String RULE_TEMPLATE  = "/components/field-rule-validator";
 	
-	public static final String TEMPLATE_RULE_PARAM  = "/bootstrap4/components/field-rule-validator-param";
-	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_ATTRS) {{
-		}});
-	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_ATTRIBUTE_PARSERS){{
-		}});
-
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(AbstractSimpleComponent.DEFAULT_PROPS) {{
-		}});
-	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(AbstractSimpleComponent.DEFAULT_PROPERTY_PARSERS){{
-			}});
+	public static final String RULEPARAM_TEMPLATE  = "/components/field-rule-validator-param";
 	
 	private Set<ValidatorEntity> validator;
 	
@@ -126,14 +101,16 @@ public class FieldValidatorTag extends AbstractPanelComponent {
     	}
     }
     
-    protected void applyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws ThemeException {
-    	
-		TemplateListVarParser rules = new TemplateListVarParser(TEMPLATE_RULE);
+	protected void beforePrepareVars(Map<String, Object> vars) {
+
+		String packageName = getPackageTheme();
+		Theme theme = getTheme();
+		
+		TemplateListVarParser rules = new TemplateListVarParser(RULE_TEMPLATE, packageName, this, theme);
 		
 		for(ValidatorEntity ve: this.validator) {
 			
-			TemplateListVarParser params = new TemplateListVarParser(TEMPLATE_RULE_PARAM);
+			TemplateListVarParser params = new TemplateListVarParser(RULEPARAM_TEMPLATE, packageName, this, theme);
 			
 			for(ValidatorParamEntity p: ve.params) {
 				params.add(p.getName(), p.getValue());
@@ -142,35 +119,13 @@ public class FieldValidatorTag extends AbstractPanelComponent {
 			rules.add(ve.getName(), ve.getMessage(), params);
 		}
 		
-		new TemplateVarParser(TEMPLATE, getTemaPackage(), getTema())
-			.put("form", form)
-			.put("field", field)
-			.put("rules", rules)
-			.parse(out);
-    }
-	
-    protected String getDefaultTemplate() {
-    	return TEMPLATE;
-    }
-
-    protected Set<String> getDefaultAttributes(){
-    	return DEFAULT_ATTRS;
-    }
-
-    protected Set<String> getEmptyAttributes(){
-    	return DEFAULT_EMPTY_ATTRIBUTES;
+		vars.put("form", form);
+		vars.put("field", field);
+		vars.put("rules", rules);
     }
     
-    protected Map<String, AttributeParser> getAttributeParsers(){
-    	return DEFAULT_ATTRIBUTE_PARSERS;
-    }
-
-    protected Set<String> getDefaultProperties(){
-    	return DEFAULT_PROPS;
-    }
-
-    protected Map<String, AttributeParser> getPropertyParsers(){
-    	return DEFAULT_PROPERTY_PARSERS;
+    protected String getDefaultTemplate() {
+    	return TEMPLATE;
     }
 	
 	public static class ValidatorEntity {

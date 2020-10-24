@@ -120,8 +120,8 @@ public abstract class AbstractPanelComponent
 		Map<String, Object> vars = new HashMap<String, Object>();
 		Writer out               = getBodyContent().getEnclosingWriter();
 		String template          = getWrapperTemplate();
-    	Theme tema               = getTema();
-    	String packageName       = getTemaPackage();
+    	Theme tema               = getTheme();
+    	String packageName       = getPackageTheme();
 		
 		vars.put("content",	new TemplateVarParser(getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, this, tema));
 		
@@ -168,7 +168,7 @@ public abstract class AbstractPanelComponent
     }
     
     protected void applyTemplate(String template, Map<String, Object> vars, Writer out){
-    	getTema().applyTagTemplate(template, getTemaPackage(), this, vars, out);
+    	getTheme().applyTagTemplate(template, getPackageTheme(), this, vars, out);
     }
     
     public void setParentTag(Object tag) {
@@ -294,12 +294,12 @@ public abstract class AbstractPanelComponent
 		}
 	}
 	
-	protected Theme getTema() {
-    	TemaRegistry temaRegistry = (TemaRegistry)getProperty(Constants.TEMA_REGISTRY);
+	protected Theme getTheme() {
+    	TemaRegistry temaRegistry = (TemaRegistry)getProperty(Constants.THEME_REGISTRY);
     	return temaRegistry.getCurrentTema();
 	}
 	
-	protected String getTemaPackage() {
+	protected String getPackageTheme() {
     	return (String)getProperty(SetTemplatePackageTag.PACKAGE_NAME);
 	}
 	
