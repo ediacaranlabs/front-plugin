@@ -13,10 +13,10 @@ public class FormComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/default_template/front/components/form.tmp";
+		super.template = "/default_template/front/components/form.tmp";
 		
-		DEFAULT_ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
+		super.default_attribute_parsers = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
 			
 			put("acceptCharset", new AttributeParserImp() {
 				
@@ -41,14 +41,14 @@ public class FormComponent extends AbstractComponent {
 			
 		}});
 	
-		DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
+		super.default_props = 
+		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("content");
 			add("style");
 		}});
 	
-		DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
+		super.default_property_parsers = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
 				put("content", new AttributeParserImp() {
 					
 					@Override

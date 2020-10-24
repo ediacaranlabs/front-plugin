@@ -11,24 +11,24 @@ public class BreadcrumbComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/default_template/front/components/breadcrumb.tmp";
+		super.template = "/default_template/front/components/breadcrumb.tmp";
 	
-		DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
+		super.default_attrs = 
+		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
 		}});
 	
-		DEFAULT_ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
+		super.default_attribute_parsers = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
 		}});
 	
-		DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
+		super.default_props = 
+		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("title");
 			add("path");
 		}});
 	
-		DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
+		super.default_property_parsers = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
 			}});
 		
 	}

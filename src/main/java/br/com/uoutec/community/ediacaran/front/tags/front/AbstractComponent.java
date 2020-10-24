@@ -19,10 +19,10 @@ import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
 
 public abstract class AbstractComponent implements Component{
 
-	protected String TEMPLATE;
+	protected String template;
 	
 	@SuppressWarnings("serial")
-	protected Set<String> DEFAULT_ATTRS = 
+	protected Set<String> default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
 			add("id");
 			add("classStyle");
@@ -33,7 +33,7 @@ public abstract class AbstractComponent implements Component{
 	
 	
 	@SuppressWarnings("serial")
-	protected Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
+	protected Map<String, AttributeParser> default_attribute_parsers = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
 				
 				put("classStyle", new AttributeParserImp() {
@@ -48,14 +48,14 @@ public abstract class AbstractComponent implements Component{
 	
 	
 	@SuppressWarnings("serial")
-	protected Set<String> DEFAULT_PROPS = 
+	protected Set<String> default_props = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
 			add("classStyle");
 		}});
 	
 	
 	@SuppressWarnings("serial")
-	protected Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
+	protected Map<String, AttributeParser> default_property_parsers = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
 			}});
 	
@@ -73,7 +73,7 @@ public abstract class AbstractComponent implements Component{
 		
 		try {
 			PluginData pd = EntityContextPlugin.getEntity(PluginData.class);
-			File file = new File(pd.getPath() + "/tags" + TEMPLATE);
+			File file = new File(pd.getPath() + "/tags" + template);
 			
 			file = file.getCanonicalFile();
 			
@@ -107,7 +107,7 @@ public abstract class AbstractComponent implements Component{
     
 	@Override
 	public Set<String> getAttributes() {
-		return DEFAULT_ATTRS;
+		return default_attrs;
 	}
 
 	@Override
@@ -117,17 +117,17 @@ public abstract class AbstractComponent implements Component{
 
 	@Override
 	public Map<String, AttributeParser> getAttributesParser() {
-		return DEFAULT_ATTRIBUTE_PARSERS;
+		return default_attribute_parsers;
 	}
 
 	@Override
 	public Set<String> getProperties() {
-		return DEFAULT_PROPS;
+		return default_props;
 	}
 
 	@Override
 	public Map<String, AttributeParser> getPropertiesParse() {
-		return DEFAULT_PROPERTY_PARSERS;
+		return default_property_parsers;
 	}
 	
 }

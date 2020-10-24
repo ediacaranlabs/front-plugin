@@ -13,25 +13,25 @@ public class ImageComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 		
-		TEMPLATE = "/default_template/front/components/image.tmp";
+		super.template = "/default_template/front/components/image.tmp";
 		
-		DEFAULT_ATTRS = 
-			Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
+		super.default_attrs = 
+			Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
 				add("src");
 			}});
 		
-		DEFAULT_ATTRIBUTE_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
+		super.default_attribute_parsers = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
 			}});
 	
-		DEFAULT_PROPS = 
-			Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
+		super.default_props = 
+			Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 				add("style");
 				add("align");
 			}});
 		
-		DEFAULT_PROPERTY_PARSERS = 
-				Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
+		super.default_property_parsers = 
+				Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
 					put("style", new AttributeParserImp() {
 						
 						@Override

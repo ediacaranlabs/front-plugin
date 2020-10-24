@@ -14,11 +14,11 @@ public class TextareaComponent extends ComponentFormComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/default_template/front/components/textfield.tmp";
+		super.template = "/default_template/front/components/textfield.tmp";
 	
 	
-		DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
+		super.default_attrs = 
+		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
 			add("autocomplete");
 			add("autofocus");
 			add("maxlength");
@@ -33,8 +33,8 @@ public class TextareaComponent extends ComponentFormComponent {
 		}});
 	
 	
-		DEFAULT_ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
+		super.default_attribute_parsers = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
 			
 			put("autocomplete", new AttributeParserImp() {
 				
@@ -61,8 +61,8 @@ public class TextareaComponent extends ComponentFormComponent {
 		}});
 	
 	
-		DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_PROPS) {{
+		super.default_props = 
+		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("label");
 			add("value");
 			add("name");
@@ -70,8 +70,8 @@ public class TextareaComponent extends ComponentFormComponent {
 		}});
 	
 	
-		DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS){{
+		super.default_property_parsers = 
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
 				put("enabled", new AttributeParserImp() {
 					
 					@Override

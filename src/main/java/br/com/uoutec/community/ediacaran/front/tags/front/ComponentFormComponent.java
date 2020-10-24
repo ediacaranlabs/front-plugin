@@ -14,10 +14,10 @@ public abstract class ComponentFormComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/default_template/front/components/form-group.tmp";
+		super.template = "/default_template/front/components/form-group.tmp";
 	
-		DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
+		super.default_attrs = 
+		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
 			add("name");
 			add("value");
 			add("required");
@@ -28,8 +28,8 @@ public abstract class ComponentFormComponent extends AbstractComponent {
 		}});
 	
 	
-		DEFAULT_ATTRIBUTE_PARSERS = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
+		super.default_attribute_parsers = 
+		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
 			
 			put("enabled", new AttributeParserImp() {
 				
