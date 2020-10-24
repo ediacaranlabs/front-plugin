@@ -13,7 +13,7 @@ public class ImageComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 		
-		TEMPLATE  = "/components/image";
+		TEMPLATE = "/default_template/front/components/image.tmp";
 		
 		DEFAULT_ATTRS = 
 			Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -37,11 +37,11 @@ public class ImageComponent extends AbstractComponent {
 						@Override
 						public Object toValue(Object value, Object component) {
 							if("rounded".equals(value)) {
-								return " rounded";
+								return " rounded.tmp";
 							}
 							else
 							if("circle".equals(value)) {
-								return " rounded-circle";
+								return " rounded-circle.tmp";
 							}
 							else
 								return value == null? null : " img-" + value;
@@ -54,7 +54,7 @@ public class ImageComponent extends AbstractComponent {
 						@Override
 						public Object toValue(Object value, Object component) {
 							if("center".equals(value)) {
-								return " mx-auto d-block";
+								return " mx-auto d-block.tmp";
 							}
 							else
 								return value == null? null : " float-" + value;

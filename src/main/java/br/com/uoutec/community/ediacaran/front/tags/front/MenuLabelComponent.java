@@ -12,7 +12,7 @@ public class MenuLabelComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/menu-label";
+		TEMPLATE = "/default_template/front/components/menu-label.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

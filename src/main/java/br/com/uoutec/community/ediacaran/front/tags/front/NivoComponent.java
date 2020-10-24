@@ -11,7 +11,7 @@ public class NivoComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/nivo";
+		TEMPLATE = "/default_template/front/components/nivo.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

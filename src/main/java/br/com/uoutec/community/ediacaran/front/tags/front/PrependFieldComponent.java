@@ -12,7 +12,7 @@ public class PrependFieldComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/prepend-field";
+		TEMPLATE = "/default_template/front/components/prepend-field.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

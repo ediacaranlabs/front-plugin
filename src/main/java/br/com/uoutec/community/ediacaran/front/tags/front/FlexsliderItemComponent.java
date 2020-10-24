@@ -13,7 +13,7 @@ public class FlexsliderItemComponent  extends AbstractComponent {
 	
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/bootstrap4/components/flexslider-item";
+		TEMPLATE = "/default_template/front/components/flexslider-item.tmp";
 	
 	
 		DEFAULT_ATTRS = 

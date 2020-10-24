@@ -12,7 +12,7 @@ public class GalleryComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/gallery";
+		TEMPLATE = "/default_template/front/components/gallery.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

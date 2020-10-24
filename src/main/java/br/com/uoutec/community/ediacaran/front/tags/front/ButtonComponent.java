@@ -13,7 +13,7 @@ public class ButtonComponent extends ComponentFormComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/button";
+		TEMPLATE = "/default_template/front/components/button.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -32,7 +32,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "type";
+					return value == null? null : "type.tmp";
 				}
 			});
 
@@ -40,7 +40,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "formaction";
+					return value == null? null : "formaction.tmp";
 				}
 			});
 
@@ -48,7 +48,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "formenctype";
+					return value == null? null : "formenctype.tmp";
 				}
 			});
 
@@ -56,7 +56,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "formmethod";
+					return value == null? null : "formmethod.tmp";
 				}
 			});
 
@@ -64,7 +64,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "formtarget";
+					return value == null? null : "formtarget.tmp";
 				}
 			});
 			
@@ -106,7 +106,7 @@ public class ButtonComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? "" : (Boolean)value? " btn-block" : "";
+						return value == null? "" : (Boolean)value? " btn-block" : ".tmp";
 					}
 				});
 				
@@ -115,7 +115,7 @@ public class ButtonComponent extends ComponentFormComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						Boolean enabled = ((ButtonTag)component).getEnabled();
-						return enabled != null && !enabled? " disabled" : "";
+						return enabled != null && !enabled? " disabled" : ".tmp";
 					}
 				});
 				

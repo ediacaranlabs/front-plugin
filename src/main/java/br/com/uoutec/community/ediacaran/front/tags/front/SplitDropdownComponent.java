@@ -13,7 +13,7 @@ public class SplitDropdownComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/split-dropdown";
+		TEMPLATE = "/default_template/front/components/split-dropdown.tmp";
 
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

@@ -12,7 +12,7 @@ public class LandingSectionComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/landing-section";
+		TEMPLATE = "/default_template/front/components/landing-section.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

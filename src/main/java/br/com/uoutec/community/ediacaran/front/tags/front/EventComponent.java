@@ -12,7 +12,7 @@ public class EventComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/bootstrap4/components/event";
+		TEMPLATE = "/default_template/front/components/event.tmp";
 	
 	
 		DEFAULT_ATTRS = 

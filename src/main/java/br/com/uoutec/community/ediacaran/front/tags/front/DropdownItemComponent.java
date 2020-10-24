@@ -12,7 +12,7 @@ public class DropdownItemComponent  extends ComponentFormComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/dropdown-item";
+		TEMPLATE = "/default_template/front/components/dropdown-item.tmp";
 	
 	
 		DEFAULT_ATTRS = 

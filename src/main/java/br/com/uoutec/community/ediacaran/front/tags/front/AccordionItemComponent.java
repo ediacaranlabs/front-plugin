@@ -11,7 +11,7 @@ public class AccordionItemComponent extends AbstractComponent {
 	
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/accordion-item";
+		TEMPLATE = "/default_template/front/components/accordion-item.tmp";
 
 	
 		DEFAULT_ATTRS = 

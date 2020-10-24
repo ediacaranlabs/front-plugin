@@ -13,7 +13,7 @@ public class GroupComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/designer/group";
+		TEMPLATE = "/default_template/front/designer/group.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -36,7 +36,7 @@ public class GroupComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? "" : "-group";
+						return value == null? "" : "-group.tmp";
 					}
 					
 				});

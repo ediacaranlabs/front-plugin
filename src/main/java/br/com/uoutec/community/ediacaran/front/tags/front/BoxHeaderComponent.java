@@ -12,7 +12,7 @@ public class BoxHeaderComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/box-header";
+		TEMPLATE = "/default_template/front/components/box-header.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

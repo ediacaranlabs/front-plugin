@@ -7,7 +7,7 @@ public class WrapperComponent extends AbstractComponent {
 	}
 
 	protected void loadConfiguration() {
-		TEMPLATE  = "/default_template/front/components/wrapper.tmp";
+		TEMPLATE = "/default_template/front/components/wrapper.tmp";
 	}
 
 }

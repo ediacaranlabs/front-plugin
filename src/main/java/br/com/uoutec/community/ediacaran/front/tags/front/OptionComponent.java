@@ -13,7 +13,7 @@ public class OptionComponent extends ComponentFormComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/option";
+		TEMPLATE = "/default_template/front/components/option.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -33,7 +33,7 @@ public class OptionComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && !(Boolean)value? "" : "disabled";
+					return value != null && !(Boolean)value? "" : "disabled.tmp";
 				}
 				
 			});
@@ -47,7 +47,7 @@ public class OptionComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "selected" : "";
+					return value != null && (Boolean)value? "selected" : ".tmp";
 				}
 				
 			});

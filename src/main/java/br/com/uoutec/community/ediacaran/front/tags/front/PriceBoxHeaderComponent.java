@@ -12,7 +12,7 @@ public class PriceBoxHeaderComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/price-box-header";
+		TEMPLATE = "/default_template/front/components/price-box-header.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

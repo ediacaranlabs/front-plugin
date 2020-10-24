@@ -12,7 +12,7 @@ public class MenuBarComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/menu-bar";
+		TEMPLATE = "/default_template/front/components/menu-bar.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -64,7 +64,7 @@ public class MenuBarComponent  extends AbstractComponent {
 						case "bottom":
 							return "fixed-" + value;
 						case "sticky":
-							return "sticky-top";
+							return "sticky-top.tmp";
 						default:
 							return value;
 						}
@@ -84,7 +84,7 @@ public class MenuBarComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? "" : "sidebar";
+						return value == null? "" : "sidebar.tmp";
 					}
 					
 				});

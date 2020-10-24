@@ -11,7 +11,7 @@ public class FieldValidatorComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/field-validator";
+		TEMPLATE = "/default_template/front/components/field-validator.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

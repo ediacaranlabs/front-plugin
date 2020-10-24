@@ -11,7 +11,7 @@ public class BreadcrumbComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/bootstrap4/components/breadcrumb";
+		TEMPLATE = "/default_template/front/components/breadcrumb.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

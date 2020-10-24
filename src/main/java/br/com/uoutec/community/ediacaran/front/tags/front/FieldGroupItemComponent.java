@@ -12,7 +12,7 @@ public class FieldGroupItemComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/bootstrap4/components/field-group-item";
+		TEMPLATE = "/default_template/front/components/field-group-item.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

@@ -13,7 +13,7 @@ public class IntroComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/intro";
+		TEMPLATE = "/default_template/front/components/intro.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -35,7 +35,7 @@ public class IntroComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return "background: url(" + value + ") no-repeat center center; background-size: cover;";
+						return "background: url(" + value + ") no-repeat center center; background-size: cover;.tmp";
 					}
 					
 				});

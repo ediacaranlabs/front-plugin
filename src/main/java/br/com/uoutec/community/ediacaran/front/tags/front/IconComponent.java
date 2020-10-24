@@ -13,7 +13,7 @@ public class IconComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/icon";
+		TEMPLATE = "/default_template/front/components/icon.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -39,7 +39,7 @@ public class IconComponent extends AbstractComponent {
 					
 					@Override
 					public String toName(String value, Object component) {
-						return "bg-size";
+						return "bg-size.tmp";
 					}
 					
 				});
@@ -48,7 +48,7 @@ public class IconComponent extends AbstractComponent {
 					
 					@Override
 					public String toName(String value, Object component) {
-						return "icon-size";
+						return "icon-size.tmp";
 					}
 					
 				});

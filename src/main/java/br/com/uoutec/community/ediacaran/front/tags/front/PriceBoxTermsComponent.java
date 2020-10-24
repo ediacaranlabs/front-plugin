@@ -12,7 +12,7 @@ public class PriceBoxTermsComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/price-box-terms";
+		TEMPLATE = "/default_template/front/components/price-box-terms.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

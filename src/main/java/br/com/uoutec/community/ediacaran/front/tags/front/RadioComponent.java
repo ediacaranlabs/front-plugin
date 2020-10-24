@@ -14,7 +14,7 @@ public class RadioComponent extends ComponentFormComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/radio";
+		TEMPLATE = "/default_template/front/components/radio.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -33,7 +33,7 @@ public class RadioComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "checked" : "";
+					return value != null && (Boolean)value? "checked" : ".tmp";
 				}
 			});
 			
@@ -57,8 +57,8 @@ public class RadioComponent extends ComponentFormComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						Boolean enabled = ((RadioTag)component).getEnabled();
-						//return enabled != null && !enabled? " uneditable-input" : "";
-						return "";
+						//return enabled != null && !enabled? " uneditable-input" : ".tmp";
+						return ".tmp";
 					}
 					
 				});
@@ -67,7 +67,7 @@ public class RadioComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? " form-check-inline" : "";
+						return value != null && (Boolean)value? " form-check-inline" : ".tmp";
 					}
 					
 				});

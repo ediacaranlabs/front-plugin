@@ -13,7 +13,7 @@ public class ListComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE   = "/bootstrap4/components/list";
+		TEMPLATE   = "/bootstrap4/components/list.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

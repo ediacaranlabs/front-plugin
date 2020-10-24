@@ -13,7 +13,7 @@ public class ListItemComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/list-item";
+		TEMPLATE = "/default_template/front/components/list-item.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -35,7 +35,7 @@ public class ListItemComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? "list-inline-item" : "";
+						return value != null && (Boolean)value? "list-inline-item" : ".tmp";
 					}
 					
 				});

@@ -12,7 +12,7 @@ public class ContainerComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/designer/container";
+		TEMPLATE = "/default_template/front/designer/container.tmp";
 	
 	
 		DEFAULT_ATTRS = 

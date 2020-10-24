@@ -13,7 +13,7 @@ public class PrettifyComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/prettify";
+		TEMPLATE = "/default_template/front/components/prettify.tmp";
 	
 	
 		DEFAULT_ATTRS = 
@@ -39,7 +39,7 @@ public class PrettifyComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? " linenums" : "";
+						return value != null && (Boolean)value? " linenums" : ".tmp";
 					}
 					
 				});

@@ -13,7 +13,7 @@ public class FormComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/form";
+		TEMPLATE = "/default_template/front/components/form.tmp";
 		
 		DEFAULT_ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
@@ -22,7 +22,7 @@ public class FormComponent extends AbstractComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "accept-charset";
+					return value == null? null : "accept-charset.tmp";
 				}
 			});
 
@@ -30,7 +30,7 @@ public class FormComponent extends AbstractComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return "dest-content";
+					return "dest-content.tmp";
 				}
 				
 				@Override
@@ -53,7 +53,7 @@ public class FormComponent extends AbstractComponent {
 					
 					@Override
 					public String toName(String value, Object component) {
-						return "form-body";
+						return "form-body.tmp";
 					}
 					
 				});
@@ -62,7 +62,7 @@ public class FormComponent extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return "inline".equals(value)? "form-inline " : "";
+						return "inline".equals(value)? "form-inline " : ".tmp";
 					}
 				});
 				

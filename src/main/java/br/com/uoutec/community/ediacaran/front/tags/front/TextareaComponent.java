@@ -14,7 +14,7 @@ public class TextareaComponent extends ComponentFormComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/textfield";
+		TEMPLATE = "/default_template/front/components/textfield.tmp";
 	
 	
 		DEFAULT_ATTRS = 
@@ -40,7 +40,7 @@ public class TextareaComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "on" : "off";
+					return value != null && (Boolean)value? "on" : "off.tmp";
 				}
 			});
 
@@ -53,7 +53,7 @@ public class TextareaComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "readonly" : "";
+					return value != null && (Boolean)value? "readonly" : ".tmp";
 				}
 				
 			});
@@ -77,8 +77,8 @@ public class TextareaComponent extends ComponentFormComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						Boolean enabled = ((TextareaTag)component).getEnabled();
-						//return enabled != null && !enabled? " uneditable-input" : "";
-						return "";
+						//return enabled != null && !enabled? " uneditable-input" : ".tmp";
+						return ".tmp";
 					}
 					
 				});

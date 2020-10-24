@@ -9,12 +9,12 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public abstract class ComponentFormComponent extends AbstractComponent {
 
-	public static final String FORM = ComponentFormComponent.class.getSimpleName() + ":form";
+	public static final String FORM = ComponentFormComponent.class.getSimpleName() + ":form.tmp";
 	
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/form-group";
+		TEMPLATE = "/default_template/front/components/form-group.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -40,7 +40,7 @@ public abstract class ComponentFormComponent extends AbstractComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && !(Boolean)value? "disabled" : "";
+					return value != null && !(Boolean)value? "disabled" : ".tmp";
 				}
 			});
 
@@ -53,7 +53,7 @@ public abstract class ComponentFormComponent extends AbstractComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "required" : "";
+					return value != null && (Boolean)value? "required" : ".tmp";
 				}
 				
 			});
@@ -67,7 +67,7 @@ public abstract class ComponentFormComponent extends AbstractComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "readonly" : "";
+					return value != null && (Boolean)value? "readonly" : ".tmp";
 				}
 			});
 			
@@ -75,7 +75,7 @@ public abstract class ComponentFormComponent extends AbstractComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "type";
+					return value == null? null : "type.tmp";
 				}
 				
 			});

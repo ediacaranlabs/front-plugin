@@ -12,7 +12,7 @@ public class GalleryFiltersComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/gallery-filters";
+		TEMPLATE = "/default_template/front/components/gallery-filters.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

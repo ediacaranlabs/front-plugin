@@ -14,7 +14,7 @@ public class TextfieldComponent extends ComponentFormComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/textfield";
+		TEMPLATE = "/default_template/front/components/textfield.tmp";
 	
 	
 		DEFAULT_ATTRS = 
@@ -35,7 +35,7 @@ public class TextfieldComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "on" : "off";
+					return value != null && (Boolean)value? "on" : "off.tmp";
 				}
 			});
 
@@ -59,8 +59,8 @@ public class TextfieldComponent extends ComponentFormComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						Boolean enabled = ((TextfieldTag)component).getEnabled();
-						//return enabled != null && !enabled? " uneditable-input" : "";
-						return "";
+						//return enabled != null && !enabled? " uneditable-input" : ".tmp";
+						return ".tmp";
 					}
 					
 				});
@@ -78,7 +78,7 @@ public class TextfieldComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null? new String("form-control-").concat((String)value) : "";
+						return value != null? new String("form-control-").concat((String)value) : ".tmp";
 					}
 					
 				});

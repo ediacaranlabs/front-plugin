@@ -13,7 +13,7 @@ public class DescriptionComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/description";
+		TEMPLATE = "/default_template/front/components/description.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -38,7 +38,7 @@ public class DescriptionComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return "text-truncate";
+						return "text-truncate.tmp";
 					}
 					
 				});

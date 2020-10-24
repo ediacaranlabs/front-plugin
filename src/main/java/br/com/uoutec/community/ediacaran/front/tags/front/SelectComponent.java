@@ -14,7 +14,7 @@ public class SelectComponent extends ComponentFormComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/bootstrap4/components/select";
+		TEMPLATE = "/default_template/front/components/select.tmp";
 	
 	
 		DEFAULT_ATTRS = 
@@ -38,7 +38,7 @@ public class SelectComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "required" : "";
+					return value != null && (Boolean)value? "required" : ".tmp";
 				}
 				
 			});
@@ -47,7 +47,7 @@ public class SelectComponent extends ComponentFormComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "size";
+					return value == null? null : "size.tmp";
 				}
 				
 			});
@@ -61,7 +61,7 @@ public class SelectComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "multiple" : "";
+					return value != null && (Boolean)value? "multiple" : ".tmp";
 				}
 				
 			});
@@ -87,8 +87,8 @@ public class SelectComponent extends ComponentFormComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						Boolean enabled = ((SelectTag)component).getEnabled();
-						//return enabled != null && !enabled? " uneditable-input" : "";
-						return "";
+						//return enabled != null && !enabled? " uneditable-input" : ".tmp";
+						return ".tmp";
 					}
 					
 				});
@@ -97,7 +97,7 @@ public class SelectComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null? new String("form-control-").concat((String)value) : "";
+						return value != null? new String("form-control-").concat((String)value) : ".tmp";
 					}
 					
 				});

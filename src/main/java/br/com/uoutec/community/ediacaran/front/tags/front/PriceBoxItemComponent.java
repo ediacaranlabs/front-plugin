@@ -13,7 +13,7 @@ public class PriceBoxItemComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/price-box-item";
+		TEMPLATE = "/default_template/front/components/price-box-item.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -35,7 +35,7 @@ public class PriceBoxItemComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? " class=\"active\"" : "";
+						return value != null && (Boolean)value? " class=\"active\"" : ".tmp";
 					}
 					
 				});

@@ -13,7 +13,7 @@ public class GalleryFilterComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/gallery-filter";
+		TEMPLATE = "/default_template/front/components/gallery-filter.tmp";
 	
 	
 		DEFAULT_ATTRS = 
@@ -40,7 +40,7 @@ public class GalleryFilterComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? " active" : "";
+						return value != null && (Boolean)value? " active" : ".tmp";
 					}
 					
 				});

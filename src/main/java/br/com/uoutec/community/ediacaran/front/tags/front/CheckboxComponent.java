@@ -13,7 +13,7 @@ public class CheckboxComponent extends ComponentFormComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/checkbox";
+		TEMPLATE = "/default_template/front/components/checkbox.tmp";
 	
 	
 		DEFAULT_ATTRS = 
@@ -34,7 +34,7 @@ public class CheckboxComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "checked" : "";
+					return value != null && (Boolean)value? "checked" : ".tmp";
 				}
 			});
 			
@@ -57,7 +57,7 @@ public class CheckboxComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return "";
+						return ".tmp";
 					}
 				});
 
@@ -65,7 +65,7 @@ public class CheckboxComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? " form-check-inline" : "";
+						return value != null && (Boolean)value? " form-check-inline" : ".tmp";
 					}
 				});
 				

@@ -12,7 +12,7 @@ public class DropdownSeparatorComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/dropdown-separator";
+		TEMPLATE = "/default_template/front/components/dropdown-separator.tmp";
 	
 	
 		DEFAULT_ATTRS = 

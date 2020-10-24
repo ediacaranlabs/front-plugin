@@ -13,7 +13,7 @@ public class DropdownWrapperComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/dropdown-wrapper";
+		TEMPLATE = "/default_template/front/components/dropdown-wrapper.tmp";
 	
 	
 		DEFAULT_ATTRS = 

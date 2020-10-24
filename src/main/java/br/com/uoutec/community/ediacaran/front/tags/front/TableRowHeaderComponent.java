@@ -13,7 +13,7 @@ public class TableRowHeaderComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/bootstrap4/components/table-row-header";
+		TEMPLATE = "/default_template/front/components/table-row-header.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -26,12 +26,12 @@ public class TableRowHeaderComponent  extends AbstractComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return "rowspan";
+					return "rowspan.tmp";
 				}
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Integer)value > 1 ? (Integer)value - 1: "";
+					return value != null && (Integer)value > 1 ? (Integer)value - 1: ".tmp";
 				}
 			});
 		}});

@@ -16,7 +16,7 @@ public class CarouselComponent extends AbstractComponent {
 	
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/bootstrap4/components/carousel";
+		TEMPLATE = "/default_template/front/components/carousel.tmp";
 	
 	
 		DEFAULT_ATTRS = 

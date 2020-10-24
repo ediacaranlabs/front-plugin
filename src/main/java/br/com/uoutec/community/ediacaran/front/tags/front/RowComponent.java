@@ -13,7 +13,7 @@ public class RowComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/designer/row";
+		TEMPLATE = "/default_template/front/designer/row.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -36,7 +36,7 @@ public class RowComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? "row" : value + "-row";
+						return value == null? "row" : value + "-row.tmp";
 					}
 					
 				});

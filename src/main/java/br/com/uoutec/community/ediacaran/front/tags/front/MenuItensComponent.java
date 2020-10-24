@@ -13,7 +13,7 @@ public class MenuItensComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/bootstrap4/components/menu-itens";
+		TEMPLATE = "/default_template/front/components/menu-itens.tmp";
 		
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -40,7 +40,7 @@ public class MenuItensComponent  extends AbstractComponent {
 							return null;
 						}
 						
-						return "left".equals(value)? " mr-auto" : " ml-auto";
+						return "left".equals(value)? " mr-auto" : " ml-auto.tmp";
 					}
 					
 				});

@@ -12,7 +12,7 @@ public class MenuTogglerComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/bootstrap4/components/menu-toggler";
+		TEMPLATE = "/default_template/front/components/menu-toggler.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

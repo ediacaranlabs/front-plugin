@@ -11,7 +11,7 @@ public class NivoCaptionComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/nivo-caption";
+		TEMPLATE = "/default_template/front/components/nivo-caption.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

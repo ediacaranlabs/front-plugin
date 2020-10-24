@@ -11,7 +11,7 @@ public class FieldRuleValidatorComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/field-rule-validator";
+		TEMPLATE = "/default_template/front/components/field-rule-validator.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{

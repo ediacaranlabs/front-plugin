@@ -12,7 +12,7 @@ public class MenuBarItemComponent  extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/menu-bar-item";
+		TEMPLATE = "/default_template/front/components/menu-bar-item.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
