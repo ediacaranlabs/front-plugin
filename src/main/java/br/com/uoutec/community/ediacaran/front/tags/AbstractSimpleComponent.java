@@ -113,12 +113,12 @@ public abstract class AbstractSimpleComponent
     	getTema().applyTagTemplate(template, getTemaPackage(), this, vars, out);
     }
     
-	protected Theme getTema() {
+	public Theme getTema() {
     	TemaRegistry temaRegistry = (TemaRegistry)getProperty(Constants.TEMA_REGISTRY);
     	return temaRegistry.getCurrentTema();
 	}
 	
-	protected String getTemaPackage() {
+	public String getTemaPackage() {
     	return (String)getProperty(SetTemplatePackageTag.PACKAGE_NAME);
 	}
     

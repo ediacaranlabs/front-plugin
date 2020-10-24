@@ -3,9 +3,8 @@ package br.com.uoutec.community.ediacaran.front.tags.front;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
+import br.com.uoutec.community.ediacaran.front.tags.BreadcrumbPathTag;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
@@ -16,7 +15,7 @@ public class BreadcrumbPathComponent extends AbstractComponent {
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE = "/components/breadcrumb-path";
+		TEMPLATE = "/default_template/front/components/breadcrumb-path.tmp";
 	
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
@@ -39,8 +38,8 @@ public class BreadcrumbPathComponent extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						BreadcrumbPathComponent tag = (BreadcrumbPathComponent)component;
-				    	return value == null? null : new TemplateVarParser(TEMPLATE_ICON, tag.getTemaPackage(), tag.getTema()).put("icon", value).put("size", 1);
+						BreadcrumbPathTag tag = (BreadcrumbPathTag)component;
+						return value == null? null : new TemplateVarParser("/components/icon", tag.getTemaPackage(), null, tag.getTema()).put("icon", value).put("size", 1);
 					}
 				});
 			}});
