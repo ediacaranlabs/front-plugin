@@ -5,21 +5,35 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
-public class TableHeaderComponent  extends AbstractComponent {
+public class TableColHeaderComponent  extends AbstractComponent {
 
 	
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		TEMPLATE  = "/components/table-header";
-	
+		TEMPLATE  = "/bootstrap4/components/table-col-header";
+		
 		DEFAULT_ATTRS = 
 		Collections.unmodifiableSet(new HashSet<String>(super.DEFAULT_ATTRS) {{
+			add("size");
 		}});
 	
 		DEFAULT_ATTRIBUTE_PARSERS = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_ATTRIBUTE_PARSERS){{
+			put("size", new AttributeParserImp() {
+				
+				@Override
+				public String toName(String value, Object component) {
+					return "colspan";
+				}
+				
+				@Override
+				public Object toValue(Object value, Object component) {
+					return value != null && (Integer)value > 1 ? (Integer)value - 1: "";
+				}
+			});
 		}});
 	
 		DEFAULT_PROPS = 
@@ -31,5 +45,4 @@ public class TableHeaderComponent  extends AbstractComponent {
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.DEFAULT_PROPERTY_PARSERS));
 
 	}
-	
 }

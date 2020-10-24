@@ -106,7 +106,7 @@ public class RadioTag extends ComponentFormTag {
 	
 	private Boolean inline;
 	
-	//private JspFragmentVarParser content;
+	private JspFragmentVarParser content;
 	
 	public RadioTag() {
 		setComponentType("radio");
@@ -159,7 +159,7 @@ public class RadioTag extends ComponentFormTag {
 	public void setInline(Boolean inline) {
 		this.inline = inline;
 	}
-/*
+
 	public JspFragmentVarParser getContent() {
 		return content;
 	}
@@ -167,5 +167,5 @@ public class RadioTag extends ComponentFormTag {
 	public void setContent(JspFragmentVarParser content) {
 		this.content = content;
 	}
-*/
+
 }
