@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_101" class="java.beans.XMLDecoder">
+
+	<object	class="br.com.uoutec.community.ediacaran.ServerBootstrap">
+
+		<void property="listenerManager">
+			<object class="br.com.uoutec.community.ediacaran.EdiacaranListenerManagerImp"/>
+		</void>
+
+		<void property="pluginManager">
+			<object class="br.com.uoutec.community.ediacaran.PluginManagerImp"/>
+		</void>
+
+		<void property="pluginInitializer">
+			<object class="br.com.uoutec.community.ediacaran.weld.BuilderPluginInitializer">
+				<void method="addExtension">
+					<string>com.arjuna.ats.jta.cdi.TransactionExtension</string>
+				</void>
+				<void method="addService">
+					<string>br.com.uoutec.community.ediacaran.server.system.entityaccess.hibernate.tx.CDITransactionServices</string>
+				</void>
+				<void method="addExtension">
+					<string>br.com.uoutec.filter.invoker.cdi.InvokerFilterExtension</string>
+				</void>
+			</object>
+		</void>
+
+		<void property="pluginsSuppliersFactory">
+			<object class="br.com.uoutec.community.ediacaran.weld.PluginsSuppliersFactoryImp"/>
+		</void>
+		
+		<void property="pluginClassLoaderFactory">
+			<object class="br.com.uoutec.community.ediacaran.weld.BuilderClassLoaderFactory"/>
+		</void>
+		
+		<!--  
+		<void property="parentClassLoader">
+			<object class="java.net.URLClassLoader">
+				...
+			</object>
+		</void>
+		-->
+		
+		<void property="pluginsLoader">
+			<object class="br.com.uoutec.community.ediacaran.plugins.PluginsLoader"/>
+		</void>
+
+		<void property="varParser">
+			<object class="br.com.uoutec.community.ediacaran.weld.VarParserConfigurationImp">
+			
+				<void property="useDefaultVars">
+					<boolean>true</boolean>
+				</void>
+			
+				<!--
+				<void method="registerVarResolver">
+					<string>teste</string>
+					<object class="br.com.uoutec.community.ediacaran.weld.VarParserImp"/>
+				</void>
+				-->
+				
+			</object>
+		</void>
+
+		<void method="addPluginSearch">
+			<object class="br.com.uoutec.community.ediacaran.plugins.JarPluginsSearch">
+				<object class="br.com.uoutec.community.ediacaran.plugin.EdiacaranExportPluginMetadata"/>
+			</object>
+		</void>
+
+		<void method="addPluginSearch">
+			<object class="br.com.uoutec.community.ediacaran.plugins.FileSystemPluginsSearch"/>
+		</void>
+
+		<void method="setSystemProperty">
+			<string>java.naming.factory.url.pkgs</string>
+			<string>org.apache.naming</string>
+		</void>
+		
+		<void method="setSystemProperty">
+			<string>java.naming.factory.initial</string>
+			<string>org.apache.naming.java.javaURLContextFactory</string>
+		</void>
+		<!-- 
+		<void method="setSystemProperty">
+			<string>java.util.logging.manager</string>
+			<string>org.apache.logging.log4j.jul.LogManager</string>
+		</void>
+	 	-->	
+	</object>
+</java>

@@ -20,7 +20,7 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.system.tema.ComponentVars;
 import br.com.uoutec.community.ediacaran.system.tema.Theme;
 import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
-import br.com.uoutec.community.ediacaran.system.tema.TemaRegistry;
+import br.com.uoutec.community.ediacaran.system.tema.ThemeRegistry;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
 public abstract class AbstractPanelComponent 
@@ -295,7 +295,7 @@ public abstract class AbstractPanelComponent
 	}
 	
 	protected Theme getTheme() {
-    	TemaRegistry temaRegistry = (TemaRegistry)getProperty(Constants.THEME_REGISTRY);
+    	ThemeRegistry temaRegistry = (ThemeRegistry)getProperty(Constants.THEME_REGISTRY);
     	return temaRegistry.getCurrentTema();
 	}
 	

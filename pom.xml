@@ -50,5 +50,13 @@
 			<version>1.0.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<!--  Test -->
+		<dependency>
+			<groupId>br.com.uoutec</groupId>
+			<artifactId>ediacaran-weld</artifactId>
+			<version>1.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		
 	</dependencies>
 </project>

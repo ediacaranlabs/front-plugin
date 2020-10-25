@@ -18,7 +18,7 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.ComponentVars;
 import br.com.uoutec.community.ediacaran.system.tema.Theme;
 import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
-import br.com.uoutec.community.ediacaran.system.tema.TemaRegistry;
+import br.com.uoutec.community.ediacaran.system.tema.ThemeRegistry;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
 public abstract class AbstractSimpleComponent 
@@ -114,7 +114,7 @@ public abstract class AbstractSimpleComponent
     }
     
 	public Theme getTema() {
-    	TemaRegistry temaRegistry = (TemaRegistry)getProperty(Constants.THEME_REGISTRY);
+    	ThemeRegistry temaRegistry = (ThemeRegistry)getProperty(Constants.THEME_REGISTRY);
     	return temaRegistry.getCurrentTema();
 	}
 	
