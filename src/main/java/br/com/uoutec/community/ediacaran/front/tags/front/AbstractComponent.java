@@ -63,7 +63,7 @@ public abstract class AbstractComponent implements Component{
 	
 	public AbstractComponent() {
 		this.loadConfiguration();
-		this.loadTemplate();
+		//this.loadTemplate();
 	}
 	
 	protected void loadConfiguration(){
@@ -83,6 +83,11 @@ public abstract class AbstractComponent implements Component{
 		catch(Throwable e) {
 			throw new ThemeException(e);
 		}
+	}
+	
+	@Override
+	public String getTemplate() {
+		return template;
 	}
 	
 	@Override

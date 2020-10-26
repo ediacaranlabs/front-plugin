@@ -8,12 +8,11 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class ListComponent  extends AbstractComponent {
-
 	
 	@SuppressWarnings("serial")
 	protected void loadConfiguration() {
 
-		super.template = "/bootstrap4/components/list.tmp";
+		super.template = "/default_template/front/components/list.tmp";
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
