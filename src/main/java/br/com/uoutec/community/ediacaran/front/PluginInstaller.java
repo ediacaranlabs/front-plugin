@@ -1,14 +1,5 @@
 package br.com.uoutec.community.ediacaran.front;
 
-import java.io.IOException;
-
-import org.brandao.brutos.io.DefaultResourceLoader;
-
-import br.com.uoutec.application.ClassUtil;
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.community.ediacaran.plugins.PluginException;
-import br.com.uoutec.community.ediacaran.plugins.PluginProperties;
-import br.com.uoutec.community.ediacaran.plugins.PluginsSuppliers;
 import br.com.uoutec.community.ediacaran.system.AbstractWebPluginInstaller;
 
 public class PluginInstaller 
@@ -26,6 +17,7 @@ public class PluginInstaller
 	
 	public static final String TEMPLATE_PROPERTY 		= "template";
 	
+	/*
 	public void install() throws PluginException {
 		try{
 			this.installTemplateManager();
@@ -56,5 +48,5 @@ public class PluginInstaller
 		
 		TemplatesManagerProvider.setTemplatesManager(templatesManager);
 	}
-	
+	*/
 }
