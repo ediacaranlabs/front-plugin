@@ -73,7 +73,7 @@ public abstract class AbstractComponent implements Component{
 		
 		try {
 			PluginData pd = EntityContextPlugin.getEntity(PluginData.class);
-			File file = new File(pd.getPath() + "/tags" + template);
+			File file = new File(pd.getPath() + "/theme" + template);
 			
 			file = file.getCanonicalFile();
 			
