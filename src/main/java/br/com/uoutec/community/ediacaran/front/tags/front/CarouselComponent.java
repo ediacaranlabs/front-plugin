@@ -14,7 +14,7 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 public class CarouselComponent extends AbstractComponent {
 
 	
-	protected void loadConfiguration() {
+	public void loadConfiguration() {
 
 		super.template = "/default_template/front/components/carousel.tmp";
 	

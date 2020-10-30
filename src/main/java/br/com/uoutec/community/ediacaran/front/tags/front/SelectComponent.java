@@ -12,7 +12,7 @@ public class SelectComponent extends ComponentFormComponent {
 
 	
 	@SuppressWarnings("serial")
-	protected void loadConfiguration() {
+	public void loadConfiguration() {
 
 		super.template = "/default_template/front/components/select.tmp";
 	

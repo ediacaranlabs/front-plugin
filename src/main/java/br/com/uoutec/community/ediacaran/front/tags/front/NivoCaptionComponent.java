@@ -9,7 +9,7 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 public class NivoCaptionComponent extends AbstractComponent {
 
 	@SuppressWarnings("serial")
-	protected void loadConfiguration() {
+	public void loadConfiguration() {
 
 		super.template = "/default_template/front/components/nivo-caption.tmp";
 	

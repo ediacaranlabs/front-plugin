@@ -10,7 +10,7 @@ public class EventComponent extends AbstractComponent {
 
 	
 	@SuppressWarnings("serial")
-	protected void loadConfiguration() {
+	public void loadConfiguration() {
 
 		super.template = "/default_template/front/components/event.tmp";
 	

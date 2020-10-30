@@ -11,7 +11,7 @@ import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 public class FlexsliderItemComponent  extends AbstractComponent {
 
 	
-	protected void loadConfiguration() {
+	public void loadConfiguration() {
 
 		super.template = "/default_template/front/components/flexslider-item.tmp";
 	

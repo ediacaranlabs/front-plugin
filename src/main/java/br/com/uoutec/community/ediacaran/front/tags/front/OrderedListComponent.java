@@ -11,7 +11,7 @@ public class OrderedListComponent  extends AbstractComponent {
 
 	
 	@SuppressWarnings("serial")
-	protected void loadConfiguration() {
+	public void loadConfiguration() {
 
 		super.template = "/default_template/front/components/ordered-list.tmp";
 	

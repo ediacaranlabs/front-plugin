@@ -12,7 +12,7 @@ public abstract class ComponentFormComponent extends AbstractComponent {
 	public static final String FORM = ComponentFormComponent.class.getSimpleName() + ":form.tmp";
 	
 	@SuppressWarnings("serial")
-	protected void loadConfiguration() {
+	public void loadConfiguration() {
 
 		super.template = "/default_template/front/components/form-group.tmp";
 	

@@ -66,14 +66,14 @@ public abstract class AbstractComponent implements Component{
 		//this.loadTemplate();
 	}
 	
-	protected void loadConfiguration(){
+	public void loadConfiguration(){
 	}
 	
-	protected void loadTemplate() {
+	public void loadTemplate() {
 		
 		try {
 			PluginData pd = EntityContextPlugin.getEntity(PluginData.class);
-			File file = new File(pd.getPath() + "/theme" + template);
+			File file = new File(pd.getPath() + "/themes" + template);
 			
 			file = file.getCanonicalFile();
 			

@@ -11,7 +11,7 @@ public class IconStackComponent extends AbstractComponent {
 
 	
 	@SuppressWarnings("serial")
-	protected void loadConfiguration() {
+	public void loadConfiguration() {
 
 		super.template = "/default_template/front/components/icon-stack.tmp";
 	
