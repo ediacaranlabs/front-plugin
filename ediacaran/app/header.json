@@ -1,0 +1,48 @@
+{
+	"signup": {
+		"link": "admin/register",
+		"text": "<i class=\"fa fa-fw fa-user\"></i> Sign up"
+	},
+	"signin": {
+		"link": "admin/login",
+		"text": "Sign in"
+	},
+	"logo": {
+		"image": "/templates/default_template/img/logo.png",
+		"link": "#",
+		"text": "Application plataform"
+	},
+	"menu": [
+		{
+			"name": "Home",
+			"link": "/"
+		},
+		{
+			"name": "Serviços",
+			"itens": [
+				{
+					"name": "DNS Dinâmico",
+					"link": "/ddns"
+				}
+			]
+		},		
+		{
+			"name": "Projetos",
+			"itens": [
+				{
+					"name": "Brutos Framework",
+					"link": "/brutos/"
+				},
+				{
+					"name": "Calypte",
+					"link": "/calypte/"
+				}
+			]
+		},
+		{
+			"name": "Contato",
+			"link": "mailto:contact@uoutec.com.br"
+		}
+	]
+	
+}
