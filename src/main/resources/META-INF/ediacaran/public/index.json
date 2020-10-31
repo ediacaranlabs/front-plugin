@@ -1,0 +1,27 @@
+{
+	"slider": [
+		{
+			"title" :"DNS Dinâmico",
+			"img" :  "templates/default_template/img/slides/nivo/bg-1.jpg",
+			"src" :  "ddns/",
+			"desc":  "IP dinâmico deixa seu site ou jogo fora do ar?
+			Crie um domínio de graça ou gerencie um existente e nunca mais fique desconectado."
+		},
+		{
+			"title" :"Calypte Cache",
+			"img" :  "templates/default_template/img/slides/nivo/bg-2.jpg",
+			"src" :  "calypte/",
+			"desc":  "Conheça nosso sistema de cache de propósito geral com suporte transacional. É extremamente 
+			rápido, tanto para escrita como para leitura, podendo chegar a mais de 600.000 operações por 
+			segundo."
+		},
+		{
+			"title" :"Brutos Framework",
+			"img" :  "templates/default_template/img/slides/nivo/bg-3.jpg",
+			"src" :  "brutos/",
+			"desc":  "Conheça nosso framework MVC desenvolvido em Java. Projetado para reduzir a complexidade do 
+			desenvolvimento web com mapeamento configurável, resolução de vista, suporte ao upload e
+			download de arquivos."
+		}
+	]
+}

@@ -19,7 +19,7 @@ public class IncludeTag extends AbstractSimpleComponent {
     public void doTag() throws JspException, IOException {
     	
     	PageContext pageContext = (PageContext) getJspContext();
-    	Theme tema               = getTema();
+    	Theme tema               = getTheme();
     	String packageName      = getTemaPackage();
     	
     	String path = tema.getTemplate(packageName) + uri;

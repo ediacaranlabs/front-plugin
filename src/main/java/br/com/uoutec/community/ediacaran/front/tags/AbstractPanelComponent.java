@@ -14,14 +14,14 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
-import br.com.uoutec.community.ediacaran.system.Constants;
+import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.system.tema.ComponentVars;
+import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 import br.com.uoutec.community.ediacaran.system.tema.Theme;
 import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
 import br.com.uoutec.community.ediacaran.system.tema.ThemeRegistry;
-import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
 public abstract class AbstractPanelComponent 
 	extends BodyTagSupport
@@ -295,8 +295,9 @@ public abstract class AbstractPanelComponent
 	}
 	
 	protected Theme getTheme() {
-    	ThemeRegistry temaRegistry = (ThemeRegistry)getProperty(Constants.THEME_REGISTRY);
-    	return temaRegistry.getCurrentTema();
+    	//ThemeRegistry temaRegistry = (ThemeRegistry)getProperty(Constants.THEME_REGISTRY);
+		ThemeRegistry temaRegistry = EntityContextPlugin.getEntity(ThemeRegistry.class);
+    	return temaRegistry.getCurrentTheme();
 	}
 	
 	protected String getPackageTheme() {

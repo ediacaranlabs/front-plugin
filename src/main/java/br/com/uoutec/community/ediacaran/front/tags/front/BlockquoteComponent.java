@@ -39,7 +39,7 @@ public class BlockquoteComponent extends AbstractComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						BlockquoteTag tag = (BlockquoteTag)component;
-						return value == null? null : new TemplateVarParser("/components/cite", tag.getTemaPackage(), null, tag.getTema()).put("content", value);
+						return value == null? null : new TemplateVarParser("/components/cite", tag.getTemaPackage(), null, tag.getTheme()).put("content", value);
 					}
 				});
 				

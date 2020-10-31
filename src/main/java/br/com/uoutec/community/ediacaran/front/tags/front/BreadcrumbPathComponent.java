@@ -39,7 +39,7 @@ public class BreadcrumbPathComponent extends AbstractComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						BreadcrumbPathTag tag = (BreadcrumbPathTag)component;
-						return value == null? null : new TemplateVarParser("/components/icon", tag.getTemaPackage(), null, tag.getTema()).put("icon", value).put("size", 1);
+						return value == null? null : new TemplateVarParser("/components/icon", tag.getTemaPackage(), null, tag.getTheme()).put("icon", value).put("size", 1);
 					}
 				});
 			}});

@@ -1,6 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-public class ImageComponent  extends AbstractSimpleComponent {
+public class ImageTag  extends AbstractSimpleComponent {
 
 	private static final String TEMPLATE  = "/components/image";
 	
