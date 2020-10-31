@@ -39,7 +39,7 @@ public class IconComponent extends AbstractComponent {
 					
 					@Override
 					public String toName(String value, Object component) {
-						return "bg-size.tmp";
+						return "bg-size";
 					}
 					
 				});
@@ -48,7 +48,7 @@ public class IconComponent extends AbstractComponent {
 					
 					@Override
 					public String toName(String value, Object component) {
-						return "icon-size.tmp";
+						return "icon-size";
 					}
 					
 				});

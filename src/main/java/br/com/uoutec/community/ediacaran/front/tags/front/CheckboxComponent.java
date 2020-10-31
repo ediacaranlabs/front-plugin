@@ -34,7 +34,7 @@ public class CheckboxComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "checked" : ".tmp";
+					return value != null && (Boolean)value? "checked" : "";
 				}
 			});
 			
@@ -57,7 +57,7 @@ public class CheckboxComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return ".tmp";
+						return "";
 					}
 				});
 
@@ -65,7 +65,7 @@ public class CheckboxComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? " form-check-inline" : ".tmp";
+						return value != null && (Boolean)value? " form-check-inline" : "";
 					}
 				});
 				

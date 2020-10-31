@@ -64,7 +64,7 @@ public class MenuBarComponent  extends AbstractComponent {
 						case "bottom":
 							return "fixed-" + value;
 						case "sticky":
-							return "sticky-top.tmp";
+							return "sticky-top";
 						default:
 							return value;
 						}
@@ -84,7 +84,7 @@ public class MenuBarComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? "" : "sidebar.tmp";
+						return value == null? "" : "sidebar";
 					}
 					
 				});

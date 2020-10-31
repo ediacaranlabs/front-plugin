@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.JspTag;
 
 public class NivoItemTag extends AbstractSimpleComponent {
 	
@@ -20,7 +19,7 @@ public class NivoItemTag extends AbstractSimpleComponent {
 	
     public void doTag() throws JspException, IOException{
     	
-    	JspTag parent = super.getParent();
+    	Object parent = super.getParentTag();
     	
     	if(parent instanceof NivoTag) {
     		StringWriter stringWriter = new StringWriter();

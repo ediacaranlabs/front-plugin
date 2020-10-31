@@ -35,7 +35,7 @@ public class ListItemComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? "list-inline-item" : ".tmp";
+						return value != null && (Boolean)value? "list-inline-item" : "";
 					}
 					
 				});

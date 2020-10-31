@@ -33,7 +33,7 @@ public class RadioComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "checked" : ".tmp";
+					return value != null && (Boolean)value? "checked" : "";
 				}
 			});
 			
@@ -57,8 +57,8 @@ public class RadioComponent extends ComponentFormComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						Boolean enabled = ((RadioTag)component).getEnabled();
-						//return enabled != null && !enabled? " uneditable-input" : ".tmp";
-						return ".tmp";
+						//return enabled != null && !enabled? " uneditable-input" : ";
+						return "";
 					}
 					
 				});
@@ -67,7 +67,7 @@ public class RadioComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? " form-check-inline" : ".tmp";
+						return value != null && (Boolean)value? " form-check-inline" : "";
 					}
 					
 				});

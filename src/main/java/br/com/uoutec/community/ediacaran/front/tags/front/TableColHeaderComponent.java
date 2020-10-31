@@ -26,12 +26,12 @@ public class TableColHeaderComponent  extends AbstractComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return "colspan.tmp";
+					return "colspan";
 				}
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Integer)value > 1 ? (Integer)value - 1: ".tmp";
+					return value != null && (Integer)value > 1 ? (Integer)value - 1: "";
 				}
 			});
 		}});

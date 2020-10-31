@@ -36,7 +36,7 @@ public class RowComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? "row" : value + "-row.tmp";
+						return value == null? "row" : value + "-row";
 					}
 					
 				});

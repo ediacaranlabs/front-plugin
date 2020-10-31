@@ -39,7 +39,7 @@ public class PrettifyComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? " linenums" : ".tmp";
+						return value != null && (Boolean)value? " linenums" : "";
 					}
 					
 				});

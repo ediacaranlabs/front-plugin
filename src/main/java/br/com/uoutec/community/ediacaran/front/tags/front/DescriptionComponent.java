@@ -38,7 +38,7 @@ public class DescriptionComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return "text-truncate.tmp";
+						return "text-truncate";
 					}
 					
 				});

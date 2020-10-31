@@ -31,7 +31,7 @@ public abstract class AbstractSimpleComponent
 
 	public static final String ATTR_FORMAT			= "([a-z-_]+)=([^\\;]+)";
 
-	public static final String PARENT_TAG			= AbstractSimpleComponent.class.getSimpleName() + ":parent";
+	public static final String PARENT_TAG			= "Component:parent";
 
 	private	String id;
 

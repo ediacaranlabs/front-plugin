@@ -33,7 +33,7 @@ public class OptionComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && !(Boolean)value? "" : "disabled.tmp";
+					return value != null && !(Boolean)value? "" : "disabled";
 				}
 				
 			});
@@ -47,7 +47,7 @@ public class OptionComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "selected" : ".tmp";
+					return value != null && (Boolean)value? "selected" : "";
 				}
 				
 			});

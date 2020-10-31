@@ -38,7 +38,7 @@ public class SelectComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "required" : ".tmp";
+					return value != null && (Boolean)value? "required" : "";
 				}
 				
 			});
@@ -47,7 +47,7 @@ public class SelectComponent extends ComponentFormComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "size.tmp";
+					return value == null? null : "size";
 				}
 				
 			});
@@ -61,7 +61,7 @@ public class SelectComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "multiple" : ".tmp";
+					return value != null && (Boolean)value? "multiple" : "";
 				}
 				
 			});
@@ -87,8 +87,8 @@ public class SelectComponent extends ComponentFormComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						Boolean enabled = ((SelectTag)component).getEnabled();
-						//return enabled != null && !enabled? " uneditable-input" : ".tmp";
-						return ".tmp";
+						//return enabled != null && !enabled? " uneditable-input" : ";
+						return "";
 					}
 					
 				});
@@ -97,7 +97,7 @@ public class SelectComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null? new String("form-control-").concat((String)value) : ".tmp";
+						return value != null? new String("form-control-").concat((String)value) : "";
 					}
 					
 				});

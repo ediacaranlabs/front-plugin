@@ -35,7 +35,7 @@ public abstract class AbstractPanelComponent
 
 	public static final String ATTR_FORMAT			= "([a-z-_]+)=([^\\;]+)";
 
-	public static final String PARENT_TAG			= AbstractPanelComponent.class.getSimpleName() + ":parent";
+	public static final String PARENT_TAG			= "Component:parent";
 	
 	@SuppressWarnings("serial")
 	protected static final Set<String> DEFAULT_ATTRS = 

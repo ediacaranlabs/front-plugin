@@ -35,7 +35,7 @@ public class IntroComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return "background: url(" + value + ") no-repeat center center; background-size: cover;.tmp";
+						return "background: url(" + value + ") no-repeat center center; background-size: cover;";
 					}
 					
 				});

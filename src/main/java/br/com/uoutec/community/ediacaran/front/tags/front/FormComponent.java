@@ -22,7 +22,7 @@ public class FormComponent extends AbstractComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "accept-charset.tmp";
+					return value == null? null : "accept-charset";
 				}
 			});
 
@@ -30,7 +30,7 @@ public class FormComponent extends AbstractComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return "dest-content.tmp";
+					return "dest-content";
 				}
 				
 				@Override
@@ -53,7 +53,7 @@ public class FormComponent extends AbstractComponent {
 					
 					@Override
 					public String toName(String value, Object component) {
-						return "form-body.tmp";
+						return "form-body";
 					}
 					
 				});
@@ -62,7 +62,7 @@ public class FormComponent extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return "inline".equals(value)? "form-inline " : ".tmp";
+						return "inline".equals(value)? "form-inline " : "";
 					}
 				});
 				

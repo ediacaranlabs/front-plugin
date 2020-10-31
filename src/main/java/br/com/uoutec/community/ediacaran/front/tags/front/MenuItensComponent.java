@@ -40,7 +40,7 @@ public class MenuItensComponent  extends AbstractComponent {
 							return null;
 						}
 						
-						return "left".equals(value)? " mr-auto" : " ml-auto.tmp";
+						return "left".equals(value)? " mr-auto" : " ml-auto";
 					}
 					
 				});

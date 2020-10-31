@@ -32,7 +32,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "type.tmp";
+					return value == null? null : "type";
 				}
 			});
 
@@ -40,7 +40,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "formaction.tmp";
+					return value == null? null : "formaction";
 				}
 			});
 
@@ -48,7 +48,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "formenctype.tmp";
+					return value == null? null : "formenctype";
 				}
 			});
 
@@ -56,7 +56,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "formmethod.tmp";
+					return value == null? null : "formmethod";
 				}
 			});
 
@@ -64,7 +64,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				
 				@Override
 				public String toName(String value, Object component) {
-					return value == null? null : "formtarget.tmp";
+					return value == null? null : "formtarget";
 				}
 			});
 			
@@ -106,7 +106,7 @@ public class ButtonComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? "" : (Boolean)value? " btn-block" : ".tmp";
+						return value == null? "" : (Boolean)value? " btn-block" : "";
 					}
 				});
 				
@@ -115,7 +115,7 @@ public class ButtonComponent extends ComponentFormComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						Boolean enabled = ((ButtonTag)component).getEnabled();
-						return enabled != null && !enabled? " disabled" : ".tmp";
+						return enabled != null && !enabled? " disabled" : "";
 					}
 				});
 				

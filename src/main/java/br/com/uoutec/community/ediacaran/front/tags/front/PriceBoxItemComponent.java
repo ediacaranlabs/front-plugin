@@ -35,7 +35,7 @@ public class PriceBoxItemComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? " class=\"active\"" : ".tmp";
+						return value != null && (Boolean)value? " class=\"active\"" : "";
 					}
 					
 				});

@@ -35,7 +35,7 @@ public class TextfieldComponent extends ComponentFormComponent {
 				
 				@Override
 				public Object toValue(Object value, Object component) {
-					return value != null && (Boolean)value? "on" : "off.tmp";
+					return value != null && (Boolean)value? "on" : "off";
 				}
 			});
 
@@ -59,8 +59,8 @@ public class TextfieldComponent extends ComponentFormComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						Boolean enabled = ((TextfieldTag)component).getEnabled();
-						//return enabled != null && !enabled? " uneditable-input" : ".tmp";
-						return ".tmp";
+						//return enabled != null && !enabled? " uneditable-input" : ";
+						return "";
 					}
 					
 				});
@@ -78,7 +78,7 @@ public class TextfieldComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null? new String("form-control-").concat((String)value) : ".tmp";
+						return value != null? new String("form-control-").concat((String)value) : "";
 					}
 					
 				});

@@ -40,7 +40,7 @@ public class GalleryFilterComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value != null && (Boolean)value? " active" : ".tmp";
+						return value != null && (Boolean)value? " active" : "";
 					}
 					
 				});
