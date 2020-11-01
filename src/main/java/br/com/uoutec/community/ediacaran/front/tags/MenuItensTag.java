@@ -23,13 +23,13 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 	
 	protected void beforePrepareVars(Map<String, Object> vars) {
 		this.content = new JspFragmentVarParser(getJspBody());
-		menu = (MenuTag)getProperty(MenuTag.CONTEXT_ID);
     	if(menu != null) {
     		vars.put("parent-id", menu.getId());
     	}
     }
 	
     protected String getDefaultTemplate() {
+		menu = (MenuTag)getProperty(MenuTag.CONTEXT_ID);
     	return menu != null? TEMPLATE_2 : TEMPLATE;
     }
 
