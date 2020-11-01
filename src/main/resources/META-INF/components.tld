@@ -260,6 +260,14 @@ Ex:
 			<fragment>true</fragment>
 		</attribute>
 		
+		<attribute>
+			<description></description>
+			<name>classStyle</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
 		<!-- attr -->
 		
 		<attribute>

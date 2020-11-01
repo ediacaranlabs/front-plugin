@@ -9,7 +9,12 @@
 }
 
 .nivo-slider {
-  background: #fbfbfb;
+	background: #fbfbfb;
+	position: relative;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	margin: 0;  
 }
 
 .slides {
@@ -145,37 +150,35 @@
 }
 
 .nivo-directionNav a {
-  font-family: FontAwesome;
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  -webkit-font-smoothing: antialiased;
-  display: inline;
-  width: auto;
-  height: auto;
-  line-height: normal;
-  vertical-align: baseline;
-  background-image: none;
-  background-position: 0% 0%;
-  background-repeat: repeat;
-  margin-top: 0;
-  margin: 0;
-  display: inline-block !important;
-  text-align: center !important;
-  color: #fff;
-  width: 18px;
-  height: 18px;
-  padding: 3px;
-  font-size: 12px;
-  line-height: 18px;
-  text-shadow: none;
-  cursor: pointer;
-  background-color: #444;
-  right: 15px;
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+    -webkit-font-smoothing: antialiased;
+	vertical-align: baseline;
+    background-image: none;
+    background-position: 0% 0%;
+    background-repeat: repeat;
+    margin-top: 0;
+    margin: 0;
+    display: inline-block !important;
+    text-align: center !important;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    padding: 3px;
+    font-size: 12px;
+    line-height: 18px;
+    text-shadow: none;
+    cursor: pointer;
+    background-color: #444;    	
 }
 
 .nivo-directionNav a {
-  opacity: 1;
+	opacity: 1;
+	position: absolute;
+	bottom: 0px;
+	z-index: 9;  
 }
 
 a.nivo-nextNav {

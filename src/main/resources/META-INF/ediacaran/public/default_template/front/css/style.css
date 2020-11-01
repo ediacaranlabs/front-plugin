@@ -17,6 +17,10 @@ a:active {
   outline: 0;
 }
 
+a {
+  color: #F03C02;
+}
+
 .clear {
   clear: both;
 }
@@ -188,6 +192,13 @@ ul.breadcrumb li a:hover {
     text-align: center;
 }
 
+/* ===================================
+fontawesome
+==================================== */
+
+.fa:not([class*="fa-inverse"]) {
+	color: #F03C02;
+}
 /* ===================================
 Sidebar
 ==================================== */
@@ -397,3 +408,8 @@ footer .widget ul li a {
     display: inline;
 }
 
+/* fontawesome icons */
+
+footer .fa:not([class*="fa-inverse"]) {
+	color: inherit;
+}

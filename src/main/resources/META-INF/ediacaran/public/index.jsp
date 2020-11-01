@@ -31,62 +31,65 @@
 			</div>
 		</ed:container>
 	</section>
-	<section class="content bg2">
+	<section class="content">
 		<ed:container>
 		<ed:row>
-			<ed:col size="4">
-				<ec:price-box>
-					<ec:price-box-header>
-						<h3>DNS dinâmico <strong>Básico Anual</strong></h3>
-					</ec:price-box-header>
-					<ec:price-box-terms>
-						<h6>Gratuito</h6>
-					</ec:price-box-terms>
-					<ec:price-box-body>
-						<ec:price-box-item checked="true" >Permitido 5 hosts.</ec:price-box-item>
-						<ec:price-box-item checked="true" >Registros básicos.</ec:price-box-item>
-						<ec:price-box-item checked="false">Registros avançados.</ec:price-box-item>
-						<ec:price-box-item checked="true" >Permite usar domínio próprio.</ec:price-box-item>
-						<ec:price-box-item checked="true" >Permite usar domínio gratuito.</ec:price-box-item>
-						<ec:price-box-item checked="false">Garantia de uptime.</ec:price-box-item>
-					</ec:price-box-body>
-				</ec:price-box>
+			<ed:col size="3">
+				<ec:box>
+					<ec:box-header>
+						<ec:icon icon="briefcase" bg="circle" size="3" />
+						<h6>Corporate business</h6>
+					</ec:box-header>
+					<ec:box-body>
+						<p>Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse 
+						am sea facilisis.</p>
+					</ec:box-body>
+					<ec:box-footer>
+						<a href="#">Learn more</a>
+					</ec:box-footer>
+				</ec:box>
 			</ed:col>
-			<ed:col size="4">
-				<ec:price-box attractiveness="special">
-					<ec:price-box-header>
-						<h3>DNS dinâmico <strong>Básico Anual</strong></h3>
-					</ec:price-box-header>
-					<ec:price-box-terms>
-						<h6>BRL 23,00 /ano</h6>
-					</ec:price-box-terms>
-					<ec:price-box-body>
-						<ec:price-box-item checked="true" >Permitido 5 hosts.</ec:price-box-item>
-						<ec:price-box-item checked="true" >Registros básicos.</ec:price-box-item>
-						<ec:price-box-item checked="false">Registros avançados.</ec:price-box-item>
-						<ec:price-box-item checked="true" >Permite usar domínio próprio.</ec:price-box-item>
-						<ec:price-box-item checked="true" >Permite usar domínio gratuito.</ec:price-box-item>
-						<ec:price-box-item checked="false">Garantia de uptime.</ec:price-box-item>
-					</ec:price-box-body>
-				</ec:price-box>
+			<ed:col size="3">
+				<ec:box>
+					<ec:box-header>
+						<ec:icon icon="desktop" bg="circle" size="3" />
+						<h6>Responsive theme</h6>
+					</ec:box-header>
+					<ec:box-body>
+						<p>Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.</p>
+					</ec:box-body>
+					<ec:box-footer>
+						<a href="#">Learn more</a>
+					</ec:box-footer>
+				</ec:box>
 			</ed:col>
-			<ed:col size="4">
-				<ec:price-box>
-					<ec:price-box-header>
-						<h3>DNS dinâmico <strong>avançado Anual</strong></h3>
-					</ec:price-box-header>
-					<ec:price-box-terms>
-						<h6>BRL 65,00 /ano</h6>
-					</ec:price-box-terms>
-					<ec:price-box-body>
-						<ec:price-box-item checked="true" >Permitido 5 hosts.</ec:price-box-item>
-						<ec:price-box-item checked="true" >Registros básicos.</ec:price-box-item>
-						<ec:price-box-item checked="false">Registros avançados.</ec:price-box-item>
-						<ec:price-box-item checked="true" >Permite usar domínio próprio.</ec:price-box-item>
-						<ec:price-box-item checked="true" >Permite usar domínio gratuito.</ec:price-box-item>
-						<ec:price-box-item checked="false">Garantia de uptime.</ec:price-box-item>
-					</ec:price-box-body>
-				</ec:price-box>
+			<ed:col size="3">
+				<ec:box>
+					<ec:box-header>
+						<ec:icon icon="flask" bg="circle" size="3" />
+						<h6>Coded carefully</h6>
+					</ec:box-header>
+					<ec:box-body>
+						<p>Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.</p>
+					</ec:box-body>
+					<ec:box-footer>
+						<a href="#">Learn more</a>
+					</ec:box-footer>
+				</ec:box>
+			</ed:col>
+			<ed:col size="3">
+				<ec:box>
+					<ec:box-header>
+						<ec:icon icon="coffee" bg="circle" size="3" />
+						<h6>Sit and enjoy</h6>
+					</ec:box-header>
+					<ec:box-body>
+						<p>Lorem ipsum dolor sit amet, has ei ipsum scaevola deseruisse am sea facilisis.</p>
+					</ec:box-body>
+					<ec:box-footer>
+						<a href="#">Learn more</a>
+					</ec:box-footer>
+				</ec:box>
 			</ed:col>
 		</ed:row>
 		</ed:container>
@@ -98,7 +101,7 @@
 			<ed:col size="6">
 				<ec:box>
 					<ec:box-header>
-						<ec:image src="/templates/default_template/img/calypte.png" align="center" />
+						<ec:image src="/plugins/ediacaran/front/templates/default_template/img/calypte.png" align="center" />
 						<h6>Calypte Cache</h6>
 					</ec:box-header>
 					<ec:box-body>
@@ -116,7 +119,7 @@
 			<ed:col size="6">
 				<ec:box>
 					<ec:box-header>
-						<ec:image src="/templates/default_template/img/brutos.png" align="center" />
+						<ec:image src="/plugins/ediacaran/front/templates/default_template/img/brutos.png" align="center" />
 						<h6>Brutos Framework</h6>
 					</ec:box-header>
 					<ec:box-body>
