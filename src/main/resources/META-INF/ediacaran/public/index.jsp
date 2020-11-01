@@ -13,17 +13,17 @@
 </head>
 
 <body>
-	<ec:include uri="/includes/header.jsp"/>
 
+	<ec:include uri="/includes/header.jsp"/>
+	
 	<ec:nivo-slider>
 		<c:forEach items="${pageObjects.slider}" var="item">
-		${item}
 			<ec:nivo-slider-tem link="${item.src}" image="${item.img}" title="${item.title}">
 				${item.desc}		
 			</ec:nivo-slider-tem>
 		</c:forEach>
 	</ec:nivo-slider>
-	
+
 	<section class="content">
 		<ed:container>
 			<div class="cta-text">
@@ -31,7 +31,6 @@
 			</div>
 		</ed:container>
 	</section>
-	
 	<section class="content bg2">
 		<ed:container>
 		<ed:row>
@@ -135,6 +134,6 @@
 		</ed:container>	</section>
 
 	<ec:include uri="/includes/footer.jsp"/>
-
+ 
 </body>
 </html>
