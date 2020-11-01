@@ -98,40 +98,44 @@
 	<section class="content">
 		<ed:container>
 		<ed:row>
-			<ed:col size="6">
-				<ec:box>
-					<ec:box-header>
-						<ec:image src="/plugins/ediacaran/front/templates/default_template/img/calypte.png" align="center" />
-						<h6>Calypte Cache</h6>
-					</ec:box-header>
-					<ec:box-body>
-						Calypte é um sistema de cache de propósito geral com suporte transacional. 
-						Permite o armazenamento de dados na forma de chave-valor em memoria e disco. 
-						É extremamente rápido, tanto para escrita como para leitura, podendo chegar a 
-						mais de 600.000 operações por segundo. Não é necessária grandes quantidades de 
-						memória para seu funcionamento. Ele trabalha de forma eficiente com pouca memória.
-					</ec:box-body>
-					<ec:box-footer>
-						<ec:button type="dark" label="Mais"/>
-					</ec:box-footer>
-				</ec:box>
-			</ed:col>
-			<ed:col size="6">
-				<ec:box>
-					<ec:box-header>
-						<ec:image src="/plugins/ediacaran/front/templates/default_template/img/brutos.png" align="center" />
-						<h6>Brutos Framework</h6>
-					</ec:box-header>
-					<ec:box-body>
-						O Brutos application framework é um controlador MVC desenvolvido em Java. 
-						Projetado para reduzir a complexidade do desenvolvimento web com mapeamento 
-						configurável, resolução de vista, suporte ao upload e download de arquivos. 
-						Podendo ser configurado usando XML, anotações e suas convenções de configuração.
-					</ec:box-body>
-					<ec:box-footer>
-						<ec:button label="Mais"/>
-					</ec:box-footer>
-				</ec:box>
+			<ed:col size="12">
+				<h4 class="heading">Some of recent <strong>works</strong></h4>
+				<ec:gallery cols="4">
+					<ec:gallery-images>
+						<ec:gallery-image filter="all" icon="/plugins/ediacaran/front/templates/default_template/img/works/thumbs/image-01.jpg" 
+							text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+							src="/plugins/ediacaran/front/templates/default_template/img/works/full/image-01-full.jpg" 
+							title="The City"/>
+						<ec:gallery-image filter="all" icon="/plugins/ediacaran/front/templates/default_template/img/works/thumbs/image-02.jpg" 
+							text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+							src="/plugins/ediacaran/front/templates/default_template/img/works/full/image-02-full.jpg" 
+							title="The City"/>
+						<ec:gallery-image filter="all" icon="/plugins/ediacaran/front/templates/default_template/img/works/thumbs/image-03.jpg" 
+							text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+							src="/plugins/ediacaran/front/templates/default_template/img/works/full/image-03-full.jpg" 
+							title="The City"/>
+						<ec:gallery-image filter="all" icon="/plugins/ediacaran/front/templates/default_template/img/works/thumbs/image-04.jpg" 
+							text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+							src="/plugins/ediacaran/front/templates/default_template/img/works/full/image-04-full.jpg" 
+							title="The City"/>
+						<ec:gallery-image filter="all" icon="/plugins/ediacaran/front/templates/default_template/img/works/thumbs/image-05.jpg" 
+							text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+							src="/plugins/ediacaran/front/templates/default_template/img/works/full/image-05-full.jpg" 
+							title="The City"/>
+						<ec:gallery-image filter="all" icon="/plugins/ediacaran/front/templates/default_template/img/works/thumbs/image-06.jpg" 
+							text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+							src="/plugins/ediacaran/front/templates/default_template/img/works/full/image-06-full.jpg" 
+							title="The City"/>
+						<ec:gallery-image filter="all" icon="/plugins/ediacaran/front/templates/default_template/img/works/thumbs/image-07.jpg" 
+							text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+							src="/plugins/ediacaran/front/templates/default_template/img/works/full/image-07-full.jpg" 
+							title="The City"/>
+						<ec:gallery-image filter="all" icon="/plugins/ediacaran/front/templates/default_template/img/works/thumbs/image-08.jpg" 
+							text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+							src="/plugins/ediacaran/front/templates/default_template/img/works/full/image-08-full.jpg" 
+							title="The City"/>
+					</ec:gallery-images>
+				</ec:gallery>
 			</ed:col>
 		</ed:row>
 		</ed:container>	</section>

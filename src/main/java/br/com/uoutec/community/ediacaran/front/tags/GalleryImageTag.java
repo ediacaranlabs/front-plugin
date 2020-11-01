@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class GalleryImageTag  extends AbstractSimpleComponent {
 
-	public static final String TEMPLATE  = "/components/gallery-filter";
+	public static final String TEMPLATE  = "/components/gallery-image";
 	
 	/* ------------ Attr ---------------*/
 	

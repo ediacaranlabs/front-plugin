@@ -8,17 +8,21 @@
 <link href="/plugins/ediacaran/front/default_template/front/css/cta.css" rel="stylesheet" />
 <link href="/plugins/ediacaran/front/default_template/front/css/price-box.css" rel="stylesheet" />
 <link href="/plugins/ediacaran/front/default_template/front/css/box.css" rel="stylesheet" />
+<link href="/plugins/ediacaran/front/default_template/front/css/gallery.css" rel="stylesheet" />
+<link href="/plugins/ediacaran/front/default_template/front/css/jquery.fancybox.min.css" rel="stylesheet" />
   
 <script src="/plugins/ediacaran/front/default_template/front/js/jquery.min.js"></script>
 <script src="/plugins/ediacaran/front/default_template/front/js/jquery.nivo.slider.js"></script>	
 <script src="/plugins/ediacaran/front/default_template/front/js/bootstrap.js"></script>
 <script src="/plugins/ediacaran/front/default_template/front/js/bootstrapValidator/bootstrapValidator.min.js"></script>
+<script src="/plugins/ediacaran/front/default_template/front/js/jquery.fancybox.min.js"></script>
 <script src="/plugins/ediacaran/front/default_template/front/js/sidebar.js"></script>	
 <script src="/plugins/ediacaran/front/default_template/front/js/messages.js" charset="utf-8"></script>
 <script	src="/plugins/ediacaran/front/default_template/front/js/regex-patterns.js" charset="utf-8"></script>
 <script	src="/plugins/ediacaran/front/default_template/front/js/application.js" charset="utf-8"></script>
 <script	src="/plugins/ediacaran/front/default_template/front/js/application.validator.js" charset="utf-8"></script>
-<script src="/plugins/ediacaran/front/default_template/front/js/nivo.js"></script>	
+<script src="/plugins/ediacaran/front/default_template/front/js/nivo.js"></script>
+<script src="/plugins/ediacaran/front/default_template/front/js/gallery.js"></script>
 <script	src="/plugins/ediacaran/front/default_template/front/js/application.event.js" charset="utf-8"></script>
 <script	src="/plugins/ediacaran/front/default_template/front/js/application.page.js" charset="utf-8"></script>
 <script type="text/javascript">
