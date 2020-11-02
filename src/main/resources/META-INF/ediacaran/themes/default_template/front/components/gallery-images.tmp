@@ -1,5 +1,5 @@
 <div class="row">
-	<ul class="portfolio-thumbs">
+	<ul class="portfolio-thumbs light-gallery">
 		{content}
 	</ul>
 </div>

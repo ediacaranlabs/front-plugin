@@ -9,13 +9,13 @@
 <link href="/plugins/ediacaran/front/default_template/front/css/price-box.css" rel="stylesheet" />
 <link href="/plugins/ediacaran/front/default_template/front/css/box.css" rel="stylesheet" />
 <link href="/plugins/ediacaran/front/default_template/front/css/gallery.css" rel="stylesheet" />
-<link href="/plugins/ediacaran/front/default_template/front/css/jquery.fancybox.min.css" rel="stylesheet" />
+<link href="/plugins/ediacaran/front/default_template/front/css/lightgallery.css" rel="stylesheet" />
   
 <script src="/plugins/ediacaran/front/default_template/front/js/jquery.min.js"></script>
 <script src="/plugins/ediacaran/front/default_template/front/js/jquery.nivo.slider.js"></script>	
 <script src="/plugins/ediacaran/front/default_template/front/js/bootstrap.js"></script>
 <script src="/plugins/ediacaran/front/default_template/front/js/bootstrapValidator/bootstrapValidator.min.js"></script>
-<script src="/plugins/ediacaran/front/default_template/front/js/jquery.fancybox.min.js"></script>
+<script src="/plugins/ediacaran/front/default_template/front/js/lightgallery.js"></script>
 <script src="/plugins/ediacaran/front/default_template/front/js/sidebar.js"></script>	
 <script src="/plugins/ediacaran/front/default_template/front/js/messages.js" charset="utf-8"></script>
 <script	src="/plugins/ediacaran/front/default_template/front/js/regex-patterns.js" charset="utf-8"></script>
