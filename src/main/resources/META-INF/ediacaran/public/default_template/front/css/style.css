@@ -40,6 +40,15 @@ a {
     padding-right: 15px;
 }
 
+h4.heading {
+    font-weight: 300;
+}
+
+.heading {
+    position: relative;
+    margin-bottom: 30px;
+}
+
 /* ===================================
 Form Validation
 ==================================== */
@@ -331,6 +340,15 @@ section[class^="sidebar"] .navbar-expand .navbar-nav .navbar-nav .nav-link {
 section[class^="sidebar"] .nav-link i:first-child{
 	padding-right: 15px;
 }
+
+/* ===============================
+Divider, Line & Misc
+================================ */
+
+.solidline {
+  border-top: 1px solid #e6e6e6;
+}
+
 /* ===================================
 footer
 ==================================== */
@@ -385,7 +403,6 @@ footer .widget ul li a {
     padding-top: 30px;
     margin: 20px 0 0 0;
 }
-
 
 .sub-footer .social-network a {
     color: #444;

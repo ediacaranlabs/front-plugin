@@ -2,9 +2,9 @@
 	
 	<a class="hover-wrap"> 
 		<span class="overlay-img"></span> 
-		<span class="overlay-img-thumb fa fa-plus"></span>
+		<span class="overlay-img-thumb fa fa-search"></span>
 	</a>
-	
+
 	<img src="{icon}" alt="">
 	
 	<div id="{id}-{index}-caption" style="display:none">
