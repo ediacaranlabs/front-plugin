@@ -4,10 +4,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.BreadcrumbPathTag;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
 public class BreadcrumbPathComponent extends AbstractComponent {
 
@@ -38,8 +36,7 @@ public class BreadcrumbPathComponent extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						BreadcrumbPathTag tag = (BreadcrumbPathTag)component;
-						return value == null? null : new TemplateVarParser("/components/icon", tag.getTemaPackage(), null, tag.getTheme()).put("icon", value).put("size", 1);
+						return value == null || ((String)value).trim().isEmpty()? null : "<i {attr} class=\"fa fa-" + value + " fa-1x\"></i>";
 					}
 				});
 			}});
