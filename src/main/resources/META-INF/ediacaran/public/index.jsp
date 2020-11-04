@@ -72,7 +72,30 @@
 				</ec:gallery>
 			</ed:col>
 		</ed:row>
-		</ed:container>	</section>
+		</ed:container>	
+	</section>
+	<section class="content">
+		<ed:container>
+		<ed:row>
+			<ed:col size="12">
+				<h4 class="heading">Carousel</h4>
+
+				<ec:carousel>
+					<ec:carousel-item>
+						<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-01.jpg"/></a>
+					</ec:carousel-item> 
+					<ec:carousel-item>
+						<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-02.jpg"/></a>
+					</ec:carousel-item> 
+					<ec:carousel-item>
+						<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-03.jpg"/></a>
+					</ec:carousel-item> 
+				</ec:carousel>
+
+			</ed:col>
+		</ed:row>
+		</ed:container>	
+	</section>
 
 	<ec:include uri="/includes/footer.jsp"/>
  

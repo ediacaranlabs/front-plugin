@@ -3,6 +3,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
 <link href="/plugins/ediacaran/front/default_template/front/css/bootstrap.css" rel="stylesheet" />
 <link href="/plugins/ediacaran/front/default_template/front/css/bootstrapValidator.min.css" rel="stylesheet" />
+<link href="/plugins/ediacaran/front/default_template/front/css/jquery.jcarousel.css" rel="stylesheet" />
 <link href="/plugins/ediacaran/front/default_template/front/css/style.css" rel="stylesheet" />
 <link href="/plugins/ediacaran/front/default_template/front/css/nivo.css" rel="stylesheet" />
 <link href="/plugins/ediacaran/front/default_template/front/css/cta.css" rel="stylesheet" />
@@ -13,6 +14,7 @@
   
 <script src="/plugins/ediacaran/front/default_template/front/js/jquery.min.js"></script>
 <script src="/plugins/ediacaran/front/default_template/front/js/jquery.nivo.slider.js"></script>	
+<script src="/plugins/ediacaran/front/default_template/front/js/jquery.jcarousel.min.js"></script>	
 <script src="/plugins/ediacaran/front/default_template/front/js/bootstrap.js"></script>
 <script src="/plugins/ediacaran/front/default_template/front/js/bootstrapValidator/bootstrapValidator.min.js"></script>
 <script src="/plugins/ediacaran/front/default_template/front/js/lightgallery.js"></script>
@@ -23,6 +25,7 @@
 <script	src="/plugins/ediacaran/front/default_template/front/js/application.validator.js" charset="utf-8"></script>
 <script src="/plugins/ediacaran/front/default_template/front/js/nivo.js"></script>
 <script src="/plugins/ediacaran/front/default_template/front/js/gallery.js"></script>
+<script src="/plugins/ediacaran/front/default_template/front/js/carousel.js"></script>
 <script	src="/plugins/ediacaran/front/default_template/front/js/application.event.js" charset="utf-8"></script>
 <script	src="/plugins/ediacaran/front/default_template/front/js/application.page.js" charset="utf-8"></script>
 <script type="text/javascript">

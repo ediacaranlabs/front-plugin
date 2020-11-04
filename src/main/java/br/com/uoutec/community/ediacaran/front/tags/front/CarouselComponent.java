@@ -31,8 +31,8 @@ public class CarouselComponent extends AbstractComponent {
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
+			add("content");
 		}});
-	
 	
 		super.default_property_parsers = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{

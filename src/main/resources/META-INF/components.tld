@@ -780,7 +780,7 @@ Ex:
 	<tag>
 		<name>carousel-item</name>
 		<tag-class>br.com.uoutec.community.ediacaran.front.tags.CarouselItemTag</tag-class>
-		<body-content>empty</body-content>
+		<body-content>scriptless</body-content>
 		<info><![CDATA[
 Adiciona um novo item ao carousel.
 Ex:

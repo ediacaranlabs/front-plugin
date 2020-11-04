@@ -1,3 +1,1 @@
-<div class="item">
-	{content}
-</div>
+<li>{content}</li>

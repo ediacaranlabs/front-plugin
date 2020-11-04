@@ -1,3 +1,12 @@
-<div {attr} class="owl-carousel owl-theme">
-{content}
+<div {attr} class="jcarousel-wrapper">
+    <div class="jcarousel">
+        <ul>
+			{content}        
+        </ul>
+    </div>
+
+    <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+    <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+
+    <p class="jcarousel-pagination"></p>
 </div>
