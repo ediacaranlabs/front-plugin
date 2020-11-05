@@ -83,7 +83,7 @@
 				</ed:col>
 				<ed:col size="6">
 		            <h4>Horizontal Description</h4>
-		            <ec:description-list>
+		            <ec:description-list  >
 		            	<ec:description title="Description lists">
 			              <p>A description list is perfect for defining terms.</p>
 		            	</ec:description>
