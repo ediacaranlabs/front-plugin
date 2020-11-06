@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class DescriptionListComponent  extends AbstractComponent {
 
@@ -25,9 +26,22 @@ public class DescriptionListComponent  extends AbstractComponent {
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("content");
+			add("style");
 		}});
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers));
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+				
+				put("style", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return value == null? "" : " dl-" + value;
+					}
+					
+				});
+				
+			}});
+		
 	}
 }

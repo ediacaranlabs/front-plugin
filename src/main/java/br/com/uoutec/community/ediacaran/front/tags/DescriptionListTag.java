@@ -10,6 +10,8 @@ public class DescriptionListTag  extends AbstractSimpleComponent {
 	
 	/* ------------ Prop ---------------*/
 	
+	private String style;
+	
 	private JspFragmentVarParser content;
 	
 	public DescriptionListTag() {
@@ -29,6 +31,14 @@ public class DescriptionListTag  extends AbstractSimpleComponent {
 
 	public void setContent(JspFragmentVarParser content) {
 		this.content = content;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
 	}
     
 }

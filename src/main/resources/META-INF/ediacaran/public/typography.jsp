@@ -73,19 +73,23 @@
 		            		<p>description list is perfect for defining terms.</p>
 		            	</ec:description>
 		            	<ec:description title="Euismod">
-				            <p>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</p>
-				            <p>Donec id elit non mi porta gravida at eget metus.</p>
+			              <p>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</p>
+			              <p>Donec id elit non mi porta gravida at eget metus.</p>
 		            	</ec:description>
 		            	<ec:description title="Malesuada porta">
-		            		Etiam porta sem malesuada magna mollis euismod.
+			              <p>Etiam porta sem malesuada magna mollis euismod.</p>
+		            	</ec:description>
+		            	<ec:description title="Felis euismod semper eget lacinia">
+			              <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo 
+			              sit amet risus.</p>
 		            	</ec:description>
 		            </ec:description-list>
 				</ed:col>
 				<ed:col size="6">
 		            <h4>Horizontal Description</h4>
-		            <ec:description-list  >
+		            <ec:description-list style="horizontal" >
 		            	<ec:description title="Description lists">
-			              <p>A description list is perfect for defining terms.</p>
+		            		<p>description list is perfect for defining terms.</p>
 		            	</ec:description>
 		            	<ec:description title="Euismod">
 			              <p>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</p>
@@ -105,23 +109,23 @@
 			<ed:row>
 				<ed:col size="3">
 		            <h4>Unordered Lists</h4>
-		            <ul>
-		              <li>Lorem ipsum dolor sit amet</li>
-		              <li>Consectetur adipiscing elit</li>
-		              <li>Integer molestie lorem at massa</li>
-		              <li>Facilisis in pretium nisl aliquet</li>
-		              <li>Nulla volutpat aliquam velit
-		                <ul>
-		                  <li>Phasellus iaculis neque</li>
-		                  <li>Purus sodales ultricies</li>
-		                  <li>Vestibulum laoreet porttitor sem</li>
-		                  <li>Ac tristique libero volutpat at</li>
-		                </ul>
-		              </li>
-		              <li>Faucibus porta lacus fringilla vel</li>
-		              <li>Aenean sit amet erat nunc</li>
-		              <li>Eget porttitor lorem</li>
-		            </ul>
+		            <ec:list>
+		              <ec:list-item>Lorem ipsum dolor sit amet</ec:list-item>
+		              <ec:list-item>Consectetur adipiscing elit</ec:list-item>
+		              <ec:list-item>Integer molestie lorem at massa</ec:list-item>
+		              <ec:list-item>Facilisis in pretium nisl aliquet</ec:list-item>
+		              <ec:list-item>Nulla volutpat aliquam velit
+		                <ec:list>
+		                  <ec:list-item>Phasellus iaculis neque</ec:list-item>
+		                  <ec:list-item>Purus sodales ultricies</ec:list-item>
+		                  <ec:list-item>Vestibulum laoreet porttitor sem</ec:list-item>
+		                  <ec:list-item>Ac tristique libero volutpat at</ec:list-item>
+		                </ec:list>
+		              </ec:list-item>
+		              <ec:list-item>Faucibus porta lacus fringilla vel</ec:list-item>
+		              <ec:list-item>Aenean sit amet erat nunc</ec:list-item>
+		              <ec:list-item>Eget porttitor lorem</ec:list-item>
+		            </ec:list>
 				</ed:col>
 				<ed:col size="3">
 		           <h4>Unstyled Lists</h4>

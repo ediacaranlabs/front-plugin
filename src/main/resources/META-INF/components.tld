@@ -2373,6 +2373,14 @@ Cria uma lista descritiva.
 		</attribute>
 		
 		<!-- attr -->
+
+		<attribute>
+			<description></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
 	
 	</tag>
 	
