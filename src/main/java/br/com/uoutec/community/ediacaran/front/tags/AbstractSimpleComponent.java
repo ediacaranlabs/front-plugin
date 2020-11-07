@@ -287,6 +287,20 @@ public abstract class AbstractSimpleComponent
 		return id;
 	}
 
+	/*
+	public void initTag(SimpleTagSupport tag) {
+		tag.setJspBody(super.getJspBody());
+		tag.setJspContext(super.getJspContext());
+		tag.setParent(this);
+	}
+	
+	public void initTag(BodyTagSupport tag) {
+		PageContext pageContext = (PageContext) getJspContext();
+		tag.setBodyContent(new BodyContentImpl(new JspWriterImpl(pageContext.getResponse())));
+		tag.setPageContext(pageContext);
+	}
+	*/
+	
 	public void setId(String id) {
 		this.id = id;
 	}

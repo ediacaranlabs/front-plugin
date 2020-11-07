@@ -129,96 +129,96 @@
 				</ed:col>
 				<ed:col size="3">
 		           <h4>Unstyled Lists</h4>
-		           <ul class="unstyled">
-		             <li>Lorem ipsum dolor sit amet</li>
-		             <li>Consectetur adipiscing elit</li>
-		             <li>Integer molestie lorem at massa</li>
-		             <li>Facilisis in pretium nisl aliquet</li>
-		             <li>Nulla volutpat aliquam velit
-		               <ul>
-		                 <li>Phasellus iaculis neque</li>
-		                 <li>Purus sodales ultricies</li>
-		                 <li>Vestibulum laoreet porttitor sem</li>
-		                 <li>Ac tristique libero volutpat at</li>
-		               </ul>
-		             </li>
-		             <li>Faucibus porta lacus fringilla vel</li>
-		             <li>Aenean sit amet erat nunc</li>
-		             <li>Eget porttitor lorem</li>
-		           </ul>
+		            <ec:list style="unstyled">
+		              <ec:list-item>Lorem ipsum dolor sit amet</ec:list-item>
+		              <ec:list-item>Consectetur adipiscing elit</ec:list-item>
+		              <ec:list-item>Integer molestie lorem at massa</ec:list-item>
+		              <ec:list-item>Facilisis in pretium nisl aliquet</ec:list-item>
+		              <ec:list-item>Nulla volutpat aliquam velit
+		                <ec:list>
+		                  <ec:list-item>Phasellus iaculis neque</ec:list-item>
+		                  <ec:list-item>Purus sodales ultricies</ec:list-item>
+		                  <ec:list-item>Vestibulum laoreet porttitor sem</ec:list-item>
+		                  <ec:list-item>Ac tristique libero volutpat at</ec:list-item>
+		                </ec:list>
+		              </ec:list-item>
+		              <ec:list-item>Faucibus porta lacus fringilla vel</ec:list-item>
+		              <ec:list-item>Aenean sit amet erat nunc</ec:list-item>
+		              <ec:list-item>Eget porttitor lorem</ec:list-item>
+		            </ec:list>
 				</ed:col>
 				<ed:col size="3">
 		            <h4>Ordered Lists</h4>
-		            <ol>
-		              <li>Lorem ipsum dolor sit amet</li>
-		              <li>Consectetur adipiscing elit</li>
-		              <li>Integer molestie lorem at massa</li>
-		              <li>Facilisis in pretium nisl aliquet</li>
-		              <li>Nulla volutpat aliquam velit
-		                <ol>
-		                  <li>Phasellus iaculis neque</li>
-		                  <li>Purus sodales ultricies</li>
-		                  <li>Vestibulum laoreet porttitor sem</li>
-		                  <li>Ac tristique libero volutpat at</li>
-		                </ol>
-		              </li>
-		              <li>Faucibus porta lacus fringilla vel</li>
-		              <li>Aenean sit amet erat nunc</li>
-		              <li>Eget porttitor lorem</li>
-		            </ol>
+		            <ec:list style="ordered">
+		              <ec:list-item>Lorem ipsum dolor sit amet</ec:list-item>
+		              <ec:list-item>Consectetur adipiscing elit</ec:list-item>
+		              <ec:list-item>Integer molestie lorem at massa</ec:list-item>
+		              <ec:list-item>Facilisis in pretium nisl aliquet</ec:list-item>
+		              <ec:list-item>Nulla volutpat aliquam velit
+		                <ec:list style="ordered">
+		                  <ec:list-item>Phasellus iaculis neque</ec:list-item>
+		                  <ec:list-item>Purus sodales ultricies</ec:list-item>
+		                  <ec:list-item>Vestibulum laoreet porttitor sem</ec:list-item>
+		                  <ec:list-item>Ac tristique libero volutpat at</ec:list-item>
+		                </ec:list>
+		              </ec:list-item>
+		              <ec:list-item>Faucibus porta lacus fringilla vel</ec:list-item>
+		              <ec:list-item>Aenean sit amet erat nunc</ec:list-item>
+		              <ec:list-item>Eget porttitor lorem</ec:list-item>
+		            </ec:list>
 				</ed:col>
 				<ed:col size="3">
 		            <h4>Unstyled Lists</h4>
-		            <ol class="unstyled">
-		              <li>Lorem ipsum dolor sit amet</li>
-		              <li>Consectetur adipiscing elit</li>
-		              <li>Integer molestie lorem at massa</li>
-		              <li>Facilisis in pretium nisl aliquet</li>
-		              <li>Nulla volutpat aliquam velit
-		                <ol>
-		                  <li>Phasellus iaculis neque</li>
-		                  <li>Purus sodales ultricies</li>
-		                  <li>Vestibulum laoreet porttitor sem</li>
-		                  <li>Ac tristique libero volutpat at</li>
-		                </ol>
-		              </li>
-		              <li>Faucibus porta lacus fringilla vel</li>
-		              <li>Aenean sit amet erat nunc</li>
-		              <li>Eget porttitor lorem</li>
-		            </ol>
+		            <ec:list style="unstyled">
+		              <ec:list-item>Lorem ipsum dolor sit amet</ec:list-item>
+		              <ec:list-item>Consectetur adipiscing elit</ec:list-item>
+		              <ec:list-item>Integer molestie lorem at massa</ec:list-item>
+		              <ec:list-item>Facilisis in pretium nisl aliquet</ec:list-item>
+		              <ec:list-item>Nulla volutpat aliquam velit
+		                <ec:list style="ordered">
+		                  <ec:list-item>Phasellus iaculis neque</ec:list-item>
+		                  <ec:list-item>Purus sodales ultricies</ec:list-item>
+		                  <ec:list-item>Vestibulum laoreet porttitor sem</ec:list-item>
+		                  <ec:list-item>Ac tristique libero volutpat at</ec:list-item>
+		                </ec:list>
+		              </ec:list-item>
+		              <ec:list-item>Faucibus porta lacus fringilla vel</ec:list-item>
+		              <ec:list-item>Aenean sit amet erat nunc</ec:list-item>
+		              <ec:list-item>Eget porttitor lorem</ec:list-item>
+		            </ec:list>
 				</ed:col>
 			</ed:row>			
 
 			<ed:row>
 				<ed:col size="12">
 		            <h4>Inline Lists</h4>
-		            <ul class="inline">
-		              <li>1-List item one</li>
-		              <li>2-List item two</li>
-		              <li>3-List item three</li>
-		              <li>4-List item four</li>
-		              <li>5-List item five</li>
-		              <li>6-List item six</li>
-		              <li>7-List item seven</li>
-		              <li>8-List item eight</li>
-		              <li>9-List item nine</li>
-		              <li>10-List item ten</li>
-		            </ul>
+		            <ec:list style="inline">
+		              <ec:list-item>1-List item one</ec:list-item>
+		              <ec:list-item>2-List item two</ec:list-item>
+		              <ec:list-item>3-List item three</ec:list-item>
+		              <ec:list-item>4-List item four</ec:list-item>
+		              <ec:list-item>5-List item five</ec:list-item>
+		              <ec:list-item>6-List item six</ec:list-item>
+		              <ec:list-item>7-List item seven</ec:list-item>
+		              <ec:list-item>8-List item eight</ec:list-item>
+		              <ec:list-item>9-List item nine</ec:list-item>
+		              <ec:list-item>10-List item ten</ec:list-item>
+		            </ec:list>
 				</ed:col>
 			</ed:row>
 
 			<ed:row>
 				<ed:col size="4">
 		            <h4>Blockquote</h4>
-		            <blockquote>
-		              <i class="icon-quote-left icon-2x"></i> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam non mod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-		            </blockquote>
+		            <ec:blockquote>
+		            	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam non mod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+	            	</ec:blockquote>
 				</ed:col>
 				<ed:col size="4">
 		            <h4>Blockquote and cite</h4>
-		            <blockquote>
-		              <i class="icon-quote-left icon-2x"></i> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam non mod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. <cite>John doe, Awesome Inc.</cite>
-		            </blockquote>
+		            <ec:blockquote cite="John doe, Awesome Inc.">
+		            	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam non mod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+	            	</ec:blockquote>
 				</ed:col>
 				<ed:col size="4">
 		            <h4>Pullquote left and right</h4>

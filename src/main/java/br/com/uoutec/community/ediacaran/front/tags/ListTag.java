@@ -20,17 +20,23 @@ public class ListTag  extends AbstractSimpleComponent {
 	
 	private JspFragmentVarParser content;
 	
+	private Object oldParent;
+	
 	public ListTag() {
 	}
 	
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
-    	getJspContext().setAttribute(PARENT, this);
+    	this.oldParent = super.setProperty(PARENT, this);
+    	//getJspContext().setAttribute(PARENT, this);
     }
     
     protected void afterApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
-    	getJspContext().removeAttribute(PARENT);
+    	super.setProperty(PARENT, oldParent);
+    	this.oldParent = null;
+    	
+    	//getJspContext().removeAttribute(PARENT);
     }
 
     protected String getDefaultTemplate() {

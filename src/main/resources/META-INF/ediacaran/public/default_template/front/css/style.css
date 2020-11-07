@@ -229,20 +229,20 @@ li {
   line-height: 1.6em;
 }
 
-ul.unstyled,
-ol.unstyled {
+ul.list-unstyled,
+ol.list-unstyled {
   margin-left: 0;
   list-style: none;
 }
 
-ul.inline,
-ol.inline {
+ul.list-inline,
+ol.list-inline {
   margin-left: 0;
   list-style: none;
 }
 
-ul.inline > li,
-ol.inline > li {
+ul.list-inline > li,
+ol.list-inline > li {
   display: inline-block;
   *display: inline;
   padding-right: 5px;
@@ -430,11 +430,66 @@ section[class^="sidebar"] .nav-link i:first-child{
 }
 
 /* ===============================
-Divider, Line & Misc
+Line
 ================================ */
 
 .solidline {
   border-top: 1px solid #e6e6e6;
+}
+
+
+/* ===============================
+Blockquote
+================================ */
+
+blockquote {
+  font-weight: 400;
+  font-style: italic;
+  padding-left: 0;
+  color: #a2a2a2;
+  line-height: 1.6em;
+  border: none;
+}
+
+blockquote cite {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-top: 10px;
+}
+
+blockquote cite:before {
+  content: "\2014 \0020";
+}
+
+blockquote cite a, blockquote cite a:visited, blockquote cite a:visited {
+  color: #555;
+}
+
+/* ===============================
+Pullquote
+================================ */
+
+.pullquote-left {
+	border-left:5px solid #F03C02;
+}
+
+.pullquote-right {
+	border-right:5px solid #F03C02;
+}
+
+.pullquote-left {
+  display: block;
+  font-size: 14px;
+  line-height: 1.6em;
+  padding-left: 20px;
+}
+
+.pullquote-right {
+  display: block;
+  font-size: 14px;
+  line-height: 1.6em;
+  padding-right: 20px;
 }
 
 /* ===================================

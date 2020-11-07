@@ -7,6 +7,7 @@ import java.util.HashSet;
 import br.com.uoutec.community.ediacaran.front.tags.BlockquoteTag;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.system.tema.ComponentVarsBuilder;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
 public class BlockquoteComponent extends AbstractComponent {
@@ -39,7 +40,9 @@ public class BlockquoteComponent extends AbstractComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						BlockquoteTag tag = (BlockquoteTag)component;
-						return value == null? null : new TemplateVarParser("/components/cite", tag.getTemaPackage(), null, tag.getTheme()).put("content", value);
+						ComponentVarsBuilder cv = new ComponentVarsBuilder();
+						//cv.put("content", tag.getCite());
+						return value == null? null : new TemplateVarParser("/components/cite", tag.getTemaPackage(), cv, tag.getTheme()).put("content", value);
 					}
 				});
 				
