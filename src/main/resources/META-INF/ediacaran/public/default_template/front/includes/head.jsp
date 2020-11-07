@@ -5,6 +5,7 @@
 <link href="/plugins/ediacaran/front/default_template/front/css/bootstrapValidator.min.css" rel="stylesheet" />
 <link href="/plugins/ediacaran/front/default_template/front/css/jquery.jcarousel.css" rel="stylesheet" />
 <link href="/plugins/ediacaran/front/default_template/front/css/style.css" rel="stylesheet" />
+<link href="/plugins/ediacaran/front/default_template/front/css/prettify.css" rel="stylesheet" />
 <link href="/plugins/ediacaran/front/default_template/front/css/nivo.css" rel="stylesheet" />
 <link href="/plugins/ediacaran/front/default_template/front/css/cta.css" rel="stylesheet" />
 <link href="/plugins/ediacaran/front/default_template/front/css/price-box.css" rel="stylesheet" />
@@ -19,6 +20,7 @@
 <script src="/plugins/ediacaran/front/default_template/front/js/bootstrapValidator/bootstrapValidator.min.js"></script>
 <script src="/plugins/ediacaran/front/default_template/front/js/lightgallery.js"></script>
 <script src="/plugins/ediacaran/front/default_template/front/js/sidebar.js"></script>	
+<script src="/plugins/ediacaran/front/default_template/front/js/prettify.js"></script>	
 <script src="/plugins/ediacaran/front/default_template/front/js/messages.js" charset="utf-8"></script>
 <script	src="/plugins/ediacaran/front/default_template/front/js/regex-patterns.js" charset="utf-8"></script>
 <script	src="/plugins/ediacaran/front/default_template/front/js/application.js" charset="utf-8"></script>
