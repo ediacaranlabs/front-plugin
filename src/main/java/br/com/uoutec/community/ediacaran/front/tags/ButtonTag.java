@@ -20,6 +20,8 @@ public class ButtonTag extends ComponentFormTag {
 	
 	private String label;
 	
+	private String icon;
+	
 	private String size;
 	
 	private String type;
@@ -35,6 +37,14 @@ public class ButtonTag extends ComponentFormTag {
     	return TEMPLATE;
     }
 	
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
 	public String getAction() {
 		return action;
 	}

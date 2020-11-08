@@ -627,6 +627,14 @@ Ex:
 		</attribute>
 		
 		<!-- attr -->
+
+		<attribute>
+			<description></description>
+			<name>icon</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
 		
 		<attribute>
 			<description></description>
