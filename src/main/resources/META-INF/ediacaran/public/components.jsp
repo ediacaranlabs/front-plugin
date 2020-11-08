@@ -65,18 +65,17 @@
 				</ed:col>
 				<ed:col size="6">
 	                <h4>More variations</h4>
-	                <p>Wrap a series of buttons with <code>.btn</code> in <code>.btn-group</code></p>
-	                <div class="bs-docs-example">
-	                  <div class="btn-group">
-	                    <button class="btn btn-primary">primary</button>
-	                    <button class="btn btn-success">success</button>
-	                    <button class="btn btn-warning">warning</button>
-	                  </div>
-	                </div>
-	                <pre class="prettyprint linenums">
-								 &lt;div class="btn-group"&gt; &lt;button class="btn btn-primary"&gt;primary&lt;/button&gt; &lt;button class="btn btn-success"&gt;success&lt;/button&gt; &lt;button class="btn btn-inverse"&gt;warning&lt;/button&gt; &lt;/div&gt;
-							</pre>
-				
+	                <p>Wrap a series of buttons with <code>&lt;ec:button-group/&gt;</code></p>
+	                <ec:button-group>
+	                	<ec:button label="primary" type="primary"/>
+	                	<ec:button label="success" type="success"/>
+	                	<ec:button label="warning" type="warning"/>
+	                </ec:button-group>
+		            <ec:prettify linenums="true">&lt;ec:button-group&gt;
+	&lt;ec:button label=&quot;primary&quot; type=&quot;primary&quot;/&gt;
+	&lt;ec:button label=&quot;success&quot; type=&quot;success&quot;/&gt;
+	&lt;ec:button label=&quot;warning&quot; type=&quot;warning&quot;/&gt;
+&lt;/ec:button-group&gt;</ec:prettify>
 				</ed:col>
 			</ed:row>
 		</ed:container>    

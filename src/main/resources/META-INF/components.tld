@@ -736,6 +736,46 @@ Ex:
 	
 	<!-- /button -->
 
+	<!-- button-group -->
+	<tag>
+		<name>button-group</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.ButtonGroupTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description></description>
+			<name>classStyle</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+	</tag>
+	
+	<!-- /button-group -->
+	
 	<!-- caruousel -->
 	
 	<tag>

@@ -1,0 +1,3 @@
+<div {attr} class="btn-group {classStyle}">
+{content}
+</div>
