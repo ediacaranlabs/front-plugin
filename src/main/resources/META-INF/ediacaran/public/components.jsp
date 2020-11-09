@@ -48,8 +48,8 @@
                 	<ec:button label="btn info"  type="info"/>
                 	<ec:button label="btn light"  type="light"/>
                 	<ec:button label="btn dark"  type="dark"/>
+                	<ec:button label="btn link"  type="link"/>
                 	<ec:button label="btn outline" outline="true"/>
-                	<ec:button label="btn block level" block="true"/>
 				</ed:col>
 			</ed:row>
 			<ed:row>
@@ -78,6 +78,80 @@
 &lt;/ec:button-group&gt;</ec:prettify>
 				</ed:col>
 			</ed:row>
+			<ed:row>
+				<ed:col size="6">
+	                <h4>Button sizes</h4>
+	                <p>There are 5 button sizes: lg and sm.</p>
+                	<ec:button label="Large button" size="lg"/>
+                	<ec:button label="Small button" size="sm" type="success"/>
+                	<ec:button label="btn block level" block="true" type="warning"/>
+				</ed:col>
+				<ed:col size="6">
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col size="6">
+				<ec:tabs id="tab0">
+					<ec:tabs-item title="One">
+	                    <p><strong>Augue iriure</strong> dolorum per ex, ne iisque ornatus veritus duo. Ex nobis integre 
+	                    lucilius sit, pri ea falli ludus appareat. Eum quodsi fuisset id, nostro patrioque qui id. Nominati 
+	                    eloquentiam in mea.</p>
+	                    <p>No eum sanctus vituperata reformidans, dicant abhorreant ut pro. Duo id enim iisque praesent, 
+	                    amet intellegat per et, solet referrentur eum et.</p>
+					</ec:tabs-item>
+					<ec:tabs-item title="two">
+						<p>Tale dolor mea ex, te enim assum suscipit cum, vix aliquid omittantur in. Duo eu cibo dolorum 
+						menandri, nam sumo dicit admodum ei. Ne mazim commune honestatis cum, mentitum phaedrum sit et.</p>
+					</ec:tabs-item>
+					<ec:tabs-item title="three">
+                    	<p>Cu cum commodo regione definiebas. Cum ea eros laboramus, audire deseruisse his at, munere 
+                    	aeterno ut quo. Et ius doming causae philosophia, vitae bonorum intellegat usu cu.</p>
+					</ec:tabs-item>
+				</ec:tabs>
+                <h4>Tab <strong>top</strong></h4>
+				<nav>
+				  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+				    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+				    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+				    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+				  </div>
+				</nav>
+				<div class="tab-content" id="nav-tabContent">
+				  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+				  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+				  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+				</div>				
+				
+				
+				</ed:col>
+				<ed:col size="6">
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col size="6">
+				</ed:col>
+				<ed:col size="6">
+	                <h4>Accordion</h4>
+	                <ec:accordion>
+	                	<ec:accordion-item title="one">
+		                    <p><strong>Augue iriure</strong> dolorum per ex, ne iisque ornatus veritus duo. Ex nobis integre 
+		                    lucilius sit, pri ea falli ludus appareat. Eum quodsi fuisset id, nostro patrioque qui id. Nominati 
+		                    eloquentiam in mea.</p>
+		                    <p>No eum sanctus vituperata reformidans, dicant abhorreant ut pro. Duo id enim iisque praesent, 
+		                    amet intellegat per et, solet referrentur eum et.</p>
+	                	</ec:accordion-item>
+	                	<ec:accordion-item title="two">
+		                    <p>Tale dolor mea ex, te enim assum suscipit cum, vix aliquid omittantur in. Duo eu cibo dolorum menandri, 
+		                    nam sumo dicit admodum ei. Ne mazim commune honestatis cum, mentitum phaedrum sit et.</p>
+	                	</ec:accordion-item>
+	                	<ec:accordion-item title="three">
+		                    <p>Cu cum commodo regione definiebas. Cum ea eros laboramus, audire deseruisse his at, munere aeterno ut 
+		                    quo. Et ius doming causae philosophia, vitae bonorum intellegat usu cu.</p>
+	                	</ec:accordion-item>
+	                </ec:accordion>
+					</ed:col>
+			</ed:row>
+			
 		</ed:container>    
     </section>
 	
@@ -85,78 +159,6 @@
       <div class="container">
         <div class="row demobtn">
           <div class="span12">
-            <div class="row">
-              <div class="span6">
-                <h4>Button with icon</h4>
-                <p>
-                  You can add icon from about 249 available icons to any choosen buttons. See some example below:
-                </p>
-                <a href="#" class="btn btn-primary"><i class="icon-cog"></i> button icon cog</a>
-                <a href="#" class="btn btn-success"><i class="icon-heart"></i> button icon heart</a>
-                <a href="#" class="btn btn-red"><i class="icon-cog"></i> button icon camera</a>
-                <a href="#" class="btn btn-inverse btn-rounded"><i class="icon-briefcase"></i> button icon briefcase</a>
-                <pre class="prettyprint linenums">
-							 &lt;a href="your link" class="btn |button type|"&gt;&lt;i class="icon-|icon name|"&gt;&lt;/i&gt; Your button text&lt;/a&gt;
-						</pre>
-              </div>
-              <div class="span6">
-                <h4>More variations</h4>
-                <p>
-                  Wrap a series of buttons with <code>.btn</code> in <code>.btn-group</code>
-                </p>
-                <div class="bs-docs-example">
-                  <div class="btn-group">
-                    <button class="btn btn-primary">primary</button>
-                    <button class="btn btn-success">success</button>
-                    <button class="btn btn-warning">warning</button>
-                  </div>
-                </div>
-                <pre class="prettyprint linenums">
-							 &lt;div class="btn-group"&gt; &lt;button class="btn btn-primary"&gt;primary&lt;/button&gt; &lt;button class="btn btn-success"&gt;success&lt;/button&gt; &lt;button class="btn btn-inverse"&gt;warning&lt;/button&gt; &lt;/div&gt;
-						</pre>
-              </div>
-            </div>
-            <!-- divider -->
-            <div class="row">
-              <div class="span12">
-                <div class="solidline">
-                </div>
-              </div>
-            </div>
-            <!-- end divider -->
-            <div class="row">
-              <div class="span6">
-                <h4>Button sizes</h4>
-                <p>
-                  There are 5 button sizes: mini, small, normal, medium and large
-                </p>
-                <a href="#" class="btn btn-mini btn-primary">mini size</a>
-                <a href="#" class="btn btn-small btn-warning">small size</a>
-                <a href="#" class="btn btn-danger">normal size</a>
-                <a href="#" class="btn btn-medium btn-danger">Medium size</a>
-                <a href="#" class="btn btn-large btn-info">Large size</a>
-              </div>
-              <div class="span6">
-                <h4>Button edge</h4>
-                <p>
-                  There are 3 button edge variations: normal, rounded and flat. Simply adding <code>btn-rounded</code> or <code>btn-flat</code> class and you'll get different button edge
-                </p>
-                <a href="#" class="btn btn-primary">normal primary</a>
-                <a href="#" class="btn btn-warning btn-rounded">rounded button</a>
-                <a href="#" class="btn btn-danger btn-flat">flat button</a>
-                <a href="#" class="btn btn-primary btn-large btn-rounded">normal button</a>
-                <a href="#" class="btn btn-warning btn-mini btn-rounded">rounded button</a>
-                <a href="#" class="btn btn-danger btn-medium btn-rounded">flat button</a>
-              </div>
-            </div>
-            <!-- divider -->
-            <div class="row">
-              <div class="span12">
-                <div class="solidline">
-                </div>
-              </div>
-            </div>
-            <!-- end divider -->
             <div class="row">
               <div class="span6">
                 <h4>Tab <strong>top</strong></h4>

@@ -8,9 +8,9 @@
 			{title} </a>  
 	</div>  
 	<div id="collapse{id}"  
-		class="collapse"  
+		class="collapse{show}"  
 		aria-labelledby="heading{id}"  
-		data-parent="#accordion{parentID}">  
+		data-parent="#{parentID}">  
 		<div class="card-body"> 
            {content} 
 		</div>  

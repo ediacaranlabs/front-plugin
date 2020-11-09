@@ -16,6 +16,7 @@ import org.brandao.brutos.bean.BeanInstance;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.ComponentVars;
+import br.com.uoutec.community.ediacaran.system.tema.TagTemplate.VarParser;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 import br.com.uoutec.community.ediacaran.system.tema.Theme;
 import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
@@ -287,6 +288,25 @@ public abstract class AbstractSimpleComponent
 		return id;
 	}
 
+	public VarParser toVarParser() {
+		return new VarParser() {
+			
+			@Override
+			public String parse() throws IOException {
+				return null;
+			}
+			
+			@Override
+			public void parse(Writer writter) throws IOException {
+				try {
+					getJspBody().invoke(writter);
+				}
+				catch(Throwable e) {
+					throw new IllegalStateException(e);
+				}
+			}
+		};
+	}
 	/*
 	public void initTag(SimpleTagSupport tag) {
 		tag.setJspBody(super.getJspBody());

@@ -171,6 +171,120 @@ Adiciona um novo cartão ao acordeon.
 
 	<!-- /Accordion -->
 
+	<!-- tabs -->
+
+	<tag>
+		<name>tabs</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TabsTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+		<attribute>
+			<description></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+	</tag>
+
+	<!-- /tabs -->
+
+	<!-- tabs-item -->
+
+	<tag>
+		<name>tabs-item</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TabsItemTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+		<attribute>
+			<description></description>
+			<name>title</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>icon</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>active</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+	</tag>
+
+	<!-- /tabs -->
+
 	<!-- Blockquote -->
 	<tag>
 		<name>blockquote</name>

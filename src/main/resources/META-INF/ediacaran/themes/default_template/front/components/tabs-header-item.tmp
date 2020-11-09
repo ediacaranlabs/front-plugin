@@ -1,0 +1,2 @@
+<a class="nav-item nav-link {active}" id="{parentID}-nav-{id}-tab" data-toggle="tab" 
+href="#{parentID}-nav-{id}" role="tab" aria-controls="{parentID}-nav-{id}" aria-selected="{selected}">{title}</a>

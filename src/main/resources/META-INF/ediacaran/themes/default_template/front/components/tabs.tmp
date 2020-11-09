@@ -1,0 +1,8 @@
+<nav>
+  <div class="nav nav-tabs" id="{id}-nav-tab" role="tablist">
+  {header}
+  </div>
+</nav>
+<div class="tab-content" id="{id}-nav-tabContent">
+	{content}
+</div>

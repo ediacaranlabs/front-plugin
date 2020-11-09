@@ -1,6 +1,8 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Map;;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Map;
 
 public class AccordionItemTag extends AbstractSimpleComponent {
 
@@ -21,11 +23,13 @@ public class AccordionItemTag extends AbstractSimpleComponent {
 	public AccordionItemTag() {
 	}
 	
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-		
+    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
     	Object parentTag = getParentTag();
 		this.parentID = parentTag == null? null : ((AccordionTag)parentTag).getId();
+    }
+	
+	public void beforePrepareVars(Map<String, Object> vars) {
+		this.content = new JspFragmentVarParser(getJspBody());
 	}
 	
     protected String getDefaultTemplate() {
