@@ -28,21 +28,33 @@ public class TabsTag extends AbstractPanelComponent {
 	
 	public void add(TabsItemTag item) {
 		index++;
-		boolean active = Boolean.TRUE.equals(item.getActive());
+		//boolean active = Boolean.TRUE.equals(item.getActive());
+		
+		header.createNewItem(item)
+		.put("parentID", getId())
+		.put("id", index);
+		
+		content.createNewItem(item)
+		.put("parentID", getId())
+		.put("id", index);
+		
+		/*
 		header.createNewItem()
 			.put("active", active? "active" : "")
 			.put("parentID", getId())
 			.put("id", index)
 			.put("selected", active)
 			.put("title", item.getTitle());
+		*/
 		
+		/*
 		content.createNewItem()
 			.put("show", active? "show" : "")
 			.put("active", active? "active" : "")
 			.put("parentID", getId())
 			.put("id", index)
 			.put("content", item.toVarParser());
-		
+		*/
 	}
 	
     public int doStartTag() throws JspException {
@@ -70,6 +82,18 @@ public class TabsTag extends AbstractPanelComponent {
 
 	public void setStyle(String style) {
 		this.style = style;
+	}
+
+	public int getNextIndex() {
+		return ++index;
+	}
+	
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 }

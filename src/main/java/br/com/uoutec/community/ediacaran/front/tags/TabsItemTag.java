@@ -1,8 +1,11 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.jsp.JspException;
+
+import br.com.uoutec.community.ediacaran.system.tema.TagTemplate.VarParser;
 
 public class TabsItemTag extends AbstractSimpleComponent {
 	
@@ -13,6 +16,10 @@ public class TabsItemTag extends AbstractSimpleComponent {
 	private String title;
 	
 	private Boolean active;
+
+	private String icon;
+	
+	private VarParser content;
 	
     public void doTag() throws JspException, IOException{
     	
@@ -26,6 +33,12 @@ public class TabsItemTag extends AbstractSimpleComponent {
     	
     }
 
+	protected void beforePrepareVars(Map<String, Object> vars) {
+		content = this.toVarParser();
+		vars.put("show", Boolean.TRUE.equals(active)?  "show" : "");
+		vars.put("selected", active);
+	}
+    
     protected String getDefaultTemplate() {
     	return null;
     }
@@ -44,6 +57,22 @@ public class TabsItemTag extends AbstractSimpleComponent {
 
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public VarParser getContent() {
+		return content;
+	}
+
+	public void setContent(VarParser content) {
+		this.content = content;
 	}
 	
 }

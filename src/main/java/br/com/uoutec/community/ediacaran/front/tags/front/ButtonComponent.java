@@ -7,7 +7,7 @@ import java.util.HashSet;
 import br.com.uoutec.community.ediacaran.front.tags.ButtonTag;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.tema.ComponentVarsBuilder;
+import br.com.uoutec.community.ediacaran.system.tema.EmptyVarsBuilder;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
 public class ButtonComponent extends ComponentFormComponent {
@@ -127,8 +127,8 @@ public class ButtonComponent extends ComponentFormComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						ButtonTag tag = (ButtonTag)component;
-						ComponentVarsBuilder cv = new ComponentVarsBuilder();
-						return value == null? "" : new TemplateVarParser("/components/icon", tag.getTemaPackage(), cv, tag.getTheme()).put("icon", value);
+						return value == null? "" : new TemplateVarParser("/components/icon", tag.getTemaPackage(), 
+								new EmptyVarsBuilder(), tag.getTheme()).put("icon", value);
 					}
 				});
 				

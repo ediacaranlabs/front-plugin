@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class TabsContentItemComponent extends AbstractComponent {
 
@@ -23,10 +24,21 @@ public class TabsContentItemComponent extends AbstractComponent {
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
+			add("active");
+			add("content");
 		}});
 	
 		super.default_property_parsers = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+				
+				put("active", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return Boolean.TRUE.equals(value)? "active" : "";
+					}
+				});
+				
 			}});
 
 	}
