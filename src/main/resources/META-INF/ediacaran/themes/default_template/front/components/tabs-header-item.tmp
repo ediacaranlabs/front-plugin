@@ -1,2 +1,4 @@
-<a class="nav-item nav-link {active}" id="{parentID}-nav-{id}-tab" data-toggle="tab" 
-href="#{parentID}-nav-{id}" role="tab" aria-controls="{parentID}-nav-{id}" aria-selected="{selected}">{icon} {title}</a>
+<li class="nav-item">
+  <a class="nav-link {active}" id="{parentID}-nav-{id}-tab" data-toggle="tab" href="#{parentID}-nav-{id}" 
+    role="tab" aria-controls="{parentID}-nav-{id}" aria-selected="{selected}">{icon} {title}</a>
+</li>
