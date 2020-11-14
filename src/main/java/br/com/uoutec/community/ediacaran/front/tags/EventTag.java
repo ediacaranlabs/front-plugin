@@ -1,5 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Map;
 
 public class EventTag extends AbstractSimpleComponent {
@@ -12,17 +14,8 @@ public class EventTag extends AbstractSimpleComponent {
 	
 	private JspFragmentVarParser content;
 
-
-    public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getComponent() {
-		if(component == null) {
+    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
+    	if(component == null) {
 			Object cp = super.getParentTag();
 			if(cp != null) {
 				if(cp instanceof AbstractSimpleComponent) {
@@ -33,8 +26,18 @@ public class EventTag extends AbstractSimpleComponent {
 					component = ((AbstractPanelComponent)cp).getId();
 				}
 			}
-		}
-		
+    	}
+    }
+
+    public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getComponent() {
 		return component;
 	}
 

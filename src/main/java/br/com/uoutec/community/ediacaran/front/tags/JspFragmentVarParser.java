@@ -18,7 +18,9 @@ public class JspFragmentVarParser extends AbstractVarParser{
 	@Override
 	public void parse(Writer writter) throws IOException {
 		try {
-			jspBody.invoke(writter);
+			if(jspBody != null) {
+				jspBody.invoke(writter);
+			}
 		}
 		catch(Throwable e) {
 			throw new IllegalStateException(e);

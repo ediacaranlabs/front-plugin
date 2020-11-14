@@ -37,7 +37,7 @@
     <section class="content">
 		<ed:container>
 			<ed:row>
-				<ed:col size="12">
+				<ed:col size="6">
                 	<h4>Button types</h4>
                 	<ec:button label="btn default" />
                 	<ec:button label="btn primary" type="primary"/>
@@ -51,7 +51,21 @@
                 	<ec:button label="btn link"  type="link"/>
                 	<ec:button label="btn outline" outline="true"/>
 				</ed:col>
+				<ed:col size="6">
+					<ec:prettify linenums="true"><button label="btn default" />
+<button label="btn primary" type="primary"/>
+<button label="btn secondary"  type="secondary"/>
+<button label="btn success"  type="success"/>
+<button label="btn danger"  type="danger"/>
+<button label="btn warning"  type="warning"/>
+<button label="btn info"  type="info"/>
+<button label="btn light"  type="light"/>
+<button label="btn dark"  type="dark"/>
+<button label="btn link"  type="link"/>
+<button label="btn outline" outline="true"/></ec:prettify>
+				</ed:col>
 			</ed:row>
+
 			<ed:row>
 				<ed:col size="6">
 	                <h4>Button with icon</h4>
@@ -59,10 +73,15 @@
                 	<ec:button label="button icon heart" type="success" size="sm" icon="heart" />
                 	<ec:button label=" button icon camera" type="red" size="sm" icon="camera" />
                 	<ec:button label="button icon briefcase" size="sm" outline="true" icon="briefcase"/>
-		            <ec:prettify linenums="true">&lt;ec:button label=&quot;button icon heart&quot; type=&quot;success&quot; size=&quot;sm&quot; icon=&quot;heart&quot; /&gt;
-&lt;ec:button label=&quot; button icon camera&quot; type=&quot;red&quot; size=&quot;sm&quot; icon=&quot;camera&quot; /&gt;
-&lt;ec:button label=&quot;button icon briefcase&quot; size=&quot;sm&quot; outline=&quot;true&quot; icon=&quot;briefcase&quot;/&gt;</ec:prettify>
 				</ed:col>
+				<ed:col size="6">
+					<ec:prettify linenums="true"><button label="button icon heart" type="success" size="sm" icon="heart" />
+<button label=" button icon camera" type="red" size="sm" icon="camera" />
+<button label="button icon briefcase" size="sm" outline="true" icon="briefcase"/></ec:prettify>
+				</ed:col>
+			</ed:row>				
+			
+			<ed:row>
 				<ed:col size="6">
 	                <h4>More variations</h4>
 	                <p>Wrap a series of buttons with <code>&lt;ec:button-group/&gt;</code></p>
@@ -71,13 +90,14 @@
 	                	<ec:button label="success" type="success"/>
 	                	<ec:button label="warning" type="warning"/>
 	                </ec:button-group>
-		            <ec:prettify linenums="true">&lt;ec:button-group&gt;
-	&lt;ec:button label=&quot;primary&quot; type=&quot;primary&quot;/&gt;
-	&lt;ec:button label=&quot;success&quot; type=&quot;success&quot;/&gt;
-	&lt;ec:button label=&quot;warning&quot; type=&quot;warning&quot;/&gt;
-&lt;/ec:button-group&gt;</ec:prettify>
+				</ed:col>
+				<ed:col size="6">
+		            <ec:prettify linenums="true"><button label="primary" type="primary"/>
+<button label="success" type="success"/>
+<button label="warning" type="warning"/></ec:prettify>
 				</ed:col>
 			</ed:row>
+			
 			<ed:row>
 				<ed:col size="6">
 	                <h4>Button sizes</h4>
@@ -87,11 +107,14 @@
                 	<ec:button label="btn block level" block="true" type="warning"/>
 				</ed:col>
 				<ed:col size="6">
+		            <ec:prettify linenums="true"><button label="Large button" size="lg"/>
+<button label="Small button" size="sm" type="success"/>
+<button label="btn block level" block="true" type="warning"/></ec:prettify>
 				</ed:col>
 			</ed:row>
 			<ed:row>
 				<ed:col size="6">
-				<ec:tabs id="tab0">
+				<ec:tabs>
 					<ec:tabs-item active="true" icon="briefcase" title="One">
 	                    <p><strong>Augue iriure</strong> dolorum per ex, ne iisque ornatus veritus duo. Ex nobis integre 
 	                    lucilius sit, pri ea falli ludus appareat. Eum quodsi fuisset id, nostro patrioque qui id. Nominati 
@@ -110,32 +133,26 @@
 				</ec:tabs>
 				</ed:col>
 				<ed:col size="6">
-				
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-      aria-selected="true">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-      aria-selected="false">Profile</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-      aria-selected="false">Contact</a>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-</div>
-				
+		            <ec:prettify linenums="true"><tabs>
+	<tabs-item active="true" icon="briefcase" title="One">
+        <p><strong>Augue iriure</strong> dolorum per ex, ne iisque ornatus veritus duo. Ex nobis integre 
+        lucilius sit, pri ea falli ludus appareat. Eum quodsi fuisset id, nostro patrioque qui id. Nominati 
+        eloquentiam in mea.</p>
+        <p>No eum sanctus vituperata reformidans, dicant abhorreant ut pro. Duo id enim iisque praesent, 
+        amet intellegat per et, solet referrentur eum et.</p>
+	</tabs-item>
+	<tabs-item title="two">
+		<p>Tale dolor mea ex, te enim assum suscipit cum, vix aliquid omittantur in. Duo eu cibo dolorum 
+		menandri, nam sumo dicit admodum ei. Ne mazim commune honestatis cum, mentitum phaedrum sit et.</p>
+	</tabs-item>
+	<tabs-item title="three">
+       	<p>Cu cum commodo regione definiebas. Cum ea eros laboramus, audire deseruisse his at, munere 
+       	aeterno ut quo. Et ius doming causae philosophia, vitae bonorum intellegat usu cu.</p>
+	</tabs-item>
+</tabs></ec:prettify>
 				</ed:col>
 			</ed:row>
 			<ed:row>
-				<ed:col size="6">
-				</ed:col>
 				<ed:col size="6">
 	                <h4>Accordion</h4>
 	                <ec:accordion>
@@ -155,7 +172,44 @@
 		                    quo. Et ius doming causae philosophia, vitae bonorum intellegat usu cu.</p>
 	                	</ec:accordion-item>
 	                </ec:accordion>
-					</ed:col>
+				</ed:col>
+				<ed:col size="6">
+		            <ec:prettify linenums="true"><accordion>
+	<accordion-item title="one">
+	     <p><strong>Augue iriure</strong> dolorum per ex, ne iisque ornatus veritus duo. Ex nobis integre 
+	     lucilius sit, pri ea falli ludus appareat. Eum quodsi fuisset id, nostro patrioque qui id. Nominati 
+	     eloquentiam in mea.</p>
+	     <p>No eum sanctus vituperata reformidans, dicant abhorreant ut pro. Duo id enim iisque praesent, 
+	     amet intellegat per et, solet referrentur eum et.</p>
+	</accordion-item>
+	<accordion-item title="two">
+	     <p>Tale dolor mea ex, te enim assum suscipit cum, vix aliquid omittantur in. Duo eu cibo dolorum menandri, 
+	     nam sumo dicit admodum ei. Ne mazim commune honestatis cum, mentitum phaedrum sit et.</p>
+	</accordion-item>
+	<accordion-item title="three">
+	     <p>Cu cum commodo regione definiebas. Cum ea eros laboramus, audire deseruisse his at, munere aeterno ut 
+	     quo. Et ius doming causae philosophia, vitae bonorum intellegat usu cu.</p>
+	</accordion-item>
+</accordion></ec:prettify>
+				</ed:col>
+			</ed:row>
+			
+			<ed:row>
+				<ed:col size="6">
+                	<h4>Event</h4>
+                	<ec:button label="btn default">
+                		<ec:event type="click">
+                			alert("click");
+                		</ec:event>
+                	</ec:button>
+				</ed:col>
+				<ed:col size="6">
+					<ec:prettify linenums="true"><button label="btn default">
+	<event type="click">
+		alert("click");
+	</event>
+</button></ec:prettify>
+				</ed:col>
 			</ed:row>
 			
 		</ed:container>    

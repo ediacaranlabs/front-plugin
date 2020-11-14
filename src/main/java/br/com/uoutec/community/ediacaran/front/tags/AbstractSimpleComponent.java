@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
@@ -299,7 +300,10 @@ public abstract class AbstractSimpleComponent
 			@Override
 			public void parse(Writer writter) throws IOException {
 				try {
-					getJspBody().invoke(writter);
+					JspFragment body = getJspBody();
+					if(body != null) {
+						body.invoke(writter);
+					}
 				}
 				catch(Throwable e) {
 					throw new IllegalStateException(e);

@@ -1,5 +1,9 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.util.Map;
+
+import br.com.uoutec.community.ediacaran.system.tema.TagTemplate.VarParser;
+
 public class ButtonTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/components/button";
@@ -30,7 +34,13 @@ public class ButtonTag extends ComponentFormTag {
 	
 	private Boolean outline;
 
+	private VarParser content;
+	
 	public ButtonTag() {
+	}
+	
+	protected void beforePrepareVars(Map<String, Object> vars) {
+		content = toVarParser();
 	}
 	
     protected String getDefaultTemplate() {
@@ -123,6 +133,14 @@ public class ButtonTag extends ComponentFormTag {
 
 	public void setActionType(String actionType) {
 		this.actionType = actionType;
+	}
+
+	public VarParser getContent() {
+		return content;
+	}
+
+	public void setContent(VarParser content) {
+		this.content = content;
 	}
 
 }

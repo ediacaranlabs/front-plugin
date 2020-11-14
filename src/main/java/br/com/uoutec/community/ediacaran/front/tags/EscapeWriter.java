@@ -27,24 +27,24 @@ public class EscapeWriter extends Writer{
 		for(int i=off;i<max;i++) {
 			switch (cbuf[i]) {
 			case '<':
-				write(cbuf, start, off - start, 0);
-				start = off + 1;
+				write(cbuf, start, i - start, 0);
+				start = i + 1;
 				break;
 			case '>':
-				write(cbuf, start, off - start, 1);
-				start = off + 1;
+				write(cbuf, start, i - start, 1);
+				start = i + 1;
 				break;
 			case '&':
-				write(cbuf, start, off - start, 2);
-				start = off + 1;
+				write(cbuf, start, i - start, 2);
+				start = i + 1;
 				break;
 			case '\'':
-				write(cbuf, start, off - start, 3);
-				start = off + 1;
+				write(cbuf, start, i - start, 3);
+				start = i + 1;
 				break;
 			case '\"':
-				write(cbuf, start, off - start, 4);
-				start = off + 1;
+				write(cbuf, start, i - start, 4);
+				start = i + 1;
 				break;
 			}
 		}

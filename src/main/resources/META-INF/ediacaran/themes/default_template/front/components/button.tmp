@@ -1,3 +1,4 @@
 <button {attr} class="btn{size}{type}{block}{enabled} {classStyle}" >
 {icon} {label}
+{content}
 </button>

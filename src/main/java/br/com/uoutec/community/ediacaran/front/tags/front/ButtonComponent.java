@@ -82,6 +82,7 @@ public class ButtonComponent extends ComponentFormComponent {
 			add("outline");
 			add("classStyle");
 			add("icon");
+			add("content");
 		}});
 	
 	

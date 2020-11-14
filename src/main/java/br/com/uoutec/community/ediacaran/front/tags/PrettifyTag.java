@@ -2,6 +2,8 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.system.tema.TagTemplate.VarParser;
+
 public class PrettifyTag  extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/components/prettify";
@@ -12,7 +14,7 @@ public class PrettifyTag  extends AbstractSimpleComponent {
 	
 	private Boolean linenums;
 	
-	private JspFragmentVarParser content;
+	private VarParser content;
 	
 	public PrettifyTag() {
 	}
@@ -22,7 +24,7 @@ public class PrettifyTag  extends AbstractSimpleComponent {
     }
 
 	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
+		this.content = new EscapeVarParser(getJspBody());
 	}
 
 	public Boolean getLinenums() {
@@ -33,11 +35,11 @@ public class PrettifyTag  extends AbstractSimpleComponent {
 		this.linenums = linenums;
 	}
 
-	public JspFragmentVarParser getContent() {
+	public VarParser getContent() {
 		return content;
 	}
 
-	public void setContent(JspFragmentVarParser content) {
+	public void setContent(VarParser content) {
 		this.content = content;
 	}
     
