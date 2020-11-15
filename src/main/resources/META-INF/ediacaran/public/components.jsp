@@ -218,8 +218,8 @@
 	                <ec:alert>
 	                	<strong>Warning!</strong> Best check yo self, you're not looking too good.
 	                </ec:alert>
-	                <ec:alert style="error">
-	                	<strong>Error!</strong> Best check yo self, you're not looking too good.
+	                <ec:alert style="danger">
+	                	<strong>Darger!</strong> Best check yo self, you're not looking too good.
 	                </ec:alert>
 	                <ec:alert style="success">
 	                	<strong>Success</strong> Best check yo self, you're not looking too good.

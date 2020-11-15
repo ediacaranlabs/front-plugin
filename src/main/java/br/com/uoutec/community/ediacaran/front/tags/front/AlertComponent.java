@@ -38,8 +38,8 @@ public class AlertComponent extends AbstractComponent {
 				put("style", new AttributeParserImp() {
 					
 					@Override
-					public String toName(String value, Object component) {
-						return value == null? null : "alert-" + value;
+					public Object toValue(Object value, Object component) {
+						return value == null? "alert-warning" : "alert-" + value;
 					}
 				});
 				
