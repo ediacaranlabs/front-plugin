@@ -1,0 +1,4 @@
+<div {attr} class="alert {style} {classStyle}">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	{content}
+</div>

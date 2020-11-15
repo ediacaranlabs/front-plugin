@@ -108,6 +108,51 @@ Adiciona um novo slide.
 	</tag>
 	<!-- /Event -->
 
+	<!-- alert -->
+	<tag>
+		<name>alert</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.AlertTag</tag-class>
+		<body-content>scriptless</body-content>
+
+		<!-- default attr -->
+
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<!-- attr -->
+
+		<attribute>
+			<description></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	<!-- /alert -->
+
 	<!-- Accordion -->
 
 	<tag>
