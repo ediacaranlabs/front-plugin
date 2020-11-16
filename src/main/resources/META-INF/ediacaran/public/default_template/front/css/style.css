@@ -7,9 +7,9 @@
 General
 ===================================*/
 body {
-  font-family: arial,sans-serif;
+  font-family: 'Open Sans', Arial, sans-serif;	
   font-size: 13px;
-  line-height: 1.57;
+  line-height: 1.6em;
   color: #545454;
 }
 
@@ -112,6 +112,31 @@ Form Validation
 }
 
 /* ===================================
+Testimonial
+==================================== */
+
+.testimonial {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #e6e6e6;
+}
+
+.testimonial .author img {
+  float: left;
+  margin: 0 10px 0;
+}
+
+.testimonial p.text {
+  color: #b2b2b2;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+.testimonial .author p.name {
+  font-weight: bold;
+}  
+
+/* ===================================
 Navbar
 ==================================== */
 nav a{
@@ -207,6 +232,67 @@ fontawesome
 
 .fa:not([class*="fa-inverse"]) {
 	color: #F03C02;
+}
+
+/* ===================================
+card
+==================================== */
+
+.card {
+  background:none;
+  border:none;
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+		  margin-bottom:5px;
+}
+
+.card-header{
+  padding: 0px;
+  font-size:13px;
+  color:#333333;
+  text-shadow: none;
+  background-color: #fbfbfb;
+  *background-color: #fbfbfb;
+  background-image: none;
+  background-repeat: repeat-x;
+  border: 1px solid #e9e9e9;
+  *border: 0;
+  border-color: none;
+}
+
+.card-header a:not([class*="collapsed"]) .plus-button{
+	display: none;
+}
+
+.card-header a:not([class*="collapsed"]) .minus-button{
+	display: inline-block;
+}
+
+.card-header a .plus-button{
+	display: inline-block;
+}
+
+.card-header a .minus-button{
+	display: none;
+}
+
+.card-header a{
+  font-size: 13px;
+  text-shadow: none;	
+  color:#333333;
+  outline:0;
+}
+
+.card-header a{
+  cursor: pointer;  
+}
+
+.card-body{
+	margin-top:1px;
+  background:#fff;
+  border: 1px solid #e9e9e9;
+  border-bottom:1px solid #e9e9e9;
 }
 
 /* ===================================

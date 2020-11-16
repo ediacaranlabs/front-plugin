@@ -153,6 +153,97 @@ Adiciona um novo slide.
 	</tag>
 	<!-- /alert -->
 
+	<!-- testimonial -->
+	<tag>
+		<name>testimonial</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TestimonialTag</tag-class>
+		<body-content>scriptless</body-content>
+
+		<!-- default attr -->
+
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<!-- attr -->
+
+		<attribute>
+			<description></description>
+			<name>name</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>image</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	<!-- /testimonial -->
+
+
+	<!-- testimonial-info -->
+	<tag>
+		<name>testimonial-info</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TestimonialInfoTag</tag-class>
+		<body-content>scriptless</body-content>
+
+		<!-- default attr -->
+
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<!-- attr -->
+		
+	</tag>
+	<!-- /testimonial-info -->
+
 	<!-- Accordion -->
 
 	<tag>

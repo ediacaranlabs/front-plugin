@@ -4,50 +4,55 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.BlockquoteTag;
+import br.com.uoutec.community.ediacaran.front.tags.TestimonialTag;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.system.tema.ComponentVarsBuilder;
 import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
 
-public class BlockquoteComponent extends AbstractComponent {
-
+public class TestimonialComponent extends AbstractComponent {
 	
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {
 
-		super.template = "/default_template/front/components/blockquote.tmp";
+		super.template = "/default_template/front/components/testimonial.tmp";
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
+			remove("classStyle");
 		}});
 	
 		super.default_attribute_parsers = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
 		}});
-
+	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("content");
-			add("cite");
+			add("image");
+			add("name");
+			add("info");
+			add("classStyle");
 		}});
 	
 		super.default_property_parsers = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
 				
-				put("cite", new AttributeParserImp() {
+				put("image", new AttributeParserImp() {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						BlockquoteTag tag = (BlockquoteTag)component;
+						TestimonialTag tag = (TestimonialTag)component;
 						ComponentVarsBuilder cvb = new ComponentVarsBuilder();
-						cvb.put("content", value);
-						return value == null? null : new TemplateVarParser("/components/cite", tag.getTemaPackage(), 
+						cvb
+							.put("attr", "src=\"" + value + "\"")
+							.put("style", "rounded-circle");
+						return value == null? null : new TemplateVarParser("/components/image", tag.getTemaPackage(), 
 								cvb, tag.getTheme());
 					}
 				});
+
 				
 			}});
 	}
-	
 }

@@ -1,0 +1,10 @@
+<div {attr} class="testimonial {classStyle}">
+ 	<p class="text">
+		<i class="fa fa-quote-left fa-2x"></i> {content}
+    </p>
+	<div class="author">
+		{image}
+		<p class="name">{name}</p>
+		{info}
+ 	</div>
+ </div>

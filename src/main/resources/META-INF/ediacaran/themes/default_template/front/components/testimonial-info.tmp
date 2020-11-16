@@ -1,0 +1,1 @@
+<span {attr} class="info {classStyle}">{content}</span>

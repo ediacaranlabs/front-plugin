@@ -229,24 +229,46 @@
 	                </ec:alert>
 				</ed:col>
 				<ed:col size="6">
-					<ec:prettify linenums="true"><ec:alert>
+					<ec:prettify linenums="true"><alert>
 	<strong>Warning!</strong> Best check yo self, you're not looking too good.
-</ec:alert>
-<ec:alert style="error">
+</alert>
+<alert style="error">
 	<strong>Error!</strong> Best check yo self, you're not looking too good.
-</ec:alert>
-<ec:alert style="success">
+</alert>
+<alert style="success">
 	<strong>Success</strong> Best check yo self, you're not looking too good.
-</ec:alert>
-<ec:alert style="info">
+</alert>
+<alert style="info">
 	<strong>Info!</strong> Best check yo self, you're not looking too good.
-</ec:alert></ec:prettify>
+</alert></ec:prettify>
+				</ed:col>
+			</ed:row>
+
+			<ed:row>
+				<ed:col size="6">
+	                <h4>Testimonial</h4>
+	                <ec:testimonial name="Testimonial name" image="/plugins/ediacaran/front/templates/default_template/img/testimonial/author1.png">
+		                There are many variations of passages of randomised words which don't look even slightly 
+		                believable. You need to be sure there isn't anything embarrassing of text.
+		                <ec:testimonial-info>
+		                	Name, <a href="#">www.sitename.com</a>
+		                </ec:testimonial-info>
+	                </ec:testimonial>
+				</ed:col>
+				<ed:col size="6">
+					<ec:prettify linenums="true"><testimonial name="Testimonial name" image="img/testimonial/author1.png">
+	There are many variations of passages of randomised words which don't look even slightly 
+	believable. You need to be sure there isn't anything embarrassing of text.
+	<testimonial-info>
+		Name, <a href="#">www.sitename.com</a>
+	</testimonial-info>
+</testimonial></ec:prettify>
 				</ed:col>
 			</ed:row>
 			
 		</ed:container>    
     </section>
-	
+	 
 	<ec:include uri="/includes/footer.jsp"/>
  
 </body>
