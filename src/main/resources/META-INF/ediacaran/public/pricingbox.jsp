@@ -117,6 +117,84 @@
 			</ed:row>
 			<ed:row>
 				<ed:col size="12">
+					<ec:prettify linenums="true"><row>
+	<col size="4">
+           <price-box>
+           	<price-box-header>
+           		<h3>Very <strong>Basic</strong></h3>
+           	</price-box-header>
+           	<price-box-terms>
+           		<h6>$15.00 / Month</h6>
+           	</price-box-terms>
+           	<price-box-body>
+           		<price-box-item checked="true">applications</price-box-item>
+           		<price-box-item checked="true">upport available</price-box-item>
+           		<price-box-item>No hidden fees</price-box-item>
+           		<price-box-item>Free</price-box-item>
+           		<price-box-item>Stop anytime easily</price-box-item>
+           	</price-box-body>
+           	<price-box-footer>
+           		<button label="Register now" icon="bolt">
+           			<event type="click">
+           				alert("Register!");
+           			</event>
+           		</button>
+           	</price-box-footer>
+           </price-box>
+	</col>
+	<col size="4">
+           <price-box attractiveness="special">
+           	<price-box-header>
+           		<h3>Good <strong>Choice</strong></h3>
+           	</price-box-header>
+           	<price-box-terms>
+           		<h6>$25.00 / Month</h6>
+           	</price-box-terms>
+           	<price-box-body>
+           		<price-box-item checked="true">applications</price-box-item>
+           		<price-box-item checked="true">upport available</price-box-item>
+           		<price-box-item checked="true">No hidden fees</price-box-item>
+           		<price-box-item>Free</price-box-item>
+           		<price-box-item>Stop anytime easily</price-box-item>
+           	</price-box-body>
+           	<price-box-footer>
+           		<button label="Register now" icon="bolt">
+           			<event type="click">
+           				alert("Register!");
+           			</event>
+           		</button>
+           	</price-box-footer>
+           </price-box>
+	</col>
+	<col size="4">
+           <price-box>
+           	<price-box-header>
+           		<h3>Just <strong>Happy</strong></h3>
+           	</price-box-header>
+           	<price-box-terms>
+           		<h6>$35.00 / Month</h6>
+           	</price-box-terms>
+           	<price-box-body>
+           		<price-box-item checked="true">applications</price-box-item>
+           		<price-box-item checked="true">upport available</price-box-item>
+           		<price-box-item checked="true">No hidden fees</price-box-item>
+           		<price-box-item checked="true">Free</price-box-item>
+           		<price-box-item checked="true">Stop anytime easily</price-box-item>
+           	</price-box-body>
+           	<price-box-footer>
+           		<button label="Register now" icon="bolt">
+           			<event type="click">
+           				alert("Register!");
+           			</event>
+           		</button>
+           	</price-box-footer>
+           </price-box>
+	</col>
+</row></ec:prettify>
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col size="12">
 		            <h4>Example on <strong>4 columns</strong></h4>
 				</ed:col>
 			</ed:row>
