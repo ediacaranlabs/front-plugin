@@ -807,7 +807,7 @@ Usado para montar o caminho de um breadcrumb navigation.
 		
 		<attribute>
 			<name>icon</name>
-			<required>true</required>
+			<required>false</required>
 			<type>java.lang.String</type>
 			<fragment>true</fragment>
 		</attribute>
