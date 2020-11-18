@@ -1999,6 +1999,14 @@ Ex:
 	
 		<attribute>
 			<description></description>
+			<name>minlength</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description></description>
 			<name>placeholder</name>
 			<required>false</required>
 			<type>java.lang.String</type>

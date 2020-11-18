@@ -13,21 +13,21 @@ public class TextareaComponent extends ComponentFormComponent {
 	
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {
+		super.loadConfiguration();
 
-		super.template = "/default_template/front/components/textfield.tmp";
+		super.template = "/default_template/front/components/textarea.tmp";
 	
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
 			add("autocomplete");
 			add("autofocus");
-			add("maxlength");
-			add("minlength");
-			add("pattern");
-			add("placeholder");
-			add("required");
 			add("cols");
 			add("rows");
+			add("maxlength");
+			add("minlength");
+			add("placeholder");
+			add("required");
 			remove("value");
 			remove("name");
 		}});

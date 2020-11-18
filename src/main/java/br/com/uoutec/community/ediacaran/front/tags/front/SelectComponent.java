@@ -13,9 +13,9 @@ public class SelectComponent extends ComponentFormComponent {
 	
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {
+		super.loadConfiguration();
 
 		super.template = "/default_template/front/components/select.tmp";
-	
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{

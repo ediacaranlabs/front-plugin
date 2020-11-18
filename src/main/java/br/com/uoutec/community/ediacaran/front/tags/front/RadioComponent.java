@@ -13,6 +13,7 @@ public class RadioComponent extends ComponentFormComponent {
 	
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {
+		super.loadConfiguration();
 
 		super.template = "/default_template/front/components/radio.tmp";
 	

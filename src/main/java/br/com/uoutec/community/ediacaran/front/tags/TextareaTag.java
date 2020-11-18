@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class TextareaTag extends ComponentFormTag {
 
-	public static final String TEMPLATE = "/components/textfield";
+	public static final String TEMPLATE = "/components/textarea";
 	
 	/* ------------ Attr ---------------*/
 	
@@ -19,6 +19,8 @@ public class TextareaTag extends ComponentFormTag {
 	private Integer rows;
 	
 	private Integer maxlength;
+	
+	private Integer minlength;
 	
 	private String placeholder;
 	
@@ -103,6 +105,14 @@ public class TextareaTag extends ComponentFormTag {
 
 	public void setRows(Integer rows) {
 		this.rows = rows;
+	}
+
+	public Integer getMinlength() {
+		return minlength;
+	}
+
+	public void setMinlength(Integer minlength) {
+		this.minlength = minlength;
 	}
 
 }

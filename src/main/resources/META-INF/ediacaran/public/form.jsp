@@ -51,10 +51,124 @@
 					</ec:form>				
 				</ed:col>
 				<ed:col size="6">
+					<ec:prettify linenums="true"><form>
+	<textfield name="email" label="Email address" placeholder="Enter email"/>
+	<passwordfield name="senha" label="Password" placeholder="Password"/>
+	<checkbox name="chk" label="Chk me out"/>
+	<button label="Submit" actionType="submit"/>
+</form></ec:prettify>
+				</ed:col>
+			</ed:row>
+			
+			
+			<ed:row>
+				<ed:col size="12">
+		            <h4></h4>
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col size="6">
+					<ec:form>
+						<ec:textfield name="email" label="Email address" placeholder="name@example.com"/>
+						<ec:select name="select" label="Example select">
+							<ec:option>1</ec:option>
+							<ec:option>2</ec:option>
+							<ec:option>3</ec:option>
+							<ec:option>4</ec:option>
+							<ec:option>5</ec:option>
+						</ec:select>
+						<ec:select name="select2" multiple="true" label="Example multiple select">
+							<ec:option>1</ec:option>
+							<ec:option>2</ec:option>
+							<ec:option>3</ec:option>
+							<ec:option>4</ec:option>
+							<ec:option>5</ec:option>
+						</ec:select>
+						<ec:textarea name="textarea" label="Example textarea" rows="3"></ec:textarea>
+					</ec:form>
+				</ed:col>
+				<ed:col size="6">
+					<ec:prettify linenums="true"><form>
+	<textfield name="email" label="Email address" placeholder="name@example.com"/>
+	<select name="select" label="Example select">
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
+		<option>4</option>
+		<option>5</option>
+	</select>
+	<select name="select2" multiple="true" label="Example multiple select">
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
+		<option>4</option>
+		<option>5</option>
+	</select>
+	<textarea name="textarea" label="Example textarea" rows="3"></textarea>
+</form></ec:prettify>
+				</ed:col>
+			</ed:row>
+
+
+			<ed:row>
+				<ed:col size="12">
+		            <h4></h4>
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col size="6">
+				</ed:col>
+				<ed:col size="6">
 					<ec:prettify linenums="true">
 					</ec:prettify>
 				</ed:col>
 			</ed:row>
+
+
+			<ed:row>
+				<ed:col size="12">
+		            <h4></h4>
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col size="6">
+				</ed:col>
+				<ed:col size="6">
+					<ec:prettify linenums="true">
+					</ec:prettify>
+				</ed:col>
+			</ed:row>
+
+
+			<ed:row>
+				<ed:col size="12">
+		            <h4></h4>
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col size="6">
+				</ed:col>
+				<ed:col size="6">
+					<ec:prettify linenums="true">
+					</ec:prettify>
+				</ed:col>
+			</ed:row>
+
+
+			<ed:row>
+				<ed:col size="12">
+		            <h4></h4>
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col size="6">
+				</ed:col>
+				<ed:col size="6">
+					<ec:prettify linenums="true">
+					</ec:prettify>
+				</ed:col>
+			</ed:row>
+			
 		</ed:container>    
     </section>
         	 

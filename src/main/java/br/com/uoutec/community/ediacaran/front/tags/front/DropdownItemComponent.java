@@ -6,12 +6,13 @@ import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
 
-public class DropdownItemComponent  extends ComponentFormComponent {
+public class DropdownItemComponent extends ComponentFormComponent {
 
 	
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {
-
+		super.loadConfiguration();
+		
 		super.template = "/default_template/front/components/dropdown-item.tmp";
 	
 	
