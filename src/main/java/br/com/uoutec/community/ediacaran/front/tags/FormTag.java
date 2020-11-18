@@ -3,6 +3,8 @@ package br.com.uoutec.community.ediacaran.front.tags;
 import java.io.Writer;
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.system.tema.TagTemplate.VarParser;
+
 public class FormTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE = "/components/form";
@@ -31,7 +33,7 @@ public class FormTag extends AbstractSimpleComponent {
 	
 	/* ------------ Prop ---------------*/
 
-	private JspFragmentVarParser content;
+	private VarParser content;
 	
 	public FormTag() {
 	}
@@ -91,11 +93,11 @@ public class FormTag extends AbstractSimpleComponent {
 		this.target = target;
 	}
 
-	public JspFragmentVarParser getContent() {
+	public VarParser getContent() {
 		return content;
 	}
 
-	public void setContent(JspFragmentVarParser content) {
+	public void setContent(VarParser content) {
 		this.content = content;
 	}
 

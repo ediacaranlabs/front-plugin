@@ -56,6 +56,10 @@ public class FormComponent extends AbstractComponent {
 						return "form-body";
 					}
 					
+					public Object toValue(Object value, Object component) {
+						return value;
+					}
+					
 				});
 				
 				put("style", new AttributeParserImp() {

@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class PasswordfieldTag extends ComponentFormTag {
 
-	public static final String TEMPLATE = "/components/textfield";
+	public static final String TEMPLATE = "/components/passwordfield";
 	
 	/* ------------ Attr ---------------*/
 	
