@@ -18,7 +18,9 @@ public class EscapeVarParser extends AbstractVarParser{
 	@Override
 	public void parse(Writer writter) throws IOException {
 		try {
-			jspBody.invoke(new EscapeWriter(writter));
+			if(jspBody != null) {
+				jspBody.invoke(new EscapeWriter(writter));
+			}
 		}
 		catch(Throwable e) {
 			throw new IllegalStateException(e);

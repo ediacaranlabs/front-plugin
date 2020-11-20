@@ -1550,6 +1550,14 @@ Ex:
 
 		<attribute>
 			<description></description>
+			<name>size</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
 			<name>group</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>
@@ -1559,6 +1567,125 @@ Ex:
 	</tag>
 	
 	<!-- /textfield -->
+
+	<!-- filefield -->
+	
+	<tag>
+		<name>filefield</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.FilefieldTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- Form attr -->
+		
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<name>enabled</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description></description>
+			<name>readonly</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>required</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>group</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>accept</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>capture</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>multiple</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>true</fragment>
+		</attribute>
+
+	</tag>
+	
+	<!-- /filefield -->
 		
 	<!-- passwordfield -->
 	
