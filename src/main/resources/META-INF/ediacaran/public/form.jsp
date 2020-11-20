@@ -288,9 +288,73 @@
 			</ed:row>
 			<ed:row>
 				<ed:col size="6">
+				
+					<ec:form>
+						<ed:row style="form">
+							<ed:col size="6">
+								<ec:textfield name="email" label="Email" placeholder="Email"/>
+							</ed:col>
+							<ed:col size="6">
+								<ec:passwordfield name="password" label="Password" placeholder="Password"/>
+							</ed:col>
+						</ed:row>
+					
+					  	<ec:textfield name="address" label="Address" placeholder="1234 Main St"/>
+					  	<ec:textfield name="address2" label="Address 2" placeholder="Apartment, studio, or floor"/>
+					
+						<ed:row style="form">
+							<ed:col size="6">
+								<ec:textfield name="city" label="City"/>
+							</ed:col>
+							<ed:col size="4">
+								<ec:select name="state" label="State">
+									<ec:option selected="true">Choose...</ec:option>
+								</ec:select>
+							</ed:col>
+							<ed:col size="2">
+								<ec:textfield name="zip" label="Zip"/>
+							</ed:col>
+						</ed:row>
+					  	
+					  	<ec:checkbox name="check_out_me" label="Check me out"/>
+					  	<ec:button label="Sign in"/>
+					  	
+					</ec:form>				
+				
+				
 				</ed:col>
 				<ed:col size="6">
-					<ec:prettify linenums="true"></ec:prettify>
+					<ec:prettify linenums="true"><form>
+	<row style="form">
+		<col size="6">
+			<textfield name="email" label="Email" placeholder="Email"/>
+		</col>
+		<col size="6">
+			<passwordfield name="password" label="Password" placeholder="Password"/>
+		</col>
+	</row>
+
+  	<textfield name="address" label="Address" placeholder="1234 Main St"/>
+  	<textfield name="address2" label="Address 2" placeholder="Apartment, studio, or floor"/>
+
+	<row style="form">
+		<col size="6">
+			<textfield name="city" label="City"/>
+		</col>
+		<col size="4">
+			<select name="state" label="State">
+				<option selected="true">Choose...</option>
+			</select>
+		</col>
+		<col size="2">
+			<textfield name="zip" label="Zip"/>
+		</col>
+	</row>
+  	
+  	<checkbox name="check_out_me" label="Check me out"/>
+  	<button label="Sign in"/>
+  	
+</form></ec:prettify>
 				</ed:col>
 			</ed:row>
 			
