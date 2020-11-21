@@ -47,7 +47,7 @@ public class RadioComponent extends ComponentFormComponent {
 			add("inline");
 			add("enabled");
 			add("label");
-			//add("content");
+			add("content");
 		}});
 	
 	
@@ -73,17 +73,6 @@ public class RadioComponent extends ComponentFormComponent {
 					
 				});
 				
-				put("label", new AttributeParserImp() {
-					
-					@Override
-					public Object toValue(Object value, Object component) {
-						RadioTag tag = (RadioTag)component;
-						return tag.getContent() == null? value : tag.getContent();
-					}
-					
-				});
-				
-
 			}});
 	
 	}
