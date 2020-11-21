@@ -153,6 +153,60 @@ Adiciona um novo slide.
 	</tag>
 	<!-- /alert -->
 
+	<!-- label -->
+	<tag>
+		<name>label</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.LabelTag</tag-class>
+		<body-content>scriptless</body-content>
+
+		<!-- default attr -->
+
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<!-- attr -->
+
+		<attribute>
+			<description></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description></description>
+			<name>size</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	<!-- /label -->
+
+
 	<!-- testimonial -->
 	<tag>
 		<name>testimonial</name>
@@ -2647,6 +2701,14 @@ Ex:&#13;&#10;
 		</attribute>
 		
 		<!-- attr -->
+
+		<attribute>
+			<description></description>
+			<name>size</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
 	
 	</tag>
 	

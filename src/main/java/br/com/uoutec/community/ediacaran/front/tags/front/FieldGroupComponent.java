@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class FieldGroupComponent  extends AbstractComponent {
 
@@ -16,6 +17,7 @@ public class FieldGroupComponent  extends AbstractComponent {
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
+			remove("classStyle");
 		}});
 	
 		super.default_attribute_parsers = 
@@ -25,10 +27,24 @@ public class FieldGroupComponent  extends AbstractComponent {
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("content");
+			add("size");
+			add("classStyle");
 		}});
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers));
+				Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+					
+					put("size", new AttributeParserImp() {
+						
+						@Override
+						public Object toValue(Object value, Object component) {
+							return value == null? null : "input-group-" + value;
+						}
+						
+					});
+					
+					
+				}});
     
 	}
 }

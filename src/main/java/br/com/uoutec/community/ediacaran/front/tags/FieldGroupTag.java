@@ -10,6 +10,8 @@ public class FieldGroupTag  extends AbstractSimpleComponent {
 	
 	/* ------------ Prop ---------------*/
 	
+	private String size;
+	
 	private JspFragmentVarParser content;
 	
 	public FieldGroupTag() {
@@ -29,6 +31,14 @@ public class FieldGroupTag  extends AbstractSimpleComponent {
 
 	public void setContent(JspFragmentVarParser content) {
 		this.content = content;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
 	}
     
 }

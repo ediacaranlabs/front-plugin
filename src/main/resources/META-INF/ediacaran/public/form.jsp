@@ -361,40 +361,153 @@
 
 			<ed:row>
 				<ed:col size="12">
-		            <h4></h4>
+		            <h4>Horizontal form</h4>
 				</ed:col>
 			</ed:row>
 			<ed:row>
 				<ed:col size="6">
-				</ed:col>
-				<ed:col size="6">
-					<ec:prettify linenums="true"></ec:prettify>
+					<ec:form>
+						<ed:row>
+							<ed:col size="2"><ec:label style="col-form">Email</ec:label></ed:col>
+							<ed:col size="10">
+								<ec:textfield name="email" placeholder="Email"/>
+							</ed:col>
+						</ed:row>
+						<ed:row>
+							<ed:col size="2"><ec:label style="col-form">Password</ec:label></ed:col>
+							<ed:col size="10">
+								<ec:passwordfield name="password" placeholder="Password"/>
+							</ed:col>
+						</ed:row>
+						<ed:row>
+							<ed:col size="2"><ec:label style="col-form">Radios</ec:label></ed:col>
+							<ed:col size="10">
+								<ec:radio label="First radio" name="gridRadios" value="option1" selected="true"/>
+								<ec:radio label="Second radio" name="gridRadios" value="option2"/>
+								<ec:radio label="Third disabled radio" name="gridRadios" value="option3" enabled="false"/>
+							</ed:col>
+						</ed:row>
+					
+						<ed:row>
+							<ed:col size="2">
+								<ec:label style="col-form">Checkbox</ec:label>
+							</ed:col>
+							<ed:col size="10">
+								<ec:checkbox label="Example checkbox" name="gridCheck1"/>
+							</ed:col>
+						</ed:row>
+					
+						<ec:button label="Sign in"/>	
+					</ec:form>				
+					
+					</ed:col>
+					<ed:col size="6">
+						<ec:prettify linenums="true"><form>
+	<row>
+		<col size="2"><label style="col-form">Email</label></col>
+		<col size="10">
+			<textfield name="email" placeholder="Email"/>
+		</col>
+	</row>
+	<row>
+		<col size="2"><label style="col-form">Password</label></col>
+		<col size="10">
+			<passwordfield name="password" placeholder="Password"/>
+		</col>
+	</row>
+	<row>
+		<col size="2"><label style="col-form">Radios</label></col>
+		<col size="10">
+			<radio label="First radio" name="gridRadios" value="option1" selected="true"/>
+			<radio label="Second radio" name="gridRadios" value="option2"/>
+			<radio label="Third disabled radio" name="gridRadios" value="option3" enabled="false"/>
+		</col>
+	</row>
+
+	<row>
+		<col size="2">
+			<label style="col-form">Checkbox</label>
+		</col>
+		<col size="10">
+			<checkbox label="Example checkbox" name="gridCheck1"/>
+		</col>
+	</row>
+
+	<button label="Sign in"/>	
+</form></ec:prettify>
+					</ed:col>
+				</ed:row>
+			<ed:row>
+				<ed:col size="12">
+		            <h4>Horizontal form label sizing</h4>
 				</ed:col>
 			</ed:row>
-
+			<ed:row>
+				<ed:col size="6">
+					<ec:form>
+						<ed:row>
+							<ed:col size="2"><ec:label style="col-form" size="sm">Email</ec:label></ed:col>
+							<ed:col size="10">
+								<ec:textfield name="email" size="sm" placeholder="Email"/>
+							</ed:col>
+						</ed:row>
+						<ed:row>
+							<ed:col size="2"><ec:label style="col-form">Email</ec:label></ed:col>
+							<ed:col size="10">
+								<ec:textfield name="email" placeholder="Email"/>
+							</ed:col>
+						</ed:row>
+						<ed:row>
+							<ed:col size="2"><ec:label style="col-form" size="lg">Email</ec:label></ed:col>
+							<ed:col size="10">
+								<ec:textfield name="email" size="lg" placeholder="Email"/>
+							</ed:col>
+						</ed:row>
+					</ec:form>			
+				</ed:col>
+				<ed:col size="6">
+					<ec:prettify linenums="true"><form>
+	<row>
+		<col size="2"><label style="col-form" size="sm">Email</label></col>
+		<col size="10">
+			<textfield name="email" size="sm" placeholder="Email"/>
+		</col>
+	</row>
+	<row>
+		<col size="2"><label style="col-form">Email</label></col>
+		<col size="10">
+			<textfield name="email" placeholder="Email"/>
+		</col>
+	</row>
+	<row>
+		<col size="2"><label style="col-form" size="lg">Email</label></col>
+		<col size="10">
+			<textfield name="email" size="lg" placeholder="Email"/>
+		</col>
+	</row>
+</form></ec:prettify>
+				</ed:col>
+			</ed:row>
 
 			<ed:row>
 				<ed:col size="12">
-		            <h4></h4>
+		            <h4>Inline form</h4>
 				</ed:col>
 			</ed:row>
 			<ed:row>
 				<ed:col size="6">
-				</ed:col>
-				<ed:col size="6">
-					<ec:prettify linenums="true"></ec:prettify>
-				</ed:col>
-			</ed:row>
-
-
-
-			<ed:row>
-				<ed:col size="12">
-		            <h4></h4>
-				</ed:col>
-			</ed:row>
-			<ed:row>
-				<ed:col size="6">
+				
+<ec:form style="inline">
+	<ec:textfield name="name" size="sm" placeholder="Jane Doe"/>
+	<ec:field-group size="sm">
+		<ec:prepend-field>
+			<ec:prepend-field-item>@</ec:prepend-field-item>
+		</ec:prepend-field>
+		<ec:textfield name="username" placeholder="Username"/>
+	</ec:field-group>
+	<ec:button label="Submit" size="sm" actionType="submit"/>
+</ec:form>				
+			
 				</ed:col>
 				<ed:col size="6">
 					<ec:prettify linenums="true"></ec:prettify>

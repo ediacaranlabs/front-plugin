@@ -17,8 +17,6 @@ public class FormTag extends AbstractSimpleComponent {
 	
 	/* ------------ Attr ---------------*/
 	
-	private String style; // inline, horizontal, vertical
-	
 	private String acceptCharset;
 	
 	private String action;
@@ -32,6 +30,8 @@ public class FormTag extends AbstractSimpleComponent {
 	private String update;
 	
 	/* ------------ Prop ---------------*/
+	
+	private String style; // inline, horizontal, vertical
 
 	private VarParser content;
 	
