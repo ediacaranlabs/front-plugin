@@ -496,34 +496,179 @@
 			</ed:row>
 			<ed:row>
 				<ed:col size="6">
-				
-<ec:form style="inline">
-	<ec:textfield name="name" size="sm" placeholder="Jane Doe"/>
-	<ec:field-group size="sm">
-		<ec:prepend-field>
-			<ec:prepend-field-item>@</ec:prepend-field-item>
-		</ec:prepend-field>
-		<ec:textfield name="username" placeholder="Username"/>
-	</ec:field-group>
-	<ec:button label="Submit" size="sm" actionType="submit"/>
-</ec:form>				
-			
+					<ec:form style="inline">
+						<ec:textfield name="name" size="sm" placeholder="Jane Doe"/>
+						<ec:field-group size="sm">
+							<ec:prepend-field>
+								<ec:prepend-field-item>@</ec:prepend-field-item>
+							</ec:prepend-field>
+							<ec:textfield name="username" placeholder="Username"/>
+						</ec:field-group>
+						<ec:button label="Submit" size="sm" actionType="submit"/>
+					</ec:form>				
 				</ed:col>
 				<ed:col size="6">
-					<ec:prettify linenums="true"></ec:prettify>
+					<ec:prettify linenums="true"><form style="inline">
+	<textfield name="name" size="sm" placeholder="Jane Doe"/>
+	<field-group size="sm">
+		<prepend-field>
+			<prepend-field-item>@</prepend-field-item>
+		</prepend-field>
+		<textfield name="username" placeholder="Username"/>
+	</field-group>
+	<button label="Submit" size="sm" actionType="submit"/>
+</form></ec:prettify>
 				</ed:col>
 			</ed:row>
 
 			<ed:row>
 				<ed:col size="12">
-		            <h4></h4>
+		            <h4>Validation</h4>
 				</ed:col>
 			</ed:row>
 			<ed:row>
 				<ed:col size="6">
+				
+<ec:form>
+	<ed:row style="form">
+		<ed:col size="4" classStyle="form-group has-feedback">
+			<ec:textfield name="first_name" label="First Name">
+				<ec:field-validator>
+					<ec:field-validator-rule name="notEmpty" message="Please provide a valid First Name"/>
+				</ec:field-validator>
+			</ec:textfield>
+		</ed:col>
+		<ed:col size="4" classStyle="form-group has-feedback">
+			<ec:textfield name="last_name" label="Last name">
+				<ec:field-validator>
+					<ec:field-validator-rule name="notEmpty" message="Please provide a valid Last Name"/>
+				</ec:field-validator>
+			</ec:textfield>
+		</ed:col>
+		<ed:col size="4" classStyle="form-group has-feedback">
+			<ec:label>Username</ec:label>
+			<ec:field-group>
+				<ec:prepend-field>
+					<ec:prepend-field-item>@</ec:prepend-field-item>
+				</ec:prepend-field>
+				<ec:textfield name="username" placeholder="Username">
+					<ec:field-validator>
+						<ec:field-validator-rule name="notEmpty" message="Please choose a username."/>
+					</ec:field-validator>
+				</ec:textfield>
+			</ec:field-group>
+		</ed:col>
+	</ed:row>
+	<ed:row style="form">
+		<ed:col size="6" classStyle="form-group has-feedback">
+			<ec:textfield name="city" label="City">
+				<ec:field-validator>
+					<ec:field-validator-rule name="notEmpty" message="Please provide a valid city."/>
+				</ec:field-validator>
+			</ec:textfield>
+		</ed:col>
+		<ed:col size="3" classStyle="form-group has-feedback">
+			<ec:textfield name="State" label="State">
+				<ec:field-validator>
+					<ec:field-validator-rule name="notEmpty" message="Please provide a valid state."/>
+				</ec:field-validator>
+			</ec:textfield>
+		</ed:col>
+		<ed:col size="3" classStyle="form-group has-feedback">
+			<ec:textfield name="zip" label="Zip">
+				<ec:field-validator>
+					<ec:field-validator-rule name="notEmpty" message="Please provide a valid zip."/>
+				</ec:field-validator>
+			</ec:textfield>
+		</ed:col>
+	</ed:row>
+	<ed:row style="form">
+		<ed:col size="12" classStyle="form-group has-feedback">
+			<ec:checkbox name="checkbox" label="Agree to terms and conditions">
+				<ec:field-validator>
+					<ec:field-validator-rule name="notEmpty" message="You must agree before submitting."/>
+				</ec:field-validator>
+			</ec:checkbox>
+		</ed:col>
+	</ed:row>
+
+	<ed:row style="form">
+		<ed:col size="12">
+			<ec:button label="Submit form"/>
+		</ed:col>
+	</ed:row>
+
+</ec:form>
 				</ed:col>
 				<ed:col size="6">
-					<ec:prettify linenums="true"></ec:prettify>
+					<ec:prettify linenums="true"><form>
+	<row style="form">
+		<col size="4" classStyle="form-group has-feedback">
+			<textfield name="first_name" label="First Name">
+				<field-validator>
+					<field-validator-rule name="notEmpty" message="Looks good!"/>
+				</field-validator>
+			</textfield>
+		</col>
+		<col size="4" classStyle="form-group has-feedback">
+			<textfield name="last_name" label="Last name">
+				<field-validator>
+					<field-validator-rule name="notEmpty" message="Looks good!"/>
+				</field-validator>
+			</textfield>
+		</col>
+		<col size="4" classStyle="form-group has-feedback">
+			<label>Username</label>
+			<field-group>
+				<prepend-field>
+					<prepend-field-item>@</prepend-field-item>
+				</prepend-field>
+				<textfield name="username" placeholder="Username">
+					<field-validator>
+						<field-validator-rule name="notEmpty" message="Please choose a username."/>
+					</field-validator>
+				</textfield>
+			</field-group>
+		</col>
+	</row>
+	<row style="form">
+		<col size="6" classStyle="form-group has-feedback">
+			<textfield name="city" label="City">
+				<field-validator>
+					<field-validator-rule name="notEmpty" message="Please provide a valid city."/>
+				</field-validator>
+			</textfield>
+		</col>
+		<col size="3" classStyle="form-group has-feedback">
+			<textfield name="State" label="State">
+				<field-validator>
+					<field-validator-rule name="notEmpty" message="Please provide a valid state."/>
+				</field-validator>
+			</textfield>
+		</col>
+		<col size="3" classStyle="form-group has-feedback">
+			<textfield name="zip" label="Zip">
+				<field-validator>
+					<field-validator-rule name="notEmpty" message="Please provide a valid zip."/>
+				</field-validator>
+			</textfield>
+		</col>
+	</row>
+	<row style="form">
+		<col size="12" classStyle="form-group has-feedback">
+			<checkbox name="checkbox" label="Agree to terms and conditions">
+				<field-validator>
+					<field-validator-rule name="notEmpty" message="You must agree before submitting."/>
+				</field-validator>
+			</checkbox>
+		</col>
+	</row>
+	<row style="form">
+		<col size="12">
+			<button label="Submit form"/>
+		</col>
+	</row>
+</form></ec:prettify>
 				</ed:col>
 			</ed:row>
 

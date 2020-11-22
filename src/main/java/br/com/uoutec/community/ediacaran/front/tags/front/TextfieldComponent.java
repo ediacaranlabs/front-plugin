@@ -26,6 +26,7 @@ public class TextfieldComponent extends ComponentFormComponent {
 			add("minlength");
 			add("pattern");
 			add("placeholder");
+			remove("classStyle");
 		}});
 	
 	
@@ -49,6 +50,7 @@ public class TextfieldComponent extends ComponentFormComponent {
 			add("size");
 			add("enabled");
 			add("content");
+			add("classStyle");
 		}});
 	
 	

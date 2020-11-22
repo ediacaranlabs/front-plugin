@@ -10,9 +10,14 @@ $.AppContext.validator = {
 			$('#' + formID)
 			.bootstrapValidator({
 				feedbackIcons : {
+					valid : '',
+					invalid : '',
+					validating : ''
+					/*	
 					valid : ' icon-ok',
 					invalid : ' icon-remove',
 					validating : ' icon-refresh'
+					*/
 				}
 			});
 		},

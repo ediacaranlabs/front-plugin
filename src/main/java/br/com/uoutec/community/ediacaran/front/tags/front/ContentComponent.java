@@ -24,7 +24,6 @@ public class ContentComponent  extends AbstractComponent {
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
-			add("text");
 			add("content");
 		}});
 	
