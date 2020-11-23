@@ -3833,7 +3833,15 @@ Cria uma coluna em uma linha.
 
 		<attribute>
 			<description></description>
-			<name>size</name>
+			<name>cols</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>rows</name>
 			<required>false</required>
 			<type>java.lang.Integer</type>
 			<fragment>true</fragment>
@@ -3842,6 +3850,14 @@ Cria uma coluna em uma linha.
 		<attribute>
 			<description></description>
 			<name>classStyle</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>style</name>
 			<required>false</required>
 			<type>java.lang.String</type>
 			<fragment>true</fragment>
@@ -3933,12 +3949,12 @@ Adiciona uma linha uma tabela.
 
 		<attribute>
 			<description></description>
-			<name>size</name>
+			<name>style</name>
 			<required>false</required>
-			<type>java.lang.Integer</type>
+			<type>java.lang.String</type>
 			<fragment>true</fragment>
 		</attribute>
-		
+
 		<attribute>
 			<description></description>
 			<name>classStyle</name>

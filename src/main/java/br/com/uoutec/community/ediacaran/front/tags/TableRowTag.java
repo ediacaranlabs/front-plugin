@@ -10,7 +10,7 @@ public class TableRowTag  extends AbstractSimpleComponent {
 	
 	/* ------------ Attr ---------------*/
 	
-	private Integer size;
+	private String style;
 	
 	/* ------------ Prop ---------------*/
 	
@@ -28,20 +28,20 @@ public class TableRowTag  extends AbstractSimpleComponent {
 		this.content = new JspFragmentVarParser(getJspBody());
 	}
 
-	public Integer getSize() {
-		return size;
-	}
-
-	public void setSize(Integer size) {
-		this.size = size;
-	}
-
 	public JspFragmentVarParser getContent() {
 		return content;
 	}
 
 	public void setContent(JspFragmentVarParser content) {
 		this.content = content;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
 	}
 
 }

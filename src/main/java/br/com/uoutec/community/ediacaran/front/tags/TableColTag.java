@@ -10,7 +10,11 @@ public class TableColTag  extends AbstractSimpleComponent {
 	
 	/* ------------ Attr ---------------*/
 	
-	private Integer size;
+	private Integer cols;
+	
+	private Integer rows;
+	
+	private String style;
 	
 	/* ------------ Prop ---------------*/
 	
@@ -28,12 +32,20 @@ public class TableColTag  extends AbstractSimpleComponent {
 		this.content = new JspFragmentVarParser(getJspBody());
 	}
 
-	public Integer getSize() {
-		return size;
+	public Integer getCols() {
+		return cols;
 	}
 
-	public void setSize(Integer size) {
-		this.size = size;
+	public void setCols(Integer cols) {
+		this.cols = cols;
+	}
+
+	public Integer getRows() {
+		return rows;
+	}
+
+	public void setRows(Integer rows) {
+		this.rows = rows;
 	}
 
 	public JspFragmentVarParser getContent() {
@@ -42,6 +54,14 @@ public class TableColTag  extends AbstractSimpleComponent {
 
 	public void setContent(JspFragmentVarParser content) {
 		this.content = content;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
 	}
 
 }

@@ -1,1 +1,1 @@
-<tr {attr}>{content}</tr>
+<tr {attr} class="{style} {classStyle}">{content}</tr>

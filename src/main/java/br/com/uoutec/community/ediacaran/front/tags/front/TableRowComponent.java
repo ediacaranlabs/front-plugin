@@ -17,32 +17,30 @@ public class TableRowComponent  extends AbstractComponent {
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
-			add("size");
+			remove("classStyle");
 		}});
 	
 		super.default_attribute_parsers = 
 		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
-			put("size", new AttributeParserImp() {
-				
-				@Override
-				public String toName(String value, Object component) {
-					return "rowspan";
-				}
-				
-				@Override
-				public Object toValue(Object value, Object component) {
-					return value != null && (Integer)value > 1 ? (Integer)value - 1: "";
-				}
-			});
 		}});
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("content");
+			add("style");
+			add("classStyle");
 		}});
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers));
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+				put("style", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						return value == null? "" : "table-" + value;
+					}
+				});
+			}});
 	}
 	
 }

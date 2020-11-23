@@ -1,1 +1,1 @@
-<td {attr}>{content}</td>
+<td {attr} class="{style} {classStyle}">{content}</td>

@@ -17,7 +17,6 @@ public class TableColHeaderComponent  extends AbstractComponent {
 		
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
-			add("size");
 		}});
 	
 		super.default_attribute_parsers = 
