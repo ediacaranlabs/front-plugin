@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front;
+package br.com.uoutec.community.ediacaran.front.pub;
 
 import javax.inject.Singleton;
 

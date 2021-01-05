@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front;
+package br.com.uoutec.community.ediacaran.front.pub;
 
 import br.com.uoutec.community.ediacaran.core.system.i18n.PluginMessageBundleUtils;
 

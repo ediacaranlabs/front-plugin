@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front;
 
+import br.com.uoutec.community.ediacaran.front.pub.AdminMenuBar;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.system.AbstractWebPluginInstaller;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBarManager;
