@@ -1,6 +1,8 @@
 package br.com.uoutec.community.ediacaran.front;
 
+import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.system.AbstractWebPluginInstaller;
+import br.com.uoutec.community.ediacaran.system.pub.MenuBarManager;
 
 public class PluginInstaller 
 	extends AbstractWebPluginInstaller {
@@ -17,36 +19,18 @@ public class PluginInstaller
 	
 	public static final String TEMPLATE_PROPERTY 		= "template";
 	
-	/*
-	public void install() throws PluginException {
-		try{
-			this.installTemplateManager();
-		}
-		catch(Throwable e) {
-			throw new PluginException(e);
-		}
+	private static final String ADMIN_MENU_BAR          = "adminMenuBar";
+	
+	public void install() throws Throwable{
+		super.install();
+		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);
+		mbm.registerMenuBar(ADMIN_MENU_BAR, new AdminMenuBar());
 	}
 	
-	@SuppressWarnings("unchecked")
-	private void installTemplateManager() 
-			throws PluginException, InstantiationException, IllegalAccessException, 
-			ClassNotFoundException, IOException {
-		
-		PluginsSuppliers ps = EntityContextPlugin.getEntity(PluginsSuppliers.class);
-		PluginProperties pp   = ps.getSupplier(PROVIDER).getProperties(PLUGIN);
-		String cacheProvider  = pp.getString(CACHE_PROVIDER_PROPERTY);
-		
-		cacheProvider = cacheProvider == null? HashMapTemplateCache.class.getName() : cacheProvider;
-		
-		Class<? extends TemplateCache> cacheProviderClass = 
-				(Class<? extends TemplateCache>) ClassUtil.get(cacheProvider);
-		TemplateCache tc = EntityContextPlugin.getEntity(cacheProviderClass);
-		tc.configure(pp);
-		
-		TemplatesManager templatesManager = new TemplatesManagerImp(
-				new TemplateLoader(), new DefaultResourceLoader(), tc, pp, "UTF-8");
-		
-		TemplatesManagerProvider.setTemplatesManager(templatesManager);
+	public void uninstall() throws Throwable {
+		super.uninstall();
+		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);
+		mbm.removeMenuBar(ADMIN_MENU_BAR);
 	}
-	*/
+	
 }
