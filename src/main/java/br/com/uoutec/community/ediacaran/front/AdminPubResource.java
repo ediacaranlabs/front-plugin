@@ -21,9 +21,9 @@ import br.com.uoutec.community.ediacaran.system.pub.MenuBarManager;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBarManagerException;
 
 @Singleton
-@Controller(value="${plugins.ediacaran.adm.context}", defaultActionName="/")
-@View(value="/${plugins.ediacaran.adm.template}/admin/index")
-@Action(value="/", view=@View(value="/${plugins.ediacaran.adm.template}/admin/index"))
+@Controller(value="${plugins.ediacaran.front.admin_context}", defaultActionName="/")
+@View(value="/${plugins.ediacaran.front.template}/admin/index")
+@Action(value="/", view=@View(value="/${plugins.ediacaran.front.template}/admin/index"))
 @GuaranteedAccessTo(UserPrivilege.class)
 @ResponseErrors(rendered=false, name="exception")
 public class AdminPubResource {
@@ -46,7 +46,7 @@ public class AdminPubResource {
 	}
 	
 	@Action(value="/dashboard")
-	@View("/${plugins.ediacaran.adm.template}/admin/dashboard")
+	@View("/${plugins.ediacaran.front.template}/admin/dashboard")
 	@Result("vars")
 	public Map<String, Object> getDashboard(){
 		Map<String, Object> m = new HashMap<String, Object>();
