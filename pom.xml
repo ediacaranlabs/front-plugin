@@ -37,6 +37,12 @@
 			<version>1.0.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>br.com.uoutec</groupId>
+			<artifactId>security-ediacaran-plugin</artifactId>
+			<version>1.0.0</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- dependencies -->
 		<dependency>
 			<groupId>br.com.uoutec</groupId>
