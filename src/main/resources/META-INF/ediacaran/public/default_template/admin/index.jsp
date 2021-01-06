@@ -4,7 +4,7 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
 <%@page trimDirectiveWhitespaces="true" %>
-<ec:setTemplatePackage name="adm"/>
+<ec:setTemplatePackage name="admin"/>
 <ec:setBundle basename="ediacaran/adm/default_template/admin/index" var="sys_messages" locale="${locale}"/>
 <!DOCTYPE html>
 <html>
