@@ -43,5 +43,5 @@
 	$.AppContext.vars.dialog      = "#defaultDialog";
 	$.AppContext.vars.language    = messages.getLanguage();
 	
-	$.AppContext.loadContentOnPanel("/plugins/ediacaran/adm${plugins.ediacaran.adm.context}/dashboard");
+	$.AppContext.loadContentOnPanel("/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard");
 	</script>

@@ -19,11 +19,11 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-	<ec:menu-bar classStyle="main-header" expand="sm" background="white" style="light">
+	<ec:menu-bar expand="sm" background="white" style="light">
 		<ec:menu-toggler />
 		<ec:menu-body>
 			<ec:menu-itens>
-				<ec:menu-item href="${plugins.ediacaran.adm.logout_page}">
+				<ec:menu-item href="${plugins.ediacaran.front.admin_logout_page}">
 					<fmt:message key="root.top_menu.sign_out" bundle="${sys_messages}" />
 				</ec:menu-item>
 			</ec:menu-itens>
