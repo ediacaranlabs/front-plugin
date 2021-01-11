@@ -75,7 +75,7 @@ public class MenuBarComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						return value == null? "navbar-expand-lg" : "navbar-expand-" + value;
+						return value == null? null : "navbar-expand-" + value;
 					}
 					
 				});
