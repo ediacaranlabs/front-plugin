@@ -4369,6 +4369,219 @@ Adiciona um item em um menu.
 	
 	<!-- /menu-item -->	
 	
+	<!-- treeview -->
+	
+	<tag>
+		<name>treeview</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TreeViewTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /treeview -->	
+	
+	<!-- treeview-itens -->
+	
+	<tag>
+		<name>treeview-itens</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TreeviewItensTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona itens em um menu.
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /treeview-itens -->
+
+	<!-- treeview-item -->
+	
+	<tag>
+		<name>treeview-item</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TreeviewItemTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+Adiciona um item em um menu. 
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+		<attribute>
+			<description>Link.</description>
+			<name>href</name>
+			<required>true</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+	</tag>
+	
+	<!-- /treeview-item -->	
+		
+	<!-- treeview-label-->
+	
+	<tag>
+		<name>treeview-label</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TreeviewLabelTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+	
+	</tag>
+	
+	<!-- /treeview-label -->
+			
+	<!-- treeview-group -->
+	
+	<tag>
+		<name>treeview-group</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TreeviewGroupTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+		
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+
+	</tag>
+	
+	<!-- /treeview-group -->
+				
 	<!-- menu-toggler -->
 	
 	<tag>
