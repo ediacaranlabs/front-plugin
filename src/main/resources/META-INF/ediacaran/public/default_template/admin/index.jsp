@@ -42,6 +42,14 @@
     <!-- Sidebar -->
     <div class="sidebar">
     	<ec:treeview>
+			<ec:treeview-group>
+				<ec:treeview-label>teste menu</ec:treeview-label>
+				<ec:treeview-itens>
+					<ec:treeview-item href="#">item 1</ec:treeview-item>
+					<ec:treeview-item href="#">item 2</ec:treeview-item>
+				</ec:treeview-itens>
+			</ec:treeview-group>
+    	
 			<c:forEach items="${Controller.menuBar.itens}" var="menu">
 				<c:choose>
 					<c:when test="${!empty menu['itens']}">

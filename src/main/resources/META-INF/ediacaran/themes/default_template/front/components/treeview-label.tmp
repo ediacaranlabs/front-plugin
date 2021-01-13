@@ -1,3 +1,4 @@
 <a href="#" class="nav-link">
 	{content}
+	<i class="right fas fa-angle-left"></i>
 </a>
