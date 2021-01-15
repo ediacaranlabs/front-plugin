@@ -15,13 +15,13 @@ public class TreeviewItensTag  extends AbstractSimpleComponent {
 	public TreeviewItensTag() {
 	}
 	
-	protected void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-    }
-	
     protected String getDefaultTemplate() {
     	return TEMPLATE;
     }
+
+	public void beforePrepareVars(Map<String, Object> vars) {
+		this.content = new JspFragmentVarParser(getJspBody());
+	}
 
 	public JspFragmentVarParser getContent() {
 		return content;

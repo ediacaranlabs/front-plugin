@@ -28,8 +28,7 @@ public class TreeviewItensComponent  extends AbstractComponent {
 		}});
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
-			}});
+			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers));
 
 	}
 }
