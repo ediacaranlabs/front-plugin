@@ -36,11 +36,20 @@ public class MenuItensComponent  extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
+						
 						if(value == null) {
 							return null;
 						}
 						
-						return "left".equals(value)? " mr-auto" : " ml-auto";
+						switch ((String)value) {
+						case "left":
+							return " mr-auto";
+						case "right":
+							return " ml-auto";
+						case "center":
+							return " mx-auto";
+						}
+						return null;
 					}
 					
 				});

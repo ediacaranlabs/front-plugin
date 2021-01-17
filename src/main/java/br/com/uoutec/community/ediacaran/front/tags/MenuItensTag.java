@@ -4,9 +4,11 @@ import java.util.Map;
 
 public class MenuItensTag  extends AbstractSimpleComponent {
 
-	public static final String TEMPLATE  = "/components/menu-itens";
+	public static final String WRAPPER_TEMPLATE = "/components/menu-collapse";
 	
-	public static final String TEMPLATE_2  = "/components/menu-itens-menu";
+	public static final String TEMPLATE  		= "/components/menu-itens";
+	
+	public static final String TEMPLATE_2  		= "/components/menu-itens-menu";
 	
 	/* ------------ Attr ---------------*/
 	
@@ -16,8 +18,10 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 	
 	private MenuTag menu;
 	
-	private String align; //left right
-	 
+	private String align; //left, right, center
+	
+	private Boolean collapse;
+	
 	public MenuItensTag() {
 	}
 	
@@ -30,9 +34,19 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 	
     protected String getDefaultTemplate() {
 		menu = (MenuTag)getProperty(MenuTag.CONTEXT_ID);
+		
+		if(menu == null) {
+			if(Boolean.TRUE.equals(collapse)) {
+				super.setWrapper(true);
+			}
+		}
     	return menu != null? TEMPLATE_2 : TEMPLATE;
     }
 
+    protected String getWrapperTemplate() {
+    	return WRAPPER_TEMPLATE;
+    }
+    
 	public JspFragmentVarParser getContent() {
 		return content;
 	}

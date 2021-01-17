@@ -1,94 +1,55 @@
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"                               prefix="fmt"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core"                              prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"                 prefix="c"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
-<%@page trimDirectiveWhitespaces="true" %>
 <ec:setTemplatePackage name="admin"/>
-<ec:setBundle basename="ediacaran/adm/default_template/admin/index" var="sys_messages" locale="${locale}"/>
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><fmt:message key="root.title" bundle="${sys_messages}" /></title>
-
-  <ec:include uri="/includes/header.jsp" />
-    
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<ec:include uri="/includes/head.jsp"/>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
 
-	<ec:menu-bar expand="sm" background="white" style="light">
-		<ec:menu-toggler />
-		<ec:menu-body>
-			<ec:menu-itens>
-				<ec:menu-item href="${plugins.ediacaran.front.admin_logout_page}">
-					<fmt:message key="root.top_menu.sign_out" bundle="${sys_messages}" />
-				</ec:menu-item>
-			</ec:menu-itens>
-		</ec:menu-body>
+<body id="body" class="collapse show">
+
+	<ec:menu-bar id="top_menu" classStyle="top-menu" expand="xl" style="light">
+		<ec:menu-toggler menuID="body">
+			<ec:icon icon="bars" size="1" />
+		</ec:menu-toggler>
+		<ec:menu-itens align="right">
+			<ec:menu-item href="#">
+				<ec:icon icon="comments" size="1"/>
+				<span class="badge badge-danger navbar-badge">3</span>
+			</ec:menu-item>
+			<ec:menu-item href="#">
+				<ec:icon icon="bell" size="1"/>
+				<span class="badge badge-warning navbar-badge">15</span>
+			</ec:menu-item>
+		</ec:menu-itens>
 	</ec:menu-bar>
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-  
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Ediacaran</span>
-    </a>
+	<aside class="sidebar">
+	 sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar  
+	 sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar  
+	 sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar  
+	 sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar  
+	 sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar  
+	 sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar sidebar  
+	</aside>
+	
+	<section class="content">
+		<ed:container>
+		content content content content content content content content content content content content content content content content content content  
+		content content content content content content content content content content content content content content content content content content  
+		content content content content content content content content content content content content content content content content content content  
+		content content content content content content content content content content content content content content content content content content  
+		content content content content content content content content content content content content content content content content content content  
+		content content content content content content content content content content content content content content content content content content  
+		content content content content content content content content content content content content content content content content content content  
+		</ed:container>	
+	</section>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-    	<ec:treeview>
-			<ec:treeview-group>
-				<ec:treeview-label>teste menu</ec:treeview-label>
-				<ec:treeview-itens>
-					<ec:treeview-item href="#">item 1</ec:treeview-item>
-					<ec:treeview-item href="#">item 2</ec:treeview-item>
-				</ec:treeview-itens>
-			</ec:treeview-group>
-    	
-			<c:forEach items="${Controller.menuBar.itens}" var="menu">
-				<c:choose>
-					<c:when test="${!empty menu['itens']}">
-						<ec:treeview-group>
-							<ec:treeview-label>${menu['name']}</ec:treeview-label>
-							<ec:treeview-itens>
-								<c:forEach items="${menu['itens']}" var="item">
-									<ec:treeview-item href="${item['link']}">${item['name']}</ec:treeview-item>
-								</c:forEach>
-							</ec:treeview-itens>
-						</ec:treeview-group>
-					</c:when>
-					<c:otherwise>
-						<ec:treeview-item href="${item['link']}">${menu['name']}</ec:treeview-item>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-    	</ec:treeview>
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.1.0-rc
-    </div>
-  </footer>
-
-</div>
-<!-- ./wrapper -->
-
-  <ec:include uri="/includes/footer.jsp" />
-
+	<ec:include uri="/includes/footer.jsp"/>
+ 
 </body>
 </html>

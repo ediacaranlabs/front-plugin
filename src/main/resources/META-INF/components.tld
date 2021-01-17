@@ -4174,6 +4174,14 @@ Adiciona uma barra de menu.
 		</attribute>
 		
 		<attribute>
+			<description></description>
+			<name>classStyle</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
 			<description>Define a identificação do componente.</description>
 			<name>id</name>
 			<required>false</required>
@@ -4723,10 +4731,18 @@ Adiciona itens em um menu.
 		<!-- attr -->
 	
 		<attribute>
-			<description>Alinhamento dos itens (left, right).</description>
+			<description>Alinhamento dos itens (left, right, center).</description>
 			<name>align</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>collapse</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
 			<fragment>true</fragment>
 		</attribute>
 		

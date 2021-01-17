@@ -16,6 +16,7 @@ public class MenuBarComponent  extends AbstractComponent {
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
+			remove("classStyle");
 		}});
 	
 		super.default_attribute_parsers = 
@@ -24,6 +25,7 @@ public class MenuBarComponent  extends AbstractComponent {
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
+			add("classStyle");
 			add("style");
 			add("background");
 			add("position");

@@ -1,42 +1,54 @@
-<!-- jQuery -->
-<script src="/plugins/ediacaran/front/default_template/admin/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="/plugins/ediacaran/front/default_template/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="/plugins/ediacaran/front/default_template/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="/plugins/ediacaran/front/default_template/admin/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="/plugins/ediacaran/front/default_template/admin/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="/plugins/ediacaran/front/default_template/admin/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="/plugins/ediacaran/front/default_template/admin/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="/plugins/ediacaran/front/default_template/admin/plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="/plugins/ediacaran/front/default_template/admin/plugins/moment/moment.min.js"></script>
-<script src="/plugins/ediacaran/front/default_template/admin/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="/plugins/ediacaran/front/default_template/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="/plugins/ediacaran/front/default_template/admin/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="/plugins/ediacaran/front/default_template/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/plugins/ediacaran/front/default_template/admin/js/adminlte.js"></script>
-<script type="text/javascript">
-	
-	messages.setDefaultLanguage('pt-BR');
-	messages.addSupportedLanguages('pt-BR');
-	
-	$.AppContext.vars.contextPath = "";
-	$.AppContext.vars.painel      = "#content-body";
-	$.AppContext.vars.dialog      = "#defaultDialog";
-	$.AppContext.vars.language    = messages.getLanguage();
-	
-	$.AppContext.loadContentOnPanel("/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard");
-</script>
+<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components" prefix="ec"%>
+<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
+<footer>
+	<ed:container>
+		<ed:row>
+			<ed:col>
+			</ed:col>
+			<ed:col classStyle="widget">
+				<h5>Serviços</h5>
+				<ul>
+					<li><a href="#">DNS dinâmico</a></li>
+				</ul>
+			</ed:col>
+			<ed:col classStyle="widget">
+				<h5>Projetos</h5>
+				<ul>
+					<li><a href="#">Brutos Framework</a></li>
+					<li><a href="#">Calypte cache</a></li>
+					<li><a href="#">Entity file manager</a></li>
+				</ul>
+			</ed:col>
+			<ed:col classStyle="widget">
+				<h5>Entre em contato</h5>
+				<address>
+					<strong>Rua Ovideo Braga</strong><br>
+					São Judas<br>
+					Ibitinga-SP
+				</address>
+				<p>
+					<ec:icon icon="phone" size="1"/> (16) 99999-9999<br>
+					<ec:icon icon="envelope" size="1"/> contato@uoutec.com.br<br>
+				</p>
+			</ed:col>
+		</ed:row>
+	</ed:container>
+	<div class="sub-footer">
+		<ed:container>
+			<ed:row>
+				<ed:col size="6">
+					<span>UoUTec - All right reserved.</span>
+				</ed:col>
+				<ed:col size="6" classStyle="social-network">
+					<ul>
+						<li><a href="#"><ec:icon icon="facebook" bg="square" bgSize="2" size="1" /></a></li>
+						<li><a href="#"><ec:icon icon="twitter" bg="square" bgSize="2" size="1"/></a></li>
+						<li><a href="#"><ec:icon icon="linkedin" bg="square" bgSize="2" size="1"/></a></li>
+					</ul>
+				</ed:col>
+			</ed:row>
+		</ed:container>
+	</div>
+    </footer>
+    
+  
