@@ -13,6 +13,18 @@ $.AppContext.onload(function(){
 		$.AppContext.resizeContent();	
 	});
 	
+	$(".sidebar").hover(function(){
+		$('body').addClass('hover-menu');
+	}, function(){
+		$('body').removeClass('hover-menu');
+	});
+	
+	$(window).click(function(){
+		if(!$('body').hasClass('hover-menu')){
+			$('body').removeClass('show');
+		}
+	});
+	
 	$.AppContext.resizeContent();
 	
 });
