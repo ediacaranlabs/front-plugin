@@ -37,103 +37,12 @@
     	<div class="sidebar-body">
 				<ec:menu-bar>
 					<ec:menu-itens>
-						<ec:menu-item href="#"><ec:icon icon="tachometer" size="1"/> Dashboard</ec:menu-item>
+						<ec:menu-item href="#"><ec:icon icon="tachometer" size="1"/> <p>Dashboard</p></ec:menu-item>
 						<ec:menu>
-							<ec:menu-label><ec:icon icon="copy" size="1"/> Menu 1</ec:menu-label>
+							<ec:menu-label><ec:icon icon="tree" size="1"/> <p>Components</p></ec:menu-label>
 							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="table" size="1"/> Menu 2</ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="table" size="1"/> Menu 3</ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="table" size="1"/> Menu 4</ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="table" size="1"/> Menu 5</ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="table" size="1"/> Menu 6</ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="table" size="1"/> Menu 7</ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="table" size="1"/> Menu 8</ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="table" size="1"/> Menu 9</ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="table" size="1"/> Menu 10</ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="table" size="1"/> Menu 11</ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="table" size="1"/> Menu 12</ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="table" size="1"/> Menu 13</ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="table" size="1"/> Menu 14</ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 1</ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> item 2</ec:menu-item>
+								<ec:menu-item href="#!/plugins/ediacaran/front/admin/components.jsp"><ec:icon icon="circle" size="1"/> <p>Buttons</p></ec:menu-item>
+								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> <p>item 2</p></ec:menu-item>
 							</ec:menu-itens>
 						</ec:menu>
 					</ec:menu-itens>
@@ -141,24 +50,7 @@
 		</div>
 	</aside>
 	
-    <section class="content">
-		<ed:container>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		</ed:container>    
+    <section id="content-body" class="content">
     </section>
 
 	<ec:include uri="/includes/footer.jsp"/>

@@ -31,39 +31,3 @@
 <script	src="/plugins/ediacaran/front/default_template/admin/js/application.event.js" charset="utf-8"></script>
 <script	src="/plugins/ediacaran/front/default_template/admin/js/application.page.js" charset="utf-8"></script>
 <script	src="/plugins/ediacaran/front/default_template/admin/js/application.config.js" charset="utf-8"></script>
-<script type="text/javascript">
-	messages.setDefaultLanguage('pt-BR');
-	messages.addSupportedLanguages('pt-BR');
-
-	$.AppContext.vars.contextPath = "";
-	$.AppContext.vars.painel      = "#content-body";
-	$.AppContext.vars.dialog      = "#defaultDialog";
-	$.AppContext.vars.language    = messages.getLanguage();
-	
-	/*
-	function getViewport() {
-	  var width = Math.max(
-	    document.documentElement.clientHeight,
-	    window.innerHeight || 0
-	  )
-	  return width;
-	}
-
-	function adjustContent() {
-		var topMenuHeight = $(".top-menu").outerHeight();
-		var footerHeight = $("footer").outerHeight();
-		var viewPort = $(window).height();
-		$(".content").css('min-height', (viewPort - footerHeight - topMenuHeight) + "px");
-	}
-	
-
-	$(window).resize(function(){
-		adjustViewPort();		
-	});
-	
-	$.AppContext.onload(function(){
-		adjustViewPort();
-	});
-*/
-
-</script>
