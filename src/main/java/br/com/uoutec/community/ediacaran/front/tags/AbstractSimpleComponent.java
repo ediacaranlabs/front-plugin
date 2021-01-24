@@ -45,6 +45,8 @@ public abstract class AbstractSimpleComponent
 	
 	private boolean wrapper;
 	
+	private String style;
+	
     public void doTag() throws JspException, IOException {
     	try {
 	    	if(!wrapper)
@@ -351,6 +353,14 @@ public abstract class AbstractSimpleComponent
 
 	public void setClassStyle(String classStyle) {
 		this.classStyle = classStyle;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
 	}
 	
 }

@@ -59,9 +59,10 @@ h4.heading {
 }
 
 
-.collapse:not(.show) {
+body[class*='collapse']:not(.show) {
     display: unset;
 }
+
 
 section[class=content] {
     /*margin-left: 250px;*/
@@ -821,6 +822,10 @@ Tabs
   position: relative;
   margin: 0;
   padding: 0;
+}
+
+.nav-tabs .nav-item a {
+	color: unset;
 }
 
 .tab-content > .tab-pane {

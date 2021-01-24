@@ -659,6 +659,14 @@ Ex:
 			<type>java.lang.String</type>
 			<fragment>true</fragment>
 		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>style</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
 		
 		<attribute>
 			<description>Define a identificação do componente.</description>

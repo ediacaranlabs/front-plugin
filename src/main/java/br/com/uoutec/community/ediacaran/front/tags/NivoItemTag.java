@@ -23,7 +23,9 @@ public class NivoItemTag extends AbstractSimpleComponent {
     	
     	if(parent instanceof NivoTag) {
     		StringWriter stringWriter = new StringWriter();
-    		this.getJspBody().invoke(stringWriter);
+    		if(this.getJspBody() != null) {
+    			this.getJspBody().invoke(stringWriter);
+    		}
     		((NivoTag)parent).add(this.image, this.title, this.link, stringWriter.toString());
     	}
     	

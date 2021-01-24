@@ -55,4 +55,11 @@ $.AppContext.onload(function(){
 		$('body').removeClass('show');
 	}
 	
+	$.AppContext.addLoadListener("pretty-link-load", "^.*", {
+		
+		after: function(){
+			PR.prettyPrint();
+		}
+	});
+	
 });

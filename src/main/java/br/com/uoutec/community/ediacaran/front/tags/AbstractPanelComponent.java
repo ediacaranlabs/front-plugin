@@ -83,6 +83,8 @@ public abstract class AbstractPanelComponent
 	
 	private Object oldParent;
 	
+	private String style;
+	
     public void doInitBody() throws JspException {
     	setProperty(getClass().getName() + ":CONTEXT", this);
     	
@@ -390,6 +392,14 @@ public abstract class AbstractPanelComponent
 
 	public void setClassStyle(String classStyle) {
 		this.classStyle = classStyle;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
 	}
     
 }

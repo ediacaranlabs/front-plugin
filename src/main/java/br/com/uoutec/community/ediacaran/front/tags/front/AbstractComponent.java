@@ -51,6 +51,7 @@ public abstract class AbstractComponent implements Component{
 	protected Set<String> default_props = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
 			add("classStyle");
+			add("style");
 		}});
 	
 	

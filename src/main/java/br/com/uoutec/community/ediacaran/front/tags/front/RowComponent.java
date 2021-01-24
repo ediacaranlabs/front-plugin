@@ -26,7 +26,6 @@ public class RowComponent  extends AbstractComponent {
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("content");
-			add("style");
 		}});
 	
 		super.default_property_parsers = 
