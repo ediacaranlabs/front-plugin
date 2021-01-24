@@ -17,8 +17,37 @@
 			</ed:col>
 		</ed:row>
 	</section>
+
+   	<ed:row>
+		<ed:col size="6">
+			<ec:box>
+				<ec:box-header>
+					<h4>Button types</h4>
+				</ec:box-header>
+				<ec:box-body>
+                	<ec:button label="btn default" />
+                	<ec:button label="btn primary" type="primary"/>
+                	<ec:button label="btn secondary"  type="secondary"/>
+                	<ec:button label="btn success"  type="success"/>
+                	<ec:button label="btn danger"  type="danger"/>
+                	<ec:button label="btn warning"  type="warning"/>
+                	<ec:button label="btn info"  type="info"/>
+                	<ec:button label="btn light"  type="light"/>
+                	<ec:button label="btn dark"  type="dark"/>
+                	<ec:button label="btn link"  type="link"/>
+                	<ec:button label="btn outline" outline="true"/>
+				</ec:box-body>
+				<ec:box-footer>
+				</ec:box-footer>
+			</ec:box>
+		</ed:col>
+		<ed:col size="6">
+		</ed:col>
+   	</ed:row>
 	
     <section class="content">
+    
+    
 		<ed:container>
 			<ed:row>
 				<ed:col size="6">
