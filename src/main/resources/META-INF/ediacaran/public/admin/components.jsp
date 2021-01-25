@@ -53,7 +53,7 @@
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
-			<ec:box>
+			<ec:box style="info">
 				<ec:box-header>
 					<h3>Button with icon</h3>
 				</ec:box-header>
@@ -102,7 +102,7 @@
  -->	
 	<ed:row>
 		<ed:col size="6">
-			<ec:box>
+			<ec:box style="success">
 				<ec:box-header>
 					<h3>More variations</h3>
 				</ec:box-header>
@@ -122,7 +122,7 @@
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
-			<ec:box>
+			<ec:box style="warning">
 				<ec:box-header>
 					<h3>Button sizes</h3>
 				</ec:box-header>
@@ -143,7 +143,7 @@
 
 	<ed:row>
 		<ed:col size="6">
-			<ec:box>
+			<ec:box style="danger">
 				<ec:box-header>
 					<h3>Tabs</h3>
 				</ec:box-header>
@@ -342,3 +342,109 @@
 			</ec:box>
 		</ed:col>
    	</ed:row>
+   	
+	<ed:row>
+		<ed:col size="6">
+			<ec:box>
+				<ec:box-header>
+					<h3>Carousel</h3>
+				</ec:box-header>
+				<ec:box-body>
+					<ec:carousel>
+						<ec:carousel-item>
+							<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-01.jpg"/></a>
+						</ec:carousel-item> 
+						<ec:carousel-item>
+							<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-02.jpg"/></a>
+						</ec:carousel-item> 
+						<ec:carousel-item>
+							<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-03.jpg"/></a>
+						</ec:carousel-item> 
+					</ec:carousel>
+				</ec:box-body>
+				<ec:box-footer>
+					<ec:prettify linenums="true"><carousel>
+	<carousel-item>
+		<a href="#"><image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-01.jpg"/></a>
+	</carousel-item> 
+	<carousel-item>
+		<a href="#"><image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-02.jpg"/></a>
+	</carousel-item> 
+	<carousel-item>
+		<a href="#"><image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-03.jpg"/></a>
+	</carousel-item> 
+</carousel></ec:prettify>
+				</ec:box-footer>
+			</ec:box>
+		</ed:col>
+		<ed:col size="6">
+			<ec:box>
+				<ec:box-header>
+					<h3>Gallery</h3>
+				</ec:box-header>
+				<ec:box-body>
+					<ec:gallery cols="4">
+						<ec:gallery-images>
+							<ec:gallery-image filter="all" 
+								icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-01.jpg" 
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-01-full.jpg" 
+								title="The City"/>
+							<ec:gallery-image filter="all" 
+								icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-02.jpg" 
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-02-full.jpg" 
+								title="The City"/>
+							<ec:gallery-image filter="all" 
+								icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-03.jpg" 
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-03-full.jpg" 
+								title="The City"/>
+							<ec:gallery-image filter="all" 
+								icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-04.jpg" 
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-04-full.jpg" 
+								title="The City"/>
+							<ec:gallery-image filter="all" 
+								icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-05.jpg" 
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-05-full.jpg" 
+								title="The City"/>
+							<ec:gallery-image filter="all" 
+								icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-06.jpg" 
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-06-full.jpg" 
+								title="The City"/>
+							<ec:gallery-image filter="all" 
+								icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-07.jpg" 
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-07-full.jpg" 
+								title="The City"/>
+							<ec:gallery-image filter="all" 
+								icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-08.jpg" 
+								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-08-full.jpg" 
+								title="The City"/>
+						</ec:gallery-images>
+					</ec:gallery>
+				</ec:box-body>
+				<ec:box-footer>
+					<ec:prettify linenums="true"><gallery cols="4">
+	<gallery-images>
+		<gallery-image filter="all" 
+			icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-01.jpg" 
+			text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+			src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-01-full.jpg" 
+			title="The City"/>
+		<gallery-image filter="all" 
+			icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-02.jpg" 
+			text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
+			src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-02-full.jpg" 
+			title="The City"/>
+		...
+	</gallery-images>
+</gallery></ec:prettify>
+				</ec:box-footer>
+			</ec:box>
+		</ed:col>
+   	</ed:row>   	
