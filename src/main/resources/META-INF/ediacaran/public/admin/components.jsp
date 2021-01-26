@@ -25,17 +25,48 @@
 					<h3>Button types</h3>
 				</ec:box-header>
 				<ec:box-body>
-                	<ec:button label="btn default" />
-                	<ec:button label="btn primary" type="primary"/>
-                	<ec:button label="btn secondary"  type="secondary"/>
-                	<ec:button label="btn success"  type="success"/>
-                	<ec:button label="btn danger"  type="danger"/>
-                	<ec:button label="btn warning"  type="warning"/>
-                	<ec:button label="btn info"  type="info"/>
-                	<ec:button label="btn light"  type="light"/>
-                	<ec:button label="btn dark"  type="dark"/>
-                	<ec:button label="btn link"  type="link"/>
-                	<ec:button label="btn outline" outline="true"/>
+					<ed:row>
+						<ed:col size="4">
+		                	<ec:button label="btn default" />
+						</ed:col>
+						<ed:col size="4">
+		                	<ec:button label="btn primary" type="primary"/>
+						</ed:col>
+						<ed:col size="4">
+        		        	<ec:button label="btn secondary"  type="secondary"/>
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col size="4">
+                			<ec:button label="btn success"  type="success"/>
+						</ed:col>
+						<ed:col size="4">
+        		        	<ec:button label="btn danger"  type="danger"/>
+						</ed:col>
+						<ed:col size="4">
+		                	<ec:button label="btn warning"  type="warning"/>
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col size="4">
+		                	<ec:button label="btn info"  type="info"/>
+						</ed:col>
+						<ed:col size="4">
+        		        	<ec:button label="btn light"  type="light"/>
+						</ed:col>
+						<ed:col size="4">
+                			<ec:button label="btn dark"  type="dark"/>
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col size="4">
+		                	<ec:button label="btn link"  type="link"/>
+						</ed:col>
+						<ed:col size="4">
+						</ed:col>
+						<ed:col size="4">
+						</ed:col>
+					</ed:row>
 				</ec:box-body>
 				<ec:box-footer>
 					<ec:prettify linenums="true"><button label="btn default" />
@@ -58,10 +89,17 @@
 					<h3>Button with icon</h3>
 				</ec:box-header>
 				<ec:box-body>
-	                <p>You can add icon to any choosen buttons. See some example below:</p>
-                	<ec:button label="button icon heart" type="success" size="sm" icon="heart" />
-                	<ec:button label=" button icon camera" type="red" size="sm" icon="camera" />
-                	<ec:button label="button icon briefcase" size="sm" outline="true" icon="briefcase"/>
+					<ed:row>
+						<ed:col size="4">
+                			<ec:button label="heart" type="success" size="sm" icon="heart" />
+						</ed:col>
+						<ed:col size="4">
+        		        	<ec:button label="camera" type="red" size="sm" icon="camera" />
+						</ed:col>
+						<ed:col size="4">
+		                	<ec:button label="briefcase" size="sm" outline="true" icon="briefcase"/>
+						</ed:col>
+					</ed:row>
 				</ec:box-body>
 				<ec:box-footer>
 					<ec:prettify linenums="true"><button label="button icon heart" type="success" size="sm" icon="heart" />
@@ -72,42 +110,13 @@
 		</ed:col>
    	</ed:row>
 
-<!-- 
-
-	<ed:row>
-		<ed:col size="6">
-			<ec:box>
-				<ec:box-header>
-					<h3></h3>
-				</ec:box-header>
-				<ec:box-body>
-				</ec:box-body>
-				<ec:box-footer>
-				</ec:box-footer>
-			</ec:box>
-		</ed:col>
-		<ed:col size="6">
-			<ec:box>
-				<ec:box-header>
-					<h3></h3>
-				</ec:box-header>
-				<ec:box-body>
-				</ec:box-body>
-				<ec:box-footer>
-				</ec:box-footer>
-			</ec:box>
-		</ed:col>
-   	</ed:row>
-
- -->	
 	<ed:row>
 		<ed:col size="6">
 			<ec:box style="success">
 				<ec:box-header>
-					<h3>More variations</h3>
+					<h3>Button group</h3>
 				</ec:box-header>
 				<ec:box-body>
-	                <p>Wrap a series of buttons with <code>&lt;ec:button-group/&gt;</code></p>
 	                <ec:button-group>
 	                	<ec:button label="primary" type="primary"/>
 	                	<ec:button label="success" type="success"/>
@@ -127,10 +136,21 @@
 					<h3>Button sizes</h3>
 				</ec:box-header>
 				<ec:box-body>
-	                <p>There are 5 button sizes: lg and sm.</p>
-                	<ec:button label="Large button" size="lg"/>
-                	<ec:button label="Small button" size="sm" type="success"/>
-                	<ec:button label="btn block level" block="true" type="warning"/>
+					<ed:row>
+						<ed:col size="12">
+                			<ec:button label="Large button" size="lg"/>
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col size="12">
+        		        	<ec:button label="Small button" size="sm" type="success"/>
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col size="12">
+		                	<ec:button label="btn block level" block="true" type="warning"/>
+						</ed:col>
+					</ed:row>
 				</ec:box-body>
 				<ec:box-footer>
 		            <ec:prettify linenums="true"><button label="Large button" size="lg"/>

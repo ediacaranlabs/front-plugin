@@ -78,7 +78,8 @@
 
 pre.prettyprint {
 	padding: 2px;
-	border: 1px solid #888
+	border: 1px solid #888;
+	max-height: 200px;
 }
 
 ol.linenums {

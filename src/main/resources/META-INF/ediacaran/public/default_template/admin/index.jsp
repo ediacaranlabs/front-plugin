@@ -38,13 +38,8 @@
 				<ec:menu-bar>
 					<ec:menu-itens>
 						<ec:menu-item href="#"><ec:icon icon="tachometer" size="1"/> <p>Dashboard</p></ec:menu-item>
-						<ec:menu>
-							<ec:menu-label><ec:icon icon="tree" size="1"/> <p>Components</p></ec:menu-label>
-							<ec:menu-itens>
-								<ec:menu-item href="#!/plugins/ediacaran/front/admin/components.jsp"><ec:icon icon="circle" size="1"/> <p>Buttons</p></ec:menu-item>
-								<ec:menu-item href="#"><ec:icon icon="circle" size="1"/> <p>item 2</p></ec:menu-item>
-							</ec:menu-itens>
-						</ec:menu>
+						<ec:menu-item href="#!/plugins/ediacaran/front/admin/components.jsp"><ec:icon icon="tree" size="1"/> <p>Components</p></ec:menu-item>
+						<ec:menu-item href="#!/plugins/ediacaran/front/admin/form.jsp"><ec:icon icon="edit" size="1"/> <p>Forms</p></ec:menu-item>
 					</ec:menu-itens>
 				</ec:menu-bar>
 		</div>
