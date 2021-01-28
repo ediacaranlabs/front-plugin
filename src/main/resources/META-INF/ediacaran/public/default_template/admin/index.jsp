@@ -40,6 +40,8 @@
 						<ec:menu-item href="#"><ec:icon icon="tachometer" size="1"/> <p>Dashboard</p></ec:menu-item>
 						<ec:menu-item href="#!/plugins/ediacaran/front/admin/components.jsp"><ec:icon icon="tree" size="1"/> <p>Components</p></ec:menu-item>
 						<ec:menu-item href="#!/plugins/ediacaran/front/admin/form.jsp"><ec:icon icon="edit" size="1"/> <p>Forms</p></ec:menu-item>
+						<ec:menu-item href="#!/plugins/ediacaran/front/admin/typography.jsp"><ec:icon icon="pencil" size="1"/> <p>Typography</p></ec:menu-item>
+						<ec:menu-item href="#!/plugins/ediacaran/front/admin/table.jsp"><ec:icon icon="table" size="1"/> <p>Tables</p></ec:menu-item>
 					</ec:menu-itens>
 				</ec:menu-bar>
 		</div>
