@@ -20,15 +20,13 @@
 		</ed:container>
 	</section>
 	
-    <section class="content">
-		<ed:container>
-			<ed:row>
-				<ed:col size="12">
-		            <h4>Default styles</h4>
-				</ed:col>
-			</ed:row>
-			<ed:row>
-				<ed:col size="6">
+   	<ed:row>
+		<ed:col size="6">
+			<ec:box>
+				<ec:box-header>
+					<h3>Default styles</h3>
+				</ec:box-header>
+				<ec:box-body>
 					<ec:table>
 						<ec:table-header>
 		                  <ec:table-col>#</ec:table-col>
@@ -57,8 +55,8 @@
 		                </ec:table-row>
 		              </ec:table-body>
 					</ec:table>
-				</ed:col>
-				<ed:col size="6">
+				</ec:box-body>
+				<ec:box-footer>
 					<ec:prettify linenums="true"><table>
 	<table-header>
 		<table-col>#</table-col>
@@ -87,15 +85,15 @@
 		</table-row>
 	</table-body>
 </table></ec:prettify>
-				</ed:col>
-			</ed:row>
-			<ed:row>
-				<ed:col size="12">
-		            <h4>Default Styles with Zebra-Striping</h4>
-				</ed:col>
-			</ed:row>
-			<ed:row>
-				<ed:col size="6">
+				</ec:box-footer>
+			</ec:box>
+		</ed:col>
+		<ed:col size="6">
+			<ec:box style="info">
+				<ec:box-header>
+					<h3>Default Styles with Zebra-Striping</h3>
+				</ec:box-header>
+				<ec:box-body>
 					<ec:table style="striped">
 						<ec:table-header>
 		                  <ec:table-col>#</ec:table-col>
@@ -124,8 +122,8 @@
 		                </ec:table-row>
 		              </ec:table-body>
 					</ec:table>
-				</ed:col>
-				<ed:col size="6">
+				</ec:box-body>
+				<ec:box-footer>
 					<ec:prettify linenums="true"><table style="striped">
 	<table-header>
 		<table-col>#</table-col>
@@ -154,16 +152,18 @@
 		</table-row>
 	</table-body>
 </table></ec:prettify>
-				</ed:col>
-			</ed:row>
-
-			<ed:row>
-				<ed:col size="12">
-		            <h4>Default Styles borders</h4>
-				</ed:col>
-			</ed:row>
-			<ed:row>
-				<ed:col size="6">
+				</ec:box-footer>
+			</ec:box>
+		</ed:col>
+   	</ed:row>
+   		
+   	<ed:row>
+		<ed:col size="6">
+			<ec:box>
+				<ec:box-header>
+					<h3>Default Styles borders</h3>
+				</ec:box-header>
+				<ec:box-body>
 					<ec:table style="bordered">
 						<ec:table-header>
 		                  <ec:table-col>#</ec:table-col>
@@ -191,8 +191,8 @@
 		                </ec:table-row>
 		              </ec:table-body>
 					</ec:table>
-				</ed:col>
-				<ed:col size="6">
+				</ec:box-body>
+				<ec:box-footer>
 					<ec:prettify linenums="true"><table style="bordered">
 	<table-header>
 		<table-col>#</table-col>
@@ -220,16 +220,15 @@
 		</table-row>
 	</table-body>
 </table></ec:prettify>
-				</ed:col>
-			</ed:row>
-
-			<ed:row>
-				<ed:col size="12">
-		            <h4>Default Styles with hover enabled</h4>
-				</ed:col>
-			</ed:row>
-			<ed:row>
-				<ed:col size="6">
+				</ec:box-footer>
+			</ec:box>
+		</ed:col>
+		<ed:col size="6">
+			<ec:box style="info">
+				<ec:box-header>
+					<h3>Default Styles with hover enabled</h3>
+				</ec:box-header>
+				<ec:box-body>
 					<ec:table style="hover">
 						<ec:table-header>
 		                  <ec:table-col>#</ec:table-col>
@@ -257,8 +256,8 @@
 		                </ec:table-row>
 		              </ec:table-body>
 					</ec:table>
-				</ed:col>
-				<ed:col size="6">
+				</ec:box-body>
+				<ec:box-footer>
 					<ec:prettify linenums="true"><table style="hover">
 	<table-header>
 		<table-col>#</table-col>
@@ -286,16 +285,18 @@
 		</table-row>
 	</table-body>
 </table></ec:prettify>
-				</ed:col>
-			</ed:row>
-			
-			<ed:row>
-				<ed:col size="12">
-		            <h4>Cutting cell padding in half</h4>
-				</ed:col>
-			</ed:row>
-			<ed:row>
-				<ed:col size="6">
+				</ec:box-footer>
+			</ec:box>
+		</ed:col>
+   	</ed:row>
+   	   		
+   	<ed:row>
+		<ed:col size="6">
+			<ec:box>
+				<ec:box-header>
+					<h3>Cutting cell padding in half</h3>
+				</ec:box-header>
+				<ec:box-body>
 					<ec:table style="sm">
 						<ec:table-header>
 		                  <ec:table-col>#</ec:table-col>
@@ -323,8 +324,8 @@
 		                </ec:table-row>
 		              </ec:table-body>
 					</ec:table>
-				</ed:col>
-				<ed:col size="6">
+				</ec:box-body>
+				<ec:box-footer>
 					<ec:prettify linenums="true"><table style="sm">
 	<table-header>
 		<table-col>#</table-col>
@@ -352,16 +353,15 @@
 		</table-row>
 	</table-body>
 </table></ec:prettify>
-				</ed:col>
-			</ed:row>
-			
-			<ed:row>
-				<ed:col size="12">
-		            <h4>Use contextual classes to color table rows</h4>
-				</ed:col>
-			</ed:row>
-			<ed:row>
-				<ed:col size="6">
+				</ec:box-footer>
+			</ec:box>
+		</ed:col>
+		<ed:col size="6">
+			<ec:box style="info">
+				<ec:box-header>
+					<h3>Use contextual classes to color table rows</h3>
+				</ec:box-header>
+				<ec:box-body>
 					<ec:table>
 						<ec:table-header>
 		                  <ec:table-col>#</ec:table-col>
@@ -394,8 +394,8 @@
 		                </ec:table-row>
 		              </ec:table-body>
 					</ec:table>
-				</ed:col>
-				<ed:col size="6">
+				</ec:box-body>
+				<ec:box-footer>
 					<ec:prettify linenums="true"><table>
 	<table-header>
 		<table-col>#</table-col>
@@ -428,7 +428,7 @@
 		</table-row>
 	</table-body>
 </table></ec:prettify>
-				</ed:col>
-			</ed:row>					
-		</ed:container>
-	</section>
+				</ec:box-footer>
+			</ec:box>
+		</ed:col>
+   	</ed:row>
