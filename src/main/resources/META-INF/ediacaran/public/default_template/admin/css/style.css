@@ -73,6 +73,10 @@ body:not(.show) section[class=content]{
     margin-left: unset;
 }
 
+img.float-left {
+    margin: 0 15px 15px 0;
+}
+
 @media screen and (min-width: 576px and max-width: 768px){
 
 	section[class=content] {
