@@ -11,7 +11,7 @@
 					</div>
 				</ed:col>
 				<ed:col size="8">
-					<ec:breadcrumb title="Components">
+					<ec:breadcrumb title="Pricing boxes">
 						<ec:breadcrumb-path icon="home" text="" lnk="#" />
 						<ec:breadcrumb-path text="Features" lnk="#" />
 					</ec:breadcrumb>
