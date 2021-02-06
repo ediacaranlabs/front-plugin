@@ -1,0 +1,1 @@
+<script>$.AppContext.floatcharts.addData("{flotchartid}", "{label}", [{x}, {y}]);</script>

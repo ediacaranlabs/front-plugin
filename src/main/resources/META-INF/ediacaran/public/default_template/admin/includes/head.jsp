@@ -28,6 +28,10 @@
 <script src="/plugins/ediacaran/front/default_template/admin/js/nivo.js"></script>
 <script src="/plugins/ediacaran/front/default_template/admin/js/gallery.js"></script>
 <script src="/plugins/ediacaran/front/default_template/admin/js/carousel.js"></script>
+<script src="/plugins/ediacaran/front/default_template/admin/plugins/flot/jquery.flot.js"></script>
+<script src="/plugins/ediacaran/front/default_template/admin/plugins/flot/plugins/jquery.flot.resize.js"></script>
+<script src="/plugins/ediacaran/front/default_template/admin/plugins/flot/plugins/jquery.flot.pie.js"></script>
 <script	src="/plugins/ediacaran/front/default_template/admin/js/application.event.js" charset="utf-8"></script>
 <script	src="/plugins/ediacaran/front/default_template/admin/js/application.page.js" charset="utf-8"></script>
 <script	src="/plugins/ediacaran/front/default_template/admin/js/application.config.js" charset="utf-8"></script>
+<script src="/plugins/ediacaran/front/default_template/admin/plugins/flot/application.config.js"></script>

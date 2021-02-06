@@ -1,0 +1,24 @@
+<script>
+$.AppContext.floatcharts.register(
+	"{flotchartid}",
+	&#123;
+	    color: "{color}",
+	    data: [],
+	    label: "{label}",
+	    lines: &#123; show: {lines} &#125;,
+	    xaxis: "{xaxis}",
+	    yaxis: "{yaxis}",
+	    bars: &#123; show: {bars} &#125;,
+	    clickable: "{clickable}",
+	    hoverable: "{hoverable}",
+	    shadowSize: "{shadowSize}",
+	    highlightColor: "{highlightColor}",
+	    points: &#123; show: {points} &#125;,
+	&#125;	
+);
+
+$.AppContext.floatcharts.setData("{flotchartid}", "{label}", []);
+</script>
+{content}
+<script>$.AppContext.floatcharts.show("{flotchartid}");</script>
+

@@ -43,6 +43,7 @@
 						<ec:menu-item href="#!/plugins/ediacaran/front/admin/typography.jsp"><ec:icon icon="pencil" size="1"/> <p>Typography</p></ec:menu-item>
 						<ec:menu-item href="#!/plugins/ediacaran/front/admin/table.jsp"><ec:icon icon="table" size="1"/> <p>Tables</p></ec:menu-item>
 						<ec:menu-item href="#!/plugins/ediacaran/front/admin/pricingbox.jsp"><ec:icon icon="money" size="1"/> <p>Pricing boxes</p></ec:menu-item>
+						<ec:menu-item href="#!/plugins/ediacaran/front/admin/flotcharts.jsp"><ec:icon icon="pie-chart" size="1"/> <p>Flot Charts</p></ec:menu-item>
 					</ec:menu-itens>
 				</ec:menu-bar>
 		</div>

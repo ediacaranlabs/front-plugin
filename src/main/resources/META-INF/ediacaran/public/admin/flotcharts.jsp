@@ -58,17 +58,17 @@
 				</ec:box-header>
 				<ec:box-body>
 					<!-- https://github.com/flot/flot/blob/master/API.md | http://www.flotcharts.org/ -->
-					<ec:flotcharts>
-						<ec:flotcharts-series  label="" color="" lines="" bars="" points="" xaxis="" yaxis="" 
-							clickable="false" hoverable="false" shadowSize="0" highlightColor="0">
-							<ec:flotcharts-data x="" y=""/>
-							<ec:flotcharts-data x="" y=""/>
-							<ec:flotcharts-data x="" y=""/>
-							<ec:flotcharts-data x="" y=""/>
-							<ec:flotcharts-data x="" y=""/>
+					<ec:flotcharts src="/plugins/ediacaran/updade.js" togglingSeries="false" 
+							updateFrequence="1" updateFrequenceUnit="SECONDS">
+						<ec:flotcharts-series  label="Teste">
+							<ec:flotcharts-data x="1" y="5"/>
+							<ec:flotcharts-data x="2" y="6"/>
+							<ec:flotcharts-data x="3" y="3"/>
+							<ec:flotcharts-data x="4" y="7"/>
+							<ec:flotcharts-data x="5" y="2"/>
 						</ec:flotcharts-series>
-						<ec:flotcharts-series  label="" color="" lines="" bars="" points="" xaxis="" yaxis="" 
-							clickable="false" hoverable="false" shadowSize="0" highlightColor="0" src="/plugins/ediacaran/updade.js"/>
+						<ec:flotcharts-series  label="Teste 2" color="2" lines="true" bars="false" points="false" xaxis="0" yaxis="0" 
+							clickable="false" hoverable="false" shadowSize="0" highlightColor="0"/>
 					</ec:flotcharts>
 				</ec:box-body>
 				<ec:box-footer>

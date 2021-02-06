@@ -5030,4 +5030,223 @@ Carrega dados de um arquivo.
 	
 	<!-- /setTemplatePackage -->
 	
+	<!-- flotcharts -->
+	
+	<tag>
+		<name>flotcharts</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.FlotChartsTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+	
+		<attribute>
+			<description>Permite informar atributos extra.</description>
+			<name>extAttrs</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description>Define o template do componente</description>
+			<name>template</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<attribute>
+			<description>Define a identificação do componente.</description>
+			<name>id</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+	
+		<attribute>
+			<description></description>
+			<name>classStyle</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>src</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>togglingSeries</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>updateFrequence</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>updateFrequenceUnit</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+
+	</tag>
+	
+	<!-- /flotcharts -->
+
+	<!-- flotcharts-series -->
+	
+	<tag>
+		<name>flotcharts-series</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.FlotChartsSeriesTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>label</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>color</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>lines</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>bars</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>points</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>xaxis</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>yaxis</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>clickable</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>hoverable</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>shadowSize</name>
+			<required>false</required>
+			<type>java.lang.Integer</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>highlightColor</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+
+	</tag>
+	
+	<!-- /flotcharts-series -->
+
+	<!-- flotcharts-data -->
+	
+	<tag>
+		<name>flotcharts-data</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.FlotChartsDataTag</tag-class>
+		<body-content>empty</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>x</name>
+			<required>false</required>
+			<type>java.lang.Double</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>y</name>
+			<required>false</required>
+			<type>java.lang.Double</type>
+			<fragment>false</fragment>
+		</attribute>
+
+	</tag>
+	
+	<!-- /flotcharts-data -->
+	
 </taglib>
