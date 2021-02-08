@@ -109,7 +109,8 @@
 								</ec:property-config-list>
 							</ec:property-config>
 						</ec:property-config>
-						<ec:flotcharts-series label="Teste" color="1" lines="true">
+						
+						<ec:flotcharts-series label="Teste">
 							<ec:flotcharts-data x="1" y="10"/>
 							<ec:flotcharts-data x="2" y="8"/>
 							<ec:flotcharts-data x="3" y="4"/>
@@ -117,6 +118,10 @@
 							<ec:flotcharts-data x="5" y="17"/>
 							<ec:flotcharts-data x="6" y="9"/>
 						</ec:flotcharts-series>
+						<%--
+						<ec:flotcharts-series  label="Teste 2" color="2" lines="true" bars="false" points="false" xaxis="0" yaxis="0" 
+							clickable="false" hoverable="false" shadowSize="0" highlightColor="0"/>
+						--%>
 					</ec:flotcharts>
 
 				</ec:box-body>

@@ -1,14 +1,16 @@
 <script>
+var {id}_config = null;
+
 $.AppContext.floatcharts.register(
 	"{flotchartid}",
 	&#123;
-	    color: "{color}",
 	    data: [],
 	    label: "{label}",
-	    lines: &#123; show: {lines} &#125;
 	&#125;	
 );
-
 $.AppContext.floatcharts.setData("{flotchartid}", "{label}", []);
 </script>
 {content}
+<script>
+$.AppContext.floatcharts.setSeriesConfig("{flotchartid}", "{label}", {id}_config);
+</script>
