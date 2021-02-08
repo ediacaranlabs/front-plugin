@@ -1,0 +1,5 @@
+<script>
+{parentID}_{name} = &#123;
+	{content}
+&#125;
+</script>

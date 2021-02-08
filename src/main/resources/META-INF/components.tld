@@ -5248,5 +5248,63 @@ Carrega dados de um arquivo.
 	</tag>
 	
 	<!-- /flotcharts-data -->
+
+	<!-- property-config -->
+	
+	<tag>
+		<name>property-config</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.PropertyConfigTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>name</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>value</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+
+	</tag>
+	
+	<!-- /property-config -->
+
+	<!-- property-config-list -->
+	
+	<tag>
+		<name>property-config-list</name>
+		<tag-class>br.com.uoutec.community.ediacaran.front.tags.PropertyConfigListTag</tag-class>
+		<body-content>scriptless</body-content>
+		<info><![CDATA[
+]]></info>
+
+		<!-- default attr -->
+		
+		<!-- attr -->
+		
+		<attribute>
+			<description></description>
+			<name>name</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+
+	</tag>
+	
+	<!-- /property-config-list -->
 	
 </taglib>

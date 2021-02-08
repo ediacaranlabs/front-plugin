@@ -1,2 +1,9 @@
+<!-- reset config var-->
+<script>var {id}_config = null;</script>
 <div {attr}></div>
 {content}
+<!-- set configuration and show -->
+<script>
+$.AppContext.floatcharts.setConfig("{id}", {id}_config);
+$.AppContext.floatcharts.show("{id}");
+</script>
