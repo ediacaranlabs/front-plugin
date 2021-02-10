@@ -1,16 +1,9 @@
-<script>
-var {id}_config = null;
-
-$.AppContext.floatcharts.register(
-	"{flotchartid}",
-	&#123;
-	    data: [],
-	    label: "{label}",
-	&#125;	
-);
-$.AppContext.floatcharts.setData("{flotchartid}", "{label}", []);
+<script language="javascript">
+	var {id}_config = null;
+	$.AppContext.floatcharts.register("{flotchartid}",&#123; data: [], label: "{label}",&#125;);
+	$.AppContext.floatcharts.setData("{flotchartid}", "{label}", []);
 </script>
 {content}
-<script>
-$.AppContext.floatcharts.setSeriesConfig("{flotchartid}", "{label}", {id}_config);
+<script language="javascript">
+	$.AppContext.floatcharts.setSeriesConfig("{flotchartid}", "{label}", {id}_config);
 </script>

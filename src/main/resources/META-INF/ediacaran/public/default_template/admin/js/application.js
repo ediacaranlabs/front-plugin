@@ -243,6 +243,30 @@ $.AppContext.utils = {
 			var start = address.substring(0, 2);
 
 			return start == '#!' || start == '#m';
+		},
+		
+		// https://stackoverflow.com/questions/171251/how-can-i-merge-properties-of-two-javascript-objects-dynamically
+		updateProperties: function (obj1, obj2) {
+
+			for(var p in obj2) {
+				try {
+					//Property in destination object set; update its value.
+					if (obj2[p].constructor==Object) {
+						obj1[p] = $.AppContext.utils.updateProperties(obj1[p], obj2[p]);
+					}
+					else{
+						obj1[p] = obj2[p];
+					}
+
+			    } 
+				catch(e){
+			      // Property in destination object not set; create it and set its value.
+			      obj1[p] = obj2[p];
+			    }
+				
+			  }
+
+			return obj1;
 		}
 		
 };

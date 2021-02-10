@@ -1,1 +1,3 @@
-<script>$.AppContext.floatcharts.addData("{flotchartid}", "{label}", [{x}, {y}]);</script>
+<script language="javascript">
+	$.AppContext.floatcharts.addData("{flotchartid}", "{label}", [{x}, {y}]);
+</script>
