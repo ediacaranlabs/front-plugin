@@ -1,5 +1,3 @@
-<script>
-{parentID}_{name} = &#123;
-	{content}
-&#125;
+<script language="javascript">
+{parentID}_{name} = &#123; {content} &#125;
 </script>

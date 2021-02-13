@@ -27,16 +27,6 @@ public class FlotChartsSeriesComponent extends AbstractComponent {
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("flotchartid");
 			add("label");
-			add("color");
-			add("lines");
-			add("bars");
-			add("points");
-			add("xaxis");
-			add("yaxis");
-			add("clickable");
-			add("hoverable");
-			add("shadowSize");
-			add("highlightColor");
 			add("content");
 			add("classStyle");
 			add("id");

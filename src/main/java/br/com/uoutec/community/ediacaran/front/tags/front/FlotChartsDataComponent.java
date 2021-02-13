@@ -26,6 +26,7 @@ public class FlotChartsDataComponent extends AbstractComponent {
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("flotchartid");
+			add("flotchartseriesid");
 			add("label");
 			add("x");
 			add("y"); 

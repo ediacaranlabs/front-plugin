@@ -1,9 +1,15 @@
+<!-- flotcharts-series -->
 <script language="javascript">
-	var {id}_config = null;
-	$.AppContext.floatcharts.register("{flotchartid}",&#123; data: [], label: "{label}",&#125;);
-	$.AppContext.floatcharts.setData("{flotchartid}", "{label}", []);
+	var {id}_config = &#123; 
+		data: [],
+		label: "{label}"
+	&#125;;
+	var {id}_data = [];
 </script>
 {content}
 <script language="javascript">
-	$.AppContext.floatcharts.setSeriesConfig("{flotchartid}", "{label}", {id}_config);
+	{id}_config.data = {id}_data;
+	{id}_config.label = "{label}";
+	{flotchartid}_series.push( {id}_config );
 </script>
+<!-- /flotcharts-series -->

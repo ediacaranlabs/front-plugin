@@ -1,3 +1,1 @@
-<script language="javascript">
-	$.AppContext.floatcharts.addData("{flotchartid}", "{label}", [{x}, {y}]);
-</script>
+<script language="javascript">{flotchartseriesid}_data.push([{x}, {y}]);</script>

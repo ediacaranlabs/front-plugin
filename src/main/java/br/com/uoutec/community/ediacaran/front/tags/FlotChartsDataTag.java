@@ -14,6 +14,8 @@ public class FlotChartsDataTag extends AbstractSimpleComponent {
 	
 	private String flotchartid;
 	
+	private String flotchartseriesid;
+	
 	private String label;
 	
 	private Double x;
@@ -29,6 +31,7 @@ public class FlotChartsDataTag extends AbstractSimpleComponent {
 
     protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
 		this.flotchartid = ((FlotChartsSeriesTag)super.getParentTag()).getFlotchartid();
+		this.flotchartseriesid = ((FlotChartsSeriesTag)super.getParentTag()).getId();
 		this.label = ((FlotChartsSeriesTag)super.getParentTag()).getLabel();
     }
 	
@@ -62,6 +65,14 @@ public class FlotChartsDataTag extends AbstractSimpleComponent {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public String getFlotchartseriesid() {
+		return flotchartseriesid;
+	}
+
+	public void setFlotchartseriesid(String flotchartseriesid) {
+		this.flotchartseriesid = flotchartseriesid;
 	}
 	
 }

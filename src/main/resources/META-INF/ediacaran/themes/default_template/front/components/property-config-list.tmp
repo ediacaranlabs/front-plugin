@@ -1,3 +1,3 @@
-{parentID}_{name} = [
-	{content}
-];
+<script language="javascript">
+{parentID}_{name} = [ {content} ];
+</script>

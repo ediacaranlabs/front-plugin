@@ -82,7 +82,7 @@ public abstract class AbstractComponent implements Component{
 			this.tagTemplate = loader.load(file, "UTF-8");
 		}
 		catch(Throwable e) {
-			throw new ThemeException(e);
+			throw new ThemeException("load template fail: " + "/themes" + template, e);
 		}
 	}
 	

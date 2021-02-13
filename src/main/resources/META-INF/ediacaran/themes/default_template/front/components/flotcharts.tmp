@@ -1,9 +1,11 @@
+<!-- flotcharts -->
 <script language="javascript">
 	var {id}_config = null;
-	</script>
+	var {id}_series = [];
+</script>
 <div {attr}></div>
 {content}
 <script language="javascript">
-$.AppContext.floatcharts.setConfig("{id}", {id}_config);
-$.AppContext.floatcharts.show("{id}");
+	$.plot('#{id}', {id}_series, {id}_config);
 </script>
+<!-- /flotcharts -->
