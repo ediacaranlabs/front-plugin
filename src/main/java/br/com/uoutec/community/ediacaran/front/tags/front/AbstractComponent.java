@@ -72,9 +72,11 @@ public abstract class AbstractComponent implements Component{
 	
 	public void loadTemplate() {
 		
+		String t = "/themes" + template;
+		
 		try {
 			PluginData pd = EntityContextPlugin.getEntity(PluginData.class);
-			File file = new File(pd.getPath() + "/themes" + template);
+			File file = new File(pd.getPath() + t);
 			
 			file = file.getCanonicalFile();
 			
@@ -82,8 +84,9 @@ public abstract class AbstractComponent implements Component{
 			this.tagTemplate = loader.load(file, "UTF-8");
 		}
 		catch(Throwable e) {
-			throw new ThemeException("load template fail: " + "/themes" + template, e);
+			throw new ThemeException("load template fail: " + t, e);
 		}
+		
 	}
 	
 	@Override

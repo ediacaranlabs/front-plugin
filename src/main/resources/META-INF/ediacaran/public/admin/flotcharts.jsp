@@ -53,12 +53,120 @@
  #flotchartstag25 {
  	height: 300px;
  }
+ 
+  #interactive {
+ 	height: 300px;
+ }
+ 
  </style>
+<script type="text/javascript">
+<!--
+	var data        = [],
+	totalPoints = 100
+	
+	function getRandomData() {
+	
+		if (data.length > 0) {
+		data = data.slice(1)
+		}
+	
+		while (data.length < totalPoints) {
+			
+			var prev = data.length > 0 ? data[data.length - 1] : 50,
+			    y    = prev + Math.random() * 10 - 5
+			
+			if (y < 0) {
+			  y = 0
+			} else if (y > 100) {
+			  y = 100
+			}
+			
+			data.push(y)
+		}
+	
+		var res = []
+		for (var i = 0; i < data.length; ++i) {
+			res.push([i, data[i]])
+		}
+		
+		return res
+	}
+	
+	var updateInterval = 500;
+
+	function update() {
+		var dta = getRandomData();
+		$.AppContext.flotcharts.updateChart('interactive',{
+			series: [
+				{
+					data: dta
+				}
+			]
+		});
+		setTimeout(update, updateInterval)
+	}
+
+	$.AppContext.onload(function(){
+		console.log('teste');
+		update();
+	});
+	
+	//-->
+</script>
+
+     	<ed:row>
+		<ed:col size="12">
+			<ec:box>
+				<ec:box-header>
+					<h3>Interactive Area Chart</h3>
+				</ec:box-header>
+				<ec:box-body>
+					<!-- https://github.com/flot/flot/blob/master/API.md | http://www.flotcharts.org/ -->
+					<ec:flotcharts id="interactive" src="/plugins/ediacaran/updade.js" togglingSeries="false" 
+							updateFrequence="1" updateFrequenceUnit="SECONDS">
+						<ec:property-config name="config">
+							<ec:property-config name="grid">
+								<ec:property-config name="borderWidth" value="1"/>
+								<ec:property-config name="borderColor" value="#f3f3f3"/>
+								<ec:property-config name="tickColor" value="#f3f3f3"/>
+							</ec:property-config>
+							<ec:property-config name="series">
+									<ec:property-config name="color" value="#3c8dbc"/>
+									<ec:property-config name="lines">
+										<ec:property-config name="show" value="true"/>
+										<ec:property-config name="lineWidth" value="2"/>
+										<ec:property-config name="fill" value="true"/>
+									</ec:property-config>
+							</ec:property-config>
+							<ec:property-config name="yaxis">
+									<ec:property-config name="min" value="0"/>
+									<ec:property-config name="max" value="100"/>
+									<ec:property-config name="show" value="true"/>
+							</ec:property-config>
+							<ec:property-config name="xaxis">
+									<ec:property-config name="show" value="true"/>
+									<ec:property-config name="min" value="0"/>
+									<ec:property-config name="max" value="100"/>
+							</ec:property-config>
+						</ec:property-config>
+						<ec:flotcharts-series label="teste">
+						</ec:flotcharts-series>
+					</ec:flotcharts>
+				</ec:box-body>
+				<ec:box-footer>
+					<ec:prettify linenums="true">
+					</ec:prettify>
+				</ec:box-footer>
+			</ec:box>
+		</ed:col>
+   	</ed:row>
+ 
+ 
     	<ed:row>
 		<ed:col size="6">
 			<ec:box>
 				<ec:box-header>
-					<h3>Interactive Area Chart</h3>
+					<h3>Bar chart</h3>
 				</ec:box-header>
 				<ec:box-body>
 					<!-- https://github.com/flot/flot/blob/master/API.md | http://www.flotcharts.org/ -->
@@ -137,33 +245,6 @@
 					<h3>Button with icon</h3>
 				</ec:box-header>
 				<ec:box-body>
-				<script type="text/javascript">
-				$(function() {
-					var bar_data = {
-						      data : [[1,10], [2,8], [3,4], [4,13], [5,17], [6,9]],
-						      bars: { show: true }
-						    }
-						    $.plot('#placeholder', [bar_data], {
-						      grid  : {
-						        borderWidth: 1,
-						        borderColor: '#f3f3f3',
-						        tickColor  : '#f3f3f3'
-						      },
-						      series: {
-						         bars: {
-						          show: true, barWidth: 0.5, align: 'center',
-						        },
-						      },
-						      colors: ['#3c8dbc'],
-						      xaxis : {
-						        ticks: [[1,'January'], [2,'February'], [3,'March'], [4,'April'], [5,'May'], [6,'June']]
-						      }
-						    })
-				});
-
-				</script>
-				<div id="placeholder" style="height: 300px;"></div>
-				
 				</ec:box-body>
 				<ec:box-footer>
 					<ec:prettify linenums="true">

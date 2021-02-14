@@ -1,80 +1,65 @@
-$.AppContext.floatcharts = {};
-$.AppContext.floatcharts.list = {};
+$.AppContext.flotcharts = {};
 
-$.AppContext.floatcharts.show = function(id){
+$.AppContext.flotcharts.charts = {};
+
+$.AppContext.flotcharts.updateChart = function (chart, data){
 	
-	$.AppContext.floatcharts.list[id].obj = [];
-
-	for (x in $.AppContext.floatcharts.list[id].series) {
-		
-		var series = $.AppContext.floatcharts.list[id].series[x];
-		var seriesConfig = null;
-		
-		if(!series.hasOwnProperty('config')){
-			seriesConfig = series.config;
+	if($.AppContext.flotcharts.charts[chart] == null){
+		return;
+	}
+	
+	var plot       = $.AppContext.flotcharts.charts[chart];
+	var series     = plot.getData();
+	var options    = plot.getOptions();
+	var newSeries  = data.series;
+	var delSeries  = data.delSeries;
+	var newOptions = data.options;
+	
+	if(newSeries != null){
+		for (i = 0; i < newSeries.length; i++) {
+			
+			  if(i >= series.length){
+				  if(newSeries[i] != null){
+					  series.push(newSeries[i]);
+				  }
+			  }
+			  else
+              if(newSeries[i] != null){
+          		  //alert(JSON.stringify(series[i]));
+				  $.AppContext.utils.updateProperties(series[i], newSeries[i]);
+			  }
+			  
 		}
-		else{
-			seriesConfig = {};
+		
+	}
+	
+	if(newOptions != null){
+		$.AppContext.utils.updateProperties(options, newOptions);
+	}
+
+	if(delSeries != null){
+		for (i = 0; i < delSeries.length; i++) {
+			series.splice(delSeries[i], 1);
 		}
-		
-		seriesConfig.label = series.label;
-		seriesConfig.data = series.data;
-		
-		alert(JSON.stringify(seriesConfig));
-		
-		$.AppContext.floatcharts.list[id].obj.push(seriesConfig);
-	}
-
-	if($.AppContext.floatcharts.list[id].hasOwnProperty('config') && $.AppContext.floatcharts.list[id] != null){
-		$.plot("#" + id, $.AppContext.floatcharts.list[id].obj, $.AppContext.floatcharts.list[id].config);
-	}
-	else{
-		$.plot("#" + id, $.AppContext.floatcharts.list[id].obj);
 	}
 	
-};
-
-$.AppContext.floatcharts.setData = function(id, label, data){
-	//alert(JSON.stringify($.AppContext.floatcharts.list[id].series[label]));
-	$.AppContext.floatcharts.list[id].series[label].data = data;
-};
-
-$.AppContext.floatcharts.addData = function(id, label, data){
-	$.AppContext.floatcharts.list[id].series[label].data.push(data);
-};
-
-$.AppContext.floatcharts.register = function(id, seriesConfig){
-
-	alert(JSON.stringify(seriesConfig));
+	plot.setData(series);
 	
-	$.AppContext.floatcharts.list[id] = {};
-	$.AppContext.floatcharts.list[id].series = {};
-	$.AppContext.floatcharts.list[id].series[seriesConfig.label] = seriesConfig;
-};
-
-$.AppContext.floatcharts.remove = function(id, config){
-	delete $.AppContext.floatcharts.list[id].series[config.label];
-};
-
-$.AppContext.floatcharts.setConfig = function(id, config){
-	
-	if(!$.AppContext.floatcharts.list.hasOwnProperty(id)){
-		$.AppContext.floatcharts.list[id] = {};
+	if(newOptions != null){
+		plot.setupGrid();
 	}
 	
-	$.AppContext.floatcharts.list[id].config = config;
-};
-
-$.AppContext.floatcharts.setSeriesConfig = function(id, label, seriesConfig){
+	plot.draw()	
 	
-	if(!$.AppContext.floatcharts.list.hasOwnProperty(id)){
-		$.AppContext.floatcharts.list[id] = {};
-	}
-	
-	if(!$.AppContext.floatcharts.list[id].series.hasOwnProperty(label)){
-		$.AppContext.floatcharts.list[id].series[label] = {};
-	}
-	
-	$.AppContext.floatcharts.list[id].series[label].config = seriesConfig;
-
+	/*
+	series[0].data = someNewArray;
+	series[0].color = 'blue'; // modify existing series
+	series.push({data: [[0, 5], [1, 1], [2, 7]], color: 'green'}); // add a new one
+	plot.setData(series); // you need to set the data so that flot will re-process any newly added series
+	var opts = plot.getOptions() // get a reference to the options
+	opts.xaxes[0].min = -1; // adjust an axis min, use the xaxes property NOT the xaxis
+	// there is no need to "setOptions"...
+	plot.setupGrid() // if you need to redraw the axis/grid
+	plot.draw()
+	*/	
 };
