@@ -2,7 +2,62 @@ $.AppContext.flotcharts = {};
 
 $.AppContext.flotcharts.charts = {};
 
+$.AppContext.flotcharts.update_charts = {};
+
+$.AppContext.flotcharts.setAsyncUpdateChart = function (chart, time = 1000){
+
+	if($.AppContext.flotcharts.charts[chart] == null){
+		return;
+	}
+	
+	if($.AppContext.flotcharts.charts[chart].edController == null){
+		$.AppContext.flotcharts.charts[chart].edController = {};
+	}
+	
+	$.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled = time > 0; 
+	$.AppContext.flotcharts.charts[chart].edController.asyncUpdateTime = time; 
+	
+	var exec = function(){
+		
+		$.AppContext.flotcharts.loadData(chart,$.AppContext.flotcharts.charts[chart].edController.resource);
+		
+		if($.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled){
+			setTimeout(exec, $.AppContext.flotcharts.charts[chart].edController.asyncUpdateTime);
+		}
+	}; 
+ 
+	if($.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled){
+		setTimeout(exec, $.AppContext.flotcharts.charts[chart].edController.asyncUpdateTime);
+	}
+}
+
+$.AppContext.flotcharts.loadData = function (chart, resource){
+	
+	var updater = function(data){
+		//alert(JSON.stringify(data));
+		$.AppContext.flotcharts.updateChart(chart, data);
+	};
+	
+	$.AppContext.utils.loadJson(resource, updater);
+	
+}
+
+$.AppContext.flotcharts.setResource = function (chart, value){
+
+	if($.AppContext.flotcharts.charts[chart] == null){
+		return;
+	}
+	
+	if($.AppContext.flotcharts.charts[chart].edController == null){
+		$.AppContext.flotcharts.charts[chart].edController = {};
+	}
+	
+	$.AppContext.flotcharts.charts[chart].edController.resource = value; 
+}
+
 $.AppContext.flotcharts.updateChart = function (chart, data){
+	
+	//alert(chart + ": " + JSON.stringify(data));
 	
 	if($.AppContext.flotcharts.charts[chart] == null){
 		return;
@@ -25,7 +80,7 @@ $.AppContext.flotcharts.updateChart = function (chart, data){
 			  }
 			  else
               if(newSeries[i] != null){
-          		  //alert(JSON.stringify(series[i]));
+          		  //alert(JSON.stringify(newSeries[i]));
 				  $.AppContext.utils.updateProperties(series[i], newSeries[i]);
 			  }
 			  

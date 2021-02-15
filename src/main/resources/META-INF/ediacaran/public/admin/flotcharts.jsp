@@ -59,6 +59,7 @@
  }
  
  </style>
+ <%-- 
 <script type="text/javascript">
 <!--
 	var data        = [],
@@ -113,7 +114,7 @@
 	
 	//-->
 </script>
-
+--%>
      	<ed:row>
 		<ed:col size="12">
 			<ec:box>
@@ -122,8 +123,8 @@
 				</ec:box-header>
 				<ec:box-body>
 					<!-- https://github.com/flot/flot/blob/master/API.md | http://www.flotcharts.org/ -->
-					<ec:flotcharts id="interactive" src="/plugins/ediacaran/updade.js" togglingSeries="false" 
-							updateFrequence="1" updateFrequenceUnit="SECONDS">
+					<ec:flotcharts id="interactive" src="/plugins/ediacaran/front/adm/flotcharts" togglingSeries="false" 
+							updateFrequence="1000" updateFrequenceUnit="MILLISECONDS">
 						<ec:property-config name="config">
 							<ec:property-config name="grid">
 								<ec:property-config name="borderWidth" value="1"/>
@@ -170,8 +171,7 @@
 				</ec:box-header>
 				<ec:box-body>
 					<!-- https://github.com/flot/flot/blob/master/API.md | http://www.flotcharts.org/ -->
-					<ec:flotcharts src="/plugins/ediacaran/updade.js" togglingSeries="false" 
-							updateFrequence="1" updateFrequenceUnit="SECONDS">
+					<ec:flotcharts>
 						<ec:property-config name="config">
 							<ec:property-config name="grid">
 								<ec:property-config name="borderWidth" value="1"/>

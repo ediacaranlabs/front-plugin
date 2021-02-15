@@ -3,8 +3,11 @@ package br.com.uoutec.community.ediacaran.front.tags.front;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.concurrent.TimeUnit;
 
+import br.com.uoutec.community.ediacaran.front.tags.FlotChartsTag;
 import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
 
 public class FlotChartsComponent extends AbstractComponent {
 
@@ -36,6 +39,22 @@ public class FlotChartsComponent extends AbstractComponent {
 	
 		super.default_property_parsers = 
 				Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+					
+					put("updateFrequence", new AttributeParserImp() {
+
+						@Override
+						public Object toValue(Object value, Object component) {
+							FlotChartsTag tag = ((FlotChartsTag)component);
+
+							int time = value == null? -1 : (Integer)value;
+							TimeUnit tm = tag.getUpdateFrequenceUnit() == null? 
+									TimeUnit.SECONDS : 
+									TimeUnit.valueOf(tag.getUpdateFrequenceUnit());
+							
+							return time > 0? tm.toMillis(time) : -1;
+						}
+						
+					});
 					
 				}});
 	}

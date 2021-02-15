@@ -7,5 +7,7 @@
 {content}
 <script language="javascript">
 	$.AppContext.flotcharts.charts.{id} = $.plot('#{id}', {id}_series, {id}_config);
+	$.AppContext.flotcharts.setResource('{id}','{src}');
+	$.AppContext.flotcharts.setAsyncUpdateChart('{id}', {updateFrequence});
 </script>
 <!-- /flotcharts -->
