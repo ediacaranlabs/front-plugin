@@ -89,6 +89,51 @@ $.AppContext.utils = {
 			
 		},
 		
+		loadJson: function (resource, success = null, error = null){
+			//alert(success);
+		    $.ajax({
+		        type   : 'GET',
+		        contentType: 'application/json',
+			    dataType: 'json',
+		        url    : $.AppContext.vars.contextPath + resource,
+		        success: success,
+		        error: error
+		    });
+			
+		    /*
+			$.ajax({
+			    type: 'GET',
+			    headers: { 
+			        'Accept': 'application/json',
+			        'Content-Type': 'application/json' 
+			    },			    
+			    dataType: "json",
+			    url: $.AppContext.vars.contextPath + resource,
+			    success: function(data){
+			    	alert(data);
+			    },
+			    error : error
+			});
+			*/
+		},
+		
+		postJson: function (resource, request, success = null, error = null){
+			
+			$.ajax({
+			    type: 'POST',
+			    headers: { 
+			        'Accept': 'application/json',
+			        'Content-Type': 'application/json' 
+			    },			    
+			    dataType: "json",
+			    url: $.AppContext.vars.contextPath + resource,
+			    data: request,
+			    success: success,
+			    error : error
+			});
+			
+		},		
+		
 		/* load content functions */
 		
 		loadResourceContent: function ($destContent, $resource){
