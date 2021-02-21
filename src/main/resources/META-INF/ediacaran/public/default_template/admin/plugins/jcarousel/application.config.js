@@ -1,3 +1,5 @@
+$.AppContext.jcarousel = {};
+
 $.AppContext.onload(function(){
 	
 	$.AppContext.addLoadListener("jcarousel-link-load", "^.*", {

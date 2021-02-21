@@ -1,3 +1,5 @@
+$.AppContext.nivo = {};
+
 $.AppContext.onload(function(){
 	
 	$.AppContext.addLoadListener("nivo-link-load", "^.*", {

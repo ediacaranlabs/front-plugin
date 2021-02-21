@@ -106,15 +106,4 @@ $.AppContext.flotcharts.updateChart = function (chart, data){
 	
 	plot.draw()	
 	
-	/*
-	series[0].data = someNewArray;
-	series[0].color = 'blue'; // modify existing series
-	series.push({data: [[0, 5], [1, 1], [2, 7]], color: 'green'}); // add a new one
-	plot.setData(series); // you need to set the data so that flot will re-process any newly added series
-	var opts = plot.getOptions() // get a reference to the options
-	opts.xaxes[0].min = -1; // adjust an axis min, use the xaxes property NOT the xaxis
-	// there is no need to "setOptions"...
-	plot.setupGrid() // if you need to redraw the axis/grid
-	plot.draw()
-	*/	
 };

@@ -19,6 +19,18 @@ $.AppContext.vars = {
 		loaded: false
 };
 
+$.AppContext.events = {
+
+		add: function (component, type, handler){
+			$('#' + component).on(type, handler);
+		},
+		
+		remove: function (component, type){
+			$('#' + component).off(type);
+		}
+		
+};
+
 $.AppContext.utils = {
 		
 		/* async load functions */
