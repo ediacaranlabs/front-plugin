@@ -12,10 +12,8 @@ import javax.inject.Singleton;
 
 import org.brandao.brutos.annotation.AcceptRequestType;
 import org.brandao.brutos.annotation.Action;
-import org.brandao.brutos.annotation.Basic;
 import org.brandao.brutos.annotation.Controller;
 import org.brandao.brutos.annotation.ResponseType;
-import org.brandao.brutos.annotation.ScopeType;
 import org.brandao.brutos.annotation.web.MediaTypes;
 
 @Singleton
@@ -24,7 +22,6 @@ import org.brandao.brutos.annotation.web.MediaTypes;
 @ResponseType(MediaTypes.APPLICATION_JSON)
 public class FlotChartsPubResource {
 
-	@Basic(bean="list", scope=ScopeType.SESSION)
 	private List<Integer> list;
 	
 	public FlotChartsPubResource() {
@@ -35,8 +32,6 @@ public class FlotChartsPubResource {
 	public Serializable loadData(){
 		update();
 		
-		HashMap<String, Object> map = new HashMap<>();
-		
 		List<int[]> data = new ArrayList<int[]>();
 		int index = 0;
 		for(Integer v: list) {
@@ -45,6 +40,8 @@ public class FlotChartsPubResource {
 		
 		Map<String, Object> series = new HashMap<>();
 		series.put("data", data);
+		
+		HashMap<String, Object> map = new HashMap<>();
 		map.put("series", Arrays.asList(series));
 		
 		return map;
