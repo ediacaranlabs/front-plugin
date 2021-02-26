@@ -1,76 +1,61 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.WriteListener;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.PageContext;
-
-import br.com.uoutec.community.ediacaran.system.tema.Theme;
+import br.com.uoutec.community.ediacaran.system.theme.PublicResource;
+import br.com.uoutec.community.ediacaran.system.theme.TemplateListVarsParser;
+import br.com.uoutec.community.ediacaran.system.theme.Theme;
 
 public class ResourcesTag extends AbstractSimpleComponent {
 	
-	private String uri;
+	public static final String TEMPLATE = "/components/resources";
+	
+	private String type;
+	
+	private TemplateListVarsParser content;
 	
 	public ResourcesTag() {
 	}
 
-    public void doTag() throws JspException, IOException {
+	public void beforePrepareVars(Map<String, Object> vars) {
+		
+    	Theme theme        = getTheme();
+    	String packageName = getThemePackage();
+		
+		this.content = new TemplateListVarsParser(TEMPLATE + "-" + type, packageName, theme);
+		
+    	ConcurrentMap<String, PublicResource> resources = theme.getResourcesByType(type, packageName);
     	
-    	PageContext pageContext = (PageContext) getJspContext();
-    	Theme tema               = getTheme();
-    	String packageName      = getTemaPackage();
-    	
-    	String path = tema.getTemplate(packageName) + uri;
-    	
-    	ServletContext servletContext = pageContext.getServletContext();
-    	
-    	String currentContext = servletContext.getContextPath().toLowerCase();
-    	String context = tema.getContext();
-    	String temaContext = context == null? null : context.toLowerCase();
-    	
-    	if(temaContext != null && !currentContext.equals(temaContext)) {
-    		servletContext = servletContext.getContext(context);
-    	}
-    	
-    	ImportResponseWrapper irw = new ImportResponseWrapper(pageContext); 
-    	
-    	try {
-    		servletContext.getRequestDispatcher(path).include(pageContext.getRequest(), irw);
-    	}
-    	catch(ServletException e) {
-    		throw new JspTagException(e);
-    	}
-    	
-    	if (irw.getStatus() < 200 || irw.getStatus() > 299) { 
-            throw new JspTagException(irw.getStatus() + " " + path); 
-        }
-    	
-    }
-
-    protected String parseRequestId(String path, String contextPath){
-    	return path;
-    }
-
-	public String getUri() {
-		return uri;
+		for(PublicResource pr: resources.values()) {
+			this.content
+				.createNewItem()
+				.put("path", pr.getPath())
+				.put("resource", pr.getResource());
+		}
+		
 	}
 
-	public void setUri(String uri) {
-		this.uri = uri;
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public TemplateListVarsParser getContent() {
+		return content;
+	}
+
+	public void setContent(TemplateListVarsParser content) {
+		this.content = content;
 	}
 
 	@Override
 	protected String getDefaultTemplate() {
-		return null;
+		return TEMPLATE;
 	}
+
 
 }

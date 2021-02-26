@@ -2,7 +2,7 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import javax.servlet.jsp.JspException;
 
-import br.com.uoutec.community.ediacaran.system.tema.TemplateListVarsParser;
+import br.com.uoutec.community.ediacaran.system.theme.TemplateListVarsParser;
 
 public class TabsTag extends AbstractPanelComponent {
 

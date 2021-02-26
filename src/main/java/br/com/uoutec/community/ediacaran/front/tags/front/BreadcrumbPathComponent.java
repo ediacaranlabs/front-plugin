@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.front.tags.BreadcrumbPathTag;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.tema.ComponentVarsBuilder;
-import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.system.theme.ComponentVarsBuilder;
+import br.com.uoutec.community.ediacaran.system.theme.TemplateVarParser;
 
 public class BreadcrumbPathComponent extends AbstractComponent {
 
@@ -41,7 +41,7 @@ public class BreadcrumbPathComponent extends AbstractComponent {
 					public Object toValue(Object value, Object component) {
 						BreadcrumbPathTag tag = (BreadcrumbPathTag)component;
 						ComponentVarsBuilder cv = new ComponentVarsBuilder();
-						return value == null || ((String)value).isEmpty()? null : new TemplateVarParser("/components/icon", tag.getTemaPackage(), cv, tag.getTheme()).put("icon", value);
+						return value == null || ((String)value).isEmpty()? null : new TemplateVarParser("/components/icon", tag.getThemePackage(), cv, tag.getTheme()).put("icon", value);
 					}
 				});
 			}});

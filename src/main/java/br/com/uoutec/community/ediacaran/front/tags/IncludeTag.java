@@ -14,7 +14,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
-import br.com.uoutec.community.ediacaran.system.tema.Theme;
+import br.com.uoutec.community.ediacaran.system.theme.Theme;
 
 public class IncludeTag extends AbstractSimpleComponent {
 	
@@ -26,18 +26,18 @@ public class IncludeTag extends AbstractSimpleComponent {
     public void doTag() throws JspException, IOException {
     	
     	PageContext pageContext = (PageContext) getJspContext();
-    	Theme tema               = getTheme();
-    	String packageName      = getTemaPackage();
+    	Theme theme               = getTheme();
+    	String packageName      = getThemePackage();
     	
-    	String path = tema.getTemplate(packageName) + uri;
+    	String path = theme.getTemplate(packageName) + uri;
     	
     	ServletContext servletContext = pageContext.getServletContext();
     	
     	String currentContext = servletContext.getContextPath().toLowerCase();
-    	String context = tema.getContext();
-    	String temaContext = context == null? null : context.toLowerCase();
+    	String context = theme.getContext();
+    	String themeContext = context == null? null : context.toLowerCase();
     	
-    	if(temaContext != null && !currentContext.equals(temaContext)) {
+    	if(themeContext != null && !currentContext.equals(themeContext)) {
     		servletContext = servletContext.getContext(context);
     	}
     	

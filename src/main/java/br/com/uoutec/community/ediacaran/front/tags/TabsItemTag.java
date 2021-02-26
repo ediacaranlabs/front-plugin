@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
-import br.com.uoutec.community.ediacaran.system.tema.TagTemplate.VarParser;
+import br.com.uoutec.community.ediacaran.system.theme.TagTemplate.VarParser;
 
 public class TabsItemTag extends AbstractSimpleComponent {
 	

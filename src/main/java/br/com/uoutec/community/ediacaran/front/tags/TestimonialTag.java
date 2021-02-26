@@ -2,8 +2,8 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
-import br.com.uoutec.community.ediacaran.system.tema.DelegateVarParser;
-import br.com.uoutec.community.ediacaran.system.tema.TagTemplate.VarParser;
+import br.com.uoutec.community.ediacaran.system.theme.DelegateVarParser;
+import br.com.uoutec.community.ediacaran.system.theme.TagTemplate.VarParser;
 
 public class TestimonialTag extends AbstractSimpleComponent {
 

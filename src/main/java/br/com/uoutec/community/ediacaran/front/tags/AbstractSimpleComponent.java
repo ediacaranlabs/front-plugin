@@ -15,13 +15,13 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.brandao.brutos.bean.BeanInstance;
 
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.ComponentVars;
-import br.com.uoutec.community.ediacaran.system.tema.TagTemplate.VarParser;
-import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
-import br.com.uoutec.community.ediacaran.system.tema.Theme;
-import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
-import br.com.uoutec.community.ediacaran.system.tema.ThemeRegistry;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.theme.ComponentVars;
+import br.com.uoutec.community.ediacaran.system.theme.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.system.theme.Theme;
+import br.com.uoutec.community.ediacaran.system.theme.ThemeException;
+import br.com.uoutec.community.ediacaran.system.theme.ThemeRegistry;
+import br.com.uoutec.community.ediacaran.system.theme.TagTemplate.VarParser;
 
 public abstract class AbstractSimpleComponent 
 	extends SimpleTagSupport 
@@ -64,10 +64,10 @@ public abstract class AbstractSimpleComponent
 		Map<String, Object> vars    = new HashMap<String, Object>();
 		Writer out                  = getOut();
 		String template             = getWrapperTemplate();
-    	Theme tema                   = getTheme();
-    	String packageName          = getTemaPackage();
+    	Theme theme                   = getTheme();
+    	String packageName          = getThemePackage();
 		
-		vars.put("content",	new TemplateVarParser(getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, this, tema));
+		vars.put("content",	new TemplateVarParser(getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, this, theme));
 		
 		beforeApplyTemplate(template, vars, out);
 
@@ -115,16 +115,15 @@ public abstract class AbstractSimpleComponent
     }
     
     protected void applyTemplate(String template, Map<String, Object> vars, Writer out){
-    	getTheme().applyTagTemplate(template, getTemaPackage(), this, vars, out);
+    	getTheme().applyTagTemplate(template, getThemePackage(), this, vars, out);
     }
     
 	public Theme getTheme() {
-    	//ThemeRegistry temaRegistry = (ThemeRegistry)getProperty(Constants.THEME_REGISTRY);
-		ThemeRegistry temaRegistry = EntityContextPlugin.getEntity(ThemeRegistry.class);
-    	return temaRegistry.getCurrentTheme();
+		ThemeRegistry themeRegistry = EntityContextPlugin.getEntity(ThemeRegistry.class);
+    	return themeRegistry.getCurrentTheme();
 	}
 	
-	public String getTemaPackage() {
+	public String getThemePackage() {
     	return (String)getProperty(SetTemplatePackageTag.PACKAGE_NAME);
 	}
     

@@ -6,8 +6,8 @@ import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
-import br.com.uoutec.community.ediacaran.system.tema.TemplateListVarParser;
-import br.com.uoutec.community.ediacaran.system.tema.Theme;
+import br.com.uoutec.community.ediacaran.system.theme.TemplateListVarParser;
+import br.com.uoutec.community.ediacaran.system.theme.Theme;
 
 public class NivoTag extends AbstractPanelComponent {
 

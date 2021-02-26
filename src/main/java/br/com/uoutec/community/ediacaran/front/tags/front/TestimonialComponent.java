@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.front.tags.TestimonialTag;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.tema.ComponentVarsBuilder;
-import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.system.theme.ComponentVarsBuilder;
+import br.com.uoutec.community.ediacaran.system.theme.TemplateVarParser;
 
 public class TestimonialComponent extends AbstractComponent {
 	
@@ -47,7 +47,7 @@ public class TestimonialComponent extends AbstractComponent {
 						cvb
 							.put("attr", "src=\"" + value + "\"")
 							.put("style", "rounded-circle");
-						return value == null? null : new TemplateVarParser("/components/image", tag.getTemaPackage(), 
+						return value == null? null : new TemplateVarParser("/components/image", tag.getThemePackage(), 
 								cvb, tag.getTheme());
 					}
 				});

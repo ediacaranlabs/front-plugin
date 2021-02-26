@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.front.tags.TabsItemTag;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.tema.EmptyVarsBuilder;
-import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.system.theme.EmptyVarsBuilder;
+import br.com.uoutec.community.ediacaran.system.theme.TemplateVarParser;
 
 public class TabsHeaderItemComponent extends AbstractComponent {
 
@@ -48,7 +48,7 @@ public class TabsHeaderItemComponent extends AbstractComponent {
 					@Override
 					public Object toValue(Object value, Object component) {
 						TabsItemTag tag = (TabsItemTag)component;
-						return value == null? "" : new TemplateVarParser("/components/icon", tag.getTemaPackage(), 
+						return value == null? "" : new TemplateVarParser("/components/icon", tag.getThemePackage(), 
 								new EmptyVarsBuilder(), tag.getTheme()).put("icon", value);
 					}
 				});

@@ -8,7 +8,7 @@ import br.com.uoutec.application.ClassUtil;
 import br.com.uoutec.application.scanner.DefaultScanner;
 import br.com.uoutec.application.scanner.TypeFilter;
 import br.com.uoutec.application.scanner.vfs.Vfs;
-import br.com.uoutec.community.ediacaran.system.tema.Component;
+import br.com.uoutec.community.ediacaran.system.theme.Component;
 
 public class CreateThemeConfig {
 

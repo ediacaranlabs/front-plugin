@@ -3,7 +3,7 @@ package br.com.uoutec.community.ediacaran.front.tags;
 import java.io.Writer;
 import java.util.Map;
 
-import br.com.uoutec.community.ediacaran.system.tema.TagTemplate.VarParser;
+import br.com.uoutec.community.ediacaran.system.theme.TagTemplate.VarParser;
 
 public class FormTag extends AbstractSimpleComponent {
 

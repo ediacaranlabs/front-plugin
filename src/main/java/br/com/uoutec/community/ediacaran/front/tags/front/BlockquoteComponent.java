@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.front.tags.BlockquoteTag;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.tema.ComponentVarsBuilder;
-import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.system.theme.ComponentVarsBuilder;
+import br.com.uoutec.community.ediacaran.system.theme.TemplateVarParser;
 
 public class BlockquoteComponent extends AbstractComponent {
 
@@ -42,7 +42,7 @@ public class BlockquoteComponent extends AbstractComponent {
 						BlockquoteTag tag = (BlockquoteTag)component;
 						ComponentVarsBuilder cvb = new ComponentVarsBuilder();
 						cvb.put("content", value);
-						return value == null? null : new TemplateVarParser("/components/cite", tag.getTemaPackage(), 
+						return value == null? null : new TemplateVarParser("/components/cite", tag.getThemePackage(), 
 								cvb, tag.getTheme());
 					}
 				});

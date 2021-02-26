@@ -10,12 +10,12 @@ import java.util.Set;
 
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.plugins.PluginData;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.tema.Component;
-import br.com.uoutec.community.ediacaran.system.tema.TagTemplate;
-import br.com.uoutec.community.ediacaran.system.tema.TemplateLoader;
-import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.system.theme.Component;
+import br.com.uoutec.community.ediacaran.system.theme.TagTemplate;
+import br.com.uoutec.community.ediacaran.system.theme.TemplateLoader;
+import br.com.uoutec.community.ediacaran.system.theme.ThemeException;
 
 public abstract class AbstractComponent implements Component{
 

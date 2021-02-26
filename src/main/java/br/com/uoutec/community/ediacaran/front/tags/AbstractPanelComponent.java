@@ -15,13 +15,13 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import org.brandao.brutos.bean.BeanInstance;
 
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.tema.ComponentVars;
-import br.com.uoutec.community.ediacaran.system.tema.TemplateVarParser;
-import br.com.uoutec.community.ediacaran.system.tema.Theme;
-import br.com.uoutec.community.ediacaran.system.tema.ThemeException;
-import br.com.uoutec.community.ediacaran.system.tema.ThemeRegistry;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.system.theme.ComponentVars;
+import br.com.uoutec.community.ediacaran.system.theme.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.system.theme.Theme;
+import br.com.uoutec.community.ediacaran.system.theme.ThemeException;
+import br.com.uoutec.community.ediacaran.system.theme.ThemeRegistry;
 
 public abstract class AbstractPanelComponent 
 	extends BodyTagSupport
@@ -122,10 +122,10 @@ public abstract class AbstractPanelComponent
 		Map<String, Object> vars = new HashMap<String, Object>();
 		Writer out               = getBodyContent().getEnclosingWriter();
 		String template          = getWrapperTemplate();
-    	Theme tema               = getTheme();
+    	Theme theme               = getTheme();
     	String packageName       = getPackageTheme();
 		
-		vars.put("content",	new TemplateVarParser(getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, this, tema));
+		vars.put("content",	new TemplateVarParser(getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, this, theme));
 		
 		beforeApplyTemplate(template, vars, out);
 
@@ -297,9 +297,8 @@ public abstract class AbstractPanelComponent
 	}
 	
 	protected Theme getTheme() {
-    	//ThemeRegistry temaRegistry = (ThemeRegistry)getProperty(Constants.THEME_REGISTRY);
-		ThemeRegistry temaRegistry = EntityContextPlugin.getEntity(ThemeRegistry.class);
-    	return temaRegistry.getCurrentTheme();
+		ThemeRegistry themeRegistry = EntityContextPlugin.getEntity(ThemeRegistry.class);
+    	return themeRegistry.getCurrentTheme();
 	}
 	
 	protected String getPackageTheme() {

@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.system.tema.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
 
 public class PriceBoxFooterComponent  extends AbstractComponent {
 
