@@ -1,7 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
 
 import br.com.uoutec.community.ediacaran.system.theme.PublicResource;
 import br.com.uoutec.community.ediacaran.system.theme.TemplateListVarsParser;
@@ -25,9 +25,9 @@ public class ResourcesTag extends AbstractSimpleComponent {
 		
 		this.content = new TemplateListVarsParser(TEMPLATE + "-" + type, packageName, theme);
 		
-    	ConcurrentMap<String, PublicResource> resources = theme.getResourcesByType(type, packageName);
+    	List<PublicResource> resources = theme.getResourcesByType(type, packageName);
     	
-		for(PublicResource pr: resources.values()) {
+		for(PublicResource pr: resources) {
 			this.content
 				.createNewItem()
 				.put("path", pr.getPath())
