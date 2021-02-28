@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
 
-public class ResourcesComponent extends ComponentFormComponent {
+public class ResourcesComponent extends AbstractComponent {
 	
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {
@@ -26,6 +26,7 @@ public class ResourcesComponent extends ComponentFormComponent {
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
+			add("type");
 			add("content");
 		}});
 	

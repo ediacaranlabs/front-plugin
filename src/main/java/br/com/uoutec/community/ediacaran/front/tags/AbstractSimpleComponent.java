@@ -143,50 +143,54 @@ public abstract class AbstractSimpleComponent
     
 	private String getAttrList(Map<String, AttributeParser> attributeParsers, 
 			Set<String> emptyAttributes, Set<String> defaultAttributes) {
-		try {
-			StringBuilder sb = new StringBuilder();
-			BeanInstance i = new BeanInstance(this);
+
+		StringBuilder sb = new StringBuilder();
+		BeanInstance i = new BeanInstance(this);
+		
+		for(String p: defaultAttributes) {
 			
-			for(String p: defaultAttributes) {
-				
-				Object v = i.get(p);
-				
-				if(v == null || emptyAttributes.contains(p)) {
-					continue;
-				}
-				
-				if(sb.length() != 0) {
-					sb.append(" ");
-				}
-				
-				AttributeParser parser = attributeParsers.get(p);
-				
-				p = parser == null? p : parser.toName(p, this);
-				v = parser == null? v : parser.toValue(v, this);
-				
-				if(p != null) {
-					sb.append(p).append("=\"").append(v).append("\"");
-				}
-				else {
-					sb.append(v);
-				}
-				
+			Object v;
+			
+			try{
+				v = i.get(p);
+			}
+			catch(Throwable ex) {
+				throw new ThemeException("fail to get property " + this.getClass().getName() + "." + p, ex);
 			}
 			
-			if(this.extAttrs != null) {
-				
-				if(sb.length() != 0) {
-					sb.append(" ");
-				}
-				
-				sb.append(this.extAttrs);
+			if(v == null || emptyAttributes.contains(p)) {
+				continue;
 			}
 			
-			return sb.toString();
+			if(sb.length() != 0) {
+				sb.append(" ");
+			}
+			
+			AttributeParser parser = attributeParsers.get(p);
+			
+			p = parser == null? p : parser.toName(p, this);
+			v = parser == null? v : parser.toValue(v, this);
+			
+			if(p != null) {
+				sb.append(p).append("=\"").append(v).append("\"");
+			}
+			else {
+				sb.append(v);
+			}
+			
 		}
-		catch(Throwable e) {
-			throw new IllegalStateException(e);
+		
+		if(this.extAttrs != null) {
+			
+			if(sb.length() != 0) {
+				sb.append(" ");
+			}
+			
+			sb.append(this.extAttrs);
 		}
+		
+		return sb.toString();
+			
 	}
 	
 	protected void beforePrepareVars(Map<String, Object> vars) {
@@ -197,35 +201,38 @@ public abstract class AbstractSimpleComponent
 	
 	public Map<String, Object> prepareVars(Map<String, AttributeParser> propertyParsers, Set<String> defaultProperties,
 			Map<String, AttributeParser> attributeParsers, Set<String> emptyAttributes, Set<String> defaultAttributes) {
-		try {
-			Map<String, Object> map              = new HashMap<String, Object>();
-			BeanInstance i                       = new BeanInstance(this);
+		
+		Map<String, Object> map              = new HashMap<String, Object>();
+		BeanInstance i                       = new BeanInstance(this);
+		
+		this.beforePrepareVars(map);
+		
+		map.put("attr", getAttrList(attributeParsers, emptyAttributes, defaultAttributes));
+		
+		for(String k: defaultProperties) {
 			
-			this.beforePrepareVars(map);
+			Object v;
 			
-			map.put("attr", getAttrList(attributeParsers, emptyAttributes, defaultAttributes));
-			
-			for(String k: defaultProperties) {
-				
-				Object v = i.get(k);
-				
-				AttributeParser parser = propertyParsers.get(k);
-				
-				k = parser == null? k : parser.toName(k, this);
-				v = parser == null? v : parser.toValue(v, this);
-				
-				if(k != null && !k.isEmpty()) {
-					map.put(k, v);
-				}
+			try{
+				v = i.get(k);
+			}
+			catch(Throwable ex) {
+				throw new ThemeException("fail to get property " + this.getClass().getName() + "." + k, ex);
 			}
 			
-			this.afterPrepareVars(map);
+			AttributeParser parser = propertyParsers.get(k);
 			
-			return map;
+			k = parser == null? k : parser.toName(k, this);
+			v = parser == null? v : parser.toValue(v, this);
+			
+			if(k != null && !k.isEmpty()) {
+				map.put(k, v);
+			}
 		}
-		catch(Throwable e) {
-			throw new IllegalStateException(e);
-		}
+		
+		this.afterPrepareVars(map);
+		
+		return map;
 	}
 	
     protected Object setProperty(String name, Object newValue) {

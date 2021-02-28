@@ -1,2 +1,2 @@
- <!-- {path} -->
- <link rel="stylesheet" href="{resource}">
+ <link rel="stylesheet" href="{path}"> <!-- {resource} -->
+ 

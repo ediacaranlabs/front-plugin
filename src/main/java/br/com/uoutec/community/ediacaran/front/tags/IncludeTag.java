@@ -47,11 +47,11 @@ public class IncludeTag extends AbstractSimpleComponent {
     		servletContext.getRequestDispatcher(path).include(pageContext.getRequest(), irw);
     	}
     	catch(ServletException e) {
-    		throw new JspTagException(e);
+    		throw new JspTagException("unable to load page " + path, e.getCause());
     	}
     	
     	if (irw.getStatus() < 200 || irw.getStatus() > 299) { 
-            throw new JspTagException(irw.getStatus() + " " + path); 
+            throw new JspTagException("unable to load page " + path + " [status=" + irw.getStatus() + "]"); 
         }
     	
     }

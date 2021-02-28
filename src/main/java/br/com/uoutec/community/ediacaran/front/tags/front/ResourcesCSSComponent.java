@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
 
-public class ResourcesCSSComponent extends ComponentFormComponent {
+public class ResourcesCSSComponent extends AbstractComponent {
 	
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {

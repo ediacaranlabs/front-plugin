@@ -1,3 +1,7 @@
+<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components" prefix="ec"%>
+<ec:resources type="css"/>
+<ec:resources type="js"/>
+<%-- 
 <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" >
 <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
@@ -37,3 +41,4 @@
 <script	src="/plugins/ediacaran/front/default_template/admin/js/application.page.js" charset="utf-8"></script>
 <script	src="/plugins/ediacaran/front/default_template/admin/js/application.config.js" charset="utf-8"></script>
 <script src="/plugins/ediacaran/front/default_template/admin/plugins/flot/application.config.js"></script>
+--%>

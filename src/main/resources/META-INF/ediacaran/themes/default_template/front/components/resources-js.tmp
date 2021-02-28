@@ -1,2 +1,1 @@
-<!-- {path} -->
-<script src="{resource}"></script>
+<script src="{path}"></script> <!-- {resource} -->
