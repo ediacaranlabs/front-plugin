@@ -1,4 +1,5 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components" prefix="ec"%>
+<ec:setTemplatePackage name="admin"/>
 <ec:resources type="css"/>
 <ec:resources type="js"/>
 <%-- 
