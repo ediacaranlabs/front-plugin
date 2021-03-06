@@ -24,15 +24,26 @@
 				<ec:icon icon="bell" size="1"/>
 				<span class="badge badge-warning navbar-badge">15</span>
 			</ec:menu-item>
+			<ec:menu>
+				<ec:menu-label><ec:icon icon="user" size="1"/></ec:menu-label>
+				<ec:menu-itens>
+					<div class="user-item">
+						<ec:icon icon="user" bg="circle" size="3" />
+					</div>
+				</ec:menu-itens>
+			</ec:menu>
+<%-- 			
 			<ec:menu-item href="#">
 				<ec:icon icon="user" size="1"/>
 			</ec:menu-item>
+--%>			
 		</ec:menu-itens>
 	</ec:menu-bar>
 
 	<aside class="sidebar">
     	<ec:menu-bar-brand>
-    		Ediacaran
+    		<ec:image src="/plugins/ediacaran/front/admin/img/Logo.png"/> 
+    		<span>Ediacaran</span>
     	</ec:menu-bar-brand>
     	<div class="sidebar-body">
 				<ec:menu-bar>
