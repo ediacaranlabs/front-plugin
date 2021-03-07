@@ -4,9 +4,9 @@ import java.util.Map;
 
 public class MenuTag  extends AbstractSimpleComponent {
 
-	public static final String CONTEXT_ID = MenuTag.class.getName() + ":CONTEXT";
+	public static final String CONTEXT_ID 			= MenuTag.class.getName() + ":CONTEXT";
 
-	public static final String TEMPLATE  = "/components/menu";
+	public static final String TEMPLATE  			= "/components/menu";
 	
 	/* ------------ Attr ---------------*/
 	

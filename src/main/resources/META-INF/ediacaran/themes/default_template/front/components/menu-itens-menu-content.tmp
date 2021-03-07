@@ -1,0 +1,15 @@
+<div id="menu_itens_{parent-id}" class="dropdown-menu {menuAlign}" aria-labelledby="{parent-id}">
+</div>
+<script language="javascript">
+	$.AppContext.onload(function()&#123;
+	
+		$.AppContext.events.add(
+			"{parent-id}",
+			"show.bs.dropdown", 
+			function (e)&#123;
+				$.AppContext.utils.loadResourceContent("#menu_itens_{parent-id}", "{resource}");
+			&#125;
+		);
+		
+	&#125;);
+</script>	

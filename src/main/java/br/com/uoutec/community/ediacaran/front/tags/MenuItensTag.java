@@ -10,6 +10,8 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 	
 	public static final String TEMPLATE_2  		= "/components/menu-itens-menu";
 	
+	public static final String TEMPLATE_CONTENT	= "/components/menu-itens-menu-content";
+	
 	/* ------------ Attr ---------------*/
 	
 	/* ------------ Prop ---------------*/
@@ -20,9 +22,11 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 	
 	private String align; //left, right, center
 	
-	private String menuAlign; //
+	private String menuAlign; //left, right
 	
 	private Boolean collapse;
+	
+	private String resource;
 	
 	public MenuItensTag() {
 	}
@@ -42,7 +46,10 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 				super.setWrapper(true);
 			}
 		}
-    	return menu != null? TEMPLATE_2 : TEMPLATE;
+		
+    	return menu != null? 
+    			(resource != null? TEMPLATE_CONTENT : TEMPLATE_2) : 
+				TEMPLATE;
     }
 
     protected String getWrapperTemplate() {
@@ -87,6 +94,14 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 
 	public void setCollapse(Boolean collapse) {
 		this.collapse = collapse;
+	}
+
+	public String getResource() {
+		return resource;
+	}
+
+	public void setResource(String resource) {
+		this.resource = resource;
 	}
 
 }
