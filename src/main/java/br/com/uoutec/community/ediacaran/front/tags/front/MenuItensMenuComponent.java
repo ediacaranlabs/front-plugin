@@ -26,6 +26,7 @@ public class MenuItensMenuComponent  extends AbstractComponent {
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("content");
 			add("align");
+			add("menuAlign");
 		}});
 	
 		super.default_property_parsers = 
@@ -43,6 +44,20 @@ public class MenuItensMenuComponent  extends AbstractComponent {
 					}
 					
 				});
+				
+				put("menuAlign", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						if(value == null) {
+							return null;
+						}
+						
+						return "dropdown-menu-" + value;
+					}
+					
+				});
+				
 			}});
 
 	}

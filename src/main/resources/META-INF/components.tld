@@ -4768,6 +4768,14 @@ Adiciona itens em um menu.
 
 		<attribute>
 			<description></description>
+			<name>menuAlign</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
 			<name>collapse</name>
 			<required>false</required>
 			<type>java.lang.Boolean</type>

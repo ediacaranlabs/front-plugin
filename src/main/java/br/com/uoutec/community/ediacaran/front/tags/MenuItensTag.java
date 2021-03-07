@@ -20,6 +20,8 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 	
 	private String align; //left, right, center
 	
+	private String menuAlign; //
+	
 	private Boolean collapse;
 	
 	public MenuItensTag() {
@@ -61,6 +63,30 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 
 	public void setAlign(String align) {
 		this.align = align;
+	}
+
+	public MenuTag getMenu() {
+		return menu;
+	}
+
+	public void setMenu(MenuTag menu) {
+		this.menu = menu;
+	}
+
+	public String getMenuAlign() {
+		return menuAlign;
+	}
+
+	public void setMenuAlign(String menuAlign) {
+		this.menuAlign = menuAlign;
+	}
+
+	public Boolean getCollapse() {
+		return collapse;
+	}
+
+	public void setCollapse(Boolean collapse) {
+		this.collapse = collapse;
 	}
 
 }

@@ -227,6 +227,10 @@ body:not(.show) .top-menu{
     padding-left: 1rem;
 }
 
+.top-menu .navbar-nav .dropdown-toggle::after {
+    display: none;
+}
+
 .top-menu .nav-link {
     height: 2.5rem;
     position: relative;
