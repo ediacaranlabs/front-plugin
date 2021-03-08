@@ -16,11 +16,9 @@
 </ed:row>
 <ed:row style="form">
 	<ed:col size="6">
-		<fmt:message var="perfil_button" key="perfil_button" bundle="${sys_messages}"/>
-		<ec:button block="true" label="${perfil_button}"/>
+		<a href="#!${plugins.ediacaran.front.admin_perfil_page}"><fmt:message key="perfil_button" bundle="${sys_messages}"/></a>
 	</ed:col>
 	<ed:col size="6" >
-		<fmt:message var="logout_button" key="logout_button" bundle="${sys_messages}"/>
-		<ec:button block="true" label="${logout_button}"/>
+		<a href="${plugins.ediacaran.front.admin_logout_page}"><fmt:message key="logout_button" bundle="${sys_messages}"/></a>
 	</ed:col>
 </ed:row>
