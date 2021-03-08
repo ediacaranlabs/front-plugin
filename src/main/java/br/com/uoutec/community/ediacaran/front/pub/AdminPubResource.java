@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.brandao.brutos.annotation.Action;
+import org.brandao.brutos.annotation.Actions;
 import org.brandao.brutos.annotation.Controller;
 import org.brandao.brutos.annotation.Result;
 import org.brandao.brutos.annotation.Transient;
@@ -23,7 +24,10 @@ import br.com.uoutec.community.ediacaran.system.pub.MenuBarManagerException;
 @Singleton
 @Controller(value="${plugins.ediacaran.front.admin_context}", defaultActionName="/")
 @View(value="/${plugins.ediacaran.front.template}/admin/index")
-@Action(value="/", view=@View(value="/${plugins.ediacaran.front.template}/admin/index"))
+@Actions({
+	@Action(value="/", view=@View(value="/${plugins.ediacaran.front.template}/admin/index")),
+	@Action(value="/user-menu", view=@View(value="/${plugins.ediacaran.front.template}/admin/includes/user_menu"))
+})
 @GuaranteedAccessTo(UserPrivilege.class)
 @ResponseErrors(rendered=false, name="exception")
 public class AdminPubResource {

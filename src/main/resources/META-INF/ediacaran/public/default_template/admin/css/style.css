@@ -227,6 +227,10 @@ body:not(.show) .top-menu{
     padding-left: 1rem;
 }
 
+.top-menu .navbar-nav .dropdown-menu {
+	position: absolute;
+}
+
 .top-menu .navbar-nav .dropdown-toggle::after {
     display: none;
 }
@@ -279,10 +283,6 @@ body:not(.show) .top-menu{
 
 	.top-menu {
 	    margin-left: 250px;
-	}
-
-	.top-menu .navbar-badge {
-	    right: -2px;
 	}
 	
 }
