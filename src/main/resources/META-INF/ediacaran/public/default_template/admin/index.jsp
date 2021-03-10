@@ -1,6 +1,7 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core"                 prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"                              prefix="c" %>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions"                         prefix="fn"%>
 <ec:setTemplatePackage name="admin"/>
 <!DOCTYPE html>
 <html>
@@ -45,13 +46,35 @@
     	<div class="sidebar-body">
 				<ec:menu-bar>
 					<ec:menu-itens>
-						<ec:menu-item href="#"><ec:icon icon="tachometer" size="1"/> <p>Dashboard</p></ec:menu-item>
-						<ec:menu-item href="#!/plugins/ediacaran/front/admin/components.jsp"><ec:icon icon="tree" size="1"/> <p>Components</p></ec:menu-item>
-						<ec:menu-item href="#!/plugins/ediacaran/front/admin/form.jsp"><ec:icon icon="edit" size="1"/> <p>Forms</p></ec:menu-item>
-						<ec:menu-item href="#!/plugins/ediacaran/front/admin/typography.jsp"><ec:icon icon="pencil" size="1"/> <p>Typography</p></ec:menu-item>
-						<ec:menu-item href="#!/plugins/ediacaran/front/admin/table.jsp"><ec:icon icon="table" size="1"/> <p>Tables</p></ec:menu-item>
-						<ec:menu-item href="#!/plugins/ediacaran/front/admin/pricingbox.jsp"><ec:icon icon="money" size="1"/> <p>Pricing boxes</p></ec:menu-item>
-						<ec:menu-item href="#!/plugins/ediacaran/front/admin/flotcharts.jsp"><ec:icon icon="pie-chart" size="1"/> <p>Flot Charts</p></ec:menu-item>
+						<c:forEach items="${Controller.TopMenuBar}" var="menu">
+							<c:choose>
+								<c:when test="${fn:length(menu.itens) eq 0}">
+									<ec:menu-item href="${menu.resource}">
+										<ec:icon icon="${menu.icon}" size="1"/> 
+										<p>${menu.FullName}</p>
+										<c:if test="${not empty menu.badge}">
+											<span class="badge badge-${empty item.badgeStyle? 'info' : item.badgeStyle} navbar-badge">${menu.badge}</span>
+										</c:if>
+									</ec:menu-item>
+								</c:when>
+								<c:when test="${fn:length(companies) gt 0}">
+									<ec:menu>
+										<ec:menu-label>${menu.FullName}</ec:menu-label>
+									</ec:menu>
+									<ec:menu-itens>
+										<c:forEach items="${menu.itens}" var="item">
+											<ec:menu-item href="${item.resource}">
+												<ec:icon icon="${item.icon}" size="1"/> 
+												<p>${item.FullName}</p>
+												<c:if test="${not empty item.badge}">
+													<span class="badge badge-${empty item.badgeStyle? 'info' : item.badgeStyle} navbar-badge">${item.badge}</span>
+												</c:if>
+											</ec:menu-item>
+										</c:forEach>
+									</ec:menu-itens>
+								</c:when>
+							</c:choose>
+						</c:forEach>
 					</ec:menu-itens>
 				</ec:menu-bar>
 		</div>

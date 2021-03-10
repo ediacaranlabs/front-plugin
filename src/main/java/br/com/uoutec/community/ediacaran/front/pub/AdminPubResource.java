@@ -32,7 +32,9 @@ import br.com.uoutec.community.ediacaran.system.pub.MenuBarManagerException;
 @ResponseErrors(rendered=false, name="exception")
 public class AdminPubResource {
 
-	private static final String ADMIN_MENU_BAR = "adminMenuBar";
+	private static final String ADMIN_MENU_BAR 		= "adminMenuBar";
+	
+	private static final String ADMIN_TOP_MENU_BAR	= "adminTopMenuBar";
 	
 	@Inject
 	@Transient
@@ -47,6 +49,10 @@ public class AdminPubResource {
 
 	public MenuBar getMenuBar() throws MenuBarManagerException{
 		return menuBarManager.getMenuBar(ADMIN_MENU_BAR);
+	}
+	
+	public MenuBar getTopMenuBar() throws MenuBarManagerException{
+		return menuBarManager.getMenuBar(ADMIN_TOP_MENU_BAR);
 	}
 	
 	@Action(value="/dashboard")

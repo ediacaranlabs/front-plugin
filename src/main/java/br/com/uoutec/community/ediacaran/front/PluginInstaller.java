@@ -34,19 +34,16 @@ public class PluginInstaller
 		mbm.registerMenuBar(ADMIN_MENU_BAR, leftMenu);
 		mbm.registerMenuBar(ADMIN_TOP_MENU_BAR,topMenu);
 		
-		//<ec:menu-item href="#"><ec:icon icon="tachometer" size="1"/> <p>Dashboard</p></ec:menu-item>
+		topMenu.addMenu(new Menu("Dashboard", "tachometer", "/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard", null, null, null, null, -1));
 		
 		if("true".equals(super.metadata.getValue("test").getValue())){
 			
-			topMenu.add
-			/*
-		 	<ec:menu-item href="#!/plugins/ediacaran/front/admin/components.jsp"><ec:icon icon="tree" size="1"/> <p>Components</p></ec:menu-item>
-			<ec:menu-item href="#!/plugins/ediacaran/front/admin/form.jsp"><ec:icon icon="edit" size="1"/> <p>Forms</p></ec:menu-item>
-			<ec:menu-item href="#!/plugins/ediacaran/front/admin/typography.jsp"><ec:icon icon="pencil" size="1"/> <p>Typography</p></ec:menu-item>
-			<ec:menu-item href="#!/plugins/ediacaran/front/admin/table.jsp"><ec:icon icon="table" size="1"/> <p>Tables</p></ec:menu-item>
-			<ec:menu-item href="#!/plugins/ediacaran/front/admin/pricingbox.jsp"><ec:icon icon="money" size="1"/> <p>Pricing boxes</p></ec:menu-item>
-			<ec:menu-item href="#!/plugins/ediacaran/front/admin/flotcharts.jsp"><ec:icon icon="pie-chart" size="1"/> <p>Flot Charts</p></ec:menu-item>
-			*/
+			topMenu.addMenu(new Menu("Components", "tree", "/plugins/ediacaran/front/admin/components.jsp", null, null, null, null, 1));
+			topMenu.addMenu(new Menu("Forms", "edit", "/plugins/ediacaran/front/admin/form.jsp", null, null, null, null, 1));
+			topMenu.addMenu(new Menu("Typography", "pencil", "/plugins/ediacaran/front/admin/typography.jsp", null, null, null, null, 1));
+			topMenu.addMenu(new Menu("Tables", "table", "/plugins/ediacaran/front/admin/table.jsp", null, null, null, null, 1));
+			topMenu.addMenu(new Menu("Pricing boxes", "money", "/plugins/ediacaran/front/admin/pricingbox.jsp", null, null, null, null, 1));
+			topMenu.addMenu(new Menu("Flot Charts", "pie-chart", "/plugins/ediacaran/front/admin/flotcharts.jsp", null, null, null, null, 1));
 			
 		}
 	}
