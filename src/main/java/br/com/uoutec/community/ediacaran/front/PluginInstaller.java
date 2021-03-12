@@ -34,16 +34,19 @@ public class PluginInstaller
 		mbm.registerMenuBar(ADMIN_MENU_BAR, leftMenu);
 		mbm.registerMenuBar(ADMIN_TOP_MENU_BAR,topMenu);
 		
-		topMenu.addMenu(new Menu("Dashboard", "tachometer", "/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard", null, null, null, null, -1));
+		leftMenu.addMenu(new Menu("Dashboard").setIcon("tachometer").setResource("/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard"));
 		
 		if("true".equals(super.metadata.getValue("test").getValue())){
 			
-			topMenu.addMenu(new Menu("Components", "tree", "/plugins/ediacaran/front/admin/components.jsp", null, null, null, null, 1));
-			topMenu.addMenu(new Menu("Forms", "edit", "/plugins/ediacaran/front/admin/form.jsp", null, null, null, null, 1));
-			topMenu.addMenu(new Menu("Typography", "pencil", "/plugins/ediacaran/front/admin/typography.jsp", null, null, null, null, 1));
-			topMenu.addMenu(new Menu("Tables", "table", "/plugins/ediacaran/front/admin/table.jsp", null, null, null, null, 1));
-			topMenu.addMenu(new Menu("Pricing boxes", "money", "/plugins/ediacaran/front/admin/pricingbox.jsp", null, null, null, null, 1));
-			topMenu.addMenu(new Menu("Flot Charts", "pie-chart", "/plugins/ediacaran/front/admin/flotcharts.jsp", null, null, null, null, 1));
+			topMenu.addMenu(new Menu("Messages").setIcon("comments").setBadge("3").setBadgeStyle("danger").setOrder(100));
+			topMenu.addMenu(new Menu("Notification").setIcon("bell").setBadge("15").setBadgeStyle("warning").setOrder(99));
+			
+			leftMenu.addMenu(new Menu("Components").setIcon("tree").setResource("/plugins/ediacaran/front/admin/components.jsp").setOrder(1));
+			leftMenu.addMenu(new Menu("Forms").setIcon("edit").setResource("/plugins/ediacaran/front/admin/form.jsp").setOrder(1));
+			leftMenu.addMenu(new Menu("Typography").setIcon("pencil").setResource("/plugins/ediacaran/front/admin/typography.jsp").setOrder(1));
+			leftMenu.addMenu(new Menu("Tables").setIcon("table").setResource("/plugins/ediacaran/front/admin/table.jsp").setOrder(1));
+			leftMenu.addMenu(new Menu("Pricing boxes").setIcon("money").setResource("/plugins/ediacaran/front/admin/pricingbox.jsp").setOrder(1));
+			leftMenu.addMenu(new Menu("Flot Charts").setIcon("pie-chart").setResource("/plugins/ediacaran/front/admin/flotcharts.jsp").setOrder(1));
 			
 		}
 	}

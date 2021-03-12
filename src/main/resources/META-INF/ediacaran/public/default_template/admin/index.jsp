@@ -17,21 +17,20 @@
 			<ec:icon icon="bars" size="1" />
 		</ec:menu-toggler>
 		<ec:menu-itens align="right">
-			<c:forEach items="${Controller.topMenuBar}" var="menu">
+			<c:forEach items="${Controller.topMenuBar.itens}" var="menu">
 				<c:choose>
-					<c:when test="${not empty menu.bodyTemplate}">
+					<c:when test="${not empty menu.body}">
 						<ec:menu>
 							<ec:menu-label>
 								<c:if test="${not empty menu.icon}">
 									<ec:icon icon="${menu.icon}" size="1"/>
 								</c:if>
-								${menu.FullName}
 								<c:if test="${not empty menu.badge}">
 									<span class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
 								</c:if>
 							</ec:menu-label>
 						</ec:menu>
-						<ec:menu-itens resource="${menu.bodyTemplate}"/>
+						<ec:menu-itens resource="${menu.body}"/>
 					</c:when>
 					<c:when test="${fn:length(menu.itens) gt 0}">
 						<ec:menu>
@@ -39,7 +38,6 @@
 								<c:if test="${not empty menu.icon}">
 									<ec:icon icon="${menu.icon}" size="1"/>
 								</c:if>
-								${menu.FullName}
 								<c:if test="${not empty menu.badge}">
 									<span class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
 								</c:if>
@@ -47,11 +45,10 @@
 						</ec:menu>
 						<ec:menu-itens>
 							<c:forEach items="${menu.itens}" var="item">
-								<ec:menu-item href="${item.resource}">
+								<ec:menu-item href="#!${item.resource}">
 									<c:if test="${not empty item.icon}">
 										<ec:icon icon="${item.icon}" size="1"/>
 									</c:if>
-									${item.FullName}
 									<c:if test="${not empty item.badge}">
 										<span class="badge badge-${empty item.badgeStyle? 'info' : item.badgeStyle} navbar-badge">${item.badge}</span>
 									</c:if>
@@ -60,11 +57,10 @@
 						</ec:menu-itens>
 					</c:when>
 					<c:otherwise>
-						<ec:menu-item href="${menu.resource}">
+						<ec:menu-item href="#!${menu.resource}">
 							<c:if test="${not empty menu.icon}">
 								<ec:icon icon="${menu.icon}" size="1"/>
 							</c:if>
-							${menu.FullName}
 							<c:if test="${not empty menu.badge}">
 								<span class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
 							</c:if>
@@ -88,21 +84,21 @@
     	<div class="sidebar-body">
 				<ec:menu-bar>
 					<ec:menu-itens>
-						<c:forEach items="${Controller.menuBar}" var="menu">
+						<c:forEach items="${Controller.menuBar.itens}" var="menu">
 							<c:choose>
-								<c:when test="${not empty menu.bodyTemplate}">
+								<c:when test="${not empty menu.body}">
 									<ec:menu>
 										<ec:menu-label>
 											<c:if test="${not empty menu.icon}">
 												<ec:icon icon="${menu.icon}" size="1"/>
 											</c:if>
-											${menu.FullName}
+											${menu.fullName}
 											<c:if test="${not empty menu.badge}">
 												<span class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
 											</c:if>
 										</ec:menu-label>
 									</ec:menu>
-									<ec:menu-itens resource="${menu.bodyTemplate}"/>
+									<ec:menu-itens resource="${menu.body}"/>
 								</c:when>
 								<c:when test="${fn:length(menu.itens) gt 0}">
 									<ec:menu>
@@ -110,7 +106,7 @@
 											<c:if test="${not empty menu.icon}">
 												<ec:icon icon="${menu.icon}" size="1"/>
 											</c:if>
-											${menu.FullName}
+											${menu.fullName}
 											<c:if test="${not empty menu.badge}">
 												<span class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
 											</c:if>
@@ -118,11 +114,11 @@
 									</ec:menu>
 									<ec:menu-itens>
 										<c:forEach items="${menu.itens}" var="item">
-											<ec:menu-item href="${item.resource}">
+											<ec:menu-item href="#!${item.resource}">
 												<c:if test="${not empty item.icon}">
 													<ec:icon icon="${item.icon}" size="1"/>
 												</c:if>
-												${item.FullName}
+												${item.fullName}
 												<c:if test="${not empty item.badge}">
 													<span class="badge badge-${empty item.badgeStyle? 'info' : item.badgeStyle} navbar-badge">${item.badge}</span>
 												</c:if>
@@ -131,11 +127,11 @@
 									</ec:menu-itens>
 								</c:when>
 								<c:otherwise>
-									<ec:menu-item href="${menu.resource}">
+									<ec:menu-item href="#!${menu.resource}">
 										<c:if test="${not empty menu.icon}">
 											<ec:icon icon="${menu.icon}" size="1"/>
 										</c:if>
-										${menu.FullName}
+										${menu.fullName}
 										<c:if test="${not empty menu.badge}">
 											<span class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
 										</c:if>
