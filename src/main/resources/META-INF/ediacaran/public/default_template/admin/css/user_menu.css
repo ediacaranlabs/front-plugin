@@ -6,3 +6,24 @@
 #menu_itens_user_menu_top button {
 	margin-bottom: 5px;
 }
+
+#menu_itens_user_menu_top img {
+	border: 1px solid #666666;
+	margin-bottom: 10px;
+	max-width: 84px;
+}
+
+#menu_itens_user_menu_top a {
+	margin-bottom: 5px;
+	text-decoration: none;	
+	color: #666666;
+	border: 1px solid #ddd;
+	display: inline-block;
+    padding: 6px 12px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    width: 100%;
+}

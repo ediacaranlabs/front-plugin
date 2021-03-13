@@ -6,12 +6,19 @@
 <ec:setBundle var="sys_messages" locale="${locale}"/>
 <ed:row style="form">
 	<ed:col size="12" classStyle="text-center">
-		<ec:icon icon="user" bg="circle" size="3" />
+		<ec:image align="center" style="circle" src="${empty sessionScope.system_user.image? '/plugins/ediacaran/front/admin/img/user.png' : sessionScope.system_user.image}"/>
 	</ed:col>
 </ed:row>
 <ed:row style="form">
 	<ed:col classStyle="text-center" size="12">
-		${sessionScope.system_user.firstName} ${sessionScope.system_user.lastName}
+		<c:choose>
+			<c:when test="${empty sessionScope.system_user.firstName}">
+				User Name
+			</c:when>
+			<c:otherwise>
+				${sessionScope.system_user.firstName} ${sessionScope.system_user.lastName}
+			</c:otherwise>
+		</c:choose>
 	</ed:col>
 </ed:row>
 <ed:row style="form">
