@@ -1,6 +1,8 @@
 package br.com.uoutec.community.ediacaran.front;
 
 import br.com.uoutec.community.ediacaran.front.pub.AdminMenuBar;
+import br.com.uoutec.community.ediacaran.front.pub.widget.Widget;
+import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.system.AbstractWebPluginInstaller;
 import br.com.uoutec.community.ediacaran.system.pub.Menu;
@@ -28,6 +30,8 @@ public class PluginInstaller
 	public void install() throws Throwable{
 		super.install();
 		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);
+		Widgets widgets = EntityContextPlugin.getEntity(Widgets.class);
+		
 		AdminMenuBar leftMenu = new AdminMenuBar(); 
 		AdminMenuBar topMenu = new AdminMenuBar();
 		
@@ -48,6 +52,7 @@ public class PluginInstaller
 			leftMenu.addMenu(new Menu("Pricing boxes").setIcon("money").setResource("/plugins/ediacaran/front/admin/pricingbox.jsp").setOrder(1));
 			leftMenu.addMenu(new Menu("Flot Charts").setIcon("pie-chart").setResource("/plugins/ediacaran/front/admin/flotcharts.jsp").setOrder(1));
 			
+			widgets.addWidget(new Widget("w1", "/plugins/ediacaran/front/admin/widgets/w1.jsp", 100));
 		}
 	}
 	
