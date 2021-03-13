@@ -2,6 +2,20 @@
 <ec:setTemplatePackage name="admin"/>
 <ec:resources type="css"/>
 <ec:resources type="js"/>
+<script type="text/javascript">
+	messages.setDefaultLanguage('pt-BR');
+	messages.addSupportedLanguages('pt-BR');
+
+	$.AppContext.vars.contextPath = "";
+	$.AppContext.vars.painel      = "#content-body";
+	$.AppContext.vars.dialog      = "#defaultDialog";
+	$.AppContext.vars.language    = messages.getLanguage();
+	
+	$.AppContext.onload(function(){			
+		$.AppContext.utils.loadResourceContent($.AppContext.vars.painel, '/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard')
+	});
+	
+</script>
 <%-- 
 <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" >

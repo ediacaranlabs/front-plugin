@@ -21,7 +21,6 @@
 	</ed:row>
 </section>
 
-<section class="content">
 <div class="row">
 <c:forEach begin="0" end="${fn:length(vars.widgets)}" varStatus="loop">
 	<c:if test="${!empty vars.widgets[loop.index].resource}">
@@ -30,7 +29,7 @@
 	</c:if>
 </c:forEach>
 </div>
-</section>
+
 <script type="text/javascript">
 	$.AppContext.onload(
 		function (){
