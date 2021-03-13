@@ -34,7 +34,7 @@ public class PluginInstaller
 		mbm.registerMenuBar(ADMIN_MENU_BAR, leftMenu);
 		mbm.registerMenuBar(ADMIN_TOP_MENU_BAR,topMenu);
 		
-		leftMenu.addMenu(new Menu("Dashboard").setIcon("tachometer").setResource("/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard"));
+		leftMenu.addMenu(new Menu("Dashboard").setIcon("tachometer").setResource("/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard").setOrder(100));
 		
 		if("true".equals(super.metadata.getValue("test").getValue())){
 			

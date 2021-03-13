@@ -26,7 +26,7 @@ import br.com.uoutec.community.ediacaran.system.pub.MenuBarManagerException;
 @View(value="/${plugins.ediacaran.front.template}/admin/index")
 @Actions({
 	@Action(value="/", view=@View(value="/${plugins.ediacaran.front.template}/admin/index")),
-	@Action(value="/user-menu", view=@View(value="/${plugins.ediacaran.front.template}/admin/includes/user_menu"))
+	@Action(value="/user-menu", view=@View(value="/${plugins.ediacaran.front.template}/admin/user_menu"))
 })
 @GuaranteedAccessTo(UserPrivilege.class)
 @ResponseErrors(rendered=false, name="exception")
