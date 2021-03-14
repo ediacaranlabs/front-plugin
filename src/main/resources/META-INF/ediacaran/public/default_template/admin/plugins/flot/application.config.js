@@ -4,9 +4,26 @@ $.AppContext.flotcharts.charts = {};
 
 $.AppContext.flotcharts.update_charts = {};
 
+$.AppContext.flotcharts.isAsyncUpdateChart = function (chart, checkID){
+
+	//var result =
+	//	$('#' + $.AppContext.flotcharts.charts[chart].edController.checkID).length &&
+	//	$.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled;
+	
+	var result =
+		$('#' + checkID).length &&
+		$.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled;
+
+	return result;
+};
+
 $.AppContext.flotcharts.setAsyncUpdateChart = function (chart, time = 1000){
 
 	if($.AppContext.flotcharts.charts[chart] == null){
+		return;
+	}
+
+	if($.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled && time > 0){
 		return;
 	}
 	
@@ -17,17 +34,28 @@ $.AppContext.flotcharts.setAsyncUpdateChart = function (chart, time = 1000){
 	$.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled = time > 0; 
 	$.AppContext.flotcharts.charts[chart].edController.asyncUpdateTime = time; 
 	
-	var exec = function(){
+	var exec = {}
+	exec.ID = chart + "_" + (new Date()).getTime();
+
+	exec.update = function(){
 		
 		$.AppContext.flotcharts.loadData(chart,$.AppContext.flotcharts.charts[chart].edController.resource);
-		
-		if($.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled){
-			setTimeout(exec, $.AppContext.flotcharts.charts[chart].edController.asyncUpdateTime);
+				
+		if($.AppContext.flotcharts.isAsyncUpdateChart(chart, exec.ID)){
+			setTimeout(exec.update, $.AppContext.flotcharts.charts[chart].edController.asyncUpdateTime);
 		}
 	}; 
  
 	if($.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled){
-		setTimeout(exec, $.AppContext.flotcharts.charts[chart].edController.asyncUpdateTime);
+		
+		//$.AppContext.flotcharts.charts[chart].edController.checkID = chart + "_" + (new Date()).getTime();
+		
+		var elm = '<div id="' + exec.ID + '" style="display: none;"></div>';
+		var e   = $('#' + chart).parent();
+		
+		$(elm).appendTo(e);
+		
+		setTimeout(exec.update, $.AppContext.flotcharts.charts[chart].edController.asyncUpdateTime);
 	}
 }
 
