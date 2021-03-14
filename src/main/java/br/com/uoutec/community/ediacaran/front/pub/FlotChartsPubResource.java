@@ -22,6 +22,8 @@ import org.brandao.brutos.annotation.web.MediaTypes;
 @ResponseType(MediaTypes.APPLICATION_JSON)
 public class FlotChartsPubResource {
 
+	private static Random r = new Random();
+	
 	private List<Integer> list;
 	
 	public FlotChartsPubResource() {
@@ -49,15 +51,32 @@ public class FlotChartsPubResource {
 
 	private void update() {
 		synchronized (FlotChartsPubResource.class) {
-			Random r = new Random();
+			
 			if(list == null) {
 				list = new ArrayList<Integer>();
+				int y = r.nextInt(100);
 				for(int i=0;i<100;i++) {
-					list.add(r.nextInt(100));
+					list.add(y);
+					y = getY(y);
 				}
 			}
 			
-			list.remove(0);list.add(r.nextInt(100));
+			list.remove(0);
+			int y = list.get(list.size() - 1);
+			y = getY(y);
+			list.add(y);
 		}
+	}
+	
+	private int getY(int x) {
+		int v = (r.nextInt() % 5);
+		int y;
+		
+		if((v > 0 && (x + v > 90)) || (v < 0 && (x + v < 30)) ) 
+			y = x - v;
+		else
+			y = x + v;
+		
+		return y;
 	}
 }
