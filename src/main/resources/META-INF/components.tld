@@ -5190,7 +5190,7 @@ Carrega dados de um arquivo.
 			<name>x</name>
 			<required>false</required>
 			<type>java.lang.Double</type>
-			<fragment>false</fragment>
+			<fragment>true</fragment>
 		</attribute>
 
 		<attribute>
@@ -5198,7 +5198,7 @@ Carrega dados de um arquivo.
 			<name>y</name>
 			<required>false</required>
 			<type>java.lang.Double</type>
-			<fragment>false</fragment>
+			<fragment>true</fragment>
 		</attribute>
 
 	</tag>

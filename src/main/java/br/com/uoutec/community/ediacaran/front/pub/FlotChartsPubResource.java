@@ -55,7 +55,7 @@ public class FlotChartsPubResource {
 			if(list == null) {
 				list = new ArrayList<Integer>();
 				int y = r.nextInt(100);
-				for(int i=0;i<100;i++) {
+				for(int i=0;i<=100;i++) {
 					list.add(y);
 					y = getY(y);
 				}
@@ -79,4 +79,44 @@ public class FlotChartsPubResource {
 		
 		return y;
 	}
+	
+	@Action(value="/line-chart")
+	public Serializable lineChart(){
+		update();
+		
+		List<double[]> sinData = new ArrayList<double[]>();
+		List<double[]> cosData = new ArrayList<double[]>();
+
+		for(double i=0;i < 14; i += 0.5) {
+			sinData.add(new double[] {i, Math.sin(i)});
+			cosData.add(new double[] {i, Math.cos(i)});
+		}
+		
+		Map<String, Object> yaxis = new HashMap<>();
+		yaxis.put("min", "-1.5");
+		yaxis.put("max", "1.5");
+		
+		Map<String, Object> xaxis = new HashMap<>();
+		xaxis.put("min", "0.0");
+		xaxis.put("max", "13.0");
+
+		Map<String, Object> axes = new HashMap<>();
+		axes.put("yaxis",yaxis);
+		axes.put("xaxis",xaxis);
+		
+		Map<String, Object> sin = new HashMap<>();
+		sin.put("data", sinData);
+		sin.put("color", "#3c8dbc");
+		
+		Map<String, Object> cos = new HashMap<>();
+		cos.put("data", cosData);
+		cos.put("color", "#00c0ef");
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("series", Arrays.asList(sin,cos));
+		map.put("axes",  axes);
+		
+		return map;
+	}
+	
 }

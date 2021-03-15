@@ -10,6 +10,7 @@ $.AppContext.onload(function(){
 		
 		    jcarousel
 		        .on('jcarousel:reload jcarousel:create', function () {
+		        	
 		            var carousel = $(this),
 		                width = carousel.innerWidth();
 		

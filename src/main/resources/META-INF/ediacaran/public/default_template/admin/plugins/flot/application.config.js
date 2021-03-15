@@ -80,7 +80,10 @@ $.AppContext.flotcharts.setResource = function (chart, value){
 		$.AppContext.flotcharts.charts[chart].edController = {};
 	}
 	
-	$.AppContext.flotcharts.charts[chart].edController.resource = value; 
+	$.AppContext.flotcharts.charts[chart].edController.resource = value;
+	
+	$.AppContext.flotcharts.loadData(chart,$.AppContext.flotcharts.charts[chart].edController.resource);	
+	
 }
 
 $.AppContext.flotcharts.updateChart = function (chart, data){
@@ -94,9 +97,11 @@ $.AppContext.flotcharts.updateChart = function (chart, data){
 	var plot       = $.AppContext.flotcharts.charts[chart];
 	var series     = plot.getData();
 	var options    = plot.getOptions();
+	var axes       = plot.getAxes();
 	var newSeries  = data.series;
 	var delSeries  = data.delSeries;
 	var newOptions = data.options;
+	var newAxes    = data.axes;
 	
 	if(newSeries != null){
 		for (i = 0; i < newSeries.length; i++) {
@@ -116,7 +121,12 @@ $.AppContext.flotcharts.updateChart = function (chart, data){
 		
 	}
 	
+	if(newAxes != null){
+		$.AppContext.utils.updateProperties(axes, newAxes);
+    }
+	
 	if(newOptions != null){
+		//alert(JSON.stringify(options));
 		$.AppContext.utils.updateProperties(options, newOptions);
 	}
 
@@ -127,8 +137,8 @@ $.AppContext.flotcharts.updateChart = function (chart, data){
 	}
 	
 	plot.setData(series);
-	
-	if(newOptions != null){
+
+	if(newOptions != null || newAxes != null){
 		plot.setupGrid();
 	}
 	
