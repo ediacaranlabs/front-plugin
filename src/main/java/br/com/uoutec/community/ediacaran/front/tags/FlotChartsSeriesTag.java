@@ -17,6 +17,8 @@ public class FlotChartsSeriesTag extends AbstractSimpleComponent {
 	
 	private String label;
 	
+	private String data;
+	
 	private JspFragmentVarParser content;
 	
 	public FlotChartsSeriesTag() {
@@ -56,6 +58,14 @@ public class FlotChartsSeriesTag extends AbstractSimpleComponent {
 
 	public void setFlotchartid(String flotchartid) {
 		this.flotchartid = flotchartid;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
 	}
 	
 }

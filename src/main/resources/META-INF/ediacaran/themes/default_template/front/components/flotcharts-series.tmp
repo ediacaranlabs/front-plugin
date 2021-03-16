@@ -4,7 +4,7 @@
 		data: [],
 		label: "{label}"
 	&#125;;
-	var {id}_data = [];
+	var {id}_data = {data};
 </script>
 {content}
 <script language="javascript">

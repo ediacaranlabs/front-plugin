@@ -4,6 +4,13 @@ $.AppContext.flotcharts.charts = {};
 
 $.AppContext.flotcharts.update_charts = {};
 
+$.AppContext.flotcharts.labelFormatter = function (label, series) {
+    return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+    + label
+    + '<br>'
+    + Math.round(series.percent) + '%</div>'
+};
+
 $.AppContext.flotcharts.isAsyncUpdateChart = function (chart, checkID){
 
 	//var result =

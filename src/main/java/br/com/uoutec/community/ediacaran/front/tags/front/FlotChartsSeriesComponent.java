@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.system.theme.AttributeParserImp;
 
 public class FlotChartsSeriesComponent extends AbstractComponent {
 
@@ -28,12 +29,21 @@ public class FlotChartsSeriesComponent extends AbstractComponent {
 			add("flotchartid");
 			add("label");
 			add("content");
-			add("classStyle");
+			add("data");
 			add("id");
 		}});
 	
 		super.default_property_parsers = 
 				Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+					
+					put("data", new AttributeParserImp() {
+						
+						@Override
+						public Object toValue(Object value, Object component) {
+							return value != null? value : "[]";
+						}
+						
+					});
 					
 				}});
 	}

@@ -5165,9 +5165,17 @@ Carrega dados de um arquivo.
 			<name>label</name>
 			<required>false</required>
 			<type>java.lang.String</type>
-			<fragment>false</fragment>
+			<fragment>true</fragment>
 		</attribute>
 
+		<attribute>
+			<description></description>
+			<name>data</name>
+			<required>false</required>
+			<type>java.lang.String</type>
+			<fragment>true</fragment>
+		</attribute>
+		
 	</tag>
 	
 	<!-- /flotcharts-series -->
@@ -5231,6 +5239,14 @@ Carrega dados de um arquivo.
 			<name>value</name>
 			<required>false</required>
 			<type>java.lang.String</type>
+			<fragment>false</fragment>
+		</attribute>
+
+		<attribute>
+			<description></description>
+			<name>raw</name>
+			<required>false</required>
+			<type>java.lang.Boolean</type>
 			<fragment>false</fragment>
 		</attribute>
 

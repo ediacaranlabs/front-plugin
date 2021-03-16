@@ -24,6 +24,8 @@ public class PropertyConfigTag extends AbstractSimpleComponent {
 	
 	private String value;
 	
+	private Boolean raw;
+	
 	private JspFragmentVarParser content;
 	
 	public PropertyConfigTag() {
@@ -92,6 +94,14 @@ public class PropertyConfigTag extends AbstractSimpleComponent {
 
 	public void setParentID(String parentID) {
 		this.parentID = parentID;
+	}
+
+	public Boolean getRaw() {
+		return raw;
+	}
+
+	public void setRaw(Boolean raw) {
+		this.raw = raw;
 	}
 	
 }

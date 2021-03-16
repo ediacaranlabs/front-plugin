@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import br.com.uoutec.community.ediacaran.front.tags.PropertyConfigTag;
 import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.theme.AttributeParserImp;
 
@@ -37,7 +38,13 @@ public class PropertyConfigNameValueComponent extends AbstractComponent {
 						
 						@Override
 						public Object toValue(Object value, Object component) {
-							return value == null || Util.isNumeric((String)value) || Util.isBoolean((String)value)?  value : "'" + value + "'";
+							return 
+								value == null || 
+								Util.isNumeric((String)value) || 
+								Util.isBoolean((String)value) ||
+								Boolean.TRUE.equals(((PropertyConfigTag)component).getRaw())?  
+									value : 
+									"'" + value + "'";
 						}
 						
 					});
