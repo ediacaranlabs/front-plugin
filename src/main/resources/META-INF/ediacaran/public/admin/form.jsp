@@ -19,36 +19,6 @@
 		</ed:container>
 	</section>
 
-<!-- 
-   	<ed:row>
-		<ed:col size="6">
-			<ec:box>
-				<ec:box-header>
-					<h3>Button types</h3>
-				</ec:box-header>
-				<ec:box-body>
-				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true">
-					</ec:prettify>
-				</ec:box-footer>
-			</ec:box>
-		</ed:col>
-		<ed:col size="6">
-			<ec:box style="info">
-				<ec:box-header>
-					<h3>Button with icon</h3>
-				</ec:box-header>
-				<ec:box-body>
-				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true">
-					</ec:prettify>
-				</ec:box-footer>
-			</ec:box>
-		</ed:col>
-   	</ed:row>
- -->	
    	<ed:row>
 		<ed:col size="6">
 			<ec:box>
@@ -63,14 +33,6 @@
 						<ec:button label="Submit" actionType="submit"/>
 					</ec:form>				
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><form>
-	<textfield name="email" label="Email address" placeholder="Enter email"/>
-	<passwordfield name="senha" label="Password" placeholder="Password"/>
-	<checkbox name="chk" label="Chk me out"/>
-	<button label="Submit" actionType="submit"/>
-</form></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
@@ -99,26 +61,6 @@
 						<ec:filefield name="file" label="Example file input" />
 					</ec:form>				
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><form>
-	<textfield name="email" label="Email address" placeholder="name@example.com"/>
-	<select name="select" label="Example select">
-		<option>1</option>
-		<option>2</option>
-		<option>3</option>
-		<option>4</option>
-		<option>5</option>
-	</select>
-	<select name="select2" multiple="true" label="Example multiple select">
-		<option>1</option>
-		<option>2</option>
-		<option>3</option>
-		<option>4</option>
-		<option>5</option>
-	</select>
-	<textarea name="textarea" label="Example textarea" rows="3"></textarea>
-	<filefield name="file" label="Example file input" />
-</form></ec:prettify>				</ec:box-footer>
 			</ec:box>
 		</ed:col>
    	</ed:row>
@@ -132,9 +74,6 @@
 				<ec:box-body>
 					<ec:textfield name="text" readonly="true" placeholder="Readonly input here..." />
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><textfield name="text" readonly="true" placeholder="Readonly input here..." /></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
@@ -149,13 +88,6 @@
 					<ec:radio name="exampleRadios" label="Second default radio"/>
 					<ec:radio name="exampleRadios" label="Disabled radio" enabled="false"/>
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><checkbox name="checkbox" label="Default checkbox"/>
-<checkbox name="checkbox2" label="Disabled checkbox" enabled="false" />
-<radio name="exampleRadios" label="Default radio" selected="true"/>
-<radio name="exampleRadios" label="Second default radio"/>
-<radio name="exampleRadios" label="Disabled radio" enabled="false"/></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
    	</ed:row>   
@@ -171,11 +103,6 @@
 					<ec:checkbox name="checkbox2" label="2" inline="true" />
 					<ec:checkbox name="checkbox3" label="3" enabled="false" inline="true"/>
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><checkbox name="checkbox1" label="1" inline="true" />
-<checkbox name="checkbox2" label="2" inline="true" />
-<checkbox name="checkbox3" label="3" enabled="false" inline="true"/></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
@@ -188,11 +115,6 @@
 					<ec:radio name="radioExample" label="2" inline="true" />
 					<ec:radio name="radioExample" label="3" enabled="false" inline="true"/>
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><radio name="radioExample" label="1" selected="true" inline="true" />
-<radio name="radioExample" label="2" inline="true" />
-<radio name="radioExample" label="3" enabled="false" inline="true"/></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
    	</ed:row>
@@ -215,18 +137,6 @@
 						</ed:row>
 					</ec:form>
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><form>
-	<row>
-		<col size="6">
-			<textfield name="first_name" placeholder="First name">
-		</col>
-		<col size="6">
-			<textfield name="first_name" placeholder="Last name">
-		</col>
-	</row>
-</form></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
@@ -246,18 +156,6 @@
 						</ed:row>
 					</ec:form>
 				</ec:box-body>
-				<ec:box-footer>
-				<ec:prettify linenums="true"><form>
-<row style="form">
-		<col size="6">
-			<textfield name="first_name" placeholder="First name">
-		</col>
-		<col size="6">
-			<textfield name="first_name" placeholder="Last name">
-		</col>
-	</row>
-</form></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
    	</ed:row>
@@ -302,39 +200,6 @@
 					  	
 					</ec:form>				
 				</ec:box-body>
-				<ec:box-footer>
-				<ec:prettify linenums="true"><form>
-<row style="form">
-	<col size="6">
-		<textfield name="email" label="Email" placeholder="Email"/>
-	</col>
-	<col size="6">
-		<passwordfield name="password" label="Password" placeholder="Password"/>
-	</col>
-</row>
-
- 	<textfield name="address" label="Address" placeholder="1234 Main St"/>
- 	<textfield name="address2" label="Address 2" placeholder="Apartment, studio, or floor"/>
-
-<row style="form">
-		<col size="6">
-			<textfield name="city" label="City"/>
-		</col>
-		<col size="4">
-			<select name="state" label="State">
-				<option selected="true">Choose...</option>
-			</select>
-		</col>
-		<col size="2">
-			<textfield name="zip" label="Zip"/>
-		</col>
-	</row>
-  	
-  	<checkbox name="check_out_me" label="Check me out"/>
-  	<button label="Sign in"/>
-  	
-</form></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
@@ -376,40 +241,6 @@
 						<ec:button label="Sign in"/>	
 					</ec:form>	
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><form>
-	<row>
-		<col size="2"><label style="col-form">Email</label></col>
-		<col size="10">
-			<textfield name="email" placeholder="Email"/>
-		</col>
-	</row>
-	<row>
-		<col size="2"><label style="col-form">Password</label></col>
-		<col size="10">
-			<passwordfield name="password" placeholder="Password"/>
-		</col>
-	</row>
-	<row>
-		<col size="2"><label style="col-form">Radios</label></col>
-		<col size="10">
-			<radio label="First radio" name="gridRadios" value="option1" selected="true"/>
-			<radio label="Second radio" name="gridRadios" value="option2"/>
-			<radio label="Third disabled radio" name="gridRadios" value="option3" enabled="false"/>
-		</col>
-	</row>
-
-	<row>
-		<col size="2">
-			<label style="col-form">Checkbox</label>
-		</col>
-		<col size="10">
-			<checkbox label="Example checkbox" name="gridCheck1"/>
-		</col>
-	</row>
-	<button label="Sign in"/>	
-</form></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
    	</ed:row>
@@ -442,28 +273,6 @@
 					</ed:row>
 				</ec:form>			
 				</ec:box-body>
-				<ec:box-footer>
-				<ec:prettify linenums="true"><form>
-<row>
-	<col size="2"><label style="col-form" size="sm">Email</label></col>
-	<col size="10">
-		<textfield name="email" size="sm" placeholder="Email"/>
-	</col>
-</row>
-<row>
-	<col size="2"><label style="col-form">Email</label></col>
-	<col size="10">
-		<textfield name="email" placeholder="Email"/>
-	</col>
-</row>
-<row>
-	<col size="2"><label style="col-form" size="lg">Email</label></col>
-		<col size="10">
-			<textfield name="email" size="lg" placeholder="Email"/>
-		</col>
-	</row>
-</form></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
@@ -483,18 +292,6 @@
 					<ec:button label="Submit" size="sm" actionType="submit"/>
 				</ec:form>				
 				</ec:box-body>
-				<ec:box-footer>
-				<ec:prettify linenums="true"><form style="inline">
-	<textfield name="name" size="sm" placeholder="Jane Doe"/>
-	<field-group size="sm">
-		<prepend-field>
-			<prepend-field-item>@</prepend-field-item>
-		</prepend-field>
-		<textfield name="username" placeholder="Username"/>
-	</field-group>
-	<button label="Submit" size="sm" actionType="submit"/>
-</form></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
    	</ed:row>
@@ -578,76 +375,6 @@
 
 </ec:form>				
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><form>
-	<row style="form">
-	<col size="4" classStyle="form-group has-feedback">
-		<textfield name="first_name" label="First Name">
-			<field-validator>
-				<field-validator-rule name="notEmpty" message="Looks good!"/>
-			</field-validator>
-		</textfield>
-	</col>
-	<col size="4" classStyle="form-group has-feedback">
-		<textfield name="last_name" label="Last name">
-			<field-validator>
-				<field-validator-rule name="notEmpty" message="Looks good!"/>
-			</field-validator>
-		</textfield>
-	</col>
-	<col size="4" classStyle="form-group has-feedback">
-		<label>Username</label>
-		<field-group>
-			<prepend-field>
-				<prepend-field-item>@</prepend-field-item>
-			</prepend-field>
-			<textfield name="username" placeholder="Username">
-				<field-validator>
-					<field-validator-rule name="notEmpty" message="Please choose a username."/>
-				</field-validator>
-			</textfield>
-		</field-group>
-	</col>
-</row>
-<row style="form">
-	<col size="6" classStyle="form-group has-feedback">
-		<textfield name="city" label="City">
-			<field-validator>
-				<field-validator-rule name="notEmpty" message="Please provide a valid city."/>
-			</field-validator>
-		</textfield>
-	</col>
-	<col size="3" classStyle="form-group has-feedback">
-		<textfield name="State" label="State">
-			<field-validator>
-				<field-validator-rule name="notEmpty" message="Please provide a valid state."/>
-			</field-validator>
-		</textfield>
-	</col>
-	<col size="3" classStyle="form-group has-feedback">
-		<textfield name="zip" label="Zip">
-			<field-validator>
-				<field-validator-rule name="notEmpty" message="Please provide a valid zip."/>
-			</field-validator>
-		</textfield>
-	</col>
-</row>
-<row style="form">
-	<col size="12" classStyle="form-group has-feedback">
-		<checkbox name="checkbox" label="Agree to terms and conditions">
-			<field-validator>
-				<field-validator-rule name="notEmpty" message="You must agree before submitting."/>
-			</field-validator>
-		</checkbox>
-	</col>
-</row>
-<row style="form">
-		<col size="12">
-			<button label="Submit form"/>
-		</col>
-	</row>
-</form></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">

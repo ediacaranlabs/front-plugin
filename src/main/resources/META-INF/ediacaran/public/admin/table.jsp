@@ -56,36 +56,6 @@
 		              </ec:table-body>
 					</ec:table>
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><table>
-	<table-header>
-		<table-col>#</table-col>
-		<table-col>First Name</table-col>
-		<table-col>Last Name</table-col>
-		<table-col>Username</table-col>
-	</table-header>
-	<table-body>
-		<table-row>
-			<table-col>1</table-col>
-			<table-col>Mark</table-col>
-			<table-col>Otto</table-col>
-			<table-col>@mdo</table-col>
-		</table-row>
-		<table-row>
-			<table-col>2</table-col>
-			<table-col>Jacob</table-col>
-			<table-col>Thornton</table-col>
-			<table-col>@fat</table-col>
-		</table-row>
-		<table-row>
-			<table-col>3</table-col>
-			<table-col>Larry</table-col>
-			<table-col>the Bird</table-col>
-			<table-col>@twitter</table-col>
-		</table-row>
-	</table-body>
-</table></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
@@ -123,36 +93,6 @@
 		              </ec:table-body>
 					</ec:table>
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><table style="striped">
-	<table-header>
-		<table-col>#</table-col>
-		<table-col>First Name</table-col>
-		<table-col>Last Name</table-col>
-		<table-col>Username</table-col>
-	</table-header>
-	<table-body>
-		<table-row>
-			<table-col>1</table-col>
-			<table-col>Mark</table-col>
-			<table-col>Otto</table-col>
-			<table-col>@mdo</table-col>
-		</table-row>
-		<table-row>
-			<table-col>2</table-col>
-			<table-col>Jacob</table-col>
-			<table-col>Thornton</table-col>
-			<table-col>@fat</table-col>
-		</table-row>
-		<table-row>
-			<table-col>3</table-col>
-			<table-col>Larry</table-col>
-			<table-col>the Bird</table-col>
-			<table-col>@twitter</table-col>
-		</table-row>
-	</table-body>
-</table></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
    	</ed:row>
@@ -192,35 +132,6 @@
 		              </ec:table-body>
 					</ec:table>
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><table style="bordered">
-	<table-header>
-		<table-col>#</table-col>
-		<table-col>First Name</table-col>
-		<table-col>Last Name</table-col>
-		<table-col>Username</table-col>
-	</table-header>
-	<table-body>
-		<table-row>
-			<table-col rows="2">1</table-col>
-			<table-col>Mark</table-col>
-			<table-col>Otto</table-col>
-			<table-col>@mdo</table-col>
-		</table-row>
-		<table-row>
-			<table-col>Jacob</table-col>
-			<table-col>Thornton</table-col>
-			<table-col>@fat</table-col>
-		</table-row>
-		<table-row>
-			<table-col>3</table-col>
-			<table-col>Larry</table-col>
-			<table-col>the Bird</table-col>
-			<table-col>@twitter</table-col>
-		</table-row>
-	</table-body>
-</table></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
@@ -257,35 +168,6 @@
 		              </ec:table-body>
 					</ec:table>
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><table style="hover">
-	<table-header>
-		<table-col>#</table-col>
-		<table-col>First Name</table-col>
-		<table-col>Last Name</table-col>
-		<table-col>Username</table-col>
-	</table-header>
-	<table-body>
-		<table-row>
-			<table-col>1</table-col>
-			<table-col>Mark</table-col>
-			<table-col>Otto</table-col>
-			<table-col>@mdo</table-col>
-		</table-row>
-		<table-row>
-			<table-col>2</table-col>
-			<table-col>Jacob</table-col>
-			<table-col>Thornton</table-col>
-			<table-col>@fat</table-col>
-		</table-row>
-		<table-row>
-			<table-col>3</table-col>
-			<table-col cols="2">Larry</table-col>
-			<table-col>@twitter</table-col>
-		</table-row>
-	</table-body>
-</table></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
    	</ed:row>
@@ -325,35 +207,6 @@
 		              </ec:table-body>
 					</ec:table>
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><table style="sm">
-	<table-header>
-		<table-col>#</table-col>
-		<table-col>First Name</table-col>
-		<table-col>Last Name</table-col>
-		<table-col>Username</table-col>
-	</table-header>
-	<table-body>
-		<table-row>
-			<table-col>1</table-col>
-			<table-col>Mark</table-col>
-			<table-col>Otto</table-col>
-			<table-col>@mdo</table-col>
-		</table-row>
-		<table-row>
-			<table-col>2</table-col>
-			<table-col>Jacob</table-col>
-			<table-col>Thornton</table-col>
-			<table-col>@fat</table-col>
-		</table-row>
-		<table-row>
-			<table-col>3</table-col>
-			<table-col cols="2">Larry the Bird</table-col>
-			<table-col>@twitter</table-col>
-		</table-row>
-	</table-body>
-</table></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
@@ -395,40 +248,6 @@
 		              </ec:table-body>
 					</ec:table>
 				</ec:box-body>
-				<ec:box-footer>
-					<ec:prettify linenums="true"><table>
-	<table-header>
-		<table-col>#</table-col>
-		<table-col>First Name</table-col>
-		<table-col>Last Name</table-col>
-		<table-col>Username</table-col>
-	</table-header>
-	<table-body>
-		<table-row style="success">
-			<table-col>1</table-col>
-			<table-col>Mark</table-col>
-			<table-col>Otto</table-col>
-			<table-col>@mdo</table-col>
-		</table-row>
-		<table-row style="danger">
-			<table-col>2</table-col>
-			<table-col>Jacob</table-col>
-			<table-col>Thornton</table-col>
-			<table-col>@fat</table-col>
-		</table-row>
-		<table-row style="warning">
-			<table-col>3</table-col>
-			<table-col size="2">Larry the Bird</table-col>
-			<table-col>@twitter</table-col>
-		</table-row>
-		<table-row style="info">
-			<table-col>4</table-col>
-			<table-col cols="2">Bird</table-col>
-			<table-col>@</table-col>
-		</table-row>
-	</table-body>
-</table></ec:prettify>
-				</ec:box-footer>
 			</ec:box>
 		</ed:col>
    	</ed:row>

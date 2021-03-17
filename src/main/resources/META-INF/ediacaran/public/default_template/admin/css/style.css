@@ -184,6 +184,7 @@ Testimonial
 .testimonial .author img {
   float: left;
   margin: 0 10px 0;
+  max-height: 68px;
 }
 
 .testimonial p.text {
@@ -876,11 +877,11 @@ Pullquote
 ================================ */
 
 .pullquote-left {
-	border-left:5px solid #F03C02;
+	border-left:2px solid #0073b7;
 }
 
 .pullquote-right {
-	border-right:5px solid #F03C02;
+	border-right:2px solid #0073b7;
 }
 
 .pullquote-left {

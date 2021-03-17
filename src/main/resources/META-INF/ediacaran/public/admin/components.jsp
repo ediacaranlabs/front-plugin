@@ -71,20 +71,24 @@
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
-			<ec:box style="info">
+			<ec:box style="warning">
 				<ec:box-header>
-					<h3>Button with icon</h3>
+					<h3>Button sizes</h3>
 				</ec:box-header>
 				<ec:box-body>
 					<ed:row>
-						<ed:col size="4">
-                			<ec:button label="heart" type="success" size="sm" icon="heart" />
+						<ed:col size="12">
+                			<ec:button label="Large button" size="lg"/>
 						</ed:col>
-						<ed:col size="4">
-        		        	<ec:button label="camera" type="red" size="sm" icon="camera" />
+					</ed:row>
+					<ed:row>
+						<ed:col size="12">
+        		        	<ec:button label="Small button" size="sm" type="success"/>
 						</ed:col>
-						<ed:col size="4">
-		                	<ec:button label="briefcase" size="sm" outline="true" icon="briefcase"/>
+					</ed:row>
+					<ed:row>
+						<ed:col size="12">
+		                	<ec:button label="btn block level" block="true" type="warning"/>
 						</ed:col>
 					</ed:row>
 				</ec:box-body>
@@ -108,24 +112,20 @@
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
-			<ec:box style="warning">
+			<ec:box style="info">
 				<ec:box-header>
-					<h3>Button sizes</h3>
+					<h3>Button with icon</h3>
 				</ec:box-header>
 				<ec:box-body>
 					<ed:row>
-						<ed:col size="12">
-                			<ec:button label="Large button" size="lg"/>
+						<ed:col size="4">
+                			<ec:button label="heart" type="success" size="sm" icon="heart" />
 						</ed:col>
-					</ed:row>
-					<ed:row>
-						<ed:col size="12">
-        		        	<ec:button label="Small button" size="sm" type="success"/>
+						<ed:col size="4">
+        		        	<ec:button label="camera" type="red" size="sm" icon="camera" />
 						</ed:col>
-					</ed:row>
-					<ed:row>
-						<ed:col size="12">
-		                	<ec:button label="btn block level" block="true" type="warning"/>
+						<ed:col size="4">
+		                	<ec:button label="briefcase" size="sm" outline="true" icon="briefcase"/>
 						</ed:col>
 					</ed:row>
 				</ec:box-body>
@@ -234,7 +234,7 @@
 					<h3>Testimonial</h3>
 				</ec:box-header>
 				<ec:box-body>
-	                <ec:testimonial name="Testimonial name" image="/plugins/ediacaran/front/templates/default_template/img/testimonial/author1.png">
+	                <ec:testimonial name="Testimonial name" image="/plugins/ediacaran/front/admin/img/user.png">
 		                There are many variations of passages of randomised words which don't look even slightly 
 		                believable. You need to be sure there isn't anything embarrassing of text.
 		                <ec:testimonial-info>
