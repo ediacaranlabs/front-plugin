@@ -1,12 +1,11 @@
 <li class="item-thumbs col-sm-12 col-md-6 col-lg-{cols} col-xl-{cols}" data-src="{src}" data-sub-html="#{id}-{index}-caption" data-id="{id}-{index}" data-type="{filter}">
 	
 	<a class="hover-wrap"> 
+		<img src="{icon}" alt="">
 		<span class="overlay-img"></span> 
 		<span class="overlay-img-thumb fa fa-search"></span>
 	</a>
 
-	<img src="{icon}" alt="">
-	
 	<div id="{id}-{index}-caption" style="display:none">
     	<h4>{title}</h4>
     	<p>{text}</p>
