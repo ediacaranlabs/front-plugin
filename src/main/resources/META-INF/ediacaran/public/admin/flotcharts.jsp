@@ -3,7 +3,6 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions"                         prefix="fn"%>
 	<section class="inner-headline">
-		<ed:container>
 			<ed:row>
 				<ed:col size="4">
 					<div class="inner-heading">
@@ -17,7 +16,6 @@
 					</ec:breadcrumb>
 				</ed:col>
 			</ed:row>
-		</ed:container>
 	</section>
 
 <style>

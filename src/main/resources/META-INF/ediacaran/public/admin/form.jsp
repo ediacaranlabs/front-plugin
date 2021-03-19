@@ -2,7 +2,6 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
 	<section class="inner-headline">
-		<ed:container>
 			<ed:row>
 				<ed:col size="4">
 					<div class="inner-heading">
@@ -16,7 +15,6 @@
 					</ec:breadcrumb>
 				</ed:col>
 			</ed:row>
-		</ed:container>
 	</section>
 
    	<ed:row>

@@ -21,7 +21,7 @@ a:active {
 }
 
 a {
-  color: rgba(255,255,255,.8);
+  color: #0073b7;
 }
 
 .clear {
@@ -353,7 +353,7 @@ Inner - Section: page headline
 
 .inner-headline ul.breadcrumb li {
   font-size: 16px;
-  color: #ddd;
+  color: #988f8f;
 }
 
 .inner-headline ul.breadcrumb li i {
