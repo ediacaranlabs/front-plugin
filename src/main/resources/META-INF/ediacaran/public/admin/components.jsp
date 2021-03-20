@@ -287,19 +287,142 @@
 					<h3>Gallery</h3>
 				</ec:box-header>
 				<ec:box-body>
+				
+	<ul class="gallery-categ filter">
+		<li class="all">
+			<a href="#">All</a>
+		</li>
+		<li class="filter_a">
+			<a href="#">Filter A</a>
+		</li>
+	</ul>
+<div class="clearfix"></div>
+	<ul class="gallery-thumbs light-gallery row">
+		<li class="item-thumbs col-sm-12 col-md-6 col-lg-3 col-xl-3" data-src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-01-full.jpg" data-sub-html="#gallerytag127-1-caption" data-id="gallerytag127-1" data-type="filter_a">
+	
+	<a class="hover-wrap"> 
+		<img src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-01.jpg" alt="">
+		<span class="overlay-img"></span> 
+		<span class="overlay-img-thumb fa fa-search"></span>
+	</a>
+
+	<div id="gallerytag127-1-caption" style="display:none">
+    	<h4>The City</h4>
+    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.</p>
+	</div>
+	
+</li><li class="item-thumbs col-sm-12 col-md-6 col-lg-3 col-xl-3" data-src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-02-full.jpg" data-sub-html="#gallerytag127-2-caption" data-id="gallerytag127-2" data-type="filter_a">
+	
+	<a class="hover-wrap"> 
+		<img src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-02.jpg" alt="">
+		<span class="overlay-img"></span> 
+		<span class="overlay-img-thumb fa fa-search"></span>
+	</a>
+
+	<div id="gallerytag127-2-caption" style="display:none">
+    	<h4>The City</h4>
+    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.</p>
+	</div>
+	
+</li><li class="item-thumbs col-sm-12 col-md-6 col-lg-3 col-xl-3" data-src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-03-full.jpg" data-sub-html="#gallerytag127-3-caption" data-id="gallerytag127-3" data-type="filter_a">
+	
+	<a class="hover-wrap"> 
+		<img src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-03.jpg" alt="">
+		<span class="overlay-img"></span> 
+		<span class="overlay-img-thumb fa fa-search"></span>
+	</a>
+
+	<div id="gallerytag127-3-caption" style="display:none">
+    	<h4>The City</h4>
+    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.</p>
+	</div>
+	
+</li><li class="item-thumbs col-sm-12 col-md-6 col-lg-3 col-xl-3" data-src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-04-full.jpg" data-sub-html="#gallerytag127-4-caption" data-id="gallerytag127-4" data-type="all">
+	
+	<a class="hover-wrap"> 
+		<img src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-04.jpg" alt="">
+		<span class="overlay-img"></span> 
+		<span class="overlay-img-thumb fa fa-search"></span>
+	</a>
+
+	<div id="gallerytag127-4-caption" style="display:none">
+    	<h4>The City</h4>
+    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.</p>
+	</div>
+	
+</li><li class="item-thumbs col-sm-12 col-md-6 col-lg-3 col-xl-3" data-src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-05-full.jpg" data-sub-html="#gallerytag127-5-caption" data-id="gallerytag127-5" data-type="all">
+	
+	<a class="hover-wrap"> 
+		<img src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-05.jpg" alt="">
+		<span class="overlay-img"></span> 
+		<span class="overlay-img-thumb fa fa-search"></span>
+	</a>
+
+	<div id="gallerytag127-5-caption" style="display:none">
+    	<h4>The City</h4>
+    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.</p>
+	</div>
+	
+</li><li class="item-thumbs col-sm-12 col-md-6 col-lg-3 col-xl-3" data-src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-06-full.jpg" data-sub-html="#gallerytag127-6-caption" data-id="gallerytag127-6" data-type="all">
+	
+	<a class="hover-wrap"> 
+		<img src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-06.jpg" alt="">
+		<span class="overlay-img"></span> 
+		<span class="overlay-img-thumb fa fa-search"></span>
+	</a>
+
+	<div id="gallerytag127-6-caption" style="display:none">
+    	<h4>The City</h4>
+    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.</p>
+	</div>
+	
+</li><li class="item-thumbs col-sm-12 col-md-6 col-lg-3 col-xl-3" data-src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-07-full.jpg" data-sub-html="#gallerytag127-7-caption" data-id="gallerytag127-7" data-type="all">
+	
+	<a class="hover-wrap"> 
+		<img src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-07.jpg" alt="">
+		<span class="overlay-img"></span> 
+		<span class="overlay-img-thumb fa fa-search"></span>
+	</a>
+
+	<div id="gallerytag127-7-caption" style="display:none">
+    	<h4>The City</h4>
+    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.</p>
+	</div>
+	
+</li><li class="item-thumbs col-sm-12 col-md-6 col-lg-3 col-xl-3" data-src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-08-full.jpg" data-sub-html="#gallerytag127-8-caption" data-id="gallerytag127-8" data-type="filter_a">
+	
+	<a class="hover-wrap"> 
+		<img src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-08.jpg" alt="">
+		<span class="overlay-img"></span> 
+		<span class="overlay-img-thumb fa fa-search"></span>
+	</a>
+
+	<div id="gallerytag127-8-caption" style="display:none">
+    	<h4>The City</h4>
+    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.</p>
+	</div>
+	
+</li>
+	</ul>
+					
+<%--				
 					<ec:gallery cols="4">
+						<ec:gallery-filters>
+							<ec:gallery-filter name="All" code="all"/>
+							<ec:gallery-filter name="Filter A" code="filter_a"/>
+						</ec:gallery-filters>
 						<ec:gallery-images>
-							<ec:gallery-image filter="all" 
+							<ec:gallery-image filter="filter_a" 
 								icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-01.jpg" 
 								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
 								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-01-full.jpg" 
-								title="The City"/>
-							<ec:gallery-image filter="all" 
+								title="The City" />
+							<ec:gallery-image filter="filter_a" 
 								icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-02.jpg" 
 								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
 								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-02-full.jpg" 
 								title="The City"/>
-							<ec:gallery-image filter="all" 
+							<ec:gallery-image filter="filter_a" 
 								icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-03.jpg" 
 								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
 								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-03-full.jpg" 
@@ -331,6 +454,7 @@
 								title="The City"/>
 						</ec:gallery-images>
 					</ec:gallery>
+--%>					
 				</ec:box-body>
 			</ec:box>
 		</ed:col>
