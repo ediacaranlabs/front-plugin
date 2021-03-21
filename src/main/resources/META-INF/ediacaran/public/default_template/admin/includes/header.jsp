@@ -6,7 +6,7 @@
 <ec:load-data file="/header.json" var="pageObjects" />
     <!-- start header -->
    <header>
-		<ec:menu-bar expand="lg">
+		<ec:menu-bar expand="lg" >
 			<ed:container>
 			<ec:menu-bar-brand><img src="${pageObjects['logo']['image']}" alt="" class="logo" /></ec:menu-bar-brand>
 			<ec:menu-toggler>

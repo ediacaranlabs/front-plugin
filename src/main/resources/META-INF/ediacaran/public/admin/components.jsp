@@ -436,7 +436,7 @@
 								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
 								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-05-full.jpg" 
 								title="The City"/>
-							<ec:gallery-image 
+							<ec:gallery-image filter="filter_a" 
 								icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-06.jpg" 
 								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
 								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-06-full.jpg" 
@@ -446,7 +446,7 @@
 								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
 								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-07-full.jpg" 
 								title="The City"/>
-							<ec:gallery-image 
+							<ec:gallery-image filter="filter_a" 
 								icon="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-08.jpg" 
 								text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis." 
 								src="/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-08-full.jpg" 

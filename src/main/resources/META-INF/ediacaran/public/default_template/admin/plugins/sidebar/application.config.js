@@ -13,10 +13,10 @@ $.AppContext.onload(function(){
 
 	$(window).resize(function(){
 		$.AppContext.sidebar.resizeContent();
-		var width = $(window).width();
-		if(width < 1200){
-			$('body').removeClass('show');
-		}
+		//var width = $(window).width();
+		//if(width < 1200){
+		//	$('body').removeClass('show');
+		//}
 	});
 	
 	$("aside[class^='sidebar'] a[class^='dropdown-item']").click(function(){
@@ -39,6 +39,13 @@ $.AppContext.onload(function(){
 				$('body').removeClass('show');
 			}
 		}
+	});
+	
+	$.AppContext.addLoadListener("sidebar-link-load", "^.*", {
+		
+		after: function(){
+		}
+	
 	});
 	
 	$.AppContext.sidebar.resizeContent();
