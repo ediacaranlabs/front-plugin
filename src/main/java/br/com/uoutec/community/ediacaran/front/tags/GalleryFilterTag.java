@@ -44,5 +44,5 @@ public class GalleryFilterTag  extends AbstractSimpleComponent {
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
-    
+
 }

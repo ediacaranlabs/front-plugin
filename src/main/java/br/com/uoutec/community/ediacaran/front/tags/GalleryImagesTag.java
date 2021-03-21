@@ -1,5 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Map;
 
 public class GalleryImagesTag  extends AbstractSimpleComponent {
@@ -10,6 +12,8 @@ public class GalleryImagesTag  extends AbstractSimpleComponent {
 	
 	/* ------------ Prop ---------------*/
 	
+	private String galleryID;
+	
 	private JspFragmentVarParser content;
 	
 	public GalleryImagesTag() {
@@ -19,10 +23,14 @@ public class GalleryImagesTag  extends AbstractSimpleComponent {
     	return TEMPLATE;
     }
     
-	public void beforePrepareVars(Map<String, Object> vars) {
+    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
+		if(galleryID == null) {
+			galleryID = ((GalleryTag)super.getParentTag()).getId();
+		}
+		
 		this.content = new JspFragmentVarParser(getJspBody());
-	}
-
+    }
+    
 	public JspFragmentVarParser getContent() {
 		return content;
 	}

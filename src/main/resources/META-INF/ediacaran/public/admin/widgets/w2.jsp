@@ -2,44 +2,55 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
 <style>
-#interactive{
+#donut_chart{
 	width: 100%;
 	height: 300px;
 }
 </style>
 <ec:box>
 	<ec:box-header>
-		<h3>Interactive</h3>
+		<h3>Donut chart</h3>
 	</ec:box-header>
 	<ec:box-body>
-		<ec:flotcharts id="interactive" src="/plugins/ediacaran/front/adm/flotcharts" togglingSeries="false" 
-				updateFrequence="1000" updateFrequenceUnit="MILLISECONDS">
+		<ec:flotcharts id="donut_chart">
 			<ec:property-config name="config">
 				<ec:property-config name="grid">
-					<ec:property-config name="borderWidth" value="1"/>
-					<ec:property-config name="borderColor" value="#f3f3f3"/>
-					<ec:property-config name="tickColor" value="#f3f3f3"/>
+					<ec:property-config name="borderWidth" value="0"/>
 				</ec:property-config>
 				<ec:property-config name="series">
-						<ec:property-config name="color" value="#3c8dbc"/>
-						<ec:property-config name="lines">
-							<ec:property-config name="show" value="true"/>
-							<ec:property-config name="lineWidth" value="2"/>
-							<ec:property-config name="fill" value="true"/>
+					<ec:property-config name="pie">
+						<ec:property-config name="show" value="true"/>
+						<ec:property-config name="radius" value="1"/>
+						<ec:property-config name="innerRadius" value="0.5"/>
+						<ec:property-config name="label">
+								<ec:property-config name="show" value="true"/>
+								<ec:property-config name="radius" value="0.6666666666666667"/>
+								<ec:property-config name="threshold" value="0.1"/>
+								<ec:property-config name="formatter" raw="true" value="$.AppContext.flotcharts.labelFormatter"/>
 						</ec:property-config>
+					</ec:property-config>
 				</ec:property-config>
-				<ec:property-config name="yaxis">
-						<ec:property-config name="min" value="0"/>
-						<ec:property-config name="max" value="100"/>
-						<ec:property-config name="show" value="true"/>
-				</ec:property-config>
-				<ec:property-config name="xaxis">
-						<ec:property-config name="show" value="true"/>
-						<ec:property-config name="min" value="0"/>
-						<ec:property-config name="max" value="100"/>
+				<ec:property-config name="legend">
+						<ec:property-config name="show" value="false"/>
 				</ec:property-config>
 			</ec:property-config>
-			<ec:flotcharts-series label="teste">
+			
+			<ec:flotcharts-series label="Series2" data="30">
+				<ec:property-config name="config">
+					<ec:property-config name="color" value="#3c8dbc"/>
+				</ec:property-config>					
+			</ec:flotcharts-series>
+
+			<ec:flotcharts-series label="Series3" data="20">
+				<ec:property-config name="config">
+					<ec:property-config name="color" value="#0073b7"/>
+				</ec:property-config>					
+			</ec:flotcharts-series>
+			
+			<ec:flotcharts-series label="Series4" data="50">
+				<ec:property-config name="config">
+					<ec:property-config name="color" value="#00c0ef"/>
+				</ec:property-config>					
 			</ec:flotcharts-series>
 		</ec:flotcharts>
 	</ec:box-body>

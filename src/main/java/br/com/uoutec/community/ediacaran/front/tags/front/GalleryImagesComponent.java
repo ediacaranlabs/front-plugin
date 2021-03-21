@@ -25,6 +25,8 @@ public class GalleryImagesComponent  extends AbstractComponent {
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("content");
+			add("galleryID");
+			add("id");
 		}});
 	
 		super.default_property_parsers = 

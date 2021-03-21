@@ -5,7 +5,7 @@ $.AppContext.onload(function(){
 	$.AppContext.addLoadListener("quicksand-link-load", "^.*", {
 		
 		after: function(){
-			
+			/*
 			var $data = $(" .light-gallery").clone();
 			
 			$('.filter li').click(function(e) {
@@ -29,7 +29,7 @@ $.AppContext.onload(function(){
 				$(this).addClass("active"); 			
 				return false;
 			});
-			
+			*/
 		}
 	
 	});

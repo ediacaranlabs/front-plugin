@@ -31,11 +31,13 @@ public class GalleryFilterComponent  extends AbstractComponent {
 			add("code");
 			add("name");
 			add("active");
+			add("id");
 		}});
 	
 	
 		super.default_property_parsers = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+				
 				put("active", new AttributeParserImp() {
 					
 					@Override
@@ -44,6 +46,7 @@ public class GalleryFilterComponent  extends AbstractComponent {
 					}
 					
 				});
+				
 			}});
     
 	}
