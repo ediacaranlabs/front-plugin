@@ -139,26 +139,4 @@ public class FrontEdiacaranServlet extends HttpServlet{
 		return (Map<Object, Object>) DataUtil.decode(ir);
 	}
 	
-	/*
-	private String readData(File f) throws IOException {
-		byte[] b = new byte[2048];
-		int l;
-		
-		StringBuilder builder = new StringBuilder();
-		FileInputStream fin = null;
-		try {
-			fin = new FileInputStream(f);
-			
-			while((l = fin.read(b)) != -1) {
-				builder.append(new String(b, 0, l, "UTF-8"));
-			}
-			return builder.toString();
-		}
-		finally {
-			if(fin != null) {
-				fin.close();
-			}
-		}
-	}
-	 */
 }
