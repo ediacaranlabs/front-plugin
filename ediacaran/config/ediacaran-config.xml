@@ -42,7 +42,7 @@
 		-->
 		
 		<void property="pluginsLoader">
-			<object class="br.com.uoutec.community.ediacaran.plugins.PluginsLoader"/>
+			<object class="br.com.uoutec.community.ediacaran.plugins.PluginsLoaderImp"/>
 		</void>
 
 		<void property="varParser">

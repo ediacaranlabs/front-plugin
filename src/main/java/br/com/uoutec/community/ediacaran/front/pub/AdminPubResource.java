@@ -64,4 +64,13 @@ public class AdminPubResource {
 		return m;
 	}
 
+	@Action(value="/config/plugins")
+	@View("/${plugins.ediacaran.front.template}/admin/plugins")
+	@Result("vars")
+	public Map<String, Object> plugins(){
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("widgets", widgets.getWidgets());
+		return m;
+	}
+	
 }
