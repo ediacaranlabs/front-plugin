@@ -40,7 +40,7 @@ public class PluginInstaller
 		
 		leftMenu.addMenu(new Menu("Dashboard").setIcon("tachometer").setResource("/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard").setOrder(100));
 		
-		if("true".equals(super.metadata.getValue("test").getValue())){
+		if(pluginConfiguration.getBoolean("test")){
 			
 			topMenu.addMenu(new Menu("Messages").setIcon("comments").setBadge("3").setBadgeStyle("danger").setOrder(100));
 			topMenu.addMenu(new Menu("Notification").setIcon("bell").setBadge("15").setBadgeStyle("warning").setOrder(99));
