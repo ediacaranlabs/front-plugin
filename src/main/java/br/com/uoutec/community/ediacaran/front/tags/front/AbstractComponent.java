@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.community.ediacaran.plugins.PluginData;
+import br.com.uoutec.community.ediacaran.plugins.PluginType;
 import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.system.theme.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.system.theme.Component;
@@ -75,8 +75,8 @@ public abstract class AbstractComponent implements Component{
 		String t = "/themes" + template;
 		
 		try {
-			PluginData pd = EntityContextPlugin.getEntity(PluginData.class);
-			File file = new File(pd.getPath() + t);
+			PluginType pd = EntityContextPlugin.getEntity(PluginType.class);
+			File file = new File(pd.getConfiguration().getMetadata().getPath().getBase() + t);
 			
 			file = file.getCanonicalFile();
 			

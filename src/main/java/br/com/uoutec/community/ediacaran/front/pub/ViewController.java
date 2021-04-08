@@ -21,7 +21,7 @@ import br.com.uoutec.community.ediacaran.PluginManager;
 import br.com.uoutec.community.ediacaran.ServerBootstrap;
 import br.com.uoutec.community.ediacaran.front.PluginInstaller;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
-import br.com.uoutec.community.ediacaran.plugins.PluginMetadata;
+import br.com.uoutec.community.ediacaran.plugins.PluginConfigurationMetadata;
 import br.com.uoutec.community.ediacaran.plugins.PluginPropertyValue;
 
 //@Controller
