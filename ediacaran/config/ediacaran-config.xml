@@ -11,6 +11,14 @@
 			<object class="br.com.uoutec.community.ediacaran.PluginManagerImp"/>
 		</void>
 
+		<void property="pluginConfigurationFileReader">
+			<object class="br.com.uoutec.community.ediacaran.plugins.PluginConfigurationFileReaderImp"/>
+		</void>
+
+		<void property="pluginConfigurationFileWriter">
+			<object class="br.com.uoutec.community.ediacaran.plugins.PluginConfigurationFileWriterImp"/>
+		</void>
+
 		<void property="pluginInitializer">
 			<object class="br.com.uoutec.community.ediacaran.weld.BuilderPluginInitializer">
 				<void method="addExtension">
