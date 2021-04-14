@@ -1,6 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.pub;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -14,9 +15,11 @@ import org.brandao.brutos.annotation.Transient;
 import org.brandao.brutos.annotation.View;
 import org.brandao.brutos.annotation.web.ResponseErrors;
 
+import br.com.uoutec.community.ediacaran.PluginConfigurationManager;
 import br.com.uoutec.community.ediacaran.core.security.GuaranteedAccessTo;
 import br.com.uoutec.community.ediacaran.core.security.UserPrivilege;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
+import br.com.uoutec.community.ediacaran.plugins.PluginConfiguration;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBarManager;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBarManagerException;
@@ -26,7 +29,8 @@ import br.com.uoutec.community.ediacaran.system.pub.MenuBarManagerException;
 @View(value="/${plugins.ediacaran.front.template}/admin/index")
 @Actions({
 	@Action(value="/", view=@View(value="/${plugins.ediacaran.front.template}/admin/index")),
-	@Action(value="/user-menu", view=@View(value="/${plugins.ediacaran.front.template}/admin/user_menu"))
+	@Action(value="/user-menu", view=@View(value="/${plugins.ediacaran.front.template}/admin/user_menu")),
+	@Action(value="/plugins", view=@View(value="/${plugins.ediacaran.front.template}/admin/plugins"))
 })
 @GuaranteedAccessTo(UserPrivilege.class)
 @ResponseErrors(rendered=false, name="exception")
@@ -43,6 +47,10 @@ public class AdminPubResource {
 	@Inject
 	@Transient
 	private Widgets widgets;
+
+	@Inject
+	@Transient
+	private PluginConfigurationManager pluginConfigurationManager;
 	
 	public AdminPubResource(){
 	}
@@ -69,8 +77,16 @@ public class AdminPubResource {
 	@Result("vars")
 	public Map<String, Object> plugins(){
 		Map<String, Object> m = new HashMap<String, Object>();
-		m.put("widgets", widgets.getWidgets());
+		m.put("plugins", widgets.getWidgets());
 		return m;
+	}
+	
+	public List<String> getGroups(){
+		return pluginConfigurationManager.getGroups();
+	}
+	
+	public List<PluginConfiguration> getPlugins(String group){
+		return pluginConfigurationManager.getPluginsConfiguartion(group);
 	}
 	
 }

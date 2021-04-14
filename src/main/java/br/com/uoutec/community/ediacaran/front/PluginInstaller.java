@@ -51,6 +51,7 @@ public class PluginInstaller
 			leftMenu.addMenu(new Menu("Tables").setIcon("table").setResource("/plugins/ediacaran/front/admin/table.jsp").setOrder(1));
 			leftMenu.addMenu(new Menu("Pricing boxes").setIcon("money").setResource("/plugins/ediacaran/front/admin/pricingbox.jsp").setOrder(1));
 			leftMenu.addMenu(new Menu("Flot Charts").setIcon("pie-chart").setResource("/plugins/ediacaran/front/admin/flotcharts.jsp").setOrder(1));
+			leftMenu.addMenu(new Menu("Plugins").setIcon("pie-chart").setResource("/plugins/ediacaran/front/adm/plugins").setOrder(1));
 			
 			widgets.addWidget(new Widget("w1", "/plugins/ediacaran/front/admin/widgets/w1.jsp", 100));
 			widgets.addWidget(new Widget("w2", "/plugins/ediacaran/front/admin/widgets/w2.jsp", 100));
