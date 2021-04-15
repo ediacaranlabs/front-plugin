@@ -9,7 +9,9 @@ import javax.inject.Singleton;
 
 import org.brandao.brutos.annotation.Action;
 import org.brandao.brutos.annotation.Actions;
+import org.brandao.brutos.annotation.Basic;
 import org.brandao.brutos.annotation.Controller;
+import org.brandao.brutos.annotation.MappingTypes;
 import org.brandao.brutos.annotation.Result;
 import org.brandao.brutos.annotation.Transient;
 import org.brandao.brutos.annotation.View;
@@ -72,13 +74,17 @@ public class AdminPubResource {
 		return m;
 	}
 
-	@Action(value="/config/plugins")
-	@View("/${plugins.ediacaran.front.template}/admin/plugins")
-	@Result("vars")
-	public Map<String, Object> plugins(){
-		Map<String, Object> m = new HashMap<String, Object>();
-		m.put("plugins", widgets.getWidgets());
-		return m;
+	@Action(value="/plugins/{code}")
+	@View("/${plugins.ediacaran.front.template}/admin/plugin-detail")
+	@Result(value="pluginConfig", mappingType=MappingTypes.VALUE)
+	public PluginConfiguration plugins(@Basic(bean="code") String code){
+		
+		PluginConfiguration pc = pluginConfigurationManager.getPluginConfiguartion(code);
+		
+		if(pc == null)
+			throw new NullPointerException("PluginConfiguration");
+		
+		return pc;
 	}
 	
 	public List<String> getGroups(){
