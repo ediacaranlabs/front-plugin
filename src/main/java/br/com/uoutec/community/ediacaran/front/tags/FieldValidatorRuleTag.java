@@ -60,6 +60,10 @@ public class FieldValidatorRuleTag extends AbstractSimpleComponent {
 		this.content = content;
 	}
 
+	public void beforePrepareVars(Map<String, Object> vars) {
+		this.content = new JspFragmentVarParser(getJspBody());
+	}
+	
 	protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
     	

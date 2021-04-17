@@ -6,7 +6,7 @@
 <ec:form id="config_fr">
 	<c:forEach items="${pluginConfig.metadata.properties}" var="property">
 		<ed:row style="form">
-			<ed:col size="6">
+			<ed:col size="8" classStyle="form-group has-feedback">
 				<c:choose>
 					<c:when test="${property.type == 'TEXT'}">
 						<ec:textfield label="${property.name}" name="${property.code}" value="${pluginConfig.getRawValue(property.code)}"/>
@@ -43,10 +43,12 @@
 					</c:when>
 				</c:choose>
 				<ec:field-validator form="config_fr" field="${property.code}">
+				
 					<c:if test="${!property.allowEmpty}">
 					<ec:field-validator-rule name="notEmpty" message="You must agree before submitting."/>
 					</c:if>
-					
+
+										
 					<c:if test="${property.min > 0 || property.max > 0}">
 					<ec:field-validator-rule name="stringLength"  message="Value is short or large">
 						<c:if test="${property.min > 0}">
@@ -58,15 +60,16 @@
 					</ec:field-validator-rule>
 					</c:if>
 					
+
 					<c:if test="${!empty property.regex}">
-					<ec:field-validator-rule name="regexp"  message="Invalid value!">
+					<ec:field-validator-rule name="regexp"  message="Invalid format!">
 						<ec:field-validator-param name="regexp" raw="true">/${property.regex}/</ec:field-validator-param>
 					</ec:field-validator-rule>
 					</c:if>
 					
 				</ec:field-validator>
 			</ed:col>
-			<ed:col size="6">
+			<ed:col size="4">
 				<small>${property.description}</small>
 			</ed:col>
 		</ed:row>
