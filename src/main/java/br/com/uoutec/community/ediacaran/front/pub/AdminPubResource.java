@@ -3,6 +3,7 @@ package br.com.uoutec.community.ediacaran.front.pub;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -15,12 +16,14 @@ import org.brandao.brutos.annotation.MappingTypes;
 import org.brandao.brutos.annotation.Result;
 import org.brandao.brutos.annotation.Transient;
 import org.brandao.brutos.annotation.View;
+import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.ResponseErrors;
 
 import br.com.uoutec.community.ediacaran.PluginConfigurationManager;
 import br.com.uoutec.community.ediacaran.core.security.GuaranteedAccessTo;
 import br.com.uoutec.community.ediacaran.core.security.UserPrivilege;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
+import br.com.uoutec.community.ediacaran.plugins.MutablePluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfiguration;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBarManager;
@@ -85,6 +88,23 @@ public class AdminPubResource {
 			throw new NullPointerException("PluginConfiguration");
 		
 		return pc;
+	}
+
+	@Action(value="/plugins/{code}")
+	@RequestMethod("POST")
+	@View("/${plugins.ediacaran.front.template}/admin/update-plugin-detail")
+	public void updatePlugin(@Basic(bean="code") String code, @Basic(bean="config") Map<String,List<String>> values){
+		
+		MutablePluginConfiguration mpc = (MutablePluginConfiguration)pluginConfigurationManager.getPluginConfiguartion(code);
+		
+		if(values != null && mpc != null) {
+			for(Entry<String, List<String>> e: values.entrySet()) {
+				mpc.setStrings(e.getKey(), e.getValue());
+			}
+			
+			pluginConfigurationManager.savePluginMetadata(mpc);
+		}
+		
 	}
 	
 	public List<String> getGroups(){

@@ -18,6 +18,12 @@ public class FormComponent extends AbstractComponent {
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
 			remove("classStyle");
+			add("acceptCharset");
+			add("action");
+			add("enctype");
+			add("method");
+			add("target");
+			add("update");
 		}});
 		
 		super.default_attribute_parsers = 
