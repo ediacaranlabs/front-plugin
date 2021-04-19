@@ -3,17 +3,37 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 
-<ec:form method="POST" id="config_fr" update="#update_plugin_result" action="/plugins/ediacaran/front/adm/plugins/${pluginConfig.metadata.code}">
-	<c:forEach items="${pluginConfig.metadata.properties}" var="property">
+<ec:form method="POST" id="status_config_fr" update="#plugin_body" action="/plugins/ediacaran/front/adm/plugins/${vars.config.metadata.code}/status">
+<ed:row style="form">
+	<ed:col id="enable_plugin_result" size="9">
+	</ed:col>
+	<ed:col size="3">
+		<ec:button-group classStyle="float-right">
+			<ec:radio name="status" label="Enabled" value="true" selected="${vars.status == 'RUNNING'}">
+				<ec:event type="click">
+					$.AppContext.pages.update_status_plugin_detail.status_config_fr.submit();
+				</ec:event>
+			</ec:radio>
+			<ec:radio name="status" label="Disabled" value="false"  selected="${vars.status != 'RUNNING'}">
+				<ec:event type="click">
+					$.AppContext.pages.update_status_plugin_detail.status_config_fr.submit();
+				</ec:event>
+			</ec:radio>
+		</ec:button-group>
+	</ed:col>
+</ed:row>
+</ec:form>	
+<ec:form method="POST" id="config_fr" update="#update_plugin_result" action="/plugins/ediacaran/front/adm/plugins/${vars.config.metadata.code}">
+	<c:forEach items="${vars.config.metadata.properties}" var="property">
 		<ed:row style="form"> 
 			<ed:col size="8" classStyle="form-group has-feedback">
 				<c:choose>
 					<c:when test="${property.type == 'TEXT'}">
-						<ec:textfield label="${property.name}" name="config.${property.code}" value="${pluginConfig.getRawValue(property.code)}"/>
+						<ec:textfield label="${property.name}" name="config.${property.code}" value="${vars.config.getRawValue(property.code)}"/>
 					</c:when>
 					<c:when test="${property.type == 'SELECT'}">
 						<ec:select name="config.${property.code}" label="${property.name}">
-							<c:set var="opt_selected" value="${pluginConfig.getRawValue(property.code)}"/>
+							<c:set var="opt_selected" value="${vars.config.getRawValue(property.code)}"/>
 							<c:forEach items="${property.options}" var="opts">
 								<ec:option label="${opts.description}" selected="${opts.value == opt_selected}" value="${opts.value}"/>
 							</c:forEach>
@@ -21,7 +41,7 @@
 					</c:when>
 					<c:when test="${property.type == 'MULTISELECT'}">
 						<ec:select name="config.${property.code}" label="${property.name}" multiple="true" sizeList="5">
-							<c:set var="opt_selected" value="${pluginConfig.getRawValue(property.code)}"/>
+							<c:set var="opt_selected" value="${vars.config.getRawValue(property.code)}"/>
 							<c:forEach items="${property.options}" var="opts">
 								<ec:option label="${opts.description}" selected="${opts.value == opt_selected}" value="${opts.value}"/>
 							</c:forEach>
@@ -29,14 +49,14 @@
 					</c:when>
 					<c:when test="${property.type == 'SELECT_LIST'}">
 						${property.name}<br>
-						<c:set var="opt_selected" value="${pluginConfig.getRawValue(property.code)}"/>
+						<c:set var="opt_selected" value="${vars.config.getRawValue(property.code)}"/>
 						<c:forEach items="${property.options}" var="opts">
 							<ec:radio inline="true" name="config.${property.code}" label="${opts.description}" value="${opts.value}" selected="${opts.value == opt_selected}"/>
 						</c:forEach>
 					</c:when>
 					<c:when test="${property.type == 'MULTISELECT_LIST'}">
 						${property.name}<br>
-						<c:set var="opt_selected" value="${pluginConfig.getRawValue(property.code)}"/>
+						<c:set var="opt_selected" value="${vars.config.getRawValue(property.code)}"/>
 						<c:forEach items="${property.options}" var="opts">
 							<ec:checkbox inline="true" name="config.${property.code}" label="${opts.description}" value="${opts.value}" selected="${opts.value == opt_selected}"/>
 						</c:forEach>
@@ -85,3 +105,4 @@
 		</ed:col>
 	</ed:row>	
 </ec:form>
+<script type="text/javascript" src="/plugins/ediacaran/front/default_template/admin/js/pages/update-status-plugin-detail.js" charset="utf-8"></script>

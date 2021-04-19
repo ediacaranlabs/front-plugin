@@ -18,6 +18,7 @@ import org.brandao.brutos.annotation.Transient;
 import org.brandao.brutos.annotation.View;
 import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.ResponseErrors;
+import org.brandao.brutos.web.WebFlowController;
 
 import br.com.uoutec.community.ediacaran.PluginConfigurationManager;
 import br.com.uoutec.community.ediacaran.core.security.GuaranteedAccessTo;
@@ -25,6 +26,7 @@ import br.com.uoutec.community.ediacaran.core.security.UserPrivilege;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.MutablePluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfiguration;
+import br.com.uoutec.community.ediacaran.plugins.PluginStatus;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBarManager;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBarManagerException;
@@ -79,15 +81,20 @@ public class AdminPubResource {
 
 	@Action(value="/plugins/{code}")
 	@View("/${plugins.ediacaran.front.template}/admin/plugin-detail")
-	@Result(value="pluginConfig", mappingType=MappingTypes.VALUE)
-	public PluginConfiguration plugins(@Basic(bean="code") String code){
+	@Result(value="vars", mappingType=MappingTypes.VALUE)
+	public Map<String,Object> plugins(@Basic(bean="code") String code){
 		
 		PluginConfiguration pc = pluginConfigurationManager.getPluginConfiguartion(code);
 		
 		if(pc == null)
 			throw new NullPointerException("PluginConfiguration");
 		
-		return pc;
+		
+		Map<String,Object> vars = new HashMap<String,Object>();
+		vars.put("config", pc);
+		vars.put("status", pluginConfigurationManager.getStatus(pc));
+		
+		return vars;
 	}
 
 	@Action(value="/plugins/{code}")
@@ -105,6 +112,19 @@ public class AdminPubResource {
 			pluginConfigurationManager.savePluginMetadata(mpc);
 		}
 		
+	}
+
+	@Action(value="/plugins/{code}/status")
+	@RequestMethod("POST")
+	public void updatePlugin(@Basic(bean="code") String code, @Basic(bean="status") Boolean enable){
+		
+		MutablePluginConfiguration mpc = (MutablePluginConfiguration)pluginConfigurationManager.getPluginConfiguartion(code);
+		
+		if(mpc != null && enable != null) {
+			pluginConfigurationManager.setEnable(mpc, Boolean.TRUE.equals(enable));
+		}
+		
+		WebFlowController.redirect().to("/plugins/ediacaran/front/adm/plugins/" + code);
 	}
 	
 	public List<String> getGroups(){

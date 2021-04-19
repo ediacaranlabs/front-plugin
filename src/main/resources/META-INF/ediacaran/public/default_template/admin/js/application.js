@@ -4,6 +4,8 @@ if (typeof jQuery === "undefined") {
 
 $.AppContext = {};
 
+$.AppContext.pages = {};
+
 $.AppContext.vars = {
 		
 		asycLoadFunctions: new Array(),
@@ -32,6 +34,14 @@ $.AppContext.events = {
 };
 
 $.AppContext.utils = {
+		
+		getComponentById: function(id){
+			return $('#' + id );
+		},
+		
+		getComponentByClass: function(id){
+			return $('.' + id );
+		},
 		
 		/* async load functions */
 		
