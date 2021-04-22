@@ -4,6 +4,11 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 
 <ec:form method="POST" id="status_config_fr" update="#enable_plugin_result" action="/plugins/ediacaran/front/adm/plugins/${vars.config.metadata.code}/status">
+<ec:event type="form:after">
+	var $form = new $.AppContext.types.Form('status_config_fr');
+	$statusField = $form.getField('status');
+	$statusField.setValue(e.response.status);
+</ec:event>
 <ed:row style="form">
 	<ed:col size="8">
 		<h3>${vars.config.metadata.name}</h3>
@@ -12,12 +17,21 @@
 		<div class="float-right">
 			<ec:radio name="status" inline="true" label="Enabled" value="true" selected="${vars.status == 'RUNNING' || vars.status == 'STOPPED_ERROR'}">
 				<ec:event type="click">
-					$.AppContext.pages.update_status_plugin_detail.status_config_fr.submit();
+				
+					var $form = new $.AppContext.types.Form('status_config_fr');
+					var $statusField = $form.getField('status');
+					$.AppContext.utils.execute('/plugins/ediacaran/front/adm/plugins/${vars.config.metadata.code}/status', 'POST', {status:$status.getValue()}, function(e){
+						$statusField.setValue(e.response.status);
+					});
+					
+					var $form = new $.AppContext.types.Form('status_config_fr');
+					$form.submit();
 				</ec:event>
 			</ec:radio>
 			<ec:radio name="status" inline="true" label="Disabled" value="false"  selected="${!(vars.status == 'RUNNING' || vars.status == 'STOPPED_ERROR')}">
 				<ec:event type="click">
-					$.AppContext.pages.update_status_plugin_detail.status_config_fr.submit();
+					var $form = new $.AppContext.types.Form('status_config_fr');
+					$form.submit();
 				</ec:event>
 			</ec:radio>
 		</div>
