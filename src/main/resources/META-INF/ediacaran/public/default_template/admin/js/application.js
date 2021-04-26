@@ -35,13 +35,17 @@ $.AppContext.events = {
 
 $.AppContext.utils = {
 		
-		getComponentById: function(id){
-			return $('#' + id );
+		getById: function(id){
+			var element = $('#' + id );
+			var elementType = element.prop("tagName").toLowerCase();
+
+			var type = $.AppContext.types._map[elementType];
+			return type == null? new $.AppContext.types._map['object'](element) : new type(element);
 		},
 		
-		getComponentByClass: function(id){
-			return $('.' + id );
-		},
+		//getComponentByClass: function(id){
+		//	return $('.' + id );
+		//},
 		
 		/* async load functions */
 		

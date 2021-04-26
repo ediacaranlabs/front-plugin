@@ -13,9 +13,8 @@
 		Update success!
 	</c:if>
 	<script>
-		$form = new $.AppContext.types.Form('status_config_fr');
-		$statusField = $form.getField('status');
+		var $form = $.AppContext.utils.getById('status_config_fr');
+		var $statusField = $form.getField('status');
 		$statusField.setValue(${vars.status});
-		//$.AppContext.pages.update_status_plugin_detail.status_config_fr.setStatusValue(${vars.status});
 	</script>
 </div>
