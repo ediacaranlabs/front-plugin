@@ -124,13 +124,13 @@ public class AdminPubResource {
 		MutablePluginConfiguration mpc = (MutablePluginConfiguration)pluginConfigurationManager.getPluginConfiguartion(code);
 		
 		if(mpc != null && enable != null) {
-			pluginConfigurationManager.setEnable(mpc, Boolean.TRUE.equals(enable));
+			boolean success = pluginConfigurationManager.setEnable(mpc, Boolean.TRUE.equals(enable));
 			
 			PluginStatus status = pluginConfigurationManager.getStatus(mpc);
 			Throwable error = pluginConfigurationManager.getError(mpc);
 			
-			vars.put("status", PluginStatus.RUNNING == status || PluginStatus.STOPPED_ERROR == status);
-			vars.put("error", error);
+			vars.put("status", PluginStatus.RUNNING == status);
+			vars.put("error", success? null : error);
 		}
 		
 		return vars;
