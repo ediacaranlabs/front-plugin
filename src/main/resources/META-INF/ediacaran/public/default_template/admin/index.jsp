@@ -12,6 +12,7 @@
 </head>
 
 <body id="body" class="collapse show">
+
 	<ec:menu-bar id="top_menu" classStyle="top-menu" expand="xl" style="light">
 		<ec:menu-toggler menuID="body">
 			<ec:icon icon="bars" size="1" />
@@ -86,6 +87,7 @@
 					<ec:menu-itens>
 						<c:forEach items="${Controller.menuBar.itens}" var="menu">
 							<c:choose>
+
 								<c:when test="${not empty menu.body}">
 									<ec:menu>
 										<ec:menu-label>
@@ -100,7 +102,8 @@
 									</ec:menu>
 									<ec:menu-itens resource="${menu.body}"/>
 								</c:when>
-								<c:when test="${fn:length(menu.itens) gt 0}">
+
+								<c:when test="${fn:length(menu.itens) != 0}">
 									<ec:menu>
 										<ec:menu-label>
 											<c:if test="${not empty menu.icon}">
@@ -111,21 +114,22 @@
 												<span class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
 											</c:if>
 										</ec:menu-label>
+										<ec:menu-itens id="menu_itens_xx">
+											<c:forEach items="${menu.itens}" var="item">
+												<ec:menu-item href="#!${item.resource}">
+													<c:if test="${not empty item.icon}">
+														<ec:icon icon="${item.icon}" size="1"/>
+													</c:if>
+													${item.fullName}
+													<c:if test="${not empty item.badge}">
+														<span class="badge badge-${empty item.badgeStyle? 'info' : item.badgeStyle} navbar-badge">${item.badge}</span>
+													</c:if>
+												</ec:menu-item>
+											</c:forEach>
+										</ec:menu-itens>
 									</ec:menu>
-									<ec:menu-itens>
-										<c:forEach items="${menu.itens}" var="item">
-											<ec:menu-item href="#!${item.resource}">
-												<c:if test="${not empty item.icon}">
-													<ec:icon icon="${item.icon}" size="1"/>
-												</c:if>
-												${item.fullName}
-												<c:if test="${not empty item.badge}">
-													<span class="badge badge-${empty item.badgeStyle? 'info' : item.badgeStyle} navbar-badge">${item.badge}</span>
-												</c:if>
-											</ec:menu-item>
-										</c:forEach>
-									</ec:menu-itens>
 								</c:when>
+
 								<c:otherwise>
 									<ec:menu-item href="#!${menu.resource}">
 										<c:if test="${not empty menu.icon}">
@@ -137,6 +141,7 @@
 										</c:if>
 									</ec:menu-item>
 								</c:otherwise>
+
 							</c:choose>
 						</c:forEach>
 					</ec:menu-itens>

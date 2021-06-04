@@ -755,7 +755,8 @@ aside[class^="sidebar"] .nav-link i:first-child{
 }
 
 aside[class^="sidebar"] .dropdown-item {
-    padding: 10px 10px;
+    padding-right: 1rem;
+    padding-left: 1rem;
 }
 
 aside[class^="sidebar"] .dropdown-item p{
