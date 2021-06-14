@@ -24,6 +24,9 @@
 				<void method="addExtension">
 					<string>com.arjuna.ats.jta.cdi.TransactionExtension</string>
 				</void>
+ 				<void method="addExtension">
+					<string>org.glassfish.soteria.cdi.CdiExtension</string>
+				</void>
 				<void method="addService">
 					<string>br.com.uoutec.community.ediacaran.server.system.entityaccess.hibernate.tx.CDITransactionServices</string>
 				</void>

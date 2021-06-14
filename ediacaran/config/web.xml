@@ -32,6 +32,7 @@
 		<param-name>context_class</param-name>
 		<param-value>br.com.uoutec.community.ediacaran.system.EdiacaranWebApplicationContext</param-value>
 	</context-param>
+
 <!-- 
 	<listener>
 		<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
@@ -63,7 +64,7 @@
 		<dispatcher>INCLUDE</dispatcher>
 		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
-	
+
 	<servlet>
 		<servlet-name>ediacaran-template</servlet-name>
 		<servlet-class>br.com.uoutec.community.ediacaran.front.FrontEdiacaranServlet</servlet-class>
