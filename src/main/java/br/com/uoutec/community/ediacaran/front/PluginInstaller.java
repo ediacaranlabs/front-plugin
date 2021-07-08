@@ -4,6 +4,10 @@ import br.com.uoutec.community.ediacaran.front.pub.AdminMenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widget;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
+import br.com.uoutec.community.ediacaran.security.pub.AuthenticationProvider;
+import br.com.uoutec.community.ediacaran.security.pub.SecurityManager;
+import br.com.uoutec.community.ediacaran.security.pub.SecurityManagerPlugin;
+import br.com.uoutec.community.ediacaran.security.pub.test.AuthenticationProviderImp;
 import br.com.uoutec.community.ediacaran.system.AbstractWebPluginInstaller;
 import br.com.uoutec.community.ediacaran.system.pub.Menu;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBarManager;
@@ -28,7 +32,6 @@ public class PluginInstaller
 	private static final String ADMIN_TOP_MENU_BAR      = "adminTopMenuBar";
 	
 	public void install() throws Throwable{
-		super.install();
 		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);
 		Widgets widgets = EntityContextPlugin.getEntity(Widgets.class);
 		
@@ -62,7 +65,24 @@ public class PluginInstaller
 			
 			widgets.addWidget(new Widget("w1", "/plugins/ediacaran/front/admin/widgets/w1.jsp", 100));
 			widgets.addWidget(new Widget("w2", "/plugins/ediacaran/front/admin/widgets/w2.jsp", 100));
+			
+			SecurityManager sm = EntityContextPlugin.getEntity(SecurityManager.class);
+			AuthenticationProvider ap = EntityContextPlugin.getEntity(AuthenticationProviderImp.class);
+			sm.registerAuthenticationProvider(ap);
+			
 		}
+		
+		SecurityManagerPlugin smp = EntityContextPlugin.getEntity(SecurityManagerPlugin.class);
+		
+		smp
+			.addConstraint("/admin/manager/*")
+				.addRole("manager")
+				.addRole("user")
+			.addConstraint("/admin/*")
+				.addRole("user")
+			.form("/login", "/login?error=true");
+		
+		super.install();
 	}
 	
 	public void uninstall() throws Throwable {
