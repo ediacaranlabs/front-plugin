@@ -19,6 +19,8 @@
     <title><fmt:message key="title" bundle="${sys_messages}"/></title>
 
 	<ec:include uri="/includes/head.jsp"/>
+	
+	<link rel="stylesheet" href="/plugins/ediacaran/front/default_template/admin/login/css/login.css">
 
 	<style type="text/css">
 		.has-feedback .form-control-feedback {
