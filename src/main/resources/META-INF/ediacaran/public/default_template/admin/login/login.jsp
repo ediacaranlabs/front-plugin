@@ -22,76 +22,51 @@
 	
 	<link rel="stylesheet" href="/plugins/ediacaran/front/default_template/admin/login/css/login.css">
 
-	<style type="text/css">
-		.has-feedback .form-control-feedback {
-		    position: absolute;
-		    top: 0;
-		    right: 0;
-		    z-index: 2;
-		    display: block;
-		    width: 34px;
-		    height: 34px;
-		    line-height: 34px;
-		    text-align: center;
-		    pointer-events: none;
-		}
-		
-		.icheck {
-			padding-left: 0px
-		}
-	</style>
 </head>
 
 <body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
+<ec:box>
+	<ec:box-header>
     <a href="#"><fmt:message key="box.title" bundle="${sys_messages}"/></a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg"><fmt:message key="box.message" bundle="${sys_messages}"/></p>
+    </ec:box-header>
+    <ec:box-body>
+	    <p class="box-msg"><fmt:message key="box.message" bundle="${sys_messages}"/></p>
+<%--	<ec:form action="${plugins.ediacaran.front.admin_login_page}" method="POST" update="#result" acceptCharset="UTF-8"> --%>
+	<ec:form action="j_security_check" method="POST" update="#result" acceptCharset="UTF-8">
+	      <input type="hidden" name="redirectTo" value="${plugins.ediacaran.front.admin_context}">
+	      <ed:row>
+      		<ed:col>
+		      <ec:textfield name="j_username" placeholder="Email"/>
+      		</ed:col>
+	      </ed:row>
+	      <ed:row>
+      		<ed:col>
+		      <ec:passwordfield name="j_password" placeholder="Password"/>
+      		</ed:col>
+	      </ed:row>
+	      <ed:row style="form">
+	      	<ed:col>
+				<div id="result" class="result-check"></div>
+	      	</ed:col>
+	      </ed:row>
+	      <ed:row style="form">
+      		<ed:col size="8">
+      		</ed:col>
+      		<ed:col size="4">
+      			<fmt:message key="box.sign_in_button" bundle="${sys_messages}" var="label"/>
+      			<ec:button block="true" label="${label}" type="primary" actionType="submit"/>
+      		</ed:col>
+	      </ed:row>
+		</ec:form>
+		
+	    <a href="${plugins.ediacaran.front.user_forgot_page}"><fmt:message key="box.forgot_pass" bundle="${sys_messages}"/></a><br>
+	    <a href="${plugins.ediacaran.front.user_register_page}" class="text-center"><fmt:message key="box.register" bundle="${sys_messages}"/></a>
+		
+    </ec:box-body>
+</ec:box>
 
-    <form action="${plugins.ediacaran.front.admin_login_page}" method="post" dest-content="#result" accept-charset="UTF-8">
-      <input type="hidden" name="redirectTo" value="${plugins.ediacaran.front.admin_context}">
-      <div class="form-group has-feedback">
-        <input name="username" type="email" class="form-control" placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input name="password" type="password" class="form-control" placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> <fmt:message key="box.remember" bundle="${sys_messages}"/>
-            </label>
-          </div>
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat"><fmt:message key="box.sign_in_button" bundle="${sys_messages}"/></button>
-        </div>
-        <!-- /.col -->
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-	        <div id="result" class="result-check"></div>
-        </div>
-        <!-- /.col -->
-      </div>
-    </form>
-
-    <a href="${plugins.ediacaran.front.user_forgot_page}"><fmt:message key="box.forgot_pass" bundle="${sys_messages}"/></a><br>
-    <a href="${plugins.ediacaran.front.user_register_page}" class="text-center"><fmt:message key="box.register" bundle="${sys_messages}"/></a>
-
-  </div>
-  <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
-	<script type="text/javascript" src="/plugins/ediacaran/front/default_template/admin/login/js/language/${locale}/login.js"></script>
-	<script type="text/javascript" src="/plugins/ediacaran/front/default_template/admin/login/js/login.js"></script>
+<script type="text/javascript" src="/plugins/ediacaran/front/default_template/admin/login/js/language/${locale}/login.js"></script>
+<script type="text/javascript" src="/plugins/ediacaran/front/default_template/admin/login/js/login.js"></script>
 
 </body>
 </html>
