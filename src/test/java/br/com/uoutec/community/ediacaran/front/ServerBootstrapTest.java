@@ -13,7 +13,6 @@ import br.com.uoutec.community.ediacaran.EdiacaranBootstrap;
 public class ServerBootstrapTest {
 	
 	public static void main(String[] s) throws IOException {
-		
 		File cfg = new File("config/ediacaran-config.xml").getCanonicalFile();
 		XMLDecoder xml = new XMLDecoder(new FileInputStream(cfg));
 		EdiacaranBootstrap sb = (EdiacaranBootstrap) xml.readObject();

@@ -1,11 +1,11 @@
 package br.com.uoutec.community.ediacaran.front;
 
+import br.com.uoutec.community.ediacaran.core.security.SecurityManager;
 import br.com.uoutec.community.ediacaran.front.pub.AdminMenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widget;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.security.pub.AuthenticationProvider;
-import br.com.uoutec.community.ediacaran.security.pub.SecurityManager;
 import br.com.uoutec.community.ediacaran.security.pub.SecurityManagerPlugin;
 import br.com.uoutec.community.ediacaran.security.pub.test.AuthenticationProviderImp;
 import br.com.uoutec.community.ediacaran.system.AbstractWebPluginInstaller;

@@ -85,4 +85,6 @@
 		<welcome-file>index.htm</welcome-file>
 	</welcome-file-list>
 
+	<absolute-ordering />
+
 </web-app>
