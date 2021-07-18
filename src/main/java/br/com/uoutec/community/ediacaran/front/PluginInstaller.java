@@ -1,13 +1,10 @@
 package br.com.uoutec.community.ediacaran.front;
 
-import br.com.uoutec.community.ediacaran.core.security.SecurityManager;
 import br.com.uoutec.community.ediacaran.front.pub.AdminMenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widget;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.community.ediacaran.security.pub.AuthenticationProvider;
 import br.com.uoutec.community.ediacaran.security.pub.SecurityManagerPlugin;
-import br.com.uoutec.community.ediacaran.security.pub.test.AuthenticationProviderImp;
 import br.com.uoutec.community.ediacaran.system.AbstractWebPluginInstaller;
 import br.com.uoutec.community.ediacaran.system.pub.Menu;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBarManager;
@@ -66,9 +63,9 @@ public class PluginInstaller
 			widgets.addWidget(new Widget("w1", "/plugins/ediacaran/front/admin/widgets/w1.jsp", 100));
 			widgets.addWidget(new Widget("w2", "/plugins/ediacaran/front/admin/widgets/w2.jsp", 100));
 			
-			SecurityManager sm = EntityContextPlugin.getEntity(SecurityManager.class);
-			AuthenticationProvider ap = EntityContextPlugin.getEntity(AuthenticationProviderImp.class);
-			sm.registerAuthenticationProvider(ap);
+			//SecurityManager sm = EntityContextPlugin.getEntity(SecurityManager.class);
+			//AuthenticationProvider ap = EntityContextPlugin.getEntity(AuthenticationProviderImp.class);
+			//sm.registerAuthenticationProvider(ap);
 			
 		}
 		

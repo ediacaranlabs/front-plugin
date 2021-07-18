@@ -92,10 +92,10 @@
 			<string>java.naming.factory.initial</string>
 			<string>org.apache.naming.java.javaURLContextFactory</string>
 		</void>
-		
+i 		
 		<void method="setSystemProperty">
 			<string>java.security.auth.login.config</string>
-			<string>ediacaran/config/jaas.config</string>
+			<string>config/jaas.config</string>
 		</void>
 		
 		<!-- 
