@@ -103,6 +103,6 @@ i
 			<string>java.util.logging.manager</string>
 			<string>org.apache.logging.log4j.jul.LogManager</string>
 		</void>
-	 	-->	
+		-->	
 	</object>
 </java>
