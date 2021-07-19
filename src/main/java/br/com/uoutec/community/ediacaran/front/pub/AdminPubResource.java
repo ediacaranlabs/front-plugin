@@ -20,8 +20,6 @@ import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.ResponseErrors;
 
 import br.com.uoutec.community.ediacaran.PluginConfigurationManager;
-import br.com.uoutec.community.ediacaran.core.security.GuaranteedAccessTo;
-import br.com.uoutec.community.ediacaran.core.security.UserPrivilege;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.MutablePluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfiguration;
@@ -38,7 +36,6 @@ import br.com.uoutec.community.ediacaran.system.pub.MenuBarManagerException;
 	@Action(value="/user-menu", view=@View(value="/${plugins.ediacaran.front.template}/admin/user_menu")),
 	@Action(value="/plugins", view=@View(value="/${plugins.ediacaran.front.template}/admin/plugins"))
 })
-@GuaranteedAccessTo(UserPrivilege.class)
 @ResponseErrors(rendered=false, name="exception")
 public class AdminPubResource {
 
