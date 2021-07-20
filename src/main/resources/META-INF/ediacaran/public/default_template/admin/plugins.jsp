@@ -28,7 +28,7 @@
 						<ec:accordion-item title="${group}">
 							<ec:list>
 								<c:forEach items="${Controller.getPlugins(group)}" var="plugin">
-									<ec:list-item><a href="#!/plugins/ediacaran/front/adm/plugins/${plugin.metadata.code}" dest-content="#plugin_body">${plugin.metadata.name}</a></ec:list-item>
+									<ec:list-item><a href="#!/plugins/ediacaran/front/admin/plugins/${plugin.metadata.code}" dest-content="#plugin_body">${plugin.metadata.name}</a></ec:list-item>
 								</c:forEach>
 							</ec:list>
 						</ec:accordion-item>	
