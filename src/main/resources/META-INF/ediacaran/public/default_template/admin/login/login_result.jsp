@@ -10,7 +10,7 @@
 	<script type="text/javascript">
 		$.AppContext.onload(
 			function (){
-				$.AppContext.openLink("${empty refererResource? pageContext.request.contextPath.concat(plugins.adm.context) : refererResource }");
+				$.AppContext.openLink("${empty refererResource? pageContext.request.contextPath.concat(plugins.ediacaran.front.admin_context) : refererResource }");
 			}
 		);
 	</script>

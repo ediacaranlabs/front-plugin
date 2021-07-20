@@ -32,16 +32,16 @@
     <ec:box-body>
 	    <p class="box-msg"><fmt:message key="box.message" bundle="${sys_messages}"/></p>
 <%--	<ec:form action="${plugins.ediacaran.front.admin_login_page}" method="POST" update="#result" acceptCharset="UTF-8"> --%>
-	<ec:form action="j_security_check" method="POST" update="#result" acceptCharset="UTF-8">
-	      <input type="hidden" name="redirectTo" value="${plugins.ediacaran.front.admin_context}">
+	<ec:form action="" method="POST" update="#result" acceptCharset="UTF-8">
+	      <input type="hidden" name="redirectTo" value="${plugins.ediacaran.front.landing_page}">
 	      <ed:row>
       		<ed:col>
-		      <ec:textfield name="j_username" placeholder="Email"/>
+		      <ec:textfield name="username" placeholder="Email"/>
       		</ed:col>
 	      </ed:row>
 	      <ed:row>
       		<ed:col>
-		      <ec:passwordfield name="j_password" placeholder="Password"/>
+		      <ec:passwordfield name="password" placeholder="Password"/>
       		</ed:col>
 	      </ed:row>
 	      <ed:row style="form">
