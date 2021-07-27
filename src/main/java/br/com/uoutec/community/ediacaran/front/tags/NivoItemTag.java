@@ -5,6 +5,14 @@ import java.io.StringWriter;
 
 import javax.servlet.jsp.JspException;
 
+//@Tag(value="nivo-slider", bodyType=BodyTypes.SCRIPTLESS)
+//@TagDoc({
+//"	Adiciona um novo NIVO slider. Os slides podem ser adicionados com <nivo-slider-item/>",
+//"	Ex:",
+//"	<nivo-slider>",
+//"		<nivo-slider-item image=\"/imgs/slide1.png\" tile=\"Title1\">Text Content</nivo-slider>",
+//"	</nivo-slider>"
+//})
 public class NivoItemTag extends AbstractSimpleComponent {
 	
 	/* ------------ Attr ---------------*/
@@ -39,6 +47,8 @@ public class NivoItemTag extends AbstractSimpleComponent {
 		return link;
 	}
 
+//	@TagDoc("Define o link da imagem")
+//	@TagAttribute(required=true,type=String.class,fragment=true)
 	public void setLink(String link) {
 		this.link = link;
 	}

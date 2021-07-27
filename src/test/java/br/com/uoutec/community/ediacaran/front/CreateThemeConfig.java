@@ -3,7 +3,6 @@ package br.com.uoutec.community.ediacaran.front;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
-import br.com.uoutec.application.ApplicationException;
 import br.com.uoutec.application.ClassUtil;
 import br.com.uoutec.application.scanner.DefaultScanner;
 import br.com.uoutec.application.scanner.TypeFilter;
@@ -31,7 +30,7 @@ public class CreateThemeConfig {
 					Class clazz = ClassUtil.get(resource);
 					return Component.class.isAssignableFrom(clazz);
 				} catch (ClassNotFoundException e) {
-					throw new ApplicationException(e);
+					throw new RuntimeException(e);
 				}
 			}
 		});

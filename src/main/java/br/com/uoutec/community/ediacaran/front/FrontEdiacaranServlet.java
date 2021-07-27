@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.uoutec.application.se.ApplicationBootstrapProvider;
 import br.com.uoutec.community.ediacaran.ServerBootstrap;
 import br.com.uoutec.community.ediacaran.front.pub.DataUtil;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
@@ -33,7 +32,7 @@ public class FrontEdiacaranServlet extends HttpServlet{
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		this.serverBootstrap = (ServerBootstrap) ApplicationBootstrapProvider.getBootstrap();
+		this.serverBootstrap = null;//(ServerBootstrap) ApplicationBootstrapProvider.getBootstrap();
 		PluginsSuppliers pluginsSuppliers = EntityContextPlugin.getEntity(PluginsSuppliers.class);
 		this.pluginProperties = pluginsSuppliers.getSupplier(PluginInstaller.PROVIDER).getProperties(PluginInstaller.PLUGIN);
 	}

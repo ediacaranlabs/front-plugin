@@ -1,29 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.pub;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.inject.Inject;
-
-import org.brandao.brutos.annotation.Action;
-import org.brandao.brutos.annotation.Basic;
-import org.brandao.brutos.annotation.Transient;
-import org.brandao.brutos.web.HttpStatus;
-import org.brandao.brutos.web.WebResultAction;
-
-import br.com.uoutec.application.se.ApplicationBootstrapProvider;
-import br.com.uoutec.community.ediacaran.PluginManager;
-import br.com.uoutec.community.ediacaran.ServerBootstrap;
-import br.com.uoutec.community.ediacaran.front.PluginInstaller;
-import br.com.uoutec.community.ediacaran.plugins.PluginException;
-import br.com.uoutec.community.ediacaran.plugins.PluginConfigurationMetadata;
-import br.com.uoutec.community.ediacaran.plugins.PluginPropertyValue;
-
 //@Controller
 //@Singleton
 //@ActionStrategy(WebActionStrategyType.DETACHED)
