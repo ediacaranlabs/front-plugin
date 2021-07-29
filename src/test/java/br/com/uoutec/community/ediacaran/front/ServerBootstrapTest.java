@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 
 import br.com.uoutec.community.ediacaran.EdiacaranBootstrap;
+import br.com.uoutec.community.ediacaran.ServerBootstrap;
 
 @SuppressWarnings("serial")
 public class ServerBootstrapTest {
@@ -22,6 +23,8 @@ public class ServerBootstrapTest {
 			put("default", "config/ediacaran-dev.properties");
 			put("logger",  "config/log4j.configuration");
 		}});
+		
+		((ServerBootstrap)sb).await();
 	}
 
 	
