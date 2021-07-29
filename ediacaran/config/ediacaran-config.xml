@@ -4,7 +4,41 @@
 	<object	class="br.com.uoutec.community.ediacaran.ServerBootstrap">
 
 		<void property="listenerManager">
-			<object class="br.com.uoutec.community.ediacaran.EdiacaranListenerManagerImp"/>
+			<object class="br.com.uoutec.community.ediacaran.EdiacaranListenerManagerImp">
+				
+				<void method="addListener">
+					<object class="br.com.uoutec.community.ediacaran.ProxyEdiacaranEventListener">
+						<void method="setEventListerClass">
+							<string>br.com.uoutec.community.ediacaran.core.system.listener.EntityInheritanceListener</string>
+						</void>
+					</object>
+				</void>
+				
+				<void method="addListener">
+					<object class="br.com.uoutec.community.ediacaran.ProxyEdiacaranEventListener">
+						<void method="setEventListerClass">
+							<string>br.com.uoutec.community.ediacaran.core.system.listener.LanguageListener</string>
+						</void>
+					</object>
+				</void>
+
+				<void method="addListener">
+					<object class="br.com.uoutec.community.ediacaran.ProxyEdiacaranEventListener">
+						<void method="setEventListerClass">
+							<string>br.com.uoutec.community.ediacaran.core.system.listener.FilterListener</string>
+						</void>
+					</object>
+				</void>
+
+				<void method="addListener">
+					<object class="br.com.uoutec.community.ediacaran.ProxyEdiacaranEventListener">
+						<void method="setEventListerClass">
+							<string>br.com.uoutec.community.ediacaran.system.theme.listener.WebEdiacaranListener</string>
+						</void>
+					</object>
+				</void>
+				
+			</object>
 		</void>
 
 		<void property="pluginManager">
@@ -92,7 +126,7 @@
 			<string>java.naming.factory.initial</string>
 			<string>org.apache.naming.java.javaURLContextFactory</string>
 		</void>
-i 		
+ 		
 		<void method="setSystemProperty">
 			<string>java.security.auth.login.config</string>
 			<string>config/jaas.config</string>

@@ -1,19 +1,19 @@
 package br.com.uoutec.community.ediacaran.front;
 
-import br.com.uoutec.community.ediacaran.core.security.SecurityManager;
+import br.com.uoutec.community.ediacaran.AbstractPlugin;
 import br.com.uoutec.community.ediacaran.core.security.AuthenticationProvider;
+import br.com.uoutec.community.ediacaran.core.security.SecurityManager;
 import br.com.uoutec.community.ediacaran.front.pub.AdminMenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widget;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.security.pub.SecurityManagerPlugin;
 import br.com.uoutec.community.ediacaran.security.pub.test.AuthenticationProviderImp;
-import br.com.uoutec.community.ediacaran.system.AbstractWebPluginInstaller;
 import br.com.uoutec.community.ediacaran.system.pub.Menu;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBarManager;
 
 public class PluginInstaller 
-	extends AbstractWebPluginInstaller {
+	extends AbstractPlugin {
 
 	public static final String PACKAGE 					= "community";
 
@@ -82,11 +82,9 @@ public class PluginInstaller
 				.addRole("user")
 			.form("/login", "/login?error=true");
 		
-		super.install();
 	}
 	
 	public void uninstall() throws Throwable {
-		super.uninstall();
 		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);
 		mbm.removeMenuBar(ADMIN_MENU_BAR);
 		mbm.removeMenuBar(ADMIN_TOP_MENU_BAR);

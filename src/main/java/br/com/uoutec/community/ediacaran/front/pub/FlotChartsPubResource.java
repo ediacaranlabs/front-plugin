@@ -30,7 +30,7 @@ public class FlotChartsPubResource {
 	}
 	
 	@Action(value="/")
-	public Serializable loadData(){
+	public synchronized Serializable loadData(){
 		update();
 		
 		List<int[]> data = new ArrayList<int[]>();
@@ -50,22 +50,19 @@ public class FlotChartsPubResource {
 	}
 
 	private void update() {
-		synchronized (FlotChartsPubResource.class) {
-			
-			if(list == null) {
-				list = new ArrayList<Integer>();
-				int y = r.nextInt(100);
-				for(int i=0;i<=100;i++) {
-					list.add(y);
-					y = getY(y);
-				}
+		if(list == null) {
+			list = new ArrayList<Integer>();
+			int y = r.nextInt(100);
+			for(int i=0;i<=100;i++) {
+				list.add(y);
+				y = getY(y);
 			}
-			
-			list.remove(0);
-			int y = list.get(list.size() - 1);
-			y = getY(y);
-			list.add(y);
 		}
+		
+		list.remove(0);
+		int y = list.get(list.size() - 1);
+		y = getY(y);
+		list.add(y);
 	}
 	
 	private int getY(int x) {
@@ -81,7 +78,7 @@ public class FlotChartsPubResource {
 	}
 	
 	@Action(value="/line-chart")
-	public Serializable lineChart(){
+	public synchronized Serializable lineChart(){
 		update();
 
 		List<double[]> sinData = new ArrayList<double[]>();
