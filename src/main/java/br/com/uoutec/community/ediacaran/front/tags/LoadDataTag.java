@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
-import br.com.uoutec.community.ediacaran.ServerBootstrap;
+import br.com.uoutec.community.ediacaran.web.tomcat.TomcatServerBootstrap;
 
 public class LoadDataTag  extends AbstractSimpleComponent {
 	
@@ -23,7 +23,7 @@ public class LoadDataTag  extends AbstractSimpleComponent {
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
     	
-    	ServerBootstrap sb     = null;//(ServerBootstrap) ApplicationBootstrapProvider.getBootstrap();
+    	TomcatServerBootstrap sb     = null;//(ServerBootstrap) ApplicationBootstrapProvider.getBootstrap();
     	Map<Object,Object> dta = ReadData.loadData(
     								file, 
 									sb.getWebapp()/*.getCanonicalFile()*/, 

@@ -15,17 +15,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.uoutec.community.ediacaran.ServerBootstrap;
 import br.com.uoutec.community.ediacaran.front.pub.DataUtil;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.plugins.PluginProperties;
 import br.com.uoutec.community.ediacaran.plugins.PluginsSuppliers;
+import br.com.uoutec.community.ediacaran.web.tomcat.TomcatServerBootstrap;
 
 public class FrontEdiacaranServlet extends HttpServlet{
 
 	private static final long serialVersionUID = -1401919198240749640L;
 
-	private ServerBootstrap serverBootstrap;
+	private TomcatServerBootstrap serverBootstrap;
 	
 	private PluginProperties pluginProperties;
 	
