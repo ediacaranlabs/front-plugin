@@ -72,9 +72,9 @@ public class PluginInstaller
 			
 		}
 		
-		SecurityManagerPlugin smp = EntityContextPlugin.getEntity(SecurityManagerPlugin.class);
+		SecurityManagerPlugin securityManagerPlugin = EntityContextPlugin.getEntity(SecurityManagerPlugin.class);
 		
-		smp
+		securityManagerPlugin
 			.addConstraint("/admin/manager/*")
 				.addRole("manager")
 				.addRole("user")

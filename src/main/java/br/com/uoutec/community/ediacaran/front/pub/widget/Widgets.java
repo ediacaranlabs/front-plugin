@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.pub.widget;
 
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,9 +13,12 @@ import br.com.uoutec.community.ediacaran.plugins.PublicBean;
 @Singleton
 public class Widgets implements PublicBean{
 
+	private PropertyChangeSupport propertyChangeSupport;
+	
 	private List<Widget> itens;
 	
 	public Widgets(){
+		this.propertyChangeSupport = new PropertyChangeSupport(this);
 		this.itens = new ArrayList<Widget>();
 	}
 	
@@ -34,6 +38,8 @@ public class Widgets implements PublicBean{
 			
 		});
 		
+		propertyChangeSupport.fireIndexedPropertyChange("widget", itens.size() - 1, null, value);
+		
 	}
 
 	public Widget getWidget(String name){
@@ -43,8 +49,12 @@ public class Widgets implements PublicBean{
 	}
 	
 	public void removeWidget(String value) throws WidgetException{
+		
 		Widget w = new Widget(null, value, 0);
 		this.itens.remove(w);
+		
+		propertyChangeSupport.fireIndexedPropertyChange("widget", itens.size(), w, null);
+		
 	}
 
 	public List<Widget> getWidgets(){
