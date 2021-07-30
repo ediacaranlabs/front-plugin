@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.8.0_101" class="java.beans.XMLDecoder">
 
-	<object	class="br.com.uoutec.community.ediacaran.ServerBootstrap">
+	<object	class="br.com.uoutec.community.ediacaran.web.tomcat.TomcatServerBootstrap">
 
 		<void property="listenerManager">
 			<object class="br.com.uoutec.community.ediacaran.EdiacaranListenerManagerImp">
