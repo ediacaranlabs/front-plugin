@@ -7,7 +7,7 @@ import br.com.uoutec.community.ediacaran.front.pub.AdminMenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widget;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.community.ediacaran.security.pub.SecurityManagerPlugin;
+import br.com.uoutec.community.ediacaran.security.pub.WebSecurityManagerPlugin;
 import br.com.uoutec.community.ediacaran.security.pub.test.AuthenticationProviderImp;
 import br.com.uoutec.community.ediacaran.system.pub.Menu;
 import br.com.uoutec.community.ediacaran.system.pub.MenuBarManager;
@@ -72,9 +72,9 @@ public class PluginInstaller
 			
 		}
 		
-		SecurityManagerPlugin securityManagerPlugin = EntityContextPlugin.getEntity(SecurityManagerPlugin.class);
+		WebSecurityManagerPlugin webSecurityManagerPlugin = EntityContextPlugin.getEntity(WebSecurityManagerPlugin.class);
 		
-		securityManagerPlugin
+		webSecurityManagerPlugin
 			.addConstraint("/admin/manager/*")
 				.addRole("manager")
 				.addRole("user")
