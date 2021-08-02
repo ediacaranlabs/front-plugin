@@ -10,13 +10,13 @@
 	</ed:col>
 	<ed:col size="4">
 		<div class="float-right">
-			<ec:radio name="status" inline="true" label="Enabled" value="true" selected="${vars.status == 'RUNNING' || vars.status == 'STOPPED_ERROR'}">
+			<ec:radio name="status" inline="true" label="Enabled" value="true" selected="${vars.status == 'RUNNING'}">
 				<ec:event type="click">
 					var $form = $.AppContext.utils.getById('status_config_fr');
 					$form.submit();
 				</ec:event>
 			</ec:radio>
-			<ec:radio name="status" inline="true" label="Disabled" value="false"  selected="${!(vars.status == 'RUNNING' || vars.status == 'STOPPED_ERROR')}">
+			<ec:radio name="status" inline="true" label="Disabled" value="false"  selected="${vars.status == 'STOPPED'}">
 				<ec:event type="click">
 					var $form = $.AppContext.utils.getById('status_config_fr');
 					$form.submit();
