@@ -43,14 +43,14 @@ public class Widgets implements PublicBean{
 	}
 
 	public Widget getWidget(String name){
-		Widget w = new Widget(null, name, 0);
+		Widget w = new Widget(name, null, 0);
 		int index = this.itens.indexOf(w);
 		return index != -1? this.itens.get(index) : null; 
 	}
 	
 	public void removeWidget(String value) throws WidgetException{
 		
-		Widget w = new Widget(null, value, 0);
+		Widget w = new Widget(value, null, 0);
 		this.itens.remove(w);
 		
 		propertyChangeSupport.fireIndexedPropertyChange("widget", itens.size(), w, null);
