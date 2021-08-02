@@ -3,7 +3,7 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 
-<ec:form method="POST" id="status_config_fr" update="#enable_plugin_result" action="/plugins/ediacaran/front/adm/plugins/${vars.config.metadata.code}/status">
+<ec:form method="POST" id="status_config_fr" update="#enable_plugin_result" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/status">
 <ed:row style="form">
 	<ed:col size="8">
 		<h3>${vars.config.metadata.name}</h3>
@@ -30,7 +30,7 @@
 	</ed:col>
 </ed:row>
 </ec:form>	
-<ec:form method="POST" id="config_fr" update="#update_plugin_result" action="/plugins/ediacaran/front/adm/plugins/${vars.config.metadata.code}">
+<ec:form method="POST" id="config_fr" update="#update_plugin_result" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}">
 <ec:table style="striped">
 	<ec:table-body>
 	<c:forEach items="${vars.config.metadata.properties}" var="property">
@@ -38,7 +38,12 @@
 			 <ec:table-col classStyle="form-group has-feedback">
 				<c:choose>
 					<c:when test="${property.type == 'TEXT'}">
-						<ec:textfield label="${property.name}" name="config.${property.code}" value="${vars.config.getRawValue(property.code)}"/>
+						<c:if test="${property.protectedValue}">
+							<ec:passwordfield label="${property.name}" name="config.${property.code}" value="************"/>
+						</c:if>
+						<c:if test="${!property.protectedValue}">
+							<ec:textfield label="${property.name}" name="config.${property.code}" value="${vars.config.getRawValue(property.code)}"/>
+						</c:if>
 					</c:when>
 					<c:when test="${property.type == 'SELECT'}">
 						<ec:select name="config.${property.code}" label="${property.name}">
