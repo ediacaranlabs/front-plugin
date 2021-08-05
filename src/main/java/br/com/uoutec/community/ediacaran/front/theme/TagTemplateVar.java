@@ -1,8 +1,8 @@
-package br.com.uoutec.community.ediacaran.front;
+package br.com.uoutec.community.ediacaran.front.theme;
 
 import java.util.regex.Pattern;
 
-public class StringPatternVar {
+public class TagTemplateVar {
 
     private String start;
     
@@ -18,7 +18,7 @@ public class StringPatternVar {
     
     private int index;
     
-    public StringPatternVar(int index, String id, Pattern regex, 
+    public TagTemplateVar(int index, String id, Pattern regex, 
     		String start, String end, Pattern regexPrefix, Pattern regexSuffix ){
         this.id          = id;
         this.start       = start;

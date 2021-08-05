@@ -8,14 +8,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.front.theme.Component;
+import br.com.uoutec.community.ediacaran.front.theme.TagTemplate;
+import br.com.uoutec.community.ediacaran.front.theme.TemplateLoader;
+import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.plugins.PluginType;
-import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.theme.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.theme.Component;
-import br.com.uoutec.community.ediacaran.system.theme.TagTemplate;
-import br.com.uoutec.community.ediacaran.system.theme.TemplateLoader;
-import br.com.uoutec.community.ediacaran.system.theme.ThemeException;
 
 public abstract class AbstractComponent implements Component{
 

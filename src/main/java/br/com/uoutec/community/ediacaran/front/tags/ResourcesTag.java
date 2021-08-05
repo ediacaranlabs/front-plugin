@@ -3,9 +3,9 @@ package br.com.uoutec.community.ediacaran.front.tags;
 import java.util.List;
 import java.util.Map;
 
-import br.com.uoutec.community.ediacaran.system.theme.PublicResource;
-import br.com.uoutec.community.ediacaran.system.theme.TemplateListVarsParser;
-import br.com.uoutec.community.ediacaran.system.theme.Theme;
+import br.com.uoutec.community.ediacaran.front.theme.PublicResource;
+import br.com.uoutec.community.ediacaran.front.theme.TemplateListVarsParser;
+import br.com.uoutec.community.ediacaran.front.theme.Theme;
 
 public class ResourcesTag extends AbstractSimpleComponent {
 	

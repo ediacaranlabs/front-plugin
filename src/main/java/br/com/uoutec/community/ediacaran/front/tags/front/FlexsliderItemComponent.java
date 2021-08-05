@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 
 public class FlexsliderItemComponent  extends AbstractComponent {
 

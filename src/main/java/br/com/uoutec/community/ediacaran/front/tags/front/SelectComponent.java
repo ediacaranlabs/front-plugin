@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.front.tags.SelectTag;
-import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
 public class SelectComponent extends ComponentFormComponent {
 

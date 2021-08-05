@@ -9,7 +9,7 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
-import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 
 public class CarouselComponent extends AbstractComponent {
 

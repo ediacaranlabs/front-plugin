@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
 import br.com.uoutec.community.ediacaran.front.tags.FlotChartsTag;
-import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
 public class FlotChartsComponent extends AbstractComponent {
 

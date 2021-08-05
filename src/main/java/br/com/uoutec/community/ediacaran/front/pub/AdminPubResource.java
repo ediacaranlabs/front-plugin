@@ -24,9 +24,6 @@ import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.MutablePluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginStatus;
-import br.com.uoutec.community.ediacaran.system.pub.MenuBar;
-import br.com.uoutec.community.ediacaran.system.pub.MenuBarManager;
-import br.com.uoutec.community.ediacaran.system.pub.MenuBarManagerException;
 
 @Singleton
 @Controller(value="${plugins.ediacaran.front.admin_context}", defaultActionName="/")

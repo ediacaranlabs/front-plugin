@@ -342,6 +342,33 @@ $.AppContext.utils = {
 		
 };
 
+$.AppContext.eventListeners = {
+		
+		addListener: function($listenerID, $listener){
+			$.AppContext.vars.eventListeners[$listenerID] = $listenerID;
+		},
+			
+		removeListener: function($listenerID, $listener){
+			delete $.AppContext.vars.eventListeners[$listenerID];
+		},
+		
+		fireEvent: function($event){
+			
+			var $listeners = $.AppContext.vars.eventListeners
+			var $i;
+			
+			for($i=0;$i<$listeners.length; $i++){
+				
+				if(typeof $listeners[$i].fireEvent !== 'undefined'){
+					$listeners[$i].fireEvent($event);
+				}
+				
+			}
+			
+		}
+		
+}
+
 $.AppContext.loadListeners = {
 
 		addListener: function($id, $resource, $listener){

@@ -14,14 +14,14 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
+import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.front.theme.ComponentVars;
+import br.com.uoutec.community.ediacaran.front.theme.TemplateVarParser;
+import br.com.uoutec.community.ediacaran.front.theme.Theme;
+import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
+import br.com.uoutec.community.ediacaran.front.theme.ThemeRegistry;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.system.theme.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.system.theme.ComponentVars;
-import br.com.uoutec.community.ediacaran.system.theme.TemplateVarParser;
-import br.com.uoutec.community.ediacaran.system.theme.Theme;
-import br.com.uoutec.community.ediacaran.system.theme.ThemeException;
-import br.com.uoutec.community.ediacaran.system.theme.ThemeRegistry;
 
 public abstract class AbstractPanelComponent 
 	extends BodyTagSupport

@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front;
+package br.com.uoutec.community.ediacaran.front.theme;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringPattern {
+public class TagTemplate {
 
     private String original;
     
@@ -19,9 +19,9 @@ public class StringPattern {
     
     private String stringPattern;
     
-    private List<StringPatternVar> vars;
+    private List<TagTemplateVar> vars;
 
-    public StringPattern(String value){
+    public TagTemplate(String value){
         this.parse(value);
         this.original   = value;
         this.pattern    = 
@@ -34,13 +34,13 @@ public class StringPattern {
 
     /* -- private methods -- */
     
-    private void parse(String uri) {
+    private void parse(String content) {
     	
         List<String> frags  = new ArrayList<String>();
         List<String> ids    = new ArrayList<String>();
         List<String> regexs = new ArrayList<String>();
         int startFrag       = 0;
-        char[] chars        = uri.toCharArray();
+        char[] chars        = content.toCharArray();
         int openKeysCount   = 0;
         int closeKeysCount  = 0;
         int firstOpenKeys   = -1;
@@ -51,7 +51,7 @@ public class StringPattern {
         	if(chars[i] == '{'){
         		
         		if(firstOpenKeys == -1){
-        			frags.add(decode(uri.substring(startFrag, i)));
+        			frags.add(decode(content.substring(startFrag, i)));
         			firstOpenKeys = i;
         		}
         		
@@ -66,7 +66,7 @@ public class StringPattern {
         	if(openKeysCount > 0 && openKeysCount == closeKeysCount){
         		
         		
-        		String var = uri.substring(firstOpenKeys + 1, lastCloseKeys);
+        		String var = content.substring(firstOpenKeys + 1, lastCloseKeys);
 
         		int separatorIndex = var.indexOf(":");
         		
@@ -76,7 +76,7 @@ public class StringPattern {
     					var.substring(0, separatorIndex);
     					
 		        if(id == null || id.isEmpty())
-		            throw new IllegalStateException("invalid parameter id " + var);
+		            throw new IllegalStateException("invalid parameter id " + var + ": " + content.substring(0, firstOpenKeys) + "...");
     					
     			String regex = 
 					separatorIndex != -1?
@@ -97,18 +97,18 @@ public class StringPattern {
         }
         
         if(openKeysCount > 0 && openKeysCount != closeKeysCount){
-            throw new IllegalStateException("expected: }");
+            throw new IllegalStateException("expected }: " + content.substring(0, lastCloseKeys) + "...");
         }
         
-        if(startFrag >= 0 && startFrag <= uri.length()){
-        	if(startFrag == uri.length())
+        if(startFrag >= 0 && startFrag <= content.length()){
+        	if(startFrag == content.length())
                 frags.add(null);
         	else
-        		frags.add(decode(uri.substring(startFrag, uri.length())));
+        		frags.add(decode(content.substring(startFrag, content.length())));
         }
         
 
-        vars = new ArrayList<StringPatternVar>();
+        vars = new ArrayList<TagTemplateVar>();
 
         for( int i=0;i<ids.size();i++ ){
         	
@@ -137,7 +137,7 @@ public class StringPattern {
             regexSuffix.append("$");
             
             vars.add(
-                    new StringPatternVar(
+                    new TagTemplateVar(
                         i,
                         ids.get(i),
                         Pattern.compile(regexs.get(i), Pattern.DOTALL | Pattern.CASE_INSENSITIVE),
@@ -170,7 +170,7 @@ public class StringPattern {
         
         
         for( int i=0;i<vars.size();i++ ){
-        	StringPatternVar p = (StringPatternVar)vars.get(i);
+        	TagTemplateVar p = (TagTemplateVar)vars.get(i);
 
             if(i == 0){
             	
@@ -215,7 +215,7 @@ public class StringPattern {
             return this.original;
         
         for(int i=0;i<vars.size();i++ ){
-            StringPatternVar p = vars.get(i);
+            TagTemplateVar p = vars.get(i);
             
             if(i == 0 && !p.isEmptyStart()){
                 value.append(p.getStart());
@@ -240,7 +240,7 @@ public class StringPattern {
             return this.original;
         
         for(int i=0;i<vars.size();i++ ){
-            StringPatternVar p = vars.get(i);
+            TagTemplateVar p = vars.get(i);
             
             if(i == 0 && !p.isEmptyStart()){
             	value.append(Pattern.quote(p.getStart()));
@@ -271,7 +271,7 @@ public class StringPattern {
             return this.original;
         
         for(int i=0;i<vars.size();i++ ){
-            StringPatternVar p = vars.get(i);
+            TagTemplateVar p = vars.get(i);
             
             if(i == 0 && p.getStart() != null){
                 value = p.getStart();
@@ -296,23 +296,32 @@ public class StringPattern {
         }
         
         for(int i=0;i<vars.size();i++ ){
-            StringPatternVar p = vars.get(i);
+            TagTemplateVar p = vars.get(i);
             
             if(i == 0 && p.getStart() != null){
                 writter.write(p.getStart());
             }
 
-            Object v = params[p.getIndex()];
-            
-            if(v instanceof VarParser) {
-            	((VarParser)v).parse(writter);
+            try {
+	            Object v = params[p.getIndex()];
+	            
+	            if(v instanceof VarParser) {
+	            	((VarParser)v).parse(writter);
+	            }
+	            else
+	            if(v instanceof TagTemplate) {
+	            	((TagTemplate)v).toWriter(writter, params);
+	            }
+	            else
+	            	writter.write(String.valueOf(v));
             }
-            else
-            if(v instanceof StringPattern) {
-            	((StringPattern)v).toWriter(writter, params);
+            catch(Throwable e) {
+	            throw new IllegalStateException(
+	            		"unable to resolve var " + p.getId() + ": " + 
+        				(p.getStart() == null? "" : p.getStart()) + "..." + (p.getEnd() == null? "" : p.getEnd()),
+        				e
+				);
             }
-            else
-            	writter.write(String.valueOf(v));
             
             if(p.getEnd() != null){
             	writter.write(p.getEnd());
@@ -330,24 +339,33 @@ public class StringPattern {
         }
         
         for(int i=0;i<vars.size();i++ ){
-            StringPatternVar p = vars.get(i);
+            TagTemplateVar p = vars.get(i);
             
             if(i == 0 && p.getStart() != null){
                 writter.write(p.getStart());
             }
 
-            Object v = params.get(p.getId());
-            
-            if(v instanceof VarParser) {
-            	((VarParser)v).parse(writter);
+            try {
+	            Object v = params.get(p.getId());
+	            
+	            if(v instanceof VarParser) {
+	            	((VarParser)v).parse(writter);
+	            }
+	            else
+	            if(v instanceof TagTemplate) {
+	            	((TagTemplate)v).toWriter(writter, params);
+	            }
+	            else
+	            if(v != null) {
+	            	writter.write(String.valueOf(v));
+	            }
             }
-            else
-            if(v instanceof StringPattern) {
-            	((StringPattern)v).toWriter(writter, params);
-            }
-            else
-            if(v != null) {
-            	writter.write(String.valueOf(v));
+            catch(Throwable e) {
+	            throw new IllegalStateException(
+	            		"unable to resolve var " + p.getId() + ": " + 
+        				(p.getStart() == null? "" : p.getStart()) + "..." + (p.getEnd() == null? "" : p.getEnd()),
+        				e
+				);
             }
             
             if(p.getEnd() != null){
@@ -362,7 +380,7 @@ public class StringPattern {
         Map<String,List<String>> params = new HashMap<String,List<String>>();
 
         for( int i=0;i<vars.size();i++ ){
-        	StringPatternVar p = vars.get(i);
+        	TagTemplateVar p = vars.get(i);
             String tmp     = value;
             tmp            = p.getRegexPrefix().matcher(tmp).replaceAll("");
             tmp            = p.getRegexSuffix().matcher(tmp).replaceAll("");
@@ -391,7 +409,7 @@ public class StringPattern {
     	}
     }
 
-	public List<StringPatternVar> getVars() {
+	public List<TagTemplateVar> getVars() {
 		return vars;
 	}
     

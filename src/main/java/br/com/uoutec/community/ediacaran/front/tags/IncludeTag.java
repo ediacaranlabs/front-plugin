@@ -14,7 +14,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
-import br.com.uoutec.community.ediacaran.system.theme.Theme;
+import br.com.uoutec.community.ediacaran.front.theme.Theme;
 
 public class IncludeTag extends AbstractSimpleComponent {
 	

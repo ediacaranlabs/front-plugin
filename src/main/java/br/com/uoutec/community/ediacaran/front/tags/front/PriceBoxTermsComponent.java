@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.system.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 
 public class PriceBoxTermsComponent extends AbstractComponent {
 
