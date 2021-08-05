@@ -1,6 +1,7 @@
 package br.com.uoutec.community.ediacaran.front;
 
 import br.com.uoutec.community.ediacaran.AbstractPlugin;
+import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
 import br.com.uoutec.community.ediacaran.core.security.AuthenticationProvider;
 import br.com.uoutec.community.ediacaran.core.security.SecurityManager;
 import br.com.uoutec.community.ediacaran.front.pub.AdminMenuBar;
@@ -37,6 +38,7 @@ public class PluginInstaller
 		installMenu();
 		installWidgets();
 		installSecurityConfig();
+		installListeners();
 	}
 	
 	private void installMenu() throws MenuBarManagerException {
@@ -161,6 +163,13 @@ public class PluginInstaller
 		}
 		
 	}
+
+	private void installListeners() {
+		
+		EdiacaranListenerManager  ediacaranListenerManager = EntityContextPlugin.getEntity(EdiacaranListenerManager.class);
+		ediacaranListenerManager.addListener(EntityContextPlugin.getEntity(ThemeEdiacaranListener.class));
+		
+	}
 	
 	private void installSecurityConfig() {
 		
@@ -184,9 +193,36 @@ public class PluginInstaller
 	}
 	
 	public void uninstall() throws Throwable {
+		uninstallMenu();
+		uninstallWidget();
+		uninstallSecurityConfig();
+		uninstallListeners();
+	}
+
+	private void uninstallSecurityConfig() {
+	}
+	
+	public void uninstallMenu() throws Throwable {
 		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);
 		mbm.removeMenuBar(ADMIN_MENU_BAR);
 		mbm.removeMenuBar(ADMIN_TOP_MENU_BAR);
+	}
+
+	public void uninstallWidget() throws Throwable {
+		Widgets widgets = EntityContextPlugin.getEntity(Widgets.class);
+		
+		if(pluginConfiguration.getBoolean("test")){
+			widgets.removeWidget("w2");
+			widgets.removeWidget("w1");
+		}
+		
+	}
+	
+	private void uninstallListeners() {
+		
+		EdiacaranListenerManager ediacaranListenerManager = EntityContextPlugin.getEntity(EdiacaranListenerManager.class);
+		ediacaranListenerManager.removeListener(EntityContextPlugin.getEntity(ThemeEdiacaranListener.class));
+		
 	}
 	
 }
