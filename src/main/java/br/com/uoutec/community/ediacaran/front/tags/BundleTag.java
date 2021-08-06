@@ -10,7 +10,7 @@ import javax.servlet.jsp.jstl.fmt.LocalizationContext;
 
 import br.com.uoutec.community.ediacaran.ContextManager;
 import br.com.uoutec.community.ediacaran.core.system.registry.MessageBundle;
-import br.com.uoutec.community.ediacaran.system.Constants;
+import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 
 public class BundleTag extends AbstractSimpleComponent {
 	
@@ -48,8 +48,9 @@ public class BundleTag extends AbstractSimpleComponent {
     		currentLocale = locale;
     	}
     	
-		MessageBundle lm = (MessageBundle)pageContext.getServletContext().getAttribute(Constants.MESSAGEBUNDLE);
-		
+		//MessageBundle lm = (MessageBundle)pageContext.getServletContext().getAttribute(Constants.MESSAGEBUNDLE);
+    	MessageBundle lm = EntityContextPlugin.getEntity(MessageBundle.class);
+    	
 		ResourceBundle value = lm.getResourceBundle(packageID, currentLocale);
 		
 		if(value == null) {
