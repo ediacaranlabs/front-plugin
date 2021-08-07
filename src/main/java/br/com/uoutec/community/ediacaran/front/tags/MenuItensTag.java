@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="menu-itens", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class MenuItensTag  extends AbstractSimpleComponent {
 
 	public static final String WRAPPER_TEMPLATE = "/components/menu-collapse";
@@ -68,6 +77,7 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 		return align;
 	}
 
+	@TagAttribute
 	public void setAlign(String align) {
 		this.align = align;
 	}
@@ -84,6 +94,7 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 		return menuAlign;
 	}
 
+	@TagAttribute
 	public void setMenuAlign(String menuAlign) {
 		this.menuAlign = menuAlign;
 	}
@@ -92,6 +103,7 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 		return collapse;
 	}
 
+	@TagAttribute
 	public void setCollapse(Boolean collapse) {
 		this.collapse = collapse;
 	}
@@ -100,6 +112,7 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 		return resource;
 	}
 
+	@TagAttribute
 	public void setResource(String resource) {
 		this.resource = resource;
 	}

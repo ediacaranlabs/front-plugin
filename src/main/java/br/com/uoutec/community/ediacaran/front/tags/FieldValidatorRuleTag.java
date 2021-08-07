@@ -5,7 +5,15 @@ import java.io.Writer;
 import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.front.tags.FieldValidatorTag.ValidatorEntity;
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
+@Tag(
+	name="field-validator-rule", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class FieldValidatorRuleTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/components/content";
@@ -24,6 +32,7 @@ public class FieldValidatorRuleTag extends AbstractSimpleComponent {
 		return name;
 	}
 
+    @TagAttribute
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -32,6 +41,7 @@ public class FieldValidatorRuleTag extends AbstractSimpleComponent {
 		return message;
 	}
 
+    @TagAttribute
 	public void setMessage(String message) {
 		this.message = message;
 	}
@@ -48,6 +58,7 @@ public class FieldValidatorRuleTag extends AbstractSimpleComponent {
 		return raw;
 	}
 
+    @TagAttribute
 	public void setRaw(Boolean raw) {
 		this.raw = raw;
 	}

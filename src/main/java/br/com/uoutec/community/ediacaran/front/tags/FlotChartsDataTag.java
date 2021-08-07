@@ -4,6 +4,15 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="flotcharts-data", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class FlotChartsDataTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE = "/components/flotcharts-data";
@@ -39,6 +48,7 @@ public class FlotChartsDataTag extends AbstractSimpleComponent {
 		return x;
 	}
 
+	@TagAttribute
 	public void setX(Double x) {
 		this.x = x;
 	}
@@ -47,6 +57,7 @@ public class FlotChartsDataTag extends AbstractSimpleComponent {
 		return y;
 	}
 
+	@TagAttribute
 	public void setY(Double y) {
 		this.y = y;
 	}
@@ -63,6 +74,7 @@ public class FlotChartsDataTag extends AbstractSimpleComponent {
 		return label;
 	}
 
+	@TagAttribute
 	public void setLabel(String label) {
 		this.label = label;
 	}

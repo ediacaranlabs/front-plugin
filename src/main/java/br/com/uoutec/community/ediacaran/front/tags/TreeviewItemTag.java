@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="treeview-item", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class TreeviewItemTag  extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/components/treeview-item";
@@ -29,6 +38,7 @@ public class TreeviewItemTag  extends AbstractSimpleComponent {
 		return href;
 	}
 
+	@TagAttribute
 	public void setHref(String href) {
 		this.href = href;
 	}

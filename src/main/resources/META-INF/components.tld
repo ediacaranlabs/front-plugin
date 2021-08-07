@@ -3998,7 +3998,7 @@ Adiciona uma linha uma tabela.
 	<!-- table-foot -->
 	
 	<tag>
-		<name>table-foot</name>
+		<name>table-footer</name>
 		<tag-class>br.com.uoutec.community.ediacaran.front.tags.TableFootTag</tag-class>
 		<body-content>scriptless</body-content>
 		<info><![CDATA[

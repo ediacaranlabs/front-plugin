@@ -14,8 +14,16 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
 
+@Tag(
+	name="include", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.EMPTY
+)
 public class IncludeTag extends AbstractSimpleComponent {
 	
 	private String uri;
@@ -64,6 +72,7 @@ public class IncludeTag extends AbstractSimpleComponent {
 		return uri;
 	}
 
+	@TagAttribute
 	public void setUri(String uri) {
 		this.uri = uri;
 	}

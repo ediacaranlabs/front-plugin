@@ -2,7 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
-public class TableFootTag  extends AbstractSimpleComponent {
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+
+@Tag(
+	name="table-footer", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
+public class TableFooterTag  extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/components/table-foot";
 	
@@ -12,7 +20,7 @@ public class TableFootTag  extends AbstractSimpleComponent {
 	
 	private JspFragmentVarParser content;
 	
-	public TableFootTag() {
+	public TableFooterTag() {
 	}
 	
     protected String getDefaultTemplate() {

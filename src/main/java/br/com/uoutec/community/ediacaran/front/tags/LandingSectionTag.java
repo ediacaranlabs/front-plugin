@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="landing-section", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class LandingSectionTag  extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/components/landing-section";
@@ -40,6 +49,7 @@ public class LandingSectionTag  extends AbstractSimpleComponent {
 		return name;
 	}
 
+	@TagAttribute
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -48,6 +58,7 @@ public class LandingSectionTag  extends AbstractSimpleComponent {
 		return title;
 	}
 
+	@TagAttribute
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -56,6 +67,7 @@ public class LandingSectionTag  extends AbstractSimpleComponent {
 		return img;
 	}
 
+	@TagAttribute
 	public void setImg(String img) {
 		this.img = img;
 	}
@@ -64,6 +76,7 @@ public class LandingSectionTag  extends AbstractSimpleComponent {
 		return align;
 	}
 
+	@TagAttribute
 	public void setAlign(String align) {
 		this.align = align;
 	}

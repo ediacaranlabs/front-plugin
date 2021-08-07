@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="menu-bar", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class MenuBarTag  extends AbstractSimpleComponent {
 
 	public static final String CONTEXT_ID = MenuBarTag.class.getName() + ":CONTEXT";
@@ -39,6 +48,7 @@ public class MenuBarTag  extends AbstractSimpleComponent {
 		return style;
 	}
 
+	@TagAttribute
 	public void setStyle(String style) {
 		this.style = style;
 	}
@@ -47,6 +57,7 @@ public class MenuBarTag  extends AbstractSimpleComponent {
 		return background;
 	}
 
+	@TagAttribute
 	public void setBackground(String background) {
 		this.background = background;
 	}
@@ -55,6 +66,7 @@ public class MenuBarTag  extends AbstractSimpleComponent {
 		return position;
 	}
 
+	@TagAttribute
 	public void setPosition(String position) {
 		this.position = position;
 	}
@@ -71,6 +83,7 @@ public class MenuBarTag  extends AbstractSimpleComponent {
 		return expand;
 	}
 
+	@TagAttribute
 	public void setExpand(String expand) {
 		this.expand = expand;
 	}
@@ -79,6 +92,7 @@ public class MenuBarTag  extends AbstractSimpleComponent {
 		return sidebar;
 	}
 
+	@TagAttribute
 	public void setSidebar(Boolean sidebar) {
 		this.sidebar = sidebar;
 	}

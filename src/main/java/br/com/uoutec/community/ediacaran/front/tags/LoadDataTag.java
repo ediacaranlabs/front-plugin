@@ -5,8 +5,16 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.web.tomcat.TomcatServerBootstrap;
 
+@Tag(
+	name="load-data", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class LoadDataTag  extends AbstractSimpleComponent {
 	
 	/* ------------ Attr ---------------*/
@@ -43,6 +51,7 @@ public class LoadDataTag  extends AbstractSimpleComponent {
 		return file;
 	}
 
+	@TagAttribute
 	public void setFile(String file) {
 		this.file = file;
 	}
@@ -51,6 +60,7 @@ public class LoadDataTag  extends AbstractSimpleComponent {
 		return var;
 	}
 
+	@TagAttribute
 	public void setVar(String var) {
 		this.var = var;
 	}

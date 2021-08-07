@@ -7,7 +7,15 @@ import java.io.Writer;
 import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.front.tags.FieldValidatorTag.ValidatorParamEntity;
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
+@Tag(
+	name="field-validator-param", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class FieldValidatorRuleParamTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE = "/components/content";
@@ -56,6 +64,7 @@ public class FieldValidatorRuleParamTag extends AbstractSimpleComponent {
 		return name;
 	}
 
+    @TagAttribute
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -64,6 +73,7 @@ public class FieldValidatorRuleParamTag extends AbstractSimpleComponent {
 		return value;
 	}
 
+    @TagAttribute
 	public void setValue(String value) {
 		this.value = value;
 	}
@@ -80,6 +90,7 @@ public class FieldValidatorRuleParamTag extends AbstractSimpleComponent {
 		return raw;
 	}
 
+    @TagAttribute
 	public void setRaw(Boolean raw) {
 		this.raw = raw;
 	}

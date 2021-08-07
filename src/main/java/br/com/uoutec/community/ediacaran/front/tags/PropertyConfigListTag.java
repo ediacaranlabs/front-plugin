@@ -4,6 +4,15 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="property-config-list", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class PropertyConfigListTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE 			= "/components/property-config-list";
@@ -66,6 +75,7 @@ public class PropertyConfigListTag extends AbstractSimpleComponent {
 		return name;
 	}
 
+	@TagAttribute
 	public void setName(String name) {
 		this.name = name;
 	}

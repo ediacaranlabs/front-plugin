@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+		name="flotcharts", 
+		uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+		bodycontent=BodyTypes.SCRIPTLESS
+		)
 public class FlotChartsTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE = "/components/flotcharts";
@@ -43,6 +52,7 @@ public class FlotChartsTag extends AbstractSimpleComponent {
 		return src;
 	}
 
+	@TagAttribute
 	public void setSrc(String src) {
 		this.src = src;
 	}
@@ -51,6 +61,7 @@ public class FlotChartsTag extends AbstractSimpleComponent {
 		return togglingSeries;
 	}
 
+	@TagAttribute
 	public void setTogglingSeries(Boolean togglingSeries) {
 		this.togglingSeries = togglingSeries;
 	}
@@ -59,6 +70,7 @@ public class FlotChartsTag extends AbstractSimpleComponent {
 		return updateFrequence;
 	}
 
+	@TagAttribute
 	public void setUpdateFrequence(Integer updateFrequence) {
 		this.updateFrequence = updateFrequence;
 	}
@@ -67,6 +79,7 @@ public class FlotChartsTag extends AbstractSimpleComponent {
 		return updateFrequenceUnit;
 	}
 
+	@TagAttribute
 	public void setUpdateFrequenceUnit(String updateFrequenceUnit) {
 		this.updateFrequenceUnit = updateFrequenceUnit;
 	}

@@ -10,8 +10,16 @@ import javax.servlet.jsp.jstl.fmt.LocalizationContext;
 
 import br.com.uoutec.community.ediacaran.ContextManager;
 import br.com.uoutec.community.ediacaran.core.system.registry.MessageBundle;
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 
+@Tag(
+	name="setBundle", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.EMPTY
+)
 public class BundleTag extends AbstractSimpleComponent {
 	
 	private Locale locale;
@@ -68,6 +76,7 @@ public class BundleTag extends AbstractSimpleComponent {
 		return locale;
 	}
 
+	@TagAttribute
 	public void setLocale(Locale locale) {
 		this.locale = locale;
 	}
@@ -76,6 +85,7 @@ public class BundleTag extends AbstractSimpleComponent {
 		return var;
 	}
 
+	@TagAttribute
 	public void setVar(String var) {
 		this.var = var;
 	}
@@ -84,6 +94,7 @@ public class BundleTag extends AbstractSimpleComponent {
 		return basename;
 	}
 
+	@TagAttribute
 	public void setBasename(String basename) {
 		this.basename = basename;
 	}

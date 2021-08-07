@@ -6,9 +6,17 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateListVarParser;
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
 
+@Tag(
+	name="field-validator", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class FieldValidatorTag extends AbstractPanelComponent {
 
 	private static final long serialVersionUID = 748182107582888257L;
@@ -36,6 +44,7 @@ public class FieldValidatorTag extends AbstractPanelComponent {
 		return form;
 	}
 
+    @TagAttribute
 	public void setForm(String form) {
 		this.form = form;
 	}
@@ -44,6 +53,7 @@ public class FieldValidatorTag extends AbstractPanelComponent {
 		return field;
 	}
 
+    @TagAttribute
 	public void setField(String field) {
 		this.field = field;
 	}
