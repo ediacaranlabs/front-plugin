@@ -1,169 +1,162 @@
 <taglib
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee web-jsptaglibrary_2_1.xsd"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	version="2.1">
+     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee web-jsptaglibrary_2_1.xsd"
+     xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     version="2.1">
+
+     <tlib-version>1.0</tlib-version>
+     <jsp-version>2.0</jsp-version>
+     <uri>https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer</uri>
      
-	<tlib-version>1.0</tlib-version>
-	<jsp-version>2.0</jsp-version>
-	<short-name>det</short-name>
-    <uri>https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer</uri>
-	<!-- container -->	
-	<tag>
-		<name>container</name>
-		<tag-class>br.com.uoutec.community.ediacaran.front.tags.ContainerTag</tag-class>
-		<body-content>scriptless</body-content>
-		
-		<!-- default attr -->
-		
-		<attribute>
-			<description>Permite informar atributos extra.</description>
-			<name>extAttrs</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-			<fragment>true</fragment>
-		</attribute>
-
-		<attribute>
-			<description>Define o template do componente</description>
-			<name>template</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-			<fragment>true</fragment>
-		</attribute>
-		
-		<attribute>
-			<description>Define a identificação do componente.</description>
-			<name>id</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-			<fragment>true</fragment>
-		</attribute>
-		
-		<!-- attr -->
-		
-	</tag>
-	<!-- /container -->	
-
-	<!-- row -->	
-	<tag>
-		<name>row</name>
-		<tag-class>br.com.uoutec.community.ediacaran.front.tags.RowTag</tag-class>
-		<body-content>scriptless</body-content>
-		
-		<!-- default attr -->
-		
-		<attribute>
-			<description>Permite informar atributos extra.</description>
-			<name>extAttrs</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-			<fragment>true</fragment>
-		</attribute>
-
-		<attribute>
-			<description>Define o template do componente</description>
-			<name>template</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-			<fragment>true</fragment>
-		</attribute>
-		
-		<attribute>
-			<description>Define a identificação do componente.</description>
-			<name>id</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-			<fragment>true</fragment>
-		</attribute>
-		
-		<attribute>
-			<description></description>
-			<name>classStyle</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-			<fragment>true</fragment>
-		</attribute>
-		
-		<!-- attr -->
-		
-		<attribute>
-			<description></description>
-			<name>style</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-			<fragment>true</fragment>
-		</attribute>
-		
-	</tag>
-	<!-- /row -->	
-
-	<!-- col -->	
-	<tag>
-		<name>col</name>
-		<tag-class>br.com.uoutec.community.ediacaran.front.tags.ColTag</tag-class>
-		<body-content>scriptless</body-content>
-		
-		<!-- default attr -->
-		
-		<attribute>
-			<description>Permite informar atributos extra.</description>
-			<name>extAttrs</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-			<fragment>true</fragment>
-		</attribute>
-
-		<attribute>
-			<description>Define o template do componente</description>
-			<name>template</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-			<fragment>true</fragment>
-		</attribute>
-		
-		<attribute>
-			<description>Define a identificação do componente.</description>
-			<name>id</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-			<fragment>true</fragment>
-		</attribute>
-		
-		<attribute>
-			<description></description>
-			<name>classStyle</name>
-			<required>false</required>
-			<type>java.lang.String</type>
-			<fragment>true</fragment>
-		</attribute>
-		
-		<!-- attr -->
-		
-		<attribute>
-			<description></description>
-			<name>size</name>
-			<required>false</required>
-			<type>java.lang.Integer</type>
-			<fragment>true</fragment>
-		</attribute>
-		
-		<attribute>
-			<description></description>
-			<name>offset</name>
-			<required>false</required>
-			<type>java.lang.Integer</type>
-			<fragment>true</fragment>
-		</attribute>
-		
-		<attribute>
-			<description></description>
-			<name>order</name>
-			<required>false</required>
-			<type>java.lang.Integer</type>
-			<fragment>true</fragment>
-		</attribute>
-		
-	</tag>
-	<!-- /col -->	
-	
+     <!-- container -->
+     
+     <tag>
+          <name>container</name>
+          <tag-class>br.com.uoutec.community.ediacaran.front.tags.ContainerTag</tag-class>
+          <body-content>scriptless</body-content>
+          <info><![CDATA[
+          ]]></info>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>id</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>classStyle</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+     </tag>
+     
+     <!-- /container -->
+     
+     <!-- row -->
+     
+     <tag>
+          <name>row</name>
+          <tag-class>br.com.uoutec.community.ediacaran.front.tags.RowTag</tag-class>
+          <body-content>scriptless</body-content>
+          <info><![CDATA[
+          ]]></info>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>style</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>id</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>classStyle</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+     </tag>
+     
+     <!-- /row -->
+     
+     <!-- col -->
+     
+     <tag>
+          <name>col</name>
+          <tag-class>br.com.uoutec.community.ediacaran.front.tags.ColTag</tag-class>
+          <body-content>scriptless</body-content>
+          <info><![CDATA[
+          ]]></info>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>offset</name>
+                    <required>false</required>
+                    <type>java.lang.Integer</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>size</name>
+                    <required>false</required>
+                    <type>java.lang.Integer</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>order</name>
+                    <required>false</required>
+                    <type>java.lang.Integer</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>id</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>classStyle</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+     </tag>
+     
+     <!-- /col -->
 </taglib>
