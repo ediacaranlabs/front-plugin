@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="col", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class ColTag  extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/designer/col";
@@ -33,6 +42,7 @@ public class ColTag  extends AbstractSimpleComponent {
 		return size;
 	}
 
+	@TagAttribute
 	public void setSize(Integer size) {
 		this.size = size;
 	}
@@ -41,6 +51,7 @@ public class ColTag  extends AbstractSimpleComponent {
 		return offset;
 	}
 
+	@TagAttribute
 	public void setOffset(Integer offset) {
 		this.offset = offset;
 	}
@@ -57,6 +68,7 @@ public class ColTag  extends AbstractSimpleComponent {
 		return order;
 	}
 
+	@TagAttribute
 	public void setOrder(Integer order) {
 		this.order = order;
 	}
