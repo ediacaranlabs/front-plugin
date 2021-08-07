@@ -369,6 +369,7 @@ public abstract class AbstractSimpleComponent
 		return style;
 	}
 
+	@TagAttribute
 	public void setStyle(String style) {
 		this.style = style;
 	}

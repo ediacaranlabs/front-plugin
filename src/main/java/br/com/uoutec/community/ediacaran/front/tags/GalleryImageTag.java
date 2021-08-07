@@ -4,6 +4,7 @@ import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
 @Tag(
 	name="gallery-image", 
@@ -46,6 +47,7 @@ public class GalleryImageTag  extends AbstractSimpleComponent {
 		return title;
 	}
 
+	@TagAttribute(required=true)
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -54,6 +56,7 @@ public class GalleryImageTag  extends AbstractSimpleComponent {
 		return filter;
 	}
 
+	@TagAttribute
 	public void setFilter(String filter) {
 		this.filter = filter;
 	}
@@ -62,6 +65,7 @@ public class GalleryImageTag  extends AbstractSimpleComponent {
 		return icon;
 	}
 
+	@TagAttribute(required=true)
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
@@ -70,6 +74,7 @@ public class GalleryImageTag  extends AbstractSimpleComponent {
 		return src;
 	}
 
+	@TagAttribute(required=true)
 	public void setSrc(String src) {
 		this.src = src;
 	}
@@ -78,6 +83,7 @@ public class GalleryImageTag  extends AbstractSimpleComponent {
 		return text;
 	}
 
+	@TagAttribute
 	public void setText(String text) {
 		this.text = text;
 	}

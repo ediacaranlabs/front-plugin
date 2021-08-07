@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,8 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.persistence.criteria.CriteriaBuilder.In;
 
 import br.com.uoutec.application.ClassUtil;
 import br.com.uoutec.application.scanner.DefaultScanner;

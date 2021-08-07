@@ -46,7 +46,7 @@ public abstract class ComponentFormTag extends AbstractSimpleComponent {
 		this.group = group;
 	}
 
-	@TagAttribute(required=true)
+	@TagAttribute
 	public void setName(String name) {
 		this.name = name;
 	}

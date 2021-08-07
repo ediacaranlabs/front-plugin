@@ -62,7 +62,7 @@ public class DescriptionTag  extends AbstractSimpleComponent {
 		return titleWidth;
 	}
 
-	@TagAttribute(required=true)
+	@TagAttribute
 	public void setTitleWidth(Integer titleWidth) {
 		this.titleWidth = titleWidth;
 	}

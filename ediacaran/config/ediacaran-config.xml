@@ -58,11 +58,8 @@
 				<void method="addExtension">
 					<string>com.arjuna.ats.jta.cdi.TransactionExtension</string>
 				</void>
- 				<void method="addExtension">
-					<string>org.glassfish.soteria.cdi.CdiExtension</string>
-				</void>
 				<void method="addService">
-					<string>br.com.uoutec.community.ediacaran.server.system.entityaccess.hibernate.tx.CDITransactionServices</string>
+					<string>br.com.uoutec.community.ediacaran.core.system.cdi.weld.CDITransactionServices</string>
 				</void>
 				<void method="addExtension">
 					<string>br.com.uoutec.filter.invoker.cdi.InvokerFilterExtension</string>
@@ -116,17 +113,7 @@
 		<void method="addPluginSearch">
 			<object class="br.com.uoutec.community.ediacaran.plugins.FileSystemPluginsSearch"/>
 		</void>
-
-		<void method="setSystemProperty">
-			<string>java.naming.factory.url.pkgs</string>
-			<string>org.apache.naming</string>
-		</void>
 		
-		<void method="setSystemProperty">
-			<string>java.naming.factory.initial</string>
-			<string>org.apache.naming.java.javaURLContextFactory</string>
-		</void>
- 		
 		<void method="setSystemProperty">
 			<string>java.security.auth.login.config</string>
 			<string>config/jaas.config</string>
