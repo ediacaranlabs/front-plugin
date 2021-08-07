@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="dropdown", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class DropdownTag  extends ComponentFormTag {
 
 	public static final String TEMPLATE  = "/components/dropdown";
@@ -45,6 +54,7 @@ public class DropdownTag  extends ComponentFormTag {
 		return label;
 	}
 
+	@TagAttribute(required=true)
 	public void setLabel(String label) {
 		this.label = label;
 	}
@@ -53,6 +63,7 @@ public class DropdownTag  extends ComponentFormTag {
 		return style;
 	}
 
+	@TagAttribute
 	public void setStyle(String style) {
 		this.style = style;
 	}
@@ -61,6 +72,7 @@ public class DropdownTag  extends ComponentFormTag {
 		return size;
 	}
 
+	@TagAttribute
 	public void setSize(String size) {
 		this.size = size;
 	}
@@ -69,6 +81,7 @@ public class DropdownTag  extends ComponentFormTag {
 		return split;
 	}
 
+	@TagAttribute
 	public void setSplit(Boolean split) {
 		this.split = split;
 	}
@@ -77,6 +90,7 @@ public class DropdownTag  extends ComponentFormTag {
 		return variation;
 	}
 
+	@TagAttribute
 	public void setVariation(String variation) {
 		this.variation = variation;
 	}

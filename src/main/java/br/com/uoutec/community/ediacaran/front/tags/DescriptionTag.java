@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="description", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class DescriptionTag  extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/components/description";
@@ -35,6 +44,7 @@ public class DescriptionTag  extends AbstractSimpleComponent {
 		return title;
 	}
 
+	@TagAttribute
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -43,6 +53,7 @@ public class DescriptionTag  extends AbstractSimpleComponent {
 		return truncate;
 	}
 
+	@TagAttribute
 	public void setTruncate(Boolean truncate) {
 		this.truncate = truncate;
 	}
@@ -51,6 +62,7 @@ public class DescriptionTag  extends AbstractSimpleComponent {
 		return titleWidth;
 	}
 
+	@TagAttribute(required=true)
 	public void setTitleWidth(Integer titleWidth) {
 		this.titleWidth = titleWidth;
 	}
@@ -59,6 +71,7 @@ public class DescriptionTag  extends AbstractSimpleComponent {
 		return contentWidth;
 	}
 
+	@TagAttribute
 	public void setContentWidth(Integer contentWidth) {
 		this.contentWidth = contentWidth;
 	}

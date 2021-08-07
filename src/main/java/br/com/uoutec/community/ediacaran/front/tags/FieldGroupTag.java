@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="field-group", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class FieldGroupTag  extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/components/field-group";
@@ -37,6 +46,7 @@ public class FieldGroupTag  extends AbstractSimpleComponent {
 		return size;
 	}
 
+	@TagAttribute
 	public void setSize(String size) {
 		this.size = size;
 	}

@@ -1,5 +1,14 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="image", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class ImageTag  extends AbstractSimpleComponent {
 
 	private static final String TEMPLATE  = "/components/image";
@@ -22,6 +31,7 @@ public class ImageTag  extends AbstractSimpleComponent {
 		return src;
 	}
 
+	@TagAttribute(required=true)
 	public void setSrc(String src) {
 		this.src = src;
 	}
@@ -30,6 +40,7 @@ public class ImageTag  extends AbstractSimpleComponent {
 		return style;
 	}
 
+	@TagAttribute
 	public void setStyle(String style) {
 		this.style = style;
 	}
@@ -38,6 +49,7 @@ public class ImageTag  extends AbstractSimpleComponent {
 		return align;
 	}
 
+	@TagAttribute
 	public void setAlign(String align) {
 		this.align = align;
 	}
