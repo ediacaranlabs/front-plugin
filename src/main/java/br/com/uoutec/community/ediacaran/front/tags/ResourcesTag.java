@@ -3,10 +3,13 @@ package br.com.uoutec.community.ediacaran.front.tags;
 import java.util.List;
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.PublicResource;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateListVarsParser;
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
 
+@Tag(name="resources", uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components")
 public class ResourcesTag extends AbstractSimpleComponent {
 	
 	public static final String TEMPLATE = "/components/resources";
@@ -40,6 +43,7 @@ public class ResourcesTag extends AbstractSimpleComponent {
 		return type;
 	}
 
+	@TagAttribute(required=true, fragment=true)
 	public void setType(String type) {
 		this.type = type;
 	}

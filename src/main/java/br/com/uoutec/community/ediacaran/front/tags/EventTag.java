@@ -4,6 +4,15 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="event", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class EventTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/components/event";
@@ -33,6 +42,7 @@ public class EventTag extends AbstractSimpleComponent {
 		return type;
 	}
 
+    @TagAttribute(required=true)
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -41,6 +51,7 @@ public class EventTag extends AbstractSimpleComponent {
 		return component;
 	}
 
+    @TagAttribute
 	public void setComponent(String component) {
 		this.component = component;
 	}

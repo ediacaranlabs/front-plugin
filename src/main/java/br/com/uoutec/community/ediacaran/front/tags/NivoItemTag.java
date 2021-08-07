@@ -5,14 +5,15 @@ import java.io.StringWriter;
 
 import javax.servlet.jsp.JspException;
 
-//@Tag(value="nivo-slider", bodyType=BodyTypes.SCRIPTLESS)
-//@TagDoc({
-//"	Adiciona um novo NIVO slider. Os slides podem ser adicionados com <nivo-slider-item/>",
-//"	Ex:",
-//"	<nivo-slider>",
-//"		<nivo-slider-item image=\"/imgs/slide1.png\" tile=\"Title1\">Text Content</nivo-slider>",
-//"	</nivo-slider>"
-//})
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="nivo-slider-tem", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class NivoItemTag extends AbstractSimpleComponent {
 	
 	/* ------------ Attr ---------------*/
@@ -47,8 +48,7 @@ public class NivoItemTag extends AbstractSimpleComponent {
 		return link;
 	}
 
-//	@TagDoc("Define o link da imagem")
-//	@TagAttribute(required=true,type=String.class,fragment=true)
+	@TagAttribute(required=true)
 	public void setLink(String link) {
 		this.link = link;
 	}
@@ -57,6 +57,7 @@ public class NivoItemTag extends AbstractSimpleComponent {
 		return image;
 	}
 
+	@TagAttribute(required=true)
 	public void setImage(String image) {
 		this.image = image;
 	}
@@ -65,6 +66,7 @@ public class NivoItemTag extends AbstractSimpleComponent {
 		return title;
 	}
 
+	@TagAttribute(required=true)
 	public void setTitle(String title) {
 		this.title = title;
 	}

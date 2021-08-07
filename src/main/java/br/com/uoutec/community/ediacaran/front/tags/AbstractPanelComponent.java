@@ -14,6 +14,7 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.front.theme.ComponentVars;
@@ -347,6 +348,7 @@ public abstract class AbstractPanelComponent
 		return extAttrs;
 	}
 
+	@TagAttribute
 	public void setExtAttrs(String extAttrs) {
 		this.extAttrs = extAttrs;
 	}
@@ -365,6 +367,7 @@ public abstract class AbstractPanelComponent
 		return id;
 	}
 
+	@TagAttribute
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -373,6 +376,7 @@ public abstract class AbstractPanelComponent
 		return template;
 	}
 
+	@TagAttribute
 	public void setTemplate(String template) {
 		this.template = template;
 	}
@@ -389,6 +393,7 @@ public abstract class AbstractPanelComponent
 		return classStyle;
 	}
 
+	@TagAttribute
 	public void setClassStyle(String classStyle) {
 		this.classStyle = classStyle;
 	}

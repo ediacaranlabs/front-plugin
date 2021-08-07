@@ -6,9 +6,17 @@ import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateListVarParser;
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
 
+@Tag(
+	name="nivo-slider", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+	)
 public class NivoTag extends AbstractPanelComponent {
 
 	private static final long serialVersionUID = 748182107582888257L;
@@ -63,6 +71,7 @@ public class NivoTag extends AbstractPanelComponent {
 		return button;
 	}
 
+	@TagAttribute
 	public void setButton(String button) {
 		this.button = button;
 	}

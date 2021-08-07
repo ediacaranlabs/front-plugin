@@ -2,8 +2,16 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
 
+@Tag(
+	name="alert", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class AlertTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE = "/components/alert";
@@ -32,6 +40,7 @@ public class AlertTag extends AbstractSimpleComponent {
 		return style;
 	}
 
+	@TagAttribute
 	public void setStyle(String style) {
 		this.style = style;
 	}
