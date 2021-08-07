@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="option", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class OptionTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/components/option";
@@ -31,6 +40,7 @@ public class OptionTag extends ComponentFormTag {
 		return selected;
 	}
 
+	@TagAttribute
 	public void setSelected(Boolean selected) {
 		this.selected = selected;
 	}
@@ -39,6 +49,7 @@ public class OptionTag extends ComponentFormTag {
 		return label;
 	}
 
+	@TagAttribute
 	public void setLabel(String label) {
 		this.label = label;
 	}

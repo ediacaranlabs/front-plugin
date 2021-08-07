@@ -2,8 +2,16 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
 
+@Tag(
+	name="button", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class ButtonTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/components/button";
@@ -51,6 +59,7 @@ public class ButtonTag extends ComponentFormTag {
 		return icon;
 	}
 
+	@TagAttribute
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
@@ -59,6 +68,7 @@ public class ButtonTag extends ComponentFormTag {
 		return action;
 	}
 
+	@TagAttribute
 	public void setAction(String action) {
 		this.action = action;
 	}
@@ -67,6 +77,7 @@ public class ButtonTag extends ComponentFormTag {
 		return ctype;
 	}
 
+	@TagAttribute
 	public void setCtype(String ctype) {
 		this.ctype = ctype;
 	}
@@ -75,6 +86,7 @@ public class ButtonTag extends ComponentFormTag {
 		return method;
 	}
 
+	@TagAttribute
 	public void setMethod(String method) {
 		this.method = method;
 	}
@@ -83,6 +95,7 @@ public class ButtonTag extends ComponentFormTag {
 		return target;
 	}
 
+	@TagAttribute
 	public void setTarget(String target) {
 		this.target = target;
 	}
@@ -91,6 +104,7 @@ public class ButtonTag extends ComponentFormTag {
 		return outline;
 	}
 
+	@TagAttribute
 	public void setOutline(Boolean outline) {
 		this.outline = outline;
 	}
@@ -99,6 +113,7 @@ public class ButtonTag extends ComponentFormTag {
 		return label;
 	}
 
+	@TagAttribute(required=true)
 	public void setLabel(String label) {
 		this.label = label;
 	}
@@ -107,6 +122,7 @@ public class ButtonTag extends ComponentFormTag {
 		return size;
 	}
 
+	@TagAttribute
 	public void setSize(String size) {
 		this.size = size;
 	}
@@ -115,6 +131,7 @@ public class ButtonTag extends ComponentFormTag {
 		return type;
 	}
 
+	@TagAttribute
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -123,6 +140,7 @@ public class ButtonTag extends ComponentFormTag {
 		return block;
 	}
 
+	@TagAttribute
 	public void setBlock(Boolean block) {
 		this.block = block;
 	}
@@ -131,6 +149,7 @@ public class ButtonTag extends ComponentFormTag {
 		return actionType;
 	}
 
+	@TagAttribute
 	public void setActionType(String actionType) {
 		this.actionType = actionType;
 	}

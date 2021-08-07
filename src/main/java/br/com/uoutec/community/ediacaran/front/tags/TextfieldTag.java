@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="textfield", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class TextfieldTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/components/textfield";
@@ -47,6 +56,7 @@ public class TextfieldTag extends ComponentFormTag {
 		return autocomplete;
 	}
 
+	@TagAttribute
 	public void setAutocomplete(Boolean autocomplete) {
 		this.autocomplete = autocomplete;
 	}
@@ -55,6 +65,7 @@ public class TextfieldTag extends ComponentFormTag {
 		return autofocus;
 	}
 
+	@TagAttribute
 	public void setAutofocus(Boolean autofocus) {
 		this.autofocus = autofocus;
 	}
@@ -63,6 +74,7 @@ public class TextfieldTag extends ComponentFormTag {
 		return maxlength;
 	}
 
+	@TagAttribute
 	public void setMaxlength(Integer maxlength) {
 		this.maxlength = maxlength;
 	}
@@ -71,6 +83,7 @@ public class TextfieldTag extends ComponentFormTag {
 		return minlength;
 	}
 
+	@TagAttribute
 	public void setMinlength(Integer minlength) {
 		this.minlength = minlength;
 	}
@@ -79,6 +92,7 @@ public class TextfieldTag extends ComponentFormTag {
 		return pattern;
 	}
 
+	@TagAttribute
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
 	}
@@ -87,6 +101,7 @@ public class TextfieldTag extends ComponentFormTag {
 		return placeholder;
 	}
 
+	@TagAttribute
 	public void setPlaceholder(String placeholder) {
 		this.placeholder = placeholder;
 	}
@@ -95,6 +110,7 @@ public class TextfieldTag extends ComponentFormTag {
 		return required;
 	}
 
+	@TagAttribute
 	public void setRequired(Boolean required) {
 		this.required = required;
 	}
@@ -103,6 +119,7 @@ public class TextfieldTag extends ComponentFormTag {
 		return label;
 	}
 
+	@TagAttribute
 	public void setLabel(String label) {
 		this.label = label;
 	}
@@ -111,6 +128,7 @@ public class TextfieldTag extends ComponentFormTag {
 		return size;
 	}
 
+	@TagAttribute
 	public void setSize(String size) {
 		this.size = size;
 	}

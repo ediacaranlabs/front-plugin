@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="filefield", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class FilefieldTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/components/filefield";
@@ -37,6 +46,7 @@ public class FilefieldTag extends ComponentFormTag {
 		return accept;
 	}
 
+	@TagAttribute
 	public void setAccept(String accept) {
 		this.accept = accept;
 	}
@@ -45,6 +55,7 @@ public class FilefieldTag extends ComponentFormTag {
 		return capture;
 	}
 
+	@TagAttribute
 	public void setCapture(Boolean capture) {
 		this.capture = capture;
 	}
@@ -53,6 +64,7 @@ public class FilefieldTag extends ComponentFormTag {
 		return multiple;
 	}
 
+	@TagAttribute
 	public void setMultiple(Boolean multiple) {
 		this.multiple = multiple;
 	}
@@ -61,6 +73,7 @@ public class FilefieldTag extends ComponentFormTag {
 		return label;
 	}
 
+	@TagAttribute
 	public void setLabel(String label) {
 		this.label = label;
 	}

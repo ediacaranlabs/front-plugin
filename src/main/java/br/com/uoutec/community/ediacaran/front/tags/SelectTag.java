@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="select", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class SelectTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/components/select";
@@ -42,6 +51,7 @@ public class SelectTag extends ComponentFormTag {
 		return autofocus;
 	}
 
+	@TagAttribute
 	public void setAutofocus(Boolean autofocus) {
 		this.autofocus = autofocus;
 	}
@@ -50,6 +60,7 @@ public class SelectTag extends ComponentFormTag {
 		return readonly;
 	}
 
+	@TagAttribute
 	public void setReadonly(Boolean readonly) {
 		this.readonly = readonly;
 	}
@@ -58,6 +69,7 @@ public class SelectTag extends ComponentFormTag {
 		return required;
 	}
 
+	@TagAttribute
 	public void setRequired(Boolean required) {
 		this.required = required;
 	}
@@ -66,6 +78,7 @@ public class SelectTag extends ComponentFormTag {
 		return label;
 	}
 
+	@TagAttribute
 	public void setLabel(String label) {
 		this.label = label;
 	}
@@ -74,6 +87,7 @@ public class SelectTag extends ComponentFormTag {
 		return multiple;
 	}
 
+	@TagAttribute
 	public void setMultiple(Boolean multiple) {
 		this.multiple = multiple;
 	}
@@ -82,6 +96,7 @@ public class SelectTag extends ComponentFormTag {
 		return size;
 	}
 
+	@TagAttribute
 	public void setSize(String size) {
 		this.size = size;
 	}
@@ -90,6 +105,7 @@ public class SelectTag extends ComponentFormTag {
 		return sizeList;
 	}
 
+	@TagAttribute
 	public void setSizeList(Integer sizeList) {
 		this.sizeList = sizeList;
 	}

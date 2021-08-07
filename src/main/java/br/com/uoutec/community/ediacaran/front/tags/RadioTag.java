@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="radio", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+	)
 public class RadioTag extends ComponentFormTag {
 
 	public static final String TEMPLATE = "/components/radio";
@@ -34,6 +43,7 @@ public class RadioTag extends ComponentFormTag {
 		return selected;
 	}
 
+	@TagAttribute
 	public void setSelected(Boolean selected) {
 		this.selected = selected;
 	}
@@ -42,6 +52,7 @@ public class RadioTag extends ComponentFormTag {
 		return label;
 	}
 
+	@TagAttribute
 	public void setLabel(String label) {
 		this.label = label;
 	}
@@ -50,6 +61,7 @@ public class RadioTag extends ComponentFormTag {
 		return inline;
 	}
 
+	@TagAttribute
 	public void setInline(Boolean inline) {
 		this.inline = inline;
 	}

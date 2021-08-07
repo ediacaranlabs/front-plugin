@@ -2,8 +2,16 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import javax.servlet.jsp.JspException;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateListVarsParser;
 
+@Tag(
+	name="tabs", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class TabsTag extends AbstractPanelComponent {
 
 	private static final long serialVersionUID = 748182107582888257L;
@@ -80,6 +88,7 @@ public class TabsTag extends AbstractPanelComponent {
 		return style;
 	}
 
+	@TagAttribute
 	public void setStyle(String style) {
 		this.style = style;
 	}

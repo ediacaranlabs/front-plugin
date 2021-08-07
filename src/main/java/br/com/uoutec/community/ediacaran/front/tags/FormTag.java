@@ -3,8 +3,16 @@ package br.com.uoutec.community.ediacaran.front.tags;
 import java.io.Writer;
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
 
+@Tag(
+	name="form", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class FormTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE = "/components/form";
@@ -57,6 +65,7 @@ public class FormTag extends AbstractSimpleComponent {
 		return acceptCharset;
 	}
 
+	@TagAttribute
 	public void setAcceptCharset(String acceptCharset) {
 		this.acceptCharset = acceptCharset;
 	}
@@ -65,6 +74,7 @@ public class FormTag extends AbstractSimpleComponent {
 		return action;
 	}
 
+	@TagAttribute
 	public void setAction(String action) {
 		this.action = action;
 	}
@@ -73,6 +83,7 @@ public class FormTag extends AbstractSimpleComponent {
 		return enctype;
 	}
 
+	@TagAttribute
 	public void setEnctype(String enctype) {
 		this.enctype = enctype;
 	}
@@ -81,6 +92,7 @@ public class FormTag extends AbstractSimpleComponent {
 		return method;
 	}
 
+	@TagAttribute
 	public void setMethod(String method) {
 		this.method = method;
 	}
@@ -89,6 +101,7 @@ public class FormTag extends AbstractSimpleComponent {
 		return target;
 	}
 
+	@TagAttribute
 	public void setTarget(String target) {
 		this.target = target;
 	}
@@ -105,6 +118,7 @@ public class FormTag extends AbstractSimpleComponent {
 		return style;
 	}
 
+	@TagAttribute
 	public void setStyle(String style) {
 		this.style = style;
 	}
@@ -113,6 +127,7 @@ public class FormTag extends AbstractSimpleComponent {
 		return update;
 	}
 
+	@TagAttribute
 	public void setUpdate(String update) {
 		this.update = update;
 	}

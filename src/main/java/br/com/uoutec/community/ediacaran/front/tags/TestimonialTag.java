@@ -2,9 +2,17 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.DelegateVarParser;
 import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
 
+@Tag(
+	name="testimonial", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class TestimonialTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE = "/components/testimonial";
@@ -37,6 +45,7 @@ public class TestimonialTag extends AbstractSimpleComponent {
 		return name;
 	}
 
+	@TagAttribute
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -45,6 +54,7 @@ public class TestimonialTag extends AbstractSimpleComponent {
 		return image;
 	}
 
+	@TagAttribute
 	public void setImage(String image) {
 		this.image = image;
 	}

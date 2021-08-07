@@ -5,9 +5,16 @@ import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.theme.DelegateVarParser;
 import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
 
+@Tag(
+	name="testimonial-info", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class TestimonialInfoTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE = "/components/testimonial-info";

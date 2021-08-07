@@ -14,6 +14,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.ComponentVars;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateVarParser;
@@ -332,7 +333,8 @@ public abstract class AbstractSimpleComponent
 		tag.setPageContext(pageContext);
 	}
 	*/
-	
+
+	@TagAttribute
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -341,6 +343,7 @@ public abstract class AbstractSimpleComponent
 		return template;
 	}
 
+	@TagAttribute
 	public void setTemplate(String template) {
 		this.template = template;
 	}
@@ -357,6 +360,7 @@ public abstract class AbstractSimpleComponent
 		return classStyle;
 	}
 
+	@TagAttribute
 	public void setClassStyle(String classStyle) {
 		this.classStyle = classStyle;
 	}

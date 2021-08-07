@@ -5,8 +5,16 @@ import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
 
+@Tag(
+	name="tabs-item", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class TabsItemTag extends AbstractSimpleComponent {
 	
 	/* ------------ Attr ---------------*/
@@ -47,6 +55,7 @@ public class TabsItemTag extends AbstractSimpleComponent {
 		return title;
 	}
 
+	@TagAttribute
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -55,6 +64,7 @@ public class TabsItemTag extends AbstractSimpleComponent {
 		return active;
 	}
 
+	@TagAttribute
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
@@ -63,6 +73,7 @@ public class TabsItemTag extends AbstractSimpleComponent {
 		return icon;
 	}
 
+	@TagAttribute
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}

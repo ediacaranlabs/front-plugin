@@ -1,5 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
 public abstract class ComponentFormTag extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE = "/components/form-group";
@@ -39,10 +41,12 @@ public abstract class ComponentFormTag extends AbstractSimpleComponent {
 		return group;
 	}
 
+	@TagAttribute
 	public void setGroup(Boolean group) {
 		this.group = group;
 	}
 
+	@TagAttribute(required=true)
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -51,6 +55,7 @@ public abstract class ComponentFormTag extends AbstractSimpleComponent {
 		return value;
 	}
 
+	@TagAttribute
 	public void setValue(String value) {
 		this.value = value;
 	}
@@ -59,6 +64,7 @@ public abstract class ComponentFormTag extends AbstractSimpleComponent {
 		return required;
 	}
 
+	@TagAttribute
 	public void setRequired(Boolean required) {
 		this.required = required;
 	}
@@ -67,6 +73,7 @@ public abstract class ComponentFormTag extends AbstractSimpleComponent {
 		return form;
 	}
 
+	@TagAttribute
 	public void setForm(String form) {
 		this.form = form;
 	}
@@ -75,6 +82,7 @@ public abstract class ComponentFormTag extends AbstractSimpleComponent {
 		return componentType;
 	}
 
+	@TagAttribute
 	public void setComponentType(String componentType) {
 		this.componentType = componentType;
 	}
@@ -83,6 +91,7 @@ public abstract class ComponentFormTag extends AbstractSimpleComponent {
 		return enabled;
 	}
 
+	@TagAttribute
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
@@ -91,6 +100,7 @@ public abstract class ComponentFormTag extends AbstractSimpleComponent {
 		return readonly;
 	}
 
+	@TagAttribute
 	public void setReadonly(Boolean readonly) {
 		this.readonly = readonly;
 	}
