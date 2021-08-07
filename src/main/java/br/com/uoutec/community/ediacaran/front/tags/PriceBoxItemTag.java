@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+		name="price-box-item", 
+		uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+		bodycontent=BodyTypes.SCRIPTLESS
+		)
 public class PriceBoxItemTag  extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/components/price-box-item";
@@ -29,6 +38,7 @@ public class PriceBoxItemTag  extends AbstractSimpleComponent {
 		return checked;
 	}
 
+	@TagAttribute
 	public void setChecked(Boolean checked) {
 		this.checked = checked;
 	}

@@ -7,7 +7,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 @Tag(
 	name="gallery-filter", 
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
-	bodycontent=BodyTypes.SCRIPTLESS
+	bodycontent=BodyTypes.EMPTY
 )
 public class GalleryFilterTag  extends AbstractSimpleComponent {
 

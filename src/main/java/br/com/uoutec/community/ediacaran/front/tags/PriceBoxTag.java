@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="price-box", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class PriceBoxTag  extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/components/price-box";
@@ -37,6 +46,7 @@ public class PriceBoxTag  extends AbstractSimpleComponent {
 		return attractiveness;
 	}
 
+	@TagAttribute
 	public void setAttractiveness(String attractiveness) {
 		this.attractiveness = attractiveness;
 	}

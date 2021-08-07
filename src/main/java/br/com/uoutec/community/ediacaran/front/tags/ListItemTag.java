@@ -2,6 +2,15 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="list-item", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class ListItemTag  extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/components/list-item";
@@ -31,6 +40,7 @@ public class ListItemTag  extends AbstractSimpleComponent {
 		return inline;
 	}
 
+	@TagAttribute
 	public void setInline(Boolean inline) {
 		this.inline = inline;
 	}

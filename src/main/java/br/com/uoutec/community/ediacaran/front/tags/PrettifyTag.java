@@ -2,8 +2,16 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
 
+@Tag(
+	name="prettify", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
 public class PrettifyTag  extends AbstractSimpleComponent {
 
 	public static final String TEMPLATE  = "/components/prettify";
@@ -31,6 +39,7 @@ public class PrettifyTag  extends AbstractSimpleComponent {
 		return linenums;
 	}
 
+	@TagAttribute
 	public void setLinenums(Boolean linenums) {
 		this.linenums = linenums;
 	}
