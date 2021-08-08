@@ -64,6 +64,7 @@
 				<void method="addExtension">
 					<string>br.com.uoutec.filter.invoker.cdi.InvokerFilterExtension</string>
 				</void>
+				
 			</object>
 		</void>
 
@@ -72,7 +73,13 @@
 		</void>
 		
 		<void property="pluginClassLoaderFactory">
-			<object class="br.com.uoutec.community.ediacaran.weld.BuilderClassLoaderFactory"/>
+			<object class="br.com.uoutec.community.ediacaran.weld.BuilderClassLoaderFactory">
+				<!--
+				<void method="addPluginClassPathMatch">
+					<string>.*weld.*</string>
+				</void>
+				-->
+			</object>
 		</void>
 		
 		<!--  

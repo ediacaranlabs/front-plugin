@@ -13,6 +13,7 @@ import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.VarParser;
 import br.com.uoutec.community.ediacaran.core.system.registry.MessageBundle;
+import br.com.uoutec.community.ediacaran.core.system.util.IDGenerator;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.i18n.MessageLocale;
 
@@ -21,6 +22,8 @@ public class Menu implements Serializable {
 	private static final long serialVersionUID = -110898947175676961L;
 
 	private PropertyChangeSupport propertyChangeSupport;
+
+	private String id;
 	
 	private String name;
 	
@@ -31,8 +34,6 @@ public class Menu implements Serializable {
 	private String body;
 	
 	private String resourceBundle;
-	
-	private String badge;
 	
 	private String badgeStyle;
 	
@@ -62,6 +63,7 @@ public class Menu implements Serializable {
 			String resourceBundle, String template, List<Menu> itens,
 			String badge, String badgeStyle, String body, int order) {
 		super();
+		this.id = IDGenerator.getUniqueOrderID('M', this.hashCode());
 		this.propertyChangeSupport = new PropertyChangeSupport(this);
 		this.name = name;
 		this.icon = icon;
@@ -70,7 +72,6 @@ public class Menu implements Serializable {
 		this.template = template;
 		this.itens = itens;
 		this.order = order;
-		this.badge = badge;
 		this.badgeStyle = badgeStyle;
 		
 		this.map = new HashMap<String, Menu>();
@@ -80,6 +81,14 @@ public class Menu implements Serializable {
 				addItem(i);
 			}
 		}
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	public String getFullName(){
@@ -207,13 +216,19 @@ public class Menu implements Serializable {
 	}
 
 	public String getBadge() {
-		return badge;
+		MenuBadgeValue value = EntityContextPlugin.getEntity(MenuBadgeValue.class);
+		return value == null? null : value.getValue();
 	}
 
 	public Menu setBadge(String badge) {
+
+		MenuBadgeValue value = EntityContextPlugin.getEntity(MenuBadgeValue.class);
+		String oldBadge = value == null? null : value.getValue();
 		
-		String oldBadge = this.badge;
-		this.badge = badge;
+		if(value != null) {
+			value.setValue(badge);
+		}
+		
 		propertyChangeSupport.firePropertyChange("badge", oldBadge, badge);
 		
 		return this;

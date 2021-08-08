@@ -65,7 +65,6 @@ public class PluginInstaller
 		topMenu.addMenu(
 				new Menu("Messages")
 					.setIcon("comments")
-					.setBadge("3")
 					.setBadgeStyle("danger")
 					.setOrder(100)
 		);
@@ -73,7 +72,6 @@ public class PluginInstaller
 		topMenu.addMenu(
 				new Menu("Notification")
 					.setIcon("bell")
-					.setBadge("15")
 					.setBadgeStyle("warning")
 					.setOrder(99)
 		);

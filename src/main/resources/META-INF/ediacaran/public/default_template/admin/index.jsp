@@ -27,7 +27,7 @@
 									<ec:icon icon="${menu.icon}" size="1"/>
 								</c:if>
 								<c:if test="${not empty menu.badge}">
-									<span class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
+									<span id="${menu.id}_badge" class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
 								</c:if>
 							</ec:menu-label>
 						</ec:menu>
@@ -40,7 +40,7 @@
 									<ec:icon icon="${menu.icon}" size="1"/>
 								</c:if>
 								<c:if test="${not empty menu.badge}">
-									<span class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
+									<span id="${menu.id}_badge" class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
 								</c:if>
 							</ec:menu-label>
 						</ec:menu>
@@ -51,7 +51,7 @@
 										<ec:icon icon="${item.icon}" size="1"/>
 									</c:if>
 									<c:if test="${not empty item.badge}">
-										<span class="badge badge-${empty item.badgeStyle? 'info' : item.badgeStyle} navbar-badge">${item.badge}</span>
+										<span id="${item.id}_badge" class="badge badge-${empty item.badgeStyle? 'info' : item.badgeStyle} navbar-badge">${item.badge}</span>
 									</c:if>
 								</ec:menu-item>
 							</c:forEach>
@@ -63,7 +63,7 @@
 								<ec:icon icon="${menu.icon}" size="1"/>
 							</c:if>
 							<c:if test="${not empty menu.badge}">
-								<span class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
+								<span id="${menu.id}_badge" class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
 							</c:if>
 						</ec:menu-item>
 					</c:otherwise>

@@ -42,7 +42,12 @@ $.AppContext.utils = {
 			var type = $.AppContext.types._map[elementType];
 			return type == null? new $.AppContext.types._map['object'](element) : new type(element);
 		},
+
+		setContentById: function(id, contect){
+			$('#' + id).html(contect);
+		},
 		
+
 		//getComponentByClass: function(id){
 		//	return $('.' + id );
 		//},
@@ -342,10 +347,12 @@ $.AppContext.utils = {
 		
 };
 
+$.AppContext.vars.eventListeners = [];
+
 $.AppContext.eventListeners = {
 		
 		addListener: function($listenerID, $listener){
-			$.AppContext.vars.eventListeners[$listenerID] = $listenerID;
+			$.AppContext.vars.eventListeners[$listenerID] = $listener;
 		},
 			
 		removeListener: function($listenerID, $listener){
@@ -365,6 +372,29 @@ $.AppContext.eventListeners = {
 				
 			}
 			
+		},
+		
+		init: function(){
+			$.AppContext.utils.loadJson(
+					'/plugins/ediacaran/front/events', 
+					function(e){
+						
+						e.forEach(function ($i){
+							$.AppContext.eventListeners.fireEvent($i)
+						});
+						
+					},
+					function(e){
+						console.log('couldn\'t get the events: ' + e);
+					}
+			);
+
+			setTimeout(
+				function () {
+					$.AppContext.eventListeners.init();
+				}, 
+				3000
+			);
 		}
 		
 }
@@ -580,4 +610,5 @@ $(function (){
 	$.AppContext.vars.loaded = true;
 	$.AppContext.utils.enableActions(null);
 	$.AppContext.utils.executeAsyncLoad();
+	$.AppContext.eventListeners.init();
 });

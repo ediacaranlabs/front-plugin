@@ -28,8 +28,12 @@ public abstract class AbstractComponent implements Component{
 			add("classStyle");
 		}});
 
+	@SuppressWarnings("serial")
 	protected Set<String> default_empty_attributes = 
-			Collections.unmodifiableSet(new HashSet<String>());
+		Collections.unmodifiableSet(new HashSet<String>() {{
+			add("id");
+			add("classStyle");
+		}});
 	
 	
 	@SuppressWarnings("serial")
