@@ -5,6 +5,14 @@
 
 		<void property="listenerManager">
 			<object class="br.com.uoutec.community.ediacaran.EdiacaranListenerManagerImp">
+				<void method="addListener">
+					<object class="br.com.uoutec.community.ediacaran.ProxyEdiacaranEventListener">
+						<void method="setEventListerClass">
+							<string>br.com.uoutec.community.ediacaran.weld.TomcatRegisterContainerEventListener</string>
+						</void>
+					</object>
+				</void>
+			
 				<!--				
 				<void method="addListener">
 					<object class="br.com.uoutec.community.ediacaran.ProxyEdiacaranEventListener">

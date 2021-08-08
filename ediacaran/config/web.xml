@@ -36,14 +36,14 @@
 
 <!--
 	<listener>
-	    <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+		<listener-class>br.com.uoutec.community.ediacaran.weld.ContextInitializer</listener-class>
 	</listener>
 -->
 	
 	<listener>
-		<listener-class>br.com.uoutec.community.ediacaran.weld.ContextInitializer</listener-class>
+	    <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
 	</listener>
-	
+
 	<listener>
 		<listener-class>br.com.uoutec.community.ediacaran.web.ContextInitializer</listener-class>
 	</listener>
