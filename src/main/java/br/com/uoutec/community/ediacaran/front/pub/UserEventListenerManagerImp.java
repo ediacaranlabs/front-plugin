@@ -7,10 +7,11 @@ import java.util.List;
 import javax.enterprise.context.SessionScoped;
 
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager;
+import br.com.uoutec.community.ediacaran.plugins.PublicBean;
 
 @SessionScoped
 public class UserEventListenerManagerImp 
-	implements UserEventListenerManager, Serializable{
+	implements UserEventListenerManager, PublicBean, Serializable{
 
 	private static final long serialVersionUID = -8619724438245447103L;
 	
