@@ -88,7 +88,7 @@ public class ThemeEdiacaranListener implements EdiacaranEventListener{
 				
 				String[] path = name.split("/");
 				if(path.length == 1) {
-					themeRegistry.registerTheme(path[0], contextManager.getContext(pmd), value);
+					themeRegistry.registerTheme(path[0], contextManager.getPath(pmd), value);
 				}
 				
 			}
