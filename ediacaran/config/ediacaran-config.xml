@@ -2,15 +2,11 @@
 <java version="1.8.0_101" class="java.beans.XMLDecoder">
 
 	<object	class="br.com.uoutec.community.ediacaran.web.tomcat.TomcatServerBootstrap">
-
+	
 		<void property="listenerManager">
 			<object class="br.com.uoutec.community.ediacaran.EdiacaranListenerManagerImp">
 				<void method="addListener">
-					<object class="br.com.uoutec.community.ediacaran.ProxyEdiacaranEventListener">
-						<void method="setEventListerClass">
-							<string>br.com.uoutec.community.ediacaran.weld.TomcatRegisterContainerEventListener</string>
-						</void>
-					</object>
+					<object class="br.com.uoutec.community.ediacaran.weld.tomcat.TomcatRegisterContainerEventListener"/>
 				</void>
 			
 				<!--				
@@ -63,16 +59,17 @@
 
 		<void property="pluginInitializer">
 			<object class="br.com.uoutec.community.ediacaran.weld.BuilderPluginInitializer">
-				<void method="addExtension">
-					<string>com.arjuna.ats.jta.cdi.TransactionExtension</string>
-				</void>
 				<void method="addService">
 					<string>br.com.uoutec.community.ediacaran.core.system.cdi.weld.CDITransactionServices</string>
+				</void>
+				<!--
+				<void method="addExtension">
+					<string>com.arjuna.ats.jta.cdi.TransactionExtension</string>
 				</void>
 				<void method="addExtension">
 					<string>br.com.uoutec.filter.invoker.cdi.InvokerFilterExtension</string>
 				</void>
-				
+				-->
 			</object>
 		</void>
 
@@ -82,11 +79,15 @@
 		
 		<void property="pluginClassLoaderFactory">
 			<object class="br.com.uoutec.community.ediacaran.weld.BuilderClassLoaderFactory">
-				<!--
-				<void method="addPluginClassPathMatch">
-					<string>.*weld.*</string>
+				<void method="addIncludePluginClassPathMatch">
+					<string>.*persistence.*</string>
 				</void>
-				-->
+				<void method="addIncludePluginClassPathMatch">
+					<string>.*plugin.*</string>
+				</void>
+				<void method="addIncludePluginClassPathMatch">
+					<string>.*filter.*</string>
+				</void>
 			</object>
 		</void>
 		
@@ -127,6 +128,11 @@
 
 		<void method="addPluginSearch">
 			<object class="br.com.uoutec.community.ediacaran.plugins.FileSystemPluginsSearch"/>
+		</void>
+
+		<void method="addEntity">
+			<object class="br.com.uoutec.community.ediacaran.web.SecurityProviderImp"/>
+			<array class="java.lang.Class" length="0"/>
 		</void>
 		
 		<void method="setSystemProperty">

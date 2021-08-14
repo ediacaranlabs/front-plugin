@@ -11,7 +11,6 @@ import javax.inject.Singleton;
 
 import org.brandao.brutos.ClassUtil;
 
-import br.com.uoutec.community.ediacaran.ContextManager;
 import br.com.uoutec.community.ediacaran.EdiacaranEventListener;
 import br.com.uoutec.community.ediacaran.EdiacaranEventObject;
 import br.com.uoutec.community.ediacaran.front.theme.Component;
@@ -23,6 +22,7 @@ import br.com.uoutec.community.ediacaran.plugins.PluginInitializer;
 import br.com.uoutec.community.ediacaran.plugins.PluginNode;
 import br.com.uoutec.community.ediacaran.plugins.PluginPath;
 import br.com.uoutec.community.ediacaran.plugins.PluginType;
+import br.com.uoutec.community.ediacaran.web.WebUtil;
 
 @Singleton
 public class ThemeEdiacaranListener implements EdiacaranEventListener{
@@ -63,7 +63,6 @@ public class ThemeEdiacaranListener implements EdiacaranEventListener{
 		
 		PluginType pluginType = EntityContextPlugin.getEntity(PluginType.class);
 		ThemeRegistry themeRegistry = EntityContextPlugin.getEntity(ThemeRegistry.class);
-		ContextManager contextManager = EntityContextPlugin.getEntity(ContextManager.class);
 		
 		PluginConfigurationMetadata pmd = pluginType.getConfiguration().getMetadata();
 		
@@ -88,7 +87,7 @@ public class ThemeEdiacaranListener implements EdiacaranEventListener{
 				
 				String[] path = name.split("/");
 				if(path.length == 1) {
-					themeRegistry.registerTheme(path[0], contextManager.getPath(pmd), value);
+					themeRegistry.registerTheme(path[0], WebUtil.getPath(pmd), value);
 				}
 				
 			}
