@@ -26,9 +26,7 @@
 								<c:if test="${not empty menu.icon}">
 									<ec:icon icon="${menu.icon}" size="1"/>
 								</c:if>
-								<c:if test="${not empty menu.badge}">
-									<span id="${menu.id}_badge" class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
-								</c:if>
+								<span id="${menu.id}_badge" class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
 							</ec:menu-label>
 						</ec:menu>
 						<ec:menu-itens resource="${menu.body}"/>
@@ -39,9 +37,7 @@
 								<c:if test="${not empty menu.icon}">
 									<ec:icon icon="${menu.icon}" size="1"/>
 								</c:if>
-								<c:if test="${not empty menu.badge}">
-									<span id="${menu.id}_badge" class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
-								</c:if>
+								<span id="${menu.id}_badge" class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
 							</ec:menu-label>
 						</ec:menu>
 						<ec:menu-itens>
@@ -50,9 +46,7 @@
 									<c:if test="${not empty item.icon}">
 										<ec:icon icon="${item.icon}" size="1"/>
 									</c:if>
-									<c:if test="${not empty item.badge}">
-										<span id="${item.id}_badge" class="badge badge-${empty item.badgeStyle? 'info' : item.badgeStyle} navbar-badge">${item.badge}</span>
-									</c:if>
+									<span id="${item.id}_badge" class="badge badge-${empty item.badgeStyle? 'info' : item.badgeStyle} navbar-badge">${item.badge}</span>
 								</ec:menu-item>
 							</c:forEach>
 						</ec:menu-itens>
@@ -62,9 +56,7 @@
 							<c:if test="${not empty menu.icon}">
 								<ec:icon icon="${menu.icon}" size="1"/>
 							</c:if>
-							<c:if test="${not empty menu.badge}">
-								<span id="${menu.id}_badge" class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
-							</c:if>
+							<span id="${menu.id}_badge" class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
 						</ec:menu-item>
 					</c:otherwise>
 				</c:choose>

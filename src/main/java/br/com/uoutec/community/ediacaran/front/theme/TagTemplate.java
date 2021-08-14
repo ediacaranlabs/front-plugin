@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -150,14 +152,21 @@ public class TagTemplate {
     }
 
     private String decode(String value) {
+    	Set<Integer> codes = new HashSet<Integer>();
     	String pattern = "&#(\\d{1,3});";
     	Pattern r = Pattern.compile(pattern);
     	Matcher m = r.matcher(value);
     	while(m.find()) {
     		String charCodeSTR = m.group(1);
     		int charInt = Integer.parseInt(charCodeSTR);
-    		String charValue = Character.toString((char)(charInt & 0xFF));
-    		value = m.replaceAll(charValue);
+    		codes.add(charInt);
+    		//String charValue = Character.toString((char)(charInt & 0xFF));
+    		//value = m.replaceAll(charValue);
+    	}
+    	
+    	for(int charCode: codes) {
+    		String charValue = Character.toString((char)(charCode & 0xFF));
+    		value = value.replaceAll("&#" + charCode + ";", charValue);
     	}
     	return value;
     }

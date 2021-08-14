@@ -32,6 +32,7 @@ public class MenuBarComponent  extends AbstractComponent {
 			add("content");
 			add("expand");
 			add("sidebar");
+			add("id");
 		}});
 	
 		super.default_property_parsers = 
