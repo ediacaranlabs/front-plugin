@@ -44,6 +44,7 @@ $.AppContext.onload(function(){
 	$.AppContext.addLoadListener("sidebar-link-load", "^.*", {
 		
 		after: function(){
+			$.AppContext.sidebar.resizeContent();
 		}
 	
 	});
