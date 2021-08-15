@@ -1,11 +1,16 @@
 package br.com.uoutec.community.ediacaran.front;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import br.com.uoutec.community.ediacaran.AbstractPlugin;
 import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
 import br.com.uoutec.community.ediacaran.core.security.AuthenticationProvider;
 import br.com.uoutec.community.ediacaran.core.security.SecurityManager;
+import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
 import br.com.uoutec.community.ediacaran.front.pub.AdminMenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
+import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBarManager;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBarManagerException;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widget;
@@ -42,11 +47,14 @@ public class PluginInstaller
 	}
 	
 	private void installMenu() throws MenuBarManagerException {
-		
+
 		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);
 
-		AdminMenuBar leftMenu = new AdminMenuBar(); 
+		AdminMenuBar leftMenu = new AdminMenuBar();
+		leftMenu.addPropertyChangeListener(new MenuPropertyChangeListener());
+		
 		AdminMenuBar topMenu = new AdminMenuBar();
+		topMenu.addPropertyChangeListener(new MenuPropertyChangeListener());
 		
 		mbm.registerMenuBar(ADMIN_MENU_BAR, leftMenu);
 		mbm.registerMenuBar(ADMIN_TOP_MENU_BAR,topMenu);
@@ -223,4 +231,36 @@ public class PluginInstaller
 		
 	}
 	
+	public static class MenuPropertyChangeListener implements PropertyChangeListener{
+
+		@Override
+		public void propertyChange(PropertyChangeEvent evt) {
+			
+			if(evt.getSource() instanceof MenuBar && "menu".equals(evt.getPropertyName())){
+				Menu newValue = (Menu) evt.getNewValue();
+				newValue.addPropertyChangeListener(new MenuPropertyChangeListener());
+			}
+			else
+			if(evt.getSource() instanceof Menu && "item".equals(evt.getPropertyName())){
+				Menu newValue = (Menu) evt.getNewValue();
+				newValue.addPropertyChangeListener(new MenuPropertyChangeListener());
+			}
+			else
+			if(evt.getSource() instanceof Menu && "badge".equals(evt.getPropertyName())){
+				
+				String value = (String)evt.getNewValue();
+				Menu menu    = (Menu) evt.getSource();
+				
+				UserEventListenerManager userEventListenerManager = 
+						EntityContextPlugin.getEntity(UserEventListenerManager.class);
+				
+				if(userEventListenerManager != null) {
+					userEventListenerManager.asyncFireEvent(new UserEvent(menu.getId(), "menu.badge.change", value));
+				}
+				
+			}
+			
+		}
+		
+	}
 }

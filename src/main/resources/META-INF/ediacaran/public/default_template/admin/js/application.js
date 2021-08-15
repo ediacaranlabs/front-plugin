@@ -43,8 +43,8 @@ $.AppContext.utils = {
 			return type == null? new $.AppContext.types._map['object'](element) : new type(element);
 		},
 
-		setContentById: function(id, contect){
-			$('#' + id).html(contect);
+		setContentById: function(id, value){
+			$('#' + id).html(value);
 		},
 		
 
@@ -364,6 +364,17 @@ $.AppContext.eventListeners = {
 			var $listeners = $.AppContext.vars.eventListeners
 			var $i;
 			
+			for(var $l in $listeners){
+				
+				var $listener = $listeners[$l];
+				
+				if(typeof $listener.fireEvent !== 'undefined'){
+					$listener.fireEvent($event);
+				}
+				
+			}
+
+			/*
 			for($i=0;$i<$listeners.length; $i++){
 				
 				if(typeof $listeners[$i].fireEvent !== 'undefined'){
@@ -371,6 +382,7 @@ $.AppContext.eventListeners = {
 				}
 				
 			}
+			*/
 			
 		},
 		

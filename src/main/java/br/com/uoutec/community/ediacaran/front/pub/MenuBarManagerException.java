@@ -1,6 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.pub;
 
-public class MenuBarManagerException extends Exception{
+public class MenuBarManagerException extends RuntimeException{
 
 	private static final long serialVersionUID = -5935998497610188923L;
 

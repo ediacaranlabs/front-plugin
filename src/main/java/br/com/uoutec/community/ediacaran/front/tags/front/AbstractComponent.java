@@ -31,7 +31,6 @@ public abstract class AbstractComponent implements Component{
 	@SuppressWarnings("serial")
 	protected Set<String> default_empty_attributes = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
-			add("id");
 			add("classStyle");
 		}});
 	
@@ -54,6 +53,7 @@ public abstract class AbstractComponent implements Component{
 	@SuppressWarnings("serial")
 	protected Set<String> default_props = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
+			add("id");
 			add("classStyle");
 			add("style");
 		}});

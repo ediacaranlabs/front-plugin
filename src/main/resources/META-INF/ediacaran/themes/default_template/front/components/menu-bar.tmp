@@ -1,19 +1,16 @@
 <nav {attr} class="navbar {expand} {style} {background} {position} {sidebar} {classStyle}">
   <script type="text/javascript">
   $.AppContext.eventListeners.addListener('menubar.listener.'+'{id}',&#123;
-  
   		fireEvent: function($e)&#123;
   		
   			if($e.type !== 'menu.badge.change')&#123;
   				return;
-			&#125;
+  			&#125;
   			
-  			$.AppContext.utils.setContentById($e.sourceID + '_badge', $e.data);
+  			$.AppContext.utils.setContentById($e.sourceID + '_badge', $e.data)
   			
-		&#125;
-		
+  		&#125;
   &#125;);
-  //teste
   </script>
   {content}
 </nav>

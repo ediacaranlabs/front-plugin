@@ -217,16 +217,16 @@ public class Menu implements Serializable {
 
 	public String getBadge() {
 		MenuBadgeValue value = EntityContextPlugin.getEntity(MenuBadgeValue.class);
-		return value == null? null : value.getValue();
+		return value == null? null : value.getValue(id);
 	}
 
 	public Menu setBadge(String badge) {
 
 		MenuBadgeValue value = EntityContextPlugin.getEntity(MenuBadgeValue.class);
-		String oldBadge = value == null? null : value.getValue();
+		String oldBadge = value == null? null : value.getValue(id);
 		
 		if(value != null) {
-			value.setValue(badge);
+			value.setValue(id, badge);
 		}
 		
 		propertyChangeSupport.firePropertyChange("badge", oldBadge, badge);
