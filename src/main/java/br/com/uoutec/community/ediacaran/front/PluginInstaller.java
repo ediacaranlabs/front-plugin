@@ -255,7 +255,8 @@ public class PluginInstaller
 						EntityContextPlugin.getEntity(UserEventListenerManager.class);
 				
 				if(userEventListenerManager != null) {
-					userEventListenerManager.asyncFireEvent(new UserEvent(menu.getId(), "menu.badge.change", value));
+					userEventListenerManager
+						.asyncFireEvent(new UserEvent(menu.getId(), "menu.badge.change", value));
 				}
 				
 			}
