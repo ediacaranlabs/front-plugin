@@ -42,7 +42,7 @@
 						</ec:menu>
 						<ec:menu-itens>
 							<c:forEach items="${menu.itens}" var="item">
-								<ec:menu-item href="#!${item.resource}">
+								<ec:menu-item href="${item.resource}">
 									<c:if test="${not empty item.icon}">
 										<ec:icon icon="${item.icon}" size="1"/>
 									</c:if>
@@ -52,7 +52,7 @@
 						</ec:menu-itens>
 					</c:when>
 					<c:otherwise>
-						<ec:menu-item href="#!${menu.resource}">
+						<ec:menu-item href="${menu.resource}">
 							<c:if test="${not empty menu.icon}">
 								<ec:icon icon="${menu.icon}" size="1"/>
 							</c:if>
@@ -61,11 +61,13 @@
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
+			<!--
 			<ec:menu id="user_menu_top">
 				<ec:menu-label><ec:icon icon="user" size="1"/></ec:menu-label>
 				<ec:menu-itens resource="${plugins.ediacaran.front.admin_user_menu}" menuAlign="right">
 				</ec:menu-itens>
 			</ec:menu>
+			-->
 		</ec:menu-itens>
 	</ec:menu-bar>
 
@@ -108,7 +110,7 @@
 										</ec:menu-label>
 										<ec:menu-itens id="menu_itens_xx">
 											<c:forEach items="${menu.itens}" var="item">
-												<ec:menu-item href="#!${item.resource}">
+												<ec:menu-item href="${item.resource}">
 													<c:if test="${not empty item.icon}">
 														<ec:icon icon="${item.icon}" size="1"/>
 													</c:if>
@@ -123,7 +125,7 @@
 								</c:when>
 
 								<c:otherwise>
-									<ec:menu-item href="#!${menu.resource}">
+									<ec:menu-item href="${menu.resource}">
 										<c:if test="${not empty menu.icon}">
 											<ec:icon icon="${menu.icon}" size="1"/>
 										</c:if>

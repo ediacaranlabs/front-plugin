@@ -62,7 +62,7 @@ public class PluginInstaller
 		leftMenu.addMenu(
 			new Menu("Dashboard")
 				.setIcon("tachometer")
-				.setResource("/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard")
+				.setResource("#!/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard")
 				.setOrder(100)
 		);
 		
@@ -87,49 +87,49 @@ public class PluginInstaller
 		leftMenu.addMenu(
 				new Menu("Components")
 					.setIcon("tree")
-					.setResource("/plugins/ediacaran/front/admin/components.jsp")
+					.setResource("#!/plugins/ediacaran/front/admin/components.jsp")
 					.setOrder(1)
 		);
 		
 		leftMenu.addMenu(
 				new Menu("Forms")
 					.setIcon("edit")
-					.setResource("/plugins/ediacaran/front/admin/form.jsp")
+					.setResource("#!/plugins/ediacaran/front/admin/form.jsp")
 					.setOrder(1)
 		);
 		
 		leftMenu.addMenu(
 				new Menu("Typography")
 					.setIcon("pencil")
-					.setResource("/plugins/ediacaran/front/admin/typography.jsp")
+					.setResource("#!/plugins/ediacaran/front/admin/typography.jsp")
 					.setOrder(1)
 		);
 		
 		leftMenu.addMenu(
 				new Menu("Tables")
 					.setIcon("table")
-					.setResource("/plugins/ediacaran/front/admin/table.jsp")
+					.setResource("#!/plugins/ediacaran/front/admin/table.jsp")
 					.setOrder(1)
 		);
 		
 		leftMenu.addMenu(
 				new Menu("Pricing boxes")
 					.setIcon("money")
-					.setResource("/plugins/ediacaran/front/admin/pricingbox.jsp")
+					.setResource("#!/plugins/ediacaran/front/admin/pricingbox.jsp")
 					.setOrder(1)
 		);
 		
 		leftMenu.addMenu(
 				new Menu("Flot Charts")
 					.setIcon("pie-chart")
-					.setResource("/plugins/ediacaran/front/admin/flotcharts.jsp")
+					.setResource("#!/plugins/ediacaran/front/admin/flotcharts.jsp")
 					.setOrder(1)
 		);
 		
 		leftMenu.addMenu(
 				new Menu("Plugins")
 					.setIcon("pie-chart")
-					.setResource("/plugins/ediacaran/front/admin/plugins")
+					.setResource("#!/plugins/ediacaran/front/admin/plugins")
 					.setOrder(1)
 		);
 		
@@ -237,13 +237,21 @@ public class PluginInstaller
 		public void propertyChange(PropertyChangeEvent evt) {
 			
 			if(evt.getSource() instanceof MenuBar && "menu".equals(evt.getPropertyName())){
+				
 				Menu newValue = (Menu) evt.getNewValue();
-				newValue.addPropertyChangeListener(new MenuPropertyChangeListener());
+				
+				if(newValue != null) {
+					newValue.addPropertyChangeListener(new MenuPropertyChangeListener());
+				}
 			}
 			else
 			if(evt.getSource() instanceof Menu && "item".equals(evt.getPropertyName())){
 				Menu newValue = (Menu) evt.getNewValue();
-				newValue.addPropertyChangeListener(new MenuPropertyChangeListener());
+				
+				if(newValue != null) {
+					newValue.addPropertyChangeListener(new MenuPropertyChangeListener());
+				}
+				
 			}
 			else
 			if(evt.getSource() instanceof Menu && "badge".equals(evt.getPropertyName())){
