@@ -279,6 +279,7 @@ public abstract class AbstractSimpleComponent
 		return extAttrs;
 	}
 
+	@TagAttribute
 	public void setExtAttrs(String extAttrs) {
 		this.extAttrs = extAttrs;
 	}
