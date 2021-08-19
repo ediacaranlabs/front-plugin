@@ -1,0 +1,4 @@
+<button {attr} type="button" class="close {classStyle}" modal-action="close"
+	aria-label="Close">
+	<span aria-hidden="true">{label}</span>
+</button>

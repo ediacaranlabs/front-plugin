@@ -1,0 +1,1 @@
+<{type} {attr} class="modal-title {classStyle}">{content}</{type}>
