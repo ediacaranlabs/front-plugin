@@ -1,0 +1,7 @@
+<div {attr} class="{style} {fade} {classStyle}" aria-modal="true" style="display: block;">    
+	<div class="modal-dialog">
+		<div class="modal-content">
+			{content}
+		</div>    
+    </div>    
+</div>
