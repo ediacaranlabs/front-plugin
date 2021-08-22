@@ -1,12 +1,9 @@
 package br.com.uoutec.community.ediacaran.front.pub;
 
 import java.io.Serializable;
-import java.util.Locale;
 
 import br.com.uoutec.community.ediacaran.VarParser;
-import br.com.uoutec.community.ediacaran.core.system.registry.MessageBundle;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.i18n.MessageLocale;
 
 @Deprecated
 public class MenuItem implements Serializable{
@@ -47,12 +44,13 @@ public class MenuItem implements Serializable{
 
 	public String getFullName(){
 		
+		/*
 		if(resourceBundle != null) {
 			Locale locale = MessageLocale.getLocale();
 			MessageBundle lang = EntityContextPlugin.getEntity(MessageBundle.class);
 			return lang.getMessageResourceString(resourceBundle, this.template, locale);
 		}
-		
+		*/
 		return name;
 	}
 	

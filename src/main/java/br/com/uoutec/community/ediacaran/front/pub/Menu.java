@@ -12,10 +12,9 @@ import java.util.Locale;
 import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.VarParser;
-import br.com.uoutec.community.ediacaran.core.system.registry.MessageBundle;
+import br.com.uoutec.community.ediacaran.core.system.i18n.PluginMessageBundleUtils;
 import br.com.uoutec.community.ediacaran.core.system.util.IDGenerator;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.i18n.MessageLocale;
 
 public class Menu implements Serializable {
 
@@ -94,9 +93,8 @@ public class Menu implements Serializable {
 	public String getFullName(){
 		
 		if(resourceBundle != null) {
-			Locale locale = MessageLocale.getLocale();
-			MessageBundle lang = EntityContextPlugin.getEntity(MessageBundle.class);
-			return lang.getMessageResourceString(this.resourceBundle, this.template, locale);
+			Locale locale = PluginMessageBundleUtils.getLocale();
+			return PluginMessageBundleUtils.getMessageResourceString(this.resourceBundle, this.template, locale);
 		}
 		
 		return name;
