@@ -66,6 +66,13 @@ public class PluginInstaller
 				.setOrder(100)
 		);
 		
+		leftMenu.addMenu(
+				new Menu("Plugins")
+					.setIcon("pie-chart")
+					.setResource("#!/plugins/ediacaran/front/admin/plugins")
+					.setOrder(-100)
+		);
+		
 		if(!pluginConfiguration.getBoolean("test")){
 			return;
 		}
@@ -123,13 +130,6 @@ public class PluginInstaller
 				new Menu("Flot Charts")
 					.setIcon("pie-chart")
 					.setResource("#!/plugins/ediacaran/front/admin/flotcharts.jsp")
-					.setOrder(1)
-		);
-		
-		leftMenu.addMenu(
-				new Menu("Plugins")
-					.setIcon("pie-chart")
-					.setResource("#!/plugins/ediacaran/front/admin/plugins")
 					.setOrder(1)
 		);
 		

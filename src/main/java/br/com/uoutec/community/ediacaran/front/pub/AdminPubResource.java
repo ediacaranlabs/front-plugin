@@ -72,7 +72,7 @@ public class AdminPubResource {
 		return m;
 	}
 
-	@Action(value="/plugins/{code}")
+	@Action(value="/plugins/{code:[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*}")
 	@View("/${plugins.ediacaran.front.template}/admin/plugin-detail")
 	@Result(value="vars", mappingType=MappingTypes.VALUE)
 	public Map<String,Object> plugins(@Basic(bean="code") String code){
@@ -90,7 +90,7 @@ public class AdminPubResource {
 		return vars;
 	}
 
-	@Action(value="/plugins/{code}")
+	@Action(value="/plugins/{code:[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*}")
 	@RequestMethod("POST")
 	@View("/${plugins.ediacaran.front.template}/admin/update-plugin-detail")
 	public void updatePlugin(@Basic(bean="code") String code, @Basic(bean="config") Map<String,List<String>> values){
@@ -107,7 +107,7 @@ public class AdminPubResource {
 		
 	}
 
-	@Action(value="/plugins/{code}/status")
+	@Action(value="/plugins/{code:[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*}/status")
 	@RequestMethod("POST")
 	@View("/${plugins.ediacaran.front.template}/admin/update-status-plugin-detail")
 	@Result(value="vars", mappingType=MappingTypes.VALUE)
