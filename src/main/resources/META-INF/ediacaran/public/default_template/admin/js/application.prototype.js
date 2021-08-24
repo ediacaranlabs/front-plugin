@@ -48,7 +48,7 @@ $.AppContext.types.Form.prototype.getField = function(name, type = null){
 	for (var $p in $map) {
 		
 		if($p == 'checkbox' || $p == 'radio'){
-			$result.push(new $.AppContext.types.Field($form, null, $p));
+			$result.push(new $.AppContext.types.Field($form, name, $p));
 		}
 		else{
 			
@@ -88,14 +88,44 @@ $.AppContext.types.Field = function($form, $field, $type){
 
 $.AppContext.types.Field.prototype.setProperty = function(name, value){
 
+	/*
 	if(!Array.isArray(this.field)){
 		$(this.field).prop(name, value);
+	}
+	*/
+	
+	if(this.type == 'checkbox' || this.type == 'radio'){
+		$(this.form).find('input:' + this.type + '[name=' + this.field + ']').each(function() {
+			$(this).prop(name, value);
+		});
+	}
+	if(this.type == 'select'){
+		$(this.form).find('select[name=' + this.field + ']').prop(name, value);
+	}
+	else{
+		$(this.field).val(value);
 	}
 	
 };
 
 $.AppContext.types.Field.prototype.getProperty = function(name){
 	
+	$result = null;
+
+	if(this.type == 'checkbox' || this.type == 'radio' || this.type == 'select'){
+		$result = $(this.form).find('input' + ':' + this.type + '[name=' + this.field + ']').first().prop(name);
+	}
+	else
+	if(this.type == 'select'){
+		$result = $(this.form).find('select[name=' + this.field + ']').prop(name);
+	}
+	else{
+		$result = $(this.field).prop(name);
+	}
+	
+	return $result;
+	
+	/*
 	var $result = null;
 	
 	if(!Array.isArray(this.field)){
@@ -103,6 +133,7 @@ $.AppContext.types.Field.prototype.getProperty = function(name){
 	}
 	
 	return result;
+	*/
 	
 };
 
