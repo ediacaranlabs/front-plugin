@@ -63,9 +63,9 @@
 					</c:when>
 					<c:when test="${property.type == 'MULTISELECT'}">
 						<ec:select name="config.${property.code}" label="${property.name}" multiple="true" sizeList="5">
-							<c:set var="opt_selected" value="${vars.config.getRawValue(property.code)}"/>
 							<c:forEach items="${property.options}" var="opts">
-								<ec:option label="${opts.description}" selected="${opts.value == opt_selected}" value="${opts.value}"/>
+								<ec:option label="${opts.description}" 
+									selected="${vars.config.containsRawValue(property.code, opts.value)}" value="${opts.value}"/>
 							</c:forEach>
 						</ec:select>
 					</c:when>
@@ -78,20 +78,31 @@
 					</c:when>
 					<c:when test="${property.type == 'MULTISELECT_LIST'}">
 						<ec:label>${property.name}</ec:label><br>
-						<c:set var="opt_selected" value="${vars.config.getRawValue(property.code)}"/>
 						<c:forEach items="${property.options}" var="opts">
-							<ec:checkbox inline="true" name="config.${property.code}" label="${opts.description}" value="${opts.value}" selected="${opts.value == opt_selected}"/>
+							<ec:checkbox inline="true" name="config.${property.code}" label="${opts.description}" value="${opts.value}" 
+								selected="${vars.config.containsRawValue(property.code, opts.value)}"/>
 						</c:forEach>
 					</c:when>
 				</c:choose>
 				<ec:field-validator form="config_fr" field="config.${property.code}">
 				
 					<c:if test="${!property.allowEmpty}">
-					<ec:field-validator-rule name="notEmpty" message="You must agree before submitting."/>
+					<ec:field-validator-rule name="notEmpty" message="The ${property.name} is required"/>
+					</c:if>
+
+					<c:if test="${(property.type == 'MULTISELECT' || property.type == 'MULTISELECT_LIST') && (property.min > 0 || property.max > 0)}">
+					<ec:field-validator-rule name="choice"  message="Please choose ${property.min} - ${property.max}!">
+						<c:if test="${property.min > 0}">
+						<ec:field-validator-param name="min">${property.min}</ec:field-validator-param>
+						</c:if>
+						<c:if test="${property.max > 0}">
+						<ec:field-validator-param name="max">${property.max}</ec:field-validator-param>
+						</c:if>
+					</ec:field-validator-rule>
 					</c:if>
 										
-					<c:if test="${property.min > 0 || property.max > 0}">
-					<ec:field-validator-rule name="stringLength"  message="Value is short or large">
+					<c:if test="${!(property.type == 'MULTISELECT' || property.type == 'MULTISELECT_LIST') && (property.min > 0 || property.max > 0)}">
+					<ec:field-validator-rule name="stringLength"  message="The ${property.name} is short or large!">
 						<c:if test="${property.min > 0}">
 						<ec:field-validator-param name="min">${property.min}</ec:field-validator-param>
 						</c:if>
