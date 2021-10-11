@@ -8,7 +8,6 @@ import java.util.Map;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
-import br.com.uoutec.community.ediacaran.web.tomcat.TomcatServerBootstrap;
 
 @Tag(
 	name="load-data", 
@@ -30,14 +29,14 @@ public class LoadDataTag  extends AbstractSimpleComponent {
 	
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
-    	
-    	TomcatServerBootstrap sb     = null;//(ServerBootstrap) ApplicationBootstrapProvider.getBootstrap();
+
+    	File baseWebApp = new File(System.getProperty("app.web"));
     	Map<Object,Object> dta = ReadData.loadData(
     								file, 
-									sb.getWebapp()/*.getCanonicalFile()*/, 
+    								baseWebApp/*.getCanonicalFile()*/, 
 									file.startsWith("/")? 
-										sb.getWebapp() : 
-										new File(sb.getWebapp(), super.getRequestPath())
+										baseWebApp : 
+										new File(baseWebApp, super.getRequestPath())
 								);
     	
     	super.getJspContext().setAttribute(var == null? "vars" : var, dta);

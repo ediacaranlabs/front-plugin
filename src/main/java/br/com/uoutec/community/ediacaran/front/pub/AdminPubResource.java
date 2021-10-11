@@ -20,6 +20,7 @@ import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.ResponseErrors;
 
 import br.com.uoutec.community.ediacaran.PluginConfigurationManager;
+import br.com.uoutec.community.ediacaran.SecurityPermissionManager;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.MutablePluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfiguration;
@@ -51,6 +52,10 @@ public class AdminPubResource {
 	@Inject
 	@Transient
 	private PluginConfigurationManager pluginConfigurationManager;
+
+	@Inject
+	@Transient
+	private SecurityPermissionManager securityPermissionManager;
 	
 	public AdminPubResource(){
 	}
@@ -86,7 +91,7 @@ public class AdminPubResource {
 		Map<String,Object> vars = new HashMap<String,Object>();
 		vars.put("config", pc);
 		vars.put("status", pluginConfigurationManager.getStatus(pc));
-		
+		vars.put("security", securityPermissionManager.getPermissions(pc.getMetadata().getCode()));
 		return vars;
 	}
 
