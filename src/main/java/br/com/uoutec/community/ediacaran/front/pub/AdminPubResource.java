@@ -20,7 +20,7 @@ import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.ResponseErrors;
 
 import br.com.uoutec.community.ediacaran.PluginConfigurationManager;
-import br.com.uoutec.community.ediacaran.SecurityPermissionManager;
+import br.com.uoutec.community.ediacaran.SecurityPermissionUpdater;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.MutablePluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfiguration;
@@ -55,7 +55,7 @@ public class AdminPubResource {
 
 	@Inject
 	@Transient
-	private SecurityPermissionManager securityPermissionManager;
+	private SecurityPermissionUpdater securityPermissionManager;
 	
 	public AdminPubResource(){
 	}
