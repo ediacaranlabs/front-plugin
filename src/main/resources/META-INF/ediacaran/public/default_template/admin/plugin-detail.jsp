@@ -145,7 +145,7 @@
 					<c:forEach items="${vars.security}" var="per">
 						<ec:table-row>
 							<ec:table-col>
-								<ec:select name="type[${count}]">
+								<ec:select name="security[${count}].permission">
 									<ec:option label="File" value="FILE" selected="${per.request.permission == 'FILE'}"/>
 									<ec:option label="Property" value="PROPERTY" selected="${per.request.permission == 'PROPERTY'}"/>
 									<ec:option label="Runtime" value="RUNTIME" selected="${per.request.permission == 'RUNTIME'}"/>
@@ -153,13 +153,13 @@
 								</ec:select>
 							</ec:table-col>
 							<ec:table-col>
-								<ec:textfield name="name[${count}]" value="${per.request.name}"></ec:textfield>
+								<ec:textfield name="security[${count}].name" value="${per.request.name}"></ec:textfield>
 							</ec:table-col>
 							<ec:table-col>
-								<ec:textfield name="actions[${count}]" value="${per.request.actions}"></ec:textfield>
+								<ec:textfield name="security[${count}].actions" value="${per.request.actions}"></ec:textfield>
 							</ec:table-col>
 							<ec:table-col>
-								<ec:select name="status[${count}]">
+								<ec:select name="security[${count}].enabled">
 									<ec:option label="Enabled" value="true" selected="${per.enabled}" />
 									<ec:option label="Disabled" value="false" selected="${!per.enabled}" />
 								</ec:select>
@@ -170,7 +170,7 @@
 					<c:forEach begin="1" end="3">
 						<ec:table-row>
 							<ec:table-col>
-								<ec:select name="type[${count}]">
+								<ec:select name="security[${count}].permission">
 									<ec:option label="" value="" selected="true"/>
 									<ec:option label="File" value="FILE"/>
 									<ec:option label="Property" value="PROPERTY"/>
@@ -179,14 +179,14 @@
 								</ec:select>
 							</ec:table-col>
 							<ec:table-col>
-								<ec:textfield name="name[${count}]" value=""></ec:textfield>
+								<ec:textfield name="security[${count}].name" value=""></ec:textfield>
 							</ec:table-col>
 							<ec:table-col>
-								<ec:textfield name="actions[${count}]" value=""></ec:textfield>
+								<ec:textfield name="security[${count}].actions" value=""></ec:textfield>
 							</ec:table-col>
 							<ec:table-col>
-								<ec:select name="status[${count}]">
-									<ec:option label="" value="false" selected="true"/>
+								<ec:select name="security[${count}].enabled">
+									<ec:option label="" value="" selected="true"/>
 									<ec:option label="Enabled" value="true"/>
 									<ec:option label="Disabled" value="false"/>
 								</ec:select>

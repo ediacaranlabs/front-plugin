@@ -1,9 +1,11 @@
 package br.com.uoutec.community.ediacaran.front.pub;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -25,6 +27,7 @@ import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.MutablePluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginStatus;
+import br.com.uoutec.community.ediacaran.security.SecurityPermissionStatus;
 
 @Singleton
 @Controller(value="${plugins.ediacaran.front.admin_context}", defaultActionName="/")
@@ -98,7 +101,13 @@ public class AdminPubResource {
 	@Action(value="/plugins/{code:[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*}")
 	@RequestMethod("POST")
 	@View("/${plugins.ediacaran.front.template}/admin/update-plugin-detail")
-	public void updatePlugin(@Basic(bean="code") String code, @Basic(bean="config") Map<String,List<String>> values){
+	public void updatePlugin(
+			@Basic(bean="code")
+			String code, 
+			@Basic(bean="config")
+			Map<String,List<String>> values, 
+			@Basic(bean="security", mappingType=MappingTypes.OBJECT)
+			List<SecurityPermissionStatusPubEntity> security) throws Throwable{
 		
 		MutablePluginConfiguration mpc = (MutablePluginConfiguration)pluginConfigurationManager.getPluginConfiguartion(code);
 		
@@ -108,6 +117,15 @@ public class AdminPubResource {
 			}
 			
 			pluginConfigurationManager.savePluginMetadata(mpc);
+			
+			if(security != null) {
+				Set<SecurityPermissionStatus> status = new HashSet<SecurityPermissionStatus>();
+				for(SecurityPermissionStatusPubEntity e: security) {
+					status.add(e.rebuild(null,false, true, true, true));
+				}
+				securityPermissionManager.updatePermissions(mpc.getMetadata().getCode(), status.toArray(new SecurityPermissionStatus[0]));
+			}
+			
 		}
 		
 	}
