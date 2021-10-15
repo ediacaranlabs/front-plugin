@@ -2,6 +2,9 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.lang.reflect.InvocationTargetException;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,6 +17,7 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
+import br.com.uoutec.community.ediacaran.DoPrivilegedException;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
@@ -220,11 +224,32 @@ public abstract class AbstractPanelComponent
 			Set<String> emptyAttributes, Set<String> defaultAttributes) {
 		try {
 			StringBuilder sb = new StringBuilder();
-			BeanInstance i = new BeanInstance(this);
+			BeanInstance i = 
+					AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
+		            public BeanInstance run() {
+		                return new BeanInstance(AbstractPanelComponent.this);
+		            }
+		        });
+			//BeanInstance i = new BeanInstance(this);
 			
 			for(String p: defaultAttributes) {
+				final String k = p;
 				
-				Object v = i.get(p);
+				Object v = 
+						AccessController.doPrivileged(new PrivilegedAction<Object>() {
+			            public Object run() {
+			                try {
+								return i.get(k);
+							} catch (IllegalAccessException e) {
+								throw new DoPrivilegedException(e);
+							} catch (IllegalArgumentException e) {
+								throw new DoPrivilegedException(e);
+							} catch (InvocationTargetException e) {
+								throw new DoPrivilegedException(e);
+							}
+			            }
+			        });
+				//Object v = i.get(p);
 				
 				if(v == null || emptyAttributes.contains(p)) {
 					continue;
@@ -268,23 +293,43 @@ public abstract class AbstractPanelComponent
 			Map<String, AttributeParser> attributeParsers, Set<String> emptyAttributes, Set<String> defaultAttributes) {
 		try {
 			Map<String, Object> map              = new HashMap<String, Object>();
-			BeanInstance i                       = new BeanInstance(this);
-			
+			BeanInstance i = 
+					AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
+		            public BeanInstance run() {
+		                return new BeanInstance(AbstractPanelComponent.this);
+		            }
+		        });
+			//BeanInstance i = new BeanInstance(AbstractPanelComponent.this);
 			this.beforePrepareVars(map);
 			
 			map.put("attr", getAttrList(attributeParsers, emptyAttributes, defaultAttributes));
 			
-			for(String k: defaultProperties) {
+			for(String p: defaultProperties) {
+				final String k = p;
 				
-				Object v = i.get(k);
+				Object v = 
+						AccessController.doPrivileged(new PrivilegedAction<Object>() {
+			            public Object run() {
+			                try {
+								return i.get(k);
+							} catch (IllegalAccessException e) {
+								throw new DoPrivilegedException(e);
+							} catch (IllegalArgumentException e) {
+								throw new DoPrivilegedException(e);
+							} catch (InvocationTargetException e) {
+								throw new DoPrivilegedException(e);
+							}
+			            }
+			        });
+				//Object v = i.get(p);
 				
-				AttributeParser parser = propertyParsers.get(k);
+				AttributeParser parser = propertyParsers.get(p);
 				
-				k = parser == null? k : parser.toName(k, this);
+				p = parser == null? p : parser.toName(p, this);
 				v = parser == null? v : parser.toValue(v, this);
 				
-				if(k != null && !k.isEmpty()) {
-					map.put(k, v);
+				if(p != null && !p.isEmpty()) {
+					map.put(p, v);
 				}
 			}
 			

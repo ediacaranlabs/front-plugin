@@ -2,6 +2,9 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.lang.reflect.InvocationTargetException;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -14,14 +17,15 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
+import br.com.uoutec.community.ediacaran.DoPrivilegedException;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.ComponentVars;
+import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateVarParser;
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeRegistry;
-import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 
 public abstract class AbstractSimpleComponent 
@@ -146,14 +150,37 @@ public abstract class AbstractSimpleComponent
 			Set<String> emptyAttributes, Set<String> defaultAttributes) {
 
 		StringBuilder sb = new StringBuilder();
-		BeanInstance i = new BeanInstance(this);
+		
+		BeanInstance i = 
+				AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
+	            public BeanInstance run() {
+	                return new BeanInstance(AbstractSimpleComponent.this);
+	            }
+	        });
+		
+		//BeanInstance i = new BeanInstance(this);
 		
 		for(String p: defaultAttributes) {
 			
 			Object v;
 			
 			try{
-				v = i.get(p);
+				final String k = p;
+				v = 
+						AccessController.doPrivileged(new PrivilegedAction<Object>() {
+			            public Object run() {
+			                try {
+								return i.get(k);
+							} catch (IllegalAccessException e) {
+								throw new DoPrivilegedException(e);
+							} catch (IllegalArgumentException e) {
+								throw new DoPrivilegedException(e);
+							} catch (InvocationTargetException e) {
+								throw new DoPrivilegedException(e);
+							}
+			            }
+			        });
+				//v = i.get(p);
 			}
 			catch(Throwable ex) {
 				throw new ThemeException("fail to get property " + this.getClass().getName() + "." + p, ex);
@@ -204,30 +231,51 @@ public abstract class AbstractSimpleComponent
 			Map<String, AttributeParser> attributeParsers, Set<String> emptyAttributes, Set<String> defaultAttributes) {
 		
 		Map<String, Object> map              = new HashMap<String, Object>();
-		BeanInstance i                       = new BeanInstance(this);
+		BeanInstance i = 
+				AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
+	            public BeanInstance run() {
+	                return new BeanInstance(AbstractSimpleComponent.this);
+	            }
+	        });
+		//BeanInstance i                       = new BeanInstance(this);
 		
 		this.beforePrepareVars(map);
 		
 		map.put("attr", getAttrList(attributeParsers, emptyAttributes, defaultAttributes));
 		
-		for(String k: defaultProperties) {
+		for(String p: defaultProperties) {
 			
 			Object v;
 			
 			try{
-				v = i.get(k);
+				final String k = p;
+				v = 
+						AccessController.doPrivileged(new PrivilegedAction<Object>() {
+			            public Object run() {
+			                try {
+								return i.get(k);
+							} catch (IllegalAccessException e) {
+								throw new DoPrivilegedException(e);
+							} catch (IllegalArgumentException e) {
+								throw new DoPrivilegedException(e);
+							} catch (InvocationTargetException e) {
+								throw new DoPrivilegedException(e);
+							}
+			            }
+			        });
+				//v = i.get(p);
 			}
 			catch(Throwable ex) {
-				throw new ThemeException("fail to get property " + this.getClass().getName() + "." + k, ex);
+				throw new ThemeException("fail to get property " + this.getClass().getName() + "." + p, ex);
 			}
 			
-			AttributeParser parser = propertyParsers.get(k);
+			AttributeParser parser = propertyParsers.get(p);
 			
-			k = parser == null? k : parser.toName(k, this);
+			p = parser == null? p : parser.toName(p, this);
 			v = parser == null? v : parser.toValue(v, this);
 			
-			if(k != null && !k.isEmpty()) {
-				map.put(k, v);
+			if(p != null && !p.isEmpty()) {
+				map.put(p, v);
 			}
 		}
 		
