@@ -42,29 +42,29 @@ public class Menu implements Serializable {
 	
 	private Map<String, Menu> map;
 	
-	private Menu parent;
-	
-	private MenuBar parentMenuBar;
+	private final Menu parent;
+
+	private final MenuBar parentMenuBar;
 	
 	private int order;
 
 	public Menu(){
-		this(null, null, null, null, null, null, new ArrayList<Menu>(), null, null, null, 0);
+		this(null, null, null, null, null, null, new ArrayList<Menu>(), null, null, null, null, null, 0);
 	}
 
-	public Menu(String id){
-		this(id, null, null, null, null, null, new ArrayList<Menu>(), null, null, null, 0);
+	public Menu(String id, Menu parent, MenuBar parentMenuBar){
+		this(id, null, null, null, null, null, new ArrayList<Menu>(), null, null, null, parent, parentMenuBar, 0);
 	}
 	
 	public Menu(String id, String name, String icon, String resource,
-			String resourceBundle, String template, String badge, String badgeStyle, String body, int order) {
+			String resourceBundle, String template, String badge, String badgeStyle, String body, Menu parent, MenuBar parentMenuBar, int order) {
 		this(id, name, icon, resource, resourceBundle, template, new ArrayList<Menu>(),
-				badge, badgeStyle, body, order);
+				badge, badgeStyle, body, parent, parentMenuBar, order);
 	}
 	
 	public Menu(String id, String name, String icon, String resource,
 			String resourceBundle, String template, List<Menu> itens,
-			String badge, String badgeStyle, String body, int order) {
+			String badge, String badgeStyle, String body, Menu parent, MenuBar parentMenuBar, int order) {
 		super();
 		this.id = id == null? IDGenerator.getUniqueOrderID('M', this.hashCode()) : id;
 		this.propertyChangeSupport = new PropertyChangeSupport(this);
@@ -76,25 +76,20 @@ public class Menu implements Serializable {
 		this.itens = itens;
 		this.order = order;
 		this.badgeStyle = badgeStyle;
-		
+		this.parent = parent;
+		this.parentMenuBar = parentMenuBar;
 		this.map = new HashMap<String, Menu>();
-		
+		this.itens = itens;
+		/*
 		if(itens != null) {
 			for(Menu i: itens) {
 				addItem(i);
 			}
 		}
+		*/
 	}
 
-	public void setParent(Menu menu) {
-		this.parent = menu;	
-	}
-	
-	public void setParentMenuBar(MenuBar value) {
-		this.parentMenuBar = value;
-	}
-	
-	public String getPath() {
+	private String getPath() {
 		
 		StringBuilder sb = new StringBuilder();
 		
@@ -116,6 +111,10 @@ public class Menu implements Serializable {
 
 	public String getId() {
 		return id;
+	}
+
+	public Menu getParent() {
+		return parent;
 	}
 
 	public String getFullName(){
@@ -266,7 +265,8 @@ public class Menu implements Serializable {
 		return this;
 	}
 
-	public Menu addItem(Menu item){
+	public Menu addItem(String id){
+		
 		synchronized (this) {
 			
 			SecurityManager sm = System.getSecurityManager();
@@ -275,13 +275,14 @@ public class Menu implements Serializable {
 				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + getPath() + ".register"));
 			}
 			
-			if(map.containsKey(item.getId())) {
-				throw new IllegalStateException("menu exist: " + item.getName());
+			if(map.containsKey(id)) {
+				throw new IllegalStateException("menu exist: " + id);
 			}
+			
+			Menu item = new Menu(id, this, null);
 			
 			this.itens.add(item);
 			this.map.put(item.getId(), item);
-			item.setParent(this);
 			
 			Collections.sort(this.itens, new Comparator<Menu>(){
 
@@ -293,7 +294,7 @@ public class Menu implements Serializable {
 			
 			propertyChangeSupport.fireIndexedPropertyChange("item", itens.size() - 1, null, item);
 			
-			return this;
+			return item;
 		}
 	}
 

@@ -34,23 +34,24 @@ public class MenuBar {
 		return this.list;
 	}
 	
-	public void addMenu(Menu menu){
+	public Menu addMenu(String id){
 		
 		synchronized (this) {
 			
 			SecurityManager sm = System.getSecurityManager();
 			
 			if(sm != null) {
-				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + id + ".register"));
+				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + this.id + ".register"));
 			}
 			
-			if(map.containsKey(menu.getId())) {
-				throw new IllegalStateException("menu exist: " + menu.getName());
+			if(map.containsKey(id)) {
+				throw new IllegalStateException("menu exist: " + id);
 			}
+
+			Menu menu = new Menu(id, null, this);
 			
 			this.list.add(menu);
 			this.map.put(menu.getId(), menu);
-			menu.setParentMenuBar(this);
 			
 			Collections.sort(this.list, new Comparator<Menu>(){
 
@@ -62,6 +63,7 @@ public class MenuBar {
 			
 			propertyChangeSupport.fireIndexedPropertyChange("menu", list.size() - 1, null, menu);
 			
+			return menu;
 		}
 	}
 
@@ -76,22 +78,22 @@ public class MenuBar {
 		return map.get(name);
 	}
 	
-	public void removeMenu(Menu menu){
+	public void removeMenu(String id){
 		synchronized (this) {
 			
 			SecurityManager sm = System.getSecurityManager();
 			
 			if(sm != null) {
-				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + id + "." + menu.getId() + ".remove"));
+				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + id + "." + id + ".remove"));
 			}
 			
-			Menu m = this.map.get(menu.getId());
+			Menu m = this.map.get(id);
 			
 			if(m == null) 
 				return;
 			
 			list.remove(m);
-			map.remove(m.getId());
+			map.remove(id);
 			
 			propertyChangeSupport.fireIndexedPropertyChange("menu", list.size(), m, null);
 			
