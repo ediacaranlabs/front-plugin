@@ -67,15 +67,15 @@ public class MenuBar {
 		}
 	}
 
-	public Menu getMenu(String name){
+	public Menu getMenu(String id){
 		
 		SecurityManager sm = System.getSecurityManager();
 		
 		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + id + "." + name + ".list"));
+			sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + this.id + "." + id + ".list"));
 		}
 		
-		return map.get(name);
+		return map.get(id);
 	}
 	
 	public void removeMenu(String id){
@@ -84,7 +84,7 @@ public class MenuBar {
 			SecurityManager sm = System.getSecurityManager();
 			
 			if(sm != null) {
-				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + id + "." + id + ".remove"));
+				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + this.id + "." + id + ".remove"));
 			}
 			
 			Menu m = this.map.get(id);
