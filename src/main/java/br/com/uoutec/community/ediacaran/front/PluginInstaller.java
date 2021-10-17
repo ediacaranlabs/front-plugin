@@ -50,24 +50,26 @@ public class PluginInstaller
 
 		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);
 
-		AdminMenuBar leftMenu = new AdminMenuBar();
+		AdminMenuBar leftMenu = new AdminMenuBar(ADMIN_MENU_BAR);
 		leftMenu.addPropertyChangeListener(new MenuPropertyChangeListener());
 		
-		AdminMenuBar topMenu = new AdminMenuBar();
+		AdminMenuBar topMenu = new AdminMenuBar(ADMIN_TOP_MENU_BAR);
 		topMenu.addPropertyChangeListener(new MenuPropertyChangeListener());
 		
-		mbm.registerMenuBar(ADMIN_MENU_BAR, leftMenu);
-		mbm.registerMenuBar(ADMIN_TOP_MENU_BAR,topMenu);
+		mbm.registerMenuBar(leftMenu);
+		mbm.registerMenuBar(topMenu);
 		
 		leftMenu.addMenu(
-			new Menu("Dashboard")
+			new Menu("dashboard")
+				.setName("Dashboard")
 				.setIcon("tachometer")
 				.setResource("#!/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard")
 				.setOrder(100)
 		);
 		
 		leftMenu.addMenu(
-				new Menu("Plugins")
+				new Menu("plugins")
+					.setName("Plugins")
 					.setIcon("pie-chart")
 					.setResource("#!/plugins/ediacaran/front/admin/plugins")
 					.setOrder(-100)
@@ -78,80 +80,92 @@ public class PluginInstaller
 		}
 			
 		topMenu.addMenu(
-				new Menu("Messages")
+				new Menu("messages")
+					.setName("Messages")
 					.setIcon("comments")
 					.setBadgeStyle("danger")
 					.setOrder(100)
 		);
 		
 		topMenu.addMenu(
-				new Menu("Notification")
+				new Menu("notification")
+					.setName("Notification")
 					.setIcon("bell")
 					.setBadgeStyle("warning")
 					.setOrder(99)
 		);
 		
 		leftMenu.addMenu(
-				new Menu("Components")
+				new Menu("components")
+					.setName("Components")
 					.setIcon("tree")
 					.setResource("#!/plugins/ediacaran/front/admin/components.jsp")
 					.setOrder(1)
 		);
 		
 		leftMenu.addMenu(
-				new Menu("Forms")
+				new Menu("forms")
+					.setName("Forms")
 					.setIcon("edit")
 					.setResource("#!/plugins/ediacaran/front/admin/form.jsp")
 					.setOrder(1)
 		);
 		
 		leftMenu.addMenu(
-				new Menu("Typography")
+				new Menu("typography")
+					.setName("Typography")
 					.setIcon("pencil")
 					.setResource("#!/plugins/ediacaran/front/admin/typography.jsp")
 					.setOrder(1)
 		);
 		
 		leftMenu.addMenu(
-				new Menu("Tables")
+				new Menu("tables")
+					.setName("Tables")
 					.setIcon("table")
 					.setResource("#!/plugins/ediacaran/front/admin/table.jsp")
 					.setOrder(1)
 		);
 		
 		leftMenu.addMenu(
-				new Menu("Pricing boxes")
+				new Menu("pricing_boxes")
+					.setName("Pricing boxes")
 					.setIcon("money")
 					.setResource("#!/plugins/ediacaran/front/admin/pricingbox.jsp")
 					.setOrder(1)
 		);
 		
 		leftMenu.addMenu(
-				new Menu("Flot Charts")
+				new Menu("flot_charts")
+					.setName("Flot Charts")
 					.setIcon("pie-chart")
 					.setResource("#!/plugins/ediacaran/front/admin/flotcharts.jsp")
 					.setOrder(1)
 		);
 		
 		leftMenu.addMenu(
-				new Menu("Menu")
+				new Menu("menu")
+					.setName("Menu")
 					.setIcon("tree")
 					.setResource("#")
 					.setOrder(1)
 					.addItem(
-							new Menu("Item 1")
+							new Menu("item_1")
+								.setName("Item 1")
 								.setIcon("tree")
 								.setResource("#")
 								.setOrder(1)
 					)
 					.addItem(
-							new Menu("Item 2")
+							new Menu("item_2")
+								.setName("Item 2")
 								.setIcon("tree")
 								.setResource("#")
 								.setOrder(1)
 					)
 					.addItem(
-							new Menu("Item 3")
+							new Menu("item_3")
+								.setName("Item 3")
 								.setIcon("tree")
 								.setResource("#")
 								.setOrder(1)

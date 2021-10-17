@@ -4,7 +4,9 @@ import br.com.uoutec.community.ediacaran.plugins.PublicBean;
 
 public interface MenuBarManager extends PublicBean{
 
-	void registerMenuBar(String name, MenuBar menuBar) throws MenuBarManagerException;
+	public static final String basePermission = "app.menu";
+	
+	void registerMenuBar(MenuBar menuBar) throws MenuBarManagerException;
 	
 	MenuBar getMenuBar(String name) throws MenuBarManagerException;
 	

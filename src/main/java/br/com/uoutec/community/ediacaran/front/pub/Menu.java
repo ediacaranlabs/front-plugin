@@ -42,27 +42,31 @@ public class Menu implements Serializable {
 	
 	private Map<String, Menu> map;
 	
+	private Menu parent;
+	
+	private MenuBar parentMenuBar;
+	
 	private int order;
 
 	public Menu(){
-		this(null, null, null, null, null, new ArrayList<Menu>(), null, null, null, 0);
+		this(null, null, null, null, null, null, new ArrayList<Menu>(), null, null, null, 0);
 	}
 
-	public Menu(String name){
-		this(name, null, null, null, null, new ArrayList<Menu>(), null, null, null, 0);
+	public Menu(String id){
+		this(id, null, null, null, null, null, new ArrayList<Menu>(), null, null, null, 0);
 	}
 	
-	public Menu(String name, String icon, String resource,
+	public Menu(String id, String name, String icon, String resource,
 			String resourceBundle, String template, String badge, String badgeStyle, String body, int order) {
-		this(name, icon, resource, resourceBundle, template, new ArrayList<Menu>(),
+		this(id, name, icon, resource, resourceBundle, template, new ArrayList<Menu>(),
 				badge, badgeStyle, body, order);
 	}
 	
-	public Menu(String name, String icon, String resource,
+	public Menu(String id, String name, String icon, String resource,
 			String resourceBundle, String template, List<Menu> itens,
 			String badge, String badgeStyle, String body, int order) {
 		super();
-		this.id = IDGenerator.getUniqueOrderID('M', this.hashCode());
+		this.id = id == null? IDGenerator.getUniqueOrderID('M', this.hashCode()) : id;
 		this.propertyChangeSupport = new PropertyChangeSupport(this);
 		this.name = name;
 		this.icon = icon;
@@ -82,6 +86,30 @@ public class Menu implements Serializable {
 		}
 	}
 
+	public void setParent(Menu menu) {
+		this.parent = menu;	
+	}
+	
+	public void setParentMenuBar(MenuBar value) {
+		this.parentMenuBar = value;
+	}
+	
+	public String getPath() {
+		
+		StringBuilder sb = new StringBuilder();
+		
+		if(parent != null) {
+			sb.append(parent.getPath()).append(".");
+		}
+		else {
+			sb.append(parentMenuBar.getId()).append(".");
+		}
+		
+		sb.append(id);
+		
+		return sb.toString();
+	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -210,6 +238,12 @@ public class Menu implements Serializable {
 	}
 
 	public List<Menu> getItens() {
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + getPath() + ".list.*"));
+		}
+		
 		return itens;
 	}
 
@@ -234,12 +268,20 @@ public class Menu implements Serializable {
 
 	public Menu addItem(Menu item){
 		synchronized (this) {
-			if(map.containsKey(item.getName())) {
+			
+			SecurityManager sm = System.getSecurityManager();
+			
+			if(sm != null) {
+				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + getPath() + ".register"));
+			}
+			
+			if(map.containsKey(item.getId())) {
 				throw new IllegalStateException("menu exist: " + item.getName());
 			}
 			
 			this.itens.add(item);
-			this.map.put(item.getName(), item);
+			this.map.put(item.getId(), item);
+			item.setParent(this);
 			
 			Collections.sort(this.itens, new Comparator<Menu>(){
 
@@ -256,18 +298,32 @@ public class Menu implements Serializable {
 	}
 
 	public Menu getItem(String name){
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + getPath() + ".list"));
+		}
+		
 		return map.get(name);
 	}
 	
 	public Menu removeItem(String name){
 		synchronized (this) {
+			
+			SecurityManager sm = System.getSecurityManager();
+			
+			if(sm != null) {
+				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + getPath() + ".remove"));
+			}
+			
 			Menu m = map.get(name);
 			
 			if(m == null) 
 				return this;
 			
 			itens.remove(m);
-			map.remove(m.getName());
+			map.remove(m.getId());
 			
 			propertyChangeSupport.fireIndexedPropertyChange("item", itens.size(), m, null);
 			
@@ -291,7 +347,7 @@ public class Menu implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -304,10 +360,10 @@ public class Menu implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Menu other = (Menu) obj;
-		if (name == null) {
-			if (other.name != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

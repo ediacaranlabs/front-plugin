@@ -11,18 +11,25 @@ import java.util.Map;
 
 public class MenuBar {
 
-	private PropertyChangeSupport propertyChangeSupport;
+	private final String id;
 	
-	private List<Menu> list;
+	private final PropertyChangeSupport propertyChangeSupport;
 	
-	private Map<String, Menu> map;
+	private final List<Menu> list;
 	
-	public MenuBar(){
+	private final Map<String, Menu> map;
+	
+	public MenuBar(String id){
 		this.propertyChangeSupport = new PropertyChangeSupport(this);
 		this.list = new ArrayList<Menu>();
 		this.map = new HashMap<String, Menu>();
+		this.id = id;
 	}
 	
+	public String getId() {
+		return id;
+	}
+
 	public List<Menu> getItens(){
 		return this.list;
 	}
@@ -30,12 +37,20 @@ public class MenuBar {
 	public void addMenu(Menu menu){
 		
 		synchronized (this) {
-			if(map.containsKey(menu.getName())) {
+			
+			SecurityManager sm = System.getSecurityManager();
+			
+			if(sm != null) {
+				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + id + ".register"));
+			}
+			
+			if(map.containsKey(menu.getId())) {
 				throw new IllegalStateException("menu exist: " + menu.getName());
 			}
 			
 			this.list.add(menu);
-			this.map.put(menu.getName(), menu);
+			this.map.put(menu.getId(), menu);
+			menu.setParentMenuBar(this);
 			
 			Collections.sort(this.list, new Comparator<Menu>(){
 
@@ -51,18 +66,32 @@ public class MenuBar {
 	}
 
 	public Menu getMenu(String name){
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + id + "." + name + ".list"));
+		}
+		
 		return map.get(name);
 	}
 	
 	public void removeMenu(Menu menu){
 		synchronized (this) {
-			Menu m = this.map.get(menu.getName());
+			
+			SecurityManager sm = System.getSecurityManager();
+			
+			if(sm != null) {
+				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + id + "." + menu.getId() + ".remove"));
+			}
+			
+			Menu m = this.map.get(menu.getId());
 			
 			if(m == null) 
 				return;
 			
 			list.remove(m);
-			map.remove(m.getName());
+			map.remove(m.getId());
 			
 			propertyChangeSupport.fireIndexedPropertyChange("menu", list.size(), m, null);
 			

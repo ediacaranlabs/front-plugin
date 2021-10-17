@@ -15,18 +15,30 @@ public class MenuBarManagerImp implements MenuBarManager{
 	}
 	
 	@Override
-	public void registerMenuBar(String name, MenuBar menuBar) throws MenuBarManagerException {
+	public void registerMenuBar(MenuBar menuBar) throws MenuBarManagerException {
 		
-		if(this.map.containsKey(name)){
-			throw new MenuBarManagerException("menu bar has already been registered: " + name);
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(basePermission + "." + menuBar.getId() + ".register"));
 		}
 		
-		this.map.put(name, menuBar);
+		if(this.map.containsKey(menuBar.getId())){
+			throw new MenuBarManagerException("menu bar has already been registered: " + menuBar.getId());
+		}
 		
+		this.map.put(menuBar.getId(), menuBar);
+
 	}
 
 	@Override
 	public MenuBar getMenuBar(String name) throws MenuBarManagerException {
+
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(basePermission + "." + name + ".list"));
+		}
 		
 		MenuBar menubar = this.map.get(name);
 		
@@ -39,6 +51,13 @@ public class MenuBarManagerImp implements MenuBarManager{
 
 	@Override
 	public void removeMenuBar(String name) throws MenuBarManagerException {
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(basePermission + "." + name + ".remove"));
+		}
+		
 		map.remove(name);
 	}
 
