@@ -3,7 +3,8 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 
-<ec:form method="POST" id="status_config_fr" update="#enable_plugin_result" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/status">
+<ec:form method="POST" id="status_config_fr" update="#enable_plugin_result" 
+action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/status" acceptCharset="UTF-8">
 	<ed:row style="form">
 		<ed:col size="8">
 			<h3>${vars.config.metadata.name}</h3>
@@ -144,24 +145,25 @@
 					</ec:table-header>
 					<c:forEach items="${vars.security}" var="per">
 						<ec:table-row>
-							<ec:table-col>
-								<ec:select name="security[${count}].permission">
-									<ec:option label="File" value="FILE" selected="${per.request.permission == 'FILE'}"/>
-									<ec:option label="Property" value="PROPERTY" selected="${per.request.permission == 'PROPERTY'}"/>
-									<ec:option label="Runtime" value="RUNTIME" selected="${per.request.permission == 'RUNTIME'}"/>
-									<ec:option label="All" value="ALL" selected="${per.request.permission == 'ALL'}"/>
-								</ec:select>
+							<ec:table-col classStyle="form-group has-feedback">
+								<ec:textfield name="security[${count}].permission" readonly="true" value="${per.request.permission}"></ec:textfield>
 							</ec:table-col>
-							<ec:table-col>
-								<ec:textfield name="security[${count}].name" value="${per.request.name}"></ec:textfield>
+							<ec:table-col classStyle="form-group has-feedback">
+								<ec:textfield name="security[${count}].name" readonly="true" value="${per.request.name}"></ec:textfield>
 							</ec:table-col>
-							<ec:table-col>
-								<ec:textfield name="security[${count}].actions" value="${per.request.actions}"></ec:textfield>
+							<ec:table-col classStyle="form-group has-feedback">
+								<ec:textfield name="security[${count}].actions" readonly="true" value="${per.request.actions}"></ec:textfield>
 							</ec:table-col>
-							<ec:table-col>
+							<ec:table-col classStyle="form-group has-feedback">
 								<ec:select name="security[${count}].enabled">
 									<ec:option label="Enabled" value="true" selected="${per.enabled}" />
 									<ec:option label="Disabled" value="false" selected="${!per.enabled}" />
+									<ec:option label="Deleted" />
+									<ec:field-validator>
+										<ec:field-validator-rule name="choice"  message="Please choose!">
+											<ec:field-validator-param name="min">1</ec:field-validator-param>
+										</ec:field-validator-rule>
+									</ec:field-validator>
 								</ec:select>
 							</ec:table-col>
 						</ec:table-row>
@@ -173,6 +175,7 @@
 								<ec:select name="security[${count}].permission">
 									<ec:option label="" value="" selected="true"/>
 									<ec:option label="File" value="FILE"/>
+									<ec:option label="Auth" value="AUTH"/>
 									<ec:option label="Property" value="PROPERTY"/>
 									<ec:option label="Runtime" value="RUNTIME"/>
 									<ec:option label="All" value="ALL"/>

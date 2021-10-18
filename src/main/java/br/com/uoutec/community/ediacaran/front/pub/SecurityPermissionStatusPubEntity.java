@@ -22,7 +22,6 @@ public class SecurityPermissionStatusPubEntity
 	
 	private String actions;
 
-	@NotNull
 	private Boolean enabled;
 	
 	public SecurityPermissionStatusPubEntity() {
@@ -74,7 +73,7 @@ public class SecurityPermissionStatusPubEntity
 		
 		SecurityPermissionRequest req = new SecurityPermissionRequest(permission, name, actions);
 		o.setRequest(req);
-		o.setEnabled(enabled == null? false : enabled.booleanValue());
+		o.setEnabled(enabled);
 		
 	}
 
