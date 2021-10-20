@@ -34,7 +34,12 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	
 	@Override
 	public synchronized void registerTheme(String name, String context, String template) throws ThemeException{
-		//TODO: security
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(PERMISSION_PREFIX + ".theme." + name + ".register"));
+		}
 		
 		ThemeEntry entry = themes.get(name);
 		
@@ -60,7 +65,13 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 
 	@Override
 	public synchronized void registerPackageTheme(String name, String packageName, String template) throws ThemeException{
-		//TODO: security
+
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(PERMISSION_PREFIX + ".theme." + name + ".package.register"));
+		}
+		
 		
 		ThemeEntry entry = themes.get(name);
 		
@@ -93,7 +104,13 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	
 	@Override
 	public synchronized void registerComponentTemplate(String name, String packageName, String template, Component tagTemplate) throws ThemeException{
-		//TODO: security
+
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(PERMISSION_PREFIX + ".theme." + name + ".component.register"));
+		}
+		
 
 		ThemeEntry entry = themes.get(name);
 		
@@ -125,7 +142,13 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 
 	@Override
 	public synchronized void registerResource(String name, String packageName, String resource, String type, String path) throws ThemeException{
-		//TODO: security
+
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(PERMISSION_PREFIX + ".theme." + name + ".resource.register"));
+		}
+		
 
 		ThemeEntry entry = themes.get(name);
 		
@@ -195,7 +218,14 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 
 	@Override
 	public void unregisterTheme(String name) {
-		//TODO: security
+
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			
+			sm.checkPermission(new RuntimePermission(PERMISSION_PREFIX + ".theme." + name + ".unregister"));
+		}
+		
 		
 		if(themes.remove(name) != null) {
 			if(logger.isWarnEnabled()) {
@@ -209,6 +239,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		
 	}
 
+	@SuppressWarnings("unused")
 	private static class ThemeEntry {
 		
 		public String name;
