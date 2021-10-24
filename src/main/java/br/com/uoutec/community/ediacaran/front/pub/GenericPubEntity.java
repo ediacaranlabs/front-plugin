@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.brandao.brutos.ClassUtil;
 
-import br.com.uoutec.community.ediacaran.core.system.util.EntityInheritanceUtil;
+import br.com.uoutec.community.ediacaran.core.system.util.EntityInheritanceManager;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.pub.entity.AbstractPubEntity;
 import br.com.uoutec.pub.entity.InvalidRequestException;
@@ -45,7 +45,7 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 
 		String type = getCodeType();
 		
-		EntityInheritanceUtil entityInheritanceUtil = EntityContextPlugin.getEntity(EntityInheritanceUtil.class);
+		EntityInheritanceManager entityInheritanceUtil = EntityContextPlugin.getEntity(EntityInheritanceManager.class);
 		Map<String, Class<?>> clazzMap = entityInheritanceUtil.getMap(getGenericType());
 		
 		Class<? extends GenericPubEntity> ptype;
