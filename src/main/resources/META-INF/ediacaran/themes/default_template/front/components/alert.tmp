@@ -1,4 +1,4 @@
-<div {attr} class="alert {style} {classStyle}">
+<div {attr} class="alert {style} {classStyle} {align}">
 	<button type="button" class="close" data-dismiss="alert">&times;</button>
 	{content}
 </div>

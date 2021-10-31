@@ -1,1 +1,1 @@
-<label class="{style} {size} {classStyle}" >{content}</label>
+<label class="{style} {size} {classStyle} {align}" >{content}</label>

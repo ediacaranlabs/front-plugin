@@ -1,5 +1,5 @@
 <div class="form-check {inline}">
-  <input class="form-check-input" {attr}>
+  <input class="form-check-input {align}" {attr}>
   <label class="form-check-label">
     {label}
   </label>

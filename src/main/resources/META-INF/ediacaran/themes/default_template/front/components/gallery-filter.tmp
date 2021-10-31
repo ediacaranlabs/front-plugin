@@ -1,1 +1,1 @@
-<li class="{code}{active}"><a href="#">{name}</a></li>
+<li class="{code}{active} {align}"><a href="#">{name}</a></li>

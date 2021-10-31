@@ -1,1 +1,1 @@
-<i {attr} class="fa fa-{icon} fa-{size}x"></i>
+<i {attr} class="fa fa-{icon} fa-{size}x {align}"></i>

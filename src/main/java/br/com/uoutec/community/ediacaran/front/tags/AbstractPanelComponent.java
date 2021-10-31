@@ -90,6 +90,8 @@ public abstract class AbstractPanelComponent
 	
 	private String style;
 	
+	private String align;
+	
     public void doInitBody() throws JspException {
     	setProperty(getClass().getName() + ":CONTEXT", this);
     	
@@ -449,6 +451,15 @@ public abstract class AbstractPanelComponent
 
 	public void setStyle(String style) {
 		this.style = style;
+	}
+
+	public String getAlign() {
+		return align;
+	}
+
+	@TagAttribute
+	public void setAlign(String align) {
+		this.align = align;
 	}
     
 }

@@ -1,5 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.pub;
 
+import java.io.File;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +30,7 @@ import br.com.uoutec.community.ediacaran.plugins.MutablePluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginStatus;
 import br.com.uoutec.community.ediacaran.security.SecurityPermissionStatus;
+import br.com.uoutec.pub.entity.InvalidRequestException;
 
 @Singleton
 @Controller(value="${plugins.ediacaran.front.admin_context}", defaultActionName="/")
@@ -152,6 +155,56 @@ public class AdminPubResource {
 		
 		return vars;
 		//WebFlowController.redirect().to("/plugins/ediacaran/front/adm/plugins/" + code);
+	}
+
+	@Action(value="/plugins/install-file")
+	@RequestMethod("POST")
+	@View("/${plugins.ediacaran.front.template}/admin/update-install-file")
+	public void installPlugin(
+			@Basic(bean="file")
+			File pluginPackage) throws InvalidRequestException{
+
+		if(pluginPackage == null) {
+			throw new InvalidRequestException("plugin package not found");
+		}
+		
+		try {
+			File newFile = 
+				new File(
+					pluginPackage.getParentFile(), 
+					pluginPackage.getName().split("\\.")[0] + ".jar");
+			
+			if(pluginPackage.renameTo(newFile)) {
+				pluginPackage = newFile;
+			}
+			
+			pluginConfigurationManager.install(pluginPackage.toURI().toURL());
+		}
+		catch(Throwable e) {
+			throw new InvalidRequestException("failed to install plugin", e);
+		}
+		
+	}
+
+	@Action(value="/plugins/install-url")
+	@RequestMethod("POST")
+	@View("/${plugins.ediacaran.front.template}/admin/update-install-file")
+	public void installPlugin(
+			@Basic(bean="url")
+			String urlPluginPackage) throws InvalidRequestException{
+
+		if(urlPluginPackage == null) {
+			throw new InvalidRequestException("plugin package not found");
+		}
+		
+		try {
+			URL url = new URL(urlPluginPackage);
+			pluginConfigurationManager.install(url);
+		}
+		catch(Throwable e) {
+			throw new InvalidRequestException("failed to install plugin", e);
+		}
+		
 	}
 	
 	public List<String> getGroups(){

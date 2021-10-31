@@ -1,4 +1,4 @@
-<li class="item-thumbs col-sm-12 col-md-6 col-lg-{cols} col-xl-{cols}" data-src="{src}" data-sub-html="#{id}-{index}-caption" data-id="{id}-{index}" data-type="{filter}">
+<li class="item-thumbs col-sm-12 col-md-6 col-lg-{cols} col-xl-{cols} {align}" data-src="{src}" data-sub-html="#{id}-{index}-caption" data-id="{id}-{index}" data-type="{filter}">
 	
 	<a class="hover-wrap"> 
 		<img src="{icon}" alt="">

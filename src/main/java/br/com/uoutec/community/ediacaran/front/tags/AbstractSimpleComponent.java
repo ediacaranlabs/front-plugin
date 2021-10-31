@@ -52,6 +52,8 @@ public abstract class AbstractSimpleComponent
 	
 	private String style;
 	
+	private String align;
+	
     public void doTag() throws JspException, IOException {
     	try {
 	    	if(!wrapper)
@@ -421,6 +423,15 @@ public abstract class AbstractSimpleComponent
 	@TagAttribute
 	public void setStyle(String style) {
 		this.style = style;
+	}
+
+	public String getAlign() {
+		return align;
+	}
+
+	@TagAttribute
+	public void setAlign(String align) {
+		this.align = align;
 	}
 	
 }

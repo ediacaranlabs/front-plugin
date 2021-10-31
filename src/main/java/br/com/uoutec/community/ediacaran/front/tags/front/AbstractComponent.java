@@ -56,12 +56,27 @@ public abstract class AbstractComponent implements Component{
 			add("id");
 			add("classStyle");
 			add("style");
+			add("align");
 		}});
 	
 	
 	@SuppressWarnings("serial")
 	protected Map<String, AttributeParser> default_property_parsers = 
 			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
+				
+				put("align", new AttributeParserImp() {
+					
+					@Override
+					public Object toValue(Object value, Object component) {
+						if("center".equals(value)) {
+							return " mx-auto d-block";
+						}
+						else
+							return value == null? null : " float-" + value;
+					}
+					
+				});
+				
 			}});
 	
 	private TagTemplate tagTemplate;

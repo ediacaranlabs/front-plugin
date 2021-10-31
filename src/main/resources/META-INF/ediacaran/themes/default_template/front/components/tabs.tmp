@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs {style}" id="{id}-nav-tab" role="tablist">
+<ul class="nav nav-tabs {style} {align}" id="{id}-nav-tab" role="tablist">
 {header}
 </ul>
 <div class="tab-content {style}" id="{id}-nav-tabContent">

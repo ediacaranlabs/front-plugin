@@ -29,7 +29,7 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 	
 	private MenuTag menu;
 	
-	private String align; //left, right, center
+	//private String align; //left, right, center
 	
 	private String menuAlign; //left, right
 	
@@ -73,6 +73,7 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 		this.content = content;
 	}
 
+/*
 	public String getAlign() {
 		return align;
 	}
@@ -81,7 +82,7 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 	public void setAlign(String align) {
 		this.align = align;
 	}
-
+*/
 	public MenuTag getMenu() {
 		return menu;
 	}

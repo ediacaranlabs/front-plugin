@@ -21,7 +21,7 @@ public class ImageTag  extends AbstractSimpleComponent {
 	
 	private String style; //fluid, thumbnail, rounded, circle (img-<...> | rounded | rounded-circle)
 	
-	private String align; //left, right, center (float-<...> | mx-auto d-block)
+	//private String align; //left, right, center (float-<...> | mx-auto d-block)
 	
     protected String getDefaultTemplate() {
     	return TEMPLATE;
@@ -45,6 +45,7 @@ public class ImageTag  extends AbstractSimpleComponent {
 		this.style = style;
 	}
 
+	/*
 	public String getAlign() {
 		return align;
 	}
@@ -53,5 +54,6 @@ public class ImageTag  extends AbstractSimpleComponent {
 	public void setAlign(String align) {
 		this.align = align;
 	}
-    
+*/
+	
 }

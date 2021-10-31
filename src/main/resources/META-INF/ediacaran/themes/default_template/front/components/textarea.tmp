@@ -1,2 +1,2 @@
 <label class="{empty}" for="{name}">{label}</label>
-<textarea class="form-control {enabled}" {attr}>{value}</textarea>
+<textarea class="form-control {enabled} {align}" {attr}>{value}</textarea>

@@ -1,4 +1,4 @@
-<div class="form-check {inline}">
+<div class="form-check {inline} {align}">
   <input class="form-check-input {enabled}" {attr}>
   <label class="form-check-label">
     {label}

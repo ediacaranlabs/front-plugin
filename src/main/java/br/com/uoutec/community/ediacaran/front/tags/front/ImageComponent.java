@@ -27,7 +27,6 @@ public class ImageComponent extends AbstractComponent {
 		super.default_props = 
 			Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 				add("style");
-				add("align");
 			}});
 		
 		super.default_property_parsers = 

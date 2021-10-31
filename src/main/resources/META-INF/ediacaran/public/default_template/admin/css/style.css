@@ -29,11 +29,12 @@ a {
 }
 
 .row, .row-fluid {
-  padding-bottom: 30px;
+  /*padding-bottom: 30px;*/
+  padding-bottom: 10px;
 }
 
 .row .row, .row-fluid .row-fluid {
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 }
 
 .content {

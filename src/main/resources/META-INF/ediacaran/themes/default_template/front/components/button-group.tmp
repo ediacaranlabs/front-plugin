@@ -1,3 +1,3 @@
-<div {attr} class="btn-group {classStyle}">
+<div {attr} class="btn-group {classStyle} {align}">
 {content}
 </div>
