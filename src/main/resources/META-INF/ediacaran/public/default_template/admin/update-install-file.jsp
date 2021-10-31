@@ -11,5 +11,10 @@
 	</c:if>
 	<c:if test="${empty exception}">
 		Update success!
+		<script>
+			$.AppContext.onload(function(){
+				$.AppContext.loadContentOnPanel("/plugins/ediacaran/front/admin/plugins");
+			});
+		</script>
 	</c:if>
 </div>

@@ -109,6 +109,15 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>readonly</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>required</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
@@ -121,15 +130,6 @@
                     <name>componentType</name>
                     <required>false</required>
                     <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>readonly</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -154,16 +154,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -181,7 +172,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -220,16 +220,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -247,7 +238,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -295,16 +295,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -322,7 +313,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -406,6 +406,15 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>readonly</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>required</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
@@ -418,15 +427,6 @@
                     <name>componentType</name>
                     <required>false</required>
                     <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>readonly</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -451,16 +451,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -478,7 +469,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -526,16 +526,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -553,7 +544,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -601,16 +601,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -628,7 +619,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -667,16 +667,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -694,7 +685,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -733,16 +733,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -760,7 +751,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -844,16 +844,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -871,7 +862,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -919,16 +919,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -946,7 +937,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1003,16 +1003,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1030,7 +1021,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1078,16 +1078,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1105,7 +1096,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1153,16 +1153,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1180,7 +1171,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1282,18 +1282,18 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>outline</name>
+                    <name>actionType</name>
                     <required>false</required>
-                    <type>java.lang.Boolean</type>
+                    <type>java.lang.String</type>
                     <fragment>true</fragment>
                </attribute>
                
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>actionType</name>
+                    <name>outline</name>
                     <required>false</required>
-                    <type>java.lang.String</type>
+                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -1345,6 +1345,15 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>readonly</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>required</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
@@ -1357,15 +1366,6 @@
                     <name>componentType</name>
                     <required>false</required>
                     <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>readonly</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -1390,16 +1390,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1417,7 +1408,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1474,16 +1474,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1501,7 +1492,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1576,16 +1576,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1603,7 +1594,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1642,16 +1642,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1669,7 +1660,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1708,16 +1708,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1735,7 +1726,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1774,16 +1774,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1801,7 +1792,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1849,16 +1849,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1876,7 +1867,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -1933,27 +1933,9 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>autofocus</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
                     <name>autocomplete</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>minlength</name>
-                    <required>false</required>
-                    <type>java.lang.Integer</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -1969,9 +1951,27 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>minlength</name>
+                    <required>false</required>
+                    <type>java.lang.Integer</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>placeholder</name>
                     <required>false</required>
                     <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>autofocus</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -2023,6 +2023,15 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>readonly</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>required</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
@@ -2035,15 +2044,6 @@
                     <name>componentType</name>
                     <required>false</required>
                     <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>readonly</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -2068,16 +2068,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2095,7 +2086,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2134,16 +2134,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2161,7 +2152,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2200,16 +2200,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2227,7 +2218,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2275,16 +2275,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2302,7 +2293,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2368,16 +2368,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2395,7 +2386,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2461,16 +2461,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2488,7 +2479,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2527,16 +2527,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2554,7 +2545,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2602,16 +2602,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2629,7 +2620,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2686,16 +2686,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2713,7 +2704,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2761,16 +2761,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2788,7 +2779,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2890,16 +2890,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2917,7 +2908,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -2974,16 +2974,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3001,7 +2992,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3049,16 +3049,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3076,7 +3067,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3142,16 +3142,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3169,7 +3160,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3226,16 +3226,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3253,7 +3244,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3301,16 +3301,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3328,7 +3319,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3394,16 +3394,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3421,7 +3412,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3469,16 +3469,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3496,7 +3487,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3589,6 +3589,15 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>readonly</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>required</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
@@ -3601,15 +3610,6 @@
                     <name>componentType</name>
                     <required>false</required>
                     <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>readonly</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -3634,16 +3634,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3661,7 +3652,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3727,16 +3727,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3754,7 +3745,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3802,16 +3802,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3829,7 +3820,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3877,16 +3877,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3904,7 +3895,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -3988,16 +3988,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4015,7 +4006,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4063,16 +4063,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4090,7 +4081,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4129,16 +4129,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4156,7 +4147,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4222,16 +4222,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4249,7 +4240,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4297,16 +4297,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4324,7 +4315,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4372,16 +4372,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4399,7 +4390,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4465,16 +4465,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4492,7 +4483,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4540,16 +4540,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4567,7 +4558,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4575,6 +4575,81 @@
      </tag>
      
      <!-- /setTemplatePackage -->
+     
+     <!-- widget -->
+     
+     <tag>
+          <name>widget</name>
+          <tag-class>br.com.uoutec.community.ediacaran.front.tags.WidgetTag</tag-class>
+          <body-content>scriptless</body-content>
+          <info><![CDATA[
+          ]]></info>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>title</name>
+                    <required>true</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>style</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>id</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>classStyle</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>extAttrs</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+     </tag>
+     
+     <!-- /widget -->
      
      <!-- checkbox -->
      
@@ -4660,6 +4735,15 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>readonly</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>required</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
@@ -4672,15 +4756,6 @@
                     <name>componentType</name>
                     <required>false</required>
                     <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>readonly</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -4705,16 +4780,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4732,7 +4798,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4780,16 +4855,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4807,7 +4873,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4846,7 +4921,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4864,7 +4939,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4903,16 +4987,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4930,7 +5005,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4969,16 +5053,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -4996,7 +5071,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5044,16 +5128,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5071,7 +5146,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5101,18 +5185,18 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>accept</name>
+                    <name>capture</name>
                     <required>false</required>
-                    <type>java.lang.String</type>
+                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>capture</name>
+                    <name>accept</name>
                     <required>false</required>
-                    <type>java.lang.Boolean</type>
+                    <type>java.lang.String</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -5173,6 +5257,15 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>readonly</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>required</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
@@ -5185,15 +5278,6 @@
                     <name>componentType</name>
                     <required>false</required>
                     <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>readonly</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -5218,16 +5302,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5245,7 +5320,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5284,16 +5368,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5311,7 +5386,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5359,16 +5443,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5386,7 +5461,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5434,16 +5518,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5461,7 +5536,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5500,16 +5584,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5527,7 +5602,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5575,16 +5659,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5602,7 +5677,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5641,16 +5725,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5668,7 +5743,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5716,7 +5800,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5734,7 +5818,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5773,7 +5866,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5791,7 +5884,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5857,16 +5959,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5884,7 +5977,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5923,16 +6025,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -5950,7 +6043,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -6007,27 +6109,9 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>autofocus</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
                     <name>autocomplete</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>minlength</name>
-                    <required>false</required>
-                    <type>java.lang.Integer</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -6043,9 +6127,27 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>minlength</name>
+                    <required>false</required>
+                    <type>java.lang.Integer</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>placeholder</name>
                     <required>false</required>
                     <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>autofocus</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -6097,6 +6199,15 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>readonly</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>required</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
@@ -6109,15 +6220,6 @@
                     <name>componentType</name>
                     <required>false</required>
                     <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>readonly</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -6142,16 +6244,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -6169,7 +6262,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -6217,16 +6319,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -6244,7 +6337,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -6253,227 +6355,11 @@
      
      <!-- /include -->
      
-     <!-- widget -->
+     <!-- urlfield -->
      
      <tag>
-          <name>widget</name>
-          <tag-class>br.com.uoutec.community.ediacaran.front.tags.WidgetTag</tag-class>
-          <body-content>scriptless</body-content>
-          <info><![CDATA[
-          ]]></info>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>title</name>
-                    <required>true</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>style</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>id</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>extAttrs</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>classStyle</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-     </tag>
-     
-     <!-- /widget -->
-     
-     <!-- price-box-footer -->
-     
-     <tag>
-          <name>price-box-footer</name>
-          <tag-class>br.com.uoutec.community.ediacaran.front.tags.PriceBoxFooterTag</tag-class>
-          <body-content>scriptless</body-content>
-          <info><![CDATA[
-          ]]></info>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>style</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>id</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>extAttrs</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>classStyle</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-     </tag>
-     
-     <!-- /price-box-footer -->
-     
-     <!-- property-config-list -->
-     
-     <tag>
-          <name>property-config-list</name>
-          <tag-class>br.com.uoutec.community.ediacaran.front.tags.PropertyConfigListTag</tag-class>
-          <body-content>scriptless</body-content>
-          <info><![CDATA[
-          ]]></info>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>name</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>style</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>id</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>extAttrs</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>classStyle</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-     </tag>
-     
-     <!-- /property-config-list -->
-     
-     <!-- select -->
-     
-     <tag>
-          <name>select</name>
-          <tag-class>br.com.uoutec.community.ediacaran.front.tags.SelectTag</tag-class>
+          <name>urlfield</name>
+          <tag-class>br.com.uoutec.community.ediacaran.front.tags.URLFieldTag</tag-class>
           <body-content>scriptless</body-content>
           <info><![CDATA[
           ]]></info>
@@ -6499,9 +6385,9 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>multiple</name>
+                    <name>pattern</name>
                     <required>false</required>
-                    <type>java.lang.Boolean</type>
+                    <type>java.lang.String</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -6517,7 +6403,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>readonly</name>
+                    <name>autocomplete</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
@@ -6526,9 +6412,27 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>sizeList</name>
+                    <name>maxlength</name>
                     <required>false</required>
                     <type>java.lang.Integer</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>minlength</name>
+                    <required>false</required>
+                    <type>java.lang.Integer</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>placeholder</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -6589,6 +6493,15 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>readonly</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>required</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
@@ -6601,15 +6514,6 @@
                     <name>componentType</name>
                     <required>false</required>
                     <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>readonly</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -6634,16 +6538,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -6661,7 +6556,358 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+     </tag>
+     
+     <!-- /urlfield -->
+     
+     <!-- price-box-footer -->
+     
+     <tag>
+          <name>price-box-footer</name>
+          <tag-class>br.com.uoutec.community.ediacaran.front.tags.PriceBoxFooterTag</tag-class>
+          <body-content>scriptless</body-content>
+          <info><![CDATA[
+          ]]></info>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>style</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>id</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>classStyle</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>extAttrs</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+     </tag>
+     
+     <!-- /price-box-footer -->
+     
+     <!-- property-config-list -->
+     
+     <tag>
+          <name>property-config-list</name>
+          <tag-class>br.com.uoutec.community.ediacaran.front.tags.PropertyConfigListTag</tag-class>
+          <body-content>scriptless</body-content>
+          <info><![CDATA[
+          ]]></info>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>name</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>style</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>id</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>classStyle</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>extAttrs</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+     </tag>
+     
+     <!-- /property-config-list -->
+     
+     <!-- select -->
+     
+     <tag>
+          <name>select</name>
+          <tag-class>br.com.uoutec.community.ediacaran.front.tags.SelectTag</tag-class>
+          <body-content>scriptless</body-content>
+          <info><![CDATA[
+          ]]></info>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>size</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>label</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>readonly</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>required</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>multiple</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>autofocus</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>sizeList</name>
+                    <required>false</required>
+                    <type>java.lang.Integer</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>name</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>value</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>form</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>enabled</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>group</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>readonly</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>required</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>componentType</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>style</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>id</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>classStyle</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>extAttrs</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -6727,16 +6973,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -6754,7 +6991,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -6811,16 +7057,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -6838,7 +7075,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -6877,16 +7123,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -6904,7 +7141,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -6979,16 +7225,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7006,7 +7243,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7054,16 +7300,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7081,7 +7318,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7156,16 +7402,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7183,7 +7420,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7222,16 +7468,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7249,7 +7486,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7288,16 +7534,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7315,7 +7552,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7354,16 +7600,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7381,7 +7618,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7456,6 +7702,15 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>readonly</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>required</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
@@ -7468,15 +7723,6 @@
                     <name>componentType</name>
                     <required>false</required>
                     <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>readonly</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -7501,16 +7747,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7528,7 +7765,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7576,18 +7822,18 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>expand</name>
+                    <name>sidebar</name>
                     <required>false</required>
-                    <type>java.lang.String</type>
+                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>sidebar</name>
+                    <name>expand</name>
                     <required>false</required>
-                    <type>java.lang.Boolean</type>
+                    <type>java.lang.String</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -7612,16 +7858,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7639,7 +7876,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7678,16 +7924,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7705,7 +7942,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7753,16 +7999,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7780,7 +8017,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7828,16 +8074,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7855,7 +8092,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7894,16 +8140,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7921,7 +8158,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7960,16 +8206,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -7987,7 +8224,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8035,16 +8281,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8062,7 +8299,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8101,16 +8347,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8128,7 +8365,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8194,16 +8440,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8221,7 +8458,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8260,16 +8506,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8287,7 +8524,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8326,16 +8572,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8353,7 +8590,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8392,16 +8638,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8419,7 +8656,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8458,16 +8704,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8485,7 +8722,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8551,16 +8797,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8578,7 +8815,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8626,16 +8872,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8653,7 +8890,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8701,16 +8947,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8728,7 +8965,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8767,16 +9013,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8794,7 +9031,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8842,16 +9088,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8869,7 +9106,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -8926,27 +9172,9 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>autofocus</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
                     <name>autocomplete</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>minlength</name>
-                    <required>false</required>
-                    <type>java.lang.Integer</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -8962,9 +9190,27 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>minlength</name>
+                    <required>false</required>
+                    <type>java.lang.Integer</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>placeholder</name>
                     <required>false</required>
                     <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>autofocus</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -9016,6 +9262,15 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>readonly</name>
+                    <required>false</required>
+                    <type>java.lang.Boolean</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>required</name>
                     <required>false</required>
                     <type>java.lang.Boolean</type>
@@ -9028,15 +9283,6 @@
                     <name>componentType</name>
                     <required>false</required>
                     <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>readonly</name>
-                    <required>false</required>
-                    <type>java.lang.Boolean</type>
                     <fragment>true</fragment>
                </attribute>
                
@@ -9061,16 +9307,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -9088,7 +9325,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>

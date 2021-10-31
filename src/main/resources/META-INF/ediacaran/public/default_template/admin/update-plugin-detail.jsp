@@ -11,5 +11,6 @@
 	</c:if>
 	<c:if test="${empty exception}">
 		Update success!
+		
 	</c:if>
 </div>

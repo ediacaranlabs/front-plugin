@@ -225,17 +225,30 @@ $.AppContext.utils = {
 			var $action      = $resource == null? $form.attr('action') : $resource;
 			var $method      = $form.attr('method');
 			var $destContent = $dest == null? $form.attr('dest-content') : $dest;
+			var $enctype     = $form.attr('enctype');
 			
-		    $.ajax({
+			//var $data = $($form).serialize();
+			var $data = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
+			
+		    var opts = {
 		        type   : $method,
 		        url    : $action,
-		        data   : $($form).serialize(),
+		        data   : $data,
 		        success: function ($data){
 			    	$.AppContext.loadListeners.executeBefore($action);
 		        	$.AppContext.utils.updateContent($destContent, $data);
 			    	$.AppContext.loadListeners.executeAfter($action);
 		        }
-		    });
+		    };
+			
+		    
+		    if($enctype === 'multipart/form-data') {
+		    	opts.enctype = $enctype;
+		    	opts.processData = false;
+		    	opts.contentType = false;		    	
+		    }
+		    
+		    $.ajax(opts);
 			
 		},
 		

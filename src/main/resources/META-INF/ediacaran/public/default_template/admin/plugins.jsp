@@ -5,7 +5,7 @@
 
 <style>
 	.file {
-		text-align: center;
+		/*text-align: center;*/
 	}
 	.file .label {
 		border: 1px dashed #cacaca;
@@ -19,7 +19,7 @@
 		color: #cacaca;
 	}
 	.file .hide-file {
-		display:none
+		/*display:none;*/
 	}
 	.url {
 		width: 100%;
@@ -64,7 +64,9 @@
 		<ec:box>
 			<ec:box-body id="plugin_body">
 			
-				<ec:form method="POST" action="/plugins/ediacaran/front/admin/plugins/install-file" enctype="multipart/form-data">
+				<ec:form method="POST" update="#result-install-file" 
+					action="/plugins/ediacaran/front/admin/plugins/install-file" 
+					enctype="multipart/form-data">
 					<ed:row>
 						<ed:col size="12">
 							<h5>Instalar plugin a partir de um arquivo</h5>
@@ -81,21 +83,30 @@
 						</ed:col>
 					</ed:row>
 					<ed:row>
-						<ed:col size="12" classStyle="file">
-							<label class="label" for="file">
-								<ec:icon icon="file" />
-								<ec:filefield extAttrs="accept=\".zip\"" classStyle="hide-file" id="file" name="file"/>
-							</label>
+						<ed:col size="10" classStyle="file form-group has-feedback">
+							<ec:filefield extAttrs="accept=\".zip\"" classStyle="hide-file" id="file" name="file" required="true">
+<%--							
+								<ec:field-validator>
+									<ec:field-validator-rule name="notEmpty" message="The file must be informed"/>
+									<ec:field-validator-rule name="file" message="The selected file is not valid">
+										<ec:field-validator-param name="extension">zip</ec:field-validator-param>
+										<ec:field-validator-param name="maxSize" raw="true">2048*1024*1024</ec:field-validator-param>
+									</ec:field-validator-rule>
+								</ec:field-validator>
+--%>								
+							</ec:filefield>
+						</ed:col>
+						<ed:col size="2">
+							<ec:button label="Instalar" actionType="submit" align="right" />
 						</ed:col>
 					</ed:row>
 					<ed:row>
-						<ed:col size="12" >
-							<ec:button label="Instalar" align="right" />
+						<ed:col size="12" id="result-install-file">
 						</ed:col>
 					</ed:row>
 				</ec:form>
 					
-				<ec:form method="POST" action="/plugins/ediacaran/front/admin/plugins/install-url" enctype="multipart/form-data">
+				<ec:form method="POST" update="#result-install-url"  action="/plugins/ediacaran/front/admin/plugins/install-url">
 					<ed:row>
 						<ed:col size="12">
 							<h5>Instalar plugin a partir de um URL</h5>
@@ -112,16 +123,22 @@
 						</ed:col>
 					</ed:row>
 					<ed:row>
-						<ed:col size="12" classStyle="url">
-							<ec:textfield name="url" classStyle="url" placeholder="https://www.site.com/uri/package" />
+						<ed:col size="10" classStyle=" form-group has-feedback">
+							<ec:urlfield name="url" classStyle="url" placeholder="https://www.site.com/uri/package">
+								<ec:field-validator>
+									<ec:field-validator-rule name="notEmpty" message="The URL must be informed!"/>
+								</ec:field-validator>
+							</ec:urlfield>
 						</ed:col>
-					</ed:row>
-					<ed:row>
-						<ed:col size="12" >
+						<ed:col size="2">
 							<ec:button label="Instalar" align="right" />
 						</ed:col>
 					</ed:row>
-				</ec:form>					
+					<ed:row>
+						<ed:col size="12" id="result-install-url">
+						</ed:col>
+					</ed:row>
+				</ec:form>
 				
 				
 			</ec:box-body>
