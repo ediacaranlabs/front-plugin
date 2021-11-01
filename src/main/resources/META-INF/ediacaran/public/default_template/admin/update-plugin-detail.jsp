@@ -7,10 +7,10 @@
 	<div id="result-action" style="display: none">${empty exception? 'success' : 'error'}</div>
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 	<c:if test="${!empty exception}">
-		Update Fail!
+		Update Fail!<br>
+		${exception}
 	</c:if>
 	<c:if test="${empty exception}">
 		Update success!
-		
 	</c:if>
 </div>

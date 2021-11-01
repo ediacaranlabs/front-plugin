@@ -92,7 +92,7 @@
 											</c:if>
 											${menu.fullName}
 											<c:if test="${not empty menu.badge}">
-												<span class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
+												<ec:badge id="${menu.id}_badge" style="${empty menu.badgeStyle? 'info' : menu.badgeStyle}" type="navbar">${menu.badge}</ec:badge>
 											</c:if>
 										</ec:menu-label>
 									</ec:menu>
@@ -107,7 +107,7 @@
 											</c:if>
 											${menu.fullName}
 											<c:if test="${not empty menu.badge}">
-												<span class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
+												<ec:badge id="${menu.id}_badge" style="${empty menu.badgeStyle? 'info' : menu.badgeStyle}" type="navbar">${menu.badge}</ec:badge>
 											</c:if>
 										</ec:menu-label>
 										<ec:menu-itens id="menu_itens_xx">
@@ -118,7 +118,7 @@
 													</c:if>
 													${item.fullName}
 													<c:if test="${not empty item.badge}">
-														<span class="badge badge-${empty item.badgeStyle? 'info' : item.badgeStyle} navbar-badge">${item.badge}</span>
+														<ec:badge id="${item.id}_badge" style="${empty item.badgeStyle? 'info' : item.badgeStyle}" type="navbar">${item.badge}</ec:badge>
 													</c:if>
 												</ec:menu-item>
 											</c:forEach>
@@ -133,7 +133,7 @@
 										</c:if>
 										${menu.fullName}
 										<c:if test="${not empty menu.badge}">
-											<span class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
+											<ec:badge id="${menu.id}_badge" style="${empty menu.badgeStyle? 'info' : menu.badgeStyle}" type="navbar">${menu.badge}</ec:badge>
 										</c:if>
 									</ec:menu-item>
 								</c:otherwise>

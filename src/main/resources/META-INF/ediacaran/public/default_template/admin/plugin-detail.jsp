@@ -131,6 +131,15 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 					</c:forEach>
 					</ec:table-body>
 				</ec:table>
+				<ed:row style="form">
+					<ed:col id="update_plugin_result" size="12">
+					</ed:col>
+				</ed:row>
+				<ed:row style="form">
+					<ed:col id="update_plugin_result" size="12">
+						<ec:button type="dark" classStyle="float-right" label="Save" actionType="submit"/>
+					</ed:col>
+				</ed:row>
 			</ec:form>
 		</ec:tabs-item>
 		<ec:tabs-item icon="life-saver" title="Security">
@@ -200,36 +209,47 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 						</c:forEach>
 					</ec:table-body>
 				</ec:table>		
+				<ed:row style="form">
+					<ed:col id="update_plugin_result" size="12">
+					</ed:col>
+				</ed:row>
+				<ed:row style="form">
+					<ed:col id="update_plugin_result" size="12">
+						<ec:button type="dark" classStyle="float-right" label="Save" actionType="submit"/>
+					</ed:col>
+				</ed:row>
 			</ec:form>
 		</ec:tabs-item>
 		<ec:tabs-item icon="warning" title="Uninstall">
 			<ec:form method="post" update="#update_plugin_result" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/uninstall">
 				<ed:row>
 					<ed:col size="12">
-						Para desinstalar o plugin aperte o botão desinstalar. Todos os dados associados ao plugin serão removidos permanentemente.
+						Para desinstalar o plugin, informe o código de confirmação <ec:badge style="danger">${vars.config.metadata.code}</ec:badge> no 
+						campo abaixo e aperte o botão desinstalar.
+					</ed:col>
+				</ed:row>
+				<ed:row>
+					<ed:col size="6" classStyle="form-group has-feedback">
+						<ec:textfield name="uninstall_code">
+							<ec:field-validator>
+								<ec:field-validator-rule name="notEmpty" message="O código deve ser informado"/>
+								<ec:field-validator-rule name="regexp"  message="Código inválido">
+										<ec:field-validator-param name="regexp" raw="true">/^${vars.config.metadata.code}$/i</ec:field-validator-param>
+								</ec:field-validator-rule>
+							</ec:field-validator>
+						</ec:textfield>
+					</ed:col>
+					<ed:col size="6">
+						<ec:button label="Uninstall" type="danger" align="right" actionType="submit"/>
 					</ed:col>
 				</ed:row>
 				<ed:row>
 					<ed:col size="12">
-						<ec:button label="Uninstall" type="danger" align="right" actionType="submit"/>
+						<b>* Todos os dados associados ao plugin serão removidos permanentemente.</b>
 					</ed:col>
-				</ed:row>
+				</ed:row>				
 			</ec:form>
 		</ec:tabs-item>
 	</ec:tabs>
-	<ed:row style="form">
-		<ed:col size="12">
-			<hr>
-		</ed:col>
-	</ed:row>	
-	<ed:row style="form">
-		<ed:col id="update_plugin_result" size="12">
-		</ed:col>
-	</ed:row>
-	<ed:row style="form">
-		<ed:col id="update_plugin_result" size="12">
-			<ec:button type="dark" classStyle="float-right" label="Save" actionType="submit"/>
-		</ed:col>
-	</ed:row>
 
 <script type="text/javascript" src="/plugins/ediacaran/front/default_template/admin/js/pages/update-status-plugin-detail.js" charset="utf-8"></script>

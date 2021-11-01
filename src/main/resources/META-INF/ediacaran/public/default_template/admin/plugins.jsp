@@ -1,36 +1,15 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"                 prefix="c"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
-
-<style>
-	.file {
-		/*text-align: center;*/
-	}
-	.file .label {
-		border: 1px dashed #cacaca;
-		position: relative;
-		width: 100%;
-		padding-top: 20px;
-		padding-bottom: 20px;
-		cursor: pointer;
-	}
-	.file .label i{
-		color: #cacaca;
-	}
-	.file .hide-file {
-		/*display:none;*/
-	}
-	.url {
-		width: 100%;
-	}
-</style>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"                               prefix="fmt"%> 
+<ec:setTemplatePackage name="admin"/>
+<ec:setBundle var="messages" locale="${locale}"/>
 
 <section class="inner-headline">
 	<ed:row>
 		<ed:col size="4">
 			<div class="inner-heading">
-				<h2>Plugins</h2>
+				<h2><fmt:message key="title" bundle="${messages}"/></h2>
 			</div>
 		</ed:col>
 		<ed:col size="8">
@@ -44,7 +23,7 @@
 <ed:row>
 	<ed:col size="3">
 		<ec:box>
-			<ec:box-header><h3>Menu</h3></ec:box-header>
+			<ec:box-header><h3><fmt:message key="title_menu" bundle="${messages}"/></h3></ec:box-header>
 			<ec:box-body>
 				<ec:accordion>
 					<c:forEach items="${Controller.groups}" var="group">
@@ -69,7 +48,7 @@
 					enctype="multipart/form-data">
 					<ed:row>
 						<ed:col size="12">
-							<h5>Instalar plugin a partir de um arquivo</h5>
+							<h5><fmt:message key="package_install.title" bundle="${messages}"/></h5>
 						</ed:col>
 					</ed:row>
 					<ed:row>
@@ -79,25 +58,26 @@
 					</ed:row>
 					<ed:row>
 						<ed:col size="12">
-							Clique no campo abaixo e informe o arquivo de instalação. Depois aperte o botão instalar para instalar o plugin.
+							<fmt:message key="package_install.description" bundle="${messages}"/>
 						</ed:col>
 					</ed:row>
 					<ed:row>
 						<ed:col size="10" classStyle="file form-group has-feedback">
-							<ec:filefield extAttrs="accept=\".zip\"" classStyle="hide-file" id="file" name="file" required="true">
-<%--							
+							<ec:filefield accept=".zip" classStyle="hide-file" id="file" name="file" required="true">
 								<ec:field-validator>
-									<ec:field-validator-rule name="notEmpty" message="The file must be informed"/>
-									<ec:field-validator-rule name="file" message="The selected file is not valid">
+									<fmt:message key="package_install.file.validator.notEmpty" bundle="${messages}" var="msg_tmp"/>
+									<ec:field-validator-rule name="notEmpty" message="${msg_tmp}"/>
+									<fmt:message key="package_install.file.validator.format" bundle="${messages}" var="msg_tmp"/>
+									<ec:field-validator-rule name="file" message="${msg_tmp}">
 										<ec:field-validator-param name="extension">zip</ec:field-validator-param>
 										<ec:field-validator-param name="maxSize" raw="true">2048*1024*1024</ec:field-validator-param>
 									</ec:field-validator-rule>
 								</ec:field-validator>
---%>								
 							</ec:filefield>
 						</ed:col>
 						<ed:col size="2">
-							<ec:button label="Instalar" actionType="submit" align="right" />
+							<fmt:message key="package_install.button" bundle="${messages}" var="msg_tmp"/>
+							<ec:button label="${msg_tmp}" actionType="submit" align="right" />
 						</ed:col>
 					</ed:row>
 					<ed:row>
@@ -109,7 +89,7 @@
 				<ec:form method="POST" update="#result-install-url"  action="/plugins/ediacaran/front/admin/plugins/install-url">
 					<ed:row>
 						<ed:col size="12">
-							<h5>Instalar plugin a partir de um URL</h5>
+							<h5><fmt:message key="url_install.title" bundle="${messages}"/></h5>
 						</ed:col>
 					</ed:row>
 					<ed:row>
@@ -119,19 +99,22 @@
 					</ed:row>
 					<ed:row>
 						<ed:col size="12">
-							Informe a URL do arquivo de instalação no campo abaixo e aperte o botão instalar para instalar o plugin.
+							<fmt:message key="url_install.description" bundle="${messages}"/>
 						</ed:col>
 					</ed:row>
 					<ed:row>
 						<ed:col size="10" classStyle=" form-group has-feedback">
-							<ec:urlfield name="url" classStyle="url" placeholder="https://www.site.com/uri/package">
+							<fmt:message key="url_install.url.placeholder" bundle="${messages}" var="msg_tmp"/>
+							<ec:urlfield name="url" classStyle="url" placeholder="${msg_tmp}">
 								<ec:field-validator>
-									<ec:field-validator-rule name="notEmpty" message="The URL must be informed!"/>
+									<fmt:message key="url_install.url.validator.notEmpty" bundle="${messages}" var="msg_tmp"/>
+									<ec:field-validator-rule name="notEmpty" message="${msg_tmp}"/>
 								</ec:field-validator>
 							</ec:urlfield>
 						</ed:col>
 						<ed:col size="2">
-							<ec:button label="Instalar" align="right" />
+							<fmt:message key="url_install.button" bundle="${messages}" var="msg_tmp"/>
+							<ec:button label="${msg_tmp}" actionType="submit" align="right" />
 						</ed:col>
 					</ed:row>
 					<ed:row>

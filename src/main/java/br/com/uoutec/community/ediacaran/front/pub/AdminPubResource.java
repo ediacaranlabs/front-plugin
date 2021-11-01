@@ -120,15 +120,14 @@ public class AdminPubResource {
 			}
 			
 			pluginConfigurationManager.savePluginMetadata(mpc);
-			
-			if(security != null) {
-				Set<SecurityPermissionStatus> status = new HashSet<SecurityPermissionStatus>();
-				for(SecurityPermissionStatusPubEntity e: security) {
-					status.add(e.rebuild(null,false, true, true, true));
-				}
-				securityPermissionManager.updatePermissions(mpc.getMetadata().getCode(), status.toArray(new SecurityPermissionStatus[0]));
+		}
+
+		if(security != null) {
+			Set<SecurityPermissionStatus> status = new HashSet<SecurityPermissionStatus>();
+			for(SecurityPermissionStatusPubEntity e: security) {
+				status.add(e.rebuild(null,false, true, true, true));
 			}
-			
+			securityPermissionManager.updatePermissions(mpc.getMetadata().getCode(), status.toArray(new SecurityPermissionStatus[0]));
 		}
 		
 	}
