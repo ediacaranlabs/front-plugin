@@ -146,6 +146,20 @@
     <section id="content-body" class="content">
     </section>
 
+	<div id="wait-modal" class="modal hide fade in" data-keyboard="false" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body text-center" style="padding-top: 3rem; padding-bottom: 3rem;">
+					<h3>Loading...</h3>
+					<div class="spinner-border spinner-border-sm text-primary" style="width: 3rem; height: 3rem;" role="status">
+					  <span class="sr-only">Loading...</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+ 
 	<ec:include uri="/includes/footer.jsp"/>
  </body>
 </html>

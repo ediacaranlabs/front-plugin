@@ -206,6 +206,25 @@ public class AdminPubResource {
 		}
 		
 	}
+
+	@Action(value="/plugins/{code:[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*}/uninstall")
+	@RequestMethod("POST")
+	@View("/${plugins.ediacaran.front.template}/admin/uninstall-plugin")
+	public void uninstallPlugin(
+			@Basic(bean="code") String code) throws InvalidRequestException{
+
+		if(code == null) {
+			throw new InvalidRequestException("plugin not found");
+		}
+		
+		try {
+			pluginConfigurationManager.uninstall(code);
+		}
+		catch(Throwable e) {
+			throw new InvalidRequestException("failed to uninstall plugin", e);
+		}
+		
+	}
 	
 	public List<String> getGroups(){
 		return pluginConfigurationManager.getGroups();

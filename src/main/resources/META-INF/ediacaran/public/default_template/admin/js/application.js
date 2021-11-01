@@ -185,11 +185,23 @@ $.AppContext.utils = {
 
 			var $address     = $.AppContext.utils.getAddress($link);
 			var $destContent = $.AppContext.utils.getDestContent($link);
+			var $modal       = $.AppContext.utils.isModal($link);
 
+		    if(!$modal){
+	    		$("#wait-modal").modal('show');
+		    }
+			
 			$.ajax({
 			    type: 'GET',
 			    url: $.AppContext.vars.contextPath + $address,
 			    success: function($data) {
+			    	
+				    if(!$modal){
+				    	setTimeout(function(){ 
+				    		$("#wait-modal").modal('hide');
+				    	}, 1000);
+				    }
+					
 			    	if($.AppContext.utils.isModal($link)){
 				    	$.AppContext.loadListeners.executeBefore($address);
 			    		$.AppContext.dialog.create();
@@ -202,7 +214,16 @@ $.AppContext.utils = {
 			    		$.AppContext.utils.updateContent($destContent, $data);
 				    	$.AppContext.loadListeners.executeAfter($address);
 			    	}
-		        }			    
+		        },
+		        error: function(){
+		        	
+				    if(!$modal){
+				    	setTimeout(function(){ 
+				    		$("#wait-modal").modal('hide');
+				    	}, 1000);
+				    }
+				    
+		        }
 			});
 			
 		},
@@ -235,9 +256,21 @@ $.AppContext.utils = {
 		        url    : $action,
 		        data   : $data,
 		        success: function ($data){
+		        	
+			    	setTimeout(function(){ 
+			    		$("#wait-modal").modal('hide');
+			    	}, 1000);
+
 			    	$.AppContext.loadListeners.executeBefore($action);
 		        	$.AppContext.utils.updateContent($destContent, $data);
 			    	$.AppContext.loadListeners.executeAfter($action);
+		        },
+		        error: function ($data){
+		        	
+			    	setTimeout(function(){ 
+			    		$("#wait-modal").modal('hide');
+			    	}, 1000);
+
 		        }
 		    };
 			
@@ -248,6 +281,8 @@ $.AppContext.utils = {
 		    	opts.contentType = false;		    	
 		    }
 		    
+	    	$("#wait-modal").modal('show');
+			
 		    $.ajax(opts);
 			
 		},
