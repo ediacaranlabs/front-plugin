@@ -195,9 +195,21 @@ public class AdminPubResource {
 		if(urlPluginPackage == null) {
 			throw new InvalidRequestException("plugin package not found");
 		}
+
+		URL url;
 		
 		try {
-			URL url = new URL(urlPluginPackage);
+			url = new URL(urlPluginPackage);
+		}
+		catch(Throwable e) {
+			throw new InvalidRequestException("failed to install plugin", e);
+		}
+
+		if(!("https".equals(url.getProtocol()) || "http".equals(url.getProtocol()))){
+			throw new InvalidRequestException("invalid protocol: " + url.getProtocol());
+		}
+		
+		try {
 			pluginConfigurationManager.install(url);
 		}
 		catch(Throwable e) {
@@ -210,10 +222,14 @@ public class AdminPubResource {
 	@RequestMethod("POST")
 	@View("/${plugins.ediacaran.front.template}/admin/uninstall-plugin")
 	public void uninstallPlugin(
-			@Basic(bean="code") String code) throws InvalidRequestException{
+			@Basic(bean="code") String code, @Basic(bean="uninstall_code") String uninstallCode) throws InvalidRequestException{
 
-		if(code == null) {
+		if(code == null || !code.equals(uninstallCode) ) {
 			throw new InvalidRequestException("plugin not found");
+		}
+
+		if(!code.equals(uninstallCode) ) {
+			throw new InvalidRequestException("invalid uninstall code: " + code);
 		}
 		
 		try {

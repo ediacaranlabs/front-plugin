@@ -2,6 +2,8 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<ec:setTemplatePackage name="admin"/>
+<ec:setBundle var="messages" locale="${locale}"/>
 
 <ec:form method="POST" id="status_config_fr" update="#enable_plugin_result" 
 action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/status" acceptCharset="UTF-8">
@@ -11,7 +13,8 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 		</ed:col>
 		<ed:col size="4">
 			<div class="float-right">
-				<ec:radio name="status" inline="true" label="Enabled" value="true"
+				<fmt:message key="menu.button.enabled" bundle="${messages}" var="msg_tmp"/>
+				<ec:radio name="status" inline="true" label="${msg_tmp}" value="true"
 					enabled="${vars.status == 'RUNNING' || vars.status == 'STOPPED'}" 
 					selected="${vars.status == 'RUNNING'}">
 					<ec:event type="click">
@@ -21,7 +24,8 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 						$statusField.setProperty('disabled', true);
 					</ec:event>
 				</ec:radio>
-				<ec:radio name="status" inline="true" label="Disabled" value="false"
+				<fmt:message key="menu.button.disabled" bundle="${messages}" var="msg_tmp"/>
+				<ec:radio name="status" inline="true" label="${msg_tmp}" value="false"
 					enabled="${vars.status == 'RUNNING' || vars.status == 'STOPPED'}"   
 					selected="${vars.status == 'STOPPED'}">
 					<ec:event type="click">
@@ -41,7 +45,8 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 	</ec:form>	
 	
 	<ec:tabs>
-		<ec:tabs-item active="true" icon="cog" title="Configuration">
+		<fmt:message key="tabs.configuration.title" bundle="${messages}" var="msg_tmp"/>
+		<ec:tabs-item active="true" icon="cog" title="${msg_tmp}">
 			<ec:form method="POST" id="config_fr" update="#update_plugin_result" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}">
 				<ec:table style="striped">
 					<ec:table-body>
@@ -137,26 +142,47 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 				</ed:row>
 				<ed:row style="form">
 					<ed:col id="update_plugin_result" size="12">
-						<ec:button type="dark" classStyle="float-right" label="Save" actionType="submit"/>
+						<fmt:message key="tabs.configuration.button_save" bundle="${messages}" var="msg_tmp"/>
+						<ec:button type="dark" align="right" label="${msg_tmp}" actionType="submit"/>
 					</ed:col>
 				</ed:row>
 			</ec:form>
 		</ec:tabs-item>
-		<ec:tabs-item icon="life-saver" title="Security">
+		<fmt:message key="tabs.security.title" bundle="${messages}" var="msg_tmp"/>
+		<ec:tabs-item icon="life-saver" title="${msg_tmp}">
 			<ec:form method="POST" id="config_fr" update="#update_plugin_result" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}">
 				<ec:table style="striped">
 					<ec:table-body>
 						<c:set var="count" value="0"/>
 						<ec:table-header>
-							<ec:table-col>Type</ec:table-col>
-							<ec:table-col>Value</ec:table-col>
-							<ec:table-col>Actions</ec:table-col>
-							<ec:table-col>Status</ec:table-col>
+							<ec:table-col><fmt:message key="tabs.security.security_tab.type_col" bundle="${messages}"/></ec:table-col>
+							<ec:table-col><fmt:message key="tabs.security.security_tab.value_col" bundle="${messages}"/></ec:table-col>
+							<ec:table-col><fmt:message key="tabs.security.security_tab.actions_col" bundle="${messages}"/></ec:table-col>
+							<ec:table-col><fmt:message key="tabs.security.security_tab.status_col" bundle="${messages}"/></ec:table-col>
 						</ec:table-header>
 						<c:forEach items="${vars.security}" var="per">
 							<ec:table-row>
 								<ec:table-col classStyle="form-group has-feedback">
-									<ec:textfield name="security[${count}].permission" readonly="true" value="${per.request.permission}"></ec:textfield>
+									<input type="hidden" name="security[${count}].permission" value="${per.request.permission}">
+									<%--<ec:textfield name="security[${count}].permission" readonly="true" value="${per.request.permission}"></ec:textfield>--%>
+									
+									<ec:select name="security[${count}].permission" enabled="false">
+										<fmt:message key="tabs.security.security_tab.type.file" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="FILE" selected="${per.request.permission == 'FILE'}"/>
+										
+										<fmt:message key="tabs.security.security_tab.type.auth" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="AUTH" selected="${per.request.permission == 'AUTH'}"/>
+										
+										<fmt:message key="tabs.security.security_tab.type.property" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="PROPERTY" selected="${per.request.permission == 'PROPERTY'}"/>
+										
+										<fmt:message key="tabs.security.security_tab.type.runtime" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="RUNTIME" selected="${per.request.permission == 'RUNTIME'}"/>
+										
+										<fmt:message key="tabs.security.security_tab.type.all" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="ALL" selected="${per.request.permission == 'ALL'}"/>
+									</ec:select>
+									
 								</ec:table-col>
 								<ec:table-col classStyle="form-group has-feedback">
 									<ec:textfield name="security[${count}].name" readonly="true" value="${per.request.name}"></ec:textfield>
@@ -166,11 +192,15 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 								</ec:table-col>
 								<ec:table-col classStyle="form-group has-feedback">
 									<ec:select name="security[${count}].enabled">
-										<ec:option label="Enabled" value="true" selected="${per.enabled}" />
-										<ec:option label="Disabled" value="false" selected="${!per.enabled}" />
-										<ec:option label="Deleted" />
+										<fmt:message key="tabs.security.security_tab.status.enabled" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="true" selected="${per.enabled}" />
+										<fmt:message key="tabs.security.security_tab.status.disabled" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="false" selected="${!per.enabled}" />
+										<fmt:message key="tabs.security.security_tab.status.deleted" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" />
 										<ec:field-validator>
-											<ec:field-validator-rule name="choice"  message="Please choose!">
+											<fmt:message key="tabs.security.security_tab.status.validator.notEmpty" bundle="${messages}" var="msg_tmp"/>
+											<ec:field-validator-rule name="choice"  message="${msg_tmp}">
 												<ec:field-validator-param name="min">1</ec:field-validator-param>
 											</ec:field-validator-rule>
 										</ec:field-validator>
@@ -184,11 +214,21 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 								<ec:table-col>
 									<ec:select name="security[${count}].permission">
 										<ec:option label="" value="" selected="true"/>
-										<ec:option label="File" value="FILE"/>
-										<ec:option label="Auth" value="AUTH"/>
-										<ec:option label="Property" value="PROPERTY"/>
-										<ec:option label="Runtime" value="RUNTIME"/>
-										<ec:option label="All" value="ALL"/>
+										
+										<fmt:message key="tabs.security.security_tab.type.file" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="FILE"/>
+										
+										<fmt:message key="tabs.security.security_tab.type.auth" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="AUTH"/>
+										
+										<fmt:message key="tabs.security.security_tab.type.property" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="PROPERTY"/>
+										
+										<fmt:message key="tabs.security.security_tab.type.runtime" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="RUNTIME"/>
+										
+										<fmt:message key="tabs.security.security_tab.type.all" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="ALL"/>
 									</ec:select>
 								</ec:table-col>
 								<ec:table-col>
@@ -200,8 +240,12 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 								<ec:table-col>
 									<ec:select name="security[${count}].enabled">
 										<ec:option label="" value="" selected="true"/>
-										<ec:option label="Enabled" value="true"/>
-										<ec:option label="Disabled" value="false"/>
+										
+										<fmt:message key="tabs.security.security_tab.status.enabled" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="true"/>
+										
+										<fmt:message key="tabs.security.security_tab.status.disabled" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="false"/>
 									</ec:select>
 								</ec:table-col>
 							</ec:table-row>
@@ -215,37 +259,43 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 				</ed:row>
 				<ed:row style="form">
 					<ed:col id="update_plugin_result" size="12">
-						<ec:button type="dark" classStyle="float-right" label="Save" actionType="submit"/>
+						<fmt:message key="tabs.security.button_save" bundle="${messages}" var="msg_tmp"/>
+						<ec:button type="dark" align="right" label="${msg_tmp}" actionType="submit"/>
 					</ed:col>
 				</ed:row>
 			</ec:form>
 		</ec:tabs-item>
-		<ec:tabs-item icon="warning" title="Uninstall">
+		<fmt:message key="tabs.uninstall.title" bundle="${messages}" var="msg_tmp"/>
+		<ec:tabs-item icon="warning" title="${msg_tmp}">
 			<ec:form method="post" update="#update_plugin_result" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/uninstall">
 				<ed:row>
 					<ed:col size="12">
-						Para desinstalar o plugin, informe o código de confirmação <ec:badge style="danger">${vars.config.metadata.code}</ec:badge> no 
-						campo abaixo e aperte o botão desinstalar.
+						<fmt:message key="tabs.uninstall.description" bundle="${messages}">
+							<fmt:param><ec:badge style="danger">${vars.config.metadata.code}</ec:badge></fmt:param>
+						</fmt:message>
 					</ed:col>
 				</ed:row>
 				<ed:row>
 					<ed:col size="6" classStyle="form-group has-feedback">
 						<ec:textfield name="uninstall_code">
 							<ec:field-validator>
-								<ec:field-validator-rule name="notEmpty" message="O código deve ser informado"/>
-								<ec:field-validator-rule name="regexp"  message="Código inválido">
+								<fmt:message key="tabs.uninstall.uninstall_code.validator.notEmpty" bundle="${messages}" var="msg_tmp"/>
+								<ec:field-validator-rule name="notEmpty" message="${msg_tmp}"/>
+								<fmt:message key="tabs.uninstall.uninstall_code.validator.regexp" bundle="${messages}" var="msg_tmp"/>
+								<ec:field-validator-rule name="regexp"  message="${msg_tmp}">
 										<ec:field-validator-param name="regexp" raw="true">/^${vars.config.metadata.code}$/i</ec:field-validator-param>
 								</ec:field-validator-rule>
 							</ec:field-validator>
 						</ec:textfield>
 					</ed:col>
 					<ed:col size="6">
-						<ec:button label="Uninstall" type="danger" align="right" actionType="submit"/>
+						<fmt:message key="tabs.uninstall.button" bundle="${messages}" var="msg_tmp"/>
+						<ec:button label="${msg_tmp}" type="danger" align="right" actionType="submit"/>
 					</ed:col>
 				</ed:row>
 				<ed:row>
 					<ed:col size="12">
-						<b>* Todos os dados associados ao plugin serão removidos permanentemente.</b>
+						<b><fmt:message key="tabs.uninstall.msg_warning" bundle="${messages}"/></b>
 					</ed:col>
 				</ed:row>				
 			</ec:form>
