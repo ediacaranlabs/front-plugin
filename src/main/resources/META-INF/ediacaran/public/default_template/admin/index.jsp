@@ -2,7 +2,9 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions"                         prefix="fn"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"                               prefix="fmt"%> 
 <ec:setTemplatePackage name="admin"/>
+<ec:setBundle var="messages" locale="${locale}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +28,7 @@
 								<c:if test="${not empty menu.icon}">
 									<ec:icon icon="${menu.icon}" size="1"/>
 								</c:if>
-								<span id="${menu.id}_badge" class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
+								<ec:badge id="${menu.id}_badge" style="${empty menu.badgeStyle? 'info' : menu.badgeStyle}" type="navbar">${menu.badge}</ec:badge>
 							</ec:menu-label>
 						</ec:menu>
 						<ec:menu-itens resource="${menu.body}"/>
@@ -37,7 +39,7 @@
 								<c:if test="${not empty menu.icon}">
 									<ec:icon icon="${menu.icon}" size="1"/>
 								</c:if>
-								<span id="${menu.id}_badge" class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
+								<ec:badge id="${menu.id}_badge" style="${empty menu.badgeStyle? 'info' : menu.badgeStyle}" type="navbar">${menu.badge}</ec:badge>
 							</ec:menu-label>
 						</ec:menu>
 						<ec:menu-itens>
@@ -46,7 +48,7 @@
 									<c:if test="${not empty item.icon}">
 										<ec:icon icon="${item.icon}" size="1"/>
 									</c:if>
-									<span id="${item.id}_badge" class="badge badge-${empty item.badgeStyle? 'info' : item.badgeStyle} navbar-badge">${item.badge}</span>
+									<ec:badge id="${item.id}_badge" style="${empty item.badgeStyle? 'info' : item.badgeStyle}" type="navbar">${item.badge}</ec:badge>
 								</ec:menu-item>
 							</c:forEach>
 						</ec:menu-itens>
@@ -56,7 +58,7 @@
 							<c:if test="${not empty menu.icon}">
 								<ec:icon icon="${menu.icon}" size="1"/>
 							</c:if>
-							<span id="${menu.id}_badge" class="badge badge-${empty menu.badgeStyle? 'info' : menu.badgeStyle} navbar-badge">${menu.badge}</span>
+							<ec:badge id="${menu.id}_badge" style="${empty menu.badgeStyle? 'info' : menu.badgeStyle}" type="navbar">${menu.badge}</ec:badge>
 						</ec:menu-item>
 					</c:otherwise>
 				</c:choose>
@@ -150,14 +152,13 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body text-center" style="padding-top: 3rem; padding-bottom: 3rem;">
-					<h3>Loading...</h3>
+					<h3><fmt:message key="root.loading" bundle="${messages}"/></h3>
 					<div class="spinner-border spinner-border-sm text-primary" style="width: 3rem; height: 3rem;" role="status">
-					  <span class="sr-only">Loading...</span>
+					  <span class="sr-only"><fmt:message key="root.loading" bundle="${messages}"/></span>
 					</div>
 				</div>
 			</div>
 		</div>
-	
 	</div>
  
 	<ec:include uri="/includes/footer.jsp"/>

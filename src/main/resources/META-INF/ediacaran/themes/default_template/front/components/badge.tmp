@@ -1,0 +1,1 @@
+<span {attr} class="badge {style} {classStyle} {type}">{content}</span>
