@@ -9,8 +9,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.core.security.AuthorizationManager;
+import br.com.uoutec.community.ediacaran.core.security.Subject;
+import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
+
 public class MenuBar {
 
+	private final AuthorizationManager authorizationManager;
+	
 	private final String id;
 	
 	private final PropertyChangeSupport propertyChangeSupport;
@@ -24,6 +30,7 @@ public class MenuBar {
 		this.list = new ArrayList<Menu>();
 		this.map = new HashMap<String, Menu>();
 		this.id = id;
+		this.authorizationManager = EntityContextPlugin.getEntity(AuthorizationManager.class);
 	}
 	
 	public String getId() {
@@ -31,7 +38,45 @@ public class MenuBar {
 	}
 
 	public List<Menu> getItens(){
-		return this.list;
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + this.id + ".list"));
+		}
+
+		List<Menu> result =  new ArrayList<Menu>();
+		
+		Subject subject = authorizationManager.getSubject();
+		
+		for(Menu m: list) {
+			
+			String role = m.getRole();
+
+			if(role == null) {
+				result.add(m);
+				continue;
+			}
+			
+			if(subject != null && subject.hasRole(role)) {
+			
+				String permission = m.getPermission();
+
+				if(permission == null) {
+					result.add(m);
+					continue;
+				}
+				
+				if(subject.isPermitted(permission)) {
+					result.add(m);
+				}
+			}
+			
+		}
+		
+		return Collections.unmodifiableList(result);
+		
+		//return this.list;
 	}
 	
 	public Menu addMenu(String id){

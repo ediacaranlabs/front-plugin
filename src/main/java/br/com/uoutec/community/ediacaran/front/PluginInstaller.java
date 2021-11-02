@@ -69,6 +69,7 @@ public class PluginInstaller
 			.setName("Plugins")
 			.setIcon("pie-chart")
 			.setResource("#!/plugins/ediacaran/front/admin/plugins")
+			.setRole("manager")
 			.setOrder(-100);
 		
 		if(!pluginConfiguration.getBoolean("test")){
