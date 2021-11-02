@@ -6,7 +6,7 @@ import java.beans.PropertyChangeListener;
 import br.com.uoutec.community.ediacaran.AbstractPlugin;
 import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
 import br.com.uoutec.community.ediacaran.core.security.AuthenticationProvider;
-import br.com.uoutec.community.ediacaran.core.security.SecurityManager;
+import br.com.uoutec.community.ediacaran.core.security.AuthorizationManager;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
 import br.com.uoutec.community.ediacaran.front.pub.AdminMenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
@@ -178,7 +178,7 @@ public class PluginInstaller
 			.form("/login", "/login?error=true");
 		
 		if(pluginConfiguration.getBoolean("test")){
-			SecurityManager sm = EntityContextPlugin.getEntity(SecurityManager.class);
+			AuthorizationManager sm = EntityContextPlugin.getEntity(AuthorizationManager.class);
 			AuthenticationProvider ap = EntityContextPlugin.getEntity(AuthenticationProviderImp.class);
 			sm.registerAuthenticationProvider(ap);
 		}

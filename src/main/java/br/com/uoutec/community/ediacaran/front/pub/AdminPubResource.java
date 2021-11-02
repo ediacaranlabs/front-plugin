@@ -24,7 +24,7 @@ import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.ResponseErrors;
 
 import br.com.uoutec.community.ediacaran.PluginConfigurationManager;
-import br.com.uoutec.community.ediacaran.SecurityPermissionUpdater;
+import br.com.uoutec.community.ediacaran.SecurityPolicyUpdater;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.MutablePluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfiguration;
@@ -61,7 +61,7 @@ public class AdminPubResource {
 
 	@Inject
 	@Transient
-	private SecurityPermissionUpdater securityPermissionManager;
+	private SecurityPolicyUpdater securityPolicyUpdater;
 	
 	public AdminPubResource(){
 	}
@@ -97,7 +97,7 @@ public class AdminPubResource {
 		Map<String,Object> vars = new HashMap<String,Object>();
 		vars.put("config", pc);
 		vars.put("status", pluginConfigurationManager.getStatus(pc));
-		vars.put("security", securityPermissionManager.getPermissions(pc.getMetadata().getCode()));
+		vars.put("security", securityPolicyUpdater.getPermissions(pc.getMetadata().getCode()));
 		return vars;
 	}
 
@@ -127,7 +127,7 @@ public class AdminPubResource {
 			for(SecurityPermissionStatusPubEntity e: security) {
 				status.add(e.rebuild(null,false, true, true, true));
 			}
-			securityPermissionManager.updatePermissions(mpc.getMetadata().getCode(), status.toArray(new SecurityPermissionStatus[0]));
+			securityPolicyUpdater.updatePermissions(mpc.getMetadata().getCode(), status.toArray(new SecurityPermissionStatus[0]));
 		}
 		
 	}

@@ -12,6 +12,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.VarParser;
+import br.com.uoutec.community.ediacaran.core.security.AuthorizationManager;
+import br.com.uoutec.community.ediacaran.core.security.Subject;
 import br.com.uoutec.community.ediacaran.core.system.i18n.PluginMessageBundleUtils;
 import br.com.uoutec.community.ediacaran.core.system.util.IDGenerator;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
@@ -20,6 +22,8 @@ public class Menu implements Serializable {
 
 	private static final long serialVersionUID = -110898947175676961L;
 
+	private AuthorizationManager authorizationManager;
+	
 	private PropertyChangeSupport propertyChangeSupport;
 
 	private String id;
@@ -45,6 +49,10 @@ public class Menu implements Serializable {
 	private final Menu parent;
 
 	private final MenuBar parentMenuBar;
+	
+	private String role;
+	
+	private String permission;
 	
 	private int order;
 
@@ -79,7 +87,7 @@ public class Menu implements Serializable {
 		this.parent = parent;
 		this.parentMenuBar = parentMenuBar;
 		this.map = new HashMap<String, Menu>();
-		this.itens = itens;
+		this.authorizationManager = EntityContextPlugin.getEntity(AuthorizationManager.class);
 		/*
 		if(itens != null) {
 			for(Menu i: itens) {
@@ -236,6 +244,7 @@ public class Menu implements Serializable {
 		return this;
 	}
 
+/*
 	public List<Menu> getItens() {
 		SecurityManager sm = System.getSecurityManager();
 		
@@ -243,9 +252,49 @@ public class Menu implements Serializable {
 			sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + getPath() + ".list.*"));
 		}
 		
-		return itens;
+		return Collections.unmodifiableList(itens);
 	}
+*/
+	public List<Menu> getItens() {
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + getPath() + ".list.*"));
+		}
 
+		List<Menu> result =  new ArrayList<Menu>();
+		
+		Subject subject = authorizationManager.getSubject();
+		
+		for(Menu m: itens) {
+			
+			String role = m.getRole();
+
+			if(role == null) {
+				result.add(m);
+				continue;
+			}
+			
+			if(subject != null && subject.hasRole(role)) {
+			
+				String permission = m.getPermission();
+
+				if(permission == null) {
+					result.add(m);
+					continue;
+				}
+				
+				if(subject.isPermitted(permission)) {
+					result.add(m);
+				}
+			}
+			
+		}
+		
+		return Collections.unmodifiableList(result);
+	}
+	
 	public String getBadge() {
 		MenuBadgeValue value = EntityContextPlugin.getEntity(MenuBadgeValue.class);
 		return value == null? null : value.getValue(id);
@@ -344,6 +393,32 @@ public class Menu implements Serializable {
 
     }
     
+	public String getPermission() {
+		return permission;
+	}
+
+	public Menu setPermission(String permission) {
+		
+		String oldValue = this.permission;
+		this.permission = permission;
+		propertyChangeSupport.firePropertyChange("permission", oldValue, permission);
+		
+		return this;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public Menu setRole(String role) {
+		
+		String oldValue = this.role;
+		this.role = role;
+		propertyChangeSupport.firePropertyChange("role", oldValue, role);
+		
+		return this;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
