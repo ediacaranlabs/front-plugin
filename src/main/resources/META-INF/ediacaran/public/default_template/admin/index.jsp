@@ -151,11 +151,17 @@
 	<div id="wait-modal" class="modal hide fade in" data-keyboard="false" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-body text-center" style="padding-top: 3rem; padding-bottom: 3rem;">
-					<h3><fmt:message key="root.loading" bundle="${messages}"/></h3>
-					<div class="spinner-border spinner-border-sm text-primary" style="width: 3rem; height: 3rem;" role="status">
-					  <span class="sr-only"><fmt:message key="root.loading" bundle="${messages}"/></span>
-					</div>
+				<div class="modal-body" style="padding-top: 3rem; padding-bottom: 3rem;">
+					<ed:row>
+						<ed:col size="4">
+							<div class="spinner-border spinner-border-sm text-primary float-right" style="width: 2rem; height: 2rem;" role="status">
+							  <span class="sr-only"><fmt:message key="root.loading" bundle="${messages}"/></span>
+							</div>
+						</ed:col>
+						<ed:col size="8">
+							<h3><fmt:message key="root.loading" bundle="${messages}"/></h3>
+						</ed:col>
+					</ed:row>
 				</div>
 			</div>
 		</div>
