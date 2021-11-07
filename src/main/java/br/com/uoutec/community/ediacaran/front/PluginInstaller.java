@@ -5,8 +5,6 @@ import java.beans.PropertyChangeListener;
 
 import br.com.uoutec.community.ediacaran.AbstractPlugin;
 import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
-import br.com.uoutec.community.ediacaran.core.security.AuthenticationProvider;
-import br.com.uoutec.community.ediacaran.core.security.AuthorizationManager;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
 import br.com.uoutec.community.ediacaran.front.pub.AdminMenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
@@ -18,7 +16,6 @@ import br.com.uoutec.community.ediacaran.front.pub.widget.WidgetException;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.security.pub.WebSecurityManagerPlugin;
-import br.com.uoutec.community.ediacaran.security.pub.test.AuthenticationProviderImp;
 
 public class PluginInstaller 
 	extends AbstractPlugin {
@@ -178,11 +175,13 @@ public class PluginInstaller
 				.addRole("user")
 			.form("/login", "/login?error=true");
 		
+		/*
 		if(pluginConfiguration.getBoolean("test")){
 			AuthorizationManager sm = EntityContextPlugin.getEntity(AuthorizationManager.class);
 			AuthenticationProvider ap = EntityContextPlugin.getEntity(AuthenticationProviderImp.class);
 			sm.registerAuthenticationProvider(ap);
 		}
+		*/
 		
 	}
 	
