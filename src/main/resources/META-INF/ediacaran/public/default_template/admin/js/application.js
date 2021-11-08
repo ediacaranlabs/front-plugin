@@ -169,15 +169,60 @@ $.AppContext.utils = {
 		
 		loadResourceContent: function ($destContent, $resource){
 
-			$.ajax({
+			var opts = {
 			    type: 'GET',
 			    url: $.AppContext.vars.contextPath + $resource,
 			    success: function($data) {
+			    	
+		        	var $evt = {
+				    		sourceID: "utils.load_resource_content",
+				    		type: "after",
+				    		data: {
+				        		opts: opts,
+				        		success: true,
+				        		data: $data,
+				        	}
+					    };
+		        	
+			    	$.AppContext.eventListeners.fireEvent($evt);
+			    	
+			    	$data = $evt.data.data;
+			    	
 			    	$.AppContext.loadListeners.executeBefore($resource);
 		    		$.AppContext.utils.updateContent($destContent, $data);
 			    	$.AppContext.loadListeners.executeAfter($resource);
-		        }			    
-			});
+		        },
+		        error: function($data){
+		        	
+		        	var $evt = {
+				    		sourceID: "utils.load_resource_content",
+				    		type: "after",
+				    		data: {
+				        		opts: opts,
+				        		success: false,
+				        		data: $data,
+				        	}
+					    };
+		        	
+			    	$.AppContext.eventListeners.fireEvent($evt);
+			    	
+			    	$data = $evt.data.data;
+		        	
+		        }
+		        
+			};
+			
+	    	var $evt = {
+	    		sourceID: "utils.load_resource_content",
+	    		type: "before",
+	    		data: opts
+		    };
+		    	
+	    	$.AppContext.eventListeners.fireEvent($evt);
+	    	
+	    	opts = $evt.data;
+			
+			$.ajax(opts);
 			
 		},
 		
@@ -190,18 +235,27 @@ $.AppContext.utils = {
 		    if(!$modal){
 	    		$("#wait-modal").modal('show');
 		    }
-			
-			$.ajax({
+
+		    var opts = {
 			    type: 'GET',
 			    url: $.AppContext.vars.contextPath + $address,
 			    success: function($data) {
 			    	
-				    if(!$modal){
-				    	setTimeout(function(){ 
-				    		$("#wait-modal").modal('hide');
-				    	}, 1000);
-				    }
-					
+		        	var $evt = {
+				    		sourceID: "utils.load_content",
+				    		type: "after",
+				    		data: {
+				        		opts: opts,
+				        		success: true,
+				        		data: $data,
+				        		modal: $modal
+				        	}
+					    };
+		        	
+			    	$.AppContext.eventListeners.fireEvent($evt);
+			    	
+			    	$data = $evt.data.data;
+				    
 			    	if($.AppContext.utils.isModal($link)){
 				    	$.AppContext.loadListeners.executeBefore($address);
 			    		$.AppContext.dialog.create();
@@ -214,8 +268,30 @@ $.AppContext.utils = {
 			    		$.AppContext.utils.updateContent($destContent, $data);
 				    	$.AppContext.loadListeners.executeAfter($address);
 			    	}
+			    	
+				    if(!$modal){
+				    	setTimeout(function(){ 
+				    		$("#wait-modal").modal('hide');
+				    	}, 1000);
+				    }
+			    	
 		        },
-		        error: function(){
+		        error: function($data){
+		        	
+		        	var $evt = {
+				    		sourceID: "utils.load_content",
+				    		type: "after",
+				    		data: {
+				        		opts: opts,
+				        		success: false,
+				        		data: $data,
+				        		modal: $modal
+				        	}
+					    };
+		        	
+			    	$.AppContext.eventListeners.fireEvent($evt);
+			    	
+			    	$data = $evt.data.data;
 		        	
 				    if(!$modal){
 				    	setTimeout(function(){ 
@@ -224,7 +300,19 @@ $.AppContext.utils = {
 				    }
 				    
 		        }
-			});
+			};
+		    
+	    	var $evt = {
+	    		sourceID: "utils.load_content",
+	    		type: "before",
+	    		data: opts
+		    };
+		    	
+	    	$.AppContext.eventListeners.fireEvent($evt);
+	    	
+	    	opts = $evt.data;
+	    	
+		    $.ajax(opts);
 			
 		},
 
@@ -250,22 +338,51 @@ $.AppContext.utils = {
 			
 			//var $data = $($form).serialize();
 			var $data = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
-			
+
 		    var opts = {
 		        type   : $method,
 		        url    : $action,
 		        data   : $data,
 		        success: function ($data){
-		        	
-			    	setTimeout(function(){ 
-			    		$("#wait-modal").modal('hide');
-			    	}, 1000);
 
+		        	var $evt = {
+				    		sourceID: "utils.submit",
+				    		type: "after",
+				    		data: {
+				        		opts: opts,
+				        		success: true,
+				        		data: $data
+				        	}
+					    };
+		        	
+			    	$.AppContext.eventListeners.fireEvent($evt);
+			    	
+			    	$data = $evt.data.data;
+			    	
 			    	$.AppContext.loadListeners.executeBefore($action);
 		        	$.AppContext.utils.updateContent($destContent, $data);
 			    	$.AppContext.loadListeners.executeAfter($action);
+			    	
+			    	setTimeout(function(){ 
+			    		$("#wait-modal").modal('hide');
+			    	}, 1000);
+			    	
 		        },
 		        error: function ($data){
+		        	
+		        	var $evt = {
+				    		sourceID: "utils.submit",
+				    		type: "after",
+				    		data: {
+				        		opts: opts,
+				        		success: false,
+				        		data: $data
+				        	}
+					    };
+		        	
+			    	$.AppContext.eventListeners.fireEvent($evt);
+			    	
+			    	$data = $evt.data.data;
 		        	
 			    	setTimeout(function(){ 
 			    		$("#wait-modal").modal('hide');
@@ -283,6 +400,16 @@ $.AppContext.utils = {
 		    
 	    	$("#wait-modal").modal('show');
 			
+	    	var $evt = {
+	    		sourceID: "utils.submit",
+	    		type: "before",
+	    		data: opts
+		    };
+	    	
+	    	$.AppContext.eventListeners.fireEvent($evt);
+	    	
+	    	opts = $evt.data;
+	    	
 		    $.ajax(opts);
 			
 		},
