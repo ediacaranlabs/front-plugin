@@ -178,6 +178,9 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 										
 										<fmt:message key="tabs.security.security_tab.type.runtime" bundle="${messages}" var="msg_tmp"/>
 										<ec:option label="${msg_tmp}" value="RUNTIME" selected="${per.request.permission == 'RUNTIME'}"/>
+
+										<fmt:message key="tabs.security.security_tab.type.reflection" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="REFLECTION" selected="${per.request.permission == 'REFLECTION'}"/>
 										
 										<fmt:message key="tabs.security.security_tab.type.all" bundle="${messages}" var="msg_tmp"/>
 										<ec:option label="${msg_tmp}" value="ALL" selected="${per.request.permission == 'ALL'}"/>
@@ -226,6 +229,9 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 										
 										<fmt:message key="tabs.security.security_tab.type.runtime" bundle="${messages}" var="msg_tmp"/>
 										<ec:option label="${msg_tmp}" value="RUNTIME"/>
+										
+										<fmt:message key="tabs.security.security_tab.type.reflection" bundle="${messages}" var="msg_tmp"/>
+										<ec:option label="${msg_tmp}" value="REFLECTION"/>
 										
 										<fmt:message key="tabs.security.security_tab.type.all" bundle="${messages}" var="msg_tmp"/>
 										<ec:option label="${msg_tmp}" value="ALL"/>
