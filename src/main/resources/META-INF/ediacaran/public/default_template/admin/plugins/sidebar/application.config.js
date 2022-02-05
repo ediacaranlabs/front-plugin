@@ -6,7 +6,10 @@ $.AppContext.sidebar.resizeContent = function () {
 	var height        = $(window).height();
 	height            = height - (footerHeight + topMenuHeight);
 	$(".content").css('min-height', height + "px");
-	$(".sidebar-body").css('min-height', ($(window).height() - $(".sidebar-body").offset().top) + "px");
+	
+	var brandHeight   = $(".navbar-brand").outerHeight();
+	$(".sidebar-body").css('min-height', ($(window).height() - brandHeight) + "px");
+
 };
 
 $.AppContext.onload(function(){			
@@ -41,6 +44,15 @@ $.AppContext.onload(function(){
 		}
 	});
 	
+	$.AppContext.eventListeners.addListener('sidebar-link-load',{
+		
+		fireEvent : function($e){
+			//alert(JSON.stringify($e));
+		}
+	
+	});
+	
+
 	$.AppContext.addLoadListener("sidebar-link-load", "^.*", {
 		
 		after: function(){
@@ -48,6 +60,7 @@ $.AppContext.onload(function(){
 		}
 	
 	});
+
 	
 	$.AppContext.sidebar.resizeContent();
 	
