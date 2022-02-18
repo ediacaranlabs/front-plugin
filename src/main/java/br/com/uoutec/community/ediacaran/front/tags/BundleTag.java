@@ -35,6 +35,7 @@ public class BundleTag extends AbstractSimpleComponent {
     	
     	String reqID = super.getRequestPath();
     	reqID = reqID.split("\\.")[0];
+    	reqID = reqID.replaceAll("/+", "/");
     	reqID = reqID.substring(ContextManager.BASE_CONTEXT.length());
     	
 		String packageID;
