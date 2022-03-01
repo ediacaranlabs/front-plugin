@@ -21,18 +21,21 @@ public class ListItemTag  extends AbstractSimpleComponent {
 	
 	private Boolean inline;
 	
-	private JspFragmentVarParser content;
-	
 	public ListItemTag() {
 	}
 	
-	public void beforePrepareVars(Map<String, Object> vars) {
-		ListTag list = (ListTag) getJspContext().getAttribute(ListTag.PARENT);
-		this.inline  = "inline".equals(list.getStyle());
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		public void beforePrepareVars(Map<String, Object> vars) {
+    			ListTag list = (ListTag) getProperty(ListTag.PARENT);
+    			inline  = "inline".equals(list.getStyle());
+    		}
+    		
+    	};
+    }
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
@@ -43,14 +46,6 @@ public class ListItemTag  extends AbstractSimpleComponent {
 	@TagAttribute
 	public void setInline(Boolean inline) {
 		this.inline = inline;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
 	}
 
 }

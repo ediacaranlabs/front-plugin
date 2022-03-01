@@ -26,8 +26,6 @@ public class FieldValidatorRuleParamTag extends AbstractSimpleComponent {
 	
 	private Boolean raw;
 	
-	private JspFragmentVarParser content;
-
 	private ByteArrayOutputStream bout;
 	
 	private PrintWriter contentWriter;
@@ -37,27 +35,33 @@ public class FieldValidatorRuleParamTag extends AbstractSimpleComponent {
     	this.contentWriter = new PrintWriter(bout, true);
 	}
 	
-    protected Writer getOut() {
-    	return contentWriter;
-    }
-	
-    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
-    	
-    	this.contentWriter.flush();
-    	
-    	byte[] bValue = this.bout.toByteArray();
-    	this.value = new String(bValue, "utf-8");
-    	
-    	if(raw == null || !raw) {
-	    	this.value = value.replaceAll("^[\\t\\n\\s]+", "");
-	    	this.value = value.replaceAll("[\\t\\n\\s]+$", "");
-	    	this.value = "\"" + value + "\"";
-    	}
-    	
-    	FieldValidatorRuleTag tag = (FieldValidatorRuleTag)super.getParentTag();
-    	tag.getValidator().getParams().add(new ValidatorParamEntity(this.name, this.value));
-    	
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    	    public Writer getOut() {
+    	    	return contentWriter;
+    	    }
+
+    	    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
+    	    		Writer out) throws IOException {
+    	    	
+    	    	contentWriter.flush();
+    	    	
+    	    	byte[] bValue = bout.toByteArray();
+    	    	value = new String(bValue, "utf-8");
+    	    	
+    	    	if(raw == null || !raw) {
+    		    	value = value.replaceAll("^[\\t\\n\\s]+", "");
+    		    	value = value.replaceAll("[\\t\\n\\s]+$", "");
+    		    	value = "\"" + value + "\"";
+    	    	}
+    	    	
+    	    	FieldValidatorRuleTag tag = (FieldValidatorRuleTag)super.getParentTag();
+    	    	tag.getValidator().getParams().add(new ValidatorParamEntity(name, value));
+    	    	
+    	    }
+    	    
+    	};
     }
 	
     public String getName() {
@@ -78,14 +82,6 @@ public class FieldValidatorRuleParamTag extends AbstractSimpleComponent {
 		this.value = value;
 	}
 
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
-	}
-
 	public Boolean getRaw() {
 		return raw;
 	}
@@ -95,12 +91,8 @@ public class FieldValidatorRuleParamTag extends AbstractSimpleComponent {
 		this.raw = raw;
 	}
 
-	protected String getDefaultTemplate() {
+	public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
-	
 }

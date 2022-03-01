@@ -37,18 +37,22 @@ public class TextfieldTag extends ComponentFormTag {
 	
 	private String size;
 
-	private JspFragmentVarParser content;
-	
 	public TextfieldTag() {
 		super.setComponentType("text");
 	}
 	
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-		vars.put("empty", label == null? "sr-only" : null);
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		public void beforePrepareVars(Map<String, Object> vars) {
+    			vars.put("empty", label == null? "sr-only" : null);
+    	    }
+    		
+    	};
     }
 	
-    protected String getDefaultTemplate() {
+	
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 	
@@ -131,14 +135,6 @@ public class TextfieldTag extends ComponentFormTag {
 	@TagAttribute
 	public void setSize(String size) {
 		this.size = size;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
 	}
 
 }

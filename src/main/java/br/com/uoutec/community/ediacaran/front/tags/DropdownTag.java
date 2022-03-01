@@ -1,7 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -33,8 +31,6 @@ public class DropdownTag  extends ComponentFormTag {
 	
 	private String variation; //up, right, left
 	
-	private JspFragmentVarParser itens;
-	
 	public DropdownTag() {
 	}
 	
@@ -42,13 +38,9 @@ public class DropdownTag  extends ComponentFormTag {
     	return TEMPLATE_WRAPPER;
     }
     
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return split == null || !split? TEMPLATE : TEMPLATE2;
     }
-
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.itens = new JspFragmentVarParser(getJspBody());
-	}
 
 	public String getLabel() {
 		return label;
@@ -95,12 +87,4 @@ public class DropdownTag  extends ComponentFormTag {
 		this.variation = variation;
 	}
 
-	public JspFragmentVarParser getItens() {
-		return itens;
-	}
-
-	public void setItens(JspFragmentVarParser itens) {
-		this.itens = itens;
-	}
-    
 }

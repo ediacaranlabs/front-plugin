@@ -1,7 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -23,23 +21,17 @@ public class TableColTag  extends AbstractSimpleComponent {
 	
 	private Integer rows;
 	
-	private String style;
+	//private String style;
 	
 	/* ------------ Prop ---------------*/
-	
-	private JspFragmentVarParser content;
 	
 	public TableColTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	Object parent = this.getParentTag();
     	return parent instanceof TableHeaderTag? TEMPLATE : TEMPLATE_2;
     }
-
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
 
 	public Integer getCols() {
 		return cols;
@@ -57,23 +49,6 @@ public class TableColTag  extends AbstractSimpleComponent {
 	@TagAttribute
 	public void setRows(Integer rows) {
 		this.rows = rows;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
-	}
-
-	public String getStyle() {
-		return style;
-	}
-
-	@TagAttribute
-	public void setStyle(String style) {
-		this.style = style;
 	}
 
 }

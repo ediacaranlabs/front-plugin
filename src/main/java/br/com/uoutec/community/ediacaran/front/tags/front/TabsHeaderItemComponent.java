@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.TabsItemTag;
+import br.com.uoutec.community.ediacaran.front.tags.TagComponent;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.front.theme.EmptyVarsBuilder;
@@ -47,8 +47,8 @@ public class TabsHeaderItemComponent extends AbstractComponent {
 					
 					@Override
 					public Object toValue(Object value, Object component) {
-						TabsItemTag tag = (TabsItemTag)component;
-						return value == null? "" : new TemplateVarParser("/components/icon", tag.getThemePackage(), 
+						TagComponent tag = (TagComponent)component;
+						return value == null? "" : new TemplateVarParser("/components/icon", tag.getPackageTheme(), 
 								new EmptyVarsBuilder(), tag.getTheme()).put("icon", value);
 					}
 				});

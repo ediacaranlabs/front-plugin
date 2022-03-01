@@ -134,7 +134,7 @@ public class FieldValidatorTag extends AbstractPanelComponent {
 		vars.put("rules", rules);
     }
     
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 	

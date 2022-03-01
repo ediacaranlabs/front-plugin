@@ -25,8 +25,6 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 	
 	/* ------------ Prop ---------------*/
 	
-	private JspFragmentVarParser content;
-	
 	private MenuTag menu;
 	
 	//private String align; //left, right, center
@@ -40,14 +38,19 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 	public MenuItensTag() {
 	}
 	
-	protected void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-    	if(menu != null) {
-    		vars.put("parent-id", menu.getId());
-    	}
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		protected void beforePrepareVars(Map<String, Object> vars) {
+    	    	if(menu != null) {
+    	    		vars.put("parent-id", menu.getId());
+    	    	}
+    	    }
+    		
+    	};
     }
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
 		menu = (MenuTag)getProperty(MenuTag.CONTEXT_ID);
 		
 		if(menu == null) {
@@ -65,24 +68,6 @@ public class MenuItensTag  extends AbstractSimpleComponent {
     	return WRAPPER_TEMPLATE;
     }
     
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
-	}
-
-/*
-	public String getAlign() {
-		return align;
-	}
-
-	@TagAttribute
-	public void setAlign(String align) {
-		this.align = align;
-	}
-*/
 	public MenuTag getMenu() {
 		return menu;
 	}

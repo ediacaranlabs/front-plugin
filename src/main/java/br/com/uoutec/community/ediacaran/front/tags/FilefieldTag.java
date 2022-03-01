@@ -27,18 +27,21 @@ public class FilefieldTag extends ComponentFormTag {
 	
 	private String label;
 	
-	private JspFragmentVarParser content;
-	
 	public FilefieldTag() {
 		super.setComponentType("file");
 	}
 	
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-		vars.put("empty", label == null? "sr-only" : null);
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		public void beforePrepareVars(Map<String, Object> vars) {
+    			vars.put("empty", label == null? "sr-only" : null);
+    	    }
+    		
+    	};
     }
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
@@ -76,14 +79,6 @@ public class FilefieldTag extends ComponentFormTag {
 	@TagAttribute
 	public void setLabel(String label) {
 		this.label = label;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
 	}
 
 }

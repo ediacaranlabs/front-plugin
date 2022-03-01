@@ -5,6 +5,7 @@ import javax.servlet.jsp.JspException;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+import br.com.uoutec.community.ediacaran.front.theme.ComponentVars;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateListVarsParser;
 
 @Tag(
@@ -34,35 +35,17 @@ public class TabsTag extends AbstractPanelComponent {
 		this.index = 0;
 	}
 	
-	public void add(TabsItemTag item) {
+	public void add(ComponentVars value) {
 		index++;
-		//boolean active = Boolean.TRUE.equals(item.getActive());
 		
-		header.createNewItem(item)
+		header.createNewItem(value)
 		.put("parentID", getId())
 		.put("id", index);
 		
-		content.createNewItem(item)
+		content.createNewItem(value)
 		.put("parentID", getId())
 		.put("id", index);
 		
-		/*
-		header.createNewItem()
-			.put("active", active? "active" : "")
-			.put("parentID", getId())
-			.put("id", index)
-			.put("selected", active)
-			.put("title", item.getTitle());
-		*/
-		
-		/*
-		content.createNewItem()
-			.put("show", active? "show" : "")
-			.put("active", active? "active" : "")
-			.put("parentID", getId())
-			.put("id", index)
-			.put("content", item.toVarParser());
-		*/
 	}
 	
     public int doStartTag() throws JspException {
@@ -80,7 +63,7 @@ public class TabsTag extends AbstractPanelComponent {
     	return super.doEndTag();
     }
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 

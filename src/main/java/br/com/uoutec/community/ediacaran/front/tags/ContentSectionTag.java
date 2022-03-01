@@ -1,7 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -21,18 +19,12 @@ public class ContentSectionTag  extends AbstractSimpleComponent {
 	
 	private String title;
 	
-	private JspFragmentVarParser content;
-	
 	public ContentSectionTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
-
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
 
 	public String getTitle() {
 		return title;
@@ -41,14 +33,6 @@ public class ContentSectionTag  extends AbstractSimpleComponent {
 	@TagAttribute
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
 	}
 
 }

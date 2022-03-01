@@ -1,7 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -23,7 +21,7 @@ public class MenuBarTag  extends AbstractSimpleComponent {
 	
 	private Boolean sidebar;
 	
-	private String style; //light, dark
+	//private String style; //light, dark
 	
 	private String background; //dark, primary
 	
@@ -31,27 +29,12 @@ public class MenuBarTag  extends AbstractSimpleComponent {
 	
 	private String expand; //sm, md, lg, xl
 	
-	private JspFragmentVarParser content;
-	
 	public MenuBarTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
-
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
-
-	public String getStyle() {
-		return style;
-	}
-
-	@TagAttribute
-	public void setStyle(String style) {
-		this.style = style;
-	}
 
 	public String getBackground() {
 		return background;
@@ -69,14 +52,6 @@ public class MenuBarTag  extends AbstractSimpleComponent {
 	@TagAttribute
 	public void setPosition(String position) {
 		this.position = position;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
 	}
 
 	public String getExpand() {

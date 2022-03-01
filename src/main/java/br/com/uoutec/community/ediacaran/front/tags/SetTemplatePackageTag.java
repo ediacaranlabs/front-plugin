@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
@@ -14,7 +15,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class SetTemplatePackageTag extends AbstractSimpleComponent {
+public class SetTemplatePackageTag extends SimpleTagSupport {
 	
 	public static final String PACKAGE_NAME = SetTemplatePackageTag.class.getSimpleName() + ":package-name";
 	
@@ -37,10 +38,4 @@ public class SetTemplatePackageTag extends AbstractSimpleComponent {
 		this.name = name;
 	}
 
-	@Override
-	protected String getDefaultTemplate() {
-		return null;
-	}
-
-    
 }

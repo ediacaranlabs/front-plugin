@@ -40,7 +40,7 @@ public class NivoItemTag extends AbstractSimpleComponent {
     	
     }
 
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return null;
     }
     

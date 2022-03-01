@@ -34,14 +34,20 @@ public class FlotChartsDataTag extends AbstractSimpleComponent {
 	public FlotChartsDataTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
-    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
-		this.flotchartid = ((FlotChartsSeriesTag)super.getParentTag()).getFlotchartid();
-		this.flotchartseriesid = ((FlotChartsSeriesTag)super.getParentTag()).getId();
-		this.label = ((FlotChartsSeriesTag)super.getParentTag()).getLabel();
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    	    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
+    			flotchartid = ((FlotChartsSeriesTag)super.getParentTag()).getFlotchartid();
+    			flotchartseriesid = ((FlotChartsSeriesTag)super.getParentTag()).getId();
+    			label = ((FlotChartsSeriesTag)super.getParentTag()).getLabel();
+    	    }
+    		
+    	};
     }
 	
 	public Double getX() {

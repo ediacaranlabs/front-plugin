@@ -22,7 +22,7 @@ public class FlexsliderItemTag  extends AbstractSimpleComponent {
 	public FlexsliderItemTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 

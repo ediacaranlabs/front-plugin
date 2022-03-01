@@ -26,8 +26,6 @@ public class FieldValidatorRuleTag extends AbstractSimpleComponent {
 
 	private Boolean raw;
 	
-	private JspFragmentVarParser content;
-	
     public String getName() {
 		return name;
 	}
@@ -63,44 +61,38 @@ public class FieldValidatorRuleTag extends AbstractSimpleComponent {
 		this.raw = raw;
 	}
 
-    public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
-	}
-
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
-	
-	protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
-    	
-		FieldValidatorTag tag = (FieldValidatorTag)super.getParentTag();
-		
-		if(tag == null) {
-			throw new IllegalStateException("field not found");
-		}
-    	
-    	if(raw == null || !raw) {
-    		message = "\"" + message + "\"";
-    	}
-    	
-    	this.validator = new ValidatorEntity(name, message);
-    	
-    }
-    
-    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
-    	FieldValidatorTag tag = (FieldValidatorTag)super.getParentTag();
-    	tag.getValidator().add(validator);
-    	
-		this.validator = null;
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
+    	    		Writer out) throws IOException {
+    	    	
+    			FieldValidatorTag tag = (FieldValidatorTag)super.getParentTag();
+    			
+    			if(tag == null) {
+    				throw new IllegalStateException("field not found");
+    			}
+    	    	
+    	    	if(raw == null || !raw) {
+    	    		message = "\"" + message + "\"";
+    	    	}
+    	    	
+    	    	validator = new ValidatorEntity(name, message);
+    	    	
+    	    }
+    	    
+    	    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
+    	    		Writer out) throws IOException {
+    	    	FieldValidatorTag tag = (FieldValidatorTag)super.getParentTag();
+    	    	tag.getValidator().add(validator);
+    	    	
+    			validator = null;
+    	    }
+    		
+    	};
     }
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
     

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
-import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
 @Tag(
 		name="list", 
@@ -25,52 +24,34 @@ public class ListTag  extends AbstractSimpleComponent {
 	
 	/* ------------ Prop ---------------*/
 	
-	private String style; //inline, unstyled, ordered
-	
-	private JspFragmentVarParser content;
+	//private String style; //inline, unstyled, ordered
 	
 	private Object oldParent;
 	
 	public ListTag() {
 	}
 	
-    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
-    	this.oldParent = super.setProperty(PARENT, this);
-    	//getJspContext().setAttribute(PARENT, this);
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
+    	    		Writer out) throws IOException {
+    			super.beforeApplyTemplate(template, vars, out);
+    	    	oldParent = setProperty(PARENT, ListTag.this);
+    		}
+
+    	    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
+    	    		Writer out) throws IOException {
+    	    	super.afterApplyTemplate(template, vars, out);
+    	    	super.setProperty(PARENT, oldParent);
+    	    	oldParent = null;
+    	    }
+    		
+    	};
     }
-    
-    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
-    	super.setProperty(PARENT, oldParent);
-    	this.oldParent = null;
-    	
-    	//getJspContext().removeAttribute(PARENT);
+
+    public String getDefaultTemplate() {
+    	return "ordered".equals(getStyle())? TEMPLATE2 : TEMPLATE;
     }
-
-    protected String getDefaultTemplate() {
-    	return "ordered".equals(this.style)? TEMPLATE2 : TEMPLATE;
-    }
-
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
-
-	public String getStyle() {
-		return style;
-	}
-
-	@TagAttribute
-	public void setStyle(String style) {
-		this.style = style;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
-	}
 
 }

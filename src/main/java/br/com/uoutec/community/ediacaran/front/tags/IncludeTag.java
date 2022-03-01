@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
@@ -24,7 +25,7 @@ import br.com.uoutec.community.ediacaran.front.theme.Theme;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.EMPTY
 )
-public class IncludeTag extends AbstractSimpleComponent {
+public class IncludeTag extends SimpleTagSupport {
 	
 	private String uri;
 	
@@ -33,9 +34,12 @@ public class IncludeTag extends AbstractSimpleComponent {
 
     public void doTag() throws JspException, IOException {
     	
+    	TagComponent tagComponent = new TagComponent();
+    	tagComponent.setPageContext((PageContext) getJspContext());
+    	
     	PageContext pageContext = (PageContext) getJspContext();
-    	Theme theme               = getTheme();
-    	String packageName      = getThemePackage();
+    	Theme theme             = tagComponent.getTheme();
+    	String packageName      = tagComponent.getPackageTheme();
     	
     	String path = theme.getTemplate(packageName) + uri;
     	
@@ -75,11 +79,6 @@ public class IncludeTag extends AbstractSimpleComponent {
 	@TagAttribute
 	public void setUri(String uri) {
 		this.uri = uri;
-	}
-
-	@Override
-	protected String getDefaultTemplate() {
-		return null;
 	}
 
 	private class ImportResponseWrapper extends HttpServletResponseWrapper { 

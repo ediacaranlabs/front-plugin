@@ -1,7 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -25,20 +23,14 @@ public class RadioTag extends ComponentFormTag {
 	
 	private Boolean inline;
 	
-	private JspFragmentVarParser content;
-	
 	public RadioTag() {
 		setComponentType("radio");
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
-	
 	public Boolean getSelected() {
 		return selected;
 	}
@@ -64,14 +56,6 @@ public class RadioTag extends ComponentFormTag {
 	@TagAttribute
 	public void setInline(Boolean inline) {
 		this.inline = inline;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
 	}
 
 }

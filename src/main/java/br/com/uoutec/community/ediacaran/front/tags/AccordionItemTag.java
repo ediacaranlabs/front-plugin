@@ -1,9 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -25,23 +21,12 @@ public class AccordionItemTag extends AbstractSimpleComponent {
 	
 	/* ------------ Private Prop ---------------*/
 	
-	private JspFragmentVarParser content;
-	
 	private String parentID;
 	
 	public AccordionItemTag() {
 	}
 	
-    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
-    	Object parentTag = getParentTag();
-		this.parentID = parentTag == null? null : ((AccordionTag)parentTag).getId();
-    }
-	
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
-	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
     
@@ -54,16 +39,8 @@ public class AccordionItemTag extends AbstractSimpleComponent {
 		this.title = title;
 	}
 
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
-	}
-
 	public String getParentID() {
-		return parentID;
+		return parentID == null? ((AccordionTag)getParentTag()).getId() : null;
 	}
 
 	public void setParentID(String parentID) {

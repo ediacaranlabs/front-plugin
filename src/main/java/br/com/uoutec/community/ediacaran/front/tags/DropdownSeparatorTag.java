@@ -19,7 +19,7 @@ public class DropdownSeparatorTag  extends AbstractSimpleComponent {
 	public DropdownSeparatorTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 	

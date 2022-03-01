@@ -16,29 +16,34 @@ public class ResourcesTag extends AbstractSimpleComponent {
 	
 	private String type;
 	
-	private TemplateListVarsParser content;
-	
 	public ResourcesTag() {
 	}
 
-	public void beforePrepareVars(Map<String, Object> vars) {
-		
-    	Theme theme        = getTheme();
-    	String packageName = getThemePackage();
-		
-		this.content = new TemplateListVarsParser(TEMPLATE + "-" + type, packageName, theme);
-		
-    	List<PublicResource> resources = theme.getResourcesByType(type, packageName);
-    	
-		for(PublicResource pr: resources) {
-			this.content
-				.createNewItem()
-				.put("path", pr.getPath())
-				.put("resource", pr.getResource());
-		}
-		
-	}
-
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		public void beforePrepareVars(Map<String, Object> vars) {
+    			
+    	    	Theme theme        = getTheme();
+    	    	String packageName = getPackageTheme();
+    			
+    	    	TemplateListVarsParser content = new TemplateListVarsParser(TEMPLATE + "-" + type, packageName, theme);
+    	    	ResourcesTag.this.setContent(content);
+    			
+    	    	List<PublicResource> resources = theme.getResourcesByType(type, packageName);
+    	    	
+    			for(PublicResource pr: resources) {
+    				content
+    					.createNewItem()
+    					.put("path", pr.getPath())
+    					.put("resource", pr.getResource());
+    			}
+    			
+    		}
+    		
+    	};
+    }
+	
 	public String getType() {
 		return type;
 	}
@@ -48,16 +53,8 @@ public class ResourcesTag extends AbstractSimpleComponent {
 		this.type = type;
 	}
 	
-	public TemplateListVarsParser getContent() {
-		return content;
-	}
-
-	public void setContent(TemplateListVarsParser content) {
-		this.content = content;
-	}
-
 	@Override
-	protected String getDefaultTemplate() {
+	public String getDefaultTemplate() {
 		return TEMPLATE;
 	}
 

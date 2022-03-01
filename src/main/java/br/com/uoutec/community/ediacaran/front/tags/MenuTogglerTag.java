@@ -23,39 +23,31 @@ public class MenuTogglerTag  extends AbstractSimpleComponent {
 	
 	private String menuID;
 	
-	private JspFragmentVarParser content;
-	
 	public MenuTogglerTag() {
 	}
 	
-    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
-    	
-    	Object id = menuID == null? ((MenuBarTag)getProperty(MenuBarTag.CONTEXT_ID)).getId() : menuID;
-    	
-    	if(id == null) {
-    		throw new RuntimeException("menu id not found");
-    	}
-    	
-    	vars.put("menu-id", id);
-    	
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    	    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
+    	    		Writer out) throws IOException {
+    	    	
+    	    	Object id = menuID == null? ((MenuBarTag)getProperty(MenuBarTag.CONTEXT_ID)).getId() : menuID;
+    	    	
+    	    	if(id == null) {
+    	    		throw new RuntimeException("menu id not found");
+    	    	}
+    	    	
+    	    	vars.put("menu-id", id);
+    	    	
+    	    }
+    		
+    	};
     }
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
-
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
-	}
 
 	public String getMenuID() {
 		return menuID;

@@ -5,22 +5,17 @@ import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.BodyTagSupport;
+import javax.servlet.jsp.PageContext;
 
 import org.brandao.brutos.bean.BeanInstance;
 
 import br.com.uoutec.community.ediacaran.DoPrivilegedException;
-import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.front.theme.ComponentVars;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateVarParser;
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
@@ -28,11 +23,8 @@ import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeRegistry;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 
-public abstract class AbstractPanelComponent 
-	extends BodyTagSupport
-	implements ComponentVars{
-
-	private static final long serialVersionUID = -5353589232919296817L;
+public class TagComponent 
+	implements ComponentVars {
 
 	public static final String WRAPPER_TEMPLATE		= "/components/wrapper";
 	
@@ -41,82 +33,15 @@ public abstract class AbstractPanelComponent
 	public static final String ATTR_FORMAT			= "([a-z-_]+)=([^\\;]+)";
 
 	public static final String PARENT_TAG			= "Component:parent";
-	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_ATTRS = 
-		Collections.unmodifiableSet(new HashSet<String>() {{
-			add("id");
-		}});
 
-	protected static final Set<String> DEFAULT_EMPTY_ATTRIBUTES = 
-			Collections.unmodifiableSet(new HashSet<String>());
+	private PageContext pageContext;
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_ATTRIBUTE_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
-				
-				put("classStyle", new AttributeParserImp() {
-					
-					@Override
-					public String toName(String value, Object component) {
-						return value == null? null : "class";
-					}
-				});
-				
-			}});
+	private Writer out;
 	
-	@SuppressWarnings("serial")
-	protected static final Set<String> DEFAULT_PROPS = 
-		Collections.unmodifiableSet(new HashSet<String>() {{
-			add("classStyle");
-		}});
+	private TagComponenetInfo tag;
 	
-	@SuppressWarnings("serial")
-	protected static final Map<String, AttributeParser> DEFAULT_PROPERTY_PARSERS = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
-			}});
-
-	private	String id;
-
-	private String extAttrs;
-	
-	private String template;
-	
-	private String classStyle;
-	
-	private boolean wrapper;
-	
-	private Object oldParent;
-	
-	private String style;
-	
-	private String align;
-	
-    public void doInitBody() throws JspException {
-    	setProperty(getClass().getName() + ":CONTEXT", this);
-    	
-    	oldParent = getParentTag();
-    	setParentTag(this);
-    }
-	
-    public int doAfterBody() throws JspException {
-    	try {
-    		applyTemplate();
-        	setParentTag(oldParent);
-        	setProperty(getClass().getName() + ":CONTEXT", null);    	
-        	return SKIP_BODY;
-    	}
-	    catch(ThemeException e) {
-	    	throw new JspException(e);
-	    } 
-    	catch (IOException e) {
-	    	throw new JspException(e);
-		}
-    	
-    }
-
-    protected void applyTemplate() throws ThemeException, IOException{
-    	if(!wrapper) {
+	protected void applyTemplate() throws ThemeException, IOException{
+    	if(!tag.isWrapper()) {
     		applySimpleTemplate();
     	}
     	else {
@@ -127,12 +52,12 @@ public abstract class AbstractPanelComponent
     protected void applyWrapperTemplate() throws IOException{
     	
 		Map<String, Object> vars = new HashMap<String, Object>();
-		Writer out               = getBodyContent().getEnclosingWriter();
+		Writer out               = getOut();
 		String template          = getWrapperTemplate();
-    	Theme theme               = getTheme();
+    	Theme theme              = getTheme();
     	String packageName       = getPackageTheme();
 		
-		vars.put("content",	new TemplateVarParser(getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, this, theme));
+		vars.put("content",	new TemplateVarParser(tag.getTemplate() == null? getDefaultTemplate() : tag.getTemplate(), packageName, this, theme));
 		
 		beforeApplyTemplate(template, vars, out);
 
@@ -149,10 +74,10 @@ public abstract class AbstractPanelComponent
 
     protected void applySimpleTemplate() throws IOException {
 
-    	setProperty(getClass().getName() + ":CONTEXT", this);
+    	setProperty(getClass().getName() + ":CONTEXT", tag);
     	
-    	Writer out               = getBodyContent().getEnclosingWriter();
-    	String template          = getTemplate() == null? getDefaultTemplate() : getTemplate();
+    	Writer out               = getOut();
+    	String template          = tag.getTemplate() == null? getDefaultTemplate() : tag.getTemplate();
     	
 		beforeApplyTemplate(template, null, out);
 
@@ -168,7 +93,35 @@ public abstract class AbstractPanelComponent
     	
     }
     
-    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
+    public String getDefaultTemplate() {
+		return tag.getDefaultTemplate();
+	}
+
+	public PageContext getPageContext() {
+		return pageContext;
+	}
+
+	public void setPageContext(PageContext pageContext) {
+		this.pageContext = pageContext;
+	}
+
+	public Writer getOut() {
+		return out;
+	}
+
+	public void setOut(Writer out) {
+		this.out = out;
+	}
+
+	public Object getTag() {
+		return tag;
+	}
+
+	public void setTag(TagComponenetInfo tag) {
+		this.tag = tag;
+	}
+
+	protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
     }
     
@@ -191,30 +144,6 @@ public abstract class AbstractPanelComponent
     protected String getWrapperTemplate() {
     	return WRAPPER_TEMPLATE;
     }
-    
-    public String getDefaultTemplate() {
-    	throw new UnsupportedOperationException();
-    }
-    
-    protected Set<String> getDefaultAttributes(){
-    	return DEFAULT_ATTRS;
-    }
-
-    protected Set<String> getEmptyAttributes(){
-    	return DEFAULT_EMPTY_ATTRIBUTES;
-    }
-    
-    protected Map<String, AttributeParser> getAttributeParsers(){
-    	return DEFAULT_ATTRIBUTE_PARSERS;
-    }
-
-    protected Set<String> getDefaultProperties(){
-    	return DEFAULT_PROPS;
-    }
-
-    protected Map<String, AttributeParser> getPropertyParsers(){
-    	return DEFAULT_PROPERTY_PARSERS;
-    }
 	
 	protected void beforePrepareVars(Map<String, Object> vars) {
 	}
@@ -229,7 +158,7 @@ public abstract class AbstractPanelComponent
 			BeanInstance i = 
 					AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
 		            public BeanInstance run() {
-		                return new BeanInstance(AbstractPanelComponent.this);
+		                return new BeanInstance(tag);
 		            }
 		        });
 			//BeanInstance i = new BeanInstance(this);
@@ -275,13 +204,13 @@ public abstract class AbstractPanelComponent
 				
 			}
 			
-			if(this.extAttrs != null) {
+			if(tag.getExtAttrs() != null) {
 				
 				if(sb.length() != 0) {
 					sb.append(" ");
 				}
 				
-				sb.append(this.extAttrs);
+				sb.append(tag.getExtAttrs());
 			}
 			
 			return sb.toString();
@@ -298,14 +227,14 @@ public abstract class AbstractPanelComponent
 			BeanInstance i = 
 					AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
 		            public BeanInstance run() {
-		                return new BeanInstance(AbstractPanelComponent.this);
+		                return new BeanInstance(tag);
 		            }
 		        });
 			//BeanInstance i = new BeanInstance(AbstractPanelComponent.this);
 			this.beforePrepareVars(map);
 			
 			map.put("attr", getAttrList(attributeParsers, emptyAttributes, defaultAttributes));
-			
+
 			for(String p: defaultProperties) {
 				final String k = p;
 				
@@ -335,6 +264,10 @@ public abstract class AbstractPanelComponent
 				}
 			}
 			
+			if(map.get("id") == null) {
+				map.put("id", getId());
+			}
+			
 			this.afterPrepareVars(map);
 			
 			return map;
@@ -344,31 +277,31 @@ public abstract class AbstractPanelComponent
 		}
 	}
 	
-	protected Theme getTheme() {
+	public Theme getTheme() {
 		ThemeRegistry themeRegistry = EntityContextPlugin.getEntity(ThemeRegistry.class);
     	return themeRegistry.getCurrentTheme();
 	}
 	
-	protected String getPackageTheme() {
+	public String getPackageTheme() {
     	return (String)getProperty(SetTemplatePackageTag.PACKAGE_NAME);
 	}
 	
-    protected Object setProperty(String name, Object newValue) {
+    public Object setProperty(String name, Object newValue) {
 		Object old = pageContext.getAttribute(name);
 		pageContext.setAttribute(name, newValue);
     	return old;
     }
 
-    protected Object getProperty(String name) {
+    public Object getProperty(String name) {
     	return getProperty(name, null);
     }
     
-    protected Object getProperty(String name, Object defaultValue) {
+    public Object getProperty(String name, Object defaultValue) {
 		Object val = pageContext.getAttribute(name);
     	return val == null? defaultValue : val;
     }
     
-    protected String getRequestPath() {
+    public String getRequestPath() {
     	
     	HttpServletRequest request = (HttpServletRequest)pageContext.getRequest();
     	
@@ -391,75 +324,13 @@ public abstract class AbstractPanelComponent
         return path.substring( contextPath.length(), path.length() );
     }
     
-	public String getExtAttrs() {
-		return extAttrs;
-	}
-
-	@TagAttribute
-	public void setExtAttrs(String extAttrs) {
-		this.extAttrs = extAttrs;
-	}
-
 	public String getId() {
+		HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 		
-		if(id == null) {
-			HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
-			
-			Integer acc = (Integer) request.getAttribute(ID_COUNT);
-			request.setAttribute(ID_COUNT, acc = acc == null? 0 : acc.intValue() + 1);
-			
-			return id = getClass().getSimpleName().toLowerCase() + String.valueOf(acc);
-		}
+		Integer acc = (Integer) request.getAttribute(ID_COUNT);
+		request.setAttribute(ID_COUNT, acc = acc == null? 0 : acc.intValue() + 1);
 		
-		return id;
+		return tag.getClass().getSimpleName().toLowerCase() + String.valueOf(acc);
 	}
 
-	@TagAttribute
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getTemplate() {
-		return template;
-	}
-
-	@TagAttribute
-	public void setTemplate(String template) {
-		this.template = template;
-	}
-
-	public boolean isWrapper() {
-		return wrapper;
-	}
-
-	public void setWrapper(boolean wrapper) {
-		this.wrapper = wrapper;
-	}
-
-	public String getClassStyle() {
-		return classStyle;
-	}
-
-	@TagAttribute
-	public void setClassStyle(String classStyle) {
-		this.classStyle = classStyle;
-	}
-
-	public String getStyle() {
-		return style;
-	}
-
-	public void setStyle(String style) {
-		this.style = style;
-	}
-
-	public String getAlign() {
-		return align;
-	}
-
-	@TagAttribute
-	public void setAlign(String align) {
-		this.align = align;
-	}
-    
 }

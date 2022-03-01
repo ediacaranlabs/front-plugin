@@ -27,17 +27,20 @@ public class TestimonialTag extends AbstractSimpleComponent {
 
 	private VarParser info;
 	
-	private VarParser content;
-	
 	public TestimonialTag() {
 	}
 	
-	protected void beforePrepareVars(Map<String, Object> vars) {
-		content = toVarParser();
-		info = new DelegateVarParser();
-	}
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		protected void beforePrepareVars(Map<String, Object> vars) {
+    			info = new DelegateVarParser();
+    		}
+    		
+    	};
+    }
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
@@ -57,14 +60,6 @@ public class TestimonialTag extends AbstractSimpleComponent {
 	@TagAttribute
 	public void setImage(String image) {
 		this.image = image;
-	}
-
-	public VarParser getContent() {
-		return content;
-	}
-
-	public void setContent(VarParser content) {
-		this.content = content;
 	}
 
 	public void setInfo(VarParser info) {

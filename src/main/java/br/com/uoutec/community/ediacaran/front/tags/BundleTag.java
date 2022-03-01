@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.jstl.fmt.LocalizationContext;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import br.com.uoutec.community.ediacaran.ContextManager;
 import br.com.uoutec.community.ediacaran.core.system.registry.MessageBundle;
@@ -14,13 +15,15 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
+import br.com.uoutec.community.ediacaran.plugins.PluginConfigurationMetadata;
+import br.com.uoutec.community.ediacaran.plugins.PluginType;
 
 @Tag(
 	name="setBundle", 
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.EMPTY
 )
-public class BundleTag extends AbstractSimpleComponent {
+public class BundleTag extends SimpleTagSupport {
 	
 	private Locale locale;
 	
@@ -33,10 +36,17 @@ public class BundleTag extends AbstractSimpleComponent {
 
     public void doTag() throws JspException, IOException {
     	
-    	String reqID = super.getRequestPath();
+    	TagComponent tagComponent = new TagComponent();
+    	tagComponent.setPageContext((PageContext) getJspContext());
+    	
+    	PluginType pt = EntityContextPlugin.getEntity(PluginType.class);
+    	PluginConfigurationMetadata pcm = pt.getConfiguration().getMetadata();
+    	
+    	String reqID = tagComponent.getRequestPath();
     	reqID = reqID.split("\\.")[0];
     	reqID = reqID.replaceAll("/+", "/");
-    	reqID = reqID.substring(ContextManager.BASE_CONTEXT.length());
+    	reqID = "/" + pcm.getSupplier() + "/" + pcm.getCode() + reqID;
+    	//reqID = reqID.substring(ContextManager.BASE_CONTEXT.length());
     	
 		String packageID;
 		Locale currentLocale;
@@ -66,7 +76,7 @@ public class BundleTag extends AbstractSimpleComponent {
 			throw new IllegalStateException(" not found: " + packageID);
 		}
 		
-    	super.setProperty(var, new LocalizationContext(value, locale));
+		tagComponent.setProperty(var, new LocalizationContext(value, locale));
     }
 
     protected String parseRequestId(String path, String contextPath){
@@ -98,11 +108,6 @@ public class BundleTag extends AbstractSimpleComponent {
 	@TagAttribute
 	public void setBasename(String basename) {
 		this.basename = basename;
-	}
-
-	@Override
-	protected String getDefaultTemplate() {
-		return null;
 	}
 	
 }

@@ -23,19 +23,13 @@ public class OptionTag extends ComponentFormTag {
 	
 	/* ------------ Prop ---------------*/
 
-	private JspFragmentVarParser content;
-	
 	public OptionTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
-	
 	public Boolean getSelected() {
 		return selected;
 	}
@@ -52,14 +46,6 @@ public class OptionTag extends ComponentFormTag {
 	@TagAttribute
 	public void setLabel(String label) {
 		this.label = label;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
 	}
 
 }

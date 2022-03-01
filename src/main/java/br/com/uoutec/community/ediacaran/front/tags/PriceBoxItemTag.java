@@ -1,7 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -19,20 +17,14 @@ public class PriceBoxItemTag  extends AbstractSimpleComponent {
 	
 	/* ------------ Prop ---------------*/
 	
-	private JspFragmentVarParser content;
-	
 	private Boolean checked;
 	
 	public PriceBoxItemTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
-
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
 
 	public Boolean getChecked() {
 		return checked;
@@ -41,14 +33,6 @@ public class PriceBoxItemTag  extends AbstractSimpleComponent {
 	@TagAttribute
 	public void setChecked(Boolean checked) {
 		this.checked = checked;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
 	}
 
 }

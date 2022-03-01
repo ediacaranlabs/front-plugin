@@ -28,7 +28,7 @@ public class BreadcrumbPathTag extends AbstractSimpleComponent {
 	public BreadcrumbPathTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 

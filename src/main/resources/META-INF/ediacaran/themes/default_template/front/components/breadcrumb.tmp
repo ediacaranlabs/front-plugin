@@ -1,4 +1,4 @@
 <ul {attr} class="breadcrumb">
-	{path}
+	{content}
 	<li class="active">{title}</li>
 </ul>

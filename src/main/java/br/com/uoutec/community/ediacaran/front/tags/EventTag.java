@@ -21,22 +21,27 @@ public class EventTag extends AbstractSimpleComponent {
 	
 	private String component;
 	
-	private JspFragmentVarParser content;
-
-    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
-    	if(component == null) {
-			Object cp = super.getParentTag();
-			if(cp != null) {
-				if(cp instanceof AbstractSimpleComponent) {
-					component = ((AbstractSimpleComponent)cp).getId();
-				}
-				else
-				if(cp instanceof AbstractPanelComponent) {
-					component = ((AbstractPanelComponent)cp).getId();
-				}
-			}
-    	}
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    	    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
+    	    	if(component == null) {
+    				Object cp = super.getParentTag();
+    				if(cp != null) {
+    					if(cp instanceof AbstractSimpleComponent) {
+    						component = ((AbstractSimpleComponent)cp).getId();
+    					}
+    					else
+    					if(cp instanceof AbstractPanelComponent) {
+    						component = ((AbstractPanelComponent)cp).getId();
+    					}
+    				}
+    	    	}
+    	    }
+    		
+    	};
     }
+	
 
     public String getType() {
 		return type;
@@ -56,20 +61,8 @@ public class EventTag extends AbstractSimpleComponent {
 		this.component = component;
 	}
 
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
-	}
-
-	protected String getDefaultTemplate() {
+	public String getDefaultTemplate() {
     	return TEMPLATE;
     }
-	
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
     
 }

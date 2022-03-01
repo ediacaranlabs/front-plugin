@@ -6,7 +6,6 @@ import java.util.Map;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
-import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
 
 @Tag(
 	name="form", 
@@ -39,25 +38,24 @@ public class FormTag extends AbstractSimpleComponent {
 	
 	/* ------------ Prop ---------------*/
 	
-	private String style; // inline, horizontal, vertical
+	//private String style; // inline, horizontal, vertical
 
-	private VarParser content;
-	
 	public FormTag() {
 	}
 
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
-	
-    protected void applyTemplate(String template, 
-    		Map<String,Object> vars, Writer out){
-    	Object oldForm = super.setProperty(FORM, this);
-    	super.applyTemplate(template, vars, out);
-    	super.setProperty(FORM, oldForm);
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		protected void applyTemplate(String template, Map<String, Object> vars, Writer out){
+    	    	Object oldForm = super.setProperty(FORM, this);
+    			super.applyTemplate(template, vars, out);
+    	    	super.setProperty(FORM, oldForm);
+    		}
+    		
+    	};
     }
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 	
@@ -104,23 +102,6 @@ public class FormTag extends AbstractSimpleComponent {
 	@TagAttribute
 	public void setTarget(String target) {
 		this.target = target;
-	}
-
-	public VarParser getContent() {
-		return content;
-	}
-
-	public void setContent(VarParser content) {
-		this.content = content;
-	}
-
-	public String getStyle() {
-		return style;
-	}
-
-	@TagAttribute
-	public void setStyle(String style) {
-		this.style = style;
 	}
 
 	public String getUpdate() {

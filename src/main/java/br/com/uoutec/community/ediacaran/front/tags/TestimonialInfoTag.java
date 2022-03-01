@@ -1,14 +1,12 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.theme.DelegateVarParser;
-import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
 
 @Tag(
 	name="testimonial-info", 
@@ -22,8 +20,6 @@ public class TestimonialInfoTag extends AbstractSimpleComponent {
 	/* ------------ Attr ---------------*/
 	
 	/* ------------ Prop ---------------*/
-	
-	private VarParser content;
 	
 	public TestimonialInfoTag() {
 	}
@@ -40,21 +36,8 @@ public class TestimonialInfoTag extends AbstractSimpleComponent {
     	
     }
 	
-	protected void beforePrepareVars(Map<String, Object> vars) {
-		content = toVarParser();
-	}
-	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
-
-	public VarParser getContent() {
-		return content;
-	}
-
-	public void setContent(VarParser content) {
-		this.content = content;
-	}
-	
 
 }

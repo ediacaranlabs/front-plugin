@@ -27,8 +27,6 @@ public class GalleryTag  extends AbstractSimpleComponent {
 	
 	private int nextImage;
 	
-	private JspFragmentVarParser content;
-	
 	public GalleryTag() {
 		this.nextImage = 1;
 	}
@@ -37,25 +35,26 @@ public class GalleryTag  extends AbstractSimpleComponent {
 		return nextImage++;
 	}
 	
-    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
-    	//check if PARENT exists
-    	getJspContext().setAttribute(PARENT, this);
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    	    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
+    	    		Writer out) throws IOException {
+    	    	setProperty(PARENT, this);
+    	    }
+    	    
+    	    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
+    	    		Writer out) throws IOException {
+    	    	setProperty(PARENT, null);
+    	    }
+    		
+    	};
     }
-    
-    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
-    	getJspContext().removeAttribute(PARENT);
-    }
-
-    protected String getDefaultTemplate() {
+	
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
-    
 	public Integer getCols() {
 		return cols;
 	}
@@ -73,12 +72,4 @@ public class GalleryTag  extends AbstractSimpleComponent {
 		this.nextImage = nextImage;
 	}
 
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
-	}
-    
 }

@@ -20,30 +20,22 @@ public class MenuLabelTag  extends AbstractSimpleComponent {
 	
 	/* ------------ Prop ---------------*/
 	
-	private JspFragmentVarParser content;
-	
 	public MenuLabelTag() {
 	}
 	
-    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
-    	vars.put("parent-id", ((MenuTag)getParentTag()).getId());
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    	    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
+    	    		Writer out) throws IOException {
+    	    	vars.put("parent-id", ((MenuTag)getParentTag()).getId());
+    	    }
+    		
+    	};
     }
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
-
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
-	}
 
 }

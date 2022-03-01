@@ -28,23 +28,23 @@ public class FlotChartsSeriesTag extends AbstractSimpleComponent {
 	
 	private String data;
 	
-	private JspFragmentVarParser content;
-	
 	public FlotChartsSeriesTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    	    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
+    			flotchartid = ((FlotChartsTag)super.getParentTag()).getId();
+    	    }
+    		
+    	};
+    }
+	
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
-
-    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
-		this.flotchartid = ((FlotChartsTag)super.getParentTag()).getId();
-    }
-	
 	public String getLabel() {
 		return label;
 	}
@@ -52,14 +52,6 @@ public class FlotChartsSeriesTag extends AbstractSimpleComponent {
 	@TagAttribute
 	public void setLabel(String label) {
 		this.label = label;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
 	}
 
 	public String getFlotchartid() {

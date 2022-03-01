@@ -1,7 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -23,19 +21,13 @@ public class BlockquoteTag extends AbstractSimpleComponent {
 	
 	private String cite;
 	
-	private JspFragmentVarParser content;
-	
 	public BlockquoteTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
-	
 	public String getCite() {
 		return cite;
 	}
@@ -43,14 +35,6 @@ public class BlockquoteTag extends AbstractSimpleComponent {
 	@TagAttribute(fragment=false)
 	public void setCite(String cite) {
 		this.cite = cite;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
 	}
 	
 }

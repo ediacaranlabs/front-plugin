@@ -1,7 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -21,18 +19,12 @@ public class PullquoteTag  extends AbstractSimpleComponent {
 	
 	private String align; //(ex: left ou right)
 	
-	private JspFragmentVarParser content;
-	
 	public PullquoteTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
-
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
 
 	public String getAlign() {
 		return align;
@@ -41,14 +33,6 @@ public class PullquoteTag  extends AbstractSimpleComponent {
 	@TagAttribute
 	public void setAlign(String align) {
 		this.align = align;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
 	}
 
 }

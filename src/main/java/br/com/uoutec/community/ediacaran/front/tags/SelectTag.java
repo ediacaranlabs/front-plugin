@@ -33,17 +33,20 @@ public class SelectTag extends ComponentFormTag {
 	
 	private String size;
 
-	private JspFragmentVarParser options;
-	
 	public SelectTag() {
 	}
 	
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.options = new JspFragmentVarParser(getJspBody());
-		vars.put("empty",   label == null? "sr-only" : null);
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		public void beforePrepareVars(Map<String, Object> vars) {
+    			vars.put("empty",   label == null? "sr-only" : null);
+    	    }
+    		
+    	};
     }
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 	
@@ -108,14 +111,6 @@ public class SelectTag extends ComponentFormTag {
 	@TagAttribute
 	public void setSizeList(Integer sizeList) {
 		this.sizeList = sizeList;
-	}
-
-	public JspFragmentVarParser getOptions() {
-		return options;
-	}
-
-	public void setOptions(JspFragmentVarParser options) {
-		this.options = options;
 	}
 
 }

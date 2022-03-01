@@ -1,7 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 
@@ -18,25 +16,11 @@ public class FlexsliderTag  extends AbstractSimpleComponent {
 	
 	/* ------------ Prop ---------------*/
 	
-	private JspFragmentVarParser imgs;
-	
 	public FlexsliderTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.imgs = new JspFragmentVarParser(getJspBody());
-	}
-    
-	public JspFragmentVarParser getImgs() {
-		return imgs;
-	}
-
-	public void setImgs(JspFragmentVarParser imgs) {
-		this.imgs = imgs;
-	}
-    
 }

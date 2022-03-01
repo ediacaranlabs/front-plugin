@@ -23,31 +23,25 @@ public class GalleryFiltersTag  extends AbstractSimpleComponent {
 	
 	private String galleryID;
 	
-	private JspFragmentVarParser content;
-	
 	public GalleryFiltersTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
-    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
-		if(galleryID == null) {
-			galleryID = ((GalleryTag)super.getParentTag()).getId();
-		}
-		
-		this.content = new JspFragmentVarParser(getJspBody());
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    	    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
+    			if(galleryID == null) {
+    				galleryID = ((GalleryTag)super.getParentTag()).getId();
+    			}
+    	    }
+    		
+    	};
     }
     
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
-	}
-
 	public String getGalleryID() {
 		return galleryID;
 	}

@@ -19,7 +19,7 @@ public class SeparatorTag  extends AbstractSimpleComponent {
 	public SeparatorTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 

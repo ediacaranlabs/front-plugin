@@ -26,7 +26,7 @@ public class GalleryFilterTag  extends AbstractSimpleComponent {
 	public GalleryFilterTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 

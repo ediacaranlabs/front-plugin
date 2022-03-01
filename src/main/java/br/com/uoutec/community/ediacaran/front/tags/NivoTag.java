@@ -63,7 +63,7 @@ public class NivoTag extends AbstractPanelComponent {
 		vars.put("captions", new TemplateListVarParser(NIVO_CAPTION, packageName, this, theme, caption));
 	}
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 	

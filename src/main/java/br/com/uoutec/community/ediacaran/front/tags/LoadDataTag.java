@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
+import javax.servlet.jsp.PageContext;
+
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -30,13 +32,16 @@ public class LoadDataTag  extends AbstractSimpleComponent {
     protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
 
+    	TagComponent tagComponent = new TagComponent();
+    	tagComponent.setPageContext((PageContext) getJspContext());
+    	
     	File baseWebApp = new File(System.getProperty("app.web"));
     	Map<Object,Object> dta = ReadData.loadData(
     								file, 
     								baseWebApp/*.getCanonicalFile()*/, 
 									file.startsWith("/")? 
 										baseWebApp : 
-										new File(baseWebApp, super.getRequestPath())
+										new File(baseWebApp, tagComponent.getRequestPath())
 								);
     	
     	super.getJspContext().setAttribute(var == null? "vars" : var, dta);
@@ -65,7 +70,7 @@ public class LoadDataTag  extends AbstractSimpleComponent {
 	}
 
 	@Override
-	protected String getDefaultTemplate() {
+	public String getDefaultTemplate() {
 		return null;
 	}
 

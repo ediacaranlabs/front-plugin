@@ -43,12 +43,18 @@ public class TextareaTag extends ComponentFormTag {
 		super.setComponentType("text");
 	}
 	
-    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
-		vars.put("empty",   label == null? "sr-only" : null);
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    	    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
+    	    		Writer out) throws IOException {
+    			vars.put("empty",   label == null? "sr-only" : null);
+    	    }
+    		
+    	};
     }
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 

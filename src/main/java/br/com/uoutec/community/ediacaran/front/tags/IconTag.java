@@ -32,7 +32,7 @@ public class IconTag extends AbstractSimpleComponent {
 	public IconTag() {
 	}
 
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return bg != null? TEMPLATE_STACK : TEMPLATE;
     }
     

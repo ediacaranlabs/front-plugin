@@ -1,44 +1,19 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
-import java.io.Writer;
-import java.lang.reflect.InvocationTargetException;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import org.brandao.brutos.bean.BeanInstance;
-
-import br.com.uoutec.community.ediacaran.DoPrivilegedException;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.front.theme.ComponentVars;
 import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
-import br.com.uoutec.community.ediacaran.front.theme.TemplateVarParser;
-import br.com.uoutec.community.ediacaran.front.theme.Theme;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
-import br.com.uoutec.community.ediacaran.front.theme.ThemeRegistry;
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 
 public abstract class AbstractSimpleComponent 
-	extends SimpleTagSupport 
-	implements ComponentVars{
-
-	public static final String WRAPPER_TEMPLATE		= "/components/wrapper";
-	
-	public static final String ID_COUNT				= "_component_id_count";
-
-	public static final String ATTR_FORMAT			= "([a-z-_]+)=([^\\;]+)";
-
-	public static final String PARENT_TAG			= "Component:parent";
+	extends SimpleTagSupport
+	implements TagComponenetInfo {
 
 	private	String id;
 
@@ -54,276 +29,76 @@ public abstract class AbstractSimpleComponent
 	
 	private String align;
 	
+	private VarParser content;
+
+	private TagComponent tagComponent;
+	
     public void doTag() throws JspException, IOException {
     	try {
-	    	if(!wrapper)
-		    	doInnerTag();
-	    	else
-	    		doWrapperTag();
+    		tagComponent.applyTemplate();
     	}
 	    catch(ThemeException e) {
 	    	throw new JspException(e);
 	    }
     }
-	
-    protected void doWrapperTag() throws JspException, IOException {
-    	
-		Map<String, Object> vars    = new HashMap<String, Object>();
-		Writer out                  = getOut();
-		String template             = getWrapperTemplate();
-    	Theme theme                   = getTheme();
-    	String packageName          = getThemePackage();
-		
-		vars.put("content",	new TemplateVarParser(getTemplate() == null? getDefaultTemplate() : getTemplate(), packageName, this, theme));
-		
-		beforeApplyTemplate(template, vars, out);
 
-    	Object oldParent = getParentTag();
-    	setParentTag(this);
+    public void setJspContext(JspContext pc) {
     	
-		applyTemplate(template, vars, out);
+    	super.setJspContext(pc);
     	
-		setParentTag(oldParent);
-		
-		afterApplyTemplate(template, vars, out);
-		
-    }
-    
-    protected void doInnerTag() throws JspException, IOException {
-
-    	setProperty(getClass().getName() + ":CONTEXT", this);
-    	
-		Map<String, Object> vars = new HashMap<String, Object>();
-		Writer out               = getOut();
-    	String template          = getTemplate() == null? getDefaultTemplate() : getTemplate();
-    	
-		beforeApplyTemplate(template, vars, out);
-
-    	Object oldParent = getParentTag();
-    	setParentTag(this);
-		
-    	applyTemplate(template, vars, out);
-    	
-    	setParentTag(oldParent);
-		afterApplyTemplate(template, vars, out);
-		
-    	setProperty(getClass().getName() + ":CONTEXT", null);    	
-    	
-    }
-    
-    protected Writer getOut() {
-    	return getJspContext().getOut();
-    }
-    
-    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
-    }
-    
-    protected void afterApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
-    }
-    
-    protected void applyTemplate(String template, Map<String, Object> vars, Writer out){
-    	getTheme().applyTagTemplate(template, getThemePackage(), this, vars, out);
-    }
-    
-	public Theme getTheme() {
-		ThemeRegistry themeRegistry = EntityContextPlugin.getEntity(ThemeRegistry.class);
-    	return themeRegistry.getCurrentTheme();
-	}
-	
-	public String getThemePackage() {
-    	return (String)getProperty(SetTemplatePackageTag.PACKAGE_NAME);
-	}
-    
-    public void setParentTag(Object tag) {
-    	setProperty(PARENT_TAG, tag);
-    }
-    
-    public Object getParentTag() {
-    	return getProperty(PARENT_TAG);
-    }
-    
-    protected String getWrapperTemplate() {
-    	return WRAPPER_TEMPLATE;
-    }
-    
-    protected abstract String getDefaultTemplate();
-    
-	private String getAttrList(Map<String, AttributeParser> attributeParsers, 
-			Set<String> emptyAttributes, Set<String> defaultAttributes) {
-
-		StringBuilder sb = new StringBuilder();
-		
-		BeanInstance i = 
-				AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
-	            public BeanInstance run() {
-	                return new BeanInstance(AbstractSimpleComponent.this);
-	            }
-	        });
-		
-		//BeanInstance i = new BeanInstance(this);
-		
-		for(String p: defaultAttributes) {
-			
-			Object v;
-			
-			try{
-				final String k = p;
-				v = 
-						AccessController.doPrivileged(new PrivilegedAction<Object>() {
-			            public Object run() {
-			                try {
-								return i.get(k);
-							} catch (IllegalAccessException e) {
-								throw new DoPrivilegedException(e);
-							} catch (IllegalArgumentException e) {
-								throw new DoPrivilegedException(e);
-							} catch (InvocationTargetException e) {
-								throw new DoPrivilegedException(e);
-							}
-			            }
-			        });
-				//v = i.get(p);
-			}
-			catch(Throwable ex) {
-				throw new ThemeException("fail to get property " + this.getClass().getName() + "." + p, ex);
-			}
-			
-			if(v == null || emptyAttributes.contains(p)) {
-				continue;
-			}
-			
-			if(sb.length() != 0) {
-				sb.append(" ");
-			}
-			
-			AttributeParser parser = attributeParsers.get(p);
-			
-			p = parser == null? p : parser.toName(p, this);
-			v = parser == null? v : parser.toValue(v, this);
-			
-			if(p != null) {
-				sb.append(p).append("=\"").append(v).append("\"");
-			}
-			else {
-				sb.append(v);
-			}
-			
-		}
-		
-		if(this.extAttrs != null) {
-			
-			if(sb.length() != 0) {
-				sb.append(" ");
-			}
-			
-			sb.append(this.extAttrs);
-		}
-		
-		return sb.toString();
-			
-	}
-	
-	protected void beforePrepareVars(Map<String, Object> vars) {
-	}
-	
-	protected void afterPrepareVars(Map<String, Object> vars) {
-	}
-	
-	public Map<String, Object> prepareVars(Map<String, AttributeParser> propertyParsers, Set<String> defaultProperties,
-			Map<String, AttributeParser> attributeParsers, Set<String> emptyAttributes, Set<String> defaultAttributes) {
-		
-		Map<String, Object> map              = new HashMap<String, Object>();
-		BeanInstance i = 
-				AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
-	            public BeanInstance run() {
-	                return new BeanInstance(AbstractSimpleComponent.this);
-	            }
-	        });
-		//BeanInstance i                       = new BeanInstance(this);
-		
-		this.beforePrepareVars(map);
-		
-		map.put("attr", getAttrList(attributeParsers, emptyAttributes, defaultAttributes));
-		
-		for(String p: defaultProperties) {
-			
-			Object v;
-			
-			try{
-				final String k = p;
-				v = 
-						AccessController.doPrivileged(new PrivilegedAction<Object>() {
-			            public Object run() {
-			                try {
-								return i.get(k);
-							} catch (IllegalAccessException e) {
-								throw new DoPrivilegedException(e);
-							} catch (IllegalArgumentException e) {
-								throw new DoPrivilegedException(e);
-							} catch (InvocationTargetException e) {
-								throw new DoPrivilegedException(e);
-							}
-			            }
-			        });
-				//v = i.get(p);
-			}
-			catch(Throwable ex) {
-				throw new ThemeException("fail to get property " + this.getClass().getName() + "." + p, ex);
-			}
-			
-			AttributeParser parser = propertyParsers.get(p);
-			
-			p = parser == null? p : parser.toName(p, this);
-			v = parser == null? v : parser.toValue(v, this);
-			
-			if(p != null && !p.isEmpty()) {
-				map.put(p, v);
-			}
-		}
-		
-		this.afterPrepareVars(map);
-		
-		return map;
-	}
-	
-    protected Object setProperty(String name, Object newValue) {
-		Object old = this.getJspContext().getAttribute(name);
-		this.getJspContext().setAttribute(name, newValue);
-    	return old;
+    	tagComponent = createTagComponent();
+    	tagComponent.setTag(this);
+    	tagComponent.setPageContext((PageContext)pc);
+    	tagComponent.setOut(pc.getOut());
     }
 
-    protected Object getProperty(String name) {
-    	return getProperty(name, null);
+    public TagComponent getTagComponent() {
+		return tagComponent;
+	}
+
+	public Object setProperty(String name, Object newValue) {
+    	return tagComponent.setProperty(name, newValue);
+    }
+
+    public Object getProperty(String name) {
+    	return tagComponent.getProperty(name);
     }
     
-    protected Object getProperty(String name, Object defaultValue) {
-		Object val = this.getJspContext().getAttribute(name);
-    	return val == null? defaultValue : val;
+    public Object getProperty(String name, Object defaultValue) {
+    	return tagComponent.getProperty(name, defaultValue);
     }
     
-    protected String getRequestPath() {
-    	
-    	PageContext pc = (PageContext)super.getJspContext();
-    	HttpServletRequest request = (HttpServletRequest)pc.getRequest();
-    	
-		String include = (String) request.getAttribute("javax.servlet.include.request_uri");
-		
-		if(include != null) {
-			return parseRequestId(
-					include, 
-					(String)request.getAttribute("javax.servlet.include.context_path"));
-		}
-		else {
-			return parseRequestId(
-					request.getRequestURI(), 
-					request.getContextPath());
-		}
-    	
+    public String getDefaultTemplate() {
+    	throw new UnsupportedOperationException();
     }
     
-    protected String parseRequestId(String path, String contextPath){
-        return path.substring( contextPath.length(), path.length() );
+    protected TagComponent createTagComponent() {
+    	return new TagComponent();
     }
+    
+    protected Object getParentTag() {
+    	return tagComponent.getParentTag();
+    }
+    
+    protected VarParser toVarParser() {
+    	return new JspFragmentVarParser(getJspBody());
+	}
+	
+	public VarParser getContent() {
+		return content == null? toVarParser() : content;
+	}
+
+	public void setContent(VarParser content) {
+		this.content = content;
+	}
+
+	public boolean isWrapper() {
+		return wrapper;
+	}
+
+	public void setWrapper(boolean wrapper) {
+		this.wrapper = wrapper;
+	}
     
 	public String getExtAttrs() {
 		return extAttrs;
@@ -335,55 +110,8 @@ public abstract class AbstractSimpleComponent
 	}
 
 	public String getId() {
-		
-		if(id == null) {
-			PageContext pageContext    = (PageContext) getJspContext();  
-			HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
-			
-			Integer acc = (Integer) request.getAttribute(ID_COUNT);
-			request.setAttribute(ID_COUNT, acc = acc == null? 0 : acc.intValue() + 1);
-			
-			return id = getClass().getSimpleName().toLowerCase() + String.valueOf(acc);
-		}
-		
 		return id;
 	}
-
-	public VarParser toVarParser() {
-		return new VarParser() {
-			
-			@Override
-			public String parse() throws IOException {
-				return null;
-			}
-			
-			@Override
-			public void parse(Writer writter) throws IOException {
-				try {
-					JspFragment body = getJspBody();
-					if(body != null) {
-						body.invoke(writter);
-					}
-				}
-				catch(Throwable e) {
-					throw new IllegalStateException(e);
-				}
-			}
-		};
-	}
-	/*
-	public void initTag(SimpleTagSupport tag) {
-		tag.setJspBody(super.getJspBody());
-		tag.setJspContext(super.getJspContext());
-		tag.setParent(this);
-	}
-	
-	public void initTag(BodyTagSupport tag) {
-		PageContext pageContext = (PageContext) getJspContext();
-		tag.setBodyContent(new BodyContentImpl(new JspWriterImpl(pageContext.getResponse())));
-		tag.setPageContext(pageContext);
-	}
-	*/
 
 	@TagAttribute
 	public void setId(String id) {
@@ -397,14 +125,6 @@ public abstract class AbstractSimpleComponent
 	@TagAttribute
 	public void setTemplate(String template) {
 		this.template = template;
-	}
-
-	public boolean isWrapper() {
-		return wrapper;
-	}
-
-	public void setWrapper(boolean wrapper) {
-		this.wrapper = wrapper;
 	}
 
 	public String getClassStyle() {

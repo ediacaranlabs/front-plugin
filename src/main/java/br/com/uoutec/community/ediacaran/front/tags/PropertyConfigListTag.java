@@ -29,12 +29,30 @@ public class PropertyConfigListTag extends AbstractSimpleComponent {
 	
 	private String name;
 	
-	private JspFragmentVarParser content;
-	
 	public PropertyConfigListTag() {
 	}
 	
-    protected String getDefaultTemplate() {
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		public void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
+    			Object cp = super.getParentTag();
+    			if(cp != null) {
+    				if(cp instanceof AbstractSimpleComponent) {
+    					parentID = ((AbstractSimpleComponent)cp).getId();
+    				}
+    				else
+    				if(cp instanceof AbstractPanelComponent) {
+    					parentID = ((AbstractPanelComponent)cp).getId();
+    				}
+    			}
+    			
+    		}
+    		
+    	};
+    }
+	
+    public String getDefaultTemplate() {
     	
     	if(!(super.getParentTag() instanceof PropertyConfigTag || super.getParentTag() instanceof PropertyConfigListTag)) {
     		return TEMPLATE;
@@ -46,30 +64,6 @@ public class PropertyConfigListTag extends AbstractSimpleComponent {
 
 		return TEMPLATE_NAME;
     }
-
-	public void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
-		this.content = new JspFragmentVarParser(getJspBody());
-		
-		Object cp = super.getParentTag();
-		if(cp != null) {
-			if(cp instanceof AbstractSimpleComponent) {
-				parentID = ((AbstractSimpleComponent)cp).getId();
-			}
-			else
-			if(cp instanceof AbstractPanelComponent) {
-				parentID = ((AbstractPanelComponent)cp).getId();
-			}
-		}
-		
-	}
-    
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
-	}
 
 	public String getName() {
 		return name;

@@ -27,23 +27,23 @@ public class LandingSectionTag  extends AbstractSimpleComponent {
 	
 	private String align;
 	
-	private JspFragmentVarParser content;
-	
 	public LandingSectionTag() {
 	}
 	
-	public void afterPrepareVars(Map<String, Object> vars) {
-		vars.put("align-left",  "right".equals(align)? " col-lg-offset-1 col-sm-push-6" : "" );
-		vars.put("align-right", "right".equals(align)? " col-lg-offset-2" : "col-sm-pull-6" );
-	}
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		public void afterPrepareVars(Map<String, Object> vars) {
+    			vars.put("align-left",  "right".equals(align)? " col-lg-offset-1 col-sm-push-6" : "" );
+    			vars.put("align-right", "right".equals(align)? " col-lg-offset-2" : "col-sm-pull-6" );
+    		}
+    		
+    	};
+    }
 	
-    protected String getDefaultTemplate() {
+    public String getDefaultTemplate() {
     	return TEMPLATE;
     }
-
-	public void beforePrepareVars(Map<String, Object> vars) {
-		this.content = new JspFragmentVarParser(getJspBody());
-	}
 
 	public String getName() {
 		return name;
@@ -79,14 +79,6 @@ public class LandingSectionTag  extends AbstractSimpleComponent {
 	@TagAttribute
 	public void setAlign(String align) {
 		this.align = align;
-	}
-
-	public JspFragmentVarParser getContent() {
-		return content;
-	}
-
-	public void setContent(JspFragmentVarParser content) {
-		this.content = content;
 	}
 
 }

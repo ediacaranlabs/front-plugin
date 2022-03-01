@@ -2,5 +2,5 @@
     {label}
   </button>
   <div class="dropdown-menu">
-  	{itens}
+  	{content}
   </div>
