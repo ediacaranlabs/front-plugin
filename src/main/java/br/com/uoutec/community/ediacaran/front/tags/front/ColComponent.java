@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.front.tags.ColTag;
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
@@ -38,12 +39,11 @@ public class ColComponent extends AbstractComponent {
 				put("size", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
-						ColTag c = (ColTag)component;
+					public Object toValue(Object value, ComponentProperties component) {
 						
-						Integer size   = c.getSize();
-						Integer offset = c.getOffset();
-						Integer order  = c.getOrder();
+						Integer size   = (Integer)component.getProperty("size");
+						Integer offset = (Integer)component.getProperty("offset");
+						Integer order  = (Integer)component.getProperty("order");
 						
 						String sizeStyle   = size == null?   "col" : "col-sm-12 col-md-12 " + "col-lg-" + size + " col-xl-" + size;
 						String offsetStyle = offset == null? ""    : "offset-lg-" + offset + " offset-xl-" + offset;
