@@ -1,6 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-public interface TagComponenetInfo {
+public interface ComponentInfo {
 
 	String getExtAttrs();
 	

@@ -13,7 +13,7 @@ import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 
 public abstract class AbstractSimpleComponent 
 	extends SimpleTagSupport
-	implements TagComponenetInfo {
+	implements ComponentInfo {
 
 	private	String id;
 
@@ -47,7 +47,7 @@ public abstract class AbstractSimpleComponent
     	super.setJspContext(pc);
     	
     	tagComponent = createTagComponent();
-    	tagComponent.setTag(this);
+    	tagComponent.setComponentInfo(this);
     	tagComponent.setPageContext((PageContext)pc);
     	tagComponent.setOut(pc.getOut());
     }

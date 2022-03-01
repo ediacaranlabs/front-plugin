@@ -7,6 +7,7 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,10 +39,10 @@ public class TagComponent
 	
 	private Writer out;
 	
-	private TagComponenetInfo tag;
+	private ComponentInfo componentInfo;
 	
 	protected void applyTemplate() throws ThemeException, IOException{
-    	if(!tag.isWrapper()) {
+    	if(!componentInfo.isWrapper()) {
     		applySimpleTemplate();
     	}
     	else {
@@ -57,7 +58,7 @@ public class TagComponent
     	Theme theme              = getTheme();
     	String packageName       = getPackageTheme();
 		
-		vars.put("content",	new TemplateVarParser(tag.getTemplate() == null? getDefaultTemplate() : tag.getTemplate(), packageName, this, theme));
+		vars.put("content",	new TemplateVarParser(componentInfo.getTemplate() == null? getDefaultTemplate() : componentInfo.getTemplate(), packageName, this, theme));
 		
 		beforeApplyTemplate(template, vars, out);
 
@@ -74,10 +75,10 @@ public class TagComponent
 
     protected void applySimpleTemplate() throws IOException {
 
-    	setProperty(getClass().getName() + ":CONTEXT", tag);
+    	setProperty(getClass().getName() + ":CONTEXT", componentInfo);
     	
     	Writer out               = getOut();
-    	String template          = tag.getTemplate() == null? getDefaultTemplate() : tag.getTemplate();
+    	String template          = componentInfo.getTemplate() == null? getDefaultTemplate() : componentInfo.getTemplate();
     	
 		beforeApplyTemplate(template, null, out);
 
@@ -94,7 +95,7 @@ public class TagComponent
     }
     
     public String getDefaultTemplate() {
-		return tag.getDefaultTemplate();
+		return componentInfo.getDefaultTemplate();
 	}
 
 	public PageContext getPageContext() {
@@ -113,12 +114,12 @@ public class TagComponent
 		this.out = out;
 	}
 
-	public Object getTag() {
-		return tag;
+	public Object getComponentInfo() {
+		return componentInfo;
 	}
 
-	public void setTag(TagComponenetInfo tag) {
-		this.tag = tag;
+	public void setComponentInfo(ComponentInfo value) {
+		this.componentInfo = value;
 	}
 
 	protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
@@ -151,6 +152,7 @@ public class TagComponent
 	protected void afterPrepareVars(Map<String, Object> vars) {
 	}
 	
+	/*
 	private String getAttrList(Map<String, AttributeParser> attributeParsers, 
 			Set<String> emptyAttributes, Set<String> defaultAttributes) {
 		try {
@@ -252,7 +254,6 @@ public class TagComponent
 							}
 			            }
 			        });
-				//Object v = i.get(p);
 				
 				AttributeParser parser = propertyParsers.get(p);
 				
@@ -275,6 +276,136 @@ public class TagComponent
 		catch(Throwable e) {
 			throw new IllegalStateException(e);
 		}
+	}
+	*/
+	
+	private String getAttrList(Map<String, AttributeParser> attributeParsers, 
+			Set<String> emptyAttributes, Set<String> defaultAttributes) {
+		
+		Map<String,Object> vars = getVars(defaultAttributes, emptyAttributes);
+		StringBuilder sb = new StringBuilder();
+		ComponentProperties cp = new ComponentPropertiesImp(this, vars);
+		
+		for(Entry<String,Object> e: vars.entrySet()) {
+			
+			String p = e.getKey();
+			Object v = e.getValue(); 
+			
+			
+			if(v == null || emptyAttributes.contains(p)) {
+				continue;
+			}
+			
+			if(sb.length() != 0) {
+				sb.append(" ");
+			}
+			
+			AttributeParser parser = attributeParsers.get(p);
+			
+			if(parser != null) {
+				p = parser.toName(p, cp);
+				v = parser.toValue(v, cp);
+			}
+			
+			if(p != null) {
+				sb.append(p).append("=\"").append(v).append("\"");
+			}
+			else {
+				sb.append(v);
+			}
+			
+		}
+		
+		if(componentInfo.getExtAttrs() != null) {
+			
+			if(sb.length() != 0) {
+				sb.append(" ");
+			}
+			
+			sb.append(componentInfo.getExtAttrs());
+		}
+		
+		return sb.toString();
+		
+	}
+	
+	public Map<String, Object> prepareVars(Map<String, AttributeParser> propertyParsers, Set<String> defaultProperties,
+			Map<String, AttributeParser> attributeParsers, Set<String> emptyAttributes, Set<String> defaultAttributes) {
+		
+		Map<String,Object> result = new HashMap<String,Object>();
+		
+		this.beforePrepareVars(result);
+		
+		Map<String,Object> vars = getVars(defaultProperties, null);
+		ComponentProperties cp = new ComponentPropertiesImp(this, vars);
+
+		result.put("attr", getAttrList(attributeParsers, emptyAttributes, defaultAttributes));
+		
+		for(Entry<String,Object> e: vars.entrySet()) {
+			
+			String p = e.getKey();
+			Object v = e.getValue(); 
+			
+			AttributeParser parser = propertyParsers.get(p);
+			
+			if(parser != null) {
+				p = parser.toName(p, cp);
+				v = parser.toValue(v, cp);
+			}
+			
+			if(p != null && !p.isEmpty()) {
+				result.put(p, v);
+			}
+			
+		}
+		
+		if(result.get("id") == null) {
+			result.put("id", getId());
+		}
+		
+		this.afterPrepareVars(result);
+		
+		return result;
+	}
+	
+	private Map<String,Object> getVars(Set<String> defaultProperties, Set<String> emptyProperties){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		BeanInstance i = 
+			AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
+            public BeanInstance run() {
+                return new BeanInstance(componentInfo);
+            }
+        });
+
+		for(String p: defaultProperties) {
+			final String k = p;
+			
+			Object v = 
+					AccessController.doPrivileged(new PrivilegedAction<Object>() {
+		            public Object run() {
+		                try {
+							return i.get(k);
+						} catch (IllegalAccessException e) {
+							throw new DoPrivilegedException(e);
+						} catch (IllegalArgumentException e) {
+							throw new DoPrivilegedException(e);
+						} catch (InvocationTargetException e) {
+							throw new DoPrivilegedException(e);
+						}
+		            }
+		        });
+			
+			
+			if(emptyProperties != null && emptyProperties.contains(p)) {
+				continue;
+			}
+			
+			map.put(p, v);
+		}
+		
+		return map;
 	}
 	
 	public Theme getTheme() {
@@ -330,7 +461,7 @@ public class TagComponent
 		Integer acc = (Integer) request.getAttribute(ID_COUNT);
 		request.setAttribute(ID_COUNT, acc = acc == null? 0 : acc.intValue() + 1);
 		
-		return tag.getClass().getSimpleName().toLowerCase() + String.valueOf(acc);
+		return componentInfo.getClass().getSimpleName().toLowerCase() + String.valueOf(acc);
 	}
 
 }
