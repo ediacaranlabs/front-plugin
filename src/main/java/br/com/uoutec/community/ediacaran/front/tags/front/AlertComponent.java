@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
@@ -38,7 +39,7 @@ public class AlertComponent extends AbstractComponent {
 				put("style", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return value == null? "alert-warning" : "alert-" + value;
 					}
 				});

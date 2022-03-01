@@ -1,19 +1,15 @@
 package br.com.uoutec.community.ediacaran.front.tags.front;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import javax.servlet.jsp.JspException;
 
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 
 public class CarouselComponent extends AbstractComponent {
 
 	
+	@SuppressWarnings("serial")
 	public void loadConfiguration() {
 
 		super.template = "/default_template/front/components/carousel.tmp";

@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
@@ -42,7 +43,7 @@ public class DropdownWrapperComponent  extends AbstractComponent {
 				put("style", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return " btn-" + value;
 					}
 					
@@ -51,7 +52,7 @@ public class DropdownWrapperComponent  extends AbstractComponent {
 				put("size", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return " btn-" + value;
 					}
 					
@@ -60,7 +61,7 @@ public class DropdownWrapperComponent  extends AbstractComponent {
 				put("variation", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return " drop" + value;
 					}
 					

@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.TagComponent;
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.front.theme.EmptyVarsBuilder;
@@ -38,7 +38,7 @@ public class TabsHeaderItemComponent extends AbstractComponent {
 				put("active", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return Boolean.TRUE.equals(value)? "active" : "";
 					}
 				});
@@ -46,10 +46,9 @@ public class TabsHeaderItemComponent extends AbstractComponent {
 				put("icon", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
-						TagComponent tag = (TagComponent)component;
-						return value == null? "" : new TemplateVarParser("/components/icon", tag.getPackageTheme(), 
-								new EmptyVarsBuilder(), tag.getTheme()).put("icon", value);
+					public Object toValue(Object value, ComponentProperties component) {
+						return value == null? "" : new TemplateVarParser("/components/icon", component.getPackageTheme(), 
+								new EmptyVarsBuilder(), component.getTheme()).put("icon", value);
 					}
 				});
 				

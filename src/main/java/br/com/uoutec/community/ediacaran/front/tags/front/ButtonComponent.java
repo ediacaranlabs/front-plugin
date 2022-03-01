@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.front.tags.ButtonTag;
-import br.com.uoutec.community.ediacaran.front.tags.TagComponent;
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.front.theme.EmptyVarsBuilder;
@@ -35,7 +35,7 @@ public class ButtonComponent extends ComponentFormComponent {
 			put("actionType", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value, Object component) {
+				public String toName(String value, ComponentProperties component) {
 					return value == null? null : "type";
 				}
 			});
@@ -43,7 +43,7 @@ public class ButtonComponent extends ComponentFormComponent {
 			put("action", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value, Object component) {
+				public String toName(String value, ComponentProperties component) {
 					return value == null? null : "formaction";
 				}
 			});
@@ -51,7 +51,7 @@ public class ButtonComponent extends ComponentFormComponent {
 			put("ctype", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value, Object component) {
+				public String toName(String value, ComponentProperties component) {
 					return value == null? null : "formenctype";
 				}
 			});
@@ -59,7 +59,7 @@ public class ButtonComponent extends ComponentFormComponent {
 			put("method", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value, Object component) {
+				public String toName(String value, ComponentProperties component) {
 					return value == null? null : "formmethod";
 				}
 			});
@@ -67,7 +67,7 @@ public class ButtonComponent extends ComponentFormComponent {
 			put("target", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value, Object component) {
+				public String toName(String value, ComponentProperties component) {
 					return value == null? null : "formtarget";
 				}
 			});
@@ -94,7 +94,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				put("size", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return value == null? "" : new String(" btn-").concat(String.valueOf(value));
 					}
 				});
@@ -102,7 +102,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				put("type", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						Boolean outline = ((ButtonTag)component).getOutline();
 						return new String(" btn-").concat(outline != null && outline ? "outline-" : "").concat(value == null? "primary" : String.valueOf(value));
 					}
@@ -111,7 +111,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				put("block", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return value == null? "" : (Boolean)value? " btn-block" : "";
 					}
 				});
@@ -119,7 +119,7 @@ public class ButtonComponent extends ComponentFormComponent {
 				put("enabled", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						Boolean enabled = ((ButtonTag)component).getEnabled();
 						return enabled != null && !enabled? " disabled" : "";
 					}
@@ -128,10 +128,9 @@ public class ButtonComponent extends ComponentFormComponent {
 				put("icon", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
-						TagComponent tag = (TagComponent)component;
-						return value == null? "" : new TemplateVarParser("/components/icon", tag.getPackageTheme(), 
-								new EmptyVarsBuilder(), tag.getTheme()).put("icon", value);
+					public Object toValue(Object value, ComponentProperties component) {
+						return value == null? "" : new TemplateVarParser("/components/icon", component.getPackageTheme(), 
+								new EmptyVarsBuilder(), component.getTheme()).put("icon", value);
 					}
 				});
 				

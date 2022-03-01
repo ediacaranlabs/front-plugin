@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
@@ -28,12 +29,12 @@ public class OptionComponent extends ComponentFormComponent {
 			put("enabled", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value, Object component) {
+				public String toName(String value, ComponentProperties component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value, Object component) {
+				public Object toValue(Object value, ComponentProperties component) {
 					return value != null && !(Boolean)value? "" : "disabled";
 				}
 				
@@ -42,12 +43,12 @@ public class OptionComponent extends ComponentFormComponent {
 			put("selected", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value, Object component) {
+				public String toName(String value, ComponentProperties component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value, Object component) {
+				public Object toValue(Object value, ComponentProperties component) {
 					return value != null && (Boolean)value? "selected" : "";
 				}
 				

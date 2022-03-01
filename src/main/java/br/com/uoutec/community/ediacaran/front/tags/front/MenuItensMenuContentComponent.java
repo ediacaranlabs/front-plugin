@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
@@ -34,7 +35,7 @@ public class MenuItensMenuContentComponent  extends AbstractComponent {
 				put("menuAlign", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						
 						if(value == null) {
 							return null;

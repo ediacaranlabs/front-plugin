@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.TextfieldTag;
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
@@ -36,7 +36,7 @@ public class TextfieldComponent extends ComponentFormComponent {
 			put("autocomplete", new AttributeParserImp() {
 				
 				@Override
-				public Object toValue(Object value, Object component) {
+				public Object toValue(Object value, ComponentProperties component) {
 					return value != null && (Boolean)value? "on" : "off";
 				}
 			});
@@ -60,9 +60,7 @@ public class TextfieldComponent extends ComponentFormComponent {
 				put("enabled", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
-						Boolean enabled = ((TextfieldTag)component).getEnabled();
-						//return enabled != null && !enabled? " uneditable-input" : ";
+					public Object toValue(Object value, ComponentProperties component) {
 						return "";
 					}
 					
@@ -71,7 +69,7 @@ public class TextfieldComponent extends ComponentFormComponent {
 				put("label", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return value;
 					}
 					
@@ -80,7 +78,7 @@ public class TextfieldComponent extends ComponentFormComponent {
 				put("size", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return value != null? new String("form-control-").concat((String)value) : "";
 					}
 					

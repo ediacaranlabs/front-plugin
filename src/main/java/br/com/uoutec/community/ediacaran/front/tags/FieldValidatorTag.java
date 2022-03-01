@@ -111,27 +111,33 @@ public class FieldValidatorTag extends AbstractPanelComponent {
     	}
     }
     
-	protected void beforePrepareVars(Map<String, Object> vars) {
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		protected void beforePrepareVars(Map<String, Object> vars) {
 
-		String packageName = getPackageTheme();
-		Theme theme = getTheme();
-		
-		TemplateListVarParser rules = new TemplateListVarParser(RULE_TEMPLATE, packageName, this, theme);
-		
-		for(ValidatorEntity ve: this.validator) {
-			
-			TemplateListVarParser params = new TemplateListVarParser(RULEPARAM_TEMPLATE, packageName, this, theme);
-			
-			for(ValidatorParamEntity p: ve.params) {
-				params.add(p.getName(), p.getValue());
-			}
-			
-			rules.add(ve.getName(), ve.getMessage(), params);
-		}
-		
-		vars.put("form", form);
-		vars.put("field", field);
-		vars.put("rules", rules);
+    			String packageName = getPackageTheme();
+    			Theme theme = getTheme();
+    			
+    			TemplateListVarParser rules = new TemplateListVarParser(RULE_TEMPLATE, packageName, this, theme);
+    			
+    			for(ValidatorEntity ve: validator) {
+    				
+    				TemplateListVarParser params = new TemplateListVarParser(RULEPARAM_TEMPLATE, packageName, this, theme);
+    				
+    				for(ValidatorParamEntity p: ve.params) {
+    					params.add(p.getName(), p.getValue());
+    				}
+    				
+    				rules.add(ve.getName(), ve.getMessage(), params);
+    			}
+    			
+    			vars.put("form", form);
+    			vars.put("field", field);
+    			vars.put("rules", rules);
+    	    }
+    		
+    	};
     }
     
     public String getDefaultTemplate() {

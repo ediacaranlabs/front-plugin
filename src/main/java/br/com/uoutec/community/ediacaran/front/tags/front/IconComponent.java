@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
@@ -39,7 +40,7 @@ public class IconComponent extends AbstractComponent {
 				put("bgSize", new AttributeParserImp() {
 					
 					@Override
-					public String toName(String value, Object component) {
+					public String toName(String value, ComponentProperties component) {
 						return "bg-size";
 					}
 					
@@ -48,7 +49,7 @@ public class IconComponent extends AbstractComponent {
 				put("iconSize", new AttributeParserImp() {
 					
 					@Override
-					public String toName(String value, Object component) {
+					public String toName(String value, ComponentProperties component) {
 						return "icon-size";
 					}
 					

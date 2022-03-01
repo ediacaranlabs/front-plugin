@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.TextareaTag;
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
@@ -39,7 +39,7 @@ public class TextareaComponent extends ComponentFormComponent {
 			put("autocomplete", new AttributeParserImp() {
 				
 				@Override
-				public Object toValue(Object value, Object component) {
+				public Object toValue(Object value, ComponentProperties component) {
 					return value != null && (Boolean)value? "on" : "off";
 				}
 			});
@@ -47,12 +47,12 @@ public class TextareaComponent extends ComponentFormComponent {
 			put("required", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value, Object component) {
+				public String toName(String value, ComponentProperties component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value, Object component) {
+				public Object toValue(Object value, ComponentProperties component) {
 					return value != null && (Boolean)value? "readonly" : "";
 				}
 				
@@ -75,9 +75,7 @@ public class TextareaComponent extends ComponentFormComponent {
 				put("enabled", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
-						Boolean enabled = ((TextareaTag)component).getEnabled();
-						//return enabled != null && !enabled? " uneditable-input" : "";
+					public Object toValue(Object value, ComponentProperties component) {
 						return "";
 					}
 					

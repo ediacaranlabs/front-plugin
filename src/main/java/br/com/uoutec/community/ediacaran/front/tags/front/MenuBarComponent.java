@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
@@ -40,7 +41,7 @@ public class MenuBarComponent  extends AbstractComponent {
 				put("style", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return value == null? null : "navbar-" + value;
 					}
 				});
@@ -48,7 +49,7 @@ public class MenuBarComponent  extends AbstractComponent {
 				put("background", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return value == null? null : "bg-" + value;
 					}
 				});
@@ -56,7 +57,7 @@ public class MenuBarComponent  extends AbstractComponent {
 				put("position", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						
 						if(value == null) {
 							return null;
@@ -77,7 +78,7 @@ public class MenuBarComponent  extends AbstractComponent {
 				put("expand", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return value == null? null : "navbar-expand-" + value;
 					}
 					
@@ -86,7 +87,7 @@ public class MenuBarComponent  extends AbstractComponent {
 				put("sidebar", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return value == null? "" : "sidebar";
 					}
 					

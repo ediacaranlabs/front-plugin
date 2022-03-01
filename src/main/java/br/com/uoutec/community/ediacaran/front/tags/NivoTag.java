@@ -56,13 +56,19 @@ public class NivoTag extends AbstractPanelComponent {
     	return super.doEndTag();
     }
 	
-	public void beforePrepareVars(Map<String, Object> vars) {
-		String packageName = getPackageTheme();
-		Theme theme = getTheme();
-		vars.put("images", new TemplateListVarParser(NIVO_IMAGE, packageName, this, theme, images));
-		vars.put("captions", new TemplateListVarParser(NIVO_CAPTION, packageName, this, theme, caption));
-	}
-	
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    		public void beforePrepareVars(Map<String, Object> vars) {
+    			String packageName = getPackageTheme();
+    			Theme theme = getTheme();
+    			vars.put("images", new TemplateListVarParser(NIVO_IMAGE, packageName, this, theme, images));
+    			vars.put("captions", new TemplateListVarParser(NIVO_CAPTION, packageName, this, theme, caption));
+    		}
+    		
+    	};
+    }
+    
     public String getDefaultTemplate() {
     	return TEMPLATE;
     }

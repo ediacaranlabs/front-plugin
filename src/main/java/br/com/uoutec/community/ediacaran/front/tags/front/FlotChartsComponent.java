@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
-import br.com.uoutec.community.ediacaran.front.tags.FlotChartsTag;
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
@@ -43,13 +43,12 @@ public class FlotChartsComponent extends AbstractComponent {
 					put("updateFrequence", new AttributeParserImp() {
 
 						@Override
-						public Object toValue(Object value, Object component) {
-							FlotChartsTag tag = ((FlotChartsTag)component);
+						public Object toValue(Object value, ComponentProperties component) {
 
 							int time = value == null? -1 : (Integer)value;
-							TimeUnit tm = tag.getUpdateFrequenceUnit() == null? 
+							TimeUnit tm = component.getProperty("updateFrequenceUnit") == null? 
 									TimeUnit.SECONDS : 
-									TimeUnit.valueOf(tag.getUpdateFrequenceUnit());
+									TimeUnit.valueOf((String)component.getProperty("updateFrequenceUnit"));
 							
 							return time > 0? tm.toMillis(time) : -1;
 						}

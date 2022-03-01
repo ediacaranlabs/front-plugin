@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
@@ -32,7 +33,7 @@ public class FormComponent extends AbstractComponent {
 			put("acceptCharset", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value, Object component) {
+				public String toName(String value, ComponentProperties component) {
 					return value == null? null : "accept-charset";
 				}
 			});
@@ -40,12 +41,12 @@ public class FormComponent extends AbstractComponent {
 			put("update", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value, Object component) {
+				public String toName(String value, ComponentProperties component) {
 					return "dest-content";
 				}
 				
 				@Override
-				public Object toValue(Object value, Object component) {
+				public Object toValue(Object value, ComponentProperties component) {
 					return value;
 				}
 			});
@@ -64,11 +65,11 @@ public class FormComponent extends AbstractComponent {
 				put("content", new AttributeParserImp() {
 					
 					@Override
-					public String toName(String value, Object component) {
+					public String toName(String value, ComponentProperties component) {
 						return "form-body";
 					}
 					
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return value;
 					}
 					
@@ -77,7 +78,7 @@ public class FormComponent extends AbstractComponent {
 				put("style", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return "inline".equals(value)? "form-inline " : "";
 					}
 				});

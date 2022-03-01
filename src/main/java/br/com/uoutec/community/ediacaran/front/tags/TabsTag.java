@@ -50,8 +50,8 @@ public class TabsTag extends AbstractPanelComponent {
 	
     public int doStartTag() throws JspException {
     	this.index   = 1;
-		this.header  = new TemplateListVarsParser(HEADER_ITEM, getPackageTheme(), getTheme());
-		this.content = new TemplateListVarsParser(CONTENT_ITEM, getPackageTheme(), getTheme());
+		this.header  = new TemplateListVarsParser(HEADER_ITEM, tagComponent.getPackageTheme(), tagComponent.getTheme());
+		this.content = new TemplateListVarsParser(CONTENT_ITEM, tagComponent.getPackageTheme(), tagComponent.getTheme());
         return EVAL_BODY_BUFFERED;
     }
 

@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.TagComponent;
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 import br.com.uoutec.community.ediacaran.front.theme.ComponentVarsBuilder;
@@ -41,14 +41,13 @@ public class TestimonialComponent extends AbstractComponent {
 				put("image", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
-						TagComponent tag = (TagComponent)component;
+					public Object toValue(Object value, ComponentProperties component) {
 						ComponentVarsBuilder cvb = new ComponentVarsBuilder();
 						cvb
 							.put("attr", "src=\"" + value + "\"")
 							.put("style", "rounded-circle");
-						return value == null? null : new TemplateVarParser("/components/image", tag.getPackageTheme(), 
-								cvb, tag.getTheme());
+						return value == null? null : new TemplateVarParser("/components/image", component.getPackageTheme(), 
+								cvb, component.getTheme());
 					}
 				});
 

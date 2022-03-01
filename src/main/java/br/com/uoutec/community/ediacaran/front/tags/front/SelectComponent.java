@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.SelectTag;
+import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
@@ -32,12 +32,12 @@ public class SelectComponent extends ComponentFormComponent {
 			put("required", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value, Object component) {
+				public String toName(String value, ComponentProperties component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value, Object component) {
+				public Object toValue(Object value, ComponentProperties component) {
 					return value != null && (Boolean)value? "required" : "";
 				}
 				
@@ -46,7 +46,7 @@ public class SelectComponent extends ComponentFormComponent {
 			put("sizeList", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value, Object component) {
+				public String toName(String value, ComponentProperties component) {
 					return value == null? null : "size";
 				}
 				
@@ -55,12 +55,12 @@ public class SelectComponent extends ComponentFormComponent {
 			put("multiple", new AttributeParserImp() {
 				
 				@Override
-				public String toName(String value, Object component) {
+				public String toName(String value, ComponentProperties component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value, Object component) {
+				public Object toValue(Object value, ComponentProperties component) {
 					return value != null && (Boolean)value? "multiple" : "";
 				}
 				
@@ -85,9 +85,7 @@ public class SelectComponent extends ComponentFormComponent {
 				put("enabled", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
-						Boolean enabled = ((SelectTag)component).getEnabled();
-						//return enabled != null && !enabled? " uneditable-input" : ";
+					public Object toValue(Object value, ComponentProperties component) {
 						return "";
 					}
 					
@@ -96,7 +94,7 @@ public class SelectComponent extends ComponentFormComponent {
 				put("size", new AttributeParserImp() {
 					
 					@Override
-					public Object toValue(Object value, Object component) {
+					public Object toValue(Object value, ComponentProperties component) {
 						return value != null? new String("form-control-").concat((String)value) : "";
 					}
 					

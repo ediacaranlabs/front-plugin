@@ -41,7 +41,7 @@ public class TagComponent
 	
 	private ComponentInfo componentInfo;
 	
-	protected void applyTemplate() throws ThemeException, IOException{
+	public void applyTemplate() throws ThemeException, IOException{
     	if(!componentInfo.isWrapper()) {
     		applySimpleTemplate();
     	}
@@ -151,133 +151,6 @@ public class TagComponent
 	
 	protected void afterPrepareVars(Map<String, Object> vars) {
 	}
-	
-	/*
-	private String getAttrList(Map<String, AttributeParser> attributeParsers, 
-			Set<String> emptyAttributes, Set<String> defaultAttributes) {
-		try {
-			StringBuilder sb = new StringBuilder();
-			BeanInstance i = 
-					AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
-		            public BeanInstance run() {
-		                return new BeanInstance(tag);
-		            }
-		        });
-			//BeanInstance i = new BeanInstance(this);
-			
-			for(String p: defaultAttributes) {
-				final String k = p;
-				
-				Object v = 
-						AccessController.doPrivileged(new PrivilegedAction<Object>() {
-			            public Object run() {
-			                try {
-								return i.get(k);
-							} catch (IllegalAccessException e) {
-								throw new DoPrivilegedException(e);
-							} catch (IllegalArgumentException e) {
-								throw new DoPrivilegedException(e);
-							} catch (InvocationTargetException e) {
-								throw new DoPrivilegedException(e);
-							}
-			            }
-			        });
-				//Object v = i.get(p);
-				
-				if(v == null || emptyAttributes.contains(p)) {
-					continue;
-				}
-				
-				if(sb.length() != 0) {
-					sb.append(" ");
-				}
-				
-				AttributeParser parser = attributeParsers.get(p);
-				
-				p = parser == null? p : parser.toName(p, this);
-				v = parser == null? v : parser.toValue(v, this);
-				
-				if(p != null) {
-					sb.append(p).append("=\"").append(v).append("\"");
-				}
-				else {
-					sb.append(v);
-				}
-				
-			}
-			
-			if(tag.getExtAttrs() != null) {
-				
-				if(sb.length() != 0) {
-					sb.append(" ");
-				}
-				
-				sb.append(tag.getExtAttrs());
-			}
-			
-			return sb.toString();
-		}
-		catch(Throwable e) {
-			throw new IllegalStateException(e);
-		}
-	}
-	
-	public Map<String, Object> prepareVars(Map<String, AttributeParser> propertyParsers, Set<String> defaultProperties,
-			Map<String, AttributeParser> attributeParsers, Set<String> emptyAttributes, Set<String> defaultAttributes) {
-		try {
-			Map<String, Object> map              = new HashMap<String, Object>();
-			BeanInstance i = 
-					AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
-		            public BeanInstance run() {
-		                return new BeanInstance(tag);
-		            }
-		        });
-			//BeanInstance i = new BeanInstance(AbstractPanelComponent.this);
-			this.beforePrepareVars(map);
-			
-			map.put("attr", getAttrList(attributeParsers, emptyAttributes, defaultAttributes));
-
-			for(String p: defaultProperties) {
-				final String k = p;
-				
-				Object v = 
-						AccessController.doPrivileged(new PrivilegedAction<Object>() {
-			            public Object run() {
-			                try {
-								return i.get(k);
-							} catch (IllegalAccessException e) {
-								throw new DoPrivilegedException(e);
-							} catch (IllegalArgumentException e) {
-								throw new DoPrivilegedException(e);
-							} catch (InvocationTargetException e) {
-								throw new DoPrivilegedException(e);
-							}
-			            }
-			        });
-				
-				AttributeParser parser = propertyParsers.get(p);
-				
-				p = parser == null? p : parser.toName(p, this);
-				v = parser == null? v : parser.toValue(v, this);
-				
-				if(p != null && !p.isEmpty()) {
-					map.put(p, v);
-				}
-			}
-			
-			if(map.get("id") == null) {
-				map.put("id", getId());
-			}
-			
-			this.afterPrepareVars(map);
-			
-			return map;
-		}
-		catch(Throwable e) {
-			throw new IllegalStateException(e);
-		}
-	}
-	*/
 	
 	private String getAttrList(Map<String, AttributeParser> attributeParsers, 
 			Set<String> emptyAttributes, Set<String> defaultAttributes) {
