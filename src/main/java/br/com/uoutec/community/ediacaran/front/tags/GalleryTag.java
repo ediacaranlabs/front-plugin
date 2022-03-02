@@ -40,7 +40,7 @@ public class GalleryTag  extends AbstractSimpleComponent {
     		
     	    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     	    		Writer out) throws IOException {
-    	    	setProperty(PARENT, this);
+    	    	setProperty(PARENT, GalleryTag.this);
     	    }
     	    
     	    protected void afterApplyTemplate(String template, Map<String,Object> vars, 

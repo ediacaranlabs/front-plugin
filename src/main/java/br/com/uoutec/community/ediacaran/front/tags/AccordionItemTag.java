@@ -1,5 +1,9 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Map;
+
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -25,6 +29,17 @@ public class AccordionItemTag extends AbstractSimpleComponent {
 	
 	public AccordionItemTag() {
 	}
+	
+    protected TagComponent createTagComponent() {
+    	return new TagComponent() {
+    		
+    	    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
+    	    	Object parentTag = getParentTag();
+    			parentID = parentTag == null? null : ((AccordionTag)parentTag).getId();
+    	    }
+    		
+    	};
+    }
 	
     public String getDefaultTemplate() {
     	return TEMPLATE;
