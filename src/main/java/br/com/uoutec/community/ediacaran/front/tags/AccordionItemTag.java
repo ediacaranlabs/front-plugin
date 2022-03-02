@@ -55,7 +55,7 @@ public class AccordionItemTag extends AbstractSimpleComponent {
 	}
 
 	public String getParentID() {
-		return parentID == null? ((AccordionTag)getParentTag()).getId() : null;
+		return parentID == null? ((AccordionTag)getParentTag()).getId() : parentID;
 	}
 
 	public void setParentID(String parentID) {
