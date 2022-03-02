@@ -75,7 +75,7 @@ public class TagComponent
 
     protected void applySimpleTemplate() throws IOException {
 
-    	setProperty(getClass().getName() + ":CONTEXT", componentInfo);
+    	setProperty(componentInfo.getClass().getName() + ":CONTEXT", componentInfo);
     	
 		Map<String, Object> vars = new HashMap<String, Object>();
     	Writer out               = getOut();
@@ -91,7 +91,7 @@ public class TagComponent
     	setParentTag(oldParent);
 		afterApplyTemplate(template, vars, out);
 		
-    	setProperty(getClass().getName() + ":CONTEXT", null);    	
+    	setProperty(componentInfo.getClass().getName() + ":CONTEXT", null);    	
     	
     }
     
