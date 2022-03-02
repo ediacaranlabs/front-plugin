@@ -103,7 +103,7 @@ public class ButtonComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, ComponentProperties component) {
-						Boolean outline = ((ButtonTag)component).getOutline();
+						Boolean outline = (Boolean)component.getProperty("outline");
 						return new String(" btn-").concat(outline != null && outline ? "outline-" : "").concat(value == null? "primary" : String.valueOf(value));
 					}
 				});

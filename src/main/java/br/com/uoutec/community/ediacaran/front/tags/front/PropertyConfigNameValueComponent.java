@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
-import br.com.uoutec.community.ediacaran.front.tags.PropertyConfigTag;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
 import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
 
@@ -43,7 +42,7 @@ public class PropertyConfigNameValueComponent extends AbstractComponent {
 								value == null || 
 								Util.isNumeric((String)value) || 
 								Util.isBoolean((String)value) ||
-								Boolean.TRUE.equals(((PropertyConfigTag)component).getRaw())?  
+								Boolean.TRUE.equals(((ComponentProperties)component).getProperty("raw"))?  
 									value : 
 									"'" + value + "'";
 						}

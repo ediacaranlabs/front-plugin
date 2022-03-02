@@ -24,7 +24,7 @@ public class BreadcrumbComponent extends AbstractComponent {
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("title");
-			add("path");
+			add("content");
 		}});
 	
 		super.default_property_parsers = 

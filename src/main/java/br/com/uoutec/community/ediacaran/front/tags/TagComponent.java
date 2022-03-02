@@ -63,7 +63,7 @@ public class TagComponent
 		beforeApplyTemplate(template, vars, out);
 
     	Object oldParent = getParentTag();
-    	setParentTag(this);
+    	setParentTag(componentInfo);
     	
 		applyTemplate(template, vars, out);
     	
@@ -77,18 +77,19 @@ public class TagComponent
 
     	setProperty(getClass().getName() + ":CONTEXT", componentInfo);
     	
+		Map<String, Object> vars = new HashMap<String, Object>();
     	Writer out               = getOut();
     	String template          = componentInfo.getTemplate() == null? getDefaultTemplate() : componentInfo.getTemplate();
     	
-		beforeApplyTemplate(template, null, out);
+		beforeApplyTemplate(template, vars, out);
 
     	Object oldParent = getParentTag();
-    	setParentTag(this);
+    	setParentTag(componentInfo);
 		
-    	applyTemplate(template, null, out);
+    	applyTemplate(template, vars, out);
     	
     	setParentTag(oldParent);
-		afterApplyTemplate(template, null, out);
+		afterApplyTemplate(template, vars, out);
 		
     	setProperty(getClass().getName() + ":CONTEXT", null);    	
     	
@@ -232,9 +233,11 @@ public class TagComponent
 			
 		}
 		
+		/*
 		if(result.get("id") == null) {
 			result.put("id", getId());
 		}
+		*/
 		
 		this.afterPrepareVars(result);
 		

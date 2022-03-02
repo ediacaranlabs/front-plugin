@@ -23,6 +23,8 @@ public abstract class AbstractPanelComponent
 
 	public static final String PARENT_TAG			= "Component:parent";
 	
+	private String uniqueID;
+	
 	private	String id;
 
 	private String extAttrs;
@@ -69,9 +71,15 @@ public abstract class AbstractPanelComponent
     	if(tagComponent == null) {
         	tagComponent = createTagComponent();
         	tagComponent.setComponentInfo(this);
+        	this.uniqueID = tagComponent.getId();
     	}
     	
     	tagComponent.setOut(getBodyContent().getEnclosingWriter());
+    	
+    	if(uniqueID == null) {
+        	this.uniqueID = tagComponent.getId();
+    	}
+    	
     }
     
     public void setPageContext(PageContext pageContext) {
@@ -83,6 +91,10 @@ public abstract class AbstractPanelComponent
     	}
     		
     	tagComponent.setPageContext(pageContext);
+    	
+    	if(uniqueID == null) {
+        	this.uniqueID = tagComponent.getId();
+    	}
     }
     
     public TagComponent getTagComponent() {
@@ -131,7 +143,7 @@ public abstract class AbstractPanelComponent
 	}
 
 	public String getId() {
-		return id;
+		return id == null? uniqueID : id;
 	}
 
 	@TagAttribute

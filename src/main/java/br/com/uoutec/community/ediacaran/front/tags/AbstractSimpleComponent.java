@@ -17,6 +17,8 @@ public abstract class AbstractSimpleComponent
 
 	private	String id;
 
+	private String uniqueID;
+	
 	private String extAttrs;
 	
 	private String template;
@@ -50,6 +52,7 @@ public abstract class AbstractSimpleComponent
     	tagComponent.setComponentInfo(this);
     	tagComponent.setPageContext((PageContext)pc);
     	tagComponent.setOut(pc.getOut());
+    	this.uniqueID = tagComponent.getId();
     }
 
     public TagComponent getTagComponent() {
@@ -110,7 +113,7 @@ public abstract class AbstractSimpleComponent
 	}
 
 	public String getId() {
-		return id;
+		return id == null? uniqueID : id;
 	}
 
 	@TagAttribute
