@@ -33,6 +33,8 @@ public abstract class AbstractSimpleComponent
 	
 	private VarParser content;
 
+	private boolean escapeContent;
+	
 	private TagComponent tagComponent;
 	
     public void doTag() throws JspException, IOException {
@@ -84,7 +86,8 @@ public abstract class AbstractSimpleComponent
     }
     
     protected VarParser toVarParser() {
-    	return new JspFragmentVarParser(getJspBody());
+    	return escapeContent? new EscapeVarParser(getJspBody()) : new JspFragmentVarParser(getJspBody());
+    	//return new JspFragmentVarParser(getJspBody());
 	}
 	
 	public VarParser getContent() {
@@ -155,6 +158,14 @@ public abstract class AbstractSimpleComponent
 	@TagAttribute
 	public void setAlign(String align) {
 		this.align = align;
+	}
+
+	public boolean isEscapeContent() {
+		return escapeContent;
+	}
+
+	public void setEscapeContent(boolean escapeContent) {
+		this.escapeContent = escapeContent;
 	}
 	
 }

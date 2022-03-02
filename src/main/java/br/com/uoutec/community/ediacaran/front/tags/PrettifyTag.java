@@ -20,6 +20,7 @@ public class PrettifyTag  extends AbstractSimpleComponent {
 	private Boolean linenums;
 	
 	public PrettifyTag() {
+		super.setEscapeContent(true);
 	}
 	
     public String getDefaultTemplate() {
