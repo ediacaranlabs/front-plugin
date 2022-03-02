@@ -73,7 +73,7 @@ public class SelectComponent extends ComponentFormComponent {
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("label");
 			add("size");
-			add("options");
+			add("content");
 			add("enabled");
 			add("readonly");
 		}});
