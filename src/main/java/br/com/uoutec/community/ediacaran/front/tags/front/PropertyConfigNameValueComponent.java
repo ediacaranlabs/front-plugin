@@ -29,6 +29,7 @@ public class PropertyConfigNameValueComponent extends AbstractComponent {
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("name");
 			add("value");
+			add("raw");
 		}});
 	
 		super.default_property_parsers = 
