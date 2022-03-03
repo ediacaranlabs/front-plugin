@@ -424,7 +424,7 @@ $.AppContext.utils = {
 				'</script>' + $content;
 			
 			$($local).html($content);
-
+			window.scrollTo(0,0);
 		},
 		
 		getDestContent: function (link){

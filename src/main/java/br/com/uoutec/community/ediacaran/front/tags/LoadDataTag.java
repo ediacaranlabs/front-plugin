@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
@@ -16,7 +18,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class LoadDataTag  extends AbstractSimpleComponent {
+public class LoadDataTag  extends SimpleTagSupport {
 	
 	/* ------------ Attr ---------------*/
 	
@@ -29,8 +31,7 @@ public class LoadDataTag  extends AbstractSimpleComponent {
 	public LoadDataTag() {
 	}
 	
-    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
+    public void doTag() throws JspException, IOException {
 
     	TagComponent tagComponent = new TagComponent();
     	tagComponent.setPageContext((PageContext) getJspContext());
@@ -67,11 +68,6 @@ public class LoadDataTag  extends AbstractSimpleComponent {
 	@TagAttribute
 	public void setVar(String var) {
 		this.var = var;
-	}
-
-	@Override
-	public String getDefaultTemplate() {
-		return null;
 	}
 
 }
