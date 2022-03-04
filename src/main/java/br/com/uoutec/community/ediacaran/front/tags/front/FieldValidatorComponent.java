@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 
-public class FieldValidatorComponent extends AbstractComponent {
+public class FieldValidatorComponent extends AbstractTemplateComponent {
 
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {
@@ -18,7 +18,7 @@ public class FieldValidatorComponent extends AbstractComponent {
 		}});
 	
 		super.default_attribute_parsers = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
+		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
 		}});
 	
 		super.default_props = 
@@ -26,7 +26,7 @@ public class FieldValidatorComponent extends AbstractComponent {
 		}});
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
 			}});
 	
 	}

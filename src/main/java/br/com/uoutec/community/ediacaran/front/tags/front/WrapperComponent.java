@@ -1,6 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.tags.front;
 
-public class WrapperComponent extends AbstractComponent {
+public class WrapperComponent extends AbstractTemplateComponent {
 
 	public WrapperComponent() throws Throwable {
 		super();

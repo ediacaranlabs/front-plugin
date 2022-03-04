@@ -13,7 +13,7 @@ import org.brandao.brutos.ClassUtil;
 
 import br.com.uoutec.community.ediacaran.EdiacaranEventListener;
 import br.com.uoutec.community.ediacaran.EdiacaranEventObject;
-import br.com.uoutec.community.ediacaran.front.theme.Component;
+import br.com.uoutec.community.ediacaran.front.theme.TemplateComponent;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeRegistry;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
@@ -154,7 +154,7 @@ public class ThemeEdiacaranListener implements EdiacaranEventListener{
 					if("tags".equals(path[2])) {
 						String[] tmp = Arrays.copyOfRange(path, 3, path.length);
 						String template = "/" + String.join("/", tmp);
-						Component c = (Component)ClassUtil.getInstance(value);
+						TemplateComponent c = (TemplateComponent)ClassUtil.getInstance(value);
 						c.loadConfiguration();
 						c.loadTemplate();
 						themeRegistry.registerComponentTemplate(path[0], path[1], template, c);

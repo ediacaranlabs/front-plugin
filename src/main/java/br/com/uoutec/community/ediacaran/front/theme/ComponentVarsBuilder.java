@@ -12,8 +12,8 @@ public class ComponentVarsBuilder implements ComponentVars{
 		this.vars = new HashMap<String, Object>();
 	}
 	
-	public Map<String, Object> prepareVars(Map<String, AttributeParser> propertyParsers, Set<String> defaultProperties,
-			Map<String, AttributeParser> attributeParsers, Set<String> emptyAttributes, Set<String> defaultAttributes){
+	public Map<String, Object> prepareVars(Map<String, PropertyParser> propertyParsers, Set<String> defaultProperties,
+			Map<String, PropertyParser> attributeParsers, Set<String> emptyAttributes, Set<String> defaultAttributes){
 		return vars;
 	}
 	

@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.front.tags.PropertiesComponentTemplate;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
 
-public class IconComponent extends AbstractComponent {
+public class IconComponent extends AbstractTemplateComponent {
 
 	
 	@SuppressWarnings("serial")
@@ -22,7 +22,7 @@ public class IconComponent extends AbstractComponent {
 		}});
 	
 		super.default_attribute_parsers = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
+		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
 		}});
 	
 		super.default_props = 
@@ -35,21 +35,21 @@ public class IconComponent extends AbstractComponent {
 		}});
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
 
-				put("bgSize", new AttributeParserImp() {
+				put("bgSize", new PropertyParserImp() {
 					
 					@Override
-					public String toName(String value, ComponentProperties component) {
+					public String toName(String value, PropertiesComponentTemplate component) {
 						return "bg-size";
 					}
 					
 				});
 				
-				put("iconSize", new AttributeParserImp() {
+				put("iconSize", new PropertyParserImp() {
 					
 					@Override
-					public String toName(String value, ComponentProperties component) {
+					public String toName(String value, PropertiesComponentTemplate component) {
 						return "icon-size";
 					}
 					

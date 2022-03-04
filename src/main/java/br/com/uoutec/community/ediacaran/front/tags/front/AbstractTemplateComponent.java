@@ -8,17 +8,18 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
-import br.com.uoutec.community.ediacaran.front.theme.Component;
+import br.com.uoutec.community.ediacaran.front.tags.PropertiesComponentTemplate;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
+import br.com.uoutec.community.ediacaran.front.theme.TemplateComponent;
 import br.com.uoutec.community.ediacaran.front.theme.TagTemplate;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateLoader;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.plugins.PluginType;
 
-public abstract class AbstractComponent implements Component{
+public abstract class AbstractTemplateComponent 
+	implements TemplateComponent{
 
 	protected String template;
 	
@@ -37,13 +38,13 @@ public abstract class AbstractComponent implements Component{
 	
 	
 	@SuppressWarnings("serial")
-	protected Map<String, AttributeParser> default_attribute_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
+	protected Map<String, PropertyParser> default_attribute_parsers = 
+			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(){{
 				
-				put("classStyle", new AttributeParserImp() {
+				put("classStyle", new PropertyParserImp() {
 					
 					@Override
-					public String toName(String value, ComponentProperties component) {
+					public String toName(String value, PropertiesComponentTemplate component) {
 						return value == null? null : "class";
 					}
 				});
@@ -62,13 +63,13 @@ public abstract class AbstractComponent implements Component{
 	
 	
 	@SuppressWarnings("serial")
-	protected Map<String, AttributeParser> default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(){{
+	protected Map<String, PropertyParser> default_property_parsers = 
+			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(){{
 				
-				put("align", new AttributeParserImp() {
+				put("align", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						if("center".equals(value)) {
 							return " mx-auto d-block";
 						}
@@ -82,7 +83,7 @@ public abstract class AbstractComponent implements Component{
 	
 	private TagTemplate tagTemplate;
 	
-	public AbstractComponent() {
+	public AbstractTemplateComponent() {
 		this.loadConfiguration();
 		//this.loadTemplate();
 	}
@@ -115,7 +116,7 @@ public abstract class AbstractComponent implements Component{
 	}
 	
 	@Override
-	public void applyTagTemplate(Map<String, Object> vars, Writer out) throws ThemeException {
+	public void build(Map<String, Object> vars, Writer out) throws ThemeException {
 		try {
 			tagTemplate.toWriter(out, vars);
 		}
@@ -125,7 +126,7 @@ public abstract class AbstractComponent implements Component{
 	}
 
 	@Override
-	public void applyTagTemplate(Writer out, Object... vars) throws ThemeException {
+	public void build(Writer out, Object... vars) throws ThemeException {
 		try {
 			tagTemplate.toWriter(out, vars);
 		}
@@ -145,7 +146,7 @@ public abstract class AbstractComponent implements Component{
 	}
 
 	@Override
-	public Map<String, AttributeParser> getAttributesParser() {
+	public Map<String, PropertyParser> getAttributesParser() {
 		return default_attribute_parsers;
 	}
 
@@ -155,7 +156,7 @@ public abstract class AbstractComponent implements Component{
 	}
 
 	@Override
-	public Map<String, AttributeParser> getPropertiesParse() {
+	public Map<String, PropertyParser> getPropertiesParser() {
 		return default_property_parsers;
 	}
 	

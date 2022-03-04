@@ -34,9 +34,9 @@ public class ThemeImp implements Theme{
 		
 		ThemePackage temaPackage = getPackage(packageName);
 		
-		ConcurrentMap<String, Component> tagTemplates = temaPackage.getTagTemplates();
+		ConcurrentMap<String, TemplateComponent> tagTemplates = temaPackage.getTagTemplates();
 		
-		Component p = tagTemplates.get(template);
+		TemplateComponent p = tagTemplates.get(template);
 		
 		if(p == null) {
 			throw new ThemeException("template not found: " + template);
@@ -47,7 +47,7 @@ public class ThemeImp implements Theme{
 		try {
 			vars.putAll(
 				componentVars.prepareVars(
-					p.getPropertiesParse(), p.getProperties(), 
+					p.getPropertiesParser(), p.getProperties(), 
 					p.getAttributesParser(), 
 					p.getEmptyAttributes(), 
 					p.getAttributes()
@@ -64,7 +64,7 @@ public class ThemeImp implements Theme{
 		}
 
 		try {
-			p.applyTagTemplate(vars, out);
+			p.build(vars, out);
 		}
 		catch(Throwable ex) {
 			throw new ThemeException("unable to load template tag: " + template + "[package=" + temaPackage.getName() + "]", ex);
@@ -76,15 +76,15 @@ public class ThemeImp implements Theme{
 		
 		ThemePackage temaPackage = getPackage(packageName);
 		
-		ConcurrentMap<String, Component> tagTemplates = temaPackage.getTagTemplates();
+		ConcurrentMap<String, TemplateComponent> tagTemplates = temaPackage.getTagTemplates();
 		
-		Component p = tagTemplates.get(template);
+		TemplateComponent p = tagTemplates.get(template);
 		
 		if(p == null) {
 			throw new ThemeException("template not found: " + template);
 		}
 		
-		p.applyTagTemplate(out, vars);
+		p.build(out, vars);
 	}
 
 	@Override

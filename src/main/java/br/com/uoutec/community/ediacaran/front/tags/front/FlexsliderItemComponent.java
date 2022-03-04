@@ -6,9 +6,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 
-public class FlexsliderItemComponent  extends AbstractComponent {
+public class FlexsliderItemComponent  extends AbstractTemplateComponent {
 
 	
 	public void loadConfiguration() {
@@ -23,7 +23,7 @@ public class FlexsliderItemComponent  extends AbstractComponent {
 	
 	
 		super.default_attribute_parsers = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
+		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
 		}});
 
 	
@@ -34,7 +34,7 @@ public class FlexsliderItemComponent  extends AbstractComponent {
 	
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
 			}});
 	
 	}

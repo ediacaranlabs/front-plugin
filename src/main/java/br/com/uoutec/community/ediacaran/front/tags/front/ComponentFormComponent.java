@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.front.tags.PropertiesComponentTemplate;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
 
-public abstract class ComponentFormComponent extends AbstractComponent {
+public abstract class ComponentFormComponent extends AbstractTemplateComponent {
 
 	public static final String FORM = ComponentFormComponent.class.getSimpleName() + ":form";
 	
@@ -30,52 +30,52 @@ public abstract class ComponentFormComponent extends AbstractComponent {
 	
 	
 		super.default_attribute_parsers = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
+		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
 			
-			put("enabled", new AttributeParserImp() {
+			put("enabled", new PropertyParserImp() {
 				
 				@Override
-				public String toName(String value, ComponentProperties component) {
+				public String toName(String value, PropertiesComponentTemplate component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value, ComponentProperties component) {
+				public Object toValue(Object value, PropertiesComponentTemplate component) {
 					return value != null && !(Boolean)value? "disabled" : "";
 				}
 			});
 
-			put("required", new AttributeParserImp() {
+			put("required", new PropertyParserImp() {
 				
 				@Override
-				public String toName(String value, ComponentProperties component) {
+				public String toName(String value, PropertiesComponentTemplate component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value, ComponentProperties component) {
+				public Object toValue(Object value, PropertiesComponentTemplate component) {
 					return value != null && (Boolean)value? "required" : "";
 				}
 				
 			});
 			
-			put("readonly", new AttributeParserImp() {
+			put("readonly", new PropertyParserImp() {
 				
 				@Override
-				public String toName(String value, ComponentProperties component) {
+				public String toName(String value, PropertiesComponentTemplate component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value, ComponentProperties component) {
+				public Object toValue(Object value, PropertiesComponentTemplate component) {
 					return value != null && (Boolean)value? "readonly" : "";
 				}
 			});
 			
-			put("componentType", new AttributeParserImp() {
+			put("componentType", new PropertyParserImp() {
 				
 				@Override
-				public String toName(String value, ComponentProperties component) {
+				public String toName(String value, PropertiesComponentTemplate component) {
 					return value == null? null : "type";
 				}
 				

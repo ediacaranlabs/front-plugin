@@ -16,7 +16,7 @@ import javax.servlet.jsp.PageContext;
 import org.brandao.brutos.bean.BeanInstance;
 
 import br.com.uoutec.community.ediacaran.DoPrivilegedException;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 import br.com.uoutec.community.ediacaran.front.theme.ComponentVars;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateVarParser;
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
@@ -153,12 +153,12 @@ public class Component
 	protected void afterPrepareVars(Map<String, Object> vars) {
 	}
 	
-	private String getAttrList(Map<String, AttributeParser> attributeParsers, 
+	private String getAttrList(Map<String, PropertyParser> attributeParsers, 
 			Set<String> emptyAttributes, Set<String> defaultAttributes) {
 		
 		Map<String,Object> vars = getVars(defaultAttributes, emptyAttributes);
 		StringBuilder sb = new StringBuilder();
-		ComponentProperties cp = new ComponentPropertiesImp(this, vars);
+		PropertiesComponentTemplate cp = new ComponentPropertiesImp(this, vars);
 		
 		for(Entry<String,Object> e: vars.entrySet()) {
 			
@@ -174,7 +174,7 @@ public class Component
 				sb.append(" ");
 			}
 			
-			AttributeParser parser = attributeParsers.get(p);
+			PropertyParser parser = attributeParsers.get(p);
 			
 			if(parser != null) {
 				p = parser.toName(p, cp);
@@ -203,15 +203,15 @@ public class Component
 		
 	}
 	
-	public Map<String, Object> prepareVars(Map<String, AttributeParser> propertyParsers, Set<String> defaultProperties,
-			Map<String, AttributeParser> attributeParsers, Set<String> emptyAttributes, Set<String> defaultAttributes) {
+	public Map<String, Object> prepareVars(Map<String, PropertyParser> propertyParsers, Set<String> defaultProperties,
+			Map<String, PropertyParser> attributeParsers, Set<String> emptyAttributes, Set<String> defaultAttributes) {
 		
 		Map<String,Object> result = new HashMap<String,Object>();
 		
 		this.beforePrepareVars(result);
 		
 		Map<String,Object> vars = getVars(defaultProperties, null);
-		ComponentProperties cp = new ComponentPropertiesImp(this, vars);
+		PropertiesComponentTemplate cp = new ComponentPropertiesImp(this, vars);
 
 		result.put("attr", getAttrList(attributeParsers, emptyAttributes, defaultAttributes));
 		
@@ -220,7 +220,7 @@ public class Component
 			String p = e.getKey();
 			Object v = e.getValue(); 
 			
-			AttributeParser parser = propertyParsers.get(p);
+			PropertyParser parser = propertyParsers.get(p);
 			
 			if(parser != null) {
 				p = parser.toName(p, cp);

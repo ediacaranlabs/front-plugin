@@ -4,13 +4,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.front.tags.PropertiesComponentTemplate;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
 import br.com.uoutec.community.ediacaran.front.theme.ComponentVarsBuilder;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateVarParser;
 
-public class BreadcrumbPathComponent extends AbstractComponent {
+public class BreadcrumbPathComponent extends AbstractTemplateComponent {
 
 	
 	@SuppressWarnings("serial")
@@ -23,7 +23,7 @@ public class BreadcrumbPathComponent extends AbstractComponent {
 		}});
 	
 		super.default_attribute_parsers = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
+		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
 		}});
 	
 		super.default_props = 
@@ -34,11 +34,11 @@ public class BreadcrumbPathComponent extends AbstractComponent {
 		}});
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
-				put("icon", new AttributeParserImp() {
+			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
+				put("icon", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						ComponentVarsBuilder cv = new ComponentVarsBuilder();
 						return value == null || ((String)value).isEmpty()? null : new TemplateVarParser("/components/icon", component.getPackageTheme(), cv, component.getTheme()).put("icon", value);
 					}

@@ -90,7 +90,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		ThemePackage temaPackage = new ThemePackage(
 				packageName, 
 				template, 
-				new ConcurrentHashMap<String, Component>(),
+				new ConcurrentHashMap<String, TemplateComponent>(),
 				new ConcurrentHashMap<String, List<PublicResource>>());
 		
 		entry.packages.put(packageName, temaPackage);
@@ -103,7 +103,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	}
 	
 	@Override
-	public synchronized void registerComponentTemplate(String name, String packageName, String template, Component tagTemplate) throws ThemeException{
+	public synchronized void registerComponentTemplate(String name, String packageName, String template, TemplateComponent tagTemplate) throws ThemeException{
 
 		SecurityManager sm = System.getSecurityManager();
 		
@@ -124,7 +124,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 			throw new ThemeException("theme package not found: " + name + "/" + packageName);
 		}
 		
-		ConcurrentMap<String, Component> tagTemplates = temaPackage.getTagTemplates();
+		ConcurrentMap<String, TemplateComponent> tagTemplates = temaPackage.getTagTemplates();
 		
 		if(tagTemplates.put(template, tagTemplate) == null){
 			

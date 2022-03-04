@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.front.tags.ButtonTag;
-import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.front.tags.PropertiesComponentTemplate;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
 import br.com.uoutec.community.ediacaran.front.theme.EmptyVarsBuilder;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateVarParser;
 
@@ -30,44 +30,44 @@ public class ButtonComponent extends ComponentFormComponent {
 		}});
 	
 		super.default_attribute_parsers = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
+		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
 			
-			put("actionType", new AttributeParserImp() {
+			put("actionType", new PropertyParserImp() {
 				
 				@Override
-				public String toName(String value, ComponentProperties component) {
+				public String toName(String value, PropertiesComponentTemplate component) {
 					return value == null? null : "type";
 				}
 			});
 
-			put("action", new AttributeParserImp() {
+			put("action", new PropertyParserImp() {
 				
 				@Override
-				public String toName(String value, ComponentProperties component) {
+				public String toName(String value, PropertiesComponentTemplate component) {
 					return value == null? null : "formaction";
 				}
 			});
 
-			put("ctype", new AttributeParserImp() {
+			put("ctype", new PropertyParserImp() {
 				
 				@Override
-				public String toName(String value, ComponentProperties component) {
+				public String toName(String value, PropertiesComponentTemplate component) {
 					return value == null? null : "formenctype";
 				}
 			});
 
-			put("method", new AttributeParserImp() {
+			put("method", new PropertyParserImp() {
 				
 				@Override
-				public String toName(String value, ComponentProperties component) {
+				public String toName(String value, PropertiesComponentTemplate component) {
 					return value == null? null : "formmethod";
 				}
 			});
 
-			put("target", new AttributeParserImp() {
+			put("target", new PropertyParserImp() {
 				
 				@Override
-				public String toName(String value, ComponentProperties component) {
+				public String toName(String value, PropertiesComponentTemplate component) {
 					return value == null? null : "formtarget";
 				}
 			});
@@ -89,46 +89,46 @@ public class ButtonComponent extends ComponentFormComponent {
 	
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
 				
-				put("size", new AttributeParserImp() {
+				put("size", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						return value == null? "" : new String(" btn-").concat(String.valueOf(value));
 					}
 				});
 
-				put("type", new AttributeParserImp() {
+				put("type", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						Boolean outline = (Boolean)component.getProperty("outline");
 						return new String(" btn-").concat(outline != null && outline ? "outline-" : "").concat(value == null? "primary" : String.valueOf(value));
 					}
 				});
 				
-				put("block", new AttributeParserImp() {
+				put("block", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						return value == null? "" : (Boolean)value? " btn-block" : "";
 					}
 				});
 				
-				put("enabled", new AttributeParserImp() {
+				put("enabled", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						Boolean enabled = ((ButtonTag)component).getEnabled();
 						return enabled != null && !enabled? " disabled" : "";
 					}
 				});
 
-				put("icon", new AttributeParserImp() {
+				put("icon", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						return value == null? "" : new TemplateVarParser("/components/icon", component.getPackageTheme(), 
 								new EmptyVarsBuilder(), component.getTheme()).put("icon", value);
 					}

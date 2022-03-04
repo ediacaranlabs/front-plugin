@@ -7,7 +7,7 @@ import br.com.uoutec.application.ClassUtil;
 import br.com.uoutec.application.scanner.DefaultScanner;
 import br.com.uoutec.application.scanner.TypeFilter;
 import br.com.uoutec.application.scanner.vfs.Vfs;
-import br.com.uoutec.community.ediacaran.front.theme.Component;
+import br.com.uoutec.community.ediacaran.front.theme.TemplateComponent;
 
 public class CreateThemeConfig {
 
@@ -28,7 +28,7 @@ public class CreateThemeConfig {
 				try {
 					resource = Vfs.toClass(resource);
 					Class clazz = ClassUtil.get(resource);
-					return Component.class.isAssignableFrom(clazz);
+					return TemplateComponent.class.isAssignableFrom(clazz);
 				} catch (ClassNotFoundException e) {
 					throw new RuntimeException(e);
 				}
@@ -46,7 +46,7 @@ public class CreateThemeConfig {
 			}
 			
 			//System.out.println(clazz.getName());
-			Component c = (Component) clazz.newInstance();
+			TemplateComponent c = (TemplateComponent) clazz.newInstance();
 			String tmp = c.getTemplate();
 			tmp = tmp .replace("/default_template/front", "");
 			tmp = tmp .replace(".tmp", "");

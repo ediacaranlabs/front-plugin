@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
-import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.front.tags.PropertiesComponentTemplate;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
 
-public class FlotChartsComponent extends AbstractComponent {
+public class FlotChartsComponent extends AbstractTemplateComponent {
 
 	
 	@SuppressWarnings("serial")
@@ -23,7 +23,7 @@ public class FlotChartsComponent extends AbstractComponent {
 		}});
 	
 		super.default_attribute_parsers = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
+		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
 		}});
 	
 		super.default_props = 
@@ -38,12 +38,12 @@ public class FlotChartsComponent extends AbstractComponent {
 		}});
 	
 		super.default_property_parsers = 
-				Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+				Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
 					
-					put("updateFrequence", new AttributeParserImp() {
+					put("updateFrequence", new PropertyParserImp() {
 
 						@Override
-						public Object toValue(Object value, ComponentProperties component) {
+						public Object toValue(Object value, PropertiesComponentTemplate component) {
 
 							int time = value == null? -1 : (Integer)value;
 							TimeUnit tm = component.getProperty("updateFrequenceUnit") == null? 

@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 
-public class ButtonGroupComponent extends AbstractComponent {
+public class ButtonGroupComponent extends AbstractTemplateComponent {
 	
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {
@@ -19,7 +19,7 @@ public class ButtonGroupComponent extends AbstractComponent {
 		}});
 	
 		super.default_attribute_parsers = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
+		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
 		}});
 
 	
@@ -29,7 +29,7 @@ public class ButtonGroupComponent extends AbstractComponent {
 		}});
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
 			}});
 	}
 }

@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 
 public class DropdownItemComponent extends ComponentFormComponent {
 
@@ -23,7 +23,7 @@ public class DropdownItemComponent extends ComponentFormComponent {
 	
 	
 		super.default_attribute_parsers = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
+		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
 		}});
 
 	
@@ -35,6 +35,6 @@ public class DropdownItemComponent extends ComponentFormComponent {
 	
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers));
+			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers));
 	}
 }

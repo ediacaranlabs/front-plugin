@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.front.tags.PropertiesComponentTemplate;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
 
-public class FieldGroupComponent  extends AbstractComponent {
+public class FieldGroupComponent  extends AbstractTemplateComponent {
 
 	
 	@SuppressWarnings("serial")
@@ -22,7 +22,7 @@ public class FieldGroupComponent  extends AbstractComponent {
 		}});
 	
 		super.default_attribute_parsers = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
+		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
 		}});
 	
 		super.default_props = 
@@ -33,12 +33,12 @@ public class FieldGroupComponent  extends AbstractComponent {
 		}});
 	
 		super.default_property_parsers = 
-				Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
+				Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
 					
-					put("size", new AttributeParserImp() {
+					put("size", new PropertyParserImp() {
 						
 						@Override
-						public Object toValue(Object value, ComponentProperties component) {
+						public Object toValue(Object value, PropertiesComponentTemplate component) {
 							return value == null? null : "input-group-" + value;
 						}
 						

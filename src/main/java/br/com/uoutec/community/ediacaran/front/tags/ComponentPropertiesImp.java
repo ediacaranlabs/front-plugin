@@ -4,7 +4,7 @@ import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
 
-public class ComponentPropertiesImp implements ComponentProperties{
+public class ComponentPropertiesImp implements PropertiesComponentTemplate{
 
 	private Component component;
 	

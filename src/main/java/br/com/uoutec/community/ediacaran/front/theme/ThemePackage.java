@@ -9,11 +9,11 @@ public class ThemePackage {
 	
 	private String path;
 	
-	private ConcurrentMap<String, Component> tagTemplates;
+	private ConcurrentMap<String, TemplateComponent> tagTemplates;
 
 	private ConcurrentMap<String, List<PublicResource>> resources;
 	
-	public ThemePackage(String name, String path, ConcurrentMap<String, Component> tagTemplates, 
+	public ThemePackage(String name, String path, ConcurrentMap<String, TemplateComponent> tagTemplates, 
 			ConcurrentMap<String, List<PublicResource>> resources) {
 		this.name = name;
 		this.path = path;
@@ -29,7 +29,7 @@ public class ThemePackage {
 		return path;
 	}
 
-	public ConcurrentMap<String, Component> getTagTemplates() {
+	public ConcurrentMap<String, TemplateComponent> getTagTemplates() {
 		return tagTemplates;
 	}
 

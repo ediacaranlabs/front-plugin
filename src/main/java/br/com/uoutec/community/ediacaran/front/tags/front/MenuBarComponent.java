@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.front.tags.PropertiesComponentTemplate;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
 
-public class MenuBarComponent  extends AbstractComponent {
+public class MenuBarComponent  extends AbstractTemplateComponent {
 
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {
@@ -21,7 +21,7 @@ public class MenuBarComponent  extends AbstractComponent {
 		}});
 	
 		super.default_attribute_parsers = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
+		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
 		}});
 	
 		super.default_props = 
@@ -37,27 +37,27 @@ public class MenuBarComponent  extends AbstractComponent {
 		}});
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
-				put("style", new AttributeParserImp() {
+			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
+				put("style", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						return value == null? null : "navbar-" + value;
 					}
 				});
 				
-				put("background", new AttributeParserImp() {
+				put("background", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						return value == null? null : "bg-" + value;
 					}
 				});
 				
-				put("position", new AttributeParserImp() {
+				put("position", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						
 						if(value == null) {
 							return null;
@@ -75,19 +75,19 @@ public class MenuBarComponent  extends AbstractComponent {
 					}
 				});
 
-				put("expand", new AttributeParserImp() {
+				put("expand", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						return value == null? null : "navbar-expand-" + value;
 					}
 					
 				});
 
-				put("sidebar", new AttributeParserImp() {
+				put("sidebar", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						return value == null? "" : "sidebar";
 					}
 					

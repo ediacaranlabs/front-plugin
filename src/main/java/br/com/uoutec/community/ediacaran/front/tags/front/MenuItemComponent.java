@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 
-public class MenuItemComponent  extends AbstractComponent {
+public class MenuItemComponent  extends AbstractTemplateComponent {
 
 	
 	@SuppressWarnings("serial")
@@ -19,7 +19,7 @@ public class MenuItemComponent  extends AbstractComponent {
 		}});
 	
 		super.default_attribute_parsers = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
+		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
 		}});
 	
 		super.default_props = 
@@ -29,7 +29,7 @@ public class MenuItemComponent  extends AbstractComponent {
 		}});
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers));
+			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers));
 
 	}
 }

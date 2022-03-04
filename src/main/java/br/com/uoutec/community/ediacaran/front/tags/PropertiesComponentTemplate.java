@@ -2,7 +2,7 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
 
-public interface ComponentProperties {
+public interface PropertiesComponentTemplate {
 
 	Theme getTheme();
 	

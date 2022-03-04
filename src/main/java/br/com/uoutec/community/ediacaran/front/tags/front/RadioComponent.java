@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.ComponentProperties;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParser;
-import br.com.uoutec.community.ediacaran.front.theme.AttributeParserImp;
+import br.com.uoutec.community.ediacaran.front.tags.PropertiesComponentTemplate;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
 
 public class RadioComponent extends ComponentFormComponent {
 
@@ -23,17 +23,17 @@ public class RadioComponent extends ComponentFormComponent {
 		}});
 	
 		super.default_attribute_parsers = 
-		Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_attribute_parsers){{
+		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
 			
-			put("selected", new AttributeParserImp() {
+			put("selected", new PropertyParserImp() {
 				
 				@Override
-				public String toName(String value, ComponentProperties component) {
+				public String toName(String value, PropertiesComponentTemplate component) {
 					return null;
 				}
 				
 				@Override
-				public Object toValue(Object value, ComponentProperties component) {
+				public Object toValue(Object value, PropertiesComponentTemplate component) {
 					return value != null && (Boolean)value? "checked" : "";
 				}
 			});
@@ -52,20 +52,20 @@ public class RadioComponent extends ComponentFormComponent {
 	
 	
 		super.default_property_parsers = 
-			Collections.unmodifiableMap(new HashMap<String, AttributeParser>(super.default_property_parsers){{
-				put("enabled", new AttributeParserImp() {
+			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
+				put("enabled", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						return "";
 					}
 					
 				});
 				
-				put("inline", new AttributeParserImp() {
+				put("inline", new PropertyParserImp() {
 					
 					@Override
-					public Object toValue(Object value, ComponentProperties component) {
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						return value != null && (Boolean)value? " form-check-inline" : "";
 					}
 					
