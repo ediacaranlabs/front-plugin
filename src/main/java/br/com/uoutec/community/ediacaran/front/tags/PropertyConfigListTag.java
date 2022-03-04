@@ -32,8 +32,8 @@ public class PropertyConfigListTag extends AbstractSimpleComponent {
 	public PropertyConfigListTag() {
 	}
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		public void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
     			Object cp = super.getParentTag();

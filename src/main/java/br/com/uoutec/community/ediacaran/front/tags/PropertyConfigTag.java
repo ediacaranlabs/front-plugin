@@ -38,8 +38,8 @@ public class PropertyConfigTag extends AbstractSimpleComponent {
 	public PropertyConfigTag() {
 	}
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		public void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
     			Object cp = super.getParentTag();

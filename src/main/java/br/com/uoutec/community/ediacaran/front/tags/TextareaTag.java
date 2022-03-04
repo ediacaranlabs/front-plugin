@@ -43,8 +43,8 @@ public class TextareaTag extends ComponentFormTag {
 		super.setComponentType("text");
 	}
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     	    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
     	    		Writer out) throws IOException {

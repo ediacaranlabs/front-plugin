@@ -30,8 +30,8 @@ public class TestimonialTag extends AbstractSimpleComponent {
 	public TestimonialTag() {
 	}
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		protected void beforePrepareVars(Map<String, Object> vars) {
     			info = new DelegateVarParser();

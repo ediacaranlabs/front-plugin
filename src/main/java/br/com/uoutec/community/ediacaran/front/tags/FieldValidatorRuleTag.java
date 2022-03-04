@@ -61,8 +61,8 @@ public class FieldValidatorRuleTag extends AbstractSimpleComponent {
 		this.raw = raw;
 	}
 
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     	    		Writer out) throws IOException {

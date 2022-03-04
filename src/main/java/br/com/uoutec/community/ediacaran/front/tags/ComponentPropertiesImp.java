@@ -6,11 +6,11 @@ import br.com.uoutec.community.ediacaran.front.theme.Theme;
 
 public class ComponentPropertiesImp implements ComponentProperties{
 
-	private TagComponent component;
+	private Component component;
 	
 	private Map<String, Object> properties;
 
-	public ComponentPropertiesImp(TagComponent component, Map<String, Object> properties) {
+	public ComponentPropertiesImp(Component component, Map<String, Object> properties) {
 		super();
 		this.component = component;
 		this.properties = properties;

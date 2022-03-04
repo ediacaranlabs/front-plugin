@@ -36,8 +36,8 @@ public class SelectTag extends ComponentFormTag {
 	public SelectTag() {
 	}
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		public void beforePrepareVars(Map<String, Object> vars) {
     			vars.put("empty",   label == null? "sr-only" : null);

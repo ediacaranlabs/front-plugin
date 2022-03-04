@@ -33,7 +33,7 @@ public class LoadDataTag  extends SimpleTagSupport {
 	
     public void doTag() throws JspException, IOException {
 
-    	TagComponent tagComponent = new TagComponent();
+    	Component tagComponent = new Component();
     	tagComponent.setPageContext((PageContext) getJspContext());
     	
     	File baseWebApp = new File(System.getProperty("app.web"));

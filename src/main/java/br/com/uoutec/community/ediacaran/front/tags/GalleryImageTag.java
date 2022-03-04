@@ -32,8 +32,8 @@ public class GalleryImageTag  extends AbstractSimpleComponent {
 	public GalleryImageTag() {
 	}
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		protected void afterPrepareVars(Map<String, Object> vars) {
     			GalleryTag tag = (GalleryTag) getJspContext().getAttribute(GalleryTag.PARENT);

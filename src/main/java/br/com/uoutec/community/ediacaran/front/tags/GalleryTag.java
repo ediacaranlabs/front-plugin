@@ -35,8 +35,8 @@ public class GalleryTag  extends AbstractSimpleComponent {
 		return nextImage++;
 	}
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     	    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     	    		Writer out) throws IOException {

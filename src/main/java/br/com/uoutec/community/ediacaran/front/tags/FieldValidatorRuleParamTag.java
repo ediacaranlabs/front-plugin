@@ -35,8 +35,8 @@ public class FieldValidatorRuleParamTag extends AbstractSimpleComponent {
     	this.contentWriter = new PrintWriter(bout, true);
 	}
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     	    public Writer getOut() {
     	    	return contentWriter;

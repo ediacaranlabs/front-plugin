@@ -24,7 +24,7 @@ import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeRegistry;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 
-public class TagComponent 
+public class Component 
 	implements ComponentVars {
 
 	public static final String WRAPPER_TEMPLATE		= "/components/wrapper";
@@ -39,10 +39,10 @@ public class TagComponent
 	
 	private Writer out;
 	
-	private ComponentInfo componentInfo;
+	private ComponentData componentData;
 	
-	public void applyTemplate() throws ThemeException, IOException{
-    	if(!componentInfo.isWrapper()) {
+	public void build() throws ThemeException, IOException{
+    	if(!componentData.isWrapper()) {
     		applySimpleTemplate();
     	}
     	else {
@@ -58,12 +58,12 @@ public class TagComponent
     	Theme theme              = getTheme();
     	String packageName       = getPackageTheme();
 		
-		vars.put("content",	new TemplateVarParser(componentInfo.getTemplate() == null? getDefaultTemplate() : componentInfo.getTemplate(), packageName, this, theme));
+		vars.put("content",	new TemplateVarParser(componentData.getTemplate() == null? getDefaultTemplate() : componentData.getTemplate(), packageName, this, theme));
 		
 		beforeApplyTemplate(template, vars, out);
 
     	Object oldParent = getParentTag();
-    	setParentTag(componentInfo);
+    	setParentTag(componentData);
     	
 		applyTemplate(template, vars, out);
     	
@@ -75,28 +75,28 @@ public class TagComponent
 
     protected void applySimpleTemplate() throws IOException {
 
-    	setProperty(componentInfo.getClass().getName() + ":CONTEXT", componentInfo);
+    	setProperty(componentData.getClass().getName() + ":CONTEXT", componentData);
     	
 		Map<String, Object> vars = new HashMap<String, Object>();
     	Writer out               = getOut();
-    	String template          = componentInfo.getTemplate() == null? getDefaultTemplate() : componentInfo.getTemplate();
+    	String template          = componentData.getTemplate() == null? getDefaultTemplate() : componentData.getTemplate();
     	
 		beforeApplyTemplate(template, vars, out);
 
     	Object oldParent = getParentTag();
-    	setParentTag(componentInfo);
+    	setParentTag(componentData);
 		
     	applyTemplate(template, vars, out);
     	
     	setParentTag(oldParent);
 		afterApplyTemplate(template, vars, out);
 		
-    	setProperty(componentInfo.getClass().getName() + ":CONTEXT", null);    	
+    	setProperty(componentData.getClass().getName() + ":CONTEXT", null);    	
     	
     }
     
     public String getDefaultTemplate() {
-		return componentInfo.getDefaultTemplate();
+		return componentData.getDefaultTemplate();
 	}
 
 	public PageContext getPageContext() {
@@ -116,11 +116,11 @@ public class TagComponent
 	}
 
 	public Object getComponentInfo() {
-		return componentInfo;
+		return componentData;
 	}
 
-	public void setComponentInfo(ComponentInfo value) {
-		this.componentInfo = value;
+	public void setComponentData(ComponentData value) {
+		this.componentData = value;
 	}
 
 	protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
@@ -190,13 +190,13 @@ public class TagComponent
 			
 		}
 		
-		if(componentInfo.getExtAttrs() != null) {
+		if(componentData.getExtAttrs() != null) {
 			
 			if(sb.length() != 0) {
 				sb.append(" ");
 			}
 			
-			sb.append(componentInfo.getExtAttrs());
+			sb.append(componentData.getExtAttrs());
 		}
 		
 		return sb.toString();
@@ -251,7 +251,7 @@ public class TagComponent
 		BeanInstance i = 
 			AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
             public BeanInstance run() {
-                return new BeanInstance(componentInfo);
+                return new BeanInstance(componentData);
             }
         });
 
@@ -337,7 +337,7 @@ public class TagComponent
 		Integer acc = (Integer) request.getAttribute(ID_COUNT);
 		request.setAttribute(ID_COUNT, acc = acc == null? 0 : acc.intValue() + 1);
 		
-		return componentInfo.getClass().getSimpleName().toLowerCase() + String.valueOf(acc);
+		return componentData.getClass().getSimpleName().toLowerCase() + String.valueOf(acc);
 	}
 
 }

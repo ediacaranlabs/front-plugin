@@ -13,7 +13,7 @@ import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 
 public abstract class AbstractSimpleComponent 
 	extends SimpleTagSupport
-	implements ComponentInfo {
+	implements ComponentData {
 
 	private	String id;
 
@@ -35,11 +35,11 @@ public abstract class AbstractSimpleComponent
 
 	private boolean escapeContent;
 	
-	private TagComponent tagComponent;
+	private Component component;
 	
     public void doTag() throws JspException, IOException {
     	try {
-    		tagComponent.applyTemplate();
+    		component.build();
     	}
 	    catch(ThemeException e) {
 	    	throw new JspException(e);
@@ -50,39 +50,39 @@ public abstract class AbstractSimpleComponent
     	
     	super.setJspContext(pc);
     	
-    	tagComponent = createTagComponent();
-    	tagComponent.setComponentInfo(this);
-    	tagComponent.setPageContext((PageContext)pc);
-    	tagComponent.setOut(pc.getOut());
-    	this.uniqueID = tagComponent.getId();
+    	component = createComponent();
+    	component.setComponentData(this);
+    	component.setPageContext((PageContext)pc);
+    	component.setOut(pc.getOut());
+    	this.uniqueID = component.getId();
     }
 
-    public TagComponent getTagComponent() {
-		return tagComponent;
+    public Component getComponent() {
+		return component;
 	}
 
 	public Object setProperty(String name, Object newValue) {
-    	return tagComponent.setProperty(name, newValue);
+    	return component.setProperty(name, newValue);
     }
 
     public Object getProperty(String name) {
-    	return tagComponent.getProperty(name);
+    	return component.getProperty(name);
     }
     
     public Object getProperty(String name, Object defaultValue) {
-    	return tagComponent.getProperty(name, defaultValue);
+    	return component.getProperty(name, defaultValue);
     }
     
     public String getDefaultTemplate() {
     	throw new UnsupportedOperationException();
     }
     
-    protected TagComponent createTagComponent() {
-    	return new TagComponent();
+    protected Component createComponent() {
+    	return new Component();
     }
     
     protected Object getParentTag() {
-    	return tagComponent.getParentTag();
+    	return component.getParentTag();
     }
     
     protected VarParser toVarParser() {

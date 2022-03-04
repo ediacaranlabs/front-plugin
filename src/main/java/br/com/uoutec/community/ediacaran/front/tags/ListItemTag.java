@@ -24,8 +24,8 @@ public class ListItemTag  extends AbstractSimpleComponent {
 	public ListItemTag() {
 	}
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		public void beforePrepareVars(Map<String, Object> vars) {
     			ListTag list = (ListTag) getProperty(ListTag.PARENT);

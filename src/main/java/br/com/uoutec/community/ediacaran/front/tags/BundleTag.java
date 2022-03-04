@@ -36,7 +36,7 @@ public class BundleTag extends SimpleTagSupport {
 
     public void doTag() throws JspException, IOException {
     	
-    	TagComponent tagComponent = new TagComponent();
+    	Component tagComponent = new Component();
     	tagComponent.setPageContext((PageContext) getJspContext());
     	
     	PluginType pt = EntityContextPlugin.getEntity(PluginType.class);

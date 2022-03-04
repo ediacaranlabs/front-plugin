@@ -56,8 +56,8 @@ public class NivoTag extends AbstractPanelComponent {
     	return super.doEndTag();
     }
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		public void beforePrepareVars(Map<String, Object> vars) {
     			String packageName = getPackageTheme();

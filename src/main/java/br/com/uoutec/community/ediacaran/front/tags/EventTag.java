@@ -19,21 +19,21 @@ public class EventTag extends AbstractSimpleComponent {
 	
 	private String type;
 	
-	private String component;
+	private String componentName;
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     	    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
-    	    	if(component == null) {
+    	    	if(componentName == null) {
     				Object cp = super.getParentTag();
     				if(cp != null) {
     					if(cp instanceof AbstractSimpleComponent) {
-    						component = ((AbstractSimpleComponent)cp).getId();
+    						componentName = ((AbstractSimpleComponent)cp).getId();
     					}
     					else
     					if(cp instanceof AbstractPanelComponent) {
-    						component = ((AbstractPanelComponent)cp).getId();
+    						componentName = ((AbstractPanelComponent)cp).getId();
     					}
     				}
     	    	}
@@ -52,13 +52,13 @@ public class EventTag extends AbstractSimpleComponent {
 		this.type = type;
 	}
 
-	public String getComponent() {
-		return component;
+	public String getComponentName() {
+		return componentName;
 	}
 
-    @TagAttribute
-	public void setComponent(String component) {
-		this.component = component;
+    @TagAttribute(displayName="component")
+	public void setComponentName(String value) {
+		this.componentName = value;
 	}
 
 	public String getDefaultTemplate() {

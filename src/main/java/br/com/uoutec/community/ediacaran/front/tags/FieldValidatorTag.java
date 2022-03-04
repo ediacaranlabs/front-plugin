@@ -111,8 +111,8 @@ public class FieldValidatorTag extends AbstractPanelComponent {
     	}
     }
     
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		protected void beforePrepareVars(Map<String, Object> vars) {
 

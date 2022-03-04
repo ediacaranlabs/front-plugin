@@ -30,8 +30,8 @@ public class AccordionItemTag extends AbstractSimpleComponent {
 	public AccordionItemTag() {
 	}
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     	    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
     	    	Object parentTag = getParentTag();

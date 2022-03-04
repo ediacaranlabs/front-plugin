@@ -19,8 +19,8 @@ public class ResourcesTag extends AbstractSimpleComponent {
 	public ResourcesTag() {
 	}
 
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		public void beforePrepareVars(Map<String, Object> vars) {
     			

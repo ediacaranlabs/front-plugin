@@ -30,8 +30,8 @@ public class LandingSectionTag  extends AbstractSimpleComponent {
 	public LandingSectionTag() {
 	}
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		public void afterPrepareVars(Map<String, Object> vars) {
     			vars.put("align-left",  "right".equals(align)? " col-lg-offset-1 col-sm-push-6" : "" );

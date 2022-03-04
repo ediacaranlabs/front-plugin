@@ -38,8 +38,8 @@ public class MenuItensTag  extends AbstractSimpleComponent {
 	public MenuItensTag() {
 	}
 	
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		protected void beforePrepareVars(Map<String, Object> vars) {
     	    	if(menu != null) {

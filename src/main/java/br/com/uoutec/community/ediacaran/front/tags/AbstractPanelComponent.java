@@ -11,7 +11,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 
 public abstract class AbstractPanelComponent 
-	extends BodyTagSupport implements ComponentInfo {
+	extends BodyTagSupport implements ComponentData {
 
 	private static final long serialVersionUID = -5353589232919296817L;
 
@@ -41,19 +41,19 @@ public abstract class AbstractPanelComponent
 	
 	private String align;
 	
-	protected TagComponent tagComponent;
+	protected Component component;
 	
     public void doInitBody() throws JspException {
-		tagComponent.setProperty(getClass().getName() + ":CONTEXT", this);
-    	oldParent = tagComponent.getParentTag();
-		tagComponent.setParentTag(this);
+		component.setProperty(getClass().getName() + ":CONTEXT", this);
+    	oldParent = component.getParentTag();
+		component.setParentTag(this);
     }
 	
     public int doAfterBody() throws JspException {
     	try {
-    		tagComponent.applyTemplate();
-    		tagComponent.setParentTag(oldParent);
-    		tagComponent.setProperty(getClass().getName() + ":CONTEXT", null);
+    		component.build();
+    		component.setParentTag(oldParent);
+    		component.setProperty(getClass().getName() + ":CONTEXT", null);
         	return SKIP_BODY;
     	}
 	    catch(ThemeException e) {
@@ -68,16 +68,16 @@ public abstract class AbstractPanelComponent
     public void setBodyContent(BodyContent b) {
     	super.setBodyContent(b);
     	
-    	if(tagComponent == null) {
-        	tagComponent = createTagComponent();
-        	tagComponent.setComponentInfo(this);
-        	this.uniqueID = tagComponent.getId();
+    	if(component == null) {
+        	component = createComponent();
+        	component.setComponentData(this);
+        	this.uniqueID = component.getId();
     	}
     	
-    	tagComponent.setOut(getBodyContent().getEnclosingWriter());
+    	component.setOut(getBodyContent().getEnclosingWriter());
     	
     	if(uniqueID == null) {
-        	this.uniqueID = tagComponent.getId();
+        	this.uniqueID = component.getId();
     	}
     	
     }
@@ -85,44 +85,44 @@ public abstract class AbstractPanelComponent
     public void setPageContext(PageContext pageContext) {
 		super.setPageContext(pageContext);
     		
-    	if(tagComponent == null) {
-        	tagComponent = createTagComponent();
-        	tagComponent.setComponentInfo(this);
+    	if(component == null) {
+        	component = createComponent();
+        	component.setComponentData(this);
     	}
     		
-    	tagComponent.setPageContext(pageContext);
+    	component.setPageContext(pageContext);
     	
     	if(uniqueID == null) {
-        	this.uniqueID = tagComponent.getId();
+        	this.uniqueID = component.getId();
     	}
     }
     
-    public TagComponent getTagComponent() {
-		return tagComponent;
+    public Component getTagComponent() {
+		return component;
 	}
 
 	public Object setProperty(String name, Object newValue) {
-    	return tagComponent.setProperty(name, newValue);
+    	return component.setProperty(name, newValue);
     }
 
     public Object getProperty(String name) {
-    	return tagComponent.getProperty(name);
+    	return component.getProperty(name);
     }
     
     public Object getProperty(String name, Object defaultValue) {
-    	return tagComponent.getProperty(name, defaultValue);
+    	return component.getProperty(name, defaultValue);
     }
     
     public String getDefaultTemplate() {
     	throw new UnsupportedOperationException();
     }
     
-    protected TagComponent createTagComponent() {
-    	return new TagComponent();
+    protected Component createComponent() {
+    	return new Component();
     }
     
     protected Object getParentTag() {
-    	return tagComponent.getParentTag();
+    	return component.getParentTag();
     }
     
 	public boolean isWrapper() {

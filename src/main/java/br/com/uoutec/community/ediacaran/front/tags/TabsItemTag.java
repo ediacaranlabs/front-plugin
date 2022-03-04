@@ -31,13 +31,13 @@ public class TabsItemTag extends AbstractSimpleComponent {
     	Object parent = super.getParentTag();
     	
     	if(parent instanceof TabsTag) {
-    		((TabsTag)parent).add(this.getTagComponent());
+    		((TabsTag)parent).add(this.getComponent());
     	}
     	
     }
 
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		protected void beforePrepareVars(Map<String, Object> vars) {
     			vars.put("show", Boolean.TRUE.equals(active)?  "show" : "");

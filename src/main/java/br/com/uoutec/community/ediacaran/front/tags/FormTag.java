@@ -43,8 +43,8 @@ public class FormTag extends AbstractSimpleComponent {
 	public FormTag() {
 	}
 
-    protected TagComponent createTagComponent() {
-    	return new TagComponent() {
+    protected Component createComponent() {
+    	return new Component() {
     		
     		protected void applyTemplate(String template, Map<String, Object> vars, Writer out){
     	    	Object oldForm = super.setProperty(FORM, FormTag.this);
