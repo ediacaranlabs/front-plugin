@@ -9,7 +9,6 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.jstl.fmt.LocalizationContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import br.com.uoutec.community.ediacaran.ContextManager;
 import br.com.uoutec.community.ediacaran.core.system.registry.MessageBundle;
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
