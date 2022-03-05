@@ -61,7 +61,7 @@ public class TemplateListVarsParser  extends AbstractVarParser{
 	public void parse(Writer writter) throws ThemeException {
 		for(Map<String, Object> o: vars) {
 			ComponentVars cv = (ComponentVars) o.get(null);
-			theme.applyTagTemplate(template, packageName, cv == null? new EmptyVarsBuilder() : cv, o, writter);
+			theme.buildComponent(template, packageName, cv == null? new EmptyVarsBuilder() : cv, o, writter);
 		}
 	}
 

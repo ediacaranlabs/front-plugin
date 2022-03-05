@@ -133,7 +133,7 @@ public class Component
     }
     
     protected void applyTemplate(String template, Map<String, Object> vars, Writer out){
-    	getTheme().applyTagTemplate(template, getPackageTheme(), this, vars, out);
+    	getTheme().buildComponent(template, getPackageTheme(), this, vars, out);
     }
     
     public void setParentTag(Object tag) {

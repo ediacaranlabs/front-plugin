@@ -46,7 +46,7 @@ public class TemplateListVarParser  extends AbstractVarParser{
 	@Override
 	public void parse(Writer writter) throws ThemeException {
 		for(Object[] o: vars) {
-			theme.applyTagTemplate(template, packageName, writter, o);
+			theme.buildComponent(template, packageName, writter, o);
 		}
 	}
 

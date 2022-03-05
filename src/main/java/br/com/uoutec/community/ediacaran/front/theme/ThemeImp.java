@@ -30,7 +30,7 @@ public class ThemeImp implements Theme{
 	}
 
 	@Override
-	public void applyTagTemplate(String template, String packageName, ComponentVars componentVars, Map<String, Object> extVars, Writer out) throws ThemeException {
+	public void buildComponent(String template, String packageName, ComponentVars componentVars, Map<String, Object> extVars, Writer out) throws ThemeException {
 		
 		ThemePackage temaPackage = getPackage(packageName);
 		
@@ -72,7 +72,7 @@ public class ThemeImp implements Theme{
 	}
 
 	@Override
-	public void applyTagTemplate(String template, String packageName, Writer out, Object... vars) throws ThemeException {
+	public void buildComponent(String template, String packageName, Writer out, Object... vars) throws ThemeException {
 		
 		ThemePackage temaPackage = getPackage(packageName);
 		
