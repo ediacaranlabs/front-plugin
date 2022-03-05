@@ -16,7 +16,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
 @Tag(
 	name="load-data", 
-	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
 public class LoadDataTag  extends SimpleTagSupport {

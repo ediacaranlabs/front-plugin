@@ -10,7 +10,7 @@ import br.com.uoutec.community.ediacaran.front.theme.PublicResource;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateListVarsParser;
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
 
-@Tag(name="resources", uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components")
+@Tag(name="resources", uri="https://www.uoutec.com.br/ediacaran/tags/components")
 public class ResourcesTagComponent extends AbstractSimpleTagComponent {
 	
 	public static final String TEMPLATE = "/components/resources";

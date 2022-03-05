@@ -14,7 +14,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
 @Tag(
 	name="field-validator-param", 
-	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
 public class FieldValidatorRuleParamTagComponent extends AbstractSimpleTagComponent {

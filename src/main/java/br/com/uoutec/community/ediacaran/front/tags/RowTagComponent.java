@@ -6,7 +6,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
 @Tag(
 	name="row", 
-	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/designer", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
 public class RowTagComponent  extends AbstractSimpleTagComponent {

@@ -5,7 +5,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 
 @Tag(
 		name="price-box-footer", 
-		uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+		uri="https://www.uoutec.com.br/ediacaran/tags/components", 
 		bodycontent=BodyTypes.SCRIPTLESS
 		)
 public class PriceBoxFooterTagComponent  extends AbstractSimpleTagComponent {

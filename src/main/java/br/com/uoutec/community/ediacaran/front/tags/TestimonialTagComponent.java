@@ -11,7 +11,7 @@ import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate.VarParser
 
 @Tag(
 	name="testimonial", 
-	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
 public class TestimonialTagComponent extends AbstractSimpleTagComponent {

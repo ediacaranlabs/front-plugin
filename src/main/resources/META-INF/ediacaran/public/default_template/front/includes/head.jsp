@@ -1,4 +1,4 @@
-<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components" prefix="ec"%>
+<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/components" prefix="ec"%>
 <ec:resources type="css"/>
 <ec:resources type="js"/>
 <script type="text/javascript">

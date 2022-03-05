@@ -20,7 +20,7 @@ import br.com.uoutec.community.ediacaran.plugins.PluginType;
 
 @Tag(
 	name="setBundle", 
-	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
 	bodycontent=BodyTypes.EMPTY
 )
 public class BundleTag extends SimpleTagSupport {

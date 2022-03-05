@@ -11,7 +11,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
 @Tag(
 	name="menu-body", 
-	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
 public class MenuBodyTagComponent  extends AbstractSimpleTagComponent {

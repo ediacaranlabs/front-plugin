@@ -15,7 +15,7 @@ import br.com.uoutec.community.ediacaran.front.theme.Theme;
 
 @Tag(
 	name="nivo-slider", 
-	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 	)
 public class NivoTagComponent extends AbstractBodyTagComponent {

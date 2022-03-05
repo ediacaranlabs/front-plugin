@@ -1,5 +1,5 @@
-<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components" prefix="ec"%>
-<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer"   prefix="ed"%>
+<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/components" prefix="ec"%>
+<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
 <ec:setTemplatePackage name="admin"/>
 <footer>
     <strong>Copyright © 2018-2021 <a href="https://www.uoutec.com.br/ediacaran">Ediacaran</a>.</strong>
