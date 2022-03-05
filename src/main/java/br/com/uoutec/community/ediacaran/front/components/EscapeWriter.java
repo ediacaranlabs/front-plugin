@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front.tags;
+package br.com.uoutec.community.ediacaran.front.components;
 
 import java.io.IOException;
 import java.io.Writer;
