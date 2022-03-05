@@ -255,7 +255,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 			map.put(type, resources);
 		}
 
-		if(!path.startsWith("/")) {
+		if(!path.startsWith("/") && !path.toLowerCase().matches("^http?(s):\\/\\/.*")) {
 			path = entry.tema.getContext() + "/" + path;
 		}
 		
@@ -313,7 +313,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 			return;
 		}
 
-		if(!path.startsWith("/")) {
+		if(!path.startsWith("/") && !path.toLowerCase().matches("^http?(s):\\/\\/.*")) {
 			path = entry.tema.getContext() + "/" + path;
 		}
 		
