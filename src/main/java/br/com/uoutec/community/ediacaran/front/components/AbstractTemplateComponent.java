@@ -11,7 +11,7 @@ import java.util.Set;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateComponent;
-import br.com.uoutec.community.ediacaran.front.theme.TagTemplate;
+import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateLoader;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
@@ -80,7 +80,7 @@ public abstract class AbstractTemplateComponent
 				
 			}});
 	
-	private TagTemplate tagTemplate;
+	private ComponentTemplate componentTemplate;
 	
 	public AbstractTemplateComponent() {
 		this.loadConfiguration();
@@ -101,7 +101,7 @@ public abstract class AbstractTemplateComponent
 			file = file.getCanonicalFile();
 			
 			TemplateLoader loader = new TemplateLoader();
-			this.tagTemplate = loader.load(file, "UTF-8");
+			this.componentTemplate = loader.load(file, "UTF-8");
 		}
 		catch(Throwable e) {
 			throw new ThemeException("load template fail: " + t, e);
@@ -117,7 +117,7 @@ public abstract class AbstractTemplateComponent
 	@Override
 	public void build(Map<String, Object> vars, Writer out) throws ThemeException {
 		try {
-			tagTemplate.toWriter(out, vars);
+			componentTemplate.toWriter(out, vars);
 		}
 		catch(Throwable e) {
 			throw new ThemeException(e);
@@ -127,7 +127,7 @@ public abstract class AbstractTemplateComponent
 	@Override
 	public void build(Writer out, Object... vars) throws ThemeException {
 		try {
-			tagTemplate.toWriter(out, vars);
+			componentTemplate.toWriter(out, vars);
 		}
 		catch(Throwable e) {
 			throw new ThemeException(e);

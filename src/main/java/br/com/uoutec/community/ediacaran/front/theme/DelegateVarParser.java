@@ -3,7 +3,7 @@ package br.com.uoutec.community.ediacaran.front.theme;
 import java.io.IOException;
 import java.io.Writer;
 
-import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
+import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate.VarParser;
 
 public class DelegateVarParser implements VarParser{
 

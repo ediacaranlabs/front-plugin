@@ -9,7 +9,7 @@ import java.nio.charset.Charset;
 
 public class TemplateLoader {
 
-	public TagTemplate load(File resource, String charsetName) throws IOException {
+	public ComponentTemplate load(File resource, String charsetName) throws IOException {
 		
 		StringBuilder stringBuilder = new StringBuilder();
 		String line = null;
@@ -23,7 +23,7 @@ public class TemplateLoader {
 				}
 		}
 		
-		return new TagTemplate(stringBuilder.toString());
+		return new ComponentTemplate(stringBuilder.toString());
 	}
 	
 }

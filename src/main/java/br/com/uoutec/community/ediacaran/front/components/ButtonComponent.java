@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.ButtonTag;
+import br.com.uoutec.community.ediacaran.front.tags.ButtonTagComponent;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
 import br.com.uoutec.community.ediacaran.front.theme.EmptyVarsBuilder;
@@ -119,7 +119,7 @@ public class ButtonComponent extends ComponentFormComponent {
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						Boolean enabled = ((ButtonTag)component).getEnabled();
+						Boolean enabled = ((ButtonTagComponent)component).getEnabled();
 						return enabled != null && !enabled? " disabled" : "";
 					}
 				});

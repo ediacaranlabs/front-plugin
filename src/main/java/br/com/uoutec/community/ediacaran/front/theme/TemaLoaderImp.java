@@ -45,9 +45,9 @@ public class TemaLoaderImp implements TemaLoader, PublicBean{
 		}
 	}
 
-	private Map<String,TagTemplate> getTagTemplates() throws IOException, PluginException {
+	private Map<String,ComponentTemplate> getTagTemplates() throws IOException, PluginException {
 		
-		Map<String,TagTemplate> templates = new HashMap<String, TagTemplate>();
+		Map<String,ComponentTemplate> templates = new HashMap<String, ComponentTemplate>();
 		
 		File[] files = templatesPath.listFiles();
 		

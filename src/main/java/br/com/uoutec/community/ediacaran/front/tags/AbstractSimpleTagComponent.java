@@ -12,7 +12,7 @@ import br.com.uoutec.community.ediacaran.front.components.ComponentData;
 import br.com.uoutec.community.ediacaran.front.components.EscapeVarParser;
 import br.com.uoutec.community.ediacaran.front.components.JspFragmentVarParser;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
-import br.com.uoutec.community.ediacaran.front.theme.TagTemplate.VarParser;
+import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate.VarParser;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 
 public abstract class AbstractSimpleTagComponent 
