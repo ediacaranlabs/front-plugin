@@ -157,7 +157,7 @@ public class ThemeEdiacaranListener implements EdiacaranEventListener{
 						TemplateComponent c = (TemplateComponent)ClassUtil.getInstance(value);
 						c.loadConfiguration();
 						c.loadTemplate();
-						themeRegistry.registerComponentTemplate(path[0], path[1], template, c);
+						themeRegistry.registerTemplateComponent(path[0], path[1], template, c);
 					}
 					
 				}

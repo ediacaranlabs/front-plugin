@@ -64,6 +64,29 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	}
 
 	@Override
+	public void unregisterTheme(String name) {
+
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			
+			sm.checkPermission(new RuntimePermission(PERMISSION_PREFIX + ".theme." + name + ".unregister"));
+		}
+		
+		
+		if(themes.remove(name) != null) {
+			if(logger.isWarnEnabled()) {
+				logger.warn("theme {} removed", name);
+			}
+		}
+		else
+		if(logger.isTraceEnabled()) {
+			logger.trace("theme {} not found", name);
+		}
+		
+	}
+	
+	@Override
 	public synchronized void registerPackageTheme(String name, String packageName, String template) throws ThemeException{
 
 		SecurityManager sm = System.getSecurityManager();
@@ -101,9 +124,39 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 			
 		
 	}
+
+	@Override
+	public synchronized void unregisterPackageTheme(String name, String packageName) {
+
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(PERMISSION_PREFIX + ".theme." + name + ".package.register"));
+		}
+		
+
+		if(packageName == null) {
+			throw new ThemeException("theme package not found: " + name + "/" + packageName);
+		}
+		
+		ThemeEntry entry = themes.get(name);
+		
+		if(entry == null) {
+			return;
+		}
+		
+			
+		boolean removed = entry.packages.remove(packageName) != null;
+		
+		if(logger.isTraceEnabled()) {
+			logger.trace("{} package: {}[theme={}, template={}]", removed? "removed" : "not found", packageName, name);
+		}
+			
+		
+	}
 	
 	@Override
-	public synchronized void registerComponentTemplate(String name, String packageName, String template, TemplateComponent tagTemplate) throws ThemeException{
+	public synchronized void registerTemplateComponent(String name, String packageName, String template, TemplateComponent tagTemplate) throws ThemeException{
 
 		SecurityManager sm = System.getSecurityManager();
 		
@@ -141,6 +194,37 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	}
 
 	@Override
+	public synchronized void unregisterTemplateComponent(String name, String packageName, String template, TemplateComponent tagTemplate) {
+
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(PERMISSION_PREFIX + ".theme." + name + ".component.unregister"));
+		}
+		
+
+		ThemeEntry entry = themes.get(name);
+		
+		if(entry == null) {
+			return;
+		}
+		
+		ThemePackage temaPackage = entry.packages.get(packageName);
+		
+		if(temaPackage == null) {
+			return;
+		}
+		
+		ConcurrentMap<String, TemplateComponent> tagTemplates = temaPackage.getTagTemplates();
+		
+		boolean removed = tagTemplates.remove(template) != null;
+		
+		if(logger.isTraceEnabled()) {
+			logger.trace("{} template component: {}[template={}, package={}]", removed? "removed": "fot found",name, template, packageName);
+		}
+		
+	}	
+	@Override
 	public synchronized void registerResource(String name, String packageName, String resource, String type, String path) throws ThemeException{
 
 		SecurityManager sm = System.getSecurityManager();
@@ -171,8 +255,8 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 			map.put(type, resources);
 		}
 
-		if(path.startsWith("/")) {
-			path = entry.tema.getContext() + path;
+		if(!path.startsWith("/")) {
+			path = entry.tema.getContext() + "/" + path;
 		}
 		
 		PublicResource pr = new PublicResource(resource, path);
@@ -198,6 +282,50 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		}
 		
 	}
+
+	@Override
+	public synchronized void unregisterResource(String name, String packageName, String resource, String type, String path) {
+
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(PERMISSION_PREFIX + ".theme." + name + ".resource.unregister"));
+		}
+		
+
+		ThemeEntry entry = themes.get(name);
+		
+		if(entry == null) {
+			return;
+		}
+		
+		ThemePackage temaPackage = entry.packages.get(packageName);
+		
+		if(temaPackage == null) {
+			return;
+		}
+		
+		ConcurrentMap<String, List<PublicResource>> map = temaPackage.getResources();
+		
+		List<PublicResource> resources = map.get(type);
+		
+		if(resources == null) {
+			return;
+		}
+
+		if(!path.startsWith("/")) {
+			path = entry.tema.getContext() + "/" + path;
+		}
+		
+		PublicResource pr = new PublicResource(resource, null);
+		
+		boolean removed = resources.remove(pr);
+			
+		if(logger.isTraceEnabled()) {
+			logger.trace("{} resource: {}[path={}, resource={}, package={}]", removed? "removed" : "not found",name, path, resource, packageName);
+		}
+		
+	}
 	
 	@Override
 	public Theme getCurrentTheme() {
@@ -214,29 +342,6 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		}
 		
 		return entry.tema;
-	}
-
-	@Override
-	public void unregisterTheme(String name) {
-
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			
-			sm.checkPermission(new RuntimePermission(PERMISSION_PREFIX + ".theme." + name + ".unregister"));
-		}
-		
-		
-		if(themes.remove(name) != null) {
-			if(logger.isWarnEnabled()) {
-				logger.warn("theme {} removed", name);
-			}
-		}
-		else
-		if(logger.isTraceEnabled()) {
-			logger.trace("theme {} not found", name);
-		}
-		
 	}
 
 	@SuppressWarnings("unused")
