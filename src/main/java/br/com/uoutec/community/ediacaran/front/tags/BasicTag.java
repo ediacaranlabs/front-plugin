@@ -1,6 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-public abstract class BasicTag extends AbstractSimpleComponent{
+public abstract class BasicTag extends AbstractSimpleTagComponent{
 	
 	private String accesskey;
 	

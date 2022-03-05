@@ -2,6 +2,7 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -11,7 +12,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.EMPTY
 )
-public class GalleryImageTag  extends AbstractSimpleComponent {
+public class GalleryImageTag  extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE  = "/components/gallery-image";
 	

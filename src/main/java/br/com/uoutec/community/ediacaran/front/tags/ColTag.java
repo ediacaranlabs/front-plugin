@@ -9,7 +9,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class ColTag  extends AbstractSimpleComponent {
+public class ColTag  extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE  = "/designer/col";
 	

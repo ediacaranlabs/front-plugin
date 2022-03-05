@@ -13,7 +13,7 @@ import br.com.uoutec.community.ediacaran.front.theme.DelegateVarParser;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class TestimonialInfoTag extends AbstractSimpleComponent {
+public class TestimonialInfoTag extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE = "/components/testimonial-info";
 	

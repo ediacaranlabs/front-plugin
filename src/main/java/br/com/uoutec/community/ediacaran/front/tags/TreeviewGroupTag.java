@@ -8,7 +8,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class TreeviewGroupTag  extends AbstractSimpleComponent {
+public class TreeviewGroupTag  extends AbstractSimpleTagComponent {
 
 	public static final String CONTEXT_ID = TreeviewGroupTag.class.getName() + ":CONTEXT";
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -13,7 +14,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class PropertyConfigListTag extends AbstractSimpleComponent {
+public class PropertyConfigListTag extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE 			= "/components/property-config-list";
 
@@ -38,12 +39,12 @@ public class PropertyConfigListTag extends AbstractSimpleComponent {
     		public void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
     			Object cp = super.getParentTag();
     			if(cp != null) {
-    				if(cp instanceof AbstractSimpleComponent) {
-    					parentID = ((AbstractSimpleComponent)cp).getId();
+    				if(cp instanceof AbstractSimpleTagComponent) {
+    					parentID = ((AbstractSimpleTagComponent)cp).getId();
     				}
     				else
-    				if(cp instanceof AbstractPanelComponent) {
-    					parentID = ((AbstractPanelComponent)cp).getId();
+    				if(cp instanceof AbstractBodyTagComponent) {
+    					parentID = ((AbstractBodyTagComponent)cp).getId();
     				}
     			}
     			

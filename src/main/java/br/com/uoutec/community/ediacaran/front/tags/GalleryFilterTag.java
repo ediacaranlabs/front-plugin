@@ -9,7 +9,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.EMPTY
 )
-public class GalleryFilterTag  extends AbstractSimpleComponent {
+public class GalleryFilterTag  extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE  = "/components/gallery-filter";
 	

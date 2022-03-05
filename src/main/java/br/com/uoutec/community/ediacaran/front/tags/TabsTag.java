@@ -13,7 +13,7 @@ import br.com.uoutec.community.ediacaran.front.theme.TemplateListVarsParser;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class TabsTag extends AbstractPanelComponent {
+public class TabsTag extends AbstractBodyTagComponent {
 
 	private static final long serialVersionUID = 748182107582888257L;
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -13,7 +14,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class EventTag extends AbstractSimpleComponent {
+public class EventTag extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE  = "/components/event";
 	
@@ -28,12 +29,12 @@ public class EventTag extends AbstractSimpleComponent {
     	    	if(componentName == null) {
     				Object cp = super.getParentTag();
     				if(cp != null) {
-    					if(cp instanceof AbstractSimpleComponent) {
-    						componentName = ((AbstractSimpleComponent)cp).getId();
+    					if(cp instanceof AbstractSimpleTagComponent) {
+    						componentName = ((AbstractSimpleTagComponent)cp).getId();
     					}
     					else
-    					if(cp instanceof AbstractPanelComponent) {
-    						componentName = ((AbstractPanelComponent)cp).getId();
+    					if(cp instanceof AbstractBodyTagComponent) {
+    						componentName = ((AbstractBodyTagComponent)cp).getId();
     					}
     				}
     	    	}

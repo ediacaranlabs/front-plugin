@@ -9,7 +9,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class MenuBarTag  extends AbstractSimpleComponent {
+public class MenuBarTag  extends AbstractSimpleTagComponent {
 
 	public static final String CONTEXT_ID = MenuBarTag.class.getName() + ":CONTEXT";
 	

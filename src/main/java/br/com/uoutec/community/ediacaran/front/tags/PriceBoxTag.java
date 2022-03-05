@@ -9,7 +9,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class PriceBoxTag  extends AbstractSimpleComponent {
+public class PriceBoxTag  extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE  = "/components/price-box";
 	

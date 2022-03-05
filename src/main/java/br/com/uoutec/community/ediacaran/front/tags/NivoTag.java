@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
+import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -17,7 +18,7 @@ import br.com.uoutec.community.ediacaran.front.theme.Theme;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 	)
-public class NivoTag extends AbstractPanelComponent {
+public class NivoTag extends AbstractBodyTagComponent {
 
 	private static final long serialVersionUID = 748182107582888257L;
 

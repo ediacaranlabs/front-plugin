@@ -1,6 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-public class GroupTag  extends AbstractSimpleComponent {
+public class GroupTag  extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE  = "/designer/group";
 	

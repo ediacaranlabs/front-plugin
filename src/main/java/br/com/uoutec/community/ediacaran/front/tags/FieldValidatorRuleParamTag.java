@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.FieldValidatorTag.ValidatorParamEntity;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
@@ -16,7 +17,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class FieldValidatorRuleParamTag extends AbstractSimpleComponent {
+public class FieldValidatorRuleParamTag extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE = "/components/content";
 	

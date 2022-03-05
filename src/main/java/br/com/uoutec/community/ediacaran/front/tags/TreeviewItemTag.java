@@ -9,7 +9,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class TreeviewItemTag  extends AbstractSimpleComponent {
+public class TreeviewItemTag  extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE  = "/components/treeview-item";
 	

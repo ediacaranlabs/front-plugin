@@ -2,7 +2,7 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
-public abstract class ComponentFormTag extends AbstractSimpleComponent {
+public abstract class ComponentFormTag extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE = "/components/form-group";
 	

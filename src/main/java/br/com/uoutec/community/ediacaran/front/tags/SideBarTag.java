@@ -2,7 +2,9 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.util.Map;
 
-public class SideBarTag  extends AbstractSimpleComponent {
+import br.com.uoutec.community.ediacaran.front.components.Component;
+
+public class SideBarTag  extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE  = "/components/sidebar";
 	

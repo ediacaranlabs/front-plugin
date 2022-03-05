@@ -8,7 +8,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.EMPTY
 )
-public class DropdownSeparatorTag  extends AbstractSimpleComponent {
+public class DropdownSeparatorTag  extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE  = "/components/dropdown-separator";
 	

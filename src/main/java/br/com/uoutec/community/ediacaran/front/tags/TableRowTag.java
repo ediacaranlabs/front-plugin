@@ -9,7 +9,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class TableRowTag  extends AbstractSimpleComponent {
+public class TableRowTag  extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE  = "/components/table-row-header";
 	

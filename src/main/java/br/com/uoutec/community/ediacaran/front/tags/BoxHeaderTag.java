@@ -8,7 +8,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class BoxHeaderTag extends AbstractSimpleComponent {
+public class BoxHeaderTag extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE = "/components/box-header";
 	

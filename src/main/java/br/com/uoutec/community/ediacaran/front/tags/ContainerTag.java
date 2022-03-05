@@ -8,7 +8,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 	uri="https://www.uoutec.com.br/ediacaran/tags/bootstrap4/designer", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class ContainerTag  extends AbstractSimpleComponent {
+public class ContainerTag  extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE  = "/designer/container";
 	
