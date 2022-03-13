@@ -20,6 +20,7 @@ public class TableColTemplateComponent  extends AbstractTemplateComponent {
 			add("cols");
 			add("rows");
 			remove("classStyle");
+			remove("style");
 		}});
 	
 		super.default_attribute_parsers = 

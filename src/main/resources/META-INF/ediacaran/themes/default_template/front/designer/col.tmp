@@ -1,3 +1,3 @@
-<div {attr} class="{size} {classStyle}">
+<div {attr} class="{size} {style} {classStyle}">
 {content}
 </div>

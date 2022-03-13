@@ -16,6 +16,8 @@ public class ListTemplateComponent  extends AbstractTemplateComponent {
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
+			remove("classStyle");
+			remove("style");
 		}});
 	
 		super.default_attribute_parsers = 

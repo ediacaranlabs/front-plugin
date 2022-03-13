@@ -181,14 +181,18 @@ public class Component
 				p = parser.toName(p, cp);
 				v = parser.toValue(v, cp);
 			}
-			
-			if(p != null) {
-				sb.append(p).append("=\"").append(v).append("\"");
+
+			if(v != null){
+				
+				if(p != null && !p.isEmpty()) {
+					sb.append(p).append("=\"").append(v).append("\"");
+				}
+				else{
+					sb.append(v);
+				}
+				
 			}
-			else {
-				sb.append(v);
-			}
-			
+
 		}
 		
 		if(componentData.getExtAttrs() != null) {

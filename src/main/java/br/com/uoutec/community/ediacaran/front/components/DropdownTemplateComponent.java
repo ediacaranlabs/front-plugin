@@ -17,6 +17,8 @@ public class DropdownTemplateComponent extends AbstractTemplateComponent {
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
+			remove("classStyle");
+			remove("style");
 		}});
 	
 	

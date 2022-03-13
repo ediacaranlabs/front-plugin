@@ -17,6 +17,8 @@ public class RowTemplateComponent  extends AbstractTemplateComponent {
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
+			remove("style");
+			remove("classStyle");
 		}});
 	
 		super.default_attribute_parsers = 

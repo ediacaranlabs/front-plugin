@@ -1,4 +1,4 @@
-<div {attr} class="testimonial {classStyle}">
+<div {attr} class="testimonial {classStyle} {style}">
  	<p class="text">
 		<i class="fa fa-quote-left fa-2x"></i> {content}
     </p>

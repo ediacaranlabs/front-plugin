@@ -50,6 +50,19 @@ public abstract class AbstractTemplateComponent
 					}
 					
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
+						return value == null || component.getProperty("style") != null? null : value;
+					}
+					
+				});
+
+				put("style", new PropertyParserImp() {
+
+					@Override
+					public String toName(String value, PropertiesComponentTemplate component) {
+						return value == null? null : "class";
+					}
+					
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						
 						String style = String.valueOf(component.getProperty("style"));
 						String align = String.valueOf(component.getProperty("align"));
@@ -62,7 +75,7 @@ public abstract class AbstractTemplateComponent
 						}
 						
 						if(align != null && align.trim().length() != 0) {
-							sb.append("center".equals(value)? " mx-auto d-block" : " float-" + value);
+							sb.append("center".equals(align)? " mx-auto d-block" : " float-" + align);
 						}
 						
 						if(style != null && style.trim().length() != 0) {
@@ -70,6 +83,16 @@ public abstract class AbstractTemplateComponent
 						}
 						
 						return sb.toString();
+					}
+					
+					
+				});
+
+				put("align", new PropertyParserImp() {
+					
+					@Override
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
+						return null;
 					}
 					
 				});
