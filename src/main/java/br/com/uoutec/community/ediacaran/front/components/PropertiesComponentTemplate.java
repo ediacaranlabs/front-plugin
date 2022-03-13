@@ -10,4 +10,6 @@ public interface PropertiesComponentTemplate {
 	
 	Object getProperty(String name);
 	
+	String getType();
+	
 }

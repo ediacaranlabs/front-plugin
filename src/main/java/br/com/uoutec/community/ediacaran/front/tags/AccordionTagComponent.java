@@ -24,5 +24,10 @@ public class AccordionTagComponent extends AbstractSimpleTagComponent {
     public String getDefaultTemplate() {
     	return TEMPLATE;
     }
+
+	@Override
+	public String getType() {
+		return "accordion";
+	}
     
 }

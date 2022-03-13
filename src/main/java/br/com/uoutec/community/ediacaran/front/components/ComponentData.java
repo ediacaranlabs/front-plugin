@@ -10,4 +10,6 @@ public interface ComponentData {
 	
     String getDefaultTemplate();
 	
+    String getType();
+    
 }

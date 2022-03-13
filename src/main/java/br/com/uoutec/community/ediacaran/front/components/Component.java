@@ -159,7 +159,7 @@ public class Component
 		
 		Map<String,Object> vars = getVars(defaultAttributes, emptyAttributes);
 		StringBuilder sb = new StringBuilder();
-		PropertiesComponentTemplate cp = new PropertiesComponentTemplateImp(this, vars);
+		PropertiesComponentTemplate cp = new PropertiesComponentTemplateImp(this, componentData.getType(), vars);
 		
 		for(Entry<String,Object> e: vars.entrySet()) {
 			
@@ -212,7 +212,7 @@ public class Component
 		this.beforePrepareVars(result);
 		
 		Map<String,Object> vars = getVars(defaultProperties, null);
-		PropertiesComponentTemplate cp = new PropertiesComponentTemplateImp(this, vars);
+		PropertiesComponentTemplate cp = new PropertiesComponentTemplateImp(this, componentData.getType(), vars);
 
 		result.put("attr", getAttrList(attributeParsers, emptyAttributes, defaultAttributes));
 		

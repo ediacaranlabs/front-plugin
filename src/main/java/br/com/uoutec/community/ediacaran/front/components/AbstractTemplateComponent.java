@@ -27,6 +27,8 @@ public abstract class AbstractTemplateComponent
 		Collections.unmodifiableSet(new HashSet<String>() {{
 			add("id");
 			add("classStyle");
+			add("style");
+			add("align");
 		}});
 
 	@SuppressWarnings("serial")
@@ -46,6 +48,30 @@ public abstract class AbstractTemplateComponent
 					public String toName(String value, PropertiesComponentTemplate component) {
 						return value == null? null : "class";
 					}
+					
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
+						
+						String style = String.valueOf(component.getProperty("style"));
+						String align = String.valueOf(component.getProperty("align"));
+						String classStyle = String.valueOf(component.getProperty("classStyle"));
+						
+						StringBuilder sb = new StringBuilder();
+						
+						if(classStyle != null && classStyle.trim().length() != 0) {
+							sb.append(classStyle);
+						}
+						
+						if(align != null && align.trim().length() != 0) {
+							sb.append("center".equals(value)? " mx-auto d-block" : " float-" + value);
+						}
+						
+						if(style != null && style.trim().length() != 0) {
+							sb.append(" ").append(component.getType()).append("-").append(style);
+						}
+						
+						return sb.toString();
+					}
+					
 				});
 				
 			}});

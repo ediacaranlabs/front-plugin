@@ -61,6 +61,11 @@ public class AccordionItemTagComponent extends AbstractSimpleTagComponent {
 
 	public void setParentID(String parentID) {
 		this.parentID = parentID;
+	}
+
+	@Override
+	public String getType() {
+		return "accordion-item";
 	}	
     
 }

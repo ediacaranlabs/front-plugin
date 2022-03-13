@@ -7,13 +7,15 @@ import br.com.uoutec.community.ediacaran.front.theme.Theme;
 public class PropertiesComponentTemplateImp implements PropertiesComponentTemplate{
 
 	private Component component;
+
+	private String type;
 	
 	private Map<String, Object> properties;
 
-	public PropertiesComponentTemplateImp(Component component, Map<String, Object> properties) {
-		super();
+	public PropertiesComponentTemplateImp(Component component, String type, Map<String, Object> properties) {
 		this.component = component;
 		this.properties = properties;
+		this.type = type;
 	}
 
 	@Override
@@ -29,6 +31,11 @@ public class PropertiesComponentTemplateImp implements PropertiesComponentTempla
 	@Override
 	public Object getProperty(String name) {
 		return properties.get(name);
+	}
+
+	@Override
+	public String getType() {
+		return type;
 	}
 	
 }
