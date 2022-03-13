@@ -64,21 +64,21 @@ public abstract class AbstractTemplateComponent
 					
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						
-						String style = String.valueOf(component.getProperty("style"));
-						String align = String.valueOf(component.getProperty("align"));
-						String classStyle = String.valueOf(component.getProperty("classStyle"));
+						Object style = component.getProperty("style");
+						Object align = component.getProperty("align");
+						Object classStyle = component.getProperty("classStyle");
 						
 						StringBuilder sb = new StringBuilder();
 						
-						if(classStyle != null && classStyle.trim().length() != 0) {
+						if(classStyle != null) {
 							sb.append(classStyle);
 						}
 						
-						if(align != null && align.trim().length() != 0) {
+						if(align != null) {
 							sb.append("center".equals(align)? " mx-auto d-block" : " float-" + align);
 						}
 						
-						if(style != null && style.trim().length() != 0) {
+						if(style != null) {
 							sb.append(" ").append(component.getType()).append("-").append(style);
 						}
 						
