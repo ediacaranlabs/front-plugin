@@ -17,4 +17,9 @@ public class GroupTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "group";
+	}
+    
 }

@@ -35,4 +35,9 @@ public class ContentSectionTagComponent  extends AbstractSimpleTagComponent {
 		this.title = title;
 	}
 
+	@Override
+	public String getType() {
+		return "content-section";
+	}
+	
 }

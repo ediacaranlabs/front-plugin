@@ -140,4 +140,9 @@ public class TextareaTagComponent extends FieldFormTagComponent {
 		this.minlength = minlength;
 	}
 
+	@Override
+	public String getType() {
+		return "textarea";
+	}
+	
 }

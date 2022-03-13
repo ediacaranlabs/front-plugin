@@ -47,4 +47,9 @@ public class LabelTagComponent extends AbstractSimpleTagComponent {
 		this.size = size;
 	}
 
+	@Override
+	public String getType() {
+		return "label";
+	}
+	
 }

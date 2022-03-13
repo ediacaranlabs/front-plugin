@@ -35,4 +35,9 @@ public class DropdownItemTagComponent  extends FieldFormTagComponent {
 		this.src = src;
 	}
 
+	@Override
+	public String getType() {
+		return "dropdown-item";
+	}
+	
 }

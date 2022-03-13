@@ -25,4 +25,9 @@ public class TreeviewGroupTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "treeview-group";
+	}
+    
 }

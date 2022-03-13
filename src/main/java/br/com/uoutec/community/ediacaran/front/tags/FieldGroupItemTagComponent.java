@@ -37,4 +37,9 @@ public class FieldGroupItemTagComponent  extends AbstractSimpleTagComponent {
 		this.text = text;
 	}
 
+	@Override
+	public String getType() {
+		return "prepend-field-item";
+	}
+	
 }

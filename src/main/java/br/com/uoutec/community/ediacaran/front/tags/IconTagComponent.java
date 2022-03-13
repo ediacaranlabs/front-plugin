@@ -81,4 +81,9 @@ public class IconTagComponent extends AbstractSimpleTagComponent {
 		this.icon = icon;
 	}
 
+	@Override
+	public String getType() {
+		return "icon";
+	}
+	
 }

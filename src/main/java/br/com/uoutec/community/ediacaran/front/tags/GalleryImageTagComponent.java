@@ -95,4 +95,9 @@ public class GalleryImageTagComponent  extends AbstractSimpleTagComponent {
 		this.text = text;
 	}
     
+	@Override
+	public String getType() {
+		return "gallery-image";
+	}
+	
 }

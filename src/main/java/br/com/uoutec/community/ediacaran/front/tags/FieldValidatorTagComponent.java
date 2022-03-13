@@ -145,6 +145,11 @@ public class FieldValidatorTagComponent extends AbstractBodyTagComponent {
     	return TEMPLATE;
     }
 	
+	@Override
+	public String getType() {
+		return "field-validator";
+	}
+    
 	public static class ValidatorEntity {
 		
 		private String name;

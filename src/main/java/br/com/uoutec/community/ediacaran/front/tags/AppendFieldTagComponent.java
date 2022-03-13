@@ -23,4 +23,9 @@ public class AppendFieldTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "append-field";
+	}
+    
 }

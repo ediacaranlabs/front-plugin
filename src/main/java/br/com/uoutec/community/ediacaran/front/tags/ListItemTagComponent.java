@@ -49,4 +49,9 @@ public class ListItemTagComponent  extends AbstractSimpleTagComponent {
 		this.inline = inline;
 	}
 
+	@Override
+	public String getType() {
+		return "list-item";
+	}
+	
 }

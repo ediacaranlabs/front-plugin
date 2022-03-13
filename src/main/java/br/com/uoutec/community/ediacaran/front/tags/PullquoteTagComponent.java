@@ -35,4 +35,9 @@ public class PullquoteTagComponent  extends AbstractSimpleTagComponent {
 		this.align = align;
 	}
 
+	@Override
+	public String getType() {
+		return "pullquote";
+	}
+	
 }

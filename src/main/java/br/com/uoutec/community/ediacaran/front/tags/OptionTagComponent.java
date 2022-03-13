@@ -46,4 +46,9 @@ public class OptionTagComponent extends FieldFormTagComponent {
 		this.label = label;
 	}
 
+	@Override
+	public String getType() {
+		return "option";
+	}
+	
 }

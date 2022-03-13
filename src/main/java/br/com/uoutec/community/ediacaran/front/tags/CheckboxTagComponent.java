@@ -58,4 +58,9 @@ public class CheckboxTagComponent extends FieldFormTagComponent {
 		this.inline = inline;
 	}
 
+	@Override
+	public String getType() {
+		return "checkbox";
+	}
+	
 }

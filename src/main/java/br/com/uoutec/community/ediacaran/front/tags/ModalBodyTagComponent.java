@@ -23,4 +23,9 @@ public class ModalBodyTagComponent extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "modal-body";
+	}
+    
 }

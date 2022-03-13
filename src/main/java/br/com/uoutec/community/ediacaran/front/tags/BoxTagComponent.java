@@ -23,4 +23,9 @@ public class BoxTagComponent extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "box";
+	}
+    
 }

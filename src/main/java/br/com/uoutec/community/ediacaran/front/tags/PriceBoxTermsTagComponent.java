@@ -23,4 +23,9 @@ public class PriceBoxTermsTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "price-box-terms";
+	}
+    
 }

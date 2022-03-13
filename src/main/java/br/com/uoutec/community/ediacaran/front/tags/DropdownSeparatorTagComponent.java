@@ -23,4 +23,9 @@ public class DropdownSeparatorTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 	
+	@Override
+	public String getType() {
+		return "dropdown-separator";
+	}
+    
 }

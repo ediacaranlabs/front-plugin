@@ -34,5 +34,10 @@ public class ModalTagComponent extends AbstractSimpleTagComponent {
 	public void setFade(Boolean fade) {
 		this.fade = fade;
 	}
+
+	@Override
+	public String getType() {
+		return "modal";
+	}
 	
 }

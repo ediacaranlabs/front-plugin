@@ -23,4 +23,9 @@ public class TreeviewLabelTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "treeview-label";
+	}
+    
 }

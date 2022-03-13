@@ -23,4 +23,9 @@ public class ModalFooterTagComponent extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "modal-footer";
+	}
+    
 }

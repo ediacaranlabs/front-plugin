@@ -23,4 +23,9 @@ public class TableBodyTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "table-body";
+	}
+    
 }

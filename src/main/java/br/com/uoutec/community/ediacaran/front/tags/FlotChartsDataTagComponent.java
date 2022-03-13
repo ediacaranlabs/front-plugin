@@ -94,4 +94,9 @@ public class FlotChartsDataTagComponent extends AbstractSimpleTagComponent {
 		this.flotchartseriesid = flotchartseriesid;
 	}
 	
+	@Override
+	public String getType() {
+		return "flotcharts-data";
+	}
+	
 }

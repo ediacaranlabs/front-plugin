@@ -137,4 +137,9 @@ public class URLFieldTagComponent extends FieldFormTagComponent {
 		this.size = size;
 	}
 
+	@Override
+	public String getType() {
+		return "urlfield";
+	}
+	
 }

@@ -36,4 +36,9 @@ public class ImageTagComponent  extends AbstractSimpleTagComponent {
 		this.src = src;
 	}
 	
+	@Override
+	public String getType() {
+		return "image";
+	}
+	
 }

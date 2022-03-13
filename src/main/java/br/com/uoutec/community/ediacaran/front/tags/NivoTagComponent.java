@@ -83,4 +83,9 @@ public class NivoTagComponent extends AbstractBodyTagComponent {
 		this.button = button;
 	}
 
+	@Override
+	public String getType() {
+		return "nivo";
+	}
+	
 }

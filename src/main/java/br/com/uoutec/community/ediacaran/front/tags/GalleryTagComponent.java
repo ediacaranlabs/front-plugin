@@ -73,4 +73,9 @@ public class GalleryTagComponent  extends AbstractSimpleTagComponent {
 		this.nextImage = nextImage;
 	}
 
+	@Override
+	public String getType() {
+		return "gallery";
+	}
+	
 }

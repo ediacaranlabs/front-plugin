@@ -52,4 +52,9 @@ public class GalleryFiltersTagComponent  extends AbstractSimpleTagComponent {
 		this.galleryID = galleryID;
 	}
     
+	@Override
+	public String getType() {
+		return "gallery-filters";
+	}
+	
 }

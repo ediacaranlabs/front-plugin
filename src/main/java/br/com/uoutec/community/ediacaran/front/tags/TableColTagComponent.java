@@ -51,4 +51,9 @@ public class TableColTagComponent  extends AbstractSimpleTagComponent {
 		this.rows = rows;
 	}
 
+	@Override
+	public String getType() {
+		return "table-col";
+	}
+	
 }

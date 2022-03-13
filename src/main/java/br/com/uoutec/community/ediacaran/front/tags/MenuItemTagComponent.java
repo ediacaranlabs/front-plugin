@@ -37,4 +37,9 @@ public class MenuItemTagComponent  extends AbstractSimpleTagComponent {
 		this.href = href;
 	}
 
+	@Override
+	public String getType() {
+		return "menu-item";
+	}
+	
 }

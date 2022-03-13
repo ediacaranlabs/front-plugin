@@ -67,5 +67,9 @@ public class FlotChartsTagComponent extends AbstractSimpleTagComponent {
 	public void setUpdateFrequenceUnit(String updateFrequenceUnit) {
 		this.updateFrequenceUnit = updateFrequenceUnit;
 	}
+	@Override
+	public String getType() {
+		return "flotcharts";
+	}
 	
 }

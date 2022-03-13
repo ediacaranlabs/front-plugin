@@ -88,4 +88,9 @@ public class TabsTagComponent extends AbstractBodyTagComponent {
 		this.index = index;
 	}
 
+	@Override
+	public String getType() {
+		return "tabs";
+	}
+	
 }

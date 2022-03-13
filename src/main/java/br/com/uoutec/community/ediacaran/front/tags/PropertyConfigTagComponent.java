@@ -111,4 +111,9 @@ public class PropertyConfigTagComponent extends AbstractSimpleTagComponent {
 		this.raw = raw;
 	}
 	
+	@Override
+	public String getType() {
+		return "property-config";
+	}
+	
 }

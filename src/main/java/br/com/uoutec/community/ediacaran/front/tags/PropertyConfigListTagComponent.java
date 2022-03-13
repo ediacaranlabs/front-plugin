@@ -83,4 +83,9 @@ public class PropertyConfigListTagComponent extends AbstractSimpleTagComponent {
 		this.parentID = parentID;
 	}
 
+	@Override
+	public String getType() {
+		return "property-config-list";
+	}
+	
 }

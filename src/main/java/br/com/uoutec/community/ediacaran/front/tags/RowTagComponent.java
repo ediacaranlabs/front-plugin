@@ -35,4 +35,9 @@ public class RowTagComponent  extends AbstractSimpleTagComponent {
 		this.style = style;
 	}
 
+	@Override
+	public String getType() {
+		return "row";
+	}
+	
 }

@@ -113,5 +113,10 @@ public class FormTagComponent extends AbstractSimpleTagComponent {
 	public void setUpdate(String update) {
 		this.update = update;
 	}
+
+	@Override
+	public String getType() {
+		return "form";
+	}
 	
 }

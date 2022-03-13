@@ -58,4 +58,9 @@ public class RadioTagComponent extends FieldFormTagComponent {
 		this.inline = inline;
 	}
 
+	@Override
+	public String getType() {
+		return "radio";
+	}
+	
 }

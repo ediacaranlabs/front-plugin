@@ -35,4 +35,9 @@ public class PriceBoxItemTagComponent  extends AbstractSimpleTagComponent {
 		this.checked = checked;
 	}
 
+	@Override
+	public String getType() {
+		return "price-box-item";
+	}
+	
 }

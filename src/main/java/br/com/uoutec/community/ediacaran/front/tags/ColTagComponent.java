@@ -57,4 +57,9 @@ public class ColTagComponent  extends AbstractSimpleTagComponent {
 		this.order = order;
 	}
 
+	@Override
+	public String getType() {
+		return "col";
+	}
+	
 }

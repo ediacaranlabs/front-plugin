@@ -23,4 +23,9 @@ public class TableFooterTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "table-footer";
+	}
+    
 }

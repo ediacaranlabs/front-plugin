@@ -138,4 +138,9 @@ public class TextfieldTagComponent extends FieldFormTagComponent {
 		this.size = size;
 	}
 
+	@Override
+	public String getType() {
+		return "textfield";
+	}
+	
 }

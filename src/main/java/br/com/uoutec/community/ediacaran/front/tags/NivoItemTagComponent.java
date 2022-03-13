@@ -71,4 +71,9 @@ public class NivoItemTagComponent extends AbstractSimpleTagComponent {
 		this.title = title;
 	}
 	
+	@Override
+	public String getType() {
+		return "nivo-item";
+	}
+	
 }

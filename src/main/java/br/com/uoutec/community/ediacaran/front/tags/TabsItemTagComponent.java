@@ -75,4 +75,9 @@ public class TabsItemTagComponent extends AbstractSimpleTagComponent {
 		this.icon = icon;
 	}
 	
+	@Override
+	public String getType() {
+		return "tabs-item";
+	}
+	
 }

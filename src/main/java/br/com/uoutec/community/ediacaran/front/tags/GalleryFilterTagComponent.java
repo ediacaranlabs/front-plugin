@@ -57,4 +57,9 @@ public class GalleryFilterTagComponent  extends AbstractSimpleTagComponent {
 		this.active = active;
 	}
 
+	@Override
+	public String getType() {
+		return "gallery-filter";
+	}
+	
 }

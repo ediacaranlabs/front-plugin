@@ -37,4 +37,9 @@ public class BlockquoteTagComponent extends AbstractSimpleTagComponent {
 		this.cite = cite;
 	}
 	
+	@Override
+	public String getType() {
+		return "blockquote";
+	}
+	
 }

@@ -23,4 +23,9 @@ public class PrependFieldTagComponent extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "prepend-field";
+	}
+    
 }

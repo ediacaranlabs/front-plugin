@@ -23,4 +23,9 @@ public class DescriptionListTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "description-list";
+	}
+    
 }

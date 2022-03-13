@@ -23,4 +23,9 @@ public class CarouselTagComponent extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "carousel";
+	}
+    
 }

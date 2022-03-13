@@ -72,4 +72,9 @@ public class FlotChartsSeriesTagComponent extends AbstractSimpleTagComponent {
 		this.data = data;
 	}
 	
+	@Override
+	public String getType() {
+		return "flotcharts-series";
+	}
+	
 }

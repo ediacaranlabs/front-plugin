@@ -39,4 +39,9 @@ public class MenuLabelTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "menu-label";
+	}
+    
 }

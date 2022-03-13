@@ -82,4 +82,9 @@ public class LandingSectionTagComponent  extends AbstractSimpleTagComponent {
 		this.align = align;
 	}
 
+	@Override
+	public String getType() {
+		return "landing-section";
+	}
+	
 }

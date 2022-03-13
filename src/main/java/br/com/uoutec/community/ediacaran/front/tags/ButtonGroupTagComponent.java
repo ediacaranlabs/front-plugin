@@ -23,4 +23,9 @@ public class ButtonGroupTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "button-group";
+	}
+    
 }

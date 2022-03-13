@@ -52,4 +52,9 @@ public class GalleryImagesTagComponent  extends AbstractSimpleTagComponent {
 		this.galleryID = galleryID;
 	}
     
+	@Override
+	public String getType() {
+		return "gallery-images";
+	}
+	
 }

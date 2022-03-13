@@ -55,4 +55,9 @@ public class ListTagComponent  extends AbstractSimpleTagComponent {
     	return "ordered".equals(getStyle())? TEMPLATE2 : TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "list";
+	}
+    
 }

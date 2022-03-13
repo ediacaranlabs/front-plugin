@@ -23,4 +23,9 @@ public class TableHeaderTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "table-header";
+	}
+    
 }

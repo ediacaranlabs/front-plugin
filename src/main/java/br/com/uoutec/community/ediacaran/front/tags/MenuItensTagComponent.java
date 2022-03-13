@@ -104,4 +104,9 @@ public class MenuItensTagComponent  extends AbstractSimpleTagComponent {
 		this.resource = resource;
 	}
 
+	@Override
+	public String getType() {
+		return "menu-itens";
+	}
+	
 }

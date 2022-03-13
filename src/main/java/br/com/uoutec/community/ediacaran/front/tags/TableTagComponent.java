@@ -36,4 +36,9 @@ public class TableTagComponent  extends AbstractSimpleTagComponent {
 		this.style = style;
 	}
 
+	@Override
+	public String getType() {
+		return "table";
+	}
+	
 }

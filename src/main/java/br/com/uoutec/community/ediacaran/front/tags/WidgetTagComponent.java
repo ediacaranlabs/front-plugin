@@ -35,4 +35,9 @@ public class WidgetTagComponent  extends AbstractSimpleTagComponent {
 		this.title = title;
 	}
 
+	@Override
+	public String getType() {
+		return "widget";
+	}
+	
 }

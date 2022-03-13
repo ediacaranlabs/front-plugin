@@ -35,4 +35,9 @@ public class PriceBoxTagComponent  extends AbstractSimpleTagComponent {
 		this.attractiveness = attractiveness;
 	}
     
+	@Override
+	public String getType() {
+		return "price-box";
+	}
+	
 }

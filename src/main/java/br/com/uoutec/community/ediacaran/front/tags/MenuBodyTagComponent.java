@@ -58,4 +58,9 @@ public class MenuBodyTagComponent  extends AbstractSimpleTagComponent {
 		this.menuID = menuID;
 	}
 
+	@Override
+	public String getType() {
+		return "menu-body";
+	}
+	
 }

@@ -72,4 +72,9 @@ public class MenuBarTagComponent  extends AbstractSimpleTagComponent {
 		this.sidebar = sidebar;
 	}
 
+	@Override
+	public String getType() {
+		return "menu-bar";
+	}
+	
 }

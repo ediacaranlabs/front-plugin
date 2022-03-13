@@ -114,4 +114,9 @@ public class SelectTagComponent extends FieldFormTagComponent {
 		this.sizeList = sizeList;
 	}
 
+	@Override
+	public String getType() {
+		return "select";
+	}
+	
 }

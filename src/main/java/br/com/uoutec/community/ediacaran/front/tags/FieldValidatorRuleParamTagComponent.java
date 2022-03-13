@@ -96,4 +96,9 @@ public class FieldValidatorRuleParamTagComponent extends AbstractSimpleTagCompon
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "field-validator-param";
+	}
+	
 }

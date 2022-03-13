@@ -87,4 +87,9 @@ public class DropdownTagComponent  extends FieldFormTagComponent {
 		this.variation = variation;
 	}
 
+	@Override
+	public String getType() {
+		return "dropdown";
+	}
+	
 }

@@ -34,5 +34,10 @@ public class FieldGroupTagComponent  extends AbstractSimpleTagComponent {
 	public void setSize(String size) {
 		this.size = size;
 	}
-    
+ 
+	@Override
+	public String getType() {
+		return "field-group";
+	}
+	
 }

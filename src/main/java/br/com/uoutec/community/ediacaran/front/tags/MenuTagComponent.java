@@ -25,4 +25,9 @@ public class MenuTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "menu";
+	}
+    
 }

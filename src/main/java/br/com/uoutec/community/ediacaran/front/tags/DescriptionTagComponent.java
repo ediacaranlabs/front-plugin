@@ -68,4 +68,9 @@ public class DescriptionTagComponent  extends AbstractSimpleTagComponent {
 		this.contentWidth = contentWidth;
 	}
 
+	@Override
+	public String getType() {
+		return "description";
+	}
+	
 }

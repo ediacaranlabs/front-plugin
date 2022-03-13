@@ -35,4 +35,9 @@ public class TreeviewItemTagComponent  extends AbstractSimpleTagComponent {
 		this.href = href;
 	}
 
+	@Override
+	public String getType() {
+		return "treeview-item";
+	}
+	
 }

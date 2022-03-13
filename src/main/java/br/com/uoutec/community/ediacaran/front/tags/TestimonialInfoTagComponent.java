@@ -40,4 +40,9 @@ public class TestimonialInfoTagComponent extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "testimonial-info";
+	}
+    
 }

@@ -35,4 +35,9 @@ public class MenuBarBrandTagComponent  extends AbstractSimpleTagComponent {
 		this.href = href;
 	}
 
+	@Override
+	public String getType() {
+		return "menu-bar-brand";
+	}
+	
 }

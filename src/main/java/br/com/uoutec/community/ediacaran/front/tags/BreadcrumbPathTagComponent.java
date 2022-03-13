@@ -59,4 +59,9 @@ public class BreadcrumbPathTagComponent extends AbstractSimpleTagComponent {
 		this.lnk = lnk;
 	}
     
+	@Override
+	public String getType() {
+		return "breadcrumb-path";
+	}
+	
 }

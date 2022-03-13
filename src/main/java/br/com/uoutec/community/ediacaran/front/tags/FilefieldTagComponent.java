@@ -82,4 +82,9 @@ public class FilefieldTagComponent extends FieldFormTagComponent {
 		this.label = label;
 	}
 
+	@Override
+	public String getType() {
+		return "filefield";
+	}
+	
 }

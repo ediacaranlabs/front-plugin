@@ -35,4 +35,9 @@ public class IntroTagComponent  extends AbstractSimpleTagComponent {
 		this.bgImage = bgImage;
 	}
 
+	@Override
+	public String getType() {
+		return "intro";
+	}
+	
 }

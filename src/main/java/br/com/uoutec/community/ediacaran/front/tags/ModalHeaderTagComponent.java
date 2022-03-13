@@ -23,4 +23,9 @@ public class ModalHeaderTagComponent extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
+	@Override
+	public String getType() {
+		return "modal-header";
+	}
+    
 }

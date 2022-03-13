@@ -35,5 +35,9 @@ public class ModalCloseButtonTagComponent extends AbstractSimpleTagComponent {
 		this.label = label;
 	}
 
+	@Override
+	public String getType() {
+		return "modal-close";
+	}
 	
 }

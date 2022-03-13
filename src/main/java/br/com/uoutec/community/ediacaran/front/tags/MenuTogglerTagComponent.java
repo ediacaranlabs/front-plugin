@@ -59,4 +59,9 @@ public class MenuTogglerTagComponent  extends AbstractSimpleTagComponent {
 		this.menuID = menuID;
 	}
 
+	@Override
+	public String getType() {
+		return "menu-toggler";
+	}
+	
 }

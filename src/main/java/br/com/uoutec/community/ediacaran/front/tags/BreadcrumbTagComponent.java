@@ -35,4 +35,9 @@ public class BreadcrumbTagComponent extends AbstractSimpleTagComponent {
 		this.title = title;
 	}
 
+	@Override
+	public String getType() {
+		return "breadcrumb";
+	}
+	
 }

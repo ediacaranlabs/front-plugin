@@ -50,4 +50,9 @@ public class SideBarTagComponent  extends AbstractSimpleTagComponent {
 		this.align = align;
 	}
 
+	@Override
+	public String getType() {
+		return "sidebar";
+	}
+	
 }

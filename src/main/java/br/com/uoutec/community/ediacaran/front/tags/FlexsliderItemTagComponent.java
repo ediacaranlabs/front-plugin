@@ -35,4 +35,9 @@ public class FlexsliderItemTagComponent  extends AbstractSimpleTagComponent {
 		this.src = src;
 	}
 	
+	@Override
+	public String getType() {
+		return "flexslider-item";
+	}
+	
 }

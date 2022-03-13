@@ -36,4 +36,9 @@ public class PrettifyTagComponent  extends AbstractSimpleTagComponent {
 		this.linenums = linenums;
 	}
 
+	@Override
+	public String getType() {
+		return "prettify";
+	}
+	
 }
