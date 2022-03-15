@@ -1,1 +1,1 @@
-<cite>{content}</cite>
+<cite><a href="{src}">{content}</a></cite>

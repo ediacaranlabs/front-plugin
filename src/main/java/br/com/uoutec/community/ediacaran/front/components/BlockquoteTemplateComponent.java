@@ -19,16 +19,28 @@ public class BlockquoteTemplateComponent extends AbstractTemplateComponent {
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
+			add("src");
 		}});
 	
 		super.default_attribute_parsers = 
 		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
+			
+			put("src", new PropertyParserImp() {
+				
+				@Override
+				public String toName(String value, PropertiesComponentTemplate component) {
+					return "cite";
+				}
+				
+			});
+			
 		}});
 
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("content");
 			add("cite");
+			add("src");
 		}});
 	
 		super.default_property_parsers = 
@@ -40,6 +52,7 @@ public class BlockquoteTemplateComponent extends AbstractTemplateComponent {
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
 						ComponentVarsBuilder cvb = new ComponentVarsBuilder();
 						cvb.put("content", value);
+						cvb.put("src", component.getProperty("src") == null? "#" : component.getProperty("src"));
 						return value == null? null : new TemplateVarParser("/components/cite", component.getPackageTheme(), 
 								cvb, component.getTheme());
 					}

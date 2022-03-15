@@ -19,6 +19,8 @@ public class BlockquoteTagComponent extends AbstractSimpleTagComponent {
 	
 	/* ------------ Prop ---------------*/
 	
+	private String src;
+	
 	private String cite;
 	
 	public BlockquoteTagComponent() {
@@ -32,11 +34,20 @@ public class BlockquoteTagComponent extends AbstractSimpleTagComponent {
 		return cite;
 	}
 
-	@TagAttribute(fragment=false)
+	@TagAttribute
 	public void setCite(String cite) {
 		this.cite = cite;
 	}
 	
+	public String getSrc() {
+		return src;
+	}
+
+	@TagAttribute
+	public void setSrc(String src) {
+		this.src = src;
+	}
+
 	@Override
 	public String getType() {
 		return "blockquote";
