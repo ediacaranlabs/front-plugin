@@ -33,8 +33,6 @@ public class ButtonTagComponent extends FieldFormTagComponent {
 	
 	private String size;
 	
-	private String type;
-	
 	private Boolean block;
 	
 	private Boolean outline;
@@ -119,12 +117,7 @@ public class ButtonTagComponent extends FieldFormTagComponent {
 	}
 
 	public String getType() {
-		return type;
-	}
-
-	@TagAttribute
-	public void setType(String type) {
-		this.type = type;
+		return "button";
 	}
 
 	public Boolean getBlock() {

@@ -26,6 +26,7 @@ public class ButtonTemplateComponent extends ComponentFormTemplateComponent {
 			add("target");
 			add("actionType");
 			remove("classStyle");
+			remove("style");
 		}});
 	
 		super.default_attribute_parsers = 
@@ -78,7 +79,7 @@ public class ButtonTemplateComponent extends ComponentFormTemplateComponent {
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("label");
 			add("size");
-			add("type");
+			add("style");
 			add("block");
 			add("outline");
 			add("classStyle");
@@ -98,7 +99,7 @@ public class ButtonTemplateComponent extends ComponentFormTemplateComponent {
 					}
 				});
 
-				put("type", new PropertyParserImp() {
+				put("style", new PropertyParserImp() {
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
