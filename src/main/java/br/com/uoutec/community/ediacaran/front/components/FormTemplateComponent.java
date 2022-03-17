@@ -79,7 +79,7 @@ public class FormTemplateComponent extends AbstractTemplateComponent {
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						return "inline".equals(value)? "form-inline " : "";
+						return value == null? null : "form-" + value + " ";
 					}
 				});
 				
