@@ -21,7 +21,7 @@ public class SelectTemplateComponent extends ComponentFormTemplateComponent {
 			add("autofocus");
 			add("required");
 			add("multiple");
-			add("sizeList");
+			add("rows");
 		}});
 	
 	
@@ -42,7 +42,7 @@ public class SelectTemplateComponent extends ComponentFormTemplateComponent {
 				
 			});
 
-			put("sizeList", new PropertyParserImp() {
+			put("rows", new PropertyParserImp() {
 				
 				@Override
 				public String toName(String value, PropertiesComponentTemplate component) {

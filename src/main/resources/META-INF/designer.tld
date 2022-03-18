@@ -64,7 +64,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
+                    <name>id</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -73,7 +73,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>id</name>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -130,7 +130,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
+                    <name>id</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -139,7 +139,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>id</name>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -223,7 +223,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
+                    <name>id</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -232,7 +232,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>id</name>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>

@@ -26,7 +26,7 @@ public class SelectTagComponent extends FieldFormTagComponent {
 	
 	private Boolean multiple;
 	
-	private Integer sizeList;
+	private Integer rows;
 	
 	/* ------------ Prop ---------------*/
 	
@@ -105,13 +105,13 @@ public class SelectTagComponent extends FieldFormTagComponent {
 		this.size = size;
 	}
 
-	public Integer getSizeList() {
-		return sizeList;
+	public Integer getRows() {
+		return rows;
 	}
 
 	@TagAttribute
-	public void setSizeList(Integer sizeList) {
-		this.sizeList = sizeList;
+	public void setRows(Integer rows) {
+		this.rows = rows;
 	}
 
 	@Override

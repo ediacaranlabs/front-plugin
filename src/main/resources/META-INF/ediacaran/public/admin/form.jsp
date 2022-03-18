@@ -48,7 +48,7 @@
 							<ec:option>4</ec:option>
 							<ec:option>5</ec:option>
 						</ec:select>
-						<ec:select name="select2" multiple="true" label="Example multiple select">
+						<ec:select name="select2" rows="2" multiple="true" label="Example multiple select">
 							<ec:option>1</ec:option>
 							<ec:option>2</ec:option>
 							<ec:option>3</ec:option>
