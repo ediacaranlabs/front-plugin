@@ -54,7 +54,7 @@
       		</ed:col>
       		<ed:col size="4">
       			<fmt:message key="box.sign_in_button" bundle="${sys_messages}" var="label"/>
-      			<ec:button block="true" label="${label}" type="primary" actionType="submit"/>
+      			<ec:button block="true" label="${label}" style="primary" actionType="submit"/>
       		</ed:col>
 	      </ed:row>
 		</ec:form>

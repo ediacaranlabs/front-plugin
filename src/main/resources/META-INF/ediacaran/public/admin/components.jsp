@@ -30,37 +30,37 @@
 		                	<ec:button label="btn default" />
 						</ed:col>
 						<ed:col size="4">
-		                	<ec:button label="btn primary" type="primary"/>
+		                	<ec:button label="btn primary" style="primary"/>
 						</ed:col>
 						<ed:col size="4">
-        		        	<ec:button label="btn secondary"  type="secondary"/>
-						</ed:col>
-					</ed:row>
-					<ed:row>
-						<ed:col size="4">
-                			<ec:button label="btn success"  type="success"/>
-						</ed:col>
-						<ed:col size="4">
-        		        	<ec:button label="btn danger"  type="danger"/>
-						</ed:col>
-						<ed:col size="4">
-		                	<ec:button label="btn warning"  type="warning"/>
+        		        	<ec:button label="btn secondary"  style="secondary"/>
 						</ed:col>
 					</ed:row>
 					<ed:row>
 						<ed:col size="4">
-		                	<ec:button label="btn info"  type="info"/>
+                			<ec:button label="btn success"  style="success"/>
 						</ed:col>
 						<ed:col size="4">
-        		        	<ec:button label="btn light"  type="light"/>
+        		        	<ec:button label="btn danger"  style="danger"/>
 						</ed:col>
 						<ed:col size="4">
-                			<ec:button label="btn dark"  type="dark"/>
+		                	<ec:button label="btn warning"  style="warning"/>
 						</ed:col>
 					</ed:row>
 					<ed:row>
 						<ed:col size="4">
-		                	<ec:button label="btn link"  type="link"/>
+		                	<ec:button label="btn info"  style="info"/>
+						</ed:col>
+						<ed:col size="4">
+        		        	<ec:button label="btn light"  style="light"/>
+						</ed:col>
+						<ed:col size="4">
+                			<ec:button label="btn dark"  style="dark"/>
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col size="4">
+		                	<ec:button label="btn link"  style="link"/>
 						</ed:col>
 						<ed:col size="4">
 						</ed:col>
@@ -83,12 +83,12 @@
 					</ed:row>
 					<ed:row>
 						<ed:col size="12">
-        		        	<ec:button label="Small button" size="sm" type="success"/>
+        		        	<ec:button label="Small button" size="sm" style="success"/>
 						</ed:col>
 					</ed:row>
 					<ed:row>
 						<ed:col size="12">
-		                	<ec:button label="btn block level" block="true" type="warning"/>
+		                	<ec:button label="btn block level" block="true" style="warning"/>
 						</ed:col>
 					</ed:row>
 				</ec:box-body>
@@ -104,9 +104,9 @@
 				</ec:box-header>
 				<ec:box-body>
 	                <ec:button-group>
-	                	<ec:button label="primary" type="primary"/>
-	                	<ec:button label="success" type="success"/>
-	                	<ec:button label="warning" type="warning"/>
+	                	<ec:button label="primary" style="primary"/>
+	                	<ec:button label="success" style="success"/>
+	                	<ec:button label="warning" style="warning"/>
 	                </ec:button-group>
 				</ec:box-body>
 			</ec:box>
@@ -119,10 +119,10 @@
 				<ec:box-body>
 					<ed:row>
 						<ed:col size="4">
-                			<ec:button label="heart" type="success" size="sm" icon="heart" />
+                			<ec:button label="heart" style="success" size="sm" icon="heart" />
 						</ed:col>
 						<ed:col size="4">
-        		        	<ec:button label="camera" type="red" size="sm" icon="camera" />
+        		        	<ec:button label="camera" style="red" size="sm" icon="camera" />
 						</ed:col>
 						<ed:col size="4">
 		                	<ec:button label="briefcase" size="sm" outline="true" icon="briefcase"/>
