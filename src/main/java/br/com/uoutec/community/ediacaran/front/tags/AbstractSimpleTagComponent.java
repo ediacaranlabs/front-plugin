@@ -81,6 +81,10 @@ public abstract class AbstractSimpleTagComponent
     	throw new UnsupportedOperationException();
     }
     
+    public String getWrapperTemplate() {
+    	throw new UnsupportedOperationException();
+    }
+    
     protected Component createComponent() {
     	return new Component();
     }

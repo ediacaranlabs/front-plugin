@@ -65,7 +65,7 @@ public class MenuItensTagComponent  extends AbstractSimpleTagComponent {
 				TEMPLATE;
     }
 
-    protected String getWrapperTemplate() {
+    public String getWrapperTemplate() {
     	return WRAPPER_TEMPLATE;
     }
     

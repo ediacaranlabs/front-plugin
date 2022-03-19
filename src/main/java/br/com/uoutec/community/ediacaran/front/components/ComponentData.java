@@ -6,6 +6,8 @@ public interface ComponentData {
 	
 	String getTemplate();
 
+	String getWrapperTemplate();
+	
 	boolean isWrapper();
 	
     String getDefaultTemplate();

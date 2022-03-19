@@ -29,7 +29,7 @@ public abstract class FieldFormTagComponent extends AbstractSimpleTagComponent {
 	public FieldFormTagComponent() {
 	}
 	
-    protected String getWrapperTemplate() {
+    public String getWrapperTemplate() {
     	return TEMPLATE;
     }
     

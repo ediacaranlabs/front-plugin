@@ -55,11 +55,12 @@ public class Component
     	
 		Map<String, Object> vars = new HashMap<String, Object>();
 		Writer out               = getOut();
-		String template          = getWrapperTemplate();
+		String template          = componentData.getWrapperTemplate();
+    	String contentTemplate   = componentData.getTemplate() == null? getDefaultTemplate() : componentData.getTemplate();
     	Theme theme              = getTheme();
     	String packageName       = getPackageTheme();
 		
-		vars.put("content",	new TemplateVarParser(componentData.getTemplate() == null? getDefaultTemplate() : componentData.getTemplate(), packageName, this, theme));
+		vars.put("content",	new TemplateVarParser(contentTemplate, packageName, this, theme));
 		
 		beforeApplyTemplate(template, vars, out);
 
@@ -144,10 +145,6 @@ public class Component
     	return getProperty(PARENT_TAG);
     }
     
-    protected String getWrapperTemplate() {
-    	return WRAPPER_TEMPLATE;
-    }
-	
 	protected void beforePrepareVars(Map<String, Object> vars) {
 	}
 	

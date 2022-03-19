@@ -32,9 +32,10 @@ public class DropdownTagComponent  extends FieldFormTagComponent {
 	private String variation; //up, right, left
 	
 	public DropdownTagComponent() {
+		setWrapper(true);
 	}
 	
-    protected String getWrapperTemplate() {
+    public String getWrapperTemplate() {
     	return TEMPLATE_WRAPPER;
     }
     

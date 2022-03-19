@@ -24,12 +24,20 @@ public class SplitDropdownTemplateComponent  extends AbstractTemplateComponent {
 	
 		super.default_attribute_parsers = 
 		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
+			put("id", new PropertyParserImp() {
+				
+				@Override
+				public Object toValue(Object value, PropertiesComponentTemplate component) {
+					return value == null? null : value + "_button";
+				}
+				
+			});
 		}});
 
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
-			add("itens");
+			add("content");
 			add("label");
 			add("style");
 			add("size");
@@ -44,7 +52,7 @@ public class SplitDropdownTemplateComponent  extends AbstractTemplateComponent {
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						return " btn-" + value;
+						return value == null? null : " btn-" + value;
 					}
 					
 				});
@@ -53,7 +61,7 @@ public class SplitDropdownTemplateComponent  extends AbstractTemplateComponent {
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						return " btn-" + value;
+						return value == null? null : " btn-" + value;
 					}
 					
 				});
@@ -62,7 +70,7 @@ public class SplitDropdownTemplateComponent  extends AbstractTemplateComponent {
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						return " drop" + value;
+						return value == null? null : " drop" + value;
 					}
 					
 				});

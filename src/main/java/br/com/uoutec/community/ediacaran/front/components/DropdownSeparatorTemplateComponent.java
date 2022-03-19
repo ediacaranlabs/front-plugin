@@ -27,7 +27,6 @@ public class DropdownSeparatorTemplateComponent  extends AbstractTemplateCompone
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
-			add("size");
 			add("content");
 		}});
 	

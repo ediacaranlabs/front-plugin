@@ -119,6 +119,10 @@ public abstract class AbstractBodyTagComponent
     	throw new UnsupportedOperationException();
     }
     
+    public String getWrapperTemplate() {
+    	throw new UnsupportedOperationException();
+    }
+    
     protected Component createComponent() {
     	return new Component();
     }

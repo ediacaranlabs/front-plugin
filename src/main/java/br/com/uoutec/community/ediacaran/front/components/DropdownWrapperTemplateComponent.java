@@ -30,7 +30,7 @@ public class DropdownWrapperTemplateComponent  extends AbstractTemplateComponent
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
-			add("itens");
+			add("content");
 			add("label");
 			add("style");
 			add("size");
@@ -45,7 +45,7 @@ public class DropdownWrapperTemplateComponent  extends AbstractTemplateComponent
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						return " btn-" + value;
+						return value == null? null : " btn-" + value;
 					}
 					
 				});
@@ -54,7 +54,7 @@ public class DropdownWrapperTemplateComponent  extends AbstractTemplateComponent
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						return " btn-" + value;
+						return value == null? null : " btn-" + value;
 					}
 					
 				});
@@ -63,7 +63,7 @@ public class DropdownWrapperTemplateComponent  extends AbstractTemplateComponent
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						return " drop" + value;
+						return value == null? null : " drop" + value;
 					}
 					
 				});
