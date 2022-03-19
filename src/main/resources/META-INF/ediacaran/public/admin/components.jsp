@@ -311,7 +311,7 @@
 					<ed:row>
 						<ed:col>
 							<ec:dropdown label="Teste" style="primary">
-								<ec:dropdown-item src="#"><ec:icon icon="heart" size="1"/> Test 1</ec:dropdown-item>
+								<ec:dropdown-item src="#"><ec:icon  icon="heart" size="1"/> Test 1</ec:dropdown-item>
 								<ec:dropdown-item src="#"><ec:icon icon="camera" size="1"/> Test 2</ec:dropdown-item>
 								<ec:dropdown-separator/>
 								<ec:dropdown-item src="#"><ec:icon icon="briefcase" size="1"/> Test 3</ec:dropdown-item>
