@@ -266,70 +266,7 @@
 
 	<ed:row>
 		<ed:col size="6">
-			<ec:box style="success">
-				<ec:box-header>
-					<h3>Dropdown</h3>
-				</ec:box-header>
-				<ec:box-body>
-					<ed:row>
-						<ed:col>
-							<ec:dropdown label="Teste" style="primary">
-								<ec:dropdown-item src="#">Test 1</ec:dropdown-item>
-								<ec:dropdown-item src="#">Test 2</ec:dropdown-item>
-								<ec:dropdown-separator/>
-								<ec:dropdown-item src="#">Test 3</ec:dropdown-item>
-							</ec:dropdown>
-						</ed:col>
-						<ed:col>
-							<ec:dropdown label="Teste" style="secondary">
-								<ec:dropdown-item src="#">Test 1</ec:dropdown-item>
-								<ec:dropdown-item src="#">Test 2</ec:dropdown-item>
-								<ec:dropdown-separator/>
-								<ec:dropdown-item src="#">Test 3</ec:dropdown-item>
-							</ec:dropdown>
-						</ed:col>
-						<ed:col>
-							<ec:dropdown label="Teste" style="success">
-								<ec:dropdown-item src="#">Test 1</ec:dropdown-item>
-								<ec:dropdown-item src="#">Test 2</ec:dropdown-item>
-								<ec:dropdown-separator/>
-								<ec:dropdown-item src="#">Test 3</ec:dropdown-item>
-							</ec:dropdown>
-						</ed:col>
-					</ed:row>
-					
-					<ed:row>
-						<ed:col>
-							<ec:dropdown label="Teste" style="info">
-								<ec:dropdown-item src="#">Test 1</ec:dropdown-item>
-								<ec:dropdown-item src="#">Test 2</ec:dropdown-item>
-								<ec:dropdown-separator/>
-								<ec:dropdown-item src="#">Test 3</ec:dropdown-item>
-							</ec:dropdown>
-						</ed:col>
-						<ed:col>
-							<ec:dropdown label="Teste" style="warning">
-								<ec:dropdown-item src="#">Test 1</ec:dropdown-item>
-								<ec:dropdown-item src="#">Test 2</ec:dropdown-item>
-								<ec:dropdown-separator/>
-								<ec:dropdown-item src="#">Test 3</ec:dropdown-item>
-							</ec:dropdown>
-						</ed:col>
-						<ed:col>
-							<ec:dropdown label="Teste" style="danger">
-								<ec:dropdown-item src="#">Test 1</ec:dropdown-item>
-								<ec:dropdown-item src="#">Test 2</ec:dropdown-item>
-								<ec:dropdown-separator/>
-								<ec:dropdown-item src="#">Test 3</ec:dropdown-item>
-							</ec:dropdown>
-						</ed:col>
-					</ed:row>					
-					
-				</ec:box-body>
-			</ec:box>
-		</ed:col>
-		<ed:col size="6">
-		
+
 			<ec:box style="success">
 				<ec:box-header>
 					<h3>Dropdown variation</h3>
@@ -363,11 +300,8 @@
 					</ed:row>
 				</ec:box-body>
 			</ec:box>
-		
-		</ed:col>
-   	</ed:row>
 
-	<ed:row>
+		</ed:col>
 		<ed:col size="6">
 			<ec:box style="success">
 				<ec:box-header>
@@ -387,8 +321,10 @@
 				</ec:box-body>
 			</ec:box>
 		</ed:col>
+   	</ed:row>
+
+	<ed:row>
 		<ed:col size="6">
-		
 			<ec:box style="success">
 				<ec:box-header>
 					<h3>Dropdown badge</h3>
@@ -406,7 +342,8 @@
 					</ed:row>
 				</ec:box-body>
 			</ec:box>
-		
+		</ed:col>
+		<ed:col size="6">
 		</ed:col>
    	</ed:row>
    	
