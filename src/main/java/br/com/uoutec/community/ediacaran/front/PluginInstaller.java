@@ -85,6 +85,28 @@ public class PluginInstaller
 			.setBadgeStyle("warning")
 			.setOrder(99);
 		
+		Menu topMenu1 = topMenu.addMenu("menu")
+				.setName("Menu")
+				.setIcon("tree")
+				.setResource("#")
+				.setOrder(1);
+			
+		topMenu1.addItem("item_1")
+					.setName("Item 1")
+					.setIcon("tree")
+					.setResource("#")
+					.setOrder(1);
+		topMenu1.addItem("item_2")
+					.setName("Item 2")
+					.setIcon("tree")
+					.setResource("#")
+					.setOrder(1);
+		topMenu1.addItem("item_3")
+					.setName("Item 3")
+					.setIcon("tree")
+					.setResource("#")
+					.setOrder(1);
+			
 		leftMenu.addMenu("components")
 			.setName("Components")
 			.setIcon("tree")

@@ -311,7 +311,7 @@
 					<ed:row>
 						<ed:col>
 							<ec:dropdown label="Teste" style="primary">
-								<ec:dropdown-item src="#"><ec:icon  icon="heart" size="1"/> Test 1</ec:dropdown-item>
+								<ec:dropdown-item src="#"><ec:icon icon="heart" size="1"/> Test 1</ec:dropdown-item>
 								<ec:dropdown-item src="#"><ec:icon icon="camera" size="1"/> Test 2</ec:dropdown-item>
 								<ec:dropdown-separator/>
 								<ec:dropdown-item src="#"><ec:icon icon="briefcase" size="1"/> Test 3</ec:dropdown-item>
@@ -442,60 +442,42 @@
    	</ed:row>
 
 	<ed:row>
-		<ed:col size="6">
-			<ec:box>
-				<ec:box-header>
-					<h3>Testimonial</h3>
-				</ec:box-header>
-				<ec:box-body>
-	                <ec:testimonial name="Testimonial name" image="/plugins/ediacaran/front/admin/img/user.png">
-		                There are many variations of passages of randomised words which don't look even slightly 
-		                believable. You need to be sure there isn't anything embarrassing of text.
-		                <ec:testimonial-info>
-		                	Name, <a href="#">www.sitename.com</a>
-		                </ec:testimonial-info>
-	                </ec:testimonial>
-				</ec:box-body>
-			</ec:box>
-		</ed:col>
-		<ed:col size="6">
+		<ed:col size="12">
 			<ec:box>
 				<ec:box-header>
 					<h3>Nivo</h3>
 				</ec:box-header>
 				<ec:box-body>
 					<ec:nivo-slider>
-						<ec:nivo-slider-tem link="#" image="/plugins/ediacaran/front/templates/default_template/img/slides/nivo/bg-1.jpg" title="DNS Dinâmico"/>
-						<ec:nivo-slider-tem link="#" image="/plugins/ediacaran/front/templates/default_template/img/slides/nivo/bg-2.jpg" title="Calypte Cache"/>
-						<ec:nivo-slider-tem link="#" image="/plugins/ediacaran/front/templates/default_template/img/slides/nivo/bg-3.jpg" title="Brutos Framework"/>
+						<ec:nivo-slider-tem link="#" image="/plugins/ediacaran/front/templates/default_template/img/slides/nivo/bg-1.jpg" title="DNS Dinâmico">
+							<p><strong>Augue iriure</strong> dolorum per ex, ne iisque ornatus veritus duo. Ex nobis integre 
+		                    lucilius sit, pri ea falli ludus appareat. Eum quodsi fuisset id, nostro patrioque qui id. Nominati 
+		                    eloquentiam in mea.</p>
+		                    <p>No eum sanctus vituperata reformidans, dicant abhorreant ut pro. Duo id enim iisque praesent, 
+		                    amet intellegat per et, solet referrentur eum et.</p>						
+						</ec:nivo-slider-tem>
+						<ec:nivo-slider-tem link="#" image="/plugins/ediacaran/front/templates/default_template/img/slides/nivo/bg-2.jpg" title="Calypte Cache">
+							<p><strong>Augue iriure</strong> dolorum per ex, ne iisque ornatus veritus duo. Ex nobis integre 
+		                    lucilius sit, pri ea falli ludus appareat. Eum quodsi fuisset id, nostro patrioque qui id. Nominati 
+		                    eloquentiam in mea.</p>
+		                    <p>No eum sanctus vituperata reformidans, dicant abhorreant ut pro. Duo id enim iisque praesent, 
+		                    amet intellegat per et, solet referrentur eum et.</p>						
+						</ec:nivo-slider-tem>
+						<ec:nivo-slider-tem link="#" image="/plugins/ediacaran/front/templates/default_template/img/slides/nivo/bg-3.jpg" title="Brutos Framework">
+							<p><strong>Augue iriure</strong> dolorum per ex, ne iisque ornatus veritus duo. Ex nobis integre 
+		                    lucilius sit, pri ea falli ludus appareat. Eum quodsi fuisset id, nostro patrioque qui id. Nominati 
+		                    eloquentiam in mea.</p>
+		                    <p>No eum sanctus vituperata reformidans, dicant abhorreant ut pro. Duo id enim iisque praesent, 
+		                    amet intellegat per et, solet referrentur eum et.</p>						
+						</ec:nivo-slider-tem>
 					</ec:nivo-slider>
 				</ec:box-body>
 			</ec:box>
 		</ed:col>
    	</ed:row>
-   	
+
 	<ed:row>
-		<ed:col size="6">
-			<ec:box>
-				<ec:box-header>
-					<h3>Carousel</h3>
-				</ec:box-header>
-				<ec:box-body>
-					<ec:carousel>
-						<ec:carousel-item>
-							<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-01.jpg"/></a>
-						</ec:carousel-item> 
-						<ec:carousel-item>
-							<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-02.jpg"/></a>
-						</ec:carousel-item> 
-						<ec:carousel-item>
-							<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-03.jpg"/></a>
-						</ec:carousel-item> 
-					</ec:carousel>
-				</ec:box-body>
-			</ec:box>
-		</ed:col>
-		<ed:col size="6">
+		<ed:col size="12">
 			<ec:box>
 				<ec:box-header>
 					<h3>Gallery</h3>
@@ -549,8 +531,46 @@
 								title="The City"/>
 						</ec:gallery-images>
 					</ec:gallery>
-	
 				</ec:box-body>
 			</ec:box>
 		</ed:col>
-   	</ed:row>   	
+   	</ed:row>
+   	
+	<ed:row>
+		<ed:col size="6">
+			<ec:box>
+				<ec:box-header>
+					<h3>Testimonial</h3>
+				</ec:box-header>
+				<ec:box-body>
+	                <ec:testimonial name="Testimonial name" image="/plugins/ediacaran/front/admin/img/user.png">
+		                There are many variations of passages of randomised words which don't look even slightly 
+		                believable. You need to be sure there isn't anything embarrassing of text.
+		                <ec:testimonial-info>
+		                	Name, <a href="#">www.sitename.com</a>
+		                </ec:testimonial-info>
+	                </ec:testimonial>
+				</ec:box-body>
+			</ec:box>
+		</ed:col>
+		<ed:col size="6">
+			<ec:box>
+				<ec:box-header>
+					<h3>Carousel</h3>
+				</ec:box-header>
+				<ec:box-body>
+					<ec:carousel>
+						<ec:carousel-item>
+							<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-01.jpg"/></a>
+						</ec:carousel-item> 
+						<ec:carousel-item>
+							<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-02.jpg"/></a>
+						</ec:carousel-item> 
+						<ec:carousel-item>
+							<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-03.jpg"/></a>
+						</ec:carousel-item> 
+					</ec:carousel>
+				</ec:box-body>
+			</ec:box>
+		</ed:col>
+   	</ed:row>

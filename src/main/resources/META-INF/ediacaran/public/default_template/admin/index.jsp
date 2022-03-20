@@ -30,8 +30,8 @@
 								</c:if>
 								<ec:badge id="${menu.id}_badge" style="${empty menu.badgeStyle? 'info' : menu.badgeStyle}" type="navbar">${menu.badge}</ec:badge>
 							</ec:menu-label>
+							<ec:menu-itens resource="${menu.body}"/>
 						</ec:menu>
-						<ec:menu-itens resource="${menu.body}"/>
 					</c:when>
 					<c:when test="${fn:length(menu.itens) gt 0}">
 						<ec:menu>
@@ -41,23 +41,25 @@
 								</c:if>
 								<ec:badge id="${menu.id}_badge" style="${empty menu.badgeStyle? 'info' : menu.badgeStyle}" type="navbar">${menu.badge}</ec:badge>
 							</ec:menu-label>
+							<ec:menu-itens>
+								<c:forEach items="${menu.itens}" var="item">
+									<ec:menu-item href="${item.resource}">
+										<c:if test="${not empty item.icon}">
+											<ec:icon icon="${item.icon}" size="1"/>
+										</c:if>
+										${item.fullName}
+										<ec:badge id="${item.id}_badge" style="${empty item.badgeStyle? 'info' : item.badgeStyle}" type="navbar">${item.badge}</ec:badge>
+									</ec:menu-item>
+								</c:forEach>
+							</ec:menu-itens>
 						</ec:menu>
-						<ec:menu-itens>
-							<c:forEach items="${menu.itens}" var="item">
-								<ec:menu-item href="${item.resource}">
-									<c:if test="${not empty item.icon}">
-										<ec:icon icon="${item.icon}" size="1"/>
-									</c:if>
-									<ec:badge id="${item.id}_badge" style="${empty item.badgeStyle? 'info' : item.badgeStyle}" type="navbar">${item.badge}</ec:badge>
-								</ec:menu-item>
-							</c:forEach>
-						</ec:menu-itens>
 					</c:when>
 					<c:otherwise>
 						<ec:menu-item href="${menu.resource}">
 							<c:if test="${not empty menu.icon}">
 								<ec:icon icon="${menu.icon}" size="1"/>
 							</c:if>
+							${item.fullName}
 							<ec:badge id="${menu.id}_badge" style="${empty menu.badgeStyle? 'info' : menu.badgeStyle}" type="navbar">${menu.badge}</ec:badge>
 						</ec:menu-item>
 					</c:otherwise>
@@ -95,8 +97,8 @@
 												<ec:badge id="${menu.id}_badge" style="${empty menu.badgeStyle? 'info' : menu.badgeStyle}" type="navbar">${menu.badge}</ec:badge>
 											</c:if>
 										</ec:menu-label>
+										<ec:menu-itens resource="${menu.body}"/>
 									</ec:menu>
-									<ec:menu-itens resource="${menu.body}"/>
 								</c:when>
 
 								<c:when test="${fn:length(menu.itens) != 0}">

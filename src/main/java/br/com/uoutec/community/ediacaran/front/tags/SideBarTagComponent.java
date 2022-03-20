@@ -4,6 +4,7 @@ import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.front.components.Component;
 
+@Deprecated
 public class SideBarTagComponent  extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE  = "/components/sidebar";

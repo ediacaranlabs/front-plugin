@@ -19,6 +19,7 @@ public class MenuBarTagComponent  extends AbstractSimpleTagComponent {
 	
 	/* ------------ Prop ---------------*/
 	
+	@Deprecated
 	private Boolean sidebar;
 	
 	//private String style; //light, dark

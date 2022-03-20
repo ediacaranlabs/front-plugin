@@ -30,6 +30,7 @@ public class MenuItensTagComponent  extends AbstractSimpleTagComponent {
 	
 	//private String align; //left, right, center
 	
+	@Deprecated
 	private String menuAlign; //left, right
 	
 	private Boolean collapse;
@@ -81,7 +82,7 @@ public class MenuItensTagComponent  extends AbstractSimpleTagComponent {
 		return menuAlign;
 	}
 
-	@TagAttribute
+	//@TagAttribute
 	public void setMenuAlign(String menuAlign) {
 		this.menuAlign = menuAlign;
 	}
