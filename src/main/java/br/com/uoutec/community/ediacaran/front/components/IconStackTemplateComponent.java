@@ -42,6 +42,11 @@ public class IconStackTemplateComponent extends AbstractTemplateComponent {
 						return "bg-size";
 					}
 					
+					@Override
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
+						return value == null? "2" : String.valueOf(value);
+					}
+					
 				});
 				
 				put("iconSize", new PropertyParserImp() {
@@ -49,6 +54,11 @@ public class IconStackTemplateComponent extends AbstractTemplateComponent {
 					@Override
 					public String toName(String value, PropertiesComponentTemplate component) {
 						return "icon-size";
+					}
+
+					@Override
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
+						return value == null? "1" : String.valueOf(value);
 					}
 					
 				});
