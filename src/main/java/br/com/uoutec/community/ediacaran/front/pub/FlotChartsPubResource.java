@@ -2,8 +2,6 @@ package br.com.uoutec.community.ediacaran.front.pub;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -14,6 +12,8 @@ import org.brandao.brutos.annotation.Action;
 import org.brandao.brutos.annotation.Controller;
 import org.brandao.brutos.annotation.ResponseType;
 import org.brandao.brutos.annotation.web.MediaTypes;
+
+import br.com.uoutec.community.ediacaran.front.PropertyConfig;
 
 @Singleton
 @Controller(value="${plugins.ediacaran.front.admin_context}/flotcharts", defaultActionName="/")
@@ -40,7 +40,7 @@ public class FlotChartsPubResource {
 			data.add(new int[] {index++, v});
 		}
 		
-		MapBuilder m = new MapBuilder(); 
+		PropertyConfig m = new PropertyConfig(); 
 		m
 			.with("series")
 				.add()
@@ -89,7 +89,7 @@ public class FlotChartsPubResource {
 			cosData.add(new double[] {i, Math.cos(i)});
 		}
 		
-		MapBuilder m = new MapBuilder(); 
+		PropertyConfig m = new PropertyConfig(); 
 		m
 			.with("axes")
 				.with("yaxis")
@@ -112,6 +112,7 @@ public class FlotChartsPubResource {
 		return m;
 	}
 	
+/*	
 	@SuppressWarnings("serial")
 	public static class MapBuilder 
 		extends HashMap<Object,Object>{
@@ -186,5 +187,5 @@ public class FlotChartsPubResource {
 		}
 		
 	}
-	
+*/	
 }

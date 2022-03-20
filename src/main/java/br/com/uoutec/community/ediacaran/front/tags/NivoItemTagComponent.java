@@ -10,7 +10,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
 @Tag(
-	name="nivo-slider-tem", 
+	name="nivo-slider-item", 
 	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
