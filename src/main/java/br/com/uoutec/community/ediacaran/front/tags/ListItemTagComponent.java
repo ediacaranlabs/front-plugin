@@ -5,7 +5,6 @@ import java.util.Map;
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
-import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
 @Tag(
 	name="list-item", 
@@ -20,7 +19,7 @@ public class ListItemTagComponent  extends AbstractSimpleTagComponent {
 	
 	/* ------------ Prop ---------------*/
 	
-	private Boolean inline;
+	//private Boolean inline;
 	
 	public ListItemTagComponent() {
 	}
@@ -30,7 +29,8 @@ public class ListItemTagComponent  extends AbstractSimpleTagComponent {
     		
     		public void beforePrepareVars(Map<String, Object> vars) {
     			ListTagComponent list = (ListTagComponent) getProperty(ListTagComponent.PARENT);
-    			inline  = "inline".equals(list.getStyle());
+    			vars.put("inline", "inline".equals(list.getStyle()));
+    			//inline  = "inline".equals(list.getStyle());
     		}
     		
     	};
@@ -39,7 +39,7 @@ public class ListItemTagComponent  extends AbstractSimpleTagComponent {
     public String getDefaultTemplate() {
     	return TEMPLATE;
     }
-
+/*
 	public Boolean getInline() {
 		return inline;
 	}
@@ -48,7 +48,7 @@ public class ListItemTagComponent  extends AbstractSimpleTagComponent {
 	public void setInline(Boolean inline) {
 		this.inline = inline;
 	}
-
+*/
 	@Override
 	public String getType() {
 		return "list-item";

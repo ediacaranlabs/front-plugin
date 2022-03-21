@@ -25,7 +25,7 @@ public class ListItemTemplateComponent  extends AbstractTemplateComponent {
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
-			add("inline");
+			//add("inline");
 			add("content");
 		}});
 	
