@@ -17,7 +17,7 @@ public class PriceBoxTagComponent  extends AbstractSimpleTagComponent {
 	
 	/* ------------ Prop ---------------*/
 	
-	private String attractiveness;
+	//private String style; //special
 	
 	public PriceBoxTagComponent() {
 	}
@@ -26,15 +26,6 @@ public class PriceBoxTagComponent  extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
-	public String getAttractiveness() {
-		return attractiveness;
-	}
-
-	@TagAttribute
-	public void setAttractiveness(String attractiveness) {
-		this.attractiveness = attractiveness;
-	}
-    
 	@Override
 	public String getType() {
 		return "price-box";

@@ -51,7 +51,7 @@
 				            </ec:price-box>
 						</ed:col>
 						<ed:col size="4">
-				            <ec:price-box attractiveness="special">
+				            <ec:price-box style="special">
 				            	<ec:price-box-header>
 				            		<h3>Good <strong>Choice</strong></h3>
 				            	</ec:price-box-header>
@@ -137,7 +137,7 @@
 				            </ec:price-box>
 						</ed:col>
 						<ed:col size="3">
-				            <ec:price-box attractiveness="special">
+				            <ec:price-box style="special">
 				            	<ec:price-box-header>
 				            		<h3>Good <strong>Choice</strong></h3>
 				            	</ec:price-box-header>

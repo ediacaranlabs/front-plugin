@@ -17,6 +17,7 @@ public class PriceBoxTemplateComponent  extends AbstractTemplateComponent {
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
+			remove("style");
 		}});
 	
 		super.default_attribute_parsers = 
@@ -26,12 +27,12 @@ public class PriceBoxTemplateComponent  extends AbstractTemplateComponent {
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("content");
-			add("attractiveness");
+			add("style");
 		}});
 	
 		super.default_property_parsers = 
 			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
-				put("attractiveness", new PropertyParserImp() {
+				put("style", new PropertyParserImp() {
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
