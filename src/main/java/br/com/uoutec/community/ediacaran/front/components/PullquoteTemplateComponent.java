@@ -17,6 +17,7 @@ public class PullquoteTemplateComponent  extends AbstractTemplateComponent {
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
+			remove("style");
 		}});
 	
 		super.default_attribute_parsers = 
@@ -25,13 +26,12 @@ public class PullquoteTemplateComponent  extends AbstractTemplateComponent {
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
-			add("align");
 			add("content");
 		}});
 	
 		super.default_property_parsers = 
 			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
-				put("align", new PropertyParserImp() {
+				put("style", new PropertyParserImp() {
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {

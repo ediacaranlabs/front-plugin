@@ -312,10 +312,12 @@
 					<h3>Pullquote left and right</h3>
 				</ec:box-header>
 				<ec:box-body>
-		            <span class="pullquote-left">
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam non mod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. </span>
-		            <span class="pullquote-right margintop10">
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam non mod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. </span>
+					<ec:pullquote>
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam non mod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+					</ec:pullquote>
+					<ec:pullquote style="right">
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam non mod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+					</ec:pullquote>
 				</ec:box-body>
 			</ec:box>
 		</ed:col>

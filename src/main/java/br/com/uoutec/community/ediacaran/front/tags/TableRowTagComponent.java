@@ -2,7 +2,6 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
-import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
 @Tag(
 	name="table-row", 
@@ -17,7 +16,7 @@ public class TableRowTagComponent  extends AbstractSimpleTagComponent {
 	
 	/* ------------ Attr ---------------*/
 	
-	private String style;
+	//private String style;
 	
 	/* ------------ Prop ---------------*/
 	
@@ -28,15 +27,6 @@ public class TableRowTagComponent  extends AbstractSimpleTagComponent {
     	Object parent = this.getParentTag();
     	return parent instanceof TableHeaderTagComponent? TEMPLATE : TEMPLATE_2;
     }
-
-	public String getStyle() {
-		return style;
-	}
-
-	@TagAttribute
-	public void setStyle(String style) {
-		this.style = style;
-	}
 
 	@Override
 	public String getType() {
