@@ -2,7 +2,7 @@
 	$.AppContext.onload(function()&#123;
 	
 		$.AppContext.events.add(
-			"{component}",
+			"{componentName}",
 			"{type}", 
 			function (e)&#123; {content} &#125;
 		);

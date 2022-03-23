@@ -29,7 +29,7 @@ public class EventTemplateComponent extends AbstractTemplateComponent {
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("content");
 			add("type");
-			add("component");
+			add("componentName");
 		}});
 	
 	
