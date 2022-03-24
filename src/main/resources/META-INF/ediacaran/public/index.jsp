@@ -38,7 +38,7 @@
 				<ed:col size="3">
 					<ec:box>
 						<ec:box-header>
-							<ec:icon icon="${item.icon}" bg="circle" size="3" />
+							<ec:icon align="center" icon="${item.icon}" bg="circle" size="3" />
 							<h6>${item.title}</h6>
 						</ec:box-header>
 						<ec:box-body>
