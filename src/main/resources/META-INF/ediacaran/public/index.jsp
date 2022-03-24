@@ -18,9 +18,9 @@
 	
 	<ec:nivo-slider>
 		<c:forEach items="${pageObjects.slider}" var="item">
-			<ec:nivo-slider-tem link="${item.src}" image="${item.img}" title="${item.title}">
+			<ec:nivo-slider-item link="${item.src}" image="${item.img}" title="${item.title}">
 				${item.desc}		
-			</ec:nivo-slider-tem>
+			</ec:nivo-slider-item>
 		</c:forEach>
 	</ec:nivo-slider>
 
