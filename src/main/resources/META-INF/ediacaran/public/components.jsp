@@ -40,28 +40,28 @@
 				<ed:col size="6">
                 	<h4>Button types</h4>
                 	<ec:button label="btn default" />
-                	<ec:button label="btn primary" type="primary"/>
-                	<ec:button label="btn secondary"  type="secondary"/>
-                	<ec:button label="btn success"  type="success"/>
-                	<ec:button label="btn danger"  type="danger"/>
-                	<ec:button label="btn warning"  type="warning"/>
-                	<ec:button label="btn info"  type="info"/>
-                	<ec:button label="btn light"  type="light"/>
-                	<ec:button label="btn dark"  type="dark"/>
-                	<ec:button label="btn link"  type="link"/>
+                	<ec:button label="btn primary" style="primary"/>
+                	<ec:button label="btn secondary"  style="secondary"/>
+                	<ec:button label="btn success"  style="success"/>
+                	<ec:button label="btn danger"  style="danger"/>
+                	<ec:button label="btn warning"  style="warning"/>
+                	<ec:button label="btn info"  style="info"/>
+                	<ec:button label="btn light"  style="light"/>
+                	<ec:button label="btn dark"  style="dark"/>
+                	<ec:button label="btn link"  style="link"/>
                 	<ec:button label="btn outline" outline="true"/>
 				</ed:col>
 				<ed:col size="6">
 					<ec:prettify linenums="true"><button label="btn default" />
-<button label="btn primary" type="primary"/>
-<button label="btn secondary"  type="secondary"/>
-<button label="btn success"  type="success"/>
-<button label="btn danger"  type="danger"/>
-<button label="btn warning"  type="warning"/>
-<button label="btn info"  type="info"/>
-<button label="btn light"  type="light"/>
-<button label="btn dark"  type="dark"/>
-<button label="btn link"  type="link"/>
+<button label="btn primary" style="primary"/>
+<button label="btn secondary"  style="secondary"/>
+<button label="btn success"  style="success"/>
+<button label="btn danger"  style="danger"/>
+<button label="btn warning"  style="warning"/>
+<button label="btn info"  style="info"/>
+<button label="btn light"  style="light"/>
+<button label="btn dark"  style="dark"/>
+<button label="btn link"  style="link"/>
 <button label="btn outline" outline="true"/></ec:prettify>
 				</ed:col>
 			</ed:row>
@@ -70,13 +70,13 @@
 				<ed:col size="6">
 	                <h4>Button with icon</h4>
 	                <p>You can add icon to any choosen buttons. See some example below:</p>
-                	<ec:button label="button icon heart" type="success" size="sm" icon="heart" />
-                	<ec:button label=" button icon camera" type="red" size="sm" icon="camera" />
+                	<ec:button label="button icon heart" style="success" size="sm" icon="heart" />
+                	<ec:button label=" button icon camera" style="red" size="sm" icon="camera" />
                 	<ec:button label="button icon briefcase" size="sm" outline="true" icon="briefcase"/>
 				</ed:col>
 				<ed:col size="6">
-					<ec:prettify linenums="true"><button label="button icon heart" type="success" size="sm" icon="heart" />
-<button label=" button icon camera" type="red" size="sm" icon="camera" />
+					<ec:prettify linenums="true"><button label="button icon heart" style="success" size="sm" icon="heart" />
+<button label=" button icon camera" style="red" size="sm" icon="camera" />
 <button label="button icon briefcase" size="sm" outline="true" icon="briefcase"/></ec:prettify>
 				</ed:col>
 			</ed:row>				
@@ -86,15 +86,15 @@
 	                <h4>More variations</h4>
 	                <p>Wrap a series of buttons with <code>&lt;ec:button-group/&gt;</code></p>
 	                <ec:button-group>
-	                	<ec:button label="primary" type="primary"/>
-	                	<ec:button label="success" type="success"/>
-	                	<ec:button label="warning" type="warning"/>
+	                	<ec:button label="primary" style="primary"/>
+	                	<ec:button label="success" style="success"/>
+	                	<ec:button label="warning" style="warning"/>
 	                </ec:button-group>
 				</ed:col>
 				<ed:col size="6">
-		            <ec:prettify linenums="true"><button label="primary" type="primary"/>
-<button label="success" type="success"/>
-<button label="warning" type="warning"/></ec:prettify>
+		            <ec:prettify linenums="true"><button label="primary" style="primary"/>
+<button label="success" style="success"/>
+<button label="warning" style="warning"/></ec:prettify>
 				</ed:col>
 			</ed:row>
 			
@@ -103,13 +103,13 @@
 	                <h4>Button sizes</h4>
 	                <p>There are 5 button sizes: lg and sm.</p>
                 	<ec:button label="Large button" size="lg"/>
-                	<ec:button label="Small button" size="sm" type="success"/>
-                	<ec:button label="btn block level" block="true" type="warning"/>
+                	<ec:button label="Small button" size="sm" style="success"/>
+                	<ec:button label="btn block level" block="true" style="warning"/>
 				</ed:col>
 				<ed:col size="6">
 		            <ec:prettify linenums="true"><button label="Large button" size="lg"/>
-<button label="Small button" size="sm" type="success"/>
-<button label="btn block level" block="true" type="warning"/></ec:prettify>
+<button label="Small button" size="sm" style="success"/>
+<button label="btn block level" block="true" style="warning"/></ec:prettify>
 				</ed:col>
 			</ed:row>
 			<ed:row>
