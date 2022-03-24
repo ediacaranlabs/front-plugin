@@ -8,7 +8,7 @@
 		"text": "Sign in"
 	},
 	"logo": {
-		"image": "/templates/default_template/img/logo.png",
+		"image": "templates/default_template/img/logo.png",
 		"link": "#",
 		"text": "Application plataform"
 	},
