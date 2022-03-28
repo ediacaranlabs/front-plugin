@@ -4,6 +4,11 @@
 	<ed:container>
 		<ed:row>
 			<ed:col>
+				<ec:list style="inline">
+					<ec:list-item><a href="#"><ec:icon icon="facebook" bg="square" bgSize="2" size="2" /></a></ec:list-item>
+					<ec:list-item><a href="#"><ec:icon icon="twitter" bg="square" bgSize="2" size="2"/></a></ec:list-item>
+					<ec:list-item><a href="#"><ec:icon icon="linkedin" bg="square" bgSize="2" size="2"/></a></ec:list-item>
+				</ec:list>
 			</ed:col>
 			<ed:col classStyle="widget">
 				<h5>Serviços</h5>

@@ -6,15 +6,19 @@
 <ec:load-data file="/header.json" var="pageObjects" />
     <!-- start header -->
    <header>
-		<ec:menu-bar id="top_menu" classStyle="top-menu" expand="xl" style="light">
+		<ec:menu-bar id="${pageObjects['menu']['id']}" classStyle="t${pageObjects['menu']['classStyle']}" expand="${pageObjects['menu']['expand']}" style="${pageObjects['menu']['Style']}">
 			<ed:container>
-			<ec:menu-bar-brand><img src="${pageObjects['logo']['image']}" alt="" class="logo" /></ec:menu-bar-brand>
+			<ec:menu-bar-brand>
+				<ec:image 
+					src="${pageObjects['menu']['menu-bar-brand']['src']}" 
+					classStyle="${pageObjects['menu']['menu-bar-brand']['classStyle']}"/>
+			</ec:menu-bar-brand>
 			<ec:menu-toggler>
 				<ec:icon icon="bars" />
 			</ec:menu-toggler>
 			<ec:menu-body>
 				<ec:menu-itens align="right">
-					<c:forEach items="${pageObjects['menu']}" var="menu">
+					<c:forEach items="${pageObjects['menu']['itens']}" var="menu">
 						<c:choose>
 							<c:when test="${!empty menu['itens']}">
 								<ec:menu>

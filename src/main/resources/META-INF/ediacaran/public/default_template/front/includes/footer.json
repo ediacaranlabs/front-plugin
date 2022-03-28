@@ -1,0 +1,48 @@
+{
+	"@component": "/components/container",
+	"content": {
+		"@component": "/designer/row",
+		"cols": [
+			{
+				"@component": "/components/content",
+				"content": ""
+			},
+			{
+				"@component": "/components/footer-menu",
+				"name": "Serviços",
+				"itens": [
+					{
+						"name": "DNS dinâmico",
+						"src": "#"
+					}
+				]
+			},
+			{
+				"@component": "/components/footer-menu",
+				"name": "Projetos",
+				"itens": [
+					{
+						"name": "Brutos Framework",
+						"src": "#"
+					},
+					{
+						"name": "Calypte cache",
+						"src": "#"
+					},
+					{
+						"name": "Entity file manager",
+						"src": "#"
+					}
+				]
+			},
+			{
+				"@component": "/components/address",
+				"name": "Entre em contato",
+				"address": "<strong>Rua Ovideo Braga</strong><br> São Judas<br> Ibitinga-SP,",
+				"phone": "(16) 99999-9999",
+				"email": "contato@uoutec.com.br"
+			}
+			
+		]
+	}
+}
