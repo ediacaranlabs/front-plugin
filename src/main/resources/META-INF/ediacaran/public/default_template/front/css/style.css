@@ -139,12 +139,20 @@ Testimonial
 /* ===================================
 Navbar
 ==================================== */
+
 .navbar-light .navbar{
 	padding: 0 0;
 }
 
+.navbar-light .navbar-nav .nav-link{
+	margin-left: 20px;
+	text-transform: uppercase;
+}
+
 .navbar-light .nav-item a{
+	padding: 10px 15px 10px 15px;
 	color: #656565;
+	text-transform: uppercase;
 }
 
 .navbar-light .nav-item a:hover{

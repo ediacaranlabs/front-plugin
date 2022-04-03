@@ -27,7 +27,7 @@
 				<ed:col size="8">
 					<ec:breadcrumb title="Components">
 						<ec:breadcrumb-path icon="home" text="" lnk="#" />
-						<ec:breadcrumb-path text="Features" lnk="#" />
+						<ec:breadcrumb-path text="Pages" lnk="#" />
 					</ec:breadcrumb>
 				</ed:col>
 			</ed:row>

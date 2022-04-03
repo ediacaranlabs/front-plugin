@@ -1,8 +1,6 @@
 {
 	"menu": { 
-		"@component": "/components/menuBar",
 		"id": "top_menu",
-		"classStyle": "top-menu",
 		"expand": "xl",
 		"style": "light",
 		"menu-bar-brand": {
@@ -17,24 +15,32 @@
 				"link": "/"
 			},
 			{
-				"name": "Serviços",
+				"name": "Features",
 				"itens": [
 					{
-						"name": "DNS Dinâmico",
-						"link": "/ddns"
+						"name": "Typography",
+						"link": "typography.jsp"
+					},
+					{
+						"name": "Table",
+						"link": "table.jsp"
+					},
+					{
+						"name": "Components",
+						"link": "components.jsp"
+					},
+					{
+						"name": "Forms",
+						"link": "form.jsp"
 					}
 				]
 			},		
 			{
-				"name": "Projetos",
+				"name": "Pages",
 				"itens": [
 					{
-						"name": "Brutos Framework",
-						"link": "/brutos/"
-					},
-					{
-						"name": "Calypte",
-						"link": "/calypte/"
+						"name": "Pricing Boxes",
+						"link": "pricingbox.jsp"
 					}
 				]
 			},
