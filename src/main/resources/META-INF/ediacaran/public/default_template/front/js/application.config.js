@@ -19,7 +19,7 @@ $.AppContext.onload(function(){
 	$.AppContext.vars.language    = messages.getLanguage();
 	
 	$(window).resize(function(){
-		$.AppContext.resizeContent();
+		//$.AppContext.resizeContent();
 		var width = $(window).width();
 		if(width < 1200){
 			$('body').removeClass('show');
@@ -48,7 +48,7 @@ $.AppContext.onload(function(){
 		}
 	});
 	
-	$.AppContext.resizeContent();
+	//$.AppContext.resizeContent();
 	
 	var width = $(window).width();
 	if(width < 1200){

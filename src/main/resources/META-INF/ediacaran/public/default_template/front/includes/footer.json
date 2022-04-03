@@ -1,48 +1,68 @@
 {
-	"@component": "/components/container",
-	"content": {
-		"@component": "/designer/row",
-		"cols": [
+	"social-links":[
+		{
+			"icon": "facebook",
+			"src": "#"
+		},
+		{
+			"icon": "twitter",
+			"src": "#"
+		},
+		{
+			"icon": "linkedin",
+			"src": "#"
+		}
+	],
+	"frontFooterMenu2": {
+		"id": "frontFooterMenu2",
+		"title": "Menu Bar 2",
+		"expand": "xl",
+		"style": "footer",
+		"itens": [
 			{
-				"@component": "/components/content",
-				"content": ""
-			},
-			{
-				"@component": "/components/footer-menu",
-				"name": "Serviços",
-				"itens": [
+				"link": "#",
+				"name": "Menu 1",
+				"itens" : [
 					{
-						"name": "DNS dinâmico",
-						"src": "#"
+						"link": "#",
+						"name": "Menu item 1"
 					}
 				]
 			},
 			{
-				"@component": "/components/footer-menu",
-				"name": "Projetos",
-				"itens": [
-					{
-						"name": "Brutos Framework",
-						"src": "#"
-					},
-					{
-						"name": "Calypte cache",
-						"src": "#"
-					},
-					{
-						"name": "Entity file manager",
-						"src": "#"
-					}
-				]
+				"link": "#",
+				"name": "Menu 2"
 			},
 			{
-				"@component": "/components/address",
-				"name": "Entre em contato",
-				"address": "<strong>Rua Ovideo Braga</strong><br> São Judas<br> Ibitinga-SP,",
-				"phone": "(16) 99999-9999",
-				"email": "contato@uoutec.com.br"
+				"link": "#",
+				"name": "Menu 3"
 			}
-			
 		]
+	},
+	"frontFooterMenu1": {
+		"id": "frontFooterMenu1",
+		"title": "Menu Bar 1",
+		"expand": "xl",
+		"style": "footer",
+		"itens": [
+			{
+				"link": "#",
+				"name": "Menu 1"
+			},
+			{
+				"link": "#",
+				"name": "Menu 2"
+			},
+			{
+				"link": "#",
+				"name": "Menu 3"
+			}
+		]
+	},
+	"address": {
+		"title": "Entre em contato",
+		"address": "<strong>Rua Ovideo Braga</strong><br>São Judas<br>Ibitinga-SP",
+		"phone": "(16) 99999-9999",
+		"email": "contato@uoutec.com.br"
 	}
 }

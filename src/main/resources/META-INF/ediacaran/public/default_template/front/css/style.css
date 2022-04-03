@@ -150,6 +150,55 @@ nav a:hover{
 .navbar{
 	padding: 0 0;
 }
+
+/* footer navbar */
+
+.navbar-footer .container {
+	flex-wrap:wrap;
+	display:unset;
+}
+
+.navbar-footer .navbar-brand {
+	flex-direction: unset;
+	display: block;
+	padding: 0px 0px;
+}
+
+.navbar-footer .navbar-nav {
+	flex-direction: unset;
+	display: unset;
+}
+
+.navbar-footer .nav-link {
+    padding: unset !important;
+}
+
+.navbar-footer .nav-link::after {
+    content: unset;
+}
+
+.navbar-footer .dropdown-menu{
+	display: block;
+    position: unset !important;
+    background-color: unset;
+    font-size: unset;
+    padding: unset;
+    margin: unset;
+}
+
+.navbar-footer .dropdown-item{
+    padding: 0 1.5rem;
+}
+
+.navbar-footer .dropdown-item:active{
+    background-color: unset;	
+}
+
+.navbar-footer .dropdown-item:hover, .dropdown-item:focus, .dropdown-item:visited{
+    background-color: inherit;
+    color: #919191;
+}
+
 /* ===================================
 Inner - Section: page headline
 ==================================== */

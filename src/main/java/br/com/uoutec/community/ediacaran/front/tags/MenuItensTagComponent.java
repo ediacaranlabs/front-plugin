@@ -33,8 +33,6 @@ public class MenuItensTagComponent  extends AbstractSimpleTagComponent {
 	@Deprecated
 	private String menuAlign; //left, right
 	
-	private Boolean collapse;
-	
 	private String resource;
 	
 	public MenuItensTagComponent() {
@@ -55,11 +53,13 @@ public class MenuItensTagComponent  extends AbstractSimpleTagComponent {
     public String getDefaultTemplate() {
 		menu = (MenuTagComponent)getProperty(MenuTagComponent.CONTEXT_ID);
 		
+		/*
 		if(menu == null) {
 			if(Boolean.TRUE.equals(collapse)) {
 				super.setWrapper(true);
 			}
 		}
+		*/
 		
     	return menu != null? 
     			(resource != null? TEMPLATE_CONTENT : TEMPLATE_2) : 
@@ -85,15 +85,6 @@ public class MenuItensTagComponent  extends AbstractSimpleTagComponent {
 	//@TagAttribute
 	public void setMenuAlign(String menuAlign) {
 		this.menuAlign = menuAlign;
-	}
-
-	public Boolean getCollapse() {
-		return collapse;
-	}
-
-	@TagAttribute
-	public void setCollapse(Boolean collapse) {
-		this.collapse = collapse;
 	}
 
 	public String getResource() {

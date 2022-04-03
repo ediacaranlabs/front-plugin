@@ -24,6 +24,8 @@ public class MenuBodyTagComponent  extends AbstractSimpleTagComponent {
 	
 	private String menuID;
 
+	private Boolean collapse;
+	
 	public MenuBodyTagComponent() {
 	}
 	
@@ -51,6 +53,15 @@ public class MenuBodyTagComponent  extends AbstractSimpleTagComponent {
 
 	public String getMenuID() {
 		return menuID;
+	}
+
+	public Boolean getCollapse() {
+		return collapse;
+	}
+
+	@TagAttribute
+	public void setCollapse(Boolean collapse) {
+		this.collapse = collapse;
 	}
 
 	@TagAttribute
