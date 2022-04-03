@@ -139,16 +139,31 @@ Testimonial
 /* ===================================
 Navbar
 ==================================== */
-nav a{
+.navbar-light .navbar{
+	padding: 0 0;
+}
+
+.navbar-light .nav-item a{
 	color: #656565;
 }
 
-nav a:hover{
-	color: #a5a5a5;
+.navbar-light .nav-item a:hover{
+	color: #ffffff;
 }
 
-.navbar{
-	padding: 0 0;
+.navbar-light .dropdown-menu {
+	padding: 0px 0px;
+	background: #222;
+	color: #ddd;
+	border-radius: 0;
+	margin: 0 0;
+	border: 0px;
+	font-size: inherit;
+}
+
+.navbar-light .dropdown-item:hover{
+	background: #F03C02;
+    color: #919191;
 }
 
 /* footer navbar */

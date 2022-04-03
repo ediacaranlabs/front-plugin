@@ -3,10 +3,13 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"                                  prefix="c"%>
-<ec:load-data file="/header.json" var="pageObjects" />
+<ec:load-data file="header.json" var="pageObjects" />
     <!-- start header -->
    <header>
-		<ec:menu-bar id="${pageObjects['menu']['id']}" classStyle="t${pageObjects['menu']['classStyle']}" expand="${pageObjects['menu']['expand']}" style="${pageObjects['menu']['Style']}">
+		<ec:menu-bar id="${pageObjects['menu']['id']}" 
+				classStyle="${pageObjects['menu']['classStyle']}" 
+				expand="${pageObjects['menu']['expand']}" 
+				style="${pageObjects['menu']['style']}">
 			<ed:container>
 			<ec:menu-bar-brand>
 				<ec:image 
