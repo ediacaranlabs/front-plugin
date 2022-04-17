@@ -4,6 +4,8 @@ if (typeof jQuery === "undefined") {
 
 $.AppContext = {};
 
+$.AppContext.pages = {};
+
 $.AppContext.vars = {
 		
 		asycLoadFunctions: new Array(),
@@ -32,6 +34,23 @@ $.AppContext.events = {
 };
 
 $.AppContext.utils = {
+		
+		getById: function(id){
+			var element = $('#' + id );
+			var elementType = element.prop("tagName").toLowerCase();
+
+			var type = $.AppContext.types._map[elementType];
+			return type == null? new $.AppContext.types._map['object'](element) : new type(element);
+		},
+
+		setContentById: function(id, value){
+			$('#' + id).html(value);
+		},
+		
+
+		//getComponentByClass: function(id){
+		//	return $('.' + id );
+		//},
 		
 		/* async load functions */
 		
@@ -150,15 +169,60 @@ $.AppContext.utils = {
 		
 		loadResourceContent: function ($destContent, $resource){
 
-			$.ajax({
+			var opts = {
 			    type: 'GET',
 			    url: $.AppContext.vars.contextPath + $resource,
 			    success: function($data) {
+			    	
+		        	var $evt = {
+				    		sourceID: "utils.load_resource_content",
+				    		type: "after",
+				    		data: {
+				        		opts: opts,
+				        		success: true,
+				        		data: $data,
+				        	}
+					    };
+		        	
+			    	$.AppContext.eventListeners.fireEvent($evt);
+			    	
+			    	$data = $evt.data.data;
+			    	
 			    	$.AppContext.loadListeners.executeBefore($resource);
 		    		$.AppContext.utils.updateContent($destContent, $data);
 			    	$.AppContext.loadListeners.executeAfter($resource);
-		        }			    
-			});
+		        },
+		        error: function($data){
+		        	
+		        	var $evt = {
+				    		sourceID: "utils.load_resource_content",
+				    		type: "after",
+				    		data: {
+				        		opts: opts,
+				        		success: false,
+				        		data: $data,
+				        	}
+					    };
+		        	
+			    	$.AppContext.eventListeners.fireEvent($evt);
+			    	
+			    	$data = $evt.data.data;
+		        	
+		        }
+		        
+			};
+			
+	    	var $evt = {
+	    		sourceID: "utils.load_resource_content",
+	    		type: "before",
+	    		data: opts
+		    };
+		    	
+	    	$.AppContext.eventListeners.fireEvent($evt);
+	    	
+	    	opts = $evt.data;
+			
+			$.ajax(opts);
 			
 		},
 		
@@ -166,11 +230,32 @@ $.AppContext.utils = {
 
 			var $address     = $.AppContext.utils.getAddress($link);
 			var $destContent = $.AppContext.utils.getDestContent($link);
+			var $modal       = $.AppContext.utils.isModal($link);
 
-			$.ajax({
+		    if(!$modal){
+	    		$("#wait-modal").modal('show');
+		    }
+
+		    var opts = {
 			    type: 'GET',
 			    url: $.AppContext.vars.contextPath + $address,
 			    success: function($data) {
+			    	
+		        	var $evt = {
+				    		sourceID: "utils.load_content",
+				    		type: "after",
+				    		data: {
+				        		opts: opts,
+				        		success: true,
+				        		data: $data,
+				        		modal: $modal
+				        	}
+					    };
+		        	
+			    	$.AppContext.eventListeners.fireEvent($evt);
+			    	
+			    	$data = $evt.data.data;
+				    
 			    	if($.AppContext.utils.isModal($link)){
 				    	$.AppContext.loadListeners.executeBefore($address);
 			    		$.AppContext.dialog.create();
@@ -183,8 +268,51 @@ $.AppContext.utils = {
 			    		$.AppContext.utils.updateContent($destContent, $data);
 				    	$.AppContext.loadListeners.executeAfter($address);
 			    	}
-		        }			    
-			});
+			    	
+				    if(!$modal){
+				    	setTimeout(function(){ 
+				    		$("#wait-modal").modal('hide');
+				    	}, 1000);
+				    }
+			    	
+		        },
+		        error: function($data){
+		        	
+		        	var $evt = {
+				    		sourceID: "utils.load_content",
+				    		type: "after",
+				    		data: {
+				        		opts: opts,
+				        		success: false,
+				        		data: $data,
+				        		modal: $modal
+				        	}
+					    };
+		        	
+			    	$.AppContext.eventListeners.fireEvent($evt);
+			    	
+			    	$data = $evt.data.data;
+		        	
+				    if(!$modal){
+				    	setTimeout(function(){ 
+				    		$("#wait-modal").modal('hide');
+				    	}, 1000);
+				    }
+				    
+		        }
+			};
+		    
+	    	var $evt = {
+	    		sourceID: "utils.load_content",
+	    		type: "before",
+	    		data: opts
+		    };
+		    	
+	    	$.AppContext.eventListeners.fireEvent($evt);
+	    	
+	    	opts = $evt.data;
+	    	
+		    $.ajax(opts);
 			
 		},
 
@@ -206,17 +334,83 @@ $.AppContext.utils = {
 			var $action      = $resource == null? $form.attr('action') : $resource;
 			var $method      = $form.attr('method');
 			var $destContent = $dest == null? $form.attr('dest-content') : $dest;
+			var $enctype     = $form.attr('enctype');
 			
-		    $.ajax({
+			//var $data = $($form).serialize();
+			var $data = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
+
+		    var opts = {
 		        type   : $method,
 		        url    : $action,
-		        data   : $($form).serialize(),
+		        data   : $data,
 		        success: function ($data){
+
+		        	var $evt = {
+				    		sourceID: "utils.submit",
+				    		type: "after",
+				    		data: {
+				        		opts: opts,
+				        		success: true,
+				        		data: $data
+				        	}
+					    };
+		        	
+			    	$.AppContext.eventListeners.fireEvent($evt);
+			    	
+			    	$data = $evt.data.data;
+			    	
 			    	$.AppContext.loadListeners.executeBefore($action);
 		        	$.AppContext.utils.updateContent($destContent, $data);
 			    	$.AppContext.loadListeners.executeAfter($action);
+			    	
+			    	setTimeout(function(){ 
+			    		$("#wait-modal").modal('hide');
+			    	}, 1000);
+			    	
+		        },
+		        error: function ($data){
+		        	
+		        	var $evt = {
+				    		sourceID: "utils.submit",
+				    		type: "after",
+				    		data: {
+				        		opts: opts,
+				        		success: false,
+				        		data: $data
+				        	}
+					    };
+		        	
+			    	$.AppContext.eventListeners.fireEvent($evt);
+			    	
+			    	$data = $evt.data.data;
+		        	
+			    	setTimeout(function(){ 
+			    		$("#wait-modal").modal('hide');
+			    	}, 1000);
+
 		        }
-		    });
+		    };
+			
+		    
+		    if($enctype === 'multipart/form-data') {
+		    	opts.enctype = $enctype;
+		    	opts.processData = false;
+		    	opts.contentType = false;		    	
+		    }
+		    
+	    	$("#wait-modal").modal('show');
+			
+	    	var $evt = {
+	    		sourceID: "utils.submit",
+	    		type: "before",
+	    		data: opts
+		    };
+	    	
+	    	$.AppContext.eventListeners.fireEvent($evt);
+	    	
+	    	opts = $evt.data;
+	    	
+		    $.ajax(opts);
 			
 		},
 		
@@ -230,7 +424,7 @@ $.AppContext.utils = {
 				'</script>' + $content;
 			
 			$($local).html($content);
-
+			window.scrollTo(0,0);
 		},
 		
 		getDestContent: function (link){
@@ -327,6 +521,70 @@ $.AppContext.utils = {
 		}
 		
 };
+
+$.AppContext.vars.eventListeners = [];
+
+$.AppContext.eventListeners = {
+		
+		addListener: function($listenerID, $listener){
+			$.AppContext.vars.eventListeners[$listenerID] = $listener;
+		},
+			
+		removeListener: function($listenerID, $listener){
+			delete $.AppContext.vars.eventListeners[$listenerID];
+		},
+		
+		fireEvent: function($event){
+			
+			var $listeners = $.AppContext.vars.eventListeners
+			var $i;
+			
+			for(var $l in $listeners){
+				
+				var $listener = $listeners[$l];
+				
+				if(typeof $listener.fireEvent !== 'undefined'){
+					$listener.fireEvent($event);
+				}
+				
+			}
+
+			/*
+			for($i=0;$i<$listeners.length; $i++){
+				
+				if(typeof $listeners[$i].fireEvent !== 'undefined'){
+					$listeners[$i].fireEvent($event);
+				}
+				
+			}
+			*/
+			
+		},
+		
+		init: function(){
+			$.AppContext.utils.loadJson(
+					'/plugins/ediacaran/front/events', 
+					function(e){
+						
+						e.forEach(function ($i){
+							$.AppContext.eventListeners.fireEvent($i)
+						});
+						
+					},
+					function(e){
+						console.log('couldn\'t get the events: ' + e);
+					}
+			);
+
+			setTimeout(
+				function () {
+					$.AppContext.eventListeners.init();
+				}, 
+				3000
+			);
+		}
+		
+}
 
 $.AppContext.loadListeners = {
 
@@ -539,4 +797,5 @@ $(function (){
 	$.AppContext.vars.loaded = true;
 	$.AppContext.utils.enableActions(null);
 	$.AppContext.utils.executeAsyncLoad();
+	$.AppContext.eventListeners.init();
 });

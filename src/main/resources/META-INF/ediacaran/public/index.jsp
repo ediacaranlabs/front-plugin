@@ -26,13 +26,6 @@
 
 	<section class="content">
 		<ed:container>
-			<div class="cta-text">
-				<h3>${pageObjects.topMessage}</h3>
-			</div>
-		</ed:container>
-	</section>
-	<section class="content">
-		<ed:container>
 		<ed:row>
 			<c:forEach items="${pageObjects.box}" var="item">
 				<ed:col size="3">

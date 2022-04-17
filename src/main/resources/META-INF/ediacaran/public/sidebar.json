@@ -1,0 +1,135 @@
+{
+	"leftMenu": { 
+		"id": "leftMenu",
+		"expand": "xl",
+		"style": "light",
+		"itens": [
+			{
+				"name": "Home",
+				"link": "/"
+			},
+			{
+				"name": "Features",
+				"itens": [
+					{
+						"name": "Typography",
+						"link": "typography.jsp"
+					},
+					{
+						"name": "Table",
+						"link": "table.jsp"
+					},
+					{
+						"name": "Components",
+						"link": "components.jsp"
+					},
+					{
+						"name": "Forms",
+						"link": "form.jsp"
+					}
+				]
+			},		
+			{
+				"name": "Pages",
+				"itens": [
+					{
+						"name": "Pricing Boxes",
+						"link": "pricingbox.jsp"
+					}
+				]
+			},
+			{
+				"name": "Contato",
+				"link": "mailto:contact@uoutec.com.br"
+			}
+		]
+	},
+	"content": "
+			<div style=\"margin-top: -50px\">
+				<ec:menu-toggler menuID=\"sidebar\">
+					<ec:icon icon=\"bars\" size=\"2\"/>
+				</ec:menu-toggler>
+			</div>
+			<p class=\"lead\">
+				<b>Calypte</b> é um sistema de cache de propósito geral com suporte
+				transacional. Permite o armazenamento de dados na forma de
+				chave-valor em memoria e disco. É extremamente rápido, tanto para
+				escrita como para leitura, podendo chegar a mais de 600.000
+				operações por segundo. Não é necessária grandes quantidades de
+				memória para seu funcionamento. Ele trabalha de forma eficiente com
+				pouca memória.
+			</p>
+
+			<h3>Download</h3>
+			<div class=\"row\">
+				<div class=\"col-sm-4\">
+					<h3>Código fonte</h3>
+					<p>Download do código fonte do servidor.</p>
+					<p>
+						Você será redirecionado para o <a href=\"https://github.com\">GitHub</a>.
+					</p>
+					<p>
+						<a href=\"https://github.com/calyptelabs/scalypte\"
+							class=\"btn btn-lg btn-info\" href=\"#\">Download do Código</a>
+					</p>
+				</div>
+				<div class=\"col-sm-4\">
+					<h3>Binários</h3>
+					<p>Download do instalador do servidor.</p>
+					<p>
+						Você será redirecionado para o <a href=\"https://sourceforge.net\">Sourceforge</a>.
+					</p>
+					<p>
+						<a
+							href=\"https://sourceforge.net/projects/calypte/files/1.0.2.1/scalypte-installer-1.0.2.1.zip/download\"
+							class=\"btn btn-lg btn-success\" href=\"#\">Download do Calypte</a>
+					</p>
+				</div>
+			</div>
+
+			<h3>Instalando com maven</h3>
+			<p>
+				Você pode instalar o cliente Calypte usando o <a
+					href=\"https://maven.apache.org/\">maven</a>.
+			</p>
+			<p>Adicione no pom.xml:</p>
+			<pre class=\"brush: java;\">&lt;repositories&gt;
+				    &lt;repository&gt;
+				        &lt;id&gt;calypte-repo&lt;/id&gt;
+				        &lt;name&gt;Calypte repository.&lt;/name&gt;
+				        &lt;url&gt;https://calypte.sourceforge.io/maven/2&lt;/url&gt;
+				    &lt;/repository&gt;
+				&lt;/repositories&gt;
+				
+				...
+				
+				&lt;dependency&gt;
+					&lt;groupId&gt;calypte&lt;/groupId&gt;
+					&lt;artifactId&gt;jcalypte&lt;/artifactId&gt;
+					&lt;version&gt;1.0.2.1&lt;/version&gt;
+				&lt;/dependency&gt;</pre>
+
+			<h3>Instalando com composer</h3>
+			<p>
+				Você pode instalar o cliente Calypte usando o <a
+					href=\"https://getcomposer.org/\">composer</a>:
+			</p>
+			<pre class=\"brush: bash;\">$ composer require calypte/calypte</pre>
+
+			<h3>Instalando com npm</h3>
+			<p>
+				Você pode instalar o cliente Calypte usando o <a
+					href=\"https://www.npmjs.com/\">npm</a>:
+			</p>
+			<pre class=\"brush: bash;\">$ npm install calypte</pre>
+
+			<h3>Instalando com pypi</h3>
+			<p>
+				Você pode instalar o cliente Calypte usando o <a
+					href=\"https://pypi.org/\">pypi</a>:
+			</p>
+			<pre class=\"brush: bash;\">$ pip install calypte</pre>
+	
+	"
+	
+}

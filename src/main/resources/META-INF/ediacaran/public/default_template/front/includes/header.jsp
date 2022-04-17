@@ -19,7 +19,7 @@
 			<ec:menu-toggler>
 				<ec:icon icon="bars" />
 			</ec:menu-toggler>
-			<ec:menu-body>
+			<ec:menu-body collapse="true">
 				<ec:menu-itens align="right">
 					<c:forEach items="${pageObjects['menu']['itens']}" var="menu">
 						<c:choose>

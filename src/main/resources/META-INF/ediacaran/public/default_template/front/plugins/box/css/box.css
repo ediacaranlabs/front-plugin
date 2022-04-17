@@ -1,0 +1,49 @@
+.box {
+	position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    margin-bottom: 1rem;    
+}
+
+.box .box-header {
+    padding: .75rem 1.25rem;
+    position: relative;
+    text-align: center;
+}
+
+.box .box-header h3 {
+    float: left;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+.box .box-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.box .box-footer {
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.box .box-success {
+    border-top-color: #00a65a;
+}
+
+.box .box-info {
+    border-top-color: #00c0ef;
+}
+
+.box .box-warning {
+    border-top-color: #f39c12;
+}
+
+.box .box-danger {
+    border-top-color: #dd4b39;
+}

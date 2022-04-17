@@ -1,12 +1,12 @@
-$.AppContext.lightgallery = {};
+$.AppContext.quicksand = {};
 
 $.AppContext.onload(function(){
 	
-	$.AppContext.addLoadListener("gallery-link-load", "^.*", {
+	$.AppContext.addLoadListener("quicksand-link-load", "^.*", {
 		
 		after: function(){
-			
-			var $data = $($.AppContext.vars.painel + " .light-gallery").clone();
+			/*
+			var $data = $(" .light-gallery").clone();
 			
 			$('.filter li').click(function(e) {
 				
@@ -20,7 +20,7 @@ $.AppContext.onload(function(){
 					var $filteredData = $data.find('.item-thumbs[data-type=' + filterClass + ']');
 				}
 				
-				$($.AppContext.vars.painel + " .light-gallery").quicksand($filteredData, {
+				$(" .light-gallery").quicksand($filteredData, {
 					duration: 600,
 					adjustHeight: 'auto'
 				}, function () {
@@ -29,7 +29,7 @@ $.AppContext.onload(function(){
 				$(this).addClass("active"); 			
 				return false;
 			});
-			
+			*/
 		}
 	
 	});

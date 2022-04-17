@@ -65,13 +65,6 @@
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
-			<!--
-			<ec:menu id="user_menu_top">
-				<ec:menu-label><ec:icon icon="user" size="1"/></ec:menu-label>
-				<ec:menu-itens resource="${plugins.ediacaran.front.admin_user_menu}" menuAlign="right">
-				</ec:menu-itens>
-			</ec:menu>
-			-->
 		</ec:menu-itens>
 	</ec:menu-bar>
 
