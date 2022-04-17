@@ -27,7 +27,6 @@ public class FlotChartsSeriesTagComponent extends AbstractSimpleTagComponent {
 	
 	private String label;
 	
-	@Deprecated
 	private String data;
 	
 	public FlotChartsSeriesTagComponent() {
@@ -68,7 +67,7 @@ public class FlotChartsSeriesTagComponent extends AbstractSimpleTagComponent {
 		return data;
 	}
 
-	//@TagAttribute
+	@TagAttribute
 	public void setData(String data) {
 		this.data = data;
 	}
