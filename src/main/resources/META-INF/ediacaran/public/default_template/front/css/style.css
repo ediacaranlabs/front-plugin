@@ -479,63 +479,41 @@ dd {
 Sidebar
 ==================================== */
 
-section[class*=content-menu] .dropdown-menu {
+.content-menu .dropdown-menu {
 	border: 0px;
 	font-size: unset;
 	padding: 0 0;
+}
+
+.content-menu .dropdown-item {
+	padding: 0rem 0rem;	
+} 
+
+.content-menu .dropdown-item:hover {
+	background-color: unset;
+} 
+
+.navbar-side .nav-item a {
+	color: #656565;
 }
 
 .navbar-side .nav-item > a {
 	font-weight: bold;
 }
 
-section[class*=content-menu] .dropdown-item {
-	padding: 0rem 0rem;	
-} 
-
-section[class*=content-menu] .dropdown-item:hover {
-	background-color: unset;
-} 
-
-.navbar-side .nav-item a {
-	color: #656565;
-	text-transform: uppercase;
-}
-
 /* content */
 
 .navbar-side .nav-link a {
 	color: #656565;
-	text-transform: uppercase;
 }
-
-/*
-section[class*=content-menu].show .sidebar{
-	display: block;
-  	width: 300px;
-}
-	
-section[class*=content-menu].show {
-    margin-left: 300px;
-}
-
-
-section[class*=content-menu].collapse:not(.show) {
-    display: unset;
-}
-
-section[class*=content-menu].collapsing {
-    hight: unset;
-}
-*/
 
 @media screen and (max-width: 1200px){
 	
-	section[class*=content-menu] {
+	.content-menu {
 	    margin-left: 0px;
 	}
 	
-	section[class*=content-menu] .dropdown-item {
+	.content-menu .dropdown-item {
 	    display: block;
 	    padding: 0.5rem 0rem;
     } 
@@ -543,16 +521,7 @@ section[class*=content-menu].collapsing {
 }
 
 @media screen and (min-width: 1200px){
-	
-	section[class*=content-menu] .sidebar{
-		display: block;
-	  	width: 300px;
-	}
-		
-	section[class*=content-menu] {
-	    margin-left: 300px;
-	}
-	
+
 	aside[class=sidebar] {
 	    background-color: #ffff;
 	    position: absolute;
@@ -561,6 +530,20 @@ section[class*=content-menu].collapsing {
 	    width: 0px;
 	  	margin-left: -300px;
 	}
+	
+	.content-menu {
+	    margin-left: 300px;
+	}
+	
+	.content-menu .sidebar {
+		display: block;
+	  	width: 300px;
+	}
+	
+	.content-menu .sidebar-body {
+		overflow-y: scroll;	
+		overflow-x: hidden;
+	};
 	
 	.navbar-side .container {
 		flex-wrap:wrap;
@@ -608,19 +591,6 @@ section[class*=content-menu].collapsing {
 	    background-color: inherit;
 	    color: #000000;
 	}
-	
-	section[class*=content-menu].show .sidebar{
-		display: block;
-	  	width: 300px;
-	}
-	
-	section[class*=content-menu] .sidebar-body {
-		overflow-y: scroll;	
-		overflow-x: hidden;
-	};
-		
-	
-	
 	
 }
 

@@ -69,7 +69,6 @@
 					</ec:menu-body>
 					</ed:container>
 				</ec:menu-bar>
-	    	
 			</div>
 		</aside>
     	<ed:row>
