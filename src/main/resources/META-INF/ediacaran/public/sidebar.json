@@ -2,54 +2,112 @@
 	"leftMenu": { 
 		"id": "leftMenu",
 		"expand": "xl",
-		"style": "light",
-		"itens": [
+		"style": "side",
+		"itens": [ 
+			{ name: "Home", link: "/calypte/" },
+			{ name: "Download", link: "/calypte/download.jsp" },
 			{
-				"name": "Home",
-				"link": "/"
-			},
-			{
-				"name": "Features",
-				"itens": [
-					{
-						"name": "Typography",
-						"link": "typography.jsp"
-					},
-					{
-						"name": "Table",
-						"link": "table.jsp"
-					},
-					{
-						"name": "Components",
-						"link": "components.jsp"
-					},
-					{
-						"name": "Forms",
-						"link": "form.jsp"
-					}
-				]
-			},		
-			{
-				"name": "Pages",
-				"itens": [
-					{
-						"name": "Pricing Boxes",
-						"link": "pricingbox.jsp"
-					}
+				name: "Instalação",
+				itens: [
+					{ name: "Pré-requisitos", 					link: "/calypte/docs/1.0.2.1/install.jsp"},
+					{ name: "Obtendo os arquivos binários", 	link: "/calypte/docs/1.0.2.1/install.jsp#obtendo_os_arquivos_binarios"},
+					{ name: "Instalando o pacote binário", 		link: "/calypte/docs/1.0.2.1/install.jsp#instalando_o_pacote_binario"},
+					{ name: "Instalando no Windows e Linux", 	link: "/calypte/docs/1.0.2.1/install.jsp#microsoft_windows_e_linux"},
+					{ name: "Teste básico de instalação", 		link: "/calypte/docs/1.0.2.1/install.jsp#teste_basico_de_instalacao"},
+					{ name: "Estrutura de diretórios", 			link: "/calypte/docs/1.0.2.1/install.jsp#estrutura_de_diretorios"},
+					{ name: "Arquivo de configuração", 			link: "/calypte/docs/1.0.2.1/install.jsp#arquivo_de_configuracao"}
 				]
 			},
 			{
-				"name": "Contato",
-				"link": "mailto:contact@uoutec.com.br"
+				name: "Manipulação de dados",
+				itens: [
+					{ name: "Comando put", 		link: "/calypte/docs/1.0.2.1/cache.jsp"},
+					{ name: "Comando replace", 	link: "/calypte/docs/1.0.2.1/cache.jsp#replace"},
+					{ name: "Comando set", 		link: "/calypte/docs/1.0.2.1/cache.jsp#set"},
+					{ name: "Comando get", 		link: "/calypte/docs/1.0.2.1/cache.jsp#get"},
+					{ name: "Comando remove", 	link: "/calypte/docs/1.0.2.1/cache.jsp#remove"}
+				]
+			},
+			{
+				name: "Transações",
+				itens: [
+					{ name: "Níveis de isolamento suportados", 						link: "/calypte/docs/1.0.2.1/transaction.jsp"},
+					{ name: "Iniciando uma transação", 								link: "/calypte/docs/1.0.2.1/transaction.jsp#iniciando_uma_transacao"},
+					{ name: "Comando begin", 										link: "/calypte/docs/1.0.2.1/transaction.jsp#begin"},
+					{ name: "Comando commit", 										link: "/calypte/docs/1.0.2.1/transaction.jsp#commit"},
+					{ name: "Comando rollback", 									link: "/calypte/docs/1.0.2.1/transaction.jsp#rollback"},
+					{ name: "Modo de confirmação automática", 						link: "/calypte/docs/1.0.2.1/transaction.jsp#modo_de_confirmacao_automatica"},
+					{ name: "Evitando a leitura fantasma e leitura não repetitiva", link: "/calypte/docs/1.0.2.1/transaction.jsp#evitando_a_leitura_fantasma_e_leitura_nao_repetitiva"}
+				]
+			},
+			{
+				name: "Comandos",
+				itens: [
+					{ name: "put", 			link: "/calypte/docs/1.0.2.1/commands.jsp"},
+					{ name: "replace", 		link: "/calypte/docs/1.0.2.1/commands.jsp#replace"},
+					{ name: "set", 			link: "/calypte/docs/1.0.2.1/commands.jsp#set"},
+					{ name: "get", 			link: "/calypte/docs/1.0.2.1/commands.jsp#get"},
+					{ name: "remove", 		link: "/calypte/docs/1.0.2.1/commands.jsp#remove"},
+					{ name: "begin", 		link: "/calypte/docs/1.0.2.1/commands.jsp#begin"},
+					{ name: "commit", 		link: "/calypte/docs/1.0.2.1/commands.jsp#commit"},
+					{ name: "rollback", 	link: "/calypte/docs/1.0.2.1/commands.jsp#rollback"},
+					{ name: "show_vars", 	link: "/calypte/docs/1.0.2.1/commands.jsp#showvars"},
+					{ name: "show_var", 	link: "/calypte/docs/1.0.2.1/commands.jsp#showvar"},
+					{ name: "set_var", 		link: "commands.jsp#setvar"}
+				]
+			},
+			{
+				name: "Calypte em aplicações PHP",
+				itens: [
+					{ name: "Instalação", 											link: "/calypte/docs/1.0.2.1/php.php"},
+					{ name: "Manipulação de dados", 								link: "/calypte/docs/1.0.2.1/php.php#maniputacao_de_dados"},
+					{ name: "Função put", 											link: "/calypte/docs/1.0.2.1/php.php#put"},
+					{ name: "Função replace", 										link: "/calypte/docs/1.0.2.1/php.php#replace"},
+					{ name: "Função replaceValue", 									link: "/calypte/docs/1.0.2.1/php.php#replace"},
+					{ name: "Função set", 											link: "/calypte/docs/1.0.2.1/php.php#set"},
+					{ name: "Função get", 											link: "/calypte/docs/1.0.2.1/php.php#get"},
+					{ name: "Função remove", 										link: "/calypte/docs/1.0.2.1/php.php#remove"},
+					{ name: "Função removeValue", 									link: "/calypte/docs/1.0.2.1/php.php#remove"},
+					{ name: "Iniciando uma transação", 								link: "/calypte/docs/1.0.2.1/php.php#begin"},
+					{ name: "Função begin", 										link: "/calypte/docs/1.0.2.1/php.php#begin"},
+					{ name: "Função commit", 										link: "/calypte/docs/1.0.2.1/php.php#commit"},
+					{ name: "Função rollback", 										link: "/calypte/docs/1.0.2.1/php.php#rollback"},
+					{ name: "Funcão setAutoCommit", 								link: "/calypte/docs/1.0.2.1/php.php#setautocommit"},
+					{ name: "Evitando a leitura fantasma e leitura não repetitiva", link: "/calypte/docs/1.0.2.1/php.php#evitando_a_leitura_fantasma_e_a_leitura_nao_repetitiva"}
+				]
+			},
+			{
+				name: "Calypte em uma aplicação Java",
+				itens: [
+					{ name: "Instalação", link: "/calypte/docs/1.0.2.1/java.php"},
+					{ name: "Manipulação de dados", link: "/calypte/docs/1.0.2.1/java.php#manipulacao_de_dados"},
+					{ name: "Método put", link: "/calypte/docs/1.0.2.1/java.php#put"},
+					{ name: "Método replace", link: "/calypte/docs/1.0.2.1/java.php#replace"},
+					{ name: "Método set", link: "/calypte/docs/1.0.2.1/java.php#set"},
+					{ name: "Método get", link: "/calypte/docs/1.0.2.1/java.php#get"},
+					{ name: "Método remove", link: "/calypte/docs/1.0.2.1/java.php#remove"},
+					{ name: "Iniciando uma transação", link: "/calypte/docs/1.0.2.1/java.php#iniciando_uma_transacao"},
+					{ name: "Método begin", link: "/calypte/docs/1.0.2.1/java.php#begin"},
+					{ name: "Método commit", link: "/calypte/docs/1.0.2.1/java.php#commit"},
+					{ name: "Método rollback", link: "/calypte/docs/1.0.2.1/java.php#rollback"},
+					{ name: "Método setAutoCommit", link: "/calypte/docs/1.0.2.1/java.php#setautocommit"},
+					{ name: "Evitando a leitura fantasma e leitura não repetitiva", link: "/calypte/docs/1.0.2.1/java.php#evitando_a_leitura_fantasma_e_leitura_nao_repetitiva"},
+				]
+			},
+			{
+				name: "Aplicações Laravel com Calypte",
+				itens: [
+					{ name: "Instalação", link: "/calypte/docs/1.0.2.1/laravel.php"},
+					{ name: "Configuração do cache.php", link: "/calypte/docs/1.0.2.1/laravel.php#configuracao_do_cache_php"},
+					{ name: "Configuração do app.php", link: "/calypte/docs/1.0.2.1/laravel.php#configuracao_do_app_php"},
+					{ name: "Configuração do .env", link: "/calypte/docs/1.0.2.1/laravel.php#configuracao_do__env"},
+				]
 			}
+			
 		]
+		
 	},
 	"content": "
-			<div style=\"margin-top: -50px\">
-				<ec:menu-toggler menuID=\"sidebar\">
-					<ec:icon icon=\"bars\" size=\"2\"/>
-				</ec:menu-toggler>
-			</div>
 			<p class=\"lead\">
 				<b>Calypte</b> é um sistema de cache de propósito geral com suporte
 				transacional. Permite o armazenamento de dados na forma de

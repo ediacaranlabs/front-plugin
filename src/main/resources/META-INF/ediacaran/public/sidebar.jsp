@@ -13,7 +13,7 @@
 <ec:include uri="/includes/head.jsp"/>
 </head>
 
-<body id="body" class="collapse show">
+<body id="body">
 
 	<ec:include uri="/includes/header.jsp"/>
 	
@@ -35,53 +35,48 @@
 		</ed:container>
 	</section>
 
-	<aside class="sidebar">
-    	<ec:menu-bar-brand>
-    		<span>Menu</span>
-    	</ec:menu-bar-brand>
-    	<div class="sidebar-body">
-    	
-			<ec:menu-bar id="${pageObjects['leftMenu']['id']}" 
-					classStyle="${pageObjects['leftMenu']['classStyle']}" 
-					expand="${pageObjects['leftMenu']['expand']}" 
-					style="${pageObjects['leftMenu']['style']}">
-				<ed:container>
-				<ec:menu-bar-brand>
-					<ec:image 
-						src="${pageObjects['leftMenu']['menu-bar-brand']['src']}" 
-						classStyle="${pageObjects['leftMenu']['menu-bar-brand']['classStyle']}"/>
-				</ec:menu-bar-brand>
-				<ec:menu-body collapse="false">
-					<ec:menu-itens align="right">
-						<c:forEach items="${pageObjects['leftMenu']['itens']}" var="menu">
-							<c:choose>
-								<c:when test="${!empty menu['itens']}">
-									<ec:menu>
-										<ec:menu-label>${menu['name']}</ec:menu-label>
-										<ec:menu-itens>
-											<c:forEach items="${menu['itens']}" var="item">
-												<ec:menu-item href="${item['link']}">${item['name']}</ec:menu-item>
-											</c:forEach>
-										</ec:menu-itens>
-									</ec:menu>
-								</c:when>
-								<c:otherwise>
-									<ec:menu-item href="${item['link']}">${menu['name']}</ec:menu-item>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</ec:menu-itens>
-				</ec:menu-body>
-				</ed:container>
-			</ec:menu-bar>
-    	
-		</div>
-	</aside>
-	
-    <section id="content-body" class="content">
+    <section id="content-body" class="content" menu=".sidebar">
+		<aside class="sidebar">
+	    	<div class="sidebar-body">
+				<ec:menu-bar id="${pageObjects['leftMenu']['id']}" 
+						classStyle="${pageObjects['leftMenu']['classStyle']}" 
+						expand="${pageObjects['leftMenu']['expand']}" 
+						style="${pageObjects['leftMenu']['style']}">
+					<ed:container>
+	 				<ec:menu-toggler menuID="leftMenu_body">
+						<ec:icon icon="bars" size="1" />
+					</ec:menu-toggler>
+					<ec:menu-body collapse="true">
+						<ec:menu-itens align="right">
+							<c:forEach items="${pageObjects['leftMenu']['itens']}" var="menu">
+								<c:choose>
+									<c:when test="${!empty menu['itens']}">
+										<ec:menu>
+											<ec:menu-label>${menu['name']}</ec:menu-label>
+											<ec:menu-itens>
+												<c:forEach items="${menu['itens']}" var="item">
+													<ec:menu-item href="${item['link']}">${item['name']}</ec:menu-item>
+												</c:forEach>
+											</ec:menu-itens>
+										</ec:menu>
+									</c:when>
+									<c:otherwise>
+										<ec:menu-item href="${item['link']}">${menu['name']}</ec:menu-item>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</ec:menu-itens>
+					</ec:menu-body>
+					</ed:container>
+				</ec:menu-bar>
+	    	
+			</div>
+		</aside>
     	<ed:row>
     		<ed:col size="12">
-   		    	${pageObjects['content']}
+    			<ed:container>
+ 					${pageObjects['content']}
+    			</ed:container>
     		</ed:col>
     	</ed:row>
     </section>

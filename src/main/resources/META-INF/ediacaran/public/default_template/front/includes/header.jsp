@@ -16,7 +16,7 @@
 					src="${pageObjects['menu']['menu-bar-brand']['src']}" 
 					classStyle="${pageObjects['menu']['menu-bar-brand']['classStyle']}"/>
 			</ec:menu-bar-brand>
-			<ec:menu-toggler>
+			<ec:menu-toggler menuID="${pageObjects['menu']['id']}_body">
 				<ec:icon icon="bars" />
 			</ec:menu-toggler>
 			<ec:menu-body collapse="true">

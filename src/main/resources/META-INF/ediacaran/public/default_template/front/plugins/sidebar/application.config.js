@@ -1,64 +1,58 @@
 $.AppContext.sidebar = {};
 
 $.AppContext.sidebar.resizeContent = function () {
+	$.AppContext.sidebar.apply('');
+};
+
+$.AppContext.sidebar.apply = function($id){
+
+	$($id + " .content").each(function() {
+
+		var $content = $(this);
+		var $menuRef = $($content).attr("menu");
+		
+		if($menuRef == 'undefined'){
+			return;
+		}
+		
+		$($content).addClass('content-menu');
+		
+		$($menuRef).each(function() {
+
+			var $menu = $(this);
+			var contentHeight = $($content).outerHeight();
+			var menuWidth = $($menu).outerWidth();
+
+		});
+
+		$($menuRef + " .sidebar-body").each(function() {
+
+			var $menuBody = $(this);
+			var contentHeight = $($content).outerHeight();
+
+			var width = $(window).width();
+			
+			if(width > 1200){
+				$($menuBody).css('height', contentHeight + "px");
+			}
+			else{
+				$($menuBody).css('height', "unset");
+			}
+			
+			//$($content).css('height', contentHeight + "px");
+			
+		});
+		
+	});
+	
 };
 
 $.AppContext.onload(function(){			
 
+	$.AppContext.sidebar.apply('');
+
 	$(window).resize(function(){
 		$.AppContext.sidebar.resizeContent();
-		//var width = $(window).width();
-		//if(width < 1200){
-		//	$('body').removeClass('show');
-		//}
 	});
-	
-	$("aside[class^='sidebar'] a[class^='dropdown-item']").click(function(){
-		var width = $(window).width();
-		if(width < 1200){
-			$('body').removeClass('show');
-		}
-	});
-	
-	$(".sidebar").hover(function(){
-		$('body').addClass('hover-menu');
-	}, function(){
-		$('body').removeClass('hover-menu');
-	});
-	
-	$(window).click(function(){
-		if(!$('body').hasClass('hover-menu')){
-			var width = $(window).width();
-			if(width < 1200){
-				$('body').removeClass('show');
-			}
-		}
-	});
-	
-	$.AppContext.eventListeners.addListener('sidebar-link-load',{
-		
-		fireEvent : function($e){
-			//alert(JSON.stringify($e));
-		}
-	
-	});
-	
-
-	$.AppContext.addLoadListener("sidebar-link-load", "^.*", {
-		
-		after: function(){
-			$.AppContext.sidebar.resizeContent();
-		}
-	
-	});
-
-	
-	$.AppContext.sidebar.resizeContent();
-	
-	var width = $(window).width();
-	
-	if(width < 1200){
-		$('body').removeClass('show');
-	}
 	
 });
