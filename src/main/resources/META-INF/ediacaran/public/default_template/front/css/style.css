@@ -479,29 +479,29 @@ dd {
 Sidebar
 ==================================== */
 
-.content-menu nav .dropdown-menu {
+.sidebar-group nav .dropdown-menu {
 	border: 0px;
 	font-size: unset;
 	padding: 0 0;
 }
 
-.content-menu nav .dropdown-item {
+.sidebar-group nav .dropdown-item {
 	padding: 0rem 0rem;	
 } 
 
-.content-menu nav .dropdown-item:hover {
+.sidebar-group nav .dropdown-item:hover {
 	background-color: unset;
 } 
 
-.content-menu nav .nav-item a {
+.sidebar-group nav .nav-item a {
 	color: #656565;
 }
 
-.content-menu nav .nav-item > a {
+.sidebar-group nav .nav-item > a {
 	font-weight: bold;
 }
 
-.content-menu nav .nav-link a {
+.sidebar-group nav .nav-link a {
 	color: #656565;
 }
 
@@ -511,11 +511,11 @@ Sidebar
 	  	width: 100%;
 	}
 	
-	.content-menu {
+	.sidebar-group {
 	    margin-left: 0px;
 	}
 	
-	.content-menu nav .dropdown-item {
+	.sidebar-group nav .dropdown-item {
 	    display: block;
 	    padding: 0.5rem 0rem;
     } 
@@ -541,39 +541,39 @@ Sidebar
 		padding-top: 1rem;
 	}
 	
-	.content-menu {
+	.sidebar-group {
 	    margin-left: 300px;
 	}
 	
-	.content-menu nav {
+	.sidebar-group nav {
 		padding: 0px 0px;
 	}
 	
-	.content-menu nav .container {
+	.sidebar-group nav .container {
 		flex-wrap:wrap;
 		display:unset;
 	}
 	
-	.content-menu nav .navbar-brand {
+	.sidebar-group nav .navbar-brand {
 		flex-direction: unset;
 		display: block;
 		padding: 0px 0px;
 	}
 	
-	.content-menu nav .navbar-nav {
+	.sidebar-group nav .navbar-nav {
 		flex-direction: unset;
 		display: unset;
 	}
 	
-	.content-menu nav .nav-link {
+	.sidebar-group nav .nav-link {
 	    padding: unset !important;
 	}
 	
-	.content-menu nav .nav-link::after {
+	.sidebar-group nav .nav-link::after {
 	    content: unset;
 	}
 	
-	.content-menu nav .dropdown-menu{
+	.sidebar-group nav .dropdown-menu{
 		display: block;
 	    position: unset !important;
 	    background-color: unset;
@@ -583,15 +583,15 @@ Sidebar
 	    border: unset;
 	}
 	
-	.content-menu nav .dropdown-item{
+	.sidebar-group nav .dropdown-item{
 	    padding: 0 1.5rem;
 	}
 	
-	.content-menu nav .dropdown-item:active{
+	.sidebar-group nav .dropdown-item:active{
 	    background-color: unset;	
 	}
 	
-	.content-menu nav .dropdown-item:hover, .dropdown-item:focus, .dropdown-item:visited{
+	.sidebar-group nav .dropdown-item:hover, .dropdown-item:focus, .dropdown-item:visited{
 	    background-color: inherit;
 	    color: #000000;
 	}

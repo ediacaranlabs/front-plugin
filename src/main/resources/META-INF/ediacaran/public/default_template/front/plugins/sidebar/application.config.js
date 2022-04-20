@@ -12,7 +12,7 @@ $.AppContext.sidebar.apply = function($id){
 		var $bar = $(this);
 		var $body = $($bar).parent()
 		
-		$($body).addClass('content-menu');
+		$($body).addClass('sidebar-group');
 		
 		var bodyHeight = $($body).outerHeight();
 		
