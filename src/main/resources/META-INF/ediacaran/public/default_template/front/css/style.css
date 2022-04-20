@@ -479,41 +479,43 @@ dd {
 Sidebar
 ==================================== */
 
-.content-menu .dropdown-menu {
+.content-menu nav .dropdown-menu {
 	border: 0px;
 	font-size: unset;
 	padding: 0 0;
 }
 
-.content-menu .dropdown-item {
+.content-menu nav .dropdown-item {
 	padding: 0rem 0rem;	
 } 
 
-.content-menu .dropdown-item:hover {
+.content-menu nav .dropdown-item:hover {
 	background-color: unset;
 } 
 
-.navbar-side .nav-item a {
+.content-menu nav .nav-item a {
 	color: #656565;
 }
 
-.navbar-side .nav-item > a {
+.content-menu nav .nav-item > a {
 	font-weight: bold;
 }
 
-/* content */
-
-.navbar-side .nav-link a {
+.content-menu nav .nav-link a {
 	color: #656565;
 }
 
 @media screen and (max-width: 1200px){
 	
+	.sidebar {
+	  	width: 100%;
+	}
+	
 	.content-menu {
 	    margin-left: 0px;
 	}
 	
-	.content-menu .dropdown-item {
+	.content-menu nav .dropdown-item {
 	    display: block;
 	    padding: 0.5rem 0rem;
     } 
@@ -522,54 +524,56 @@ Sidebar
 
 @media screen and (min-width: 1200px){
 
-	aside[class=sidebar] {
-	    background-color: #ffff;
+	.sidebar {
+		padding-top: 1rem;
+		display: block;
+	  	width: 300px;
+		background-color: #ffff;
 	    position: absolute;
 	    overflow-y: hidden;
 	    z-index: 1038;
-	    width: 0px;
 	  	margin-left: -300px;
+		overflow-y: auto;	
+		overflow-x: hidden;
+	}
+	
+	.content {
+		padding-top: 1rem;
 	}
 	
 	.content-menu {
 	    margin-left: 300px;
 	}
 	
-	.content-menu .sidebar {
-		display: block;
-	  	width: 300px;
+	.content-menu nav {
+		padding: 0px 0px;
 	}
 	
-	.content-menu .sidebar-body {
-		overflow-y: scroll;	
-		overflow-x: hidden;
-	};
-	
-	.navbar-side .container {
+	.content-menu nav .container {
 		flex-wrap:wrap;
 		display:unset;
 	}
 	
-	.navbar-side .navbar-brand {
+	.content-menu nav .navbar-brand {
 		flex-direction: unset;
 		display: block;
 		padding: 0px 0px;
 	}
 	
-	.navbar-side .navbar-nav {
+	.content-menu nav .navbar-nav {
 		flex-direction: unset;
 		display: unset;
 	}
 	
-	.navbar-side .nav-link {
+	.content-menu nav .nav-link {
 	    padding: unset !important;
 	}
 	
-	.navbar-side .nav-link::after {
+	.content-menu nav .nav-link::after {
 	    content: unset;
 	}
 	
-	.navbar-side .dropdown-menu{
+	.content-menu nav .dropdown-menu{
 		display: block;
 	    position: unset !important;
 	    background-color: unset;
@@ -579,15 +583,15 @@ Sidebar
 	    border: unset;
 	}
 	
-	.navbar-side .dropdown-item{
+	.content-menu nav .dropdown-item{
 	    padding: 0 1.5rem;
 	}
 	
-	.navbar-side .dropdown-item:active{
+	.content-menu nav .dropdown-item:active{
 	    background-color: unset;	
 	}
 	
-	.navbar-side .dropdown-item:hover, .dropdown-item:focus, .dropdown-item:visited{
+	.content-menu nav .dropdown-item:hover, .dropdown-item:focus, .dropdown-item:visited{
 	    background-color: inherit;
 	    color: #000000;
 	}
