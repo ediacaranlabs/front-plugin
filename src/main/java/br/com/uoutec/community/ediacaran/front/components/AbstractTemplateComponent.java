@@ -35,6 +35,7 @@ public abstract class AbstractTemplateComponent
 	protected Set<String> default_empty_attributes = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
 			add("classStyle");
+			add("style");
 		}});
 	
 	
@@ -125,6 +126,14 @@ public abstract class AbstractTemplateComponent
 							return value == null? null : " float-" + value;
 					}
 					
+				});
+				
+				put("style", new PropertyParserImp() {
+					
+					@Override
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
+						return value == null? "" : component.getType()+ value;
+					}
 				});
 				
 			}});

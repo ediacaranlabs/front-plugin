@@ -35,8 +35,8 @@
 		</ed:container>
 	</section>
 
-    <section class="sidebar-group">
-    	<aside class="sidebar">
+	<ec:sidebar-group>
+		<ec:sidebar>
 			<ed:container>
 				<ec:menu-bar id="${pageObjects['leftMenu']['id']}" 
 						classStyle="${pageObjects['leftMenu']['classStyle']}" 
@@ -68,8 +68,8 @@
 						</ec:menu-body>
 				</ec:menu-bar>
 			</ed:container>
-    	</aside>
-   	    <section id="content-body" class="content">
+		</ec:sidebar>
+		<ec:body id="content-body">
 	    	<ed:row>
 	    		<ed:col size="12">
 	    			<ed:container>
@@ -77,9 +77,8 @@
 	    			</ed:container>
 	    		</ed:col>
 	    	</ed:row>
-   	    </section>
-    </section>
-	
+		</ec:body>
+	</ec:sidebar-group>
         	 
 	<ec:include uri="/includes/footer.jsp"/>
  

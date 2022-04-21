@@ -1,5 +1,3 @@
-<div class="{size} {offset}">
-	<aside class="left-sidebar">
-		{content}
-	</aside>
-</div>
+<aside {attr} class="sidebar {style} {align} {classStyle} {autoAdjust}">
+	{content}
+</aside>

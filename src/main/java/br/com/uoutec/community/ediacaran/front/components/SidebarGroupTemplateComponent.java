@@ -5,15 +5,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
-import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
 
-public class SideBarTemplateComponent  extends AbstractTemplateComponent {
+public class SidebarGroupTemplateComponent extends AbstractTemplateComponent {
 	
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {
 		super.loadConfiguration();
 		
-		super.template = "/default_template/front/components/sidebar.tmp";
+		super.template = "/default_template/front/components/sidebar-group.tmp";
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
@@ -29,22 +28,11 @@ public class SideBarTemplateComponent  extends AbstractTemplateComponent {
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("content");
-			add("autoAdjust");
 		}});
 	
 	
 		super.default_property_parsers = 
 			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
-				
-				put("autoAdjust", new PropertyParserImp() {
-					
-					@Override
-					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						return value != null && (Boolean)value? "auto-height" : "";
-					}
-					
-				});
-				
 			}});
 	}
 }

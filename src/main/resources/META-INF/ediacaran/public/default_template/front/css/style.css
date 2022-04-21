@@ -524,8 +524,9 @@ Sidebar
 
 @media screen and (min-width: 1200px){
 
-	.sidebar {
+	.sidebar-group .sidebar {
 		padding-top: 1rem;
+		padding-bottom: 1rem;
 		display: block;
 	  	width: 300px;
 		background-color: #ffff;
@@ -536,14 +537,23 @@ Sidebar
 		overflow-y: auto;	
 		overflow-x: hidden;
 	}
-	
+
+	.sidebar-group:not(.show) .sidebar{
+		width: 0px;
+	}
+
 	.content {
 		padding-top: 1rem;
 	}
-	
+
 	.sidebar-group {
 	    margin-left: 300px;
 	}
+	
+	.sidebar-group:not(.show){
+		margin-left: 0px;
+	}
+
 	
 	.sidebar-group nav {
 		padding: 0px 0px;

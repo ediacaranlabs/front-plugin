@@ -1,10 +1,14 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.util.Map;
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
-import br.com.uoutec.community.ediacaran.front.components.Component;
-
-@Deprecated
+@Tag(
+		name="sidebar", 
+		uri="https://www.uoutec.com.br/ediacaran/tags/components", 
+		bodycontent=BodyTypes.SCRIPTLESS
+	)
 public class SideBarTagComponent  extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE  = "/components/sidebar";
@@ -13,42 +17,22 @@ public class SideBarTagComponent  extends AbstractSimpleTagComponent {
 	
 	/* ------------ Prop ---------------*/
 	
-	private Integer size;
-	
-	private String align;
+	private Boolean autoAdjust;
 	
 	public SideBarTagComponent() {
 	}
-	
-    protected Component createComponent() {
-    	return new Component() {
-    		
-    		public void beforePrepareVars(Map<String, Object> vars) {
-    			int offset = "right".equalsIgnoreCase(align)? (size == null? 11 : 12 - size) : -1; 
-    			vars.put("offset", offset <= 0? "" : "offset-lg-" + offset + " offset-xl-" + offset);
-    	    }
-    		
-    	};
-    }
 	
     public String getDefaultTemplate() {
     	return TEMPLATE;
     }
 
-	public Integer getSize() {
-		return size;
+	public Boolean getAutoAdjust() {
+		return autoAdjust;
 	}
 
-	public void setSize(Integer size) {
-		this.size = size;
-	}
-
-	public String getAlign() {
-		return align;
-	}
-
-	public void setAlign(String align) {
-		this.align = align;
+	@TagAttribute
+	public void setAutoAdjust(Boolean autoAdjust) {
+		this.autoAdjust = autoAdjust;
 	}
 
 	@Override

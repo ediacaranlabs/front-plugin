@@ -15,11 +15,24 @@ $.AppContext.sidebar.apply = function($id){
 		$($body).addClass('sidebar-group');
 		
 		var bodyHeight = $($body).outerHeight();
+		var barHeight = $($bar).outerHeight();
 		
 		var width = $(window).width();
 
 		if(width > 1200){
-			$($bar).css('height', bodyHeight + "px");
+			
+			if($bar.hasClass('auto-height') ){
+				if(bodyHeight > barHeight){
+					$($bar).css('height', bodyHeight + "px");
+				}
+				else{
+					$($body).css('height', barHeight + "px");
+				}
+			}
+			else{
+				$($bar).css('height', bodyHeight + "px");
+			}
+			//$($bar).css('height', bodyHeight + "px");
 		}
 		else{
 			$($bar).css('height', "unset");

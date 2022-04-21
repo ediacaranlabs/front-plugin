@@ -1,0 +1,3 @@
+<section class="sidebar-group {style} {classStyle} {align}">
+	{content}
+</section>

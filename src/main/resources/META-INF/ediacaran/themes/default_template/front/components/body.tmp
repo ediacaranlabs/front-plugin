@@ -1,0 +1,3 @@
+<section {attr} class="content {style} {classStyle} {align}">
+	{content}
+</section>
