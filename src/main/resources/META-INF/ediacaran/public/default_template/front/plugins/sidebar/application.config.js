@@ -12,8 +12,6 @@ $.AppContext.sidebar.apply = function($id){
 		var $bar = $(this);
 		var $body = $($bar).parent()
 		
-		$($body).addClass('sidebar-group');
-		
 		var bodyHeight = $($body).outerHeight();
 		var barHeight = $($bar).outerHeight();
 		
@@ -32,53 +30,11 @@ $.AppContext.sidebar.apply = function($id){
 			else{
 				$($bar).css('height', bodyHeight + "px");
 			}
-			//$($bar).css('height', bodyHeight + "px");
 		}
 		else{
 			$($bar).css('height', "unset");
 		}
 	});
-	
-/*	
-	$($id + " .content").each(function() {
-
-		var $content = $(this);
-		var $menuRef = $($content).attr("menu");
-		
-		if($menuRef == 'undefined'){
-			return;
-		}
-		
-		$($content).addClass('content-menu');
-		
-		$($menuRef).each(function() {
-
-			var $menu = $(this);
-			var contentHeight = $($content).outerHeight();
-			var menuWidth = $($menu).outerWidth();
-
-		});
-
-		$($menuRef).each(function() {
-
-			var $menuBody = $(this);
-			var contentHeight = $($content).outerHeight();
-
-			var width = $(window).width();
-
-			if(width > 1200){
-				$($menuBody).css('height', contentHeight + "px");
-			}
-			else{
-				$($menuBody).css('height', "unset");
-			}
-			
-			//$($content).css('height', contentHeight + "px");
-			
-		});
-		
-	});
-*/
 	
 };
 
@@ -88,6 +44,23 @@ $.AppContext.onload(function(){
 
 	$(window).resize(function(){
 		$.AppContext.sidebar.resizeContent();
+	});
+	
+	$.AppContext.eventListeners.addListener('sidebar-link-load',{
+		
+		fireEvent : function($e){
+			//alert(JSON.stringify($e));
+		}
+	
+	});
+	
+
+	$.AppContext.addLoadListener("sidebar-link-load", "^.*", {
+		
+		after: function(){
+			$.AppContext.sidebar.resizeContent();
+		}
+	
 	});
 	
 });
