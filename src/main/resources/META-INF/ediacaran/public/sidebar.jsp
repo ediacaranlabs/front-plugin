@@ -35,7 +35,7 @@
 		</ed:container>
 	</section>
 
-	<ec:sidebar-group>
+	<ec:sidebar-group show="true">
 		<ec:sidebar>
 			<ed:container>
 				<ec:menu-bar id="${pageObjects['leftMenu']['id']}" 

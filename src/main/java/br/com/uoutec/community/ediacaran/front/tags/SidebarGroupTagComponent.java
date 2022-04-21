@@ -2,6 +2,7 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
 @Tag(
 	name="sidebar-group", 
@@ -16,6 +17,8 @@ public class SidebarGroupTagComponent extends FieldFormTagComponent {
 	
 	/* ------------ Prop ---------------*/
 	
+	private Boolean show;
+	
 	public SidebarGroupTagComponent() {
 	}
 	
@@ -25,6 +28,15 @@ public class SidebarGroupTagComponent extends FieldFormTagComponent {
 
 	public String getType() {
 		return "sidebar-group";
+	}
+
+	public Boolean getShow() {
+		return show;
+	}
+
+	@TagAttribute
+	public void setShow(Boolean show) {
+		this.show = show;
 	}
 
 }
