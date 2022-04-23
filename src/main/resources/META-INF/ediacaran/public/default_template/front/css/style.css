@@ -536,6 +536,7 @@ Sidebar
 	  	margin-left: -300px;
 		overflow-y: auto;	
 		overflow-x: hidden;
+		transition: width 0.2s ease-in;
 	}
 
 	.sidebar-group:not(.show) .sidebar{

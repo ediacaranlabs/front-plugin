@@ -1,47 +1,53 @@
 $.AppContext.sidebar = {};
 
 $.AppContext.sidebar.resizeContent = function () {
-	var topMenuHeight = $(".top-menu").outerHeight();
-	var footerHeight  = $("footer").outerHeight();
-	var height        = $(window).height();
-	height            = height - (footerHeight + topMenuHeight);
-	$(".content").css('min-height', height + "px");
-	
-	var brandHeight   = $(".navbar-brand").outerHeight();
-	$(".sidebar-body").css('min-height', ($(window).height() - brandHeight) + "px");
+	$.AppContext.sidebar.apply('');
+};
 
+$.AppContext.sidebar.apply = function($id){
+
+	$("aside.sidebar").each(function() {
+
+		var $bar = $(this);
+		var $body = $($bar).parent()
+		
+		var bodyHeight = $($body).outerHeight();
+		var barHeight = $($bar).outerHeight();
+
+		var width = $(window).width();
+
+		console.log($($body).attr("id") + "->" + bodyHeight + " : " + $($bar).attr("id") + "->" + barHeight);
+		
+		if(width > 1200 || $bar.hasClass('static-height')){
+			
+			if($bar.hasClass('auto-height')){
+				
+				if(bodyHeight > barHeight){
+					$($bar).css('height', bodyHeight + "px");
+				}
+				else{
+					$($body).css('height', barHeight + "px");
+				}
+				
+			}
+			else{
+				$($bar).css('height', bodyHeight + "px");
+			}
+			
+		}
+		else{
+			$($bar).css('height', "unset");
+		}
+	});
+	
 };
 
 $.AppContext.onload(function(){			
 
+	$.AppContext.sidebar.apply('');
+
 	$(window).resize(function(){
 		$.AppContext.sidebar.resizeContent();
-		//var width = $(window).width();
-		//if(width < 1200){
-		//	$('body').removeClass('show');
-		//}
-	});
-	
-	$("aside[class^='sidebar'] a[class^='dropdown-item']").click(function(){
-		var width = $(window).width();
-		if(width < 1200){
-			$('body').removeClass('show');
-		}
-	});
-	
-	$(".sidebar").hover(function(){
-		$('body').addClass('hover-menu');
-	}, function(){
-		$('body').removeClass('hover-menu');
-	});
-	
-	$(window).click(function(){
-		if(!$('body').hasClass('hover-menu')){
-			var width = $(window).width();
-			if(width < 1200){
-				$('body').removeClass('show');
-			}
-		}
 	});
 	
 	$.AppContext.eventListeners.addListener('sidebar-link-load',{
@@ -60,14 +66,5 @@ $.AppContext.onload(function(){
 		}
 	
 	});
-
-	
-	$.AppContext.sidebar.resizeContent();
-	
-	var width = $(window).width();
-	
-	if(width < 1200){
-		$('body').removeClass('show');
-	}
 	
 });
