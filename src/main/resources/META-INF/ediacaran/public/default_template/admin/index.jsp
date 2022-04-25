@@ -16,7 +16,7 @@
 <body>
 <ec:sidebar-group id="pageBody" show="true">
 
-	<ec:sidebar classStyle="static-height">
+	<ec:sidebar>
 		<ec:menu-bar style="adm-left">
 			<ec:menu-bar-brand>
 				<ec:image src="/plugins/ediacaran/front/admin/img/Logo.png" />

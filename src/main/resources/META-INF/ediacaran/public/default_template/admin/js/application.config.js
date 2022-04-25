@@ -1,66 +1,53 @@
 $.AppContext.local = {};
 
 $.AppContext.local.resizeContent = function () {
+	
 	var topMenuHeight = $(".top-menu").outerHeight();
 	var footerHeight  = $("footer").outerHeight();
 	var height        = $(window).height();
 	height            = height - (footerHeight + topMenuHeight);
 	
 	$("#content-body").css('min-height', height + "px");
-	$("#pageBody").css('height', $(window).height() + "px");
-	$("#pageBody").css('min-height', $(window).height() + "px");
+	
+	console.log("window.height: " + $(document).height());
 	
 };
 
 $.AppContext.onload(function(){			
 
+	$.AppContext.eventListeners.addListener('local-link-load',{
+		
+		fireEvent : function($e){
+			
+			if($e.sourceID === 'utils.enableActions' && $e.type === 'after'){
+				
+				$.AppContext.sidebar.apply($e.data.local);
+				
+				$($e.data.local + " img").on("load", function(){
+					$.AppContext.sidebar.resizeContent();
+				});
+				
+			}
+		}
+	
+	});
+	
 	$.AppContext.addLoadListener("local-link-load", "^.*", {
 		
 		after: function(){
 			$.AppContext.local.resizeContent();
+			$("img").on("load", function(){
+				$.AppContext.local.resizeContent();
+			});
 		}
 	
 	});
-	
+
 	$(window).resize(function(){
+		console.log("window.height: " + $(window).height());
 		$.AppContext.local.resizeContent();
 	});
 	
 	$.AppContext.local.resizeContent();
-	
-	$("aside.sidebar a[class^='dropdown-item']").click(function(){
-		var width = $(window).width();
-		if(width < 1200){
-			$('#pageBody').collapse('toggle');
-			//$('#pageBody').removeClass('show');
-		}
-	});
-	
-	$("aside.sidebar").hover(function(){
-		$('#pageBody').addClass('hover-menu');
-	}, function(){
-		$('#pageBody').removeClass('hover-menu');
-	});
-	
-	$(window).click(function(){
-		
-		if(!$('#pageBody').hasClass('hover-menu') && $('#pageBody').hasClass('show')){
-
-			var width = $(window).width();
-			
-			if(width < 1200){
-				$('#pageBody').collapse('toggle');
-				//$('#pageBody').removeClass('show');
-			}
-			
-		}
-		
-	});
-	
-	var width = $(window).width();
-	
-	if(width < 1200){
-		$('#pageBody').removeClass('show');
-	}
 	
 });

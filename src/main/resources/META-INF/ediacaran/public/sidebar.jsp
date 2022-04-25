@@ -13,7 +13,7 @@
 <ec:include uri="/includes/head.jsp"/>
 </head>
 
-<body id="body">
+<body>
 
 	<ec:include uri="/includes/header.jsp"/>
 	
@@ -35,17 +35,15 @@
 		</ed:container>
 	</section>
 
-	<ec:sidebar-group show="true">
+	<ec:sidebar-group id="pageBody" show="true">
+
 		<ec:sidebar>
 			<ed:container>
 				<ec:menu-bar id="${pageObjects['leftMenu']['id']}" 
 						classStyle="${pageObjects['leftMenu']['classStyle']}" 
 						expand="${pageObjects['leftMenu']['expand']}" 
 						style="${pageObjects['leftMenu']['style']}">
-		 				<ec:menu-toggler menuID="leftMenu_body">
-							<ec:icon icon="bars" size="1" />
-						</ec:menu-toggler>
-						<ec:menu-body collapse="true">
+						<ec:menu-body>
 							<ec:menu-itens align="right">
 								<c:forEach items="${pageObjects['leftMenu']['itens']}" var="menu">
 									<c:choose>
@@ -69,15 +67,21 @@
 				</ec:menu-bar>
 			</ed:container>
 		</ec:sidebar>
-		<ec:body id="content-body">
-	    	<ed:row>
-	    		<ed:col size="12">
-	    			<ed:container>
-	 					${pageObjects['content']}
-	    			</ed:container>
-	    		</ed:col>
-	    	</ed:row>
-		</ec:body>
+
+
+
+
+		<div class="sidebar-content">
+			<ec:body id="content-body">
+    			<ed:container>
+	 				<ec:menu-toggler menuID="pageBody">
+						<ec:icon icon="bars" size="1" />
+					</ec:menu-toggler>
+ 					${pageObjects['content']}
+    			</ed:container>
+			</ec:body>
+		</div>
+		
 	</ec:sidebar-group>
         	 
 	<ec:include uri="/includes/footer.jsp"/>

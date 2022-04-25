@@ -72,8 +72,22 @@ $.AppContext.utils = {
 		},
 		
 		enableActions: function (local){
+			
+	    	$.AppContext.eventListeners.fireEvent({
+	    		sourceID: "utils.enableActions",
+	    		type: "before",
+	    		data: { "local" : local}
+		    });
+			
 			$.AppContext.utils.enableAsyncSubmit(local);
 			$.AppContext.utils.enableAsyncGet(local);
+			
+	    	$.AppContext.eventListeners.fireEvent({
+	    		sourceID: "utils.enableActions",
+	    		type: "after",
+	    		data: { "local" : local}
+		    });
+			
 		},
 
 		enableAsyncSubmit: function (local){
