@@ -75,28 +75,28 @@
 
 				<ec:carousel>
 					<ec:carousel-item>
-						<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-01.jpg"/></a>
+						<a href="#"><ec:image src="/plugins/ediacaran/front/img/gallery/thumbs/image-01.jpg"/></a>
 					</ec:carousel-item> 
 					<ec:carousel-item>
-						<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-02.jpg"/></a>
+						<a href="#"><ec:image src="/plugins/ediacaran/front/img/gallery/thumbs/image-02.jpg"/></a>
 					</ec:carousel-item> 
 					<ec:carousel-item>
-						<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-03.jpg"/></a>
+						<a href="#"><ec:image src="/plugins/ediacaran/front/img/gallery/thumbs/image-03.jpg"/></a>
 					</ec:carousel-item> 
 					<ec:carousel-item>
-						<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-04.jpg"/></a>
+						<a href="#"><ec:image src="/plugins/ediacaran/front/img/gallery/thumbs/image-04.jpg"/></a>
 					</ec:carousel-item> 
 					<ec:carousel-item>
-						<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-05.jpg"/></a>
+						<a href="#"><ec:image src="/plugins/ediacaran/front/img/gallery/thumbs/image-05.jpg"/></a>
 					</ec:carousel-item> 
 					<ec:carousel-item>
-						<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-06.jpg"/></a>
+						<a href="#"><ec:image src="/plugins/ediacaran/front/img/gallery/thumbs/image-06.jpg"/></a>
 					</ec:carousel-item> 
 					<ec:carousel-item>
-						<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-07.jpg"/></a>
+						<a href="#"><ec:image src="/plugins/ediacaran/front/img/gallery/thumbs/image-07.jpg"/></a>
 					</ec:carousel-item> 
 					<ec:carousel-item>
-						<a href="#"><ec:image src="/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-08.jpg"/></a>
+						<a href="#"><ec:image src="/plugins/ediacaran/front/img/gallery/thumbs/image-08.jpg"/></a>
 					</ec:carousel-item> 
 				</ec:carousel>
 

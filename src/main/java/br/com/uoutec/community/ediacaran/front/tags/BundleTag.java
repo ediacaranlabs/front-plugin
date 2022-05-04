@@ -45,6 +45,7 @@ public class BundleTag extends SimpleTagSupport {
     	String reqID = tagComponent.getRequestPath();
     	reqID = reqID.split("\\.")[0];
     	reqID = reqID.replaceAll("/+", "/");
+    	reqID = reqID.replaceAll("^/templates", "");
     	reqID = "/" + pcm.getSupplier() + "/" + pcm.getCode() + reqID;
     	//reqID = reqID.substring(ContextManager.BASE_CONTEXT.length());
     	

@@ -3,14 +3,14 @@
 	"slider": [
 		{
 			"title" :"DNS Dinâmico",
-			"img" :  "/plugins/ediacaran/front/templates/default_template/img/slides/nivo/bg-1.jpg",
+			"img" :  "/plugins/ediacaran/front/img/slides/nivo/bg-1.jpg",
 			"src" :  "ddns/",
 			"desc":  "IP dinâmico deixa seu site ou jogo fora do ar?
 			Crie um domínio de graça ou gerencie um existente e nunca mais fique desconectado."
 		},
 		{
 			"title" :"Calypte Cache",
-			"img" :  "/plugins/ediacaran/front/templates/default_template/img/slides/nivo/bg-2.jpg",
+			"img" :  "/plugins/ediacaran/front/img/slides/nivo/bg-2.jpg",
 			"src" :  "calypte/",
 			"desc":  "Conheça nosso sistema de cache de propósito geral com suporte transacional. É extremamente 
 			rápido, tanto para escrita como para leitura, podendo chegar a mais de 600.000 operações por 
@@ -18,7 +18,7 @@
 		},
 		{
 			"title" :"Brutos Framework",
-			"img" :  "/plugins/ediacaran/front/templates/default_template/img/slides/nivo/bg-3.jpg",
+			"img" :  "/plugins/ediacaran/front/img/slides/nivo/bg-3.jpg",
 			"src" :  "brutos/",
 			"desc":  "Conheça nosso framework MVC desenvolvido em Java. Projetado para reduzir a complexidade do 
 			desenvolvimento web com mapeamento configurável, resolução de vista, suporte ao upload e
@@ -54,50 +54,50 @@
 	"gallery": [
 		{
 			"title" :"The City",
-			"icon"  :  "/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-01.jpg",
-			"image" :  "/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-01-full.jpg",
+			"icon"  :  "/plugins/ediacaran/front/img/gallery/thumbs/image-01.jpg",
+			"image" :  "/plugins/ediacaran/front/img/gallery/full/image-01-full.jpg",
 			"desc"  :  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis."
 		},
 		{
 			"title" :"The City",
-			"icon"  :  "/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-02.jpg",
-			"image" :  "/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-02-full.jpg",
+			"icon"  :  "/plugins/ediacaran/front/img/gallery/thumbs/image-02.jpg",
+			"image" :  "/plugins/ediacaran/front/img/gallery/full/image-02-full.jpg",
 			"desc"  :  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis."
 		},
 		{
 			"title" :"The City",
-			"icon"  :  "/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-03.jpg",
-			"image" :  "/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-03-full.jpg",
+			"icon"  :  "/plugins/ediacaran/front/img/gallery/thumbs/image-03.jpg",
+			"image" :  "/plugins/ediacaran/front/img/gallery/full/image-03-full.jpg",
 			"desc"  :  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis."
 		},
 		{
 			"title" :"The City",
-			"icon"  :  "/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-04.jpg",
-			"image" :  "/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-04-full.jpg",
+			"icon"  :  "/plugins/ediacaran/front/img/gallery/thumbs/image-04.jpg",
+			"image" :  "/plugins/ediacaran/front/img/gallery/full/image-04-full.jpg",
 			"desc"  :  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis."
 		},
 		{
 			"title" :"The City",
-			"icon"  :  "/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-05.jpg",
-			"image" :  "/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-05-full.jpg",
+			"icon"  :  "/plugins/ediacaran/front/img/gallery/thumbs/image-05.jpg",
+			"image" :  "/plugins/ediacaran/front/img/gallery/full/image-05-full.jpg",
 			"desc"  :  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis."
 		},
 		{
 			"title" :"The City",
-			"icon"  :  "/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-06.jpg",
-			"image" :  "/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-06-full.jpg",
+			"icon"  :  "/plugins/ediacaran/front/img/gallery/thumbs/image-06.jpg",
+			"image" :  "/plugins/ediacaran/front/img/gallery/full/image-06-full.jpg",
 			"desc"  :  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis."
 		},
 		{
 			"title" :"The City",
-			"icon"  :  "/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-07.jpg",
-			"image" :  "/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-07-full.jpg",
+			"icon"  :  "/plugins/ediacaran/front/img/gallery/thumbs/image-07.jpg",
+			"image" :  "/plugins/ediacaran/front/img/gallery/full/image-07-full.jpg",
 			"desc"  :  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis."
 		},
 		{
 			"title" :"The City",
-			"icon"  :  "/plugins/ediacaran/front/templates/default_template/img/gallery/thumbs/image-08.jpg",
-			"image" :  "/plugins/ediacaran/front/templates/default_template/img/gallery/full/image-08-full.jpg",
+			"icon"  :  "/plugins/ediacaran/front/img/gallery/thumbs/image-08.jpg",
+			"image" :  "/plugins/ediacaran/front/img/gallery/full/image-08-full.jpg",
 			"desc"  :  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis."
 		}
 	]	

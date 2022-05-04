@@ -52,7 +52,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		entry.name = name;
 		entry.context = context;
 		entry.packages = new ConcurrentHashMap<String, ThemePackage>();
-		entry.tema = new ThemeImp(name, context, template, entry.packages);
+		entry.tema = new ThemeImp(name, context, "/templates" + template, entry.packages);
 		
 		if(logger.isTraceEnabled()) {
 			logger.trace("thema created: {}[template={}, context={}]", name, template, context);
@@ -256,7 +256,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		}
 
 		if(!path.startsWith("/") && !path.toLowerCase().matches("^http?(s):\\/\\/.*")) {
-			path = entry.tema.getContext() + "/" + path;
+			path = entry.tema.getContext() + "/templates" + "/" + path;
 		}
 		
 		PublicResource pr = new PublicResource(resource, path);
