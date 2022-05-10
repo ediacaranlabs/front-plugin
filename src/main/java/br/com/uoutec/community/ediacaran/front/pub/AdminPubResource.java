@@ -34,11 +34,11 @@ import br.com.uoutec.pub.entity.InvalidRequestException;
 
 @Singleton
 @Controller(value="${plugins.ediacaran.front.admin_context}", defaultActionName="/")
-@View(value="/${plugins.ediacaran.front.template}/admin/index")
+@View(value="/templates/${plugins.ediacaran.front.template}/admin/index")
 @Actions({
-	@Action(value="/", view=@View(value="/${plugins.ediacaran.front.template}/admin/index")),
-	@Action(value="/user-menu", view=@View(value="/${plugins.ediacaran.front.template}/admin/user_menu")),
-	@Action(value="/plugins", view=@View(value="/${plugins.ediacaran.front.template}/admin/plugins"))
+	@Action(value="/", view=@View(value="/templates/${plugins.ediacaran.front.template}/admin/index")),
+	@Action(value="/user-menu", view=@View(value="/templates/${plugins.ediacaran.front.template}/admin/user_menu")),
+	@Action(value="/plugins", view=@View(value="/templates/${plugins.ediacaran.front.template}/admin/plugins"))
 })
 @ResponseErrors(rendered=false, name="exception")
 public class AdminPubResource {
