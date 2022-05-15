@@ -28,7 +28,6 @@ public class FlotChartsTemplateComponent extends AbstractTemplateComponent {
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("src");
-			add("togglingSeries"); 
 			add("updateFrequence");
 			add("updateFrequenceUnit");
 			add("content");

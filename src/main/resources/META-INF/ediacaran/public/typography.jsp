@@ -232,11 +232,11 @@
 			<ed:row>
 				<ed:col size="12">
 		            <h4>Preformatted text</h4>
-		            <ec:prettify linenums="true">&lt;div class="col-12"&gt;
-&nbsp;&nbsp;&lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr..&lt;/p&gt;
-&nbsp;&nbsp;&lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr..&lt;/p&gt;
-&nbsp;&nbsp;&lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr..&lt;/p&gt;
-&lt;/div&gt;</ec:prettify>
+		            <ec:prettify linenums="true"><div class="col-12">
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr..</p>
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr..</p>
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr..</p>
+</div></ec:prettify>
 				</ed:col>
 			</ed:row>
 

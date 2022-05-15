@@ -43,7 +43,7 @@ $.AppContext.lightgallery.apply = function($id){
 
 $.AppContext.onload(function(){
 	
-	$.AppContext.lightgallery.apply('body');
+	$.AppContext.lightgallery.apply('');
 	
 	$.AppContext.addLoadListener("gallery-link-load", "^.*", {
 		

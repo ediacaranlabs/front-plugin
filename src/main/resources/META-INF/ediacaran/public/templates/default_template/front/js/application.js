@@ -135,7 +135,7 @@ $.AppContext.utils = {
 		},
 		
 		loadJson: function (resource, success = null, error = null){
-			//alert(success);
+
 		    $.ajax({
 		        type   : 'GET',
 		        contentType: 'application/json',
@@ -145,21 +145,6 @@ $.AppContext.utils = {
 		        error: error
 		    });
 			
-		    /*
-			$.ajax({
-			    type: 'GET',
-			    headers: { 
-			        'Accept': 'application/json',
-			        'Content-Type': 'application/json' 
-			    },			    
-			    dataType: "json",
-			    url: $.AppContext.vars.contextPath + resource,
-			    success: function(data){
-			    	alert(data);
-			    },
-			    error : error
-			});
-			*/
 		},
 		
 		postJson: function (resource, request, success = null, error = null){
