@@ -2,14 +2,14 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"                   prefix="c"%>
 
-<ec:load-data file="footer.json" var="objects" />
+<%--<ec:load-data file="footer.json" var="objects" />--%>
 <footer>
 	<ed:container>
 		<ed:row>
 			<ed:col>
-				<c:if test="${!empty objects['social-links']}">
+				<c:if test="${!empty pageObjects['social-links']}">
 					<ec:list style="inline">
-						<c:forEach items="${objects['social-links']}" var="social_link">
+						<c:forEach items="${pageObjects['social-links']}" var="social_link">
 							<ec:list-item>
 								<a href="${social_link['src']}">
 									<ec:icon icon="${social_link['icon']}" bg="square" bgSize="2" size="2" />
@@ -20,19 +20,19 @@
 				</c:if>
 			</ed:col>
 			<ed:col classStyle="widget">
-				<c:if test="${!empty objects['frontFooterMenu2']}">
+				<c:if test="${!empty pageObjects['frontFooterMenu2']}">
 				
-					<ec:menu-bar id="${objects['frontFooterMenu2']['id']}" 
-							classStyle="${objects['frontFooterMenu2']['classStyle']}" 
-							expand="${objects['frontFooterMenu2']['expand']}" 
-							style="${objects['frontFooterMenu2']['style']}">
+					<ec:menu-bar id="${pageObjects['frontFooterMenu2']['id']}" 
+							classStyle="${pageObjects['frontFooterMenu2']['classStyle']}" 
+							expand="${pageObjects['frontFooterMenu2']['expand']}" 
+							style="${pageObjects['frontFooterMenu2']['style']}">
 						<ed:container>
 						<ec:menu-bar-brand>
-							<h5>${objects['frontFooterMenu2']['title']}</h5>
+							<h5>${pageObjects['frontFooterMenu2']['title']}</h5>
 						</ec:menu-bar-brand>
 						<ec:menu-body collapse="false">
 							<ec:menu-itens>
-								<c:forEach items="${objects['frontFooterMenu2']['itens']}" var="menu">
+								<c:forEach items="${pageObjects['frontFooterMenu2']['itens']}" var="menu">
 									<c:choose>
 										<c:when test="${!empty menu['itens']}">
 											<ec:menu>
@@ -56,19 +56,19 @@
 				</c:if>
 			</ed:col>
 			<ed:col classStyle="widget">
-				<c:if test="${!empty objects['frontFooterMenu1']}">
+				<c:if test="${!empty pageObjects['frontFooterMenu1']}">
 				
-					<ec:menu-bar id="${objects['frontFooterMenu1']['id']}" 
-							classStyle="${objects['frontFooterMenu1']['classStyle']}" 
-							expand="${objects['frontFooterMenu1']['expand']}" 
-							style="${objects['frontFooterMenu1']['style']}">
+					<ec:menu-bar id="${pageObjects['frontFooterMenu1']['id']}" 
+							classStyle="${pageObjects['frontFooterMenu1']['classStyle']}" 
+							expand="${pageObjects['frontFooterMenu1']['expand']}" 
+							style="${pageObjects['frontFooterMenu1']['style']}">
 						<ed:container>
 						<ec:menu-bar-brand>
-							<h5>${objects['frontFooterMenu1']['title']}</h5>
+							<h5>${pageObjects['frontFooterMenu1']['title']}</h5>
 						</ec:menu-bar-brand>
 						<ec:menu-body collapse="false">
 							<ec:menu-itens>
-								<c:forEach items="${objects['frontFooterMenu1']['itens']}" var="menu">
+								<c:forEach items="${pageObjects['frontFooterMenu1']['itens']}" var="menu">
 									<c:choose>
 										<c:when test="${!empty menu['itens']}">
 											<ec:menu>
@@ -92,15 +92,15 @@
 				</c:if>
 			</ed:col>
 			<ed:col classStyle="widget">
-				<c:if test="${!empty objects['address']}">
-					<h5>${objects['address']['title']}</h5>
-					<address>${objects['address']['address']}</address>
+				<c:if test="${!empty pageObjects['address']}">
+					<h5>${pageObjects['address']['title']}</h5>
+					<address>${pageObjects['address']['address']}</address>
 					<p>
-					<c:if test="${!empty objects['address']['phone']}">
-						<ec:icon icon="phone" size="1"/> ${objects['address']['phone']}<br>
+					<c:if test="${!empty pageObjects['address']['phone']}">
+						<ec:icon icon="phone" size="1"/> ${pageObjects['address']['phone']}<br>
 					</c:if>
-					<c:if test="${!empty objects['address']['email']}">
-						<ec:icon icon="envelope" size="1"/> ${objects['address']['email']}<br>
+					<c:if test="${!empty pageObjects['address']['email']}">
+						<ec:icon icon="envelope" size="1"/> ${pageObjects['address']['email']}<br>
 					</c:if>
 					</p>
 				</c:if>			

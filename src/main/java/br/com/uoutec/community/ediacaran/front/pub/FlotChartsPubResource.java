@@ -16,7 +16,7 @@ import org.brandao.brutos.annotation.web.MediaTypes;
 import br.com.uoutec.community.ediacaran.front.PropertyConfig;
 
 @Singleton
-@Controller(value="${plugins.ediacaran.front.admin_context}/flotcharts", defaultActionName="/")
+@Controller(value="/flotcharts", defaultActionName="/")
 @AcceptRequestType(MediaTypes.APPLICATION_JSON)
 @ResponseType(MediaTypes.APPLICATION_JSON)
 public class FlotChartsPubResource {

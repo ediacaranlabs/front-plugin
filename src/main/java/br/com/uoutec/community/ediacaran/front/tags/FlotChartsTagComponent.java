@@ -19,8 +19,6 @@ public class FlotChartsTagComponent extends AbstractSimpleTagComponent {
 	
 	private String src;
 	
-	private Boolean togglingSeries; 
-	
 	private Integer updateFrequence;
 	
 	private String updateFrequenceUnit;
@@ -39,15 +37,6 @@ public class FlotChartsTagComponent extends AbstractSimpleTagComponent {
 	@TagAttribute
 	public void setSrc(String src) {
 		this.src = src;
-	}
-
-	public Boolean getTogglingSeries() {
-		return togglingSeries;
-	}
-
-	@TagAttribute
-	public void setTogglingSeries(Boolean togglingSeries) {
-		this.togglingSeries = togglingSeries;
 	}
 
 	public Integer getUpdateFrequence() {

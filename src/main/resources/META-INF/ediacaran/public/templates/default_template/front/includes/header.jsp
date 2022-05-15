@@ -3,7 +3,7 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"                                  prefix="c"%>
-<ec:load-data file="header.json" var="pageObjects" />
+<%--<ec:load-data file="header.json" var="pageObjects" />--%>
     <!-- start header -->
    <header>
 		<ec:menu-bar id="${pageObjects['menu']['id']}" 

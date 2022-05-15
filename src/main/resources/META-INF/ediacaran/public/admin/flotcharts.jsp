@@ -47,7 +47,7 @@
 			</ec:box-header>
 			<ec:box-body>
 				<!-- https://github.com/flot/flot/blob/master/API.md | http://www.flotcharts.org/ -->
-				<ec:flotcharts id="interactive" src="/plugins/ediacaran/front/admin/flotcharts" togglingSeries="false" 
+				<ec:flotcharts id="interactive" src="/plugins/ediacaran/front/flotcharts" 
 						updateFrequence="1000" updateFrequenceUnit="MILLISECONDS">
 					<ec:property-config name="config">
 						<ec:property-config name="grid">
@@ -88,7 +88,7 @@
 				<h3><ec:icon icon="bar-chart" size="1"/> Line chart</h3>
 			</ec:box-header>
 			<ec:box-body>
-				<ec:flotcharts id="line_chart" src="/plugins/ediacaran/front/admin/flotcharts/line-chart">
+				<ec:flotcharts id="line_chart" src="/plugins/ediacaran/front/flotcharts/line-chart">
 					<ec:property-config name="config">
 						<ec:property-config name="grid">
 							<ec:property-config name="hoverable" value="true"/>

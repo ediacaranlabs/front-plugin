@@ -4,9 +4,33 @@ $.AppContext.flotcharts.charts = {};
 
 $.AppContext.flotcharts.update_charts = {};
 
+$.AppContext.flotcharts.labelFormatter = function (label, series) {
+    return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+    + label
+    + '<br>'
+    + Math.round(series.percent) + '%</div>'
+};
+
+$.AppContext.flotcharts.isAsyncUpdateChart = function (chart, checkID){
+
+	//var result =
+	//	$('#' + $.AppContext.flotcharts.charts[chart].edController.checkID).length &&
+	//	$.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled;
+	
+	var result =
+		$('#' + checkID).length &&
+		$.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled;
+
+	return result;
+};
+
 $.AppContext.flotcharts.setAsyncUpdateChart = function (chart, time = 1000){
 
 	if($.AppContext.flotcharts.charts[chart] == null){
+		return;
+	}
+
+	if($.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled && time > 0){
 		return;
 	}
 	
@@ -17,17 +41,28 @@ $.AppContext.flotcharts.setAsyncUpdateChart = function (chart, time = 1000){
 	$.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled = time > 0; 
 	$.AppContext.flotcharts.charts[chart].edController.asyncUpdateTime = time; 
 	
-	var exec = function(){
+	var exec = {}
+	exec.ID = chart + "_" + (new Date()).getTime();
+
+	exec.update = function(){
 		
 		$.AppContext.flotcharts.loadData(chart,$.AppContext.flotcharts.charts[chart].edController.resource);
-		
-		if($.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled){
-			setTimeout(exec, $.AppContext.flotcharts.charts[chart].edController.asyncUpdateTime);
+				
+		if($.AppContext.flotcharts.isAsyncUpdateChart(chart, exec.ID)){
+			setTimeout(exec.update, $.AppContext.flotcharts.charts[chart].edController.asyncUpdateTime);
 		}
 	}; 
  
 	if($.AppContext.flotcharts.charts[chart].edController.asyncUpdateEnabled){
-		setTimeout(exec, $.AppContext.flotcharts.charts[chart].edController.asyncUpdateTime);
+		
+		//$.AppContext.flotcharts.charts[chart].edController.checkID = chart + "_" + (new Date()).getTime();
+		
+		var elm = '<div id="' + exec.ID + '" style="display: none;"></div>';
+		var e   = $('#' + chart).parent();
+		
+		$(elm).appendTo(e);
+		
+		setTimeout(exec.update, $.AppContext.flotcharts.charts[chart].edController.asyncUpdateTime);
 	}
 }
 
@@ -52,7 +87,10 @@ $.AppContext.flotcharts.setResource = function (chart, value){
 		$.AppContext.flotcharts.charts[chart].edController = {};
 	}
 	
-	$.AppContext.flotcharts.charts[chart].edController.resource = value; 
+	$.AppContext.flotcharts.charts[chart].edController.resource = value;
+	
+	$.AppContext.flotcharts.loadData(chart,$.AppContext.flotcharts.charts[chart].edController.resource);	
+	
 }
 
 $.AppContext.flotcharts.updateChart = function (chart, data){
@@ -66,9 +104,11 @@ $.AppContext.flotcharts.updateChart = function (chart, data){
 	var plot       = $.AppContext.flotcharts.charts[chart];
 	var series     = plot.getData();
 	var options    = plot.getOptions();
+	var axes       = plot.getAxes();
 	var newSeries  = data.series;
 	var delSeries  = data.delSeries;
 	var newOptions = data.options;
+	var newAxes    = data.axes;
 	
 	if(newSeries != null){
 		for (i = 0; i < newSeries.length; i++) {
@@ -88,7 +128,12 @@ $.AppContext.flotcharts.updateChart = function (chart, data){
 		
 	}
 	
+	if(newAxes != null){
+		$.AppContext.utils.updateProperties(axes, newAxes);
+    }
+	
 	if(newOptions != null){
+		//alert(JSON.stringify(options));
 		$.AppContext.utils.updateProperties(options, newOptions);
 	}
 
@@ -99,8 +144,8 @@ $.AppContext.flotcharts.updateChart = function (chart, data){
 	}
 	
 	plot.setData(series);
-	
-	if(newOptions != null){
+
+	if(newOptions != null || newAxes != null){
 		plot.setupGrid();
 	}
 	

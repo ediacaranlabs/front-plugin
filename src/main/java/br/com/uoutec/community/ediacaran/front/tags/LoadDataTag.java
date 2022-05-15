@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
@@ -46,7 +45,8 @@ public class LoadDataTag  extends SimpleTagSupport {
     								new File(baseWebApp, tagComponent.getRequestPath())
 								);
     	
-    	super.getJspContext().setAttribute(var == null? "vars" : var, dta);
+    	//super.getJspContext().setAttribute(var == null? "vars" : var, dta);
+    	((PageContext)getJspContext()).getRequest().setAttribute(var == null? "vars" : var, dta);;
 	}
 
     private String getBasePath() {
