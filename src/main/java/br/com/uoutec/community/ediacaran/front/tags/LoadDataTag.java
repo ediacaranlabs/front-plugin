@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
@@ -13,8 +14,6 @@ import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.community.ediacaran.plugins.PluginType;
 
 @Tag(
 	name="load-data", 
@@ -26,6 +25,8 @@ public class LoadDataTag  extends SimpleTagSupport {
 	/* ------------ Attr ---------------*/
 	
 	/* ------------ Prop ---------------*/
+	
+	private String context;
 	
 	private String file;
 	
@@ -50,9 +51,16 @@ public class LoadDataTag  extends SimpleTagSupport {
 	}
 
     private String getBasePath() {
-    	PluginType pt = EntityContextPlugin.getEntity(PluginType.class);
+    	ServletContext servletContext = 
+			context == null?
+					((PageContext)getJspContext()).getServletContext() :
+					((PageContext)getJspContext()).getServletContext().getContext(context);
+					
+		return servletContext.getRealPath("/");
+
     	//TODO: constants
-    	return pt.getConfiguration().getMetadata().getPath().getBase() + "/public";
+    	//PluginType pt = EntityContextPlugin.getEntity(PluginType.class);
+    	//return pt.getConfiguration().getMetadata().getPath().getBase() + "/public";
     }
     
     protected void applyTemplate(String template, 
@@ -75,6 +83,15 @@ public class LoadDataTag  extends SimpleTagSupport {
 	@TagAttribute
 	public void setVar(String var) {
 		this.var = var;
+	}
+
+	public String getContext() {
+		return context;
+	}
+
+	@TagAttribute
+	public void setContext(String context) {
+		this.context = context;
 	}
 
 }
