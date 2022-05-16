@@ -19,7 +19,7 @@
 	<ec:sidebar>
 		<ec:menu-bar style="adm-left">
 			<ec:menu-bar-brand>
-				<ec:image src="/plugins/ediacaran/front/admin/img/Logo.png" />
+				<ec:image src="/img/admin/Logo.png" />
 				<span>Ediacaran</span>
 			</ec:menu-bar-brand>
 				<ec:menu-itens>
