@@ -41,30 +41,33 @@ public class LoadDataTag  extends SimpleTagSupport {
     public void doTag() throws JspException, IOException {
     	Component tagComponent = new Component();
     	tagComponent.setPageContext((PageContext) getJspContext());
-    	
-    	File baseWebApp = new File(getBasePath());
-    	Map<Object,Object> dta = ReadData.loadData(
+
+    	File root = getRootPath();
+    	File base = getBasePath(tagComponent.getRequestPath(), root);
+    	Map<Object,Object> dta = ReadData.loadData(file, base, root, locale);
+    	/*
+    			.loadData(
     								file, 
     								locale,
-    								baseWebApp, 
+    								root, 
     								new File(baseWebApp, tagComponent.getRequestPath())
 								);
-    	
-    	//super.getJspContext().setAttribute(var == null? "vars" : var, dta);
+    	*/
     	((PageContext)getJspContext()).getRequest().setAttribute(var == null? "vars" : var, dta);
 	}
 
-    private String getBasePath() {
+    private File getRootPath() {
     	ServletContext servletContext = 
 			context == null?
 					((PageContext)getJspContext()).getServletContext() :
 					((PageContext)getJspContext()).getServletContext().getContext(context);
 					
-		return servletContext.getRealPath("/");
+		return new File(servletContext.getRealPath("/"));
+    }
 
-    	//TODO: constants
-    	//PluginType pt = EntityContextPlugin.getEntity(PluginType.class);
-    	//return pt.getConfiguration().getMetadata().getPath().getBase() + "/public";
+    private File getBasePath(String path, File root) {
+    	File fullPath = new File(root, path);
+		return root.equals(fullPath)? fullPath : fullPath.getParentFile();
     }
     
     protected void applyTemplate(String template, 

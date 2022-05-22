@@ -19,8 +19,68 @@ public class ReadData {
 
 	private static final Logger logger = LoggerFactory.getLogger(ReadData.class);
 	
+	
+	@SuppressWarnings("unchecked")
+	public static Map<Object,Object> loadData(String path, File base, File root, Locale locale) throws IOException{
+		
+		File fData              = new File(base, path + ".dpag");
+		Map<Object,Object> data = loadData(fData, root, locale);
+		
+		if(data != null && locale != null) {
+			String localePath = path + "_" + locale.toString() + ".dpag";
+			File localeFile = new File(base, localePath);
+			Map<Object,Object> localeData = loadData(localeFile, root, locale);
+			
+			if(localeData != null) {
+				merge(localeData, data, null);
+			}
+		}
+		
+		if(data != null) {
+			List<Object> inc = (List<Object>)data.get("includes");
+			
+			Map<Object,Object> vars = new HashMap<Object,Object>();
+
+			if(inc != null) {
+				List<Map<Object,Object>> incData = loadIncludes(inc, fData.getParentFile().getCanonicalFile(), root, locale);
+				
+				for(Map<Object,Object> i: incData) {
+					merge(i, vars, null);
+				}
+
+			}
+			
+			merge(vars, data, null);
+		}
+		
+		return data;
+	}
+	
+	private static Map<Object,Object> loadData(File file, File root, Locale locale) throws IOException{
+		
+		if(!file.exists() || !file.isFile() || !file.canRead()) {
+			return null;
+		}
+		
+		return getData(file, root);
+	}
+	
+	private static List<Map<Object,Object>> loadIncludes(List<Object> includes, File basePath, File root, Locale locale) throws IOException{
+		
+		List<Map<Object,Object>> incData = new ArrayList<Map<Object,Object>>();
+		
+		for(Object i: includes) {
+			Map<Object,Object> data = loadData(String.valueOf(i), basePath, root, locale);
+			if(data != null) {
+				incData.add(data);
+			}
+		}
+
+		return incData;
+	}
+	
+	/*
 	public static Map<Object,Object> loadData(String path, Locale locale, File root, File requestFile) throws IOException{
-		locale = Locale.forLanguageTag("en-US");
 		File baseFile			= root.equals(requestFile)? requestFile : requestFile.getParentFile();
 		File fData              = new File(baseFile, path + ".dpag");
 		Map<Object,Object> data = loadData(fData, root);
@@ -36,32 +96,67 @@ public class ReadData {
 		}
 		return data;
 	}
+	 */
 	
-	private static Map<Object,Object> loadData(File file, File base) throws IOException{
+	/*
+	public static Map<Object,Object> loadData(String path, File base, File root, Locale locale) throws IOException{
+		
+		File fData              = new File(base, path + ".dpag");
+		Map<Object,Object> data = loadData(fData, root, locale);
+		
+		if(data != null && locale != null) {
+			String localePath = path + "_" + locale.toString() + ".dpag";
+			File localeFile = new File(base, localePath);
+			Map<Object,Object> localeData = loadData(localeFile, root, locale);
+			
+			if(localeData != null) {
+				merge(localeData, data, null);
+			}
+		}
+		return data;
+	}
+	
+	private static Map<Object,Object> loadData(File file, File root, Locale locale) throws IOException{
 		
 		if(!file.exists() || !file.isFile() || !file.canRead()) {
 			return null;
 		}
 		
-		Map<Object,Object> data = getData(file, base);
+		Map<Object,Object> data = getData(file, root);
 		
 		if(data != null) {
-			File parentFData = file.getParentFile().getCanonicalFile();
-			List<Map<Object,Object>> incData = loadIncludes(data, base, parentFData);
+			List<Object> inc = (List<Object>)data.get("includes");
 			
 			Map<Object,Object> vars = new HashMap<Object,Object>();
-			
-			for(Map<Object,Object> i: incData) {
-				//vars.putAll(i);
-				merge(i, vars, null);
+
+			if(inc != null) {
+				List<Map<Object,Object>> incData = loadIncludes(inc, file.getParentFile().getCanonicalFile(), root, locale);
+				
+				for(Map<Object,Object> i: incData) {
+					merge(i, vars, null);
+				}
+
 			}
 			
 			merge(data, vars, null);
-			//vars.putAll(data);
 			return vars;
 		}
 		
 		return data;
+	}
+
+	private static List<Map<Object,Object>> loadIncludes(List<Object> includes, File basePath, File root, Locale locale) throws IOException{
+		
+		List<Map<Object,Object>> incData = new ArrayList<Map<Object,Object>>();
+		
+		for(Object i: includes) {
+			Map<Object,Object> data = loadData(String.valueOf(i), basePath, root, locale);
+			if(data != null) {
+				incData.add(data);
+			}
+		}
+
+		return incData;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -88,7 +183,9 @@ public class ReadData {
 		
 		return incData;
 	}
+	*/
 	
+	@SuppressWarnings("unchecked")
 	private static void merge (Map<Object, Object> from, Map<Object, Object> to, String prefix){
 		
 		for(Entry<Object, Object> vals: from.entrySet()) {
