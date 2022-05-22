@@ -3,6 +3,7 @@ package br.com.uoutec.community.ediacaran.front.tags;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -26,6 +27,8 @@ public class LoadDataTag  extends SimpleTagSupport {
 	
 	/* ------------ Prop ---------------*/
 	
+	private Locale locale;
+	
 	private String context;
 	
 	private String file;
@@ -42,12 +45,13 @@ public class LoadDataTag  extends SimpleTagSupport {
     	File baseWebApp = new File(getBasePath());
     	Map<Object,Object> dta = ReadData.loadData(
     								file, 
+    								locale,
     								baseWebApp, 
     								new File(baseWebApp, tagComponent.getRequestPath())
 								);
     	
     	//super.getJspContext().setAttribute(var == null? "vars" : var, dta);
-    	((PageContext)getJspContext()).getRequest().setAttribute(var == null? "vars" : var, dta);;
+    	((PageContext)getJspContext()).getRequest().setAttribute(var == null? "vars" : var, dta);
 	}
 
     private String getBasePath() {
@@ -71,7 +75,7 @@ public class LoadDataTag  extends SimpleTagSupport {
 		return file;
 	}
 
-	@TagAttribute
+	@TagAttribute(required=true)
 	public void setFile(String file) {
 		this.file = file;
 	}
@@ -87,6 +91,15 @@ public class LoadDataTag  extends SimpleTagSupport {
 
 	public String getContext() {
 		return context;
+	}
+
+	public Locale getLocale() {
+		return locale;
+	}
+
+	@TagAttribute
+	public void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 
 	@TagAttribute

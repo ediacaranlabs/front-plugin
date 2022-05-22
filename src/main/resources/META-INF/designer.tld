@@ -28,7 +28,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>id</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -37,7 +37,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>extAttrs</name>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -55,7 +55,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>id</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -64,7 +64,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
+                    <name>extAttrs</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -72,81 +72,6 @@
      </tag>
      
      <!-- /container -->
-     
-     <!-- row -->
-     
-     <tag>
-          <name>row</name>
-          <tag-class>br.com.uoutec.community.ediacaran.front.tags.RowTagComponent</tag-class>
-          <body-content>scriptless</body-content>
-          <info><![CDATA[
-          ]]></info>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>style</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>style</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>classStyle</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>extAttrs</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>id</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-     </tag>
-     
-     <!-- /row -->
      
      <!-- col -->
      
@@ -196,6 +121,33 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>id</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
@@ -210,11 +162,32 @@
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
                </attribute>
+     </tag>
+     
+     <!-- /col -->
+     
+     <!-- row -->
+     
+     <tag>
+          <name>row</name>
+          <tag-class>br.com.uoutec.community.ediacaran.front.tags.RowTagComponent</tag-class>
+          <body-content>scriptless</body-content>
+          <info><![CDATA[
+          ]]></info>
                
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>template</name>
+                    <name>style</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>style</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -237,7 +210,34 @@
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
                </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>classStyle</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>extAttrs</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
      </tag>
      
-     <!-- /col -->
+     <!-- /row -->
 </taglib>
