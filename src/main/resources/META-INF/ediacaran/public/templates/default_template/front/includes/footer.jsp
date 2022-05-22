@@ -34,18 +34,18 @@
 							<ec:menu-itens>
 								<c:forEach items="${pageObjects['frontFooterMenu2']['itens']}" var="menu">
 									<c:choose>
-										<c:when test="${!empty menu['itens']}">
+										<c:when test="${!empty menu.value['itens']}">
 											<ec:menu>
-												<ec:menu-label>${menu['name']}</ec:menu-label>
+												<ec:menu-label>${menu.value['name']}</ec:menu-label>
 												<ec:menu-itens>
-													<c:forEach items="${menu['itens']}" var="item">
-														<ec:menu-item href="${item['link']}">${item['name']}</ec:menu-item>
+													<c:forEach items="${menu.value['itens']}" var="item">
+														<ec:menu-item href="${item.value['link']}">${item.value['name']}</ec:menu-item>
 													</c:forEach>
 												</ec:menu-itens>
 											</ec:menu>
 										</c:when>
 										<c:otherwise>
-											<ec:menu-item href="${item['link']}">${menu['name']}</ec:menu-item>
+											<ec:menu-item href="${menu.value['link']}">${menu.value['name']}</ec:menu-item>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -70,18 +70,18 @@
 							<ec:menu-itens>
 								<c:forEach items="${pageObjects['frontFooterMenu1']['itens']}" var="menu">
 									<c:choose>
-										<c:when test="${!empty menu['itens']}">
+										<c:when test="${!empty menu.value['itens']}">
 											<ec:menu>
-												<ec:menu-label>${menu['name']}</ec:menu-label>
+												<ec:menu-label>${menu.value['name']}</ec:menu-label>
 												<ec:menu-itens>
-													<c:forEach items="${menu['itens']}" var="item">
-														<ec:menu-item href="${item['link']}">${item['name']}</ec:menu-item>
+													<c:forEach items="${menu.value['itens']}" var="item">
+														<ec:menu-item href="${item.value['link']}">${item.value['name']}</ec:menu-item>
 													</c:forEach>
 												</ec:menu-itens>
 											</ec:menu>
 										</c:when>
 										<c:otherwise>
-											<ec:menu-item href="${item['link']}">${menu['name']}</ec:menu-item>
+											<ec:menu-item href="${menu.value['link']}">${menu.value['name']}</ec:menu-item>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
