@@ -71,7 +71,7 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 										</ec:select>
 									</c:when>
 									<c:when test="${property.type == 'MULTISELECT'}">
-										<ec:select name="config.${property.code}" label="${property.name}" multiple="true" sizeList="5">
+										<ec:select name="config.${property.code}" label="${property.name}" multiple="true" rows="5">
 											<c:forEach items="${property.options}" var="opts">
 												<ec:option label="${opts.description}" 
 													selected="${vars.config.containsRawValue(property.code, opts.value)}" value="${opts.value}"/>
@@ -143,7 +143,7 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 				<ed:row style="form">
 					<ed:col id="update_plugin_result" size="12">
 						<fmt:message key="tabs.configuration.button_save" bundle="${messages}" var="msg_tmp"/>
-						<ec:button type="dark" align="right" label="${msg_tmp}" actionType="submit"/>
+						<ec:button style="dark" align="right" label="${msg_tmp}" actionType="submit"/>
 					</ed:col>
 				</ed:row>
 			</ec:form>
@@ -266,7 +266,7 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 				<ed:row style="form">
 					<ed:col id="update_plugin_result" size="12">
 						<fmt:message key="tabs.security.button_save" bundle="${messages}" var="msg_tmp"/>
-						<ec:button type="dark" align="right" label="${msg_tmp}" actionType="submit"/>
+						<ec:button style="dark" align="right" label="${msg_tmp}" actionType="submit"/>
 					</ed:col>
 				</ed:row>
 			</ec:form>
@@ -296,7 +296,7 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 					</ed:col>
 					<ed:col size="6">
 						<fmt:message key="tabs.uninstall.button" bundle="${messages}" var="msg_tmp"/>
-						<ec:button label="${msg_tmp}" type="danger" align="right" actionType="submit"/>
+						<ec:button label="${msg_tmp}" style="danger" align="right" actionType="submit"/>
 					</ed:col>
 				</ed:row>
 				<ed:row>
