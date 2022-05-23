@@ -502,7 +502,7 @@ Sidebar
 	position: absolute;
 	width: 300px;
 	height: 100%;
-	z-index: 1280;
+	z-index: 600;
 	overflow-y: auto;	
 	overflow-x: hidden;
 }
