@@ -1,0 +1,3 @@
+<div {attr} class="sidebar-content {style} {classStyle} {align}">
+{content}
+</div>
