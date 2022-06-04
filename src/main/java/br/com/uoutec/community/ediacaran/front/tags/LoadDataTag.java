@@ -43,7 +43,7 @@ public class LoadDataTag  extends SimpleTagSupport {
     	tagComponent.setPageContext((PageContext) getJspContext());
 
     	File root = getRootPath();
-    	File base = getBasePath(tagComponent.getRequestPath(), root);
+    	File base = file.startsWith("/")? root : getBasePath(tagComponent.getRequestPath(), root);
     	Map<Object,Object> dta = ReadData.loadData(file, base, root, locale);
     	/*
     			.loadData(

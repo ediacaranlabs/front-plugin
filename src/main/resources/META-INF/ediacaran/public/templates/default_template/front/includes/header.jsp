@@ -4,25 +4,23 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"                   prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions"              prefix="fn"%>
+<ec:load-data context="/" file="/objects/menus/default-menu" var="defaultMenu" />
 <%--<ec:load-data file="header.json" var="pageObjects" />--%>
     <!-- start header -->
    <header>
-		<ec:menu-bar id="${pageObjects['menu']['id']}" 
-				classStyle="${pageObjects['menu']['classStyle']}" 
-				expand="${pageObjects['menu']['expand']}" 
-				style="${pageObjects['menu']['style']}">
+		<ec:menu-bar id="top_menu" 
+				expand="xl" 
+				style="light">
 			<ed:container>
 			<ec:menu-bar-brand>
-				<ec:image 
-					src="${pageObjects['menu']['menu-bar-brand']['src']}" 
-					classStyle="${pageObjects['menu']['menu-bar-brand']['classStyle']}"/>
+				<ec:image src="${defaultMenu['menu-bar-brand']['src']}"/>
 			</ec:menu-bar-brand>
-			<ec:menu-toggler menuID="${pageObjects['menu']['id']}_body">
+			<ec:menu-toggler menuID="top_menu_body">
 				<ec:icon icon="bars" />
 			</ec:menu-toggler>
 			<ec:menu-body collapse="true">
 				<ec:menu-itens align="right">
-					<c:forEach items="${pageObjects['menu']['itens']}" var="menu">
+					<c:forEach items="${defaultMenu['itens']}" var="menu">
 						<c:choose>
 							<c:when test="${!empty menu.value['itens']}">
 								<ec:menu>
