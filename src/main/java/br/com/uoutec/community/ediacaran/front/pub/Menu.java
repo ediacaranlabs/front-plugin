@@ -22,9 +22,9 @@ public class Menu implements Serializable {
 
 	private static final long serialVersionUID = -110898947175676961L;
 
-	private AuthorizationManager authorizationManager;
+	private transient AuthorizationManager authorizationManager;
 	
-	private PropertyChangeSupport propertyChangeSupport;
+	private transient PropertyChangeSupport propertyChangeSupport;
 
 	private String id;
 	
