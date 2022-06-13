@@ -2,10 +2,11 @@ package br.com.uoutec.community.ediacaran.front.pub;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -109,7 +110,7 @@ public class ObjectsManagerImp
 		SecurityManager sm = System.getSecurityManager();
 		
 		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + "." + id.replace("/", ".") + ".unregister"));
+			sm.checkPermission(new RuntimePermission(basePermission + id.replace("/", ".") + ".unregister"));
 		}
 		
 		writeLock.lock();
@@ -191,7 +192,7 @@ public class ObjectsManagerImp
 		try {
 			Object object = get(id, locale);
 			
-			if(object == null && locale == null) {
+			if(object == null && locale != null) {
 				object = get(id, null);
 			}
 			
@@ -204,7 +205,7 @@ public class ObjectsManagerImp
 	}
 
 	@Override
-	public List<Object> getObjects(String id) {
+	public ObjectEntry getObjects(String id) {
 		
 		readLock.lock();
 		try {
@@ -216,14 +217,14 @@ public class ObjectsManagerImp
 				return name.equals(e.getId());
 			});
 			
-			List<Object> r = new ArrayList<Object>();
+			Map<Locale,Object> map = new HashMap<Locale, Object>();
 			for(ObjectMetadata omd: list) {
 				Object o = get(id, omd.getLocale());
 				if(o != null) {
-					r.add(o);
+					map.put(omd.getLocale(), o);
 				}
 			}
-			return r;
+			return map.isEmpty()? null : new ObjectEntry(path, name, map);
 		}
 		finally {
 			readLock.unlock();
