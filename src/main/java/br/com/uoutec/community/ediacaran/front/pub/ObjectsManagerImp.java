@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.Lock;
@@ -261,6 +262,60 @@ public class ObjectsManagerImp
 					r.add(o);
 				}
 			}
+			return r;
+		}
+		finally {
+			readLock.unlock();
+		}
+			
+	}
+
+	@Override
+	public List<ObjectEntry> listObjects(String path, String name, boolean recursive) {
+		
+		readLock.lock();
+		try {
+			List<ObjectMetadata> list = objectFileManager.list(path, recursive, e->{
+				return name == null? true : e.getId().contains(name);
+			});
+			
+			Map<String, List<ObjectMetadata>> group = new HashMap<String, List<ObjectMetadata>>();
+			
+			for(ObjectMetadata omd: list) {
+				String id = omd.getPath() + "/" + omd.getId();
+				
+				List<ObjectMetadata> g = group.get(id);
+				
+				if(g == null) {
+					g = new ArrayList<ObjectMetadata>();
+					group.put(id, g);
+				}
+				
+				g.add(omd);
+			}
+			
+			List<ObjectEntry> r = new ArrayList<ObjectEntry>();
+
+			for(Entry<String,List<ObjectMetadata>> e: group.entrySet()) {
+				
+				Map<Locale,Object> map = new HashMap<Locale, Object>();
+				
+				for(ObjectMetadata omd: e.getValue()) {
+					
+					Object o = get(e.getKey(), omd.getLocale());
+					
+					if(o != null) {
+						map.put(omd.getLocale(), o);
+					}
+				}
+				
+				if(!map.isEmpty()) {
+					ObjectMetadata base = e.getValue().get(0);
+					r.add(new ObjectEntry(base.getPath(), base.getId(), map));
+				}
+				
+			}
+			
 			return r;
 		}
 		finally {

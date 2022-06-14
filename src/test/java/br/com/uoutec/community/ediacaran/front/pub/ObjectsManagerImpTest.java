@@ -2,6 +2,7 @@ package br.com.uoutec.community.ediacaran.front.pub;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -256,6 +257,33 @@ public class ObjectsManagerImpTest {
 		
 		assertTrue(list.size() == 1);
 		assertTrue(list.indexOf("VALOR 3") != -1);
+	}
+
+	@Test
+	public void testListObject() {
+		objectsManager.registerObject("/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("/path/type/item1", null, "VALOR 2");
+		objectsManager.registerObject("/path/type/item1", new Locale("pt","BR"), "VALOR 3");
+		objectsManager.registerObject("/path/type/item2", null, "VALOR 4");
+		objectsManager.registerObject("/path/item2", null, "VALOR 5");
+		objectsManager.registerObject("/path/type/path2/item2_val", new Locale("pt","BR"), "VALOR 6");
+		
+		List<ObjectEntry> list = objectsManager.listObjects("/path/type", null, false);
+		
+		assertTrue(list.size() == 2);
+		
+		assertEquals("/path/type/item1",list.get(0).getFullId());
+		assertEquals("item1",list.get(0).getId());
+		assertEquals("/path/type",list.get(0).getPath());
+		assertEquals("VALOR 2",list.get(0).getObject());
+		assertEquals("VALOR 3",list.get(0).getObject(new Locale("pt", "BR")));
+
+		assertEquals("/path/type/item2",list.get(1).getFullId());
+		assertEquals("item2",list.get(1).getId());
+		assertEquals("/path/type",list.get(1).getPath());
+		assertEquals("VALOR 4",list.get(1).getObject());
+		assertNull(list.get(1).getObject(new Locale("pt", "BR")));
+		
 	}
 	
 }

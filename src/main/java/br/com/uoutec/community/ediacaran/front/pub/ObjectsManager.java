@@ -18,6 +18,8 @@ public interface ObjectsManager {
 	
 	List<Object> list(String path, String name, Locale locale, boolean recursive);
 	
+	List<ObjectEntry> listObjects(String path, String name, boolean recursive);
+	
 	void registerObjectHandler(ObjectHandler encoder);
 	
 	void unregisterObjectHandler(ObjectHandler encoder);
