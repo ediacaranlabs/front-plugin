@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.pub;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -14,6 +15,8 @@ public interface ObjectsManager {
 	Object getObject(String id);
 	
 	Object getObject(String id, Locale locale);
+	
+	List<Object> list(String path, String name, Locale locale, boolean recursive);
 	
 	void registerObjectHandler(ObjectHandler encoder);
 	

@@ -2,6 +2,7 @@ package br.com.uoutec.community.ediacaran.front.pub;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -234,6 +235,33 @@ public class ObjectsManagerImp
 				}
 			}
 			return map.isEmpty()? null : new ObjectEntry(path, name, map);
+		}
+		finally {
+			readLock.unlock();
+		}
+			
+	}
+
+	@Override
+	public List<Object> list(String path, String name, Locale locale, boolean recursive) {
+		
+		readLock.lock();
+		try {
+			List<ObjectMetadata> list = objectFileManager.list(path, recursive, e->{
+				boolean result;
+				result =           (name == null? true : e.getId().contains(name));
+				result = result && (locale == null? true : locale.equals(e.getLocale()));
+				return result;
+			});
+			
+			List<Object> r = new ArrayList<Object>();
+			for(ObjectMetadata omd: list) {
+				Object o = get(omd.getPath() + "/" + omd.getId(), omd.getLocale());
+				if(o != null) {
+					r.add(o);
+				}
+			}
+			return r;
 		}
 		finally {
 			readLock.unlock();

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 import org.junit.jupiter.api.AfterEach;
@@ -38,6 +39,7 @@ public class ObjectsManagerImpTest {
 	public void before() {
 		System.setProperty("app.base", BASE.getAbsolutePath());
 		BASE_BJECTS.mkdir();
+		clearRepository(BASE_BJECTS);
 		objectsManager = new ObjectsManagerImp();
 		objectFileManager = new ObjectFileManager(BASE_BJECTS);
 	}
@@ -168,6 +170,92 @@ public class ObjectsManagerImpTest {
 		assertEquals("VAL1_DEFAULT",e.getObject());
 		assertEquals("VAL1_PT_BR",e.getObject(new Locale("pt", "BR")));
 		assertEquals("VAL1_EN_US",e.getObject(new Locale("en", "US")));
+	}
+
+	@Test
+	public void testList() {
+		objectsManager.registerObject("/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("/path/type/item1", null, "VALOR 2");
+		objectsManager.registerObject("/path/item2", null, "VALOR 3");
+		objectsManager.registerObject("/path/type/item2_val", null, "VALOR 4");
+		
+		List<Object> list = objectsManager.list(null, null, null, true);
+		
+		assertTrue(list.size() == 4);
+		assertTrue(list.indexOf("VALOR 1") != -1);
+		assertTrue(list.indexOf("VALOR 2") != -1);
+		assertTrue(list.indexOf("VALOR 3") != -1);
+		assertTrue(list.indexOf("VALOR 4") != -1);
+	}
+
+	@Test
+	public void testListPath() {
+		objectsManager.registerObject("/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("/path/type/item1", null, "VALOR 2");
+		objectsManager.registerObject("/path/item2", null, "VALOR 3");
+		objectsManager.registerObject("/path/type/item2_val", null, "VALOR 4");
+		
+		List<Object> list = objectsManager.list("/path", "item1", null, false);
+		
+		assertTrue(list.size() == 1);
+		assertTrue(list.indexOf("VALOR 1") != -1);
+	}
+	
+	@Test
+	public void testListRecursive() {
+		objectsManager.registerObject("/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("/path/type/item1", null, "VALOR 2");
+		objectsManager.registerObject("/path/item2", null, "VALOR 3");
+		objectsManager.registerObject("/path/type/item2_val", null, "VALOR 4");
+		
+		List<Object> list = objectsManager.list("/path", "item1", null, true);
+		
+		assertTrue(list.size() == 2);
+		assertTrue(list.indexOf("VALOR 1") != -1);
+		assertTrue(list.indexOf("VALOR 2") != -1);
+	}
+
+	@Test
+	public void testListLocale() {
+		objectsManager.registerObject("/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("/path/type/item1", new Locale("pt","BR"), "VALOR 2");
+		objectsManager.registerObject("/path/item2", null, "VALOR 3");
+		objectsManager.registerObject("/path/type/item2_val", new Locale("pt","BR"), "VALOR 4");
+		
+		List<Object> list = objectsManager.list("/path", null, new Locale("pt","BR"), true);
+		
+		assertTrue(list.size() == 2);
+		assertTrue(list.indexOf("VALOR 2") != -1);
+		assertTrue(list.indexOf("VALOR 4") != -1);
+	}
+
+	@Test
+	public void testListLocaleANDNoRecursive() {
+		objectsManager.registerObject("/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("/path/type/item1", new Locale("pt","BR"), "VALOR 2");
+		objectsManager.registerObject("/path/type/item2", new Locale("pt","BR"), "VALOR 3");
+		objectsManager.registerObject("/path/item2", null, "VALOR 4");
+		objectsManager.registerObject("/path/type/path2/item2_val", new Locale("pt","BR"), "VALOR 5");
+		
+		List<Object> list = objectsManager.list("/path/type", null, new Locale("pt","BR"), false);
+		
+		assertTrue(list.size() == 2);
+		assertTrue(list.indexOf("VALOR 2") != -1);
+		assertTrue(list.indexOf("VALOR 3") != -1);
+	}
+
+	@Test
+	public void testListLocaleANDNoRecursiveANDName() {
+		objectsManager.registerObject("/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("/path/type/item1", new Locale("pt","BR"), "VALOR 2");
+		objectsManager.registerObject("/path/type/item2", new Locale("pt","BR"), "VALOR 3");
+		objectsManager.registerObject("/path/item2", null, "VALOR 4");
+		objectsManager.registerObject("/path/type/path2/item2_val", new Locale("pt","BR"), "VALOR 5");
+		
+		List<Object> list = objectsManager.list("/path/type", "2", new Locale("pt","BR"), false);
+		
+		assertTrue(list.size() == 1);
+		assertTrue(list.indexOf("VALOR 3") != -1);
 	}
 	
 }
