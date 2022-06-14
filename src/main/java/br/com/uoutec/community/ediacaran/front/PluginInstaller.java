@@ -33,9 +33,9 @@ public class PluginInstaller
 	
 	public static final String TEMPLATE_PROPERTY 		= "template";
 	
-	private static final String ADMIN_MENU_BAR          = "adminMenuBar";
+	private static final String ADMIN_MENU_BAR          = "adminmenubar";
 	
-	private static final String ADMIN_TOP_MENU_BAR      = "adminTopMenuBar";
+	private static final String ADMIN_TOP_MENU_BAR      = "admintopmenubar";
 	
 	private ObjectHandler objectHandler;
 	

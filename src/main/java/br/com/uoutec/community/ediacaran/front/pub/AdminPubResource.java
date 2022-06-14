@@ -44,9 +44,9 @@ import br.com.uoutec.pub.entity.InvalidRequestException;
 @ResponseErrors(rendered=false, name="exception")
 public class AdminPubResource {
 
-	private static final String ADMIN_MENU_BAR 		= "/admin/menus/adminMenuBar";
+	private static final String ADMIN_MENU_BAR 		= "/admin/menus/adminmenubar";
 	
-	private static final String ADMIN_TOP_MENU_BAR	= "/admin/menus/adminTopMenuBar";
+	private static final String ADMIN_TOP_MENU_BAR	= "/admin/menus/admintopmenubar";
 	
 	@Inject
 	@Transient

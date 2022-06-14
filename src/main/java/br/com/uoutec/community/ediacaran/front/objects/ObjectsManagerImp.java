@@ -199,6 +199,10 @@ public class ObjectsManagerImp
 	@Override
 	public Object getObject(String id, Locale locale) {
 		
+		if(!objectFileManager.isValidFullId(id)) {
+			throw new IllegalStateException("invalid format: " + id);
+		}
+		
 		readLock.lock();
 		try {
 			Object object = get(id, locale);
@@ -217,6 +221,10 @@ public class ObjectsManagerImp
 
 	@Override
 	public ObjectEntry getObjects(String id) {
+		
+		if(!objectFileManager.isValidFullId(id)) {
+			throw new IllegalStateException("invalid format: " + id);
+		}
 		
 		readLock.lock();
 		try {

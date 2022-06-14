@@ -14,6 +14,8 @@
 </head>
 
 <body>
+<ec:import-object var="adminmenubar" id="/admin/menus/adminmenubar"/>
+<ec:import-object var="admintopmenubar" id="/admin/menus/admintopmenubar"/>
 <ec:sidebar-group id="pageBody" show="true">
 
 	<ec:sidebar>
@@ -23,7 +25,7 @@
 				<span>Ediacaran</span>
 			</ec:menu-bar-brand>
 				<ec:menu-itens>
-					<c:forEach items="${Controller.menuBar.itens}" var="menu">
+					<c:forEach items="${adminmenubar.itens}" var="menu">
 						<c:choose>
 	
 							<c:when test="${not empty menu.body}">
@@ -94,7 +96,7 @@
 			<ec:menu-bar-brand>
 			</ec:menu-bar-brand>
 				<ec:menu-itens align="right">
-				<c:forEach items="${Controller.topMenuBar.itens}" var="menu">
+				<c:forEach items="${admintopmenubar.itens}" var="menu">
 					<c:choose>
 						<c:when test="${not empty menu.body}">
 							<ec:menu>
