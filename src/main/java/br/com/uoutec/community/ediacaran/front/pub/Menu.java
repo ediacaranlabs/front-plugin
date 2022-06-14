@@ -56,6 +56,8 @@ public class Menu implements Serializable {
 	
 	private int order;
 
+	private boolean persistent;
+	
 	public Menu(){
 		this(null, null, null, null, null, null, new ArrayList<Menu>(), null, null, null, null, null, 0);
 	}
@@ -88,6 +90,7 @@ public class Menu implements Serializable {
 		this.parentMenuBar = parentMenuBar;
 		this.map = new HashMap<String, Menu>();
 		this.authorizationManager = EntityContextPlugin.getEntity(AuthorizationManager.class);
+		this.persistent = false;
 		/*
 		if(itens != null) {
 			for(Menu i: itens) {
@@ -415,6 +418,19 @@ public class Menu implements Serializable {
 		String oldValue = this.role;
 		this.role = role;
 		propertyChangeSupport.firePropertyChange("role", oldValue, role);
+		
+		return this;
+	}
+
+	public boolean isPersistent() {
+		return persistent;
+	}
+
+	public Menu setPersistent(boolean persistent) {
+		
+		boolean oldValue = this.persistent;
+		this.persistent = persistent;
+		propertyChangeSupport.firePropertyChange("persistent", oldValue, persistent);
 		
 		return this;
 	}

@@ -6,11 +6,11 @@ import java.beans.PropertyChangeListener;
 import br.com.uoutec.community.ediacaran.AbstractPlugin;
 import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
+import br.com.uoutec.community.ediacaran.front.objects.MenubarObjectHandler;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectHandler;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
-import br.com.uoutec.community.ediacaran.front.pub.AdminMenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
-import br.com.uoutec.community.ediacaran.front.pub.MenuBarManager;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBarManagerException;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widget;
 import br.com.uoutec.community.ediacaran.front.pub.widget.WidgetException;
@@ -37,6 +37,8 @@ public class PluginInstaller
 	
 	private static final String ADMIN_TOP_MENU_BAR      = "adminTopMenuBar";
 	
+	private ObjectHandler objectHandler;
+	
 	public void install() throws Throwable{
 		installMenu();
 		installWidgets();
@@ -46,6 +48,14 @@ public class PluginInstaller
 	
 	private void installMenu() throws MenuBarManagerException {
 
+		this.objectHandler = new MenubarObjectHandler();
+		ObjectsManager objectsManager = EntityContextPlugin.getEntity(ObjectsManager.class);
+		objectsManager.registerObjectHandler(objectHandler);
+		
+		MenuBar leftMenu = (MenuBar)objectsManager.getObject("/admin/menus/" + ADMIN_MENU_BAR);
+		MenuBar topMenu  = (MenuBar)objectsManager.getObject("/admin/menus/" + ADMIN_TOP_MENU_BAR);
+		
+		/*
 		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);
 
 		AdminMenuBar leftMenu = new AdminMenuBar(ADMIN_MENU_BAR);
@@ -69,6 +79,7 @@ public class PluginInstaller
 			.setResource("#!/plugins/ediacaran/front/admin/plugins")
 			.setRole("manager")
 			.setOrder(-100);
+		*/
 		
 		if(!pluginConfiguration.getBoolean("test")){
 			return;
@@ -219,9 +230,15 @@ public class PluginInstaller
 	}
 	
 	public void uninstallMenu() throws Throwable {
+		
+		ObjectsManager objectsManager = EntityContextPlugin.getEntity(ObjectsManager.class);
+		objectsManager.unregisterObjectHandler(objectHandler);
+		
+		/*
 		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);
 		mbm.removeMenuBar(ADMIN_MENU_BAR);
 		mbm.removeMenuBar(ADMIN_TOP_MENU_BAR);
+		*/
 	}
 
 	public void uninstallWidget() throws Throwable {

@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentMap;
 import javax.inject.Singleton;
 
 @Singleton
+@Deprecated
 public class MenuBarManagerImp implements MenuBarManager{
 
 	private ConcurrentMap<String, MenuBar> map;
