@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front.pub;
+package br.com.uoutec.community.ediacaran.front.objects;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.inject.Singleton;
 
-import br.com.uoutec.community.ediacaran.front.pub.ObjectFileManager.ObjectValue;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectFileManager.ObjectValue;
 import br.com.uoutec.community.ediacaran.plugins.PublicBean;
 
 @Singleton

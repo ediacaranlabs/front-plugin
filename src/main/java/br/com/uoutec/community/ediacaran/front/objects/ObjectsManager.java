@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front.pub;
+package br.com.uoutec.community.ediacaran.front.objects;
 
 import java.util.List;
 import java.util.Locale;

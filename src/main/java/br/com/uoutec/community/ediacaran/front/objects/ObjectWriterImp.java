@@ -1,6 +1,7 @@
-package br.com.uoutec.community.ediacaran.front.pub;
+package br.com.uoutec.community.ediacaran.front.objects;
 
-import java.io.Reader;
+import java.io.IOException;
+import java.io.Writer;
 import java.lang.reflect.Modifier;
 
 import com.google.gson.Gson;
@@ -8,7 +9,7 @@ import com.google.gson.GsonBuilder;
 
 import br.com.uoutec.community.ediacaran.core.system.util.DataUtil.ClassTypeAdapter;
 
-public class ObjectReaderImp implements ObjectReader{
+public class ObjectWriterImp implements ObjectWriter{
 
 	private static final Gson gson;
 	
@@ -20,8 +21,8 @@ public class ObjectReaderImp implements ObjectReader{
 	}
 	
 	@Override
-	public Object read(Reader reader) {
-		return  gson.fromJson(reader, Object.class);
+	public void write(Object obj, Writer writer) throws IOException {
+		gson.toJson(obj, Object.class, writer);
 	}
 
 }

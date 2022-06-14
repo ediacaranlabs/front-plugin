@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front.pub;
+package br.com.uoutec.community.ediacaran.front.objects;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import br.com.uoutec.community.ediacaran.core.system.util.DataUtil.ClassTypeAdapter;
+import br.com.uoutec.community.ediacaran.front.pub.Menu;
 
 public class MenuObjectWriter implements ObjectWriter{
 

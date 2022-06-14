@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front.pub;
+package br.com.uoutec.community.ediacaran.front.objects;
 
 public class ObjectHandlerImp implements ObjectHandler{
 

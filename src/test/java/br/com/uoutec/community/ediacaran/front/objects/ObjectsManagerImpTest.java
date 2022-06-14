@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front.pub;
+package br.com.uoutec.community.ediacaran.front.objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,7 +14,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.uoutec.community.ediacaran.front.pub.ObjectsManager.ObjectEntry;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectFileManager;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectHandlerImp;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerImp;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectEntry;
 
 public class ObjectsManagerImpTest {
 

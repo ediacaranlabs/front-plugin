@@ -1,15 +1,15 @@
-package br.com.uoutec.community.ediacaran.front.pub;
+package br.com.uoutec.community.ediacaran.front.objects;
 
-import java.io.IOException;
-import java.io.Writer;
+import java.io.Reader;
 import java.lang.reflect.Modifier;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import br.com.uoutec.community.ediacaran.core.system.util.DataUtil.ClassTypeAdapter;
+import br.com.uoutec.community.ediacaran.front.pub.Menu;
 
-public class ObjectWriterImp implements ObjectWriter{
+public class MenuObjectReader implements ObjectReader{
 
 	private static final Gson gson;
 	
@@ -21,8 +21,8 @@ public class ObjectWriterImp implements ObjectWriter{
 	}
 	
 	@Override
-	public void write(Object obj, Writer writer) throws IOException {
-		gson.toJson(obj, Object.class, writer);
+	public Object read(Reader reader) {
+		return  (Menu)gson.fromJson(reader, Menu.class);
 	}
 
 }

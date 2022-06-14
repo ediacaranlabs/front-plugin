@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front.pub;
+package br.com.uoutec.community.ediacaran.front.objects;
 
 import java.io.Reader;
 import java.lang.reflect.Modifier;
@@ -8,7 +8,7 @@ import com.google.gson.GsonBuilder;
 
 import br.com.uoutec.community.ediacaran.core.system.util.DataUtil.ClassTypeAdapter;
 
-public class MenuObjectReader implements ObjectReader{
+public class ObjectReaderImp implements ObjectReader{
 
 	private static final Gson gson;
 	
@@ -21,7 +21,7 @@ public class MenuObjectReader implements ObjectReader{
 	
 	@Override
 	public Object read(Reader reader) {
-		return  (Menu)gson.fromJson(reader, Menu.class);
+		return  gson.fromJson(reader, Object.class);
 	}
 
 }

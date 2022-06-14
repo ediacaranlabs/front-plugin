@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front.pub;
+package br.com.uoutec.community.ediacaran.front.objects;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,8 +13,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import br.com.uoutec.community.ediacaran.front.pub.ObjectsManager.Filter;
-import br.com.uoutec.community.ediacaran.front.pub.ObjectsManager.ObjectMetadata;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.Filter;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 
 public class ObjectFileManager {
 
