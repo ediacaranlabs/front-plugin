@@ -25,6 +25,7 @@ import org.brandao.brutos.annotation.web.ResponseErrors;
 
 import br.com.uoutec.community.ediacaran.PluginConfigurationManager;
 import br.com.uoutec.community.ediacaran.SecurityPolicyUpdater;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.MutablePluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfiguration;
@@ -43,13 +44,14 @@ import br.com.uoutec.pub.entity.InvalidRequestException;
 @ResponseErrors(rendered=false, name="exception")
 public class AdminPubResource {
 
-	private static final String ADMIN_MENU_BAR 		= "adminMenuBar";
+	private static final String ADMIN_MENU_BAR 		= "/admin/menus/adminMenuBar";
 	
-	private static final String ADMIN_TOP_MENU_BAR	= "adminTopMenuBar";
+	private static final String ADMIN_TOP_MENU_BAR	= "/admin/menus/adminTopMenuBar";
 	
 	@Inject
 	@Transient
-	private MenuBarManager menuBarManager;
+	private ObjectsManager objectsManager;
+	//private MenuBarManager menuBarManager;
 	
 	@Inject
 	@Transient
@@ -67,11 +69,11 @@ public class AdminPubResource {
 	}
 
 	public MenuBar getMenuBar() throws MenuBarManagerException{
-		return menuBarManager.getMenuBar(ADMIN_MENU_BAR);
+		return (MenuBar)objectsManager.getObject(ADMIN_MENU_BAR);
 	}
 	
 	public MenuBar getTopMenuBar() throws MenuBarManagerException{
-		return menuBarManager.getMenuBar(ADMIN_TOP_MENU_BAR);
+		return (MenuBar)objectsManager.getObject(ADMIN_TOP_MENU_BAR);
 	}
 	
 	@Action(value="/dashboard")

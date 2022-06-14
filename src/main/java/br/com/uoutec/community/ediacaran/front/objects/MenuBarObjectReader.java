@@ -57,7 +57,7 @@ public class MenuBarObjectReader extends ObjectReaderImp{
 		String templateDTA = (String)itemDTA.get("template");
 		String roleDTA = (String)itemDTA.get("role");
 		String permissionDTA = (String)itemDTA.get("permission");
-		String orderDTA = (String)itemDTA.get("order");
+		Integer orderDTA = (Integer)itemDTA.get("order");
 		List<Map<String,Object>> itensDTA = (List<Map<String,Object>>)itemDTA.get("itens");
 		
 		menu.setName(nameDTA);
@@ -69,7 +69,7 @@ public class MenuBarObjectReader extends ObjectReaderImp{
 		menu.setTemplate(templateDTA);
 		menu.setRole(roleDTA);
 		menu.setPermission(permissionDTA);
-		menu.setOrder(orderDTA == null? 0 : Integer.parseInt(orderDTA));
+		menu.setOrder(orderDTA == null? 0 : orderDTA.intValue());
 		menu.setPersistent(true);
 		
 		if(itensDTA != null) {
