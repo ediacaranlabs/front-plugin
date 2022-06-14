@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.Lock;
@@ -25,7 +24,9 @@ public class ObjectsManagerImp
 
 	public static final String basePermission = "app.objs";
 	
-	private String OBJECTS_REPOSITORY = "/objects";
+	public static final String OBJECTS_REPOSITORY = "objects/";
+	
+	private static final Locale NULL_LOCALE = new Locale("xx", "XX");
 	
 	private ConcurrentMap<String, ConcurrentMap<Locale,ObjectValue>> objects;
 	
@@ -41,6 +42,8 @@ public class ObjectsManagerImp
 	
 	private ObjectFileManager objectFileManager;
 	
+	private ObjectHandler defaultHandler;
+	
 	public ObjectsManagerImp() {
 		handlers = new LinkedList<ObjectHandler>();
 		objects = new ConcurrentHashMap<String, ConcurrentMap<Locale,ObjectValue>>();
@@ -49,6 +52,7 @@ public class ObjectsManagerImp
 		this.readLock = readWriteLock.readLock();
 		this.objectListenerManager = new ObjectListenerManager();
 		this.objectFileManager = new ObjectFileManager(new File(System.getProperty("app.base"), OBJECTS_REPOSITORY));
+		this.defaultHandler = new ObjectHandlerImp();
 	}
 	
 	@Override
@@ -85,7 +89,7 @@ public class ObjectsManagerImp
 	
 			ObjectHandler handler = getObjectHandler(object);
 			ObjectValue obj = persistObject(id, locale, object, handler);
-			map.put(locale, obj);
+			map.put(getSafeLocale(locale), obj);
 			
 			objectListenerManager.afterRegister(id, locale, object);
 			
@@ -116,12 +120,17 @@ public class ObjectsManagerImp
 		writeLock.lock();
 		try {
 			
-			int lastIndex = id.lastIndexOf("/");
-			String path = id.substring(0, lastIndex - 1);
-			String name = id.substring(lastIndex);
+			String[] pathAndName = objectFileManager.toPathAndName(id);
+			String path = pathAndName[0];
+			String name = pathAndName[1];
 			
 			ObjectMetadata omd = objectFileManager.unique(path, false, e->{
-				return name.equals(e.getId()) && locale == e.getLocale();
+				return 
+						name.equals(e.getId()) && 
+						(
+							(locale == null && e.getLocale() == null) || 
+							(locale != null && locale.equals(e.getLocale()))
+						);
 			});
 			
 			if(omd == null) {
@@ -133,7 +142,7 @@ public class ObjectsManagerImp
 			ConcurrentMap<Locale,ObjectValue> map = objects.get(id);
 			
 			if(map != null) {
-				map.remove(locale);
+				map.remove(getSafeLocale(locale));
 				if(map.isEmpty()) {
 					objects.remove(id, map);
 				}
@@ -209,9 +218,9 @@ public class ObjectsManagerImp
 		
 		readLock.lock();
 		try {
-			int lastIndex = id.lastIndexOf("/");
-			String path = id.substring(0, lastIndex - 1);
-			String name = id.substring(lastIndex);
+			String[] pathAndName = objectFileManager.toPathAndName(id);
+			String path = pathAndName[0];
+			String name = pathAndName[1];
 			
 			List<ObjectMetadata> list = objectFileManager.list(path, false, e->{
 				return name.equals(e.getId());
@@ -254,6 +263,16 @@ public class ObjectsManagerImp
 		objectListenerManager.unregisterListener(listener);
 	}
 	
+	public void flush() {
+		writeLock.lock();
+		try {
+			objects.clear();
+		}
+		finally {
+			writeLock.unlock();
+		}		
+	}
+
 	/* --private-- */
 	
 	/* get */
@@ -264,10 +283,10 @@ public class ObjectsManagerImp
 		ConcurrentMap<Locale,ObjectValue> map = objects.get(id);
 		
 		if(map != null) {
-			obj = map.get(locale);
+			obj = map.get(getSafeLocale(locale));
 			
 			if(obj != null && obj.isValid()) {
-				return obj;
+				return obj.object;
 			}
 		}
 		
@@ -286,18 +305,23 @@ public class ObjectsManagerImp
 		ConcurrentMap<Locale,ObjectValue> map = objects.get(id);
 		
 		if(map != null) {
-			ObjectValue obj = map.get(locale);
+			ObjectValue obj = map.get(getSafeLocale(locale));
 			if(obj != null && obj.isValid()) {
 				return obj;
 			}
 		}
 		
-		int lastIndex = id.lastIndexOf("/");
-		String path = id.substring(0, lastIndex - 1);
-		String name = id.substring(lastIndex);
+		String[] pathAndName = objectFileManager.toPathAndName(id);
+		String path = pathAndName[0];
+		String name = pathAndName[1];
 		
 		ObjectMetadata omd = objectFileManager.unique(path, false, e->{
-			return name.equals(e.getId()) && locale == e.getLocale();
+			return 
+					name.equals(e.getId()) && 
+					(
+						(locale == null && e.getLocale() == null) || 
+						(locale != null && locale.equals(e.getLocale()))
+					);
 		});
 		
 		if(omd != null) {
@@ -315,7 +339,7 @@ public class ObjectsManagerImp
 			if(current != null) {
 				map = current;
 			}
-			map.put(locale, object);
+			map.put(getSafeLocale(locale), object);
 			
 			return object;
 		}
@@ -323,13 +347,19 @@ public class ObjectsManagerImp
 		map = objects.get(id);
 		
 		if(map != null ) {
-			map.remove(locale);
+			map.remove(getSafeLocale(locale));
 			if(map.isEmpty()) {
 				objects.remove(id);
 			}
 		}
 		
 		return null;
+	}
+	
+	/* private */
+	
+	private Locale getSafeLocale(Locale locale) {
+		return locale == null? NULL_LOCALE : locale;
 	}
 	
 	/* persist */
@@ -355,8 +385,7 @@ public class ObjectsManagerImp
 			}
 		}
 		
-		throw new NullPointerException("handler not found: " + obj);
-		
+		return defaultHandler;
 	}
 
 	private ObjectHandler getObjectHandler(String type) {
@@ -367,15 +396,19 @@ public class ObjectsManagerImp
 			}
 		}
 		
-		throw new NullPointerException("handler not found: " + type);
-		
+		return defaultHandler;
 	}
 	
 	private static class ObjectListenerManager implements ObjectListener{
 
-		private Set<ObjectListener> listeners;
+		private List<ObjectListener> listeners;
 		
 		private ReadWriteLock readWriteLock;
+		
+		public ObjectListenerManager() {
+			this.listeners = new LinkedList<ObjectListener>();
+			this.readWriteLock = new ReentrantReadWriteLock();
+		}
 		
 		public void registerListener(ObjectListener listener) {
 			Lock lock = readWriteLock.writeLock();

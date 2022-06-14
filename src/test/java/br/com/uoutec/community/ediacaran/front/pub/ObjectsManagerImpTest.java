@@ -1,0 +1,173 @@
+package br.com.uoutec.community.ediacaran.front.pub;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Locale;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import br.com.uoutec.community.ediacaran.front.pub.ObjectsManager.ObjectEntry;
+
+public class ObjectsManagerImpTest {
+
+	private static final File BASE = new File(System.getProperty("user.dir"));
+	
+	private static final File BASE_BJECTS = new File(BASE, ObjectsManagerImp.OBJECTS_REPOSITORY);
+	
+	private ObjectsManagerImp objectsManager;
+	
+	private ObjectFileManager objectFileManager;
+	
+	public boolean clearRepository(File directoryToBeDeleted) {
+	    File[] allContents = directoryToBeDeleted.listFiles();
+	    if (allContents != null) {
+	        for (File file : allContents) {
+	        	clearRepository(file);
+	        }
+	    }
+	    return directoryToBeDeleted.delete();
+	}
+	
+	@BeforeEach
+	public void before() {
+		System.setProperty("app.base", BASE.getAbsolutePath());
+		BASE_BJECTS.mkdir();
+		objectsManager = new ObjectsManagerImp();
+		objectFileManager = new ObjectFileManager(BASE_BJECTS);
+	}
+
+	@AfterEach
+	public void after() {
+		objectsManager = null;
+		objectFileManager = null;
+		clearRepository(BASE_BJECTS);
+	}
+	
+	@Test
+	public void testRegisterDefault() {
+		objectsManager.registerObject("/path/type/item1", null, "TESTE");
+		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
+	}
+
+	@Test
+	public void testRegisterDefaultAndpt_BR() {
+		objectsManager.registerObject("/path/type/item1", null, "TESTE");
+		objectsManager.registerObject("/path/type/item1", new Locale("pt", "BR"), "TESTE");
+		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
+		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_pt_BR.obj").exists());
+	}
+
+	@Test
+	public void testRegisterSpaceDefaultAndpt_BR() {
+		objectsManager.registerObject("/path/type/item1_val", null, "TESTE");
+		objectsManager.registerObject("/path/type/item1_val", new Locale("pt", "BR"), "TESTE");
+		assertTrue(new File(BASE_BJECTS, "/path/type/item1_val_json_default.obj").exists());
+		assertTrue(new File(BASE_BJECTS, "/path/type/item1_val_json_pt_BR.obj").exists());
+	}
+
+	@Test
+	public void testGet() {
+		objectsManager.registerObject("/path/type/item1", null, "TESTE");
+		objectsManager.registerObject("/path/type/item1", new Locale("pt", "BR"), "PT_BR");
+		objectsManager.registerObject("/path/type/item1_val", null, "VAL1_DEFAULT");
+		objectsManager.registerObject("/path/type/item1_val", new Locale("pt", "BR"), "VAL1_PT_BR");
+		
+		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
+		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_pt_BR.obj").exists());
+		assertTrue(new File(BASE_BJECTS, "/path/type/item1_val_json_default.obj").exists());
+		assertTrue(new File(BASE_BJECTS, "/path/type/item1_val_json_pt_BR.obj").exists());
+		
+		objectsManager.flush();
+		
+		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
+		assertEquals("PT_BR",objectsManager.getObject("/path/type/item1", new Locale("pt", "BR")));
+		assertEquals("VAL1_DEFAULT",objectsManager.getObject("/path/type/item1_val"));
+		assertEquals("VAL1_PT_BR",objectsManager.getObject("/path/type/item1_val", new Locale("pt", "BR")));
+		
+		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
+		assertEquals("PT_BR",objectsManager.getObject("/path/type/item1", new Locale("pt", "BR")));
+		assertEquals("VAL1_DEFAULT",objectsManager.getObject("/path/type/item1_val"));
+		assertEquals("VAL1_PT_BR",objectsManager.getObject("/path/type/item1_val", new Locale("pt", "BR")));
+		
+	}
+	
+	@Test
+	public void testGetReload() throws IOException {
+		objectsManager.registerObject("/path/type/item1", null, "TESTE");
+		
+		objectsManager.flush();
+		
+		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
+		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
+		
+		objectFileManager.persist("/path/type/item1", null, "NEW VALUE", new ObjectHandlerImp());
+		
+		assertEquals("NEW VALUE",objectsManager.getObject("/path/type/item1"));
+		
+	}
+
+	@Test
+	public void testUnregister() throws IOException {
+		objectsManager.registerObject("/path/type/item1", null, "TESTE");
+		objectsManager.registerObject("/path/type/item1", new Locale("pt", "BR"), "PT_BR");
+		
+		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
+		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_pt_BR.obj").exists());
+		
+		objectsManager.flush();
+		
+		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
+		assertEquals("PT_BR",objectsManager.getObject("/path/type/item1", new Locale("pt", "BR")));
+		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
+		assertEquals("PT_BR",objectsManager.getObject("/path/type/item1", new Locale("pt", "BR")));
+		
+		objectsManager.unregisterObject("/path/type/item1", new Locale("pt", "BR"));
+
+		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
+		assertFalse(new File(BASE_BJECTS, "/path/type/item1_json_pt_BR.obj").exists());
+		
+		
+	}
+
+	@Test
+	public void testUnregisterOne() throws IOException {
+		objectsManager.registerObject("/path/type/item1", null, "TESTE");
+		
+		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
+		
+		objectsManager.flush();
+		
+		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
+		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
+		
+		objectsManager.unregisterObject("/path/type/item1", null);
+
+		assertFalse(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
+		
+	}
+	
+	@Test
+	public void testGetObjects() {
+		objectsManager.registerObject("/path/type/item1", null, "TESTE");
+		objectsManager.registerObject("/path/type/item1", new Locale("pt", "BR"), "PT_BR");
+		objectsManager.registerObject("/path/type/item1_val", null, "VAL1_DEFAULT");
+		objectsManager.registerObject("/path/type/item1_val", new Locale("pt", "BR"), "VAL1_PT_BR");
+		objectsManager.registerObject("/path/type/item1_val", new Locale("en", "US"), "VAL1_EN_US");
+		
+		ObjectEntry e = objectsManager.getObjects("/path/type/item1_val");
+		
+		assertEquals("/path/type/item1_val",e.getFullId());
+		assertEquals("item1_val",e.getId());
+		assertEquals("/path/type",e.getPath());
+		assertEquals("VAL1_DEFAULT",e.getObject());
+		assertEquals("VAL1_PT_BR",e.getObject(new Locale("pt", "BR")));
+		assertEquals("VAL1_EN_US",e.getObject(new Locale("en", "US")));
+	}
+	
+}

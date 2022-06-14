@@ -23,6 +23,8 @@ public interface ObjectsManager {
 
 	void removeListener(ObjectListener listener);
 	
+	void flush();
+	
 	public static interface ObjectListener{
 		
 		void beforeLoad(String id, Locale locale);

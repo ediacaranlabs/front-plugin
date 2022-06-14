@@ -18,11 +18,11 @@ import br.com.uoutec.community.ediacaran.front.pub.ObjectsManager.ObjectMetadata
 
 public class ObjectFileManager {
 
-	private static final String PATH_FORMAT = "(/[a-z]+(_[0-9a-z]+))+";
+	private static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)+";
 	
-	private static final String ID_FORMAT = "[a-z]+(_[0-9a-z]+)+";
+	private static final String ID_FORMAT = "[a-z][a-z0-9]+(_[a-z0-9]+)*";
 
-	private static final String FULLID_FORMAT = "(" + PATH_FORMAT + ")/(" + ID_FORMAT + ")";
+	private static final String FULLID_FORMAT = "(" + PATH_FORMAT + ")\\/(" + ID_FORMAT + ")";
 	
 	private static final String TYPE_FORMAT = "[0-9a-z]{4,10}";
 	
@@ -46,7 +46,28 @@ public class ObjectFileManager {
 		this.basePath = basePath;
 	}
 	
-	/* list */
+	public String[] toPathAndName(String fullId) {
+		
+		if(!isValidFullId(fullId)) {
+			return null;
+		}
+		/*
+			/      = /  , null
+			/a     = /  , a
+			/aa/aa = /aa, aa
+		*/
+		
+		fullId = fullId.trim();
+		
+		int lastIndex = fullId.lastIndexOf("/");
+		
+		if(lastIndex == 0) {
+			return new String[] {fullId,null};
+		}
+		
+		return new String[] {fullId.substring(0, lastIndex), fullId.substring(lastIndex + 1)};
+		
+	}
 	
 	public boolean isValidFullId(String fullId) {
 		return fullIdPattern.matcher(fullId).matches();
@@ -70,14 +91,13 @@ public class ObjectFileManager {
 	
 	public ObjectMetadata unique(String path, boolean recursive, Filter filter){
 		
-		List<ObjectMetadata> list = new LinkedList<ObjectMetadata>();
-		list(list, basePath, filter, recursive);
+		List<ObjectMetadata> list = list(path, recursive, filter);
 		
 		if(list.size() > 1) {
 			throw new IllegalStateException("found: " + list.size());
 		}
 		
-		return list.get(0);
+		return list.isEmpty()? null : list.get(0);
 		
 	}
 	
@@ -162,8 +182,11 @@ public class ObjectFileManager {
 			throw new IOException("invalid path: " + fullId);
 		}
 		
-		try(FileOutputStream stream = new FileOutputStream(file)){
-			handler.getWriter().write(obj, new OutputStreamWriter(stream, StandardCharsets.UTF_8));
+		file.getParentFile().mkdirs();
+		
+		try(OutputStreamWriter stream = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8)){
+			handler.getWriter().write(obj, stream);
+			stream.flush();
 		}
 	
 		return file;
