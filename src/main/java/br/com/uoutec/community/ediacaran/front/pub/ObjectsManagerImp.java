@@ -271,6 +271,25 @@ public class ObjectsManagerImp
 	}
 
 	@Override
+	public List<ObjectMetadata> listMetadata(String path, String name, Locale locale, boolean recursive) {
+		
+		readLock.lock();
+		try {
+			return objectFileManager.list(path, recursive, e->{
+				boolean result;
+				result =           (name == null? true : e.getId().contains(name));
+				result = result && (locale == null? true : locale.equals(e.getLocale()));
+				return result;
+			});
+			
+		}
+		finally {
+			readLock.unlock();
+		}
+			
+	}
+	
+	@Override
 	public List<ObjectEntry> listObjects(String path, String name, boolean recursive) {
 		
 		readLock.lock();
@@ -323,7 +342,7 @@ public class ObjectsManagerImp
 		}
 			
 	}
-	
+
 	public void addListener(ObjectListener listener) {
 		
 		SecurityManager sm = System.getSecurityManager();

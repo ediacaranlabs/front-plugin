@@ -16,6 +16,8 @@ public interface ObjectsManager {
 	
 	Object getObject(String id, Locale locale);
 	
+	List<ObjectMetadata> listMetadata(String path, String name, Locale locale, boolean recursive);
+	
 	List<Object> list(String path, String name, Locale locale, boolean recursive);
 	
 	List<ObjectEntry> listObjects(String path, String name, boolean recursive);
