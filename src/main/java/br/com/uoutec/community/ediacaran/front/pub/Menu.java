@@ -26,6 +26,8 @@ public class Menu implements Serializable {
 	
 	private transient PropertyChangeSupport propertyChangeSupport;
 
+	private final String uniqueID = IDGenerator.getUniqueOrderID('M', this.hashCode());
+	
 	private String id;
 	
 	private String name;
@@ -263,7 +265,7 @@ public class Menu implements Serializable {
 		SecurityManager sm = System.getSecurityManager();
 		
 		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + getPath() + ".list.*"));
+			sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".list.*"));
 		}
 
 		List<Menu> result =  new ArrayList<Menu>();
@@ -299,18 +301,20 @@ public class Menu implements Serializable {
 	}
 	
 	public String getBadge() {
-		MenuBadgeValue value = EntityContextPlugin.getEntity(MenuBadgeValue.class);
-		return value == null? null : value.getValue(id);
+		//MenuBadgeValue value = EntityContextPlugin.getEntity(MenuBadgeValue.class);
+		//return value == null? null : value.getValue(uniqueID);
+		return null;
 	}
 
 	public Menu setBadge(String badge) {
 
-		MenuBadgeValue value = EntityContextPlugin.getEntity(MenuBadgeValue.class);
-		String oldBadge = value == null? null : value.getValue(id);
+		//MenuBadgeValue value = EntityContextPlugin.getEntity(MenuBadgeValue.class);
+		//String oldBadge = value == null? null : value.getValue(uniqueID);
+		String oldBadge = null;
 		
-		if(value != null) {
-			value.setValue(id, badge);
-		}
+		//if(value != null) {
+		//	value.setValue(uniqueID, badge);
+		//}
 		
 		propertyChangeSupport.firePropertyChange("badge", oldBadge, badge);
 		
@@ -324,7 +328,7 @@ public class Menu implements Serializable {
 			SecurityManager sm = System.getSecurityManager();
 			
 			if(sm != null) {
-				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + getPath() + ".register"));
+				sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".register"));
 			}
 			
 			if(map.containsKey(id)) {
@@ -355,7 +359,7 @@ public class Menu implements Serializable {
 		SecurityManager sm = System.getSecurityManager();
 		
 		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + getPath() + ".list"));
+			sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".list"));
 		}
 		
 		return map.get(name);
@@ -367,7 +371,7 @@ public class Menu implements Serializable {
 			SecurityManager sm = System.getSecurityManager();
 			
 			if(sm != null) {
-				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + getPath() + ".remove"));
+				sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".remove"));
 			}
 			
 			Menu m = map.get(name);

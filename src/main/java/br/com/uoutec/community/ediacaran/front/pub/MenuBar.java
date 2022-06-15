@@ -15,9 +15,13 @@ import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 
 public class MenuBar {
 
+	public static final String basePermission = "app.menu";
+
 	private final AuthorizationManager authorizationManager;
 	
 	private final String id;
+	
+	private String name;
 	
 	private final PropertyChangeSupport propertyChangeSupport;
 	
@@ -37,12 +41,29 @@ public class MenuBar {
 		return id;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + ".name"));
+		}
+
+		String oldName = this.name;
+		this.name = name;
+		propertyChangeSupport.firePropertyChange("resourceBundle", oldName, name);
+	}
+
 	public List<Menu> getItens(){
 		
 		SecurityManager sm = System.getSecurityManager();
 		
 		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + this.id + ".list"));
+			sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + ".list"));
 		}
 
 		List<Menu> result =  new ArrayList<Menu>();
@@ -86,7 +107,7 @@ public class MenuBar {
 			SecurityManager sm = System.getSecurityManager();
 			
 			if(sm != null) {
-				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + this.id + ".register"));
+				sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + ".register"));
 			}
 			
 			if(map.containsKey(id)) {
@@ -117,7 +138,7 @@ public class MenuBar {
 		SecurityManager sm = System.getSecurityManager();
 		
 		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + this.id + "." + id + ".list"));
+			sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + "." + id + ".list"));
 		}
 		
 		return map.get(id);
@@ -129,7 +150,7 @@ public class MenuBar {
 			SecurityManager sm = System.getSecurityManager();
 			
 			if(sm != null) {
-				sm.checkPermission(new RuntimePermission(MenuBarManager.basePermission + "." + this.id + "." + id + ".remove"));
+				sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + "." + id + ".remove"));
 			}
 			
 			Menu m = this.map.get(id);

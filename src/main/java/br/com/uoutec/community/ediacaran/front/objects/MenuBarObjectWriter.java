@@ -21,6 +21,7 @@ public class MenuBarObjectWriter extends ObjectWriterImp{
 	private Map<String,Object> toObject(MenuBar menubar) {
 		Map<String,Object> o = new HashMap<String,Object>();
 		o.put("id", menubar.getId());
+		o.put("name", menubar.getName());
 		o.put("itens", toObject(menubar.getItens()));
 		return o;
 	}

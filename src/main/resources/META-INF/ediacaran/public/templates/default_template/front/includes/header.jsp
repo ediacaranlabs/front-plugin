@@ -4,8 +4,8 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"                   prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions"              prefix="fn"%>
-<ec:load-data context="/" file="/objects/menus/default-menu" var="defaultMenu" />
-<%--<ec:load-data file="header.json" var="pageObjects" />--%>
+<ec:import-object id="/front/menus/default" var="defaultMenu"/>
+
     <!-- start header -->
    <header>
 		<ec:menu-bar id="top_menu" 
@@ -13,28 +13,63 @@
 				style="light">
 			<ed:container>
 			<ec:menu-bar-brand>
-				<ec:image src="${defaultMenu['menu-bar-brand']['src']}"/>
+				<ec:image src="/img/logo.png"/>
 			</ec:menu-bar-brand>
 			<ec:menu-toggler menuID="top_menu_body">
 				<ec:icon icon="bars" />
 			</ec:menu-toggler>
 			<ec:menu-body collapse="true">
 				<ec:menu-itens align="right">
-					<c:forEach items="${defaultMenu['itens']}" var="menu">
+					<c:forEach items="${defaultMenu.itens}" var="menu">
 						<c:choose>
-							<c:when test="${!empty menu.value['itens']}">
+	
+							<c:when test="${not empty menu.body}">
 								<ec:menu>
-									<ec:menu-label>${menu.value['name']}</ec:menu-label>
-									<ec:menu-itens>
-										<c:forEach items="${menu.value['itens']}" var="item">
-											<ec:menu-item href="${item.value['link']}">${item.value['name']}</ec:menu-item>
+									<ec:menu-label>
+										<c:if test="${not empty menu.icon}">
+											<ec:icon icon="${menu.icon}" size="1"/>
+										</c:if>
+										${menu.fullName}
+										<ec:badge id="${menu.id}_badge" style="${empty menu.badgeStyle? 'info' : menu.badgeStyle}" type="navbar">${menu.badge}</ec:badge>
+									</ec:menu-label>
+									<ec:menu-itens resource="${menu.body}"/>
+								</ec:menu>
+							</c:when>
+	
+							<c:when test="${fn:length(menu.itens) != 0}">
+								<ec:menu>
+									<ec:menu-label>
+										<c:if test="${not empty menu.icon}">
+											<ec:icon icon="${menu.icon}" size="1"/>
+										</c:if>
+										${menu.fullName}
+										<ec:badge id="${menu.id}_badge" style="${empty menu.badgeStyle? 'info' : menu.badgeStyle}" type="navbar">${menu.badge}</ec:badge>
+									</ec:menu-label>
+									<ec:menu-itens id="menu_itens_xx">
+										<c:forEach items="${menu.itens}" var="item">
+											<ec:menu-item href="${item.resource}">
+												<c:if test="${not empty item.icon}">
+													<ec:icon icon="${item.icon}" size="1"/>
+												</c:if>
+												${item.fullName}
+												<ec:badge id="${item.id}_badge" style="${empty item.badgeStyle? 'info' : item.badgeStyle}" type="navbar">${item.badge}</ec:badge>
+											</ec:menu-item>
 										</c:forEach>
 									</ec:menu-itens>
 								</ec:menu>
 							</c:when>
+	
 							<c:otherwise>
-								<ec:menu-item href="${menu.value['link']}">${menu.value['name']}</ec:menu-item>
+
+								<ec:menu-item href="${menu.resource}">
+									<c:if test="${not empty menu.icon}">
+										<ec:icon icon="${menu.icon}" size="1"/>
+									</c:if>
+									${menu.fullName}
+									<ec:badge id="${menu.id}_badge" style="${empty menu.badgeStyle? 'info' : menu.badgeStyle}" type="navbar">${menu.badge}</ec:badge>
+								</ec:menu-item>
 							</c:otherwise>
+							
 						</c:choose>
 					</c:forEach>
 				</ec:menu-itens>

@@ -20,6 +20,7 @@ public class MenuBarObjectReader extends ObjectReaderImp{
 	private MenuBar toObject(Map<String,Object> data) {
 		
 		String idDTA = (String) data.get("id");
+		String nameDTA = (String) data.get("name");
 		List<Map<String,Object>> itensDTA = (List<Map<String,Object>>) data.get("itens");
 		
 		if(idDTA == null || idDTA.trim().length() == 0) {
@@ -27,6 +28,8 @@ public class MenuBarObjectReader extends ObjectReaderImp{
 		}
 		
 		MenuBar menuBar = new MenuBar(idDTA.trim());
+		
+		menuBar.setName(nameDTA);
 		
 		if(itensDTA != null) {
 			
