@@ -8,6 +8,7 @@
 <%--<ec:load-data context="/" file="/objects/social-links" var="socialLinks" />--%>
 <%--<ec:load-data file="footer.json" var="objects" />--%>
 <ec:import-object id="/front/social_links" var="socialLinks"/>
+<ec:import-object id="/front/address" var="address"/>
 <ec:import-object id="/front/menus/footer_menu2" var="footerMenu2"/>
 <ec:import-object id="/front/menus/footer_menu" var="footerMenu"/>
 
@@ -168,14 +169,14 @@
 			</ed:col>
 			<ed:col classStyle="widget">
 				<c:if test="${!empty address}">
-					<h5>${address['title']}</h5>
-					<address>${address['address']}</address>
+					<h5>${address.title}</h5>
+					<address>${address.address}</address>
 					<p>
-					<c:if test="${!empty address['phone']}">
-						<ec:icon icon="phone" size="1"/> ${address['phone']}<br>
+					<c:if test="${!empty address.phone}">
+						<ec:icon icon="phone" size="1"/> ${address.phone}<br>
 					</c:if>
-					<c:if test="${!empty address['email']}">
-						<ec:icon icon="envelope" size="1"/> ${address['email']}<br>
+					<c:if test="${!empty address.email}">
+						<ec:icon icon="envelope" size="1"/> ${address.email}<br>
 					</c:if>
 					</p>
 				</c:if>			
