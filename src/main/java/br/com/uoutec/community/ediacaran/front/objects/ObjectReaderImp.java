@@ -1,7 +1,11 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.Modifier;
+import java.nio.charset.StandardCharsets;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,8 +24,10 @@ public class ObjectReaderImp implements ObjectReader{
 	}
 	
 	@Override
-	public Object read(Reader reader) {
-		return  gson.fromJson(reader, Object.class);
+	public Object read(InputStream stream) throws IOException {
+		try(Reader reader = new InputStreamReader(stream, StandardCharsets.UTF_8)){
+			return  gson.fromJson(reader, Object.class);
+		}
 	}
 
 }

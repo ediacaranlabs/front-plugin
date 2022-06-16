@@ -1,6 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
-import java.io.Reader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -11,8 +12,8 @@ public class MenuBarObjectReader extends ObjectReaderImp{
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public Object read(Reader reader) {
-		Map<String,Object> data = (Map<String, Object>) super.read(reader);
+	public Object read(InputStream stream) throws IOException {
+		Map<String,Object> data = (Map<String, Object>) super.read(stream);
 		return toObject(data);
 	}
 

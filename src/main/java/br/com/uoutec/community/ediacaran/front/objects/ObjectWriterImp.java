@@ -1,8 +1,10 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
 import java.io.IOException;
-import java.io.Writer;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.lang.reflect.Modifier;
+import java.nio.charset.StandardCharsets;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,7 +23,8 @@ public class ObjectWriterImp implements ObjectWriter{
 	}
 	
 	@Override
-	public void write(Object obj, Writer writer) throws IOException {
+	public void write(Object obj, OutputStream stream) throws IOException {
+		OutputStreamWriter writer = new OutputStreamWriter(stream, StandardCharsets.UTF_8);
 		gson.toJson(obj, Object.class, writer);
 	}
 
