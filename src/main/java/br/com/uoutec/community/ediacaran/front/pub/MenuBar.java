@@ -29,6 +29,10 @@ public class MenuBar {
 	
 	private final Map<String, Menu> map;
 	
+	public MenuBar(){
+		this(null);
+	}
+	
 	public MenuBar(String id){
 		this.propertyChangeSupport = new PropertyChangeSupport(this);
 		this.list = new ArrayList<Menu>();

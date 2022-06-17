@@ -301,21 +301,21 @@ public class Menu implements Serializable {
 	}
 	
 	public String getBadge() {
-		//MenuBadgeValue value = EntityContextPlugin.getEntity(MenuBadgeValue.class);
-		//return value == null? null : value.getValue(uniqueID);
-		return null;
+		MenuBadgeValue value = EntityContextPlugin.getEntity(MenuBadgeValue.class);
+		return value == null? null : value.getValue(uniqueID);
+		//return null;
 	}
 
 	public Menu setBadge(String badge) {
 
-		//MenuBadgeValue value = EntityContextPlugin.getEntity(MenuBadgeValue.class);
-		//String oldBadge = value == null? null : value.getValue(uniqueID);
-		String oldBadge = null;
+		MenuBadgeValue value = EntityContextPlugin.getEntity(MenuBadgeValue.class);
+		String oldBadge = value == null? null : value.getValue(uniqueID);
+		//String oldBadge = null;
 		
-		//if(value != null) {
-		//	value.setValue(uniqueID, badge);
-		//}
-		
+		if(value != null) {
+			value.setValue(uniqueID, badge);
+		}
+
 		propertyChangeSupport.firePropertyChange("badge", oldBadge, badge);
 		
 		return this;
