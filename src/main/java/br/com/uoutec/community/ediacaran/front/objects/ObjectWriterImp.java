@@ -26,6 +26,7 @@ public class ObjectWriterImp implements ObjectWriter{
 	public void write(Object obj, OutputStream stream) throws IOException {
 		OutputStreamWriter writer = new OutputStreamWriter(stream, StandardCharsets.UTF_8);
 		gson.toJson(obj, Object.class, writer);
+		writer.flush();
 	}
 
 }

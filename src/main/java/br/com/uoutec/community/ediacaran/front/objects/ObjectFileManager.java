@@ -2,80 +2,70 @@ package br.com.uoutec.community.ediacaran.front.objects;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.regex.Matcher;
+import java.util.Map;
 import java.util.regex.Pattern;
 
+import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
+import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileValue;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.Filter;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectValue;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerImp.ObjectFileMetadataManager;
 
 public class ObjectFileManager {
 
 	private static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)+";
 	
-	private static final String ID_FORMAT = "[a-z][a-z0-9]+(_[a-z0-9]+)*";
-
-	private static final String FULLID_FORMAT = "(" + PATH_FORMAT + ")\\/(" + ID_FORMAT + ")";
-	
-	private static final String TYPE_FORMAT = "[0-9a-z]{4,10}";
-	
-	private static final String LOCALE_FORMAT = "(default)|([a-z]{2,2}_[A-Z]{2,2})";
-
-	private static final String FILENAME_FORMAT = "(" + ID_FORMAT + ")_(" + TYPE_FORMAT + ")_(" + LOCALE_FORMAT + ").obj";
-	
-	private Pattern fullIdPattern = Pattern.compile(FULLID_FORMAT);
-	
-	private Pattern idPattern = Pattern.compile(ID_FORMAT);
-	
 	private Pattern pathPattern = Pattern.compile(PATH_FORMAT);
-	
-	private Pattern typePattern = Pattern.compile(TYPE_FORMAT);
-	
-	private Pattern fileNamePattern = Pattern.compile(FILENAME_FORMAT);
 
 	private File basePath;
 	
+	private FileManager fileManager;
+	
 	public ObjectFileManager(File basePath) {
+		
+		this.fileManager = new FileManager(basePath, new ObjectFileManagerHandler() {
+			
+			@Override
+			public Object read(File file, FileMetadata metadata) throws IOException {
+
+				ObjectFileMetadataManager omd = (ObjectFileMetadataManager)metadata;
+				Object object;
+				
+				try(InputStream stream = new FileInputStream(file)){
+					object = omd.getHandler().getReader().read(stream);
+				}
+				
+				return object;
+				
+			}
+
+			@Override
+			public void write(File file, FileMetadata metadata, Object value) throws FileNotFoundException, IOException {
+				
+				ObjectFileMetadataManager omd = (ObjectFileMetadataManager)metadata;
+				
+				ObjectHandler handler = omd.getHandler();
+				try(OutputStream stream = new FileOutputStream(file)){
+					handler.getWriter().write(value, stream);
+					stream.flush();
+				}
+				
+			}
+			
+		});
 		this.basePath = basePath;
 	}
 	
-	public String[] toPathAndName(String fullId) {
-		
-		if(!isValidFullId(fullId)) {
-			return null;
-		}
-		/*
-			/      = /  , null
-			/a     = /  , a
-			/aa/aa = /aa, aa
-		*/
-		
-		fullId = fullId.trim();
-		
-		int lastIndex = fullId.lastIndexOf("/");
-		
-		if(lastIndex == 0) {
-			return new String[] {fullId,null};
-		}
-		
-		return new String[] {fullId.substring(0, lastIndex), fullId.substring(lastIndex + 1)};
-		
-	}
-	
-	public boolean isValidFullId(String fullId) {
-		return fullIdPattern.matcher(fullId).matches();
-	}
-
-	public boolean isValidType(String type) {
-		return typePattern.matcher(type).matches();
-	}
-
 	public ObjectMetadata unique(){
 		return unique(null, null);
 	}
@@ -143,7 +133,7 @@ public class ObjectFileManager {
 			}
 			else
 			if(f.isFile()) {
-				ObjectMetadata omd = toObjectMetadata(f);
+				ObjectMetadata omd = toObjectMetadata(fileManager.toMetadata(basePath, f));
 				if(omd != null && (filter == null || filter.accept(omd))) {
 					result.add(omd);
 				}
@@ -151,203 +141,47 @@ public class ObjectFileManager {
 		}
 	}
 	
-	/* load */
-
+	/* get */
+	
 	public ObjectValue get(ObjectMetadata omd, ObjectHandler handler) throws IOException {
-		
-		File file = toFile(omd);
-		
-		if(!file.exists() || !file.canRead()) {
-			return null;
-		}
-
-		Object object;
-		
-		try(InputStream stream = new FileInputStream(file)){
-			object = handler.getReader().read(stream);
-		}
-		
-		return object == null? null : new ObjectValue(file, object);
-		
+		FileMetadata fmd = toFileMetadata(omd, handler);
+		FileValue fv = fileManager.get(fmd);
+		return fv == null? null : new ObjectValue(fv.getFile(), fv.getObject());
 	}
 	
 	/* persist */
 	
-	public File persist(String fullId, Locale locale, Object obj, ObjectHandler handler) throws IOException {
-		
-		File file = toFile(fullId, locale, handler.getType());
-		
-		if(!file.getAbsolutePath().startsWith(basePath.getAbsolutePath())){
-			throw new IOException("invalid path: " + fullId);
-		}
-		
-		file.getParentFile().mkdirs();
-		
-		try(OutputStream stream = new FileOutputStream(file)){
-			handler.getWriter().write(obj, stream);
-			stream.flush();
-		}
-	
+	public File persist(String path, String name, Locale locale, Object obj, ObjectHandler handler) throws IOException {
+		FileMetadata fmd = toFileMetadata(path, name, locale, obj, handler);
+		File file = fileManager.persist(fmd, obj);
 		return file;
 	}
 	
 	/* delete */
 	
 	public void delete(ObjectMetadata omd) throws IOException {
-		
-		File file = toFile(omd);
-		
-		if(!file.getAbsolutePath().startsWith(basePath.getAbsolutePath())){
-			throw new IOException("invalid path: " + omd.getPath() + "/" + omd.getId());
-		}
-		
-		delete(basePath, file);
-	}
-	
-	private void delete(File base, File file) throws IOException {
-		
-		file.delete();
-		
-		File parent = file.getParentFile();
-		
-		if(parent.equals(base)) {
-			return;
-		}
-		
-		if(parent.listFiles(e->e.isFile()).length == 0) {
-			delete(base, parent);
-		}
-		
+		FileMetadata fmd = toFileMetadata(omd, null);
+		fileManager.delete(fmd);
 	}
 	
 	/* private */
 	
-	private File toFile(String fullId, Locale locale, String type) {
-		
-		if(!fullIdPattern.matcher(fullId).matches()) {
-			throw new IllegalStateException("invalid id: " + fullId);
-		}
-		
-		if(!typePattern.matcher(type).matches()) {
-			throw new IllegalStateException("invalid type: " + type);
-		}
-		
-		fullId = fullId.replaceAll("/+", "/");
-		fullId = fullId.replace("/", File.separator);
-		
-		StringBuilder builder = new StringBuilder(fullId).append("_").append(type).append("_");
-		
-		if(locale == null) {
-			builder.append("default");
-		}
-		else {
-			builder.append(locale.getLanguage()).append("_").append(locale.getCountry());
-		}
-		
-		builder.append(".obj");
-		
-		return new File(basePath, builder.toString());
+	private ObjectMetadata toObjectMetadata(FileMetadata fmd) {
+		return fmd == null? null : new ObjectMetadata(fmd.getPath(),fmd.getName(), (Locale)fmd.getExtMetadata("locale"), fmd.getType());
 	}
 
-	private File toFile(ObjectMetadata omd) {
-		
-		if(!idPattern.matcher(omd.getId()).matches()) {
-			throw new IllegalStateException("invalid id: " + omd.getId());
-		}
-
-		if(!pathPattern.matcher(omd.getPath()).matches()) {
-			throw new IllegalStateException("invalid path: " + omd.getPath());
-		}
-		
-		if(!typePattern.matcher(omd.getType()).matches()) {
-			throw new IllegalStateException("invalid type: " + omd.getType());
-		}
-		
-		String fullId = omd.getPath() + "/" + omd.getId();
-		fullId = fullId.replaceAll("/+", "/");
-		fullId = fullId.replace("/", File.separator);
-		
-		StringBuilder builder = new StringBuilder(fullId).append("_").append(omd.getType()).append("_");
-		
-		if(omd.getLocale() == null) {
-			builder.append("default");
-		}
-		else {
-			builder.append(omd.getLocale().getLanguage()).append("_").append(omd.getLocale().getCountry());
-		}
-		
-		builder.append(".obj");
-		
-		return new File(basePath, builder.toString());
+	private FileMetadata toFileMetadata(String path, String name, Locale locale, Object obj, ObjectHandler handler) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("locale", locale);
+		return new ObjectFileMetadataManager(new FileMetadata(path, name, handler.getType(), map), handler);
 	}
 	
-	private ObjectMetadata toObjectMetadata(File file) {
+	private FileMetadata toFileMetadata(ObjectMetadata omd, ObjectHandler handler) {
 		
-		String fileName = file.getName();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("locale", omd.getLocale());
 		
-		Matcher m = fileNamePattern.matcher(fileName);
-		
-		if(!m.matches()) {
-			return null;
-		}
-		
-		m.reset();
-		
-		if(!m.find()) {
-			throw new IllegalStateException("id");
-		}
-		
-		String baseName = basePath.getAbsolutePath();
-		String pathName = file.getParentFile().getAbsolutePath();
-		
-		if(!pathName.startsWith(baseName)) {
-			throw new IllegalStateException("path");
-		}
-		
-		pathName = pathName.substring(baseName.length());
-		pathName = pathName.replace(File.separator, "/");
-		
-		String id = m.group(1);
-		String type = m.group(3);
-		
-		String localeName = m.group(4);
-		String[] localeParts = localeName.split("_");
-		Locale locale = localeParts.length == 1? null : new Locale(localeParts[0], localeParts[1]);
-		
-		return new ObjectMetadata(pathName, id, locale, type);
+		return new ObjectFileMetadataManager(new FileMetadata(omd.getPath(), omd.getId(), omd.getType(), map), handler); 
 	}
-	
-	public static class ObjectValue {
-		
-		public File file;
-		
-		public long lastModified;
-		
-		public Object object;
-
-		public ObjectValue(File file, Object object) {
-			this.file = file;
-			this.lastModified = object == null? -1 : file.lastModified();
-			this.object = object;
-		}
-		
-		public boolean isValid() {
-			return lastModified == file.lastModified();
-		}
-	}
-	
-	/*
-	public static void main(String[] a) {
-		System.setProperty("app.base", "C:\\projetos\\ediacaran\\plugins\\front\\front-ediacaran-plugin\\src\\main\\resources\\META-INF\\ediacaran\\objects");
-		File base = new File(System.getProperty("app.base"));
-		
-		ObjectFileManager ofm = new ObjectFileManager();
-		ofm.toObjectMetadata(new File(base, "/front/menus/top_menu_bar_22_menu_default.obj"));
-		ofm.toObjectMetadata(new File(base, "/front/menus/top_menu_bar_22_menu_pt_BR.obj"));
-		ofm.toObjectMetadata(new File(base, "/front/menus/top_menu_bar_menu_pt_BR.obj"));
-		ofm.toObjectMetadata(new File(base, "/front/menus/top_menu_menu_pt_BR.obj"));
-		ofm.toObjectMetadata(new File(base, "/front/menus/top_menu_pt_BR.obj"));
-	}
-	*/
 
 }

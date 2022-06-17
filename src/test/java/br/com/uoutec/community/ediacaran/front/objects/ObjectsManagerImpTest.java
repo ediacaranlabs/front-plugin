@@ -112,7 +112,7 @@ public class ObjectsManagerImpTest {
 		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
 		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
 		
-		objectFileManager.persist("/path/type/item1", null, "NEW VALUE", new ObjectHandlerImp());
+		objectFileManager.persist("/path/type", "item1", null, "NEW VALUE", new ObjectHandlerImp());
 		
 		assertEquals("NEW VALUE",objectsManager.getObject("/path/type/item1"));
 		

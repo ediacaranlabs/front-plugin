@@ -14,16 +14,25 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.regex.Pattern;
 
 import javax.inject.Singleton;
 
-import br.com.uoutec.community.ediacaran.front.objects.ObjectFileManager.ObjectValue;
+import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
 import br.com.uoutec.community.ediacaran.plugins.PublicBean;
 
 @Singleton
 public class ObjectsManagerImp 
 	implements ObjectsManager, PublicBean {
 
+	private static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)+";
+	
+	private static final String ID_FORMAT = "[a-z][a-z0-9]+(_[a-z0-9]+)*";
+
+	private static final String FULLID_FORMAT = "(" + PATH_FORMAT + ")\\/(" + ID_FORMAT + ")";
+	
+	private Pattern fullIdPattern = Pattern.compile(FULLID_FORMAT);
+	
 	public static final String basePermission = "app.objs";
 	
 	public static final String OBJECTS_REPOSITORY = "objects/";
@@ -57,6 +66,28 @@ public class ObjectsManagerImp
 		this.defaultHandler = new ObjectHandlerImp();
 	}
 	
+	private boolean isVaidID(String value) {
+		return fullIdPattern.matcher(value).matches();
+	}
+	
+	private String[] toPathAndName(String fullId) {
+		
+		if(!isVaidID(fullId)) {
+			return null;
+		}
+		
+		fullId = fullId.trim();
+		
+		int lastIndex = fullId.lastIndexOf("/");
+		
+		if(lastIndex == 0) {
+			return new String[] {fullId,null};
+		}
+		
+		return new String[] {fullId.substring(0, lastIndex), fullId.substring(lastIndex + 1)};
+		
+	}
+	
 	@Override
 	public void registerObject(String id, Locale locale, Object object) {
 		
@@ -64,7 +95,7 @@ public class ObjectsManagerImp
 			throw new NullPointerException("object");
 		}
 		
-		if(!objectFileManager.isValidFullId(id)) {
+		if(!isVaidID(id)) {
 			throw new IllegalStateException("invalid id: " + id);
 		}
 
@@ -89,8 +120,12 @@ public class ObjectsManagerImp
 				}
 			}
 	
+			String[] pathAndName = toPathAndName(id);
+			String path = pathAndName[0];
+			String name = pathAndName[1];
+			
 			ObjectHandler handler = getObjectHandler(object);
-			ObjectValue obj = persistObject(id, locale, object, handler);
+			ObjectValue obj = persistObject(path, name, locale, object, handler);
 			map.put(getSafeLocale(locale), obj);
 			
 			objectListenerManager.afterRegister(id, locale, object);
@@ -109,7 +144,7 @@ public class ObjectsManagerImp
 	@Override
 	public void unregisterObject(String id, Locale locale) {
 
-		if(!objectFileManager.isValidFullId(id)) {
+		if(!isVaidID(id)) {
 			throw new IllegalStateException("invalid format: " + id);
 		}
 		
@@ -122,7 +157,7 @@ public class ObjectsManagerImp
 		writeLock.lock();
 		try {
 			
-			String[] pathAndName = objectFileManager.toPathAndName(id);
+			String[] pathAndName = toPathAndName(id);
 			String path = pathAndName[0];
 			String name = pathAndName[1];
 			
@@ -199,7 +234,7 @@ public class ObjectsManagerImp
 	@Override
 	public Object getObject(String id, Locale locale) {
 		
-		if(!objectFileManager.isValidFullId(id)) {
+		if(!isVaidID(id)) {
 			throw new IllegalStateException("invalid format: " + id);
 		}
 		
@@ -222,13 +257,13 @@ public class ObjectsManagerImp
 	@Override
 	public ObjectEntry getObjects(String id) {
 		
-		if(!objectFileManager.isValidFullId(id)) {
+		if(!isVaidID(id)) {
 			throw new IllegalStateException("invalid format: " + id);
 		}
 		
 		readLock.lock();
 		try {
-			String[] pathAndName = objectFileManager.toPathAndName(id);
+			String[] pathAndName = toPathAndName(id);
 			String path = pathAndName[0];
 			String name = pathAndName[1];
 			
@@ -396,7 +431,7 @@ public class ObjectsManagerImp
 			obj = map.get(getSafeLocale(locale));
 			
 			if(obj != null && obj.isValid()) {
-				return obj.object;
+				return obj.getObject();
 			}
 		}
 		
@@ -407,7 +442,7 @@ public class ObjectsManagerImp
 			throw new IllegalStateException(e);
 		}
 		
-		return obj == null? null : obj.object; 
+		return obj == null? null : obj.getObject(); 
 	}
 	
 	private synchronized ObjectValue loadObject(String id, Locale locale) throws IOException {
@@ -421,7 +456,7 @@ public class ObjectsManagerImp
 			}
 		}
 		
-		String[] pathAndName = objectFileManager.toPathAndName(id);
+		String[] pathAndName = toPathAndName(id);
 		String path = pathAndName[0];
 		String name = pathAndName[1];
 		
@@ -474,8 +509,8 @@ public class ObjectsManagerImp
 	
 	/* persist */
 	
-	private synchronized ObjectValue persistObject(String id, Locale locale, Object obj, ObjectHandler handler) throws IOException {
-		File file = objectFileManager.persist(id, locale, obj, handler);
+	private synchronized ObjectValue persistObject(String path, String name, Locale locale, Object obj, ObjectHandler handler) throws IOException {
+		File file = objectFileManager.persist(path, name, locale, obj, handler);
 		return new ObjectValue(file, obj);
 	}
 
@@ -507,6 +542,21 @@ public class ObjectsManagerImp
 		}
 		
 		return defaultHandler;
+	}
+	
+	public static class ObjectFileMetadataManager extends FileMetadata{
+		
+		private ObjectHandler handler;
+		
+		public ObjectFileMetadataManager(FileMetadata fmd, ObjectHandler handler) {
+			super(fmd);
+			this.handler = handler;
+		}
+
+		public ObjectHandler getHandler() {
+			return handler;
+		}
+
 	}
 	
 	private static class ObjectListenerManager implements ObjectListener{
