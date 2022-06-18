@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
 
-public class ObjectFileManagerHandler implements FileManagerHandler{
+public abstract class AbstractFileManagerHandler implements FileManagerHandler {
 
 	private static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)+";
 	
@@ -116,16 +116,6 @@ public class ObjectFileManagerHandler implements FileManagerHandler{
 		builder.append(".obj");
 		
 		return new File(base, builder.toString());
-	}
-
-	@Override
-	public Object read(File file, FileMetadata metadata) throws IOException {
-		throw new IOException();
-	}
-
-	@Override
-	public void write(File file, FileMetadata metadata, Object value) throws IOException {
-		throw new IOException();
 	}
 
 }

@@ -1,18 +1,12 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileValue;
@@ -23,48 +17,11 @@ import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerImp.ObjectF
 
 public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 
-	private static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)+";
-	
-	private Pattern pathPattern = Pattern.compile(PATH_FORMAT);
-
-	private File basePath;
-	
 	private FileManager fileManager;
 	
-	public FileObjectsManagerDriver(File basePath, String name) {
+	public FileObjectsManagerDriver(FileManager fileManager, String name) {
 		super(name);
-		
-		this.fileManager = new FileManager(basePath, new ObjectFileManagerHandler() {
-			
-			@Override
-			public Object read(File file, FileMetadata metadata) throws IOException {
-
-				ObjectFileMetadataManager omd = (ObjectFileMetadataManager)metadata;
-				Object object;
-				
-				try(InputStream stream = new FileInputStream(file)){
-					object = omd.getHandler().getReader().read(stream);
-				}
-				
-				return object;
-				
-			}
-
-			@Override
-			public void write(File file, FileMetadata metadata, Object value) throws FileNotFoundException, IOException {
-				
-				ObjectFileMetadataManager omd = (ObjectFileMetadataManager)metadata;
-				
-				ObjectHandler handler = omd.getHandler();
-				try(OutputStream stream = new FileOutputStream(file)){
-					handler.getWriter().write(value, stream);
-					stream.flush();
-				}
-				
-			}
-			
-		});
-		this.basePath = basePath;
+		this.fileManager = fileManager;
 	}
 	
 	public ObjectMetadata unique(){
@@ -104,42 +61,16 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 	}
 	
 	public List<ObjectMetadata> list(String path, boolean recursive, Filter filter){
+		List<FileMetadata> list = fileManager.list(path, recursive, (e)->{
+			return filter.accept(toObjectMetadata(e));
+		});
 		
-		File base;
+		List<ObjectMetadata> r = new ArrayList<ObjectMetadata>();
+		list.stream().forEach((e->{
+			r.add(toObjectMetadata(e));
+		}));
 		
-		if(path != null) {
-			if(!pathPattern.matcher(path).matches()) {
-				throw new IllegalStateException("invalid path: " + path);
-			}
-			
-			path = path.replace("/", File.separator);
-			base = new File(basePath, path);
-		}
-		else {
-			base = basePath;
-		}
-		
-		List<ObjectMetadata> list = new LinkedList<ObjectMetadata>();
-		list(list, base, filter, recursive);
-		return list;
-	}
-	
-	private void list(List<ObjectMetadata> result, File path, Filter filter, boolean recursive) {
-		
-		File[] l = path.listFiles();
-		
-		for(File f: l) {
-			if(f.isDirectory() && recursive) {
-				list(result, f, filter, recursive);
-			}
-			else
-			if(f.isFile()) {
-				ObjectMetadata omd = toObjectMetadata(fileManager.toMetadata(basePath, f));
-				if(omd != null && (filter == null || filter.accept(omd))) {
-					result.add(omd);
-				}
-			}
-		}
+		return r;
 	}
 	
 	/* get */

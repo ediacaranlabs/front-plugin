@@ -1,6 +1,10 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.Filter;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
@@ -13,8 +17,14 @@ public abstract class AbstractObjectsManagerDriver implements ObjectsManagerDriv
 	
 	private List<ObjectHandler> handlers;
 	
+	private ObjectHandler defaultObjectHandler;
+	
+	private ReadWriteLock handlersLock;
+	
 	public AbstractObjectsManagerDriver(String name) {
 		this.name = name;
+		this.handlersLock = new ReentrantReadWriteLock();
+		this.handlers = new LinkedList<ObjectHandler>();
 	}
 	
 	public String getName() {
@@ -34,7 +44,15 @@ public abstract class AbstractObjectsManagerDriver implements ObjectsManagerDriv
 			throw new IllegalStateException("handler");
 		}
 		
-		handlers.add(handler);
+		Lock lock = handlersLock.writeLock();
+		lock.lock();
+		try {
+			handlers.add(handler);
+		}
+		finally {
+			lock.unlock();
+		}
+
 	}
 
 	@Override
@@ -45,8 +63,32 @@ public abstract class AbstractObjectsManagerDriver implements ObjectsManagerDriv
 		if(sm != null) {
 			sm.checkPermission(new RuntimePermission(basePermission + ".handler.unregister"));
 		}
+
+		Lock lock = handlersLock.writeLock();
+		lock.lock();
+		try {
+			handlers.remove(handler);
+		}
+		finally {
+			lock.unlock();
+		}
 		
-		handlers.remove(handler);
+	}
+
+	public ObjectHandler getDefaultObjectHandler() {
+		return defaultObjectHandler;
+	}
+
+	public void setDefaultObjectHandler(ObjectHandler defaultObjectHandler) {
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(basePermission + ".default_handler.register"));
+		}
+		
+		
+		this.defaultObjectHandler = defaultObjectHandler;
 	}
 
 	@Override
@@ -93,24 +135,38 @@ public abstract class AbstractObjectsManagerDriver implements ObjectsManagerDriv
 
 	protected ObjectHandler getObjectHandler(Object obj) throws ObjectsManagerDriverException {
 		
-		for(ObjectHandler handler: handlers) {
-			if(handler.accept(obj)) {
-				return handler;
+		Lock lock = handlersLock.readLock();
+		lock.lock();
+		try {
+			for(ObjectHandler handler: handlers) {
+				if(handler.accept(obj)) {
+					return handler;
+				}
 			}
 		}
+		finally {
+			lock.unlock();
+		}
 		
-		throw new ObjectsManagerDriverException("handler not found: " + obj);
+		return defaultObjectHandler;
 	}
 
 	protected ObjectHandler getObjectHandler(String type) throws ObjectsManagerDriverException {
 		
-		for(ObjectHandler handler: handlers) {
-			if(handler.accept(type)) {
-				return handler;
+		Lock lock = handlersLock.readLock();
+		lock.lock();
+		try {
+			for(ObjectHandler handler: handlers) {
+				if(handler.accept(type)) {
+					return handler;
+				}
 			}
 		}
+		finally {
+			lock.unlock();
+		}
 		
-		throw new ObjectsManagerDriverException("handler not found: " + type);
+		return defaultObjectHandler;
 	}
 	
 }

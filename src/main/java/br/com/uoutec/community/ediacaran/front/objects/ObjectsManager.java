@@ -22,9 +22,9 @@ public interface ObjectsManager {
 	
 	List<ObjectEntry> listObjects(String path, String name, boolean recursive);
 	
-	void registerDriver(String name, ObjectsManagerDriver driver);
+	void registerDriver(ObjectsManagerDriver driver) throws ObjectsManagerDriverException;
 	
-	void unregisterDriver(String name, ObjectsManagerDriver driver);
+	void unregisterDriver(ObjectsManagerDriver driver);
 	
 	void addListener(ObjectListener listener);
 

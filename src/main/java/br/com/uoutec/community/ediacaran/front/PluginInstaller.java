@@ -2,13 +2,20 @@ package br.com.uoutec.community.ediacaran.front;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 
 import br.com.uoutec.community.ediacaran.AbstractPlugin;
 import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
+import br.com.uoutec.community.ediacaran.front.objects.FileManager;
+import br.com.uoutec.community.ediacaran.front.objects.FileObjectsManagerDriver;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsFileManagerHandler;
 import br.com.uoutec.community.ediacaran.front.objects.MenubarObjectHandler;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectHandler;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectHandlerImp;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriverException;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBarManagerException;
@@ -21,6 +28,8 @@ import br.com.uoutec.community.ediacaran.security.pub.WebSecurityManagerPlugin;
 public class PluginInstaller 
 	extends AbstractPlugin {
 
+	public static final String OBJECTS_REPOSITORY       = "objects/";
+	
 	public static final String PACKAGE 					= "community";
 
 	public static final String PROVIDER 				= "ediacaran";
@@ -36,8 +45,10 @@ public class PluginInstaller
 	private static final String ADMIN_MENU_BAR          = "adminmenubar";
 	
 	private static final String ADMIN_TOP_MENU_BAR      = "admintopmenubar";
+
+	private ObjectHandler menubarObjectHandler;
 	
-	private ObjectHandler objectHandler;
+	private ObjectsManagerDriver globalDriver;
 	
 	public void install() throws Throwable{
 		installMenu();
@@ -46,14 +57,27 @@ public class PluginInstaller
 		installListeners();
 	}
 	
-	private void installMenu() throws MenuBarManagerException {
+	private void installMenu() throws MenuBarManagerException, ObjectsManagerDriverException {
 
-		this.objectHandler = new MenubarObjectHandler();
-		ObjectsManager objectsManager = EntityContextPlugin.getEntity(ObjectsManager.class);
-		objectsManager.registerObjectHandler(objectHandler);
+		this.menubarObjectHandler = new MenubarObjectHandler();
 		
-		MenuBar leftMenu = (MenuBar)objectsManager.getObject("/admin/menus/" + ADMIN_MENU_BAR);
-		MenuBar topMenu  = (MenuBar)objectsManager.getObject("/admin/menus/" + ADMIN_TOP_MENU_BAR);
+		this.globalDriver = 
+				new FileObjectsManagerDriver(
+						new FileManager(
+								new File(System.getProperty("app.base"), OBJECTS_REPOSITORY), 
+								new ObjectsFileManagerHandler()
+						), "global"
+				); 
+
+		this.globalDriver.registerObjectHandler(this.menubarObjectHandler);
+		this.globalDriver.setDefaultObjectHandler(new ObjectHandlerImp());
+		
+		ObjectsManager objectsManager = EntityContextPlugin.getEntity(ObjectsManager.class);
+		
+		objectsManager.registerDriver(this.globalDriver);
+		
+		MenuBar leftMenu = (MenuBar)objectsManager.getObject("global/admin/menus/" + ADMIN_MENU_BAR);
+		MenuBar topMenu  = (MenuBar)objectsManager.getObject("global/admin/menus/" + ADMIN_TOP_MENU_BAR);
 		
 		/*
 		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);
@@ -232,7 +256,7 @@ public class PluginInstaller
 	public void uninstallMenu() throws Throwable {
 		
 		ObjectsManager objectsManager = EntityContextPlugin.getEntity(ObjectsManager.class);
-		objectsManager.unregisterObjectHandler(objectHandler);
+		objectsManager.unregisterDriver(globalDriver);
 		
 		/*
 		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);

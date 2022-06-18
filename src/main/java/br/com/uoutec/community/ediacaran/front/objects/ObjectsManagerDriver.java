@@ -13,6 +13,10 @@ public interface ObjectsManagerDriver {
 
 	void unregisterObjectHandler(ObjectHandler handler);
 	
+	ObjectHandler getDefaultObjectHandler();
+
+	void setDefaultObjectHandler(ObjectHandler defaultObjectHandler);
+	
 	String getName();
 	
 	ObjectMetadata unique();

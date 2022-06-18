@@ -33,7 +33,7 @@ public class ObjectFileManager {
 	
 	public ObjectFileManager(File basePath) {
 		
-		this.fileManager = new FileManager(basePath, new ObjectFileManagerHandler() {
+		this.fileManager = new FileManager(basePath, new AbstractFileManagerHandler() {
 			
 			@Override
 			public Object read(File file, FileMetadata metadata) throws IOException {
@@ -146,7 +146,8 @@ public class ObjectFileManager {
 	public ObjectValue get(ObjectMetadata omd, ObjectHandler handler) throws IOException {
 		FileMetadata fmd = toFileMetadata(omd, handler);
 		FileValue fv = fileManager.get(fmd);
-		return fv == null? null : new ObjectValue(fv.getFile(), fv.getObject());
+		//return fv == null? null : new ObjectValue(fv.getFile(), fv.getObject());
+		return null;
 	}
 	
 	/* persist */

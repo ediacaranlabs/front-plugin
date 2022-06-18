@@ -14,9 +14,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.uoutec.community.ediacaran.front.objects.ObjectFileManager;
-import br.com.uoutec.community.ediacaran.front.objects.ObjectHandlerImp;
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerImp;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectEntry;
 
 public class ObjectsManagerImpTest {
@@ -27,7 +24,9 @@ public class ObjectsManagerImpTest {
 	
 	private ObjectsManagerImp objectsManager;
 	
-	private ObjectFileManager objectFileManager;
+	private ObjectsManagerDriver driver;
+	
+	private FileManager fileManager;
 	
 	public boolean clearRepository(File directoryToBeDeleted) {
 	    File[] allContents = directoryToBeDeleted.listFiles();
@@ -40,24 +39,33 @@ public class ObjectsManagerImpTest {
 	}
 	
 	@BeforeEach
-	public void before() {
+	public void before() throws ObjectsManagerDriverException {
+		
 		System.setProperty("app.base", BASE.getAbsolutePath());
+		
 		BASE_BJECTS.mkdir();
 		clearRepository(BASE_BJECTS);
+		
+		fileManager = new FileManager(BASE_BJECTS, new ObjectsFileManagerHandler());
+		
+		driver = new FileObjectsManagerDriver(fileManager, "global");
+		driver.setDefaultObjectHandler(new ObjectHandlerImp());
+
 		objectsManager = new ObjectsManagerImp();
-		objectFileManager = new ObjectFileManager(BASE_BJECTS);
+		objectsManager.registerDriver(driver);
 	}
 
 	@AfterEach
 	public void after() {
 		objectsManager = null;
-		objectFileManager = null;
+		driver = null;
+		fileManager = null;
 		clearRepository(BASE_BJECTS);
 	}
 	
 	@Test
 	public void testRegisterDefault() {
-		objectsManager.registerObject("/path/type/item1", null, "TESTE");
+		objectsManager.registerObject("global/path/type/item1", null, "TESTE");
 		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
 	}
 
@@ -104,7 +112,8 @@ public class ObjectsManagerImpTest {
 	}
 	
 	@Test
-	public void testGetReload() throws IOException {
+	public void testGetReload() throws ObjectsManagerDriverException {
+		
 		objectsManager.registerObject("/path/type/item1", null, "TESTE");
 		
 		objectsManager.flush();
@@ -112,7 +121,7 @@ public class ObjectsManagerImpTest {
 		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
 		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
 		
-		objectFileManager.persist("/path/type", "item1", null, "NEW VALUE", new ObjectHandlerImp());
+		driver.persist("/path/type", "item1", null, "NEW VALUE");
 		
 		assertEquals("NEW VALUE",objectsManager.getObject("/path/type/item1"));
 		

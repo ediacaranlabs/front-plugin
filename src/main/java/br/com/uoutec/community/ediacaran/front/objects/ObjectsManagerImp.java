@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,9 +28,17 @@ public class ObjectsManagerImp
 	
 	private static final String ID_FORMAT = "[a-z][a-z0-9]+(_[a-z0-9]+)*";
 
-	private static final String FULLID_FORMAT = "(" + PATH_FORMAT + ")\\/(" + ID_FORMAT + ")";
+	private static final String DRIVER_FORMAT = "[a-z0-9]+([_-][a-z0-9]+)*";
+	
+	private static final String FULLID_FORMAT = "(" + DRIVER_FORMAT + ")(" + PATH_FORMAT + ")\\/(" + ID_FORMAT + ")";
+
+	private static final String SEARCH_FORMAT = "(" + DRIVER_FORMAT + ")(" + PATH_FORMAT + ")";
 	
 	private Pattern fullIdPattern = Pattern.compile(FULLID_FORMAT);
+	
+	private Pattern searchPattern = Pattern.compile(SEARCH_FORMAT);
+	
+	//private Pattern driverPattern = Pattern.compile(DRIVER_FORMAT);
 	
 	public static final String basePermission = "app.objs";
 	
@@ -51,8 +58,6 @@ public class ObjectsManagerImp
 	
 	private ObjectListenerManager objectListenerManager;
 	
-	private ObjectFileManager objectFileManager;
-	
 	public ObjectsManagerImp() {
 		drivers = new ConcurrentHashMap<String,ObjectsManagerDriver>();
 		objects = new ConcurrentHashMap<String, ConcurrentMap<Locale,ObjectValue>>();
@@ -60,29 +65,49 @@ public class ObjectsManagerImp
 		this.writeLock = readWriteLock.writeLock();
 		this.readLock = readWriteLock.readLock();
 		this.objectListenerManager = new ObjectListenerManager();
-		this.objectFileManager = new ObjectFileManager(new File(System.getProperty("app.base"), OBJECTS_REPOSITORY));
+		//this.objectFileManager = new ObjectFileManager(new File(System.getProperty("app.base"), OBJECTS_REPOSITORY));
 	}
 	
 	private boolean isVaidID(String value) {
 		return fullIdPattern.matcher(value).matches();
 	}
 	
-	private String[] toPathAndName(String fullId) {
+	private boolean isVaidSearch(String value) {
+		return searchPattern.matcher(value).matches();
+	}
+	
+	private PathMetadata getPathMetadata(String id) {
 		
-		if(!isVaidID(fullId)) {
+		if(!isVaidID(id)) {
 			return null;
 		}
 		
-		fullId = fullId.trim();
+		id = id.trim();
 		
-		int lastIndex = fullId.lastIndexOf("/");
+		String[] parts = id.split("/+", 2);
+		String driver = parts[0];
+		String fullPath =  "/" + parts[1];
 		
-		if(lastIndex == 0) {
-			return new String[] {fullId,null};
+		int lastIndex = fullPath.lastIndexOf("/");
+		
+		String path = fullPath.substring(0, lastIndex);
+		String objId = fullPath.substring(lastIndex + 1);
+		return new PathMetadata(driver, path, objId);
+	}
+	
+	private PathMetadata getSearchMetadata(String value) {
+		
+		if(!isVaidSearch(value)) {
+			return null;
 		}
 		
-		return new String[] {fullId.substring(0, lastIndex), fullId.substring(lastIndex + 1)};
+		value = value.trim();
 		
+		String[] parts = value.split("/+", 1);
+		String driver = parts[0];
+		String fullPath = parts[1];
+		
+		return new PathMetadata(driver, fullPath, null);
 	}
 	
 	/* /global/admin/menus/adminmenubar */
@@ -123,11 +148,10 @@ public class ObjectsManagerImp
 				}
 			}
 	
-			String[] pathAndName = toPathAndName(id);
-			String path = pathAndName[0];
-			String name = pathAndName[1];
+			PathMetadata pmd = getPathMetadata(id);
+			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
 			
-			ObjectValue obj = persistObject(path, name, locale, object);
+			ObjectValue obj = persistObject(driver, pmd, locale, object);
 			
 			if(obj.isValid()) {
 				map.put(getSafeLocale(locale), obj);
@@ -136,7 +160,7 @@ public class ObjectsManagerImp
 			objectListenerManager.afterRegister(id, locale, object);
 			
 		}
-		catch(IOException e) {
+		catch(ObjectsManagerDriverException e) {
 			throw new IllegalStateException(e);
 		}
 		finally {
@@ -162,13 +186,12 @@ public class ObjectsManagerImp
 		writeLock.lock();
 		try {
 			
-			String[] pathAndName = toPathAndName(id);
-			String path = pathAndName[0];
-			String name = pathAndName[1];
+			PathMetadata pmd = getPathMetadata(id);
+			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
 			
-			ObjectMetadata omd = objectFileManager.unique(path, false, e->{
+			ObjectMetadata omd = driver.unique(pmd.getPath(), false, e->{
 				return 
-						name.equals(e.getId()) && 
+						pmd.getId().equals(e.getId()) && 
 						(
 							(locale == null && e.getLocale() == null) || 
 							(locale != null && locale.equals(e.getLocale()))
@@ -190,11 +213,11 @@ public class ObjectsManagerImp
 				}
 			}
 			
-			deleteObject(omd);
+			deleteObject(driver, pmd, omd);
 			
 			objectListenerManager.afterUnregister(id, locale);
 		}
-		catch(IOException e) {
+		catch(ObjectsManagerDriverException e) {
 			throw new IllegalStateException(e);
 		}
 		finally {
@@ -204,7 +227,7 @@ public class ObjectsManagerImp
 	}
 
 	@Override
-	public void registerDriver(String name, ObjectsManagerDriver driver) {
+	public void registerDriver(ObjectsManagerDriver driver) throws ObjectsManagerDriverException {
 		
 		SecurityManager sm = System.getSecurityManager();
 		
@@ -212,11 +235,14 @@ public class ObjectsManagerImp
 			sm.checkPermission(new RuntimePermission(basePermission + ".driver.register"));
 		}
 		
-		drivers.putIfAbsent(name, driver);
+		if(drivers.putIfAbsent(driver.getName().toLowerCase(), driver) != null) {
+			throw new ObjectsManagerDriverException("driver exists: " + driver.getName());
+		}
+		
 	}
 
 	@Override
-	public void unregisterDriver(String name, ObjectsManagerDriver driver) {
+	public synchronized void unregisterDriver(ObjectsManagerDriver driver) {
 		
 		SecurityManager sm = System.getSecurityManager();
 		
@@ -224,7 +250,7 @@ public class ObjectsManagerImp
 			sm.checkPermission(new RuntimePermission(basePermission + ".driver.unregister"));
 		}
 		
-		drivers.remove(name, driver);
+		drivers.remove(driver.getName().toLowerCase(), driver);
 	}
 
 	@Override
@@ -264,12 +290,11 @@ public class ObjectsManagerImp
 		
 		readLock.lock();
 		try {
-			String[] pathAndName = toPathAndName(id);
-			String path = pathAndName[0];
-			String name = pathAndName[1];
+			PathMetadata pmd = getPathMetadata(id);
+			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
 			
-			List<ObjectMetadata> list = objectFileManager.list(path, false, e->{
-				return name.equals(e.getId());
+			List<ObjectMetadata> list = driver.list(pmd.getPath(), false, e->{
+				return pmd.getId().equals(e.getId());
 			});
 			
 			Map<Locale,Object> map = new HashMap<Locale, Object>();
@@ -279,7 +304,10 @@ public class ObjectsManagerImp
 					map.put(omd.getLocale(), o);
 				}
 			}
-			return map.isEmpty()? null : new ObjectEntry(path, name, map);
+			return map.isEmpty()? null : new ObjectEntry(pmd.getPath(), pmd.getId(), map);
+		}
+		catch(ObjectsManagerDriverException e) {
+			throw new IllegalStateException(e);
 		}
 		finally {
 			readLock.unlock();
@@ -292,7 +320,10 @@ public class ObjectsManagerImp
 		
 		readLock.lock();
 		try {
-			List<ObjectMetadata> list = objectFileManager.list(path, recursive, e->{
+			PathMetadata pmd = getSearchMetadata(path);
+			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
+			
+			List<ObjectMetadata> list = driver.list(pmd.getPath(), recursive, e->{
 				boolean result;
 				result =           (name == null? true : e.getId().contains(name));
 				result = result && (locale == null? true : locale.equals(e.getLocale()));
@@ -308,6 +339,9 @@ public class ObjectsManagerImp
 			}
 			return r;
 		}
+		catch(ObjectsManagerDriverException e) {
+			throw new IllegalStateException(e);
+		}
 		finally {
 			readLock.unlock();
 		}
@@ -319,13 +353,19 @@ public class ObjectsManagerImp
 		
 		readLock.lock();
 		try {
-			return objectFileManager.list(path, recursive, e->{
+			PathMetadata pmd = getSearchMetadata(path);
+			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
+			
+			return driver.list(pmd.getPath(), recursive, e->{
 				boolean result;
 				result =           (name == null? true : e.getId().contains(name));
 				result = result && (locale == null? true : locale.equals(e.getLocale()));
 				return result;
 			});
 			
+		}
+		catch(ObjectsManagerDriverException e) {
+			throw new IllegalStateException(e);
 		}
 		finally {
 			readLock.unlock();
@@ -338,7 +378,10 @@ public class ObjectsManagerImp
 		
 		readLock.lock();
 		try {
-			List<ObjectMetadata> list = objectFileManager.list(path, recursive, e->{
+			PathMetadata pmd = getSearchMetadata(path);
+			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
+			
+			List<ObjectMetadata> list = driver.list(pmd.getPath(), recursive, e->{
 				return name == null? true : e.getId().contains(name);
 			});
 			
@@ -380,6 +423,9 @@ public class ObjectsManagerImp
 			}
 			
 			return r;
+		}
+		catch(ObjectsManagerDriverException e) {
+			throw new IllegalStateException(e);
 		}
 		finally {
 			readLock.unlock();
@@ -457,13 +503,20 @@ public class ObjectsManagerImp
 			}
 		}
 		
-		String[] pathAndName = toPathAndName(id);
-		String path = pathAndName[0];
-		String name = pathAndName[1];
+		PathMetadata pmd = getPathMetadata(id);
+
+		ObjectsManagerDriver driver;
 		
-		ObjectMetadata omd = objectFileManager.unique(path, false, e->{
+		try {
+			driver = getDriver(pmd.getDriver());
+		}
+		catch(ObjectsManagerDriverException e) {
+			throw new IllegalStateException(e);
+		}
+		
+		ObjectMetadata omd = driver.unique(pmd.getPath(), false, e->{
 			return 
-					name.equals(e.getId()) && 
+					pmd.getId().equals(e.getId()) && 
 					(
 						(locale == null && e.getLocale() == null) || 
 						(locale != null && locale.equals(e.getLocale()))
@@ -472,11 +525,16 @@ public class ObjectsManagerImp
 		
 		if(omd != null) {
 			
-			ObjectHandler handler = getObjectHandler(omd.getType());
-			
 			objectListenerManager.beforeLoad(id, locale);
+
+			ObjectValue object;
 			
-			ObjectValue object = objectFileManager.get(omd, handler);
+			try {
+				object = getObject(driver, pmd, locale);
+			}
+			catch(ObjectsManagerDriverException e) {
+				throw new IllegalStateException(e);
+			}
 			
 			objectListenerManager.afterLoad(id, locale, object);
 			
@@ -507,10 +565,28 @@ public class ObjectsManagerImp
 	private Locale getSafeLocale(Locale locale) {
 		return locale == null? NULL_LOCALE : locale;
 	}
+
+	/* get */
+	
+	private ObjectValue getObject(ObjectsManagerDriver driver, PathMetadata pmd, Locale locale) throws ObjectsManagerDriverException {
+		return driver.get(new ObjectMetadata(pmd.getPath(), pmd.getId(), locale, null));
+	}
 	
 	/* persist */
 	
-	private ObjectValue persistObject(String driverName, String path, String name, Locale locale, Object object) throws ObjectsManagerDriverException {
+	private ObjectValue persistObject(ObjectsManagerDriver driver, PathMetadata pmd, Locale locale, Object object) throws ObjectsManagerDriverException {
+		return driver.persist(pmd.getPath(), pmd.getId(), locale, object);
+	}
+
+	/* delete */
+	
+	private void deleteObject(ObjectsManagerDriver driver, PathMetadata pmd, ObjectMetadata omd) throws ObjectsManagerDriverException {
+		driver.delete(omd);
+	}
+	
+	/* base */
+	
+	private ObjectsManagerDriver getDriver(String driverName) throws ObjectsManagerDriverException {
 		
 		ObjectsManagerDriver driver = drivers.get(driverName);
 		
@@ -518,16 +594,8 @@ public class ObjectsManagerImp
 			throw new ObjectsManagerDriverException("not found: " + driverName);
 		}
 		
-		return driver.persist(path, name, locale, object);
+		return driver;
 	}
-
-	/* delete */
-	
-	private synchronized void deleteObject(ObjectMetadata omd) throws IOException {
-		objectFileManager.delete(omd);
-	}
-	
-	/* base */
 	
 	public static class ObjectFileMetadataManager extends FileMetadata{
 		
@@ -544,6 +612,33 @@ public class ObjectsManagerImp
 
 	}
 	
+	private class PathMetadata{
+		
+		public String driver;
+		
+		public String path;
+		
+		public String id;
+
+		public PathMetadata(String driver, String path, String id) {
+			this.driver = driver;
+			this.path = path;
+			this.id = id;
+		}
+
+		public String getDriver() {
+			return driver;
+		}
+
+		public String getPath() {
+			return path;
+		}
+
+		public String getId() {
+			return id;
+		}
+		
+	}
 	private static class ObjectListenerManager implements ObjectListener{
 
 		private List<ObjectListener> listeners;
