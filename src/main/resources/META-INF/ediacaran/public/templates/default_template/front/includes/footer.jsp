@@ -7,10 +7,10 @@
 <%--<ec:load-data context="/" file="/objects/menus/footer-menu2" var="footerMenu2" />--%>
 <%--<ec:load-data context="/" file="/objects/social-links" var="socialLinks" />--%>
 <%--<ec:load-data file="footer.json" var="objects" />--%>
-<ec:import-object id="/front/social_links" var="socialLinks"/>
-<ec:import-object id="/front/address" var="address"/>
-<ec:import-object id="/front/menus/footer_menu2" var="footerMenu2"/>
-<ec:import-object id="/front/menus/footer_menu" var="footerMenu"/>
+<ec:import-object id="global/front/social_links" var="socialLinks"/>
+<ec:import-object id="global/front/address" var="address"/>
+<ec:import-object id="global/front/menus/footer_menu2" var="footerMenu2"/>
+<ec:import-object id="global/front/menus/footer_menu" var="footerMenu"/>
 
 <footer>
 	<ed:container>

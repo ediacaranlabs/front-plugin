@@ -4,7 +4,7 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"                   prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions"              prefix="fn"%>
-<ec:import-object id="/front/menus/default" var="defaultMenu"/>
+<ec:import-object id="global/front/menus/default" var="defaultMenu"/>
 
     <!-- start header -->
    <header>

@@ -3,6 +3,7 @@ package br.com.uoutec.community.ediacaran.front;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.util.Locale;
 
 import br.com.uoutec.community.ediacaran.AbstractPlugin;
 import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
@@ -14,6 +15,7 @@ import br.com.uoutec.community.ediacaran.front.objects.MenubarObjectHandler;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectHandler;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectHandlerImp;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectListener;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriverException;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
@@ -79,6 +81,21 @@ public class PluginInstaller
 		MenuBar leftMenu = (MenuBar)objectsManager.getObject("global/admin/menus/" + ADMIN_MENU_BAR);
 		MenuBar topMenu  = (MenuBar)objectsManager.getObject("global/admin/menus/" + ADMIN_TOP_MENU_BAR);
 		
+		installDefaultMenu(leftMenu, topMenu);
+		
+		objectsManager.addListener(new ObjectListener() {
+			
+			public void afterLoad(String id, Locale locale, Object obj) {
+				if(id.equals("global/admin/menus/" + ADMIN_MENU_BAR) && obj instanceof MenuBar) {
+					installDefaultMenu((MenuBar)obj, null);
+				}
+				else 
+				if(id.equals("global/admin/menus/" + ADMIN_TOP_MENU_BAR) && obj instanceof MenuBar) {
+					installDefaultMenu(null, (MenuBar)obj);
+				}
+			}
+			
+		});
 		/*
 		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);
 
@@ -105,101 +122,110 @@ public class PluginInstaller
 			.setOrder(-100);
 		*/
 		
+
+	}
+	
+	private void installDefaultMenu(MenuBar leftMenu, MenuBar topMenu) {
+		
 		if(!pluginConfiguration.getBoolean("test")){
 			return;
 		}
+		
+		if(topMenu != null) {
+			topMenu.addMenu("messages")
+				.setName("Messages")
+				.setIcon("comments")
+				.setBadgeStyle("danger")
+				.setOrder(100);
 			
-		topMenu.addMenu("messages")
-			.setName("Messages")
-			.setIcon("comments")
-			.setBadgeStyle("danger")
-			.setOrder(100);
+			topMenu.addMenu("notification")
+				.setName("Notification")
+				.setIcon("bell")
+				.setBadgeStyle("warning")
+				.setOrder(99);
+			
+			Menu topMenu1 = topMenu.addMenu("menu")
+					.setName("Menu")
+					.setIcon("tree")
+					.setResource("#")
+					.setOrder(1);
+				
+			topMenu1.addItem("item_1")
+						.setName("Item 1")
+						.setIcon("tree")
+						.setResource("#")
+						.setOrder(1);
+			topMenu1.addItem("item_2")
+						.setName("Item 2")
+						.setIcon("tree")
+						.setResource("#")
+						.setOrder(1);
+			topMenu1.addItem("item_3")
+						.setName("Item 3")
+						.setIcon("tree")
+						.setResource("#")
+						.setOrder(1);
+		}
 		
-		topMenu.addMenu("notification")
-			.setName("Notification")
-			.setIcon("bell")
-			.setBadgeStyle("warning")
-			.setOrder(99);
-		
-		Menu topMenu1 = topMenu.addMenu("menu")
+		if(leftMenu != null) {		
+			leftMenu.addMenu("components")
+				.setName("Components")
+				.setIcon("tree")
+				.setResource("#!/plugins/ediacaran/front/admin/components.jsp")
+				.setOrder(1);
+			
+			leftMenu.addMenu("forms")
+				.setName("Forms")
+				.setIcon("edit")
+				.setResource("#!/plugins/ediacaran/front/admin/form.jsp")
+				.setOrder(1);
+			
+			leftMenu.addMenu("typography")
+				.setName("Typography")
+				.setIcon("pencil")
+				.setResource("#!/plugins/ediacaran/front/admin/typography.jsp")
+				.setOrder(1);
+			
+			leftMenu.addMenu("tables")
+				.setName("Tables")
+				.setIcon("table")
+				.setResource("#!/plugins/ediacaran/front/admin/table.jsp")
+				.setOrder(1);
+			
+			leftMenu.addMenu("pricing_boxes")
+				.setName("Pricing boxes")
+				.setIcon("money")
+				.setResource("#!/plugins/ediacaran/front/admin/pricingbox.jsp")
+				.setOrder(1);
+			
+			leftMenu.addMenu("flot_charts")
+				.setName("Flot Charts")
+				.setIcon("pie-chart")
+				.setResource("#!/plugins/ediacaran/front/admin/flotcharts.jsp")
+				.setOrder(1);
+			
+			Menu menu = leftMenu.addMenu("menu")
 				.setName("Menu")
 				.setIcon("tree")
 				.setResource("#")
 				.setOrder(1);
 			
-		topMenu1.addItem("item_1")
+			menu.addItem("item_1")
 					.setName("Item 1")
 					.setIcon("tree")
 					.setResource("#")
 					.setOrder(1);
-		topMenu1.addItem("item_2")
+			menu.addItem("item_2")
 					.setName("Item 2")
 					.setIcon("tree")
 					.setResource("#")
 					.setOrder(1);
-		topMenu1.addItem("item_3")
+			menu.addItem("item_3")
 					.setName("Item 3")
 					.setIcon("tree")
 					.setResource("#")
 					.setOrder(1);
-			
-		leftMenu.addMenu("components")
-			.setName("Components")
-			.setIcon("tree")
-			.setResource("#!/plugins/ediacaran/front/admin/components.jsp")
-			.setOrder(1);
-		
-		leftMenu.addMenu("forms")
-			.setName("Forms")
-			.setIcon("edit")
-			.setResource("#!/plugins/ediacaran/front/admin/form.jsp")
-			.setOrder(1);
-		
-		leftMenu.addMenu("typography")
-			.setName("Typography")
-			.setIcon("pencil")
-			.setResource("#!/plugins/ediacaran/front/admin/typography.jsp")
-			.setOrder(1);
-		
-		leftMenu.addMenu("tables")
-			.setName("Tables")
-			.setIcon("table")
-			.setResource("#!/plugins/ediacaran/front/admin/table.jsp")
-			.setOrder(1);
-		
-		leftMenu.addMenu("pricing_boxes")
-			.setName("Pricing boxes")
-			.setIcon("money")
-			.setResource("#!/plugins/ediacaran/front/admin/pricingbox.jsp")
-			.setOrder(1);
-		
-		leftMenu.addMenu("flot_charts")
-			.setName("Flot Charts")
-			.setIcon("pie-chart")
-			.setResource("#!/plugins/ediacaran/front/admin/flotcharts.jsp")
-			.setOrder(1);
-		
-		Menu menu = leftMenu.addMenu("menu")
-			.setName("Menu")
-			.setIcon("tree")
-			.setResource("#")
-			.setOrder(1);
-		
-		menu.addItem("item_1")
-				.setName("Item 1")
-				.setIcon("tree")
-				.setResource("#")
-				.setOrder(1);
-		menu.addItem("item_2")
-				.setName("Item 2")
-				.setIcon("tree")
-				.setResource("#")
-				.setOrder(1);
-		menu.addItem("item_3")
-				.setName("Item 3")
-				.setIcon("tree")
-				.setResource("#")
-				.setOrder(1);
+		}
 		
 	}
 	

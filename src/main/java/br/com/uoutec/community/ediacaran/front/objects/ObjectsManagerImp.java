@@ -154,6 +154,7 @@ public class ObjectsManagerImp
 			}
 	
 			PathMetadata pmd = getPathMetadata(id);
+			
 			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
 			
 			ObjectValue obj = persistObject(driver, pmd, locale, object);
@@ -548,7 +549,7 @@ public class ObjectsManagerImp
 				throw new IllegalStateException(e);
 			}
 			
-			objectListenerManager.afterLoad(id, locale, object);
+			objectListenerManager.afterLoad(id, locale, object.getObject());
 			
 			map = new ConcurrentHashMap<Locale,ObjectValue>();
 			ConcurrentMap<Locale,ObjectValue> current = objects.putIfAbsent(id, map);

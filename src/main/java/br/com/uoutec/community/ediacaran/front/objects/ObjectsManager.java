@@ -34,17 +34,17 @@ public interface ObjectsManager {
 	
 	public static interface ObjectListener{
 		
-		void beforeLoad(String id, Locale locale);
+		default void beforeLoad(String id, Locale locale) {};
 		
-		void afterLoad(String id, Locale locale, Object obj);
+		default void afterLoad(String id, Locale locale, Object obj) {};
 		
-		void beforeRegister(String id, Locale locale, Object object);
+		default void beforeRegister(String id, Locale locale, Object object) {};
 		
-		void afterRegister(String id, Locale locale, Object object);
+		default void afterRegister(String id, Locale locale, Object object) {};
 
-		void beforeUnregister(String id, Locale locale);
+		default void beforeUnregister(String id, Locale locale) {};
 		
-		void afterUnregister(String id, Locale locale);
+		default void afterUnregister(String id, Locale locale) {};
 		
 	}
 	
