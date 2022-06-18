@@ -47,23 +47,20 @@ public class ObjectsManagerImp
 	
 	private Lock readLock;
 	
-	private List<ObjectHandler> handlers;
+	private ConcurrentMap<String,ObjectsManagerDriver> drivers;
 	
 	private ObjectListenerManager objectListenerManager;
 	
 	private ObjectFileManager objectFileManager;
 	
-	private ObjectHandler defaultHandler;
-	
 	public ObjectsManagerImp() {
-		handlers = new LinkedList<ObjectHandler>();
+		drivers = new ConcurrentHashMap<String,ObjectsManagerDriver>();
 		objects = new ConcurrentHashMap<String, ConcurrentMap<Locale,ObjectValue>>();
 		this.readWriteLock = new ReentrantReadWriteLock();
 		this.writeLock = readWriteLock.writeLock();
 		this.readLock = readWriteLock.readLock();
 		this.objectListenerManager = new ObjectListenerManager();
 		this.objectFileManager = new ObjectFileManager(new File(System.getProperty("app.base"), OBJECTS_REPOSITORY));
-		this.defaultHandler = new ObjectHandlerImp();
 	}
 	
 	private boolean isVaidID(String value) {
@@ -87,6 +84,12 @@ public class ObjectsManagerImp
 		return new String[] {fullId.substring(0, lastIndex), fullId.substring(lastIndex + 1)};
 		
 	}
+	
+	/* /global/admin/menus/adminmenubar */
+	/* /local/index */
+	/* /mysql/admin/menus/adminmenubar */
+	/* /mysql/users/name/afonso%brandao */
+	/* /mysql/users/id/afonso%brandao */
 	
 	@Override
 	public void registerObject(String id, Locale locale, Object object) {
@@ -124,9 +127,11 @@ public class ObjectsManagerImp
 			String path = pathAndName[0];
 			String name = pathAndName[1];
 			
-			ObjectHandler handler = getObjectHandler(object);
-			ObjectValue obj = persistObject(path, name, locale, object, handler);
-			map.put(getSafeLocale(locale), obj);
+			ObjectValue obj = persistObject(path, name, locale, object);
+			
+			if(obj.isValid()) {
+				map.put(getSafeLocale(locale), obj);
+			}
 			
 			objectListenerManager.afterRegister(id, locale, object);
 			
@@ -199,31 +204,27 @@ public class ObjectsManagerImp
 	}
 
 	@Override
-	public synchronized void registerObjectHandler(ObjectHandler handler) {
+	public void registerDriver(String name, ObjectsManagerDriver driver) {
 		
 		SecurityManager sm = System.getSecurityManager();
 		
 		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".handler.register"));
+			sm.checkPermission(new RuntimePermission(basePermission + ".driver.register"));
 		}
 		
-		if(handlers.indexOf(handler) != -1) {
-			throw new IllegalStateException("handler");
-		}
-		
-		handlers.add(handler);
+		drivers.putIfAbsent(name, driver);
 	}
 
 	@Override
-	public synchronized void unregisterObjectHandler(ObjectHandler handler) {
+	public void unregisterDriver(String name, ObjectsManagerDriver driver) {
 		
 		SecurityManager sm = System.getSecurityManager();
 		
 		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".handler.unregister"));
+			sm.checkPermission(new RuntimePermission(basePermission + ".driver.unregister"));
 		}
 		
-		handlers.remove(handler);
+		drivers.remove(name, driver);
 	}
 
 	@Override
@@ -509,9 +510,15 @@ public class ObjectsManagerImp
 	
 	/* persist */
 	
-	private synchronized ObjectValue persistObject(String path, String name, Locale locale, Object obj, ObjectHandler handler) throws IOException {
-		File file = objectFileManager.persist(path, name, locale, obj, handler);
-		return new ObjectValue(file, obj);
+	private ObjectValue persistObject(String driverName, String path, String name, Locale locale, Object object) throws ObjectsManagerDriverException {
+		
+		ObjectsManagerDriver driver = drivers.get(driverName);
+		
+		if(driver == null) {
+			throw new ObjectsManagerDriverException("not found: " + driverName);
+		}
+		
+		return driver.persist(path, name, locale, object);
 	}
 
 	/* delete */
@@ -521,28 +528,6 @@ public class ObjectsManagerImp
 	}
 	
 	/* base */
-	
-	private ObjectHandler getObjectHandler(Object obj) {
-		
-		for(ObjectHandler handler: handlers) {
-			if(handler.accept(obj)) {
-				return handler;
-			}
-		}
-		
-		return defaultHandler;
-	}
-
-	private ObjectHandler getObjectHandler(String type) {
-		
-		for(ObjectHandler handler: handlers) {
-			if(handler.accept(type)) {
-				return handler;
-			}
-		}
-		
-		return defaultHandler;
-	}
 	
 	public static class ObjectFileMetadataManager extends FileMetadata{
 		

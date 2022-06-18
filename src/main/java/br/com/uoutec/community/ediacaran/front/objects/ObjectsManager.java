@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
-import java.io.File;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -23,9 +22,9 @@ public interface ObjectsManager {
 	
 	List<ObjectEntry> listObjects(String path, String name, boolean recursive);
 	
-	void registerObjectHandler(ObjectHandler encoder);
+	void registerDriver(String name, ObjectsManagerDriver driver);
 	
-	void unregisterObjectHandler(ObjectHandler encoder);
+	void unregisterDriver(String name, ObjectsManagerDriver driver);
 	
 	void addListener(ObjectListener listener);
 
@@ -131,35 +130,11 @@ public interface ObjectsManager {
 		
 	}
 	
-	public static class ObjectValue {
+	public static interface ObjectValue {
 		
-		private File file;
-		
-		private long lastModified;
-		
-		private Object object;
+		boolean isValid();
 
-		public ObjectValue(File file, Object object) {
-			this.file = file;
-			this.lastModified = object == null? -1 : file.lastModified();
-			this.object = object;
-		}
-		
-		public boolean isValid() {
-			return lastModified == file.lastModified();
-		}
-
-		public File getFile() {
-			return file;
-		}
-
-		public long getLastModified() {
-			return lastModified;
-		}
-
-		public Object getObject() {
-			return object;
-		}
+		Object getObject();
 		
 	}	
 }
