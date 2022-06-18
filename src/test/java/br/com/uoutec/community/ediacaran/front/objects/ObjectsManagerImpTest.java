@@ -71,26 +71,26 @@ public class ObjectsManagerImpTest {
 
 	@Test
 	public void testRegisterDefaultAndpt_BR() {
-		objectsManager.registerObject("/path/type/item1", null, "TESTE");
-		objectsManager.registerObject("/path/type/item1", new Locale("pt", "BR"), "TESTE");
+		objectsManager.registerObject("global/path/type/item1", null, "TESTE");
+		objectsManager.registerObject("global/path/type/item1", new Locale("pt", "BR"), "TESTE");
 		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
 		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_pt_BR.obj").exists());
 	}
 
 	@Test
 	public void testRegisterSpaceDefaultAndpt_BR() {
-		objectsManager.registerObject("/path/type/item1_val", null, "TESTE");
-		objectsManager.registerObject("/path/type/item1_val", new Locale("pt", "BR"), "TESTE");
+		objectsManager.registerObject("global/path/type/item1_val", null, "TESTE");
+		objectsManager.registerObject("global/path/type/item1_val", new Locale("pt", "BR"), "TESTE");
 		assertTrue(new File(BASE_BJECTS, "/path/type/item1_val_json_default.obj").exists());
 		assertTrue(new File(BASE_BJECTS, "/path/type/item1_val_json_pt_BR.obj").exists());
 	}
 
 	@Test
 	public void testGet() {
-		objectsManager.registerObject("/path/type/item1", null, "TESTE");
-		objectsManager.registerObject("/path/type/item1", new Locale("pt", "BR"), "PT_BR");
-		objectsManager.registerObject("/path/type/item1_val", null, "VAL1_DEFAULT");
-		objectsManager.registerObject("/path/type/item1_val", new Locale("pt", "BR"), "VAL1_PT_BR");
+		objectsManager.registerObject("global/path/type/item1", null, "TESTE");
+		objectsManager.registerObject("global/path/type/item1", new Locale("pt", "BR"), "PT_BR");
+		objectsManager.registerObject("global/path/type/item1_val", null, "VAL1_DEFAULT");
+		objectsManager.registerObject("global/path/type/item1_val", new Locale("pt", "BR"), "VAL1_PT_BR");
 		
 		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
 		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_pt_BR.obj").exists());
@@ -99,50 +99,50 @@ public class ObjectsManagerImpTest {
 		
 		objectsManager.flush();
 		
-		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
-		assertEquals("PT_BR",objectsManager.getObject("/path/type/item1", new Locale("pt", "BR")));
-		assertEquals("VAL1_DEFAULT",objectsManager.getObject("/path/type/item1_val"));
-		assertEquals("VAL1_PT_BR",objectsManager.getObject("/path/type/item1_val", new Locale("pt", "BR")));
+		assertEquals("TESTE",objectsManager.getObject("global/path/type/item1"));
+		assertEquals("PT_BR",objectsManager.getObject("global/path/type/item1", new Locale("pt", "BR")));
+		assertEquals("VAL1_DEFAULT",objectsManager.getObject("global/path/type/item1_val"));
+		assertEquals("VAL1_PT_BR",objectsManager.getObject("global/path/type/item1_val", new Locale("pt", "BR")));
 		
-		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
-		assertEquals("PT_BR",objectsManager.getObject("/path/type/item1", new Locale("pt", "BR")));
-		assertEquals("VAL1_DEFAULT",objectsManager.getObject("/path/type/item1_val"));
-		assertEquals("VAL1_PT_BR",objectsManager.getObject("/path/type/item1_val", new Locale("pt", "BR")));
+		assertEquals("TESTE",objectsManager.getObject("global/path/type/item1"));
+		assertEquals("PT_BR",objectsManager.getObject("global/path/type/item1", new Locale("pt", "BR")));
+		assertEquals("VAL1_DEFAULT",objectsManager.getObject("global/path/type/item1_val"));
+		assertEquals("VAL1_PT_BR",objectsManager.getObject("global/path/type/item1_val", new Locale("pt", "BR")));
 		
 	}
 	
 	@Test
 	public void testGetReload() throws ObjectsManagerDriverException {
 		
-		objectsManager.registerObject("/path/type/item1", null, "TESTE");
+		objectsManager.registerObject("global/path/type/item1", null, "TESTE");
 		
 		objectsManager.flush();
 		
-		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
-		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
+		assertEquals("TESTE",objectsManager.getObject("global/path/type/item1"));
+		assertEquals("TESTE",objectsManager.getObject("global/path/type/item1"));
 		
 		driver.persist("/path/type", "item1", null, "NEW VALUE");
 		
-		assertEquals("NEW VALUE",objectsManager.getObject("/path/type/item1"));
+		assertEquals("NEW VALUE",objectsManager.getObject("global/path/type/item1"));
 		
 	}
 
 	@Test
 	public void testUnregister() throws IOException {
-		objectsManager.registerObject("/path/type/item1", null, "TESTE");
-		objectsManager.registerObject("/path/type/item1", new Locale("pt", "BR"), "PT_BR");
+		objectsManager.registerObject("global/path/type/item1", null, "TESTE");
+		objectsManager.registerObject("global/path/type/item1", new Locale("pt", "BR"), "PT_BR");
 		
 		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
 		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_pt_BR.obj").exists());
 		
 		objectsManager.flush();
 		
-		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
-		assertEquals("PT_BR",objectsManager.getObject("/path/type/item1", new Locale("pt", "BR")));
-		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
-		assertEquals("PT_BR",objectsManager.getObject("/path/type/item1", new Locale("pt", "BR")));
+		assertEquals("TESTE",objectsManager.getObject("global/path/type/item1"));
+		assertEquals("PT_BR",objectsManager.getObject("global/path/type/item1", new Locale("pt", "BR")));
+		assertEquals("TESTE",objectsManager.getObject("global/path/type/item1"));
+		assertEquals("PT_BR",objectsManager.getObject("global/path/type/item1", new Locale("pt", "BR")));
 		
-		objectsManager.unregisterObject("/path/type/item1", new Locale("pt", "BR"));
+		objectsManager.unregisterObject("global/path/type/item1", new Locale("pt", "BR"));
 
 		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
 		assertFalse(new File(BASE_BJECTS, "/path/type/item1_json_pt_BR.obj").exists());
@@ -152,16 +152,16 @@ public class ObjectsManagerImpTest {
 
 	@Test
 	public void testUnregisterOne() throws IOException {
-		objectsManager.registerObject("/path/type/item1", null, "TESTE");
+		objectsManager.registerObject("global/path/type/item1", null, "TESTE");
 		
 		assertTrue(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
 		
 		objectsManager.flush();
 		
-		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
-		assertEquals("TESTE",objectsManager.getObject("/path/type/item1"));
+		assertEquals("TESTE",objectsManager.getObject("global/path/type/item1"));
+		assertEquals("TESTE",objectsManager.getObject("global/path/type/item1"));
 		
-		objectsManager.unregisterObject("/path/type/item1", null);
+		objectsManager.unregisterObject("global/path/type/item1", null);
 
 		assertFalse(new File(BASE_BJECTS, "/path/type/item1_json_default.obj").exists());
 		
@@ -169,13 +169,13 @@ public class ObjectsManagerImpTest {
 	
 	@Test
 	public void testGetObjects() {
-		objectsManager.registerObject("/path/type/item1", null, "TESTE");
-		objectsManager.registerObject("/path/type/item1", new Locale("pt", "BR"), "PT_BR");
-		objectsManager.registerObject("/path/type/item1_val", null, "VAL1_DEFAULT");
-		objectsManager.registerObject("/path/type/item1_val", new Locale("pt", "BR"), "VAL1_PT_BR");
-		objectsManager.registerObject("/path/type/item1_val", new Locale("en", "US"), "VAL1_EN_US");
+		objectsManager.registerObject("global/path/type/item1", null, "TESTE");
+		objectsManager.registerObject("global/path/type/item1", new Locale("pt", "BR"), "PT_BR");
+		objectsManager.registerObject("global/path/type/item1_val", null, "VAL1_DEFAULT");
+		objectsManager.registerObject("global/path/type/item1_val", new Locale("pt", "BR"), "VAL1_PT_BR");
+		objectsManager.registerObject("global/path/type/item1_val", new Locale("en", "US"), "VAL1_EN_US");
 		
-		ObjectEntry e = objectsManager.getObjects("/path/type/item1_val");
+		ObjectEntry e = objectsManager.getObjects("global/path/type/item1_val");
 		
 		assertEquals("/path/type/item1_val",e.getFullId());
 		assertEquals("item1_val",e.getId());
@@ -187,12 +187,12 @@ public class ObjectsManagerImpTest {
 
 	@Test
 	public void testList() {
-		objectsManager.registerObject("/path/item1", null, "VALOR 1");
-		objectsManager.registerObject("/path/type/item1", null, "VALOR 2");
-		objectsManager.registerObject("/path/item2", null, "VALOR 3");
-		objectsManager.registerObject("/path/type/item2_val", null, "VALOR 4");
+		objectsManager.registerObject("global/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("global/path/type/item1", null, "VALOR 2");
+		objectsManager.registerObject("global/path/item2", null, "VALOR 3");
+		objectsManager.registerObject("global/path/type/item2_val", null, "VALOR 4");
 		
-		List<Object> list = objectsManager.list(null, null, null, true);
+		List<Object> list = objectsManager.list("global", null, null, true);
 		
 		assertTrue(list.size() == 4);
 		assertTrue(list.indexOf("VALOR 1") != -1);
@@ -203,12 +203,12 @@ public class ObjectsManagerImpTest {
 
 	@Test
 	public void testListPath() {
-		objectsManager.registerObject("/path/item1", null, "VALOR 1");
-		objectsManager.registerObject("/path/type/item1", null, "VALOR 2");
-		objectsManager.registerObject("/path/item2", null, "VALOR 3");
-		objectsManager.registerObject("/path/type/item2_val", null, "VALOR 4");
+		objectsManager.registerObject("global/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("global/path/type/item1", null, "VALOR 2");
+		objectsManager.registerObject("global/path/item2", null, "VALOR 3");
+		objectsManager.registerObject("global/path/type/item2_val", null, "VALOR 4");
 		
-		List<Object> list = objectsManager.list("/path", "item1", null, false);
+		List<Object> list = objectsManager.list("global/path", "item1", null, false);
 		
 		assertTrue(list.size() == 1);
 		assertTrue(list.indexOf("VALOR 1") != -1);
@@ -216,12 +216,12 @@ public class ObjectsManagerImpTest {
 	
 	@Test
 	public void testListRecursive() {
-		objectsManager.registerObject("/path/item1", null, "VALOR 1");
-		objectsManager.registerObject("/path/type/item1", null, "VALOR 2");
-		objectsManager.registerObject("/path/item2", null, "VALOR 3");
-		objectsManager.registerObject("/path/type/item2_val", null, "VALOR 4");
+		objectsManager.registerObject("global/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("global/path/type/item1", null, "VALOR 2");
+		objectsManager.registerObject("global/path/item2", null, "VALOR 3");
+		objectsManager.registerObject("global/path/type/item2_val", null, "VALOR 4");
 		
-		List<Object> list = objectsManager.list("/path", "item1", null, true);
+		List<Object> list = objectsManager.list("global/path", "item1", null, true);
 		
 		assertTrue(list.size() == 2);
 		assertTrue(list.indexOf("VALOR 1") != -1);
@@ -230,12 +230,12 @@ public class ObjectsManagerImpTest {
 
 	@Test
 	public void testListLocale() {
-		objectsManager.registerObject("/path/item1", null, "VALOR 1");
-		objectsManager.registerObject("/path/type/item1", new Locale("pt","BR"), "VALOR 2");
-		objectsManager.registerObject("/path/item2", null, "VALOR 3");
-		objectsManager.registerObject("/path/type/item2_val", new Locale("pt","BR"), "VALOR 4");
+		objectsManager.registerObject("global/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("global/path/type/item1", new Locale("pt","BR"), "VALOR 2");
+		objectsManager.registerObject("global/path/item2", null, "VALOR 3");
+		objectsManager.registerObject("global/path/type/item2_val", new Locale("pt","BR"), "VALOR 4");
 		
-		List<Object> list = objectsManager.list("/path", null, new Locale("pt","BR"), true);
+		List<Object> list = objectsManager.list("global/path", null, new Locale("pt","BR"), true);
 		
 		assertTrue(list.size() == 2);
 		assertTrue(list.indexOf("VALOR 2") != -1);
@@ -244,13 +244,13 @@ public class ObjectsManagerImpTest {
 
 	@Test
 	public void testListLocaleANDNoRecursive() {
-		objectsManager.registerObject("/path/item1", null, "VALOR 1");
-		objectsManager.registerObject("/path/type/item1", new Locale("pt","BR"), "VALOR 2");
-		objectsManager.registerObject("/path/type/item2", new Locale("pt","BR"), "VALOR 3");
-		objectsManager.registerObject("/path/item2", null, "VALOR 4");
-		objectsManager.registerObject("/path/type/path2/item2_val", new Locale("pt","BR"), "VALOR 5");
+		objectsManager.registerObject("global/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("global/path/type/item1", new Locale("pt","BR"), "VALOR 2");
+		objectsManager.registerObject("global/path/type/item2", new Locale("pt","BR"), "VALOR 3");
+		objectsManager.registerObject("global/path/item2", null, "VALOR 4");
+		objectsManager.registerObject("global/path/type/path2/item2_val", new Locale("pt","BR"), "VALOR 5");
 		
-		List<Object> list = objectsManager.list("/path/type", null, new Locale("pt","BR"), false);
+		List<Object> list = objectsManager.list("global/path/type", null, new Locale("pt","BR"), false);
 		
 		assertTrue(list.size() == 2);
 		assertTrue(list.indexOf("VALOR 2") != -1);
@@ -259,13 +259,13 @@ public class ObjectsManagerImpTest {
 
 	@Test
 	public void testListLocaleANDNoRecursiveANDName() {
-		objectsManager.registerObject("/path/item1", null, "VALOR 1");
-		objectsManager.registerObject("/path/type/item1", new Locale("pt","BR"), "VALOR 2");
-		objectsManager.registerObject("/path/type/item2", new Locale("pt","BR"), "VALOR 3");
-		objectsManager.registerObject("/path/item2", null, "VALOR 4");
-		objectsManager.registerObject("/path/type/path2/item2_val", new Locale("pt","BR"), "VALOR 5");
+		objectsManager.registerObject("global/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("global/path/type/item1", new Locale("pt","BR"), "VALOR 2");
+		objectsManager.registerObject("global/path/type/item2", new Locale("pt","BR"), "VALOR 3");
+		objectsManager.registerObject("global/path/item2", null, "VALOR 4");
+		objectsManager.registerObject("global/path/type/path2/item2_val", new Locale("pt","BR"), "VALOR 5");
 		
-		List<Object> list = objectsManager.list("/path/type", "2", new Locale("pt","BR"), false);
+		List<Object> list = objectsManager.list("global/path/type", "2", new Locale("pt","BR"), false);
 		
 		assertTrue(list.size() == 1);
 		assertTrue(list.indexOf("VALOR 3") != -1);
@@ -273,14 +273,14 @@ public class ObjectsManagerImpTest {
 
 	@Test
 	public void testListObject() {
-		objectsManager.registerObject("/path/item1", null, "VALOR 1");
-		objectsManager.registerObject("/path/type/item1", null, "VALOR 2");
-		objectsManager.registerObject("/path/type/item1", new Locale("pt","BR"), "VALOR 3");
-		objectsManager.registerObject("/path/type/item2", null, "VALOR 4");
-		objectsManager.registerObject("/path/item2", null, "VALOR 5");
-		objectsManager.registerObject("/path/type/path2/item2_val", new Locale("pt","BR"), "VALOR 6");
+		objectsManager.registerObject("global/path/item1", null, "VALOR 1");
+		objectsManager.registerObject("global/path/type/item1", null, "VALOR 2");
+		objectsManager.registerObject("global/path/type/item1", new Locale("pt","BR"), "VALOR 3");
+		objectsManager.registerObject("global/path/type/item2", null, "VALOR 4");
+		objectsManager.registerObject("global/path/item2", null, "VALOR 5");
+		objectsManager.registerObject("global/path/type/path2/item2_val", new Locale("pt","BR"), "VALOR 6");
 		
-		List<ObjectEntry> list = objectsManager.listObjects("/path/type", null, false);
+		List<ObjectEntry> list = objectsManager.listObjects("global/path/type", null, false);
 		
 		assertTrue(list.size() == 2);
 		

@@ -2,6 +2,7 @@ package br.com.uoutec.community.ediacaran.front.objects;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class ObjectsManagerImp
 	
 	private static final String FULLID_FORMAT = "(" + DRIVER_FORMAT + ")(" + PATH_FORMAT + ")\\/(" + ID_FORMAT + ")";
 
-	private static final String SEARCH_FORMAT = "(" + DRIVER_FORMAT + ")(" + PATH_FORMAT + ")";
+	private static final String SEARCH_FORMAT = "(" + DRIVER_FORMAT + ")(" + PATH_FORMAT + ")*";
 	
 	private Pattern fullIdPattern = Pattern.compile(FULLID_FORMAT);
 	
@@ -76,6 +77,10 @@ public class ObjectsManagerImp
 		return searchPattern.matcher(value).matches();
 	}
 	
+	private String getID(ObjectsManagerDriver driver, String path, String id) {
+		return driver.getName() + path + "/" + id;
+	}
+	
 	private PathMetadata getPathMetadata(String id) {
 		
 		if(!isVaidID(id)) {
@@ -97,15 +102,15 @@ public class ObjectsManagerImp
 	
 	private PathMetadata getSearchMetadata(String value) {
 		
-		if(!isVaidSearch(value)) {
+		if(value == null || !isVaidSearch(value)) {
 			return null;
 		}
 		
 		value = value.trim();
 		
-		String[] parts = value.split("/+", 1);
+		String[] parts = value.split("/+", 2);
 		String driver = parts[0];
-		String fullPath = parts[1];
+		String fullPath = parts.length == 1? null : "/" + parts[1];
 		
 		return new PathMetadata(driver, fullPath, null);
 	}
@@ -267,13 +272,19 @@ public class ObjectsManagerImp
 		
 		readLock.lock();
 		try {
-			Object object = get(id, locale);
+			PathMetadata pmd = getPathMetadata(id);
+			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
+			
+			Object object = get(driver, pmd, id, locale);
 			
 			if(object == null && locale != null) {
-				object = get(id, null);
+				object = get(driver, pmd, id, null);
 			}
 			
 			return object;
+		}
+		catch(ObjectsManagerDriverException e) {
+			throw new IllegalStateException(e);
 		}
 		finally {
 			readLock.unlock();
@@ -299,7 +310,7 @@ public class ObjectsManagerImp
 			
 			Map<Locale,Object> map = new HashMap<Locale, Object>();
 			for(ObjectMetadata omd: list) {
-				Object o = get(id, omd.getLocale());
+				Object o = get(driver, pmd, id, omd.getLocale());
 				if(o != null) {
 					map.put(omd.getLocale(), o);
 				}
@@ -316,11 +327,17 @@ public class ObjectsManagerImp
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Object> list(String path, String name, Locale locale, boolean recursive) {
 		
 		readLock.lock();
 		try {
 			PathMetadata pmd = getSearchMetadata(path);
+			
+			if(pmd == null) {
+				return (List<Object>)Collections.EMPTY_LIST;
+			}
+			
 			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
 			
 			List<ObjectMetadata> list = driver.list(pmd.getPath(), recursive, e->{
@@ -332,7 +349,13 @@ public class ObjectsManagerImp
 			
 			List<Object> r = new ArrayList<Object>();
 			for(ObjectMetadata omd: list) {
-				Object o = get(omd.getPath() + "/" + omd.getId(), omd.getLocale());
+				Object o = 
+						get(
+								driver, 
+								new PathMetadata(driver.getName(), omd.getPath(), omd.getId()), 
+								getID(driver, omd.getPath(), omd.getId()), omd.getLocale()
+						);
+				
 				if(o != null) {
 					r.add(o);
 				}
@@ -388,7 +411,7 @@ public class ObjectsManagerImp
 			Map<String, List<ObjectMetadata>> group = new HashMap<String, List<ObjectMetadata>>();
 			
 			for(ObjectMetadata omd: list) {
-				String id = omd.getPath() + "/" + omd.getId();
+				String id = getID(driver, omd.getPath(), omd.getId());
 				
 				List<ObjectMetadata> g = group.get(id);
 				
@@ -408,7 +431,7 @@ public class ObjectsManagerImp
 				
 				for(ObjectMetadata omd: e.getValue()) {
 					
-					Object o = get(e.getKey(), omd.getLocale());
+					Object o = get(driver, new PathMetadata(pmd.getDriver(), omd.getPath(), omd.getId()), e.getKey(), omd.getLocale());
 					
 					if(o != null) {
 						map.put(omd.getLocale(), o);
@@ -469,7 +492,7 @@ public class ObjectsManagerImp
 	
 	/* get */
 	
-	private Object get(String id, Locale locale) {
+	private Object get(ObjectsManagerDriver driver, PathMetadata pmd, String id, Locale locale) {
 		
 		ObjectValue obj;
 		ConcurrentMap<Locale,ObjectValue> map = objects.get(id);
@@ -483,7 +506,7 @@ public class ObjectsManagerImp
 		}
 		
 		try {
-			obj = loadObject(id, locale);
+			obj = loadObject(driver, pmd, id, locale);
 		}
 		catch(IOException e) {
 			throw new IllegalStateException(e);
@@ -492,7 +515,7 @@ public class ObjectsManagerImp
 		return obj == null? null : obj.getObject(); 
 	}
 	
-	private synchronized ObjectValue loadObject(String id, Locale locale) throws IOException {
+	private synchronized ObjectValue loadObject(ObjectsManagerDriver driver, PathMetadata pmd, String id, Locale locale) throws IOException {
 		
 		ConcurrentMap<Locale,ObjectValue> map = objects.get(id);
 		
@@ -501,17 +524,6 @@ public class ObjectsManagerImp
 			if(obj != null && obj.isValid()) {
 				return obj;
 			}
-		}
-		
-		PathMetadata pmd = getPathMetadata(id);
-
-		ObjectsManagerDriver driver;
-		
-		try {
-			driver = getDriver(pmd.getDriver());
-		}
-		catch(ObjectsManagerDriverException e) {
-			throw new IllegalStateException(e);
 		}
 		
 		ObjectMetadata omd = driver.unique(pmd.getPath(), false, e->{
@@ -530,7 +542,7 @@ public class ObjectsManagerImp
 			ObjectValue object;
 			
 			try {
-				object = getObject(driver, pmd, locale);
+				object = getObject(driver, omd);
 			}
 			catch(ObjectsManagerDriverException e) {
 				throw new IllegalStateException(e);
@@ -568,8 +580,8 @@ public class ObjectsManagerImp
 
 	/* get */
 	
-	private ObjectValue getObject(ObjectsManagerDriver driver, PathMetadata pmd, Locale locale) throws ObjectsManagerDriverException {
-		return driver.get(new ObjectMetadata(pmd.getPath(), pmd.getId(), locale, null));
+	private ObjectValue getObject(ObjectsManagerDriver driver, ObjectMetadata omd) throws ObjectsManagerDriverException {
+		return driver.get(omd);
 	}
 	
 	/* persist */
