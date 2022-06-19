@@ -2,16 +2,18 @@ package br.com.uoutec.community.ediacaran.front.objects;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.Filter;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectValue;
 
 public abstract class AbstractObjectsManagerDriver implements ObjectsManagerDriver {
 
-	public static final String basePermission = "app.objs";
+	public static final String basePermission = "app.objs.driver.";
 	
 	private String name;
 	
@@ -21,14 +23,39 @@ public abstract class AbstractObjectsManagerDriver implements ObjectsManagerDriv
 	
 	private ReadWriteLock handlersLock;
 	
+	private ObjectsManagerDriverListenerWrapper listeners;
+	
 	public AbstractObjectsManagerDriver(String name) {
 		this.name = name;
 		this.handlersLock = new ReentrantReadWriteLock();
 		this.handlers = new LinkedList<ObjectHandler>();
+		this.listeners = new ObjectsManagerDriverListenerWrapper();
 	}
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void addListener(ObjectsManagerDriverListener listener) {
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(basePermission + name + ".listener.register"));
+		}
+		
+		listeners.registerListener(listener);
+	}
+
+	public void removeListener(ObjectsManagerDriverListener listener) {
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(basePermission + name + ".listener.unregister"));
+		}
+		
+		listeners.unregisterListener(listener);
 	}
 	
 	@Override
@@ -37,7 +64,7 @@ public abstract class AbstractObjectsManagerDriver implements ObjectsManagerDriv
 		SecurityManager sm = System.getSecurityManager();
 		
 		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".handler.register"));
+			sm.checkPermission(new RuntimePermission(basePermission + name + ".handler.register"));
 		}
 		
 		if(handlers.indexOf(handler) != -1) {
@@ -61,7 +88,7 @@ public abstract class AbstractObjectsManagerDriver implements ObjectsManagerDriv
 		SecurityManager sm = System.getSecurityManager();
 		
 		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".handler.unregister"));
+			sm.checkPermission(new RuntimePermission(basePermission + name + ".handler.unregister"));
 		}
 
 		Lock lock = handlersLock.writeLock();
@@ -84,7 +111,7 @@ public abstract class AbstractObjectsManagerDriver implements ObjectsManagerDriv
 		SecurityManager sm = System.getSecurityManager();
 		
 		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".default_handler.register"));
+			sm.checkPermission(new RuntimePermission(basePermission + name + ".default_handler.register"));
 		}
 		
 		
@@ -133,6 +160,34 @@ public abstract class AbstractObjectsManagerDriver implements ObjectsManagerDriv
 		return list(path, true, filter);
 	}
 
+	public ObjectValue get(ObjectMetadata omd) {
+		listeners.beforeLoad(omd);
+		ObjectValue o = getAction(omd);
+		listeners.afterLoad(omd, o);
+		return o;
+	}
+
+	protected abstract ObjectValue getAction(ObjectMetadata omd);
+	
+	public ObjectValue persist(String path, String name, Locale locale, Object obj) throws ObjectsManagerDriverException  {
+		listeners.beforePersist(path, name, locale, obj);
+		ObjectValue o = persistAction(path, name, locale, obj);
+		listeners.afterPersist(path, name, locale, o);
+		return o;
+	}
+	
+	protected abstract ObjectValue persistAction(String path, String name, Locale locale, Object obj) throws ObjectsManagerDriverException;
+	
+	/* delete */
+	
+	public void delete(ObjectMetadata omd) throws ObjectsManagerDriverException {
+		listeners.beforeDelete(omd);
+		deleteAction(omd);
+		listeners.afterDelete(omd);
+	}
+	
+	protected abstract void deleteAction(ObjectMetadata omd) throws ObjectsManagerDriverException;
+	
 	protected ObjectHandler getObjectHandler(Object obj) throws ObjectsManagerDriverException {
 		
 		Lock lock = handlersLock.readLock();
@@ -167,6 +222,125 @@ public abstract class AbstractObjectsManagerDriver implements ObjectsManagerDriv
 		}
 		
 		return defaultObjectHandler;
+	}
+	
+	private static class ObjectsManagerDriverListenerWrapper implements ObjectsManagerDriverListener{
+
+		private List<ObjectsManagerDriverListener> listeners;
+		
+		private ReadWriteLock readWriteLock;
+		
+		public ObjectsManagerDriverListenerWrapper() {
+			this.listeners = new LinkedList<ObjectsManagerDriverListener>();
+			this.readWriteLock = new ReentrantReadWriteLock();
+		}
+		
+		public void registerListener(ObjectsManagerDriverListener listener) {
+			Lock lock = readWriteLock.writeLock();
+			lock.lock();
+			try {
+				listeners.add(listener);
+			}
+			finally {
+				lock.unlock();
+			}
+		}
+
+		public void unregisterListener(ObjectsManagerDriverListener listener) {
+			Lock lock = readWriteLock.writeLock();
+			lock.lock();
+			try {
+				listeners.remove(listener);
+			}
+			finally {
+				lock.unlock();
+			}
+		}
+		
+		@Override
+		public void beforeLoad(ObjectMetadata omd) {
+			Lock lock = readWriteLock.readLock();
+			lock.lock();
+			try {
+				for(ObjectsManagerDriverListener l: listeners) {
+					l.beforeLoad(omd);
+				}
+			}
+			finally {
+				lock.unlock();
+			}
+		}
+
+		@Override
+		public void afterLoad(ObjectMetadata omd, ObjectValue obj) {
+			Lock lock = readWriteLock.readLock();
+			lock.lock();
+			try {
+				for(ObjectsManagerDriverListener l: listeners) {
+					l.afterLoad(omd, obj);
+				}
+			}
+			finally {
+				lock.unlock();
+			}
+		}
+
+		@Override
+		public void beforePersist(String path, String name, Locale locale, Object obj) {
+			Lock lock = readWriteLock.readLock();
+			lock.lock();
+			try {
+				for(ObjectsManagerDriverListener l: listeners) {
+					l.beforePersist(path, name, locale, obj);
+				}
+			}
+			finally {
+				lock.unlock();
+			}
+		}
+
+		@Override
+		public void afterPersist(String path, String name, Locale locale, ObjectValue objValue) {
+			Lock lock = readWriteLock.readLock();
+			lock.lock();
+			try {
+				for(ObjectsManagerDriverListener l: listeners) {
+					l.afterPersist(path, name, locale, objValue);
+				}
+			}
+			finally {
+				lock.unlock();
+			}
+		}
+
+		@Override
+		public void beforeDelete(ObjectMetadata omd) {
+			Lock lock = readWriteLock.readLock();
+			lock.lock();
+			try {
+				for(ObjectsManagerDriverListener l: listeners) {
+					l.beforeDelete(omd);
+				}
+			}
+			finally {
+				lock.unlock();
+			}
+		}
+
+		@Override
+		public void afterDelete(ObjectMetadata omd) {
+			Lock lock = readWriteLock.readLock();
+			lock.lock();
+			try {
+				for(ObjectsManagerDriverListener l: listeners) {
+					l.afterDelete(omd);
+				}
+			}
+			finally {
+				lock.unlock();
+			}
+		}
+		
 	}
 	
 }

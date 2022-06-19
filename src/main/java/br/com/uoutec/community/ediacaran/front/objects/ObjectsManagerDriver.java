@@ -41,4 +41,24 @@ public interface ObjectsManagerDriver {
 	
 	void delete(ObjectMetadata omd) throws ObjectsManagerDriverException;
 	
+	void addListener(ObjectsManagerDriverListener listener);
+
+	void removeListener(ObjectsManagerDriverListener listener);
+	
+	public static interface ObjectsManagerDriverListener{
+		
+		default void beforeLoad(ObjectMetadata omd) {};
+		
+		default void afterLoad(ObjectMetadata omd, ObjectValue obj) {};
+		
+		default void beforePersist(String path, String name, Locale locale, Object obj) {};
+		
+		default void afterPersist(String path, String name, Locale locale, ObjectValue objValue) {};
+
+		default void beforeDelete(ObjectMetadata omd) {};
+		
+		default void afterDelete(ObjectMetadata omd) {};
+		
+	}
+	
 }

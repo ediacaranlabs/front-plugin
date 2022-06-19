@@ -248,7 +248,7 @@ public class ObjectsManagerImp
 	}
 
 	@Override
-	public synchronized void unregisterDriver(ObjectsManagerDriver driver) {
+	public void unregisterDriver(ObjectsManagerDriver driver) {
 		
 		SecurityManager sm = System.getSecurityManager();
 		
@@ -259,6 +259,18 @@ public class ObjectsManagerImp
 		drivers.remove(driver.getName().toLowerCase(), driver);
 	}
 
+	@Override
+	public ObjectsManagerDriver getDriver(String driverName) {
+
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(basePermission + ".driver.get"));
+		}
+		
+		return drivers.get(driverName);
+	}
+	
 	@Override
 	public Object getObject(String id) {
 		return getObject(id, null);
@@ -274,7 +286,7 @@ public class ObjectsManagerImp
 		readLock.lock();
 		try {
 			PathMetadata pmd = getPathMetadata(id);
-			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
+			ObjectsManagerDriver driver = getSecureDriver(pmd.getDriver());
 			
 			Object object = get(driver, pmd, id, locale);
 			
@@ -303,7 +315,7 @@ public class ObjectsManagerImp
 		readLock.lock();
 		try {
 			PathMetadata pmd = getPathMetadata(id);
-			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
+			ObjectsManagerDriver driver = getSecureDriver(pmd.getDriver());
 			
 			List<ObjectMetadata> list = driver.list(pmd.getPath(), false, e->{
 				return pmd.getId().equals(e.getId());
@@ -339,7 +351,7 @@ public class ObjectsManagerImp
 				return (List<Object>)Collections.EMPTY_LIST;
 			}
 			
-			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
+			ObjectsManagerDriver driver = getSecureDriver(pmd.getDriver());
 			
 			List<ObjectMetadata> list = driver.list(pmd.getPath(), recursive, e->{
 				boolean result;
@@ -378,7 +390,7 @@ public class ObjectsManagerImp
 		readLock.lock();
 		try {
 			PathMetadata pmd = getSearchMetadata(path);
-			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
+			ObjectsManagerDriver driver = getSecureDriver(pmd.getDriver());
 			
 			return driver.list(pmd.getPath(), recursive, e->{
 				boolean result;
@@ -403,7 +415,7 @@ public class ObjectsManagerImp
 		readLock.lock();
 		try {
 			PathMetadata pmd = getSearchMetadata(path);
-			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
+			ObjectsManagerDriver driver = getSecureDriver(pmd.getDriver());
 			
 			List<ObjectMetadata> list = driver.list(pmd.getPath(), recursive, e->{
 				return name == null? true : e.getId().contains(name);
@@ -599,8 +611,8 @@ public class ObjectsManagerImp
 	
 	/* base */
 	
-	private ObjectsManagerDriver getDriver(String driverName) throws ObjectsManagerDriverException {
-		
+	public ObjectsManagerDriver getSecureDriver(String driverName) throws ObjectsManagerDriverException {
+
 		ObjectsManagerDriver driver = drivers.get(driverName);
 		
 		if(driver == null) {
@@ -608,8 +620,7 @@ public class ObjectsManagerImp
 		}
 		
 		return driver;
-	}
-	
+	}	
 	public static class ObjectFileMetadataManager extends FileMetadata{
 		
 		private ObjectHandler handler;
@@ -652,6 +663,7 @@ public class ObjectsManagerImp
 		}
 		
 	}
+	
 	private static class ObjectListenerManager implements ObjectListener{
 
 		private List<ObjectListener> listeners;

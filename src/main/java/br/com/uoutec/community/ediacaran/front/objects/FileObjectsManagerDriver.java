@@ -75,7 +75,7 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 	
 	/* get */
 	
-	public ObjectValue get(ObjectMetadata omd) {
+	protected ObjectValue getAction(ObjectMetadata omd) {
 
 		try {
 			ObjectHandler handler = getObjectHandler(omd.getType());
@@ -93,7 +93,7 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 	
 	/* persist */
 	
-	public ObjectValue persist(String path, String name, Locale locale, Object obj) throws ObjectsManagerDriverException  {
+	protected ObjectValue persistAction(String path, String name, Locale locale, Object obj) throws ObjectsManagerDriverException  {
 		ObjectHandler handler = getObjectHandler(obj);
 		
 		try {
@@ -108,7 +108,7 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 	
 	/* delete */
 	
-	public void delete(ObjectMetadata omd) throws ObjectsManagerDriverException {
+	protected void deleteAction(ObjectMetadata omd) throws ObjectsManagerDriverException {
 		try {
 			FileMetadata fmd = toFileMetadata(omd, null);
 			fileManager.delete(fmd);

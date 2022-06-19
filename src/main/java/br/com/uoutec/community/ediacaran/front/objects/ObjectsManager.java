@@ -26,6 +26,8 @@ public interface ObjectsManager {
 	
 	void unregisterDriver(ObjectsManagerDriver driver);
 	
+	ObjectsManagerDriver getDriver(String name);
+	
 	void addListener(ObjectListener listener);
 
 	void removeListener(ObjectListener listener);
