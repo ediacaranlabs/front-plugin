@@ -55,4 +55,5 @@ public class JsonFileManagerHandler extends AbstractFileManagerHandler{
 	public Writer getWriter(File file) throws FileNotFoundException {
 		return new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
 	}
+	
 }
