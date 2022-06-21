@@ -13,7 +13,6 @@ import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileValue;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.Filter;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectValue;
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerImp.ObjectFileMetadataManager;
 
 public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 
@@ -22,42 +21,6 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 	public FileObjectsManagerDriver(FileManager fileManager, String name) {
 		super(name);
 		this.fileManager = fileManager;
-	}
-	
-	public ObjectMetadata unique(){
-		return unique(null, null);
-	}
-	
-	public ObjectMetadata unique(Filter filter){
-		return unique(null, true, filter);
-	}
-
-	public ObjectMetadata unique(String path, Filter filter){
-		return unique(path, true, filter);
-	}
-	
-	public ObjectMetadata unique(String path, boolean recursive, Filter filter){
-		
-		List<ObjectMetadata> list = list(path, recursive, filter);
-		
-		if(list.size() > 1) {
-			throw new IllegalStateException("found: " + list.size());
-		}
-		
-		return list.isEmpty()? null : list.get(0);
-		
-	}
-	
-	public List<ObjectMetadata> list(){
-		return list(null);
-	}
-	
-	public List<ObjectMetadata> list(Filter filter){
-		return list(null, true, filter);
-	}
-
-	public List<ObjectMetadata> list(String path, Filter filter){
-		return list(path, true, filter);
 	}
 	
 	public List<ObjectMetadata> list(String path, boolean recursive, Filter filter){
@@ -80,9 +43,9 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 		try {
 			ObjectHandler handler = getObjectHandler(omd.getType());
 			
-			FileMetadata fmd = toFileMetadata(omd, handler);
+			FileMetadata fmd = toFileMetadata(omd);
 			FileValue fv = fileManager.get(fmd);
-			return fv == null? null : new FileObjectsManagerDriverValue(fv.getFile(), fv.getObject());
+			return fv == null? null : new FileObjectsManagerDriverValue(fv.getFile(), handler.toObject(fv.getObject()));
 		}
 		catch(Throwable e) {
 			e.printStackTrace();
@@ -97,8 +60,8 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 		ObjectHandler handler = getObjectHandler(obj);
 		
 		try {
-			FileMetadata fmd = toFileMetadata(path, name, locale, obj, handler);
-			File file = fileManager.persist(fmd, obj);
+			FileMetadata fmd = toFileMetadata(path, name, locale, handler.getType());
+			File file = fileManager.persist(fmd, handler.toData(obj));
 			return new FileObjectsManagerDriverValue(file, obj);
 		}
 		catch(IOException e) {
@@ -110,7 +73,7 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 	
 	protected void deleteAction(ObjectMetadata omd) throws ObjectsManagerDriverException {
 		try {
-			FileMetadata fmd = toFileMetadata(omd, null);
+			FileMetadata fmd = toFileMetadata(omd);
 			fileManager.delete(fmd);
 		}
 		catch(IOException e) {
@@ -124,18 +87,18 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 		return fmd == null? null : new ObjectMetadata(fmd.getPath(),fmd.getName(), (Locale)fmd.getExtMetadata("locale"), fmd.getType());
 	}
 
-	private FileMetadata toFileMetadata(String path, String name, Locale locale, Object obj, ObjectHandler handler) {
+	private FileMetadata toFileMetadata(String path, String name, Locale locale, String type) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("locale", locale);
-		return new ObjectFileMetadataManager(new FileMetadata(path, name, handler.getType(), map), handler);
+		return new FileMetadata(path, name, type, map);
 	}
 	
-	private FileMetadata toFileMetadata(ObjectMetadata omd, ObjectHandler handler) {
+	private FileMetadata toFileMetadata(ObjectMetadata omd) {
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("locale", omd.getLocale());
 		
-		return new ObjectFileMetadataManager(new FileMetadata(omd.getPath(), omd.getId(), omd.getType(), map), handler); 
+		return new FileMetadata(omd.getPath(), omd.getId(), omd.getType(), map); 
 	}
 
 	public static class FileObjectsManagerDriverValue implements ObjectValue {

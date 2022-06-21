@@ -46,7 +46,7 @@ public class ObjectsManagerImpTest {
 		BASE_BJECTS.mkdir();
 		clearRepository(BASE_BJECTS);
 		
-		fileManager = new FileManager(BASE_BJECTS, new ObjectsFileManagerHandler());
+		fileManager = new FileManager(BASE_BJECTS, new JsonFileManagerHandler());
 		
 		driver = new FileObjectsManagerDriver(fileManager, "global");
 		driver.setDefaultObjectHandler(new ObjectHandlerImp());

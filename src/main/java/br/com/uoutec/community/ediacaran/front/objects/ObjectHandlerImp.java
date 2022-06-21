@@ -1,28 +1,14 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
+
 public class ObjectHandlerImp implements ObjectHandler{
 
-	private ObjectReader reader;
-	
-	private ObjectWriter writer;
-	
 	public ObjectHandlerImp() {
-		this.reader = new ObjectReaderImp();
-		this.writer = new ObjectWriterImp();
 	}
+	
 	@Override
 	public String getType() {
 		return "json";
-	}
-
-	@Override
-	public ObjectReader getReader() {
-		return reader;
-	}
-
-	@Override
-	public ObjectWriter getWriter() {
-		return writer;
 	}
 
 	@Override
@@ -33,6 +19,16 @@ public class ObjectHandlerImp implements ObjectHandler{
 	@Override
 	public boolean accept(String type) {
 		return "json".equals(type);
+	}
+	
+	@Override
+	public Object toObject(Object data) {
+		return data;
+	}
+	
+	@Override
+	public Object toData(Object object) {
+		return object;
 	}
 
 }

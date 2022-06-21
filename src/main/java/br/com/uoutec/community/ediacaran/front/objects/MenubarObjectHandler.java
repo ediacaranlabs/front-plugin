@@ -1,28 +1,22 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
+import java.util.Map;
+
+import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
+
 public class MenubarObjectHandler implements ObjectHandler{
 
-	private ObjectReader reader;
+	private DataMenubarParser dataMenubarParser;
 	
-	private ObjectWriter writer;
+	private MenuBarObjectParser menuBarObjectParser;
 	
 	public MenubarObjectHandler() {
-		this.reader = new MenuBarObjectReader();
-		this.writer = new MenuBarObjectWriter();
+		this.dataMenubarParser = new DataMenubarParser();
+		this.menuBarObjectParser = new MenuBarObjectParser();
 	}
 	@Override
 	public String getType() {
 		return "menu";
-	}
-
-	@Override
-	public ObjectReader getReader() {
-		return reader;
-	}
-
-	@Override
-	public ObjectWriter getWriter() {
-		return writer;
 	}
 
 	@Override
@@ -33,6 +27,16 @@ public class MenubarObjectHandler implements ObjectHandler{
 	@Override
 	public boolean accept(String type) {
 		return "menu".equals(type);
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object toObject(Object data) {
+		return dataMenubarParser.toObject((Map<String, Object>) data);
+	}
+	@Override
+	public Object toData(Object object) {
+		return menuBarObjectParser.toData((MenuBar) object);
 	}
 
 }

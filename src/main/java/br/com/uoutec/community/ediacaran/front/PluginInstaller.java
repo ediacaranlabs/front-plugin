@@ -9,10 +9,10 @@ import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager;
 import br.com.uoutec.community.ediacaran.front.objects.FileObjectsManagerDriver;
+import br.com.uoutec.community.ediacaran.front.objects.JsonFileManagerHandler;
 import br.com.uoutec.community.ediacaran.front.objects.MenubarObjectHandler;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectHandler;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectHandlerImp;
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsFileManagerHandler;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectValue;
@@ -68,11 +68,12 @@ public class PluginInstaller
 				new FileObjectsManagerDriver(
 						new FileManager(
 								new File(System.getProperty("app.base"), OBJECTS_REPOSITORY), 
-								new ObjectsFileManagerHandler()
+								new JsonFileManagerHandler()
 						), "global"
 				); 
 
 		this.globalDriver.registerObjectHandler(this.menubarObjectHandler);
+		
 		this.globalDriver.setDefaultObjectHandler(new ObjectHandlerImp());
 		this.globalDriver.addListener(new ObjectsManagerDriverListener() {
 			

@@ -4,10 +4,10 @@ public interface ObjectHandler {
 
 	String getType();
 	
-	ObjectReader getReader();
+	Object toObject(Object data);
 	
-	ObjectWriter getWriter();
-		
+	Object toData(Object object);
+	
 	boolean accept(Object o);
 	
 	boolean accept(String type);

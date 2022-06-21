@@ -1,7 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,15 +8,9 @@ import java.util.Map;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 
-public class MenuBarObjectWriter extends ObjectWriterImp{
+public class MenuBarObjectParser {
 
-	@Override
-	public void write(Object obj, OutputStream stream) throws IOException {
-		Map<String,Object> o = toObject((MenuBar)obj);
-		super.write(o, stream);
-	}
-
-	private Map<String,Object> toObject(MenuBar menubar) {
+	public Map<String,Object> toData(MenuBar menubar) {
 		Map<String,Object> o = new HashMap<String,Object>();
 		o.put("id", menubar.getId());
 		o.put("name", menubar.getName());

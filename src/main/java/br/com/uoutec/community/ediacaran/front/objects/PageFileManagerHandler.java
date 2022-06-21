@@ -128,4 +128,17 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		throw new IOException();
 	}
 
+	/*
+	public static void main(String []a) {
+		loop(1, 10, 1, e->System.out.println(e));
+	}
+	
+	public static void loop(int start, int end, int step, Consumer<Integer> c) {
+		c.accept(start);
+		if( ((step > 0) && (start < end)) || ((step < 0) && (start > end)) ) {
+			loop(start + step,end, step, c);
+		}
+	}
+	*/
+	
 }

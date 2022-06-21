@@ -18,7 +18,6 @@ import java.util.regex.Pattern;
 
 import javax.inject.Singleton;
 
-import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
 import br.com.uoutec.community.ediacaran.plugins.PublicBean;
 
 @Singleton
@@ -621,20 +620,6 @@ public class ObjectsManagerImp
 		
 		return driver;
 	}	
-	public static class ObjectFileMetadataManager extends FileMetadata{
-		
-		private ObjectHandler handler;
-		
-		public ObjectFileMetadataManager(FileMetadata fmd, ObjectHandler handler) {
-			super(fmd);
-			this.handler = handler;
-		}
-
-		public ObjectHandler getHandler() {
-			return handler;
-		}
-
-	}
 	
 	private class PathMetadata{
 		
