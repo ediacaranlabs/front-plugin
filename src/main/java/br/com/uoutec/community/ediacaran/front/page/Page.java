@@ -1,6 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.page;
 
-import java.io.InputStream;
+import java.io.Reader;
 import java.util.Map;
 
 public class Page {
@@ -9,7 +9,7 @@ public class Page {
 	
 	private Map<String, String> header;
 	
-	private InputStream pageStream;
+	private transient Object content;
 
 	public String getTitle() {
 		return title;
@@ -27,12 +27,16 @@ public class Page {
 		this.header = header;
 	}
 
-	public InputStream getPageStream() {
-		return pageStream;
+	public Object getContent() {
+		return content;
 	}
 
-	public void setPageStream(InputStream pageStream) {
-		this.pageStream = pageStream;
+	public void setContent(Reader content) {
+		this.content = content;
+	}
+	
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 }

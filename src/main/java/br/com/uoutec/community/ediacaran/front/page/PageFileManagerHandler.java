@@ -111,7 +111,7 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		String path = toFilePath(omd.getPath() + "/" + omd.getName());
 		Locale locale = (Locale) omd.getExtMetadata("locale");
 		
-		StringBuilder builder = new StringBuilder(path).append("_").append("_");
+		StringBuilder builder = new StringBuilder(path).append("_");
 		
 		if(locale == null) {
 			builder.append("default");
@@ -125,10 +125,28 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		return new File(base, builder.toString());
 	}
 	
+	private File toContentFile(File fileMtadata, FileMetadata omd) {
+		
+		String name = omd.getName();
+		Locale locale = (Locale) omd.getExtMetadata("locale");
+		
+		StringBuilder builder = new StringBuilder(name).append("_");
+		
+		if(locale != null) {
+			builder.append(locale.getLanguage()).append("_").append(locale.getCountry());
+		}
+		
+		builder.append(".cpag");
+		
+		return new File(fileMtadata.getParentFile(), builder.toString());
+	}
+	
 	@Override
 	@SuppressWarnings("unchecked")
 	public Object read(File file, FileMetadata metadata) throws IOException {
 
+		File contentFile = toContentFile(file, metadata);
+		
 		Object data;
 		
 		try(Reader reader = getReader(file)){
@@ -141,20 +159,8 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		
 		Page page = dataPageObjectParser.toObject((Map<String, Object>) data);
 
-		Locale locale = (Locale) metadata.getExtMetadata("locale");
-		
-		StringBuilder b = new StringBuilder(metadata.getName());
-		
-		if(locale != null) {
-			b.append("_").append(locale.getLanguage()).append("_").append(locale.getCountry());
-		}
-		b.append(".cpag");
-		
-		File parent = file.getParentFile();
-		File contentFile = new File(parent, b.toString());
-		
 		if(contentFile.exists()) {
-			page.setPageStream(new FileInputStream(file));
+			page.setContent(getReader(contentFile));
 		}
 		
 		return page;
@@ -167,35 +173,45 @@ public class PageFileManagerHandler implements FileManagerHandler{
 	@Override
 	public void write(File file, FileMetadata metadata, Object value) throws FileNotFoundException, IOException {
 		
+		File contentFile = toContentFile(file, metadata);
+		
+		Page page = (Page)value;
+		
+		Object data = pageObjectDataParser.toData(page);
+		
 		try(Writer stream = getWriter(file)){
-			gson.toJson(value, Object.class, stream);
+			gson.toJson(data, Object.class, stream);
 			stream.flush();
 		}
 		
-		if(value == null) {
-			return;
-		}
+		try(Writer writer = getWriter(contentFile)){
 		
-		Page page = (Page)value;
-
-		if(page.getPageStream() == null) {
-			return;
-		}
-		
-		Locale locale = (Locale) metadata.getExtMetadata("locale");
-		
-		StringBuilder b = new StringBuilder(metadata.getName());
-		
-		if(locale != null) {
-			b.append("_").append(locale.getLanguage()).append("_").append(locale.getCountry());
-		}
-		b.append(".cpag");
-		
-		File parent = file.getParentFile();
-		File contentFile = new File(parent, b.toString());
-		
-		if(contentFile.exists()) {
-			page.setPageStream(new FileInputStream(file));
+			Object content = page.getContent();
+			
+			if(content instanceof String) {
+				writer.append((String)content);
+			}
+			else
+			if(content instanceof Reader) {
+				
+				Reader reader = (Reader)content;
+				char[] buf = new char[4096];
+				int l;
+				
+				try{
+					while((l = reader.read(buf, 0, buf.length)) > 0 ) {
+						writer.write(buf, 0, l);
+					}
+				}
+				finally {
+					reader.close();
+				}
+				
+			}
+			else
+				throw new IllegalStateException(String.valueOf(content));
+			
+			writer.flush();
 		}
 		
 	}
