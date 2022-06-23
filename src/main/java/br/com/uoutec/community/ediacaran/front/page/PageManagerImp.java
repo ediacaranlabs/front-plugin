@@ -1,0 +1,171 @@
+package br.com.uoutec.community.ediacaran.front.page;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import br.com.uoutec.community.ediacaran.front.objects.FileManager;
+import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
+import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileValue;
+import br.com.uoutec.community.ediacaran.front.objects.FileManager.Filter;
+import br.com.uoutec.community.ediacaran.plugins.PluginConfigurationMetadata;
+import br.com.uoutec.community.ediacaran.plugins.PluginPath;
+import br.com.uoutec.community.ediacaran.plugins.PluginType;
+
+public class PageManagerImp implements PageManager {
+
+	public static final String PUBLIC_PATH = "/public";
+
+	private FileManager fileManager;
+	
+	public PageManagerImp(PluginType pluginType) {
+		PluginConfigurationMetadata pcm = pluginType.getConfiguration().getMetadata();
+		PluginPath pp = pcm.getPath();
+		this.fileManager = new FileManager(new File(pp.getBase(), PUBLIC_PATH), new PageFileManagerHandler());
+	}
+	
+	@Override
+	public void registerPage(String path, String name, Locale locale, Page page) throws PageManagerException {
+		
+		Map<String,Object> ext = new HashMap<String, Object>();
+		ext.put("locale", locale);
+		FileMetadata fmd = new FileMetadata(path, normalize(name), "pag", ext);
+		
+		try {
+			fileManager.persist(fmd, page);
+		}
+		catch(IOException ex) {
+			throw new PageManagerException(ex);
+		}
+		
+	}
+
+	@Override
+	public void unregisterPage(String path, String name, Locale locale) throws PageManagerException {
+
+		Map<String,Object> ext = new HashMap<String, Object>();
+		ext.put("locale", locale);
+		FileMetadata fmd = new FileMetadata(path, normalize(name), "pag", ext);
+		
+		try {
+			fileManager.delete(fmd);
+		}
+		catch(IOException ex) {
+			throw new PageManagerException(ex);
+		}
+		
+	}
+
+	@Override
+	public Page getPage(String path, Locale locale) {
+		
+		int lastIndex = path.lastIndexOf("/");
+		
+		FileMetadata fmd;
+
+		Map<String,Object> ext = new HashMap<String, Object>();
+		ext.put("locale", locale);
+		
+		if(lastIndex == -1) {
+			fmd = new FileMetadata("/", path, "pag", ext);
+		}
+		else {
+			String p = path.substring(0, lastIndex);
+			String n = path.substring(lastIndex, path.length());
+			
+			if(p.length() == 0) {
+				fmd = new FileMetadata("/", n, "pag", ext);
+			}
+			else {
+				fmd = null;
+			}
+		}
+		
+		try {
+			FileValue fv = fmd == null? null : fileManager.get(fmd);
+			return fv == null? null : (Page)fv.getObject();
+		}
+		catch(IOException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		
+	}
+
+	@Override
+	public Page getPage(PageMetadata value) {
+		try {
+			Map<String,Object> ext = new HashMap<String, Object>();
+			ext.put("locale", value.getLocale());
+			
+			FileMetadata fmd = new FileMetadata(value.getPath(), value.getID(), "pag", ext);
+			FileValue fv = fileManager.get(fmd);
+			return fv == null? null : (Page)fv.getObject();
+		}
+		catch(IOException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
+	public PageMetadata unique(){
+		return unique(null, null);
+	}
+	
+	public PageMetadata unique(Filter filter){
+		return unique(null, true, filter);
+	}
+
+	public PageMetadata unique(String path, Filter filter){
+		return unique(path, true, filter);
+	}
+	
+	public PageMetadata unique(String path, boolean recursive, Filter filter){
+		
+		List<PageMetadata> list = list(path, recursive, filter);
+		
+		if(list.size() > 1) {
+			throw new IllegalStateException("found: " + list.size());
+		}
+		
+		return list.isEmpty()? null : list.get(0);
+		
+	}
+	
+	public List<PageMetadata> list(){
+		return list(null);
+	}
+	
+	public List<PageMetadata> list(Filter filter){
+		return list(null, true, filter);
+	}
+
+	public List<PageMetadata> list(String path, Filter filter){
+		return list(path, true, filter);
+	}
+	
+	public List<PageMetadata> list(String path, boolean recursive, Filter filter){
+		List<PageMetadata> list = new LinkedList<PageMetadata>();
+		list(list, path, filter, recursive);
+		return list;
+	}
+	
+	private void list(List<PageMetadata> result, String path, Filter filter, boolean recursive) {
+		
+	}
+
+	private String normalize(String name) {
+		return 
+			Normalizer.normalize(name, Form.NFD)
+			.replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+			.toLowerCase()
+			.replaceAll("\\s+", "-");
+	}
+	
+}

@@ -22,6 +22,7 @@ import com.google.gson.GsonBuilder;
 
 import br.com.uoutec.community.ediacaran.core.system.util.DataUtil.ClassTypeAdapter;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
+import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.FileManagerHandler;
 
 public class PageFileManagerHandler implements FileManagerHandler{
@@ -218,6 +219,39 @@ public class PageFileManagerHandler implements FileManagerHandler{
 
 	public Writer getWriter(File file) throws FileNotFoundException {
 		return new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
+	}
+	
+	public static class PageMetadataImp implements PageMetadata{
+		
+		private String path;
+		
+		private String id;
+		
+		private Locale locale;
+
+		public PageMetadataImp(FileMetadata value) {
+			this(value.getPath(), value.getName(), (Locale)value.getExtMetadata("locale"));
+		}
+		
+		public PageMetadataImp(String path, String id, Locale locale) {
+			super();
+			this.path = path;
+			this.id = id;
+			this.locale = locale;
+		}
+
+		public String getPath() {
+			return path;
+		}
+
+		public String getID() {
+			return id;
+		}
+
+		public Locale getLocale() {
+			return locale;
+		}
+		
 	}
 	
 }
