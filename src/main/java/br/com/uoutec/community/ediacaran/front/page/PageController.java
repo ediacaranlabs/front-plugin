@@ -26,7 +26,7 @@ public class PageController implements PublicType {
 	@Transient
 	private PageManager pageManager;
 
-	@Action("/{uri:([a-z][a-z0-9]+(-[a-z0-9]+)*)(/[a-z][a-z0-9]+(-[a-z0-9]+)*)*}")
+	@Action("/{uri:([a-z][a-z0-9]+(-[a-z0-9]+)*)(\\/[a-z][a-z0-9]+(-[a-z0-9]+)*)*}")
 	public WebResultAction execute(@Basic(bean="uri") String uri, @Basic(bean="locale", mappingType=MappingTypes.VALUE) Locale locale, WebResultAction result) {
 		uri = "/" + uri;
 		Page page = pageManager.getPage(uri, locale);

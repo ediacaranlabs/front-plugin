@@ -3,6 +3,7 @@ package br.com.uoutec.community.ediacaran.front.page;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.List;
 import java.util.Map;
 
 public class Page {
@@ -11,7 +12,17 @@ public class Page {
 	
 	private Map<String, String> header;
 	
+	private List<BreadcrumbPath> breadcrumb;
+	
 	private transient Reader content;
+
+	public List<BreadcrumbPath> getBreadcrumb() {
+		return breadcrumb;
+	}
+
+	public void setBreadcrumb(List<BreadcrumbPath> breadcrumb) {
+		this.breadcrumb = breadcrumb;
+	}
 
 	public String getTitle() {
 		return title;
