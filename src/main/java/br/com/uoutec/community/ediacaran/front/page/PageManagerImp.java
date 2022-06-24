@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import br.com.uoutec.community.ediacaran.front.objects.FileManager;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileValue;
@@ -24,6 +26,7 @@ public class PageManagerImp implements PageManager {
 
 	private FileManager fileManager;
 	
+	@Inject
 	public PageManagerImp(PluginType pluginType) {
 		PluginConfigurationMetadata pcm = pluginType.getConfiguration().getMetadata();
 		PluginPath pp = pcm.getPath();
@@ -77,14 +80,9 @@ public class PageManagerImp implements PageManager {
 		}
 		else {
 			String p = path.substring(0, lastIndex);
-			String n = path.substring(lastIndex, path.length());
+			String n = path.substring(lastIndex + 1, path.length());
 			
-			if(p.length() == 0) {
-				fmd = new FileMetadata("/", n, "pag", ext);
-			}
-			else {
-				fmd = null;
-			}
+			fmd = new FileMetadata(p, n, "pag", ext);
 		}
 		
 		try {

@@ -22,14 +22,14 @@ import com.google.gson.GsonBuilder;
 
 import br.com.uoutec.community.ediacaran.core.system.util.DataUtil.ClassTypeAdapter;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
-import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.FileManagerHandler;
+import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadata;
 
 public class PageFileManagerHandler implements FileManagerHandler{
 
 	private static final Gson gson;
 	
-	private static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)+";
+	private static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*";
 	
 	private static final String ID_FORMAT = "[a-z][a-z0-9]+(-[a-z0-9]+)*";
 
@@ -112,13 +112,10 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		String path = toFilePath(omd.getPath() + "/" + omd.getName());
 		Locale locale = (Locale) omd.getExtMetadata("locale");
 		
-		StringBuilder builder = new StringBuilder(path).append("_");
+		StringBuilder builder = new StringBuilder(path);
 		
-		if(locale == null) {
-			builder.append("default");
-		}
-		else {
-			builder.append(locale.getLanguage()).append("_").append(locale.getCountry());
+		if(locale != null) {
+			builder.append("_").append(locale.getLanguage()).append("_").append(locale.getCountry());
 		}
 		
 		builder.append(".pag");
@@ -131,10 +128,10 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		String name = omd.getName();
 		Locale locale = (Locale) omd.getExtMetadata("locale");
 		
-		StringBuilder builder = new StringBuilder(name).append("_");
+		StringBuilder builder = new StringBuilder(name);
 		
 		if(locale != null) {
-			builder.append(locale.getLanguage()).append("_").append(locale.getCountry());
+			builder.append("_").append(locale.getLanguage()).append("_").append(locale.getCountry());
 		}
 		
 		builder.append(".cpag");
