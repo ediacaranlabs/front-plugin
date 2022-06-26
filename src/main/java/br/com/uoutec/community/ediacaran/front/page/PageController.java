@@ -8,7 +8,6 @@ import javax.inject.Singleton;
 import org.brandao.brutos.annotation.Action;
 import org.brandao.brutos.annotation.ActionStrategy;
 import org.brandao.brutos.annotation.Basic;
-import org.brandao.brutos.annotation.Controller;
 import org.brandao.brutos.annotation.MappingTypes;
 import org.brandao.brutos.annotation.Transient;
 import org.brandao.brutos.annotation.web.WebActionStrategyType;
@@ -18,7 +17,6 @@ import org.brandao.brutos.web.WebResultAction;
 import br.com.uoutec.community.ediacaran.plugins.PublicType;
 
 @Singleton
-@Controller
 @ActionStrategy(WebActionStrategyType.DETACHED)
 public class PageController implements PublicType {
 
@@ -26,9 +24,8 @@ public class PageController implements PublicType {
 	@Transient
 	private PageManager pageManager;
 
-	@Action("/{uri:(/[a-z][a-z0-9]+(-[a-z0-9]+)*)+}")
+	@Action("{uri:(/[a-z][a-z0-9]+(-[a-z0-9]+)*)+}")
 	public WebResultAction execute(@Basic(bean="uri") String uri, @Basic(bean="locale", mappingType=MappingTypes.VALUE) Locale locale, WebResultAction result) {
-		uri = "/" + uri;
 		Page page = pageManager.getPage(uri, locale);
 		if(page == null && locale != null) {
 			page = pageManager.getPage(uri, null);
