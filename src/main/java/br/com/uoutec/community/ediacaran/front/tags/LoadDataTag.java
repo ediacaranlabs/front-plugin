@@ -57,11 +57,15 @@ public class LoadDataTag  extends SimpleTagSupport {
 	}
 
     private File getRootPath() {
-    	ServletContext servletContext = 
-			context == null?
-					((PageContext)getJspContext()).getServletContext() :
-					((PageContext)getJspContext()).getServletContext().getContext(context);
-					
+    	ServletContext servletContext;
+    	
+    	if(context == null) {
+    		servletContext = ((PageContext)getJspContext()).getServletContext();
+    	}
+    	else {
+    		servletContext = ((PageContext)getJspContext()).getServletContext().getContext(context);
+    	}
+    			
 		return new File(servletContext.getRealPath("/"));
     }
 

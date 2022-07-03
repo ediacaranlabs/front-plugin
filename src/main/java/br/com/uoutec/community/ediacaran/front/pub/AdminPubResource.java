@@ -35,11 +35,11 @@ import br.com.uoutec.pub.entity.InvalidRequestException;
 
 @Singleton
 @Controller(value="${plugins.ediacaran.front.admin_context}", defaultActionName="/")
-@View(value="/templates/${plugins.ediacaran.front.template}/admin/index")
+@View(value="${plugins.ediacaran.front.template}/admin/index")
 @Actions({
-	@Action(value="/", view=@View(value="/templates/${plugins.ediacaran.front.template}/admin/index")),
-	@Action(value="/user-menu", view=@View(value="/templates/${plugins.ediacaran.front.template}/admin/user_menu")),
-	@Action(value="/plugins", view=@View(value="/templates/${plugins.ediacaran.front.template}/admin/plugins"))
+	@Action(value="/", view=@View(value="${plugins.ediacaran.front.template}/admin/index")),
+	@Action(value="/user-menu", view=@View(value="${plugins.ediacaran.front.template}/admin/user_menu")),
+	@Action(value="/plugins", view=@View(value="${plugins.ediacaran.front.template}/admin/plugins"))
 })
 @ResponseErrors(rendered=false, name="exception")
 public class AdminPubResource {
@@ -77,7 +77,7 @@ public class AdminPubResource {
 	}
 	
 	@Action(value="/dashboard")
-	@View("/templates/${plugins.ediacaran.front.template}/admin/dashboard")
+	@View("${plugins.ediacaran.front.template}/admin/dashboard")
 	@Result("vars")
 	public Map<String, Object> getDashboard(){
 		Map<String, Object> m = new HashMap<String, Object>();
@@ -86,7 +86,7 @@ public class AdminPubResource {
 	}
 
 	@Action(value="/plugins/{code:[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*}")
-	@View("/templates/${plugins.ediacaran.front.template}/admin/plugin-detail")
+	@View("${plugins.ediacaran.front.template}/admin/plugin-detail")
 	@Result(value="vars", mappingType=MappingTypes.VALUE)
 	public Map<String,Object> plugins(@Basic(bean="code") String code){
 		
@@ -105,7 +105,7 @@ public class AdminPubResource {
 
 	@Action(value="/plugins/{code:[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*}")
 	@RequestMethod("POST")
-	@View("/templates/${plugins.ediacaran.front.template}/admin/update-plugin-detail")
+	@View("${plugins.ediacaran.front.template}/admin/update-plugin-detail")
 	public void updatePlugin(
 			@Basic(bean="code")
 			String code, 
@@ -136,7 +136,7 @@ public class AdminPubResource {
 
 	@Action(value="/plugins/{code:[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*}/status")
 	@RequestMethod("POST")
-	@View("/templates/${plugins.ediacaran.front.template}/admin/update-status-plugin-detail")
+	@View("${plugins.ediacaran.front.template}/admin/update-status-plugin-detail")
 	@Result(value="vars", mappingType=MappingTypes.VALUE)
 	public Map<String,Object> updatePlugin(@Basic(bean="code") String code, @Basic(bean="status") Boolean enable){
 		
@@ -160,7 +160,7 @@ public class AdminPubResource {
 
 	@Action(value="/plugins/install-file")
 	@RequestMethod("POST")
-	@View("/templates/${plugins.ediacaran.front.template}/admin/update-install-file")
+	@View("${plugins.ediacaran.front.template}/admin/update-install-file")
 	public void installPlugin(
 			@Basic(bean="file")
 			File pluginPackage) throws InvalidRequestException{
@@ -189,7 +189,7 @@ public class AdminPubResource {
 
 	@Action(value="/plugins/install-url")
 	@RequestMethod("POST")
-	@View("/templates/${plugins.ediacaran.front.template}/admin/update-install-file")
+	@View("${plugins.ediacaran.front.template}/admin/update-install-file")
 	public void installPlugin(
 			@Basic(bean="url")
 			String urlPluginPackage) throws InvalidRequestException{
@@ -222,7 +222,7 @@ public class AdminPubResource {
 
 	@Action(value="/plugins/{code:[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*}/uninstall")
 	@RequestMethod("POST")
-	@View("/templates/${plugins.ediacaran.front.template}/admin/uninstall-plugin")
+	@View("${plugins.ediacaran.front.template}/admin/uninstall-plugin")
 	public void uninstallPlugin(
 			@Basic(bean="code") String code, @Basic(bean="uninstall_code") String uninstallCode) throws InvalidRequestException{
 

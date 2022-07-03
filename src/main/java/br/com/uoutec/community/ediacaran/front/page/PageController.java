@@ -12,6 +12,7 @@ import org.brandao.brutos.annotation.MappingTypes;
 import org.brandao.brutos.annotation.Transient;
 import org.brandao.brutos.annotation.web.WebActionStrategyType;
 import org.brandao.brutos.web.HttpStatus;
+import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebResultAction;
 
 import br.com.uoutec.community.ediacaran.plugins.PublicType;
@@ -32,7 +33,8 @@ public class PageController implements PublicType {
 		}
 		
 		if(page != null) {
-			result.setView("template/default");
+			result.setView("/template/default");
+			result.setDispatcher(WebDispatcherType.FORWARD);
 			result.add("page", page);
 		}
 		else {
