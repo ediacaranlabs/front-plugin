@@ -6,6 +6,7 @@ import java.io.File;
 
 import br.com.uoutec.community.ediacaran.AbstractPlugin;
 import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
+import br.com.uoutec.community.ediacaran.VarParser;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager;
 import br.com.uoutec.community.ediacaran.front.objects.FileObjectsManagerDriver;
@@ -19,6 +20,7 @@ import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectValu
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver.ObjectsManagerDriverListener;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriverException;
+import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBarManagerException;
@@ -54,12 +56,24 @@ public class PluginInstaller
 	private ObjectsManagerDriver globalDriver;
 	
 	public void install() throws Throwable{
+		installPageTemplates();
 		installMenu();
 		installWidgets();
 		installSecurityConfig();
 		installListeners();
 	}
 	
+	private void installPageTemplates() {
+		VarParser varParser = EntityContextPlugin.getEntity(VarParser.class);
+		PageManager pageManager = EntityContextPlugin.getEntity(PageManager.class);
+		pageManager.registerTemplate(
+				"default", 
+				"Default Template", 
+				varParser.getValue("${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/default-template"),
+				varParser.getValue("${plugins.ediacaran.front.web_path}:/templates/pages/default-template.jsp")
+		);
+	}
+
 	private void installMenu() throws MenuBarManagerException, ObjectsManagerDriverException {
 
 		this.menubarObjectHandler = new MenubarObjectHandler();
@@ -254,12 +268,18 @@ public class PluginInstaller
 	}
 	
 	public void uninstall() throws Throwable {
+		uninstallPageTemplates();
 		uninstallMenu();
 		uninstallWidget();
 		uninstallSecurityConfig();
 		uninstallListeners();
 	}
 
+	private void uninstallPageTemplates() {
+		PageManager pageManager = EntityContextPlugin.getEntity(PageManager.class);
+		pageManager.unregisterTemplate("default");
+	}
+	
 	private void uninstallSecurityConfig() {
 	}
 	

@@ -13,6 +13,8 @@ public class Page {
 	private Map<String, String> header;
 	
 	private List<BreadcrumbPath> breadcrumb;
+
+	private String template;
 	
 	private transient Reader content;
 
@@ -48,6 +50,14 @@ public class Page {
 		this.content = content;
 	}
 	
+	public String getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(String template) {
+		this.template = template;
+	}
+
 	public void write(Writer writer) throws IOException {
 		char[] buf = new char[4096];
 		int l;

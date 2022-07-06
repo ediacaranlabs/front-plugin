@@ -13,6 +13,8 @@ public class DataPageObjectParser {
 		Page page = new Page();
 		page.setTitle((String) data.get("title"));
 		
+		page.setTemplate((String) data.get("template"));
+		
 		Map<String,Object> headerMAP = (Map<String,Object>) data.get("header");
 
 		List<Map<String,Object>> breadcrumbMAP = (List<Map<String,Object>>) data.get("breadcrumb");

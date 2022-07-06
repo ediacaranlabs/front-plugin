@@ -15,6 +15,7 @@ import org.brandao.brutos.web.HttpStatus;
 import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebResultAction;
 
+import br.com.uoutec.community.ediacaran.front.page.PageTemplateManager.PageTemplate;
 import br.com.uoutec.community.ediacaran.plugins.PublicType;
 
 @Singleton
@@ -28,12 +29,14 @@ public class PageController implements PublicType {
 	@Action("{uri:(/[a-z][a-z0-9]+(-[a-z0-9]+)*)+}")
 	public WebResultAction execute(@Basic(bean="uri") String uri, @Basic(bean="locale", mappingType=MappingTypes.VALUE) Locale locale, WebResultAction result) {
 		Page page = pageManager.getPage(uri, locale);
+		
 		if(page == null && locale != null) {
 			page = pageManager.getPage(uri, null);
 		}
 		
 		if(page != null) {
-			result.setView("/template/default");
+			PageTemplate pg = pageManager.getTemplate(page.getTemplate());
+			result.setView(pg.getTemplate(), true);
 			result.setDispatcher(WebDispatcherType.FORWARD);
 			result.add("page", page);
 		}

@@ -11,26 +11,32 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import br.com.uoutec.community.ediacaran.front.objects.FileManager;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileValue;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.Filter;
+import br.com.uoutec.community.ediacaran.front.page.PageTemplateManager.PageTemplate;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfigurationMetadata;
 import br.com.uoutec.community.ediacaran.plugins.PluginPath;
 import br.com.uoutec.community.ediacaran.plugins.PluginType;
 
+@Singleton
 public class PageManagerImp implements PageManager {
 
 	public static final String PUBLIC_PATH = "/public";
 
 	private FileManager fileManager;
 	
+	private PageTemplateManager pageTemplateManager;
+	
 	@Inject
-	public PageManagerImp(PluginType pluginType) {
+	public PageManagerImp(PluginType pluginType, PageTemplateManager pageTemplateManager) {
 		PluginConfigurationMetadata pcm = pluginType.getConfiguration().getMetadata();
 		PluginPath pp = pcm.getPath();
 		this.fileManager = new FileManager(new File(pp.getBase(), PUBLIC_PATH), new PageFileManagerHandler());
+		this.pageTemplateManager = pageTemplateManager;
 	}
 	
 	@Override
@@ -164,6 +170,26 @@ public class PageManagerImp implements PageManager {
 			.replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
 			.toLowerCase()
 			.replaceAll("\\s+", "-");
+	}
+
+	@Override
+	public void registerTemplate(String id, String name, String formPath, String template) {
+		pageTemplateManager.registerTemplate(id, name, formPath, template);
+	}
+
+	@Override
+	public PageTemplate getTemplate(String id) {
+		return pageTemplateManager.getTemplate(id);
+	}
+
+	@Override
+	public List<PageTemplate> getTemplates() {
+		return pageTemplateManager.getTemplates();
+	}
+
+	@Override
+	public void unregisterTemplate(String id) {
+		pageTemplateManager.unregisterTemplate(id);
 	}
 	
 }

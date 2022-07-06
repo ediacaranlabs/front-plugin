@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Locale;
 
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.Filter;
+import br.com.uoutec.community.ediacaran.front.page.PageTemplateManager.PageTemplate;
+import br.com.uoutec.community.ediacaran.front.page.PageTemplateManager.PageTemplateManagerException;
 
 public interface PageManager {
 
@@ -30,6 +32,14 @@ public interface PageManager {
 	List<PageMetadata> list(String path, Filter filter);
 	
 	List<PageMetadata> list(String path, boolean recursive, Filter filter);
+	
+	void registerTemplate(String id, String name, String formPath, String template) throws PageTemplateManagerException;
+
+	void unregisterTemplate(String id);
+	
+	PageTemplate getTemplate(String id);
+	
+	List<PageTemplate> getTemplates();
 	
 	public class PageManagerException extends Exception{
 

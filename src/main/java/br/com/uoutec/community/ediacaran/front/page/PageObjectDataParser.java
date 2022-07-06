@@ -10,6 +10,7 @@ public class PageObjectDataParser{
 	public Map<String,Object> toData(Page page) {
 		Map<String,Object> o = new HashMap<String,Object>();
 		o.put("title", page.getTitle());
+		o.put("template", page.getTemplate());
 		
 		Map<String,String> header = page.getHeader();
 		List<BreadcrumbPath> breadcrumb = page.getBreadcrumb();
