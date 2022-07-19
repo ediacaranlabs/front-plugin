@@ -33,9 +33,11 @@ public class PageFileManagerHandler implements FileManagerHandler{
 	
 	private static final String ID_FORMAT = "[a-z][a-z0-9]+(-[a-z0-9]+)*";
 
-	private static final String LOCALE_FORMAT = "(default)|([a-z]{2,2}_[A-Z]{2,2})";
+	//private static final String LOCALE_FORMAT = "(default)|([a-z]{2,2}_[A-Z]{2,2})";
+	
+	private static final String LOCALE_FORMAT = "[a-z]{2,2}_[A-Z]{2,2}";
 
-	private static final String FILENAME_FORMAT = "(" + ID_FORMAT + ")_(" + LOCALE_FORMAT + ").pag";
+	private static final String FILENAME_FORMAT = "(" + ID_FORMAT + ")(_" + LOCALE_FORMAT + ")?\\.pag";
 
 	static{
 		gson = new GsonBuilder()
@@ -87,15 +89,14 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		pathName = pathName.replace(File.separator, "/");
 		
 		String id = m.group(1);
-		String type = m.group(3);
+		String localeName = m.group(3);
 		
-		String localeName = m.group(4);
-		String[] localeParts = localeName.split("_");
-		Locale locale = localeParts.length == 1? null : new Locale(localeParts[0], localeParts[1]);
+		String[] localeParts = localeName == null? null : localeName.substring(1).split("_");
+		Locale locale = localeParts == null? null : new Locale(localeParts[0], localeParts[1]);
 		
 		Map<String,Object> md = new HashMap<String,Object>();
 		md.put("locale", locale);
-		return new FileMetadata(pathName, id, type, md);
+		return new FileMetadata(pathName, id, "pag", md);
 	}
 	
 	@Override
@@ -241,7 +242,7 @@ public class PageFileManagerHandler implements FileManagerHandler{
 			return path;
 		}
 
-		public String getID() {
+		public String getId() {
 			return id;
 		}
 

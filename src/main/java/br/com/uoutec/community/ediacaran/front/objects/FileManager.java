@@ -169,6 +169,7 @@ public class FileManager {
 		
 	}
 	
+	@FunctionalInterface
 	public static interface Filter {
 		
 		boolean accept(FileMetadata omd);

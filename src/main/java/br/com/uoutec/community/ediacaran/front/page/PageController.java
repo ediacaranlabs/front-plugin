@@ -27,7 +27,10 @@ public class PageController implements PublicType {
 	private PageManager pageManager;
 
 	@Action("{uri:(/[a-z][a-z0-9]+(-[a-z0-9]+)*)+}")
-	public WebResultAction execute(@Basic(bean="uri") String uri, @Basic(bean="locale", mappingType=MappingTypes.VALUE) Locale locale, WebResultAction result) {
+	public WebResultAction execute(
+			@Basic(bean="uri") String uri, 
+			@Basic(bean="locale", mappingType=MappingTypes.VALUE) Locale locale, 
+			WebResultAction result) {
 		Page page = pageManager.getPage(uri, locale);
 		
 		if(page == null && locale != null) {

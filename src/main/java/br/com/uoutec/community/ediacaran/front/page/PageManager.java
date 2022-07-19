@@ -67,7 +67,7 @@ public interface PageManager {
 		
 		String getPath();
 		
-		String getID();
+		String getId();
 		
 		Locale getLocale();
 		

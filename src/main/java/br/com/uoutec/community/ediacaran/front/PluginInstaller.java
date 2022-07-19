@@ -69,8 +69,8 @@ public class PluginInstaller
 		pageManager.registerTemplate(
 				"default", 
 				"Default Template", 
-				varParser.getValue("${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/default-template"),
-				varParser.getValue("${plugins.ediacaran.front.web_path}:/templates/pages/default-template.jsp")
+				varParser.getValue("${plugins.ediacaran.front.web_path}:/pages/admin/edit.jsp"),
+				varParser.getValue("${plugins.ediacaran.front.web_path}:/pages/default-template.jsp")
 		);
 	}
 

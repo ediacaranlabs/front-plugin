@@ -18,8 +18,6 @@ import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileValue;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.Filter;
 import br.com.uoutec.community.ediacaran.front.page.PageTemplateManager.PageTemplate;
-import br.com.uoutec.community.ediacaran.plugins.PluginConfigurationMetadata;
-import br.com.uoutec.community.ediacaran.plugins.PluginPath;
 import br.com.uoutec.community.ediacaran.plugins.PluginType;
 
 @Singleton
@@ -33,9 +31,11 @@ public class PageManagerImp implements PageManager {
 	
 	@Inject
 	public PageManagerImp(PluginType pluginType, PageTemplateManager pageTemplateManager) {
-		PluginConfigurationMetadata pcm = pluginType.getConfiguration().getMetadata();
-		PluginPath pp = pcm.getPath();
-		this.fileManager = new FileManager(new File(pp.getBase(), PUBLIC_PATH), new PageFileManagerHandler());
+		//PluginConfigurationMetadata pcm = pluginType.getConfiguration().getMetadata();
+		//PluginPath pp = pcm.getPath();
+		//this.fileManager = new FileManager(new File(pp.getBase(), PUBLIC_PATH), new PageFileManagerHandler());
+		String path = System.getProperty("app.web");
+		this.fileManager = new FileManager(new File(path), new PageFileManagerHandler());
 		this.pageTemplateManager = pageTemplateManager;
 	}
 	
@@ -108,7 +108,7 @@ public class PageManagerImp implements PageManager {
 			Map<String,Object> ext = new HashMap<String, Object>();
 			ext.put("locale", value.getLocale());
 			
-			FileMetadata fmd = new FileMetadata(value.getPath(), value.getID(), "pag", ext);
+			FileMetadata fmd = new FileMetadata(value.getPath(), value.getId(), "pag", ext);
 			FileValue fv = fileManager.get(fmd);
 			return fv == null? null : (Page)fv.getObject();
 		}
@@ -161,6 +161,13 @@ public class PageManagerImp implements PageManager {
 	}
 	
 	private void list(List<PageMetadata> result, String path, Filter filter, boolean recursive) {
+		List<FileMetadata> r = fileManager.list(path, recursive, (e)->{
+			return filter.accept(e);
+		});
+		
+		r.stream().forEach((e)->{
+			result.add(new PageMetadataImp(e));
+		});
 		
 	}
 
@@ -192,4 +199,28 @@ public class PageManagerImp implements PageManager {
 		pageTemplateManager.unregisterTemplate(id);
 	}
 	
+	public static class PageMetadataImp implements PageMetadata{
+
+		private FileMetadata fileMetadata;
+		
+		public PageMetadataImp(FileMetadata fileMetadata) {
+			this.fileMetadata = fileMetadata;
+		}
+
+		@Override
+		public String getPath() {
+			return fileMetadata.getPath();
+		}
+
+		@Override
+		public String getId() {
+			return fileMetadata.getName();
+		}
+
+		@Override
+		public Locale getLocale() {
+			return (Locale) fileMetadata.getExtMetadata("locale");
+		}
+		
+	}
 }
