@@ -238,10 +238,9 @@ public class PluginInstaller
 	}
 
 	private void installListeners() {
-		
 		EdiacaranListenerManager  ediacaranListenerManager = EntityContextPlugin.getEntity(EdiacaranListenerManager.class);
 		ediacaranListenerManager.addListener(EntityContextPlugin.getEntity(ThemeEdiacaranListener.class));
-		
+		ediacaranListenerManager.addListener(EntityContextPlugin.getEntity(LanguageRequestListener.class));
 	}
 	
 	private void installSecurityConfig() {
@@ -309,6 +308,7 @@ public class PluginInstaller
 		
 		EdiacaranListenerManager ediacaranListenerManager = EntityContextPlugin.getEntity(EdiacaranListenerManager.class);
 		ediacaranListenerManager.removeListener(EntityContextPlugin.getEntity(ThemeEdiacaranListener.class));
+		ediacaranListenerManager.removeListener(EntityContextPlugin.getEntity(LanguageRequestListener.class));
 		
 	}
 	

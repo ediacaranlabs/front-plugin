@@ -9,7 +9,7 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.jstl.fmt.LocalizationContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import br.com.uoutec.community.ediacaran.core.system.registry.MessageBundle;
+import br.com.uoutec.community.ediacaran.core.system.i18n.LanguageRegistry;
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
@@ -53,10 +53,10 @@ public class BundleTag extends SimpleTagSupport {
 		Locale currentLocale;
 		
     	if(basename == null) {
-			packageID = MessageBundle.TEMPLATE_PACKAGE + reqID;
+			packageID = LanguageRegistry.TEMPLATE_PACKAGE + reqID;
     	}
     	else {
-    		packageID = MessageBundle.TEMPLATE_PACKAGE + "/" + basename;
+    		packageID = LanguageRegistry.TEMPLATE_PACKAGE + "/" + basename;
     	}
     	
 		PageContext pageContext = (PageContext) getJspContext();  
@@ -69,7 +69,7 @@ public class BundleTag extends SimpleTagSupport {
     	}
     	
 		//MessageBundle lm = (MessageBundle)pageContext.getServletContext().getAttribute(Constants.MESSAGEBUNDLE);
-    	MessageBundle lm = EntityContextPlugin.getEntity(MessageBundle.class);
+    	LanguageRegistry lm = EntityContextPlugin.getEntity(LanguageRegistry.class);
     	
 		ResourceBundle value = lm.getResourceBundle(packageID, currentLocale);
 		

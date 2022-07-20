@@ -14,7 +14,7 @@ import java.util.Map;
 import br.com.uoutec.community.ediacaran.VarParser;
 import br.com.uoutec.community.ediacaran.core.security.AuthorizationManager;
 import br.com.uoutec.community.ediacaran.core.security.Subject;
-import br.com.uoutec.community.ediacaran.core.system.i18n.PluginMessageBundleUtils;
+import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.core.system.util.IDGenerator;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 
@@ -133,8 +133,8 @@ public class Menu implements Serializable {
 	public String getFullName(){
 		
 		if(resourceBundle != null) {
-			Locale locale = PluginMessageBundleUtils.getLocale();
-			return PluginMessageBundleUtils.getMessageResourceString(this.resourceBundle, this.template, locale);
+			Locale locale = PluginLanguageUtils.getLocale();
+			return PluginLanguageUtils.getMessageResourceString(this.resourceBundle, this.template, locale);
 		}
 		
 		return name;
