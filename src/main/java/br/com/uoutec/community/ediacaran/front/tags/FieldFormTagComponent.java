@@ -26,7 +26,10 @@ public abstract class FieldFormTagComponent extends AbstractSimpleTagComponent {
 	
 	private Boolean group;
 	
+	private Boolean escape;
+
 	public FieldFormTagComponent() {
+		setEscape(true);
 	}
 	
     public String getWrapperTemplate() {
@@ -57,7 +60,18 @@ public abstract class FieldFormTagComponent extends AbstractSimpleTagComponent {
 
 	@TagAttribute
 	public void setValue(String value) {
-		this.value = value;
+		if(value != null && Boolean.TRUE.equals(escape)) {
+			this.value = 
+					value
+						.replace("&", "&amp;")
+						.replace("<", "&lt;")
+						.replace(">", "&gt;")
+						.replace("'", "&apos;")
+						.replace("\"", "&quot;");
+		}
+		else {
+			this.value = value;
+		}
 	}
 
 	public Boolean getRequired() {
@@ -105,4 +119,13 @@ public abstract class FieldFormTagComponent extends AbstractSimpleTagComponent {
 		this.readonly = readonly;
 	}
 
+	@TagAttribute
+	public void setEscape(Boolean escape) {
+		this.escape = escape;
+	}
+	
+	public boolean getEscape() {
+		return escape;
+	}
+	
 }

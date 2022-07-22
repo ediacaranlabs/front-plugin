@@ -12,7 +12,7 @@
 			</div>
 		</ed:col>
 		<ed:col size="8">
-			<ec:breadcrumb title="Plugins">
+			<ec:breadcrumb title="Páginas">
 				<ec:breadcrumb-path icon="home" text="" lnk="#" />
 			</ec:breadcrumb>
 		</ed:col>
@@ -20,9 +20,37 @@
 </section>
 
 <ed:row>
-	<ed:col size="12" id="pages_body">
+	<ed:col size="12">
 		<ec:box>
 			<ec:box-body>
+				<ec:form method="POST" action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list" update="#pages_body">
+					<ed:row>
+						<ed:col>
+							<ec:textfield label="Nome" name="name" value="${name}"/>
+						</ed:col>
+						<ed:col size="3">
+							<ec:select label="Idioma" name="locale">
+								<ec:option value="" selected="true"></ec:option>
+								<c:forEach items="${locales}" var="loc">
+								<ec:option value="${loc.key}">${loc.value}</ec:option>
+								</c:forEach>
+							</ec:select>
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col>
+							<ec:button label="Pesqusiar" actionType="submit"  align="right"/>
+						</ed:col>
+					</ed:row>
+				</ec:form>
+			</ec:box-body>
+		</ec:box>
+	</ed:col>
+</ed:row>
+<ed:row>
+	<ed:col size="12">
+		<ec:box>
+			<ec:box-body id="pages_body">
 				<jsp:include page="/pages/admin/table.jsp"/>
 			</ec:box-body>
 		</ec:box>

@@ -2,6 +2,7 @@ package br.com.uoutec.community.ediacaran.front.page.pub;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -13,13 +14,14 @@ import org.brandao.brutos.annotation.DefaultThrowSafe;
 import org.brandao.brutos.annotation.MappingTypes;
 import org.brandao.brutos.annotation.Result;
 import org.brandao.brutos.annotation.Transient;
-import org.brandao.brutos.annotation.View;
 import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.RequestMethodTypes;
 import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
+import br.com.uoutec.community.ediacaran.core.system.i18n.LanguageRegistry;
+import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.page.Page;
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadata;
@@ -34,29 +36,46 @@ public class EditPageController {
 	@Inject
 	public PageManager pageManager;
 
+	@Transient
+	@Inject
+	private LanguageRegistry languageRegistry;
+	
 	@Action("/")
 	@Result("itens")
-	@View(value="/pages/admin/index")
-	public List<PageMetadata> index(){
-		return list(null, null);
+	//@View(value="/pages/admin/index")
+	public WebResultAction index(WebResultAction webResult){
+		webResult = list(null, null, webResult);
+		webResult.setView("/pages/admin/index");
+		return webResult;
 	}
 	
 	@Action("/list")
 	@RequestMethod(RequestMethodTypes.POST)
 	@Result("itens")
-	@View(value="/pages/admin/table")
-	public List<PageMetadata> list(
+	//@View(value="/pages/admin/table")
+	public WebResultAction list(
 			String name,
-			@Basic(mappingType=MappingTypes.VALUE)
-			String localeSTR){
+			String locale,
+			WebResultAction webResult){
 		
-		Locale locale = localeSTR == null || localeSTR.trim().length() == 0? null : Locale.forLanguageTag(localeSTR);
-		return pageManager.list(null, true, (e)->{
-			Locale l = (Locale) e.getExtMetadata("locale");
-			boolean result = locale == null? true : locale.equals(l);
-			result = result && (name == null? true : e.getName().contains(name));
-			return result;
-		});		
+		Locale loc = PluginLanguageUtils.toLocale(locale);
+		List<PageMetadata> list = 
+			pageManager.list(null, true, (e)->{
+				Locale l = (Locale) e.getExtMetadata("locale");
+				boolean result = loc == null? true : loc.equals(l);
+				result = result && (name == null? true : e.getName().contains(name));
+				return result;
+			});
+		
+		Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
+		Map<String,PageTemplate> editors = pageManager.getTemplatesIdMap();
+		webResult
+			.setView("/pages/admin/table")
+			.add("itens", list)
+			.add("locales", langNames)
+			.add("editors", editors);
+		
+		return webResult;
 	}
 
 	@Action("/edit")
@@ -65,36 +84,42 @@ public class EditPageController {
 			String path, 
 			String name,
 			@Basic(mappingType=MappingTypes.VALUE)
-			Locale locale,
+			String locale,
 			WebResultAction webResult){
 		
 		try {
-			PageMetadata pg = pageManager.unique(path, true, (e)->{
+			Locale loc = PluginLanguageUtils.toLocale(locale);
+			PageMetadata pg = pageManager.unique(path == null? "" : path, true, (e)->{
+				
+				if(name == null) {
+					return false;
+				}
+				
 				Locale l = (Locale) e.getExtMetadata("locale");
-				boolean result = locale == null? l == null : locale.equals(l);
-				result = result && (name == null? true : e.getName().contains(name));
+				boolean result = loc == null? l == null : loc.equals(l);
+				result = result && path == null? e.getPath().isEmpty() : e.getPath().equals(path);
+				result = result && e.getName().equals(name);
 				return result;
 			});
-			
-			if(pg == null) {
-				WebFlowController
-				.redirect()
-				.to("${plugins.ediacaran.front.admin_context}/pages");
-				return null;
-			}
-			
-			Page page = pageManager.getPage(pg);
+
+			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
 			List<PageTemplate> templates = pageManager.getTemplates();
+			Page page = pg == null? null : pageManager.getPage(pg);
 			PageTemplate template = page == null? templates.get(0) : pageManager.getTemplate(page.getTemplate());
+			
 			
 			webResult.setView(template.getFormPath(), true);
 			webResult.setDispatcher(WebDispatcherType.FORWARD);
-			webResult.add("page", page);
-			webResult.add("templates", templates);
+			webResult
+				.add("page", page)
+				.add("templates", templates)
+				.add("metadata", pg)
+				.add("locales", langNames);
 
 			return webResult;
 		}
 		catch(Throwable ex) {
+			ex.printStackTrace();
 			WebFlowController
 				.redirect()
 				.put("exception", ex)

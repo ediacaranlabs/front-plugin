@@ -140,6 +140,12 @@ public class TextareaTagComponent extends FieldFormTagComponent {
 		this.minlength = minlength;
 	}
 
+	@TagAttribute
+	public void setEscape(Boolean escape) {
+		super.setEscape(escape);
+		super.setEscapeContent(escape == null? false : escape.booleanValue());
+	}
+	
 	@Override
 	public String getType() {
 		return "textarea";

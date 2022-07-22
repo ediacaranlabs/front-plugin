@@ -70,7 +70,7 @@ public class FileManager {
 		
 		File base;
 		
-		if(path != null) {
+		if(path != null && !path.isEmpty()) {
 			if(!pathPattern.matcher(path).matches()) {
 				throw new IllegalStateException("invalid path: " + path);
 			}

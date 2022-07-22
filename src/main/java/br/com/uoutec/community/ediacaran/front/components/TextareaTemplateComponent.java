@@ -66,6 +66,7 @@ public class TextareaTemplateComponent extends ComponentFormTemplateComponent {
 			add("value");
 			add("name");
 			add("enabled");
+			add("content");
 		}});
 	
 	

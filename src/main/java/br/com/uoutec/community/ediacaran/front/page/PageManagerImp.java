@@ -194,6 +194,10 @@ public class PageManagerImp implements PageManager {
 		return pageTemplateManager.getTemplates();
 	}
 
+	public Map<String,PageTemplate> getTemplatesIdMap(){
+		return pageTemplateManager.getTemplatesIdMap();
+	}
+	
 	@Override
 	public void unregisterTemplate(String id) {
 		pageTemplateManager.unregisterTemplate(id);

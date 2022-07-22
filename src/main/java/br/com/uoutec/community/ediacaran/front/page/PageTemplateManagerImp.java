@@ -2,7 +2,9 @@ package br.com.uoutec.community.ediacaran.front.page;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -54,6 +56,17 @@ public class PageTemplateManagerImp
 		return Collections.unmodifiableList(r);
 	}
 
+	public Map<String,PageTemplate> getTemplatesIdMap(){
+		
+		Map<String,PageTemplate> r = new HashMap<String, PageTemplate>();
+		
+		for(Entry<String,PageTemplate> e: map.entrySet()) {
+			r.put(e.getKey(),e.getValue());
+		}
+		
+		return Collections.unmodifiableMap(r);
+	}
+	
 	@Override
 	public void unregisterTemplate(String id) {
 		

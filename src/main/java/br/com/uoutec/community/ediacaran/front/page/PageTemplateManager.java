@@ -1,6 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.page;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PageTemplateManager {
 
@@ -12,6 +13,8 @@ public interface PageTemplateManager {
 	
 	List<PageTemplate> getTemplates();
 
+	Map<String,PageTemplate> getTemplatesIdMap();
+	
 	public static class PageTemplateManagerException extends RuntimeException{
 
 		private static final long serialVersionUID = 1231376961383126039L;

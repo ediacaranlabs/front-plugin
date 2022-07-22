@@ -2,6 +2,7 @@ package br.com.uoutec.community.ediacaran.front.page;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.Filter;
 import br.com.uoutec.community.ediacaran.front.page.PageTemplateManager.PageTemplate;
@@ -40,6 +41,8 @@ public interface PageManager {
 	PageTemplate getTemplate(String id);
 	
 	List<PageTemplate> getTemplates();
+	
+	Map<String,PageTemplate> getTemplatesIdMap();
 	
 	public class PageManagerException extends Exception{
 
