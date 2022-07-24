@@ -50,7 +50,7 @@
 </ed:row>
 <ed:row>
 	<ed:col size="12">
-		<ec:textarea name="content">
+		<ec:textarea name="content" classStyle="tinymce">
 			${page.write(pageContext.out)}
 		</ec:textarea>
 	</ed:col>
