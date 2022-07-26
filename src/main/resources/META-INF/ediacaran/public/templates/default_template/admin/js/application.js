@@ -93,17 +93,50 @@ $.AppContext.utils = {
 		enableAsyncSubmit: function (local){
 
 			$((local? local + " " : "") + "form button[type=submit]").each(function() {
+				
 				var $e = $(this);
-				console.log($e);
+
 				if( $e.is("button") && $e.attr("type") == "submit" ) {
 			         
 					$e.click(function(){
 						var $b = $(this);
 						
+						$form = $b.attr("form") !== undefined? $('#' + $b.attr("form")) : $b.parents('form:first');
+						
+						var $destContent = $form.attr('dest-content');
+						
+						if(!$destContent){
+							return;
+						}
+						
 						if($b.attr("formaction") !== undefined){
-							$form = $b.attr("form") !== undefined? $('#' + $b.attr("form")) : $b.parents('form:first');
 							$form.attr("action", $b.attr("formaction"));
 						}
+						else{
+							$form.attr("action", $form.attr("action_default"));
+						}
+						
+						if($b.attr("formenctype") !== undefined){
+							$form.attr("enctype", $b.attr("formenctype"));
+						}
+						else{
+							$form.attr("enctype", $form.attr("enctype_default"));
+						}
+
+						if($b.attr("formmethod") !== undefined){
+							$form.attr("method", $b.attr("formmethod"));
+						}
+						else{
+							$form.attr("method", $form.attr("method_default"));
+						}
+						
+						if($b.attr("formtarget") !== undefined){
+							$form.attr("target", $b.attr("formtarget"));
+						}
+						else{
+							$form.attr("target", $form.attr("target_default"));
+						}
+						
 					})
 			    }					
 			});
@@ -111,13 +144,21 @@ $.AppContext.utils = {
 			$((local? local + " " : "") + "form").each(function() {
 				var $f           = $(this);
 				var $destContent = $f.attr('dest-content');
-				
-				if(!$destContent){
+				var $address     = $f.attr('action');
+				var actionType   = $address === undefined? "" : $address.substring(0, 2);
+
+				if( (actionType !== '#!' && actionType !== '#m') && !$destContent){
 					return;
 				}
 				
 				$($f).removeAttr('onsubmit');
 				$($f).unbind('submit');
+				
+				$f.attr("action_default", $f.attr("action"));
+				$f.attr("enctype_default", $f.attr("enctype"));
+				$f.attr("method_default", $f.attr("method"));
+				$f.attr("target_default", $f.attr("target"));
+
 				
 				$($f).submit(function (event) {
 			    	var $form = $(this);
@@ -198,158 +239,22 @@ $.AppContext.utils = {
 		/* load content functions */
 		
 		loadResourceContent: function ($destContent, $resource){
-
-			var opts = {
-			    type: 'GET',
-			    url: $.AppContext.vars.contextPath + $resource,
-			    success: function($data) {
-			    	
-		        	var $evt = {
-				    		sourceID: "utils.load_resource_content",
-				    		type: "after",
-				    		data: {
-				        		opts: opts,
-				        		success: true,
-				        		data: $data,
-				        	}
-					    };
-		        	
-			    	$.AppContext.eventListeners.fireEvent($evt);
-			    	
-			    	$data = $evt.data.data;
-			    	
-			    	$.AppContext.loadListeners.executeBefore($resource);
-		    		$.AppContext.utils.updateContent($destContent, $data);
-			    	$.AppContext.loadListeners.executeAfter($resource);
-		        },
-		        error: function($data){
-		        	
-		        	var $evt = {
-				    		sourceID: "utils.load_resource_content",
-				    		type: "after",
-				    		data: {
-				        		opts: opts,
-				        		success: false,
-				        		data: $data,
-				        	}
-					    };
-		        	
-			    	$.AppContext.eventListeners.fireEvent($evt);
-			    	
-			    	$data = $evt.data.data;
-		        	
-		        }
-		        
-			};
-			
-	    	var $evt = {
-	    		sourceID: "utils.load_resource_content",
-	    		type: "before",
-	    		data: opts
-		    };
-		    	
-	    	$.AppContext.eventListeners.fireEvent($evt);
-	    	
-	    	opts = $evt.data;
-			
-			$.ajax(opts);
-			
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $resource, null, null, $destContent, false);
 		},
 		
 		loadContent: function ($link){
 
-			var $address     = $.AppContext.utils.getAddress($link);
-			var $destContent = $.AppContext.utils.getDestContent($link);
-			var $modal       = $.AppContext.utils.isModal($link);
+			var $address     = $.AppContext.utils.getAddress($link.attr("href"));
+			var $destContent = $.AppContext.utils.getDestContent($link.attr("href"), $link.attr('dest-content'));
+			var $modal       = $.AppContext.utils.isModal($link.attr("href"));
 
-		    if(!$modal){
-	    		$("#wait-modal").modal('show');
-		    }
-
-		    var opts = {
-			    type: 'GET',
-			    url: $.AppContext.vars.contextPath + $address,
-			    success: function($data) {
-			    	
-		        	var $evt = {
-				    		sourceID: "utils.load_content",
-				    		type: "after",
-				    		data: {
-				        		opts: opts,
-				        		success: true,
-				        		data: $data,
-				        		modal: $modal
-				        	}
-					    };
-		        	
-			    	$.AppContext.eventListeners.fireEvent($evt);
-			    	
-			    	$data = $evt.data.data;
-				    
-			    	if($.AppContext.utils.isModal($link)){
-				    	$.AppContext.loadListeners.executeBefore($address);
-			    		$.AppContext.dialog.create();
-			    		$.AppContext.dialog.setContent($data);
-			    		$.AppContext.dialog.setVisible(true);
-				    	$.AppContext.loadListeners.executeAfter($address);
-			    	}
-			    	else{
-				    	$.AppContext.loadListeners.executeBefore($address);
-			    		$.AppContext.utils.updateContent($destContent, $data);
-				    	$.AppContext.loadListeners.executeAfter($address);
-			    	}
-			    	
-				    if(!$modal){
-				    	setTimeout(function(){ 
-				    		$("#wait-modal").modal('hide');
-				    	}, 1000);
-				    }
-			    	
-		        },
-		        error: function($data){
-		        	
-		        	var $evt = {
-				    		sourceID: "utils.load_content",
-				    		type: "after",
-				    		data: {
-				        		opts: opts,
-				        		success: false,
-				        		data: $data,
-				        		modal: $modal
-				        	}
-					    };
-		        	
-			    	$.AppContext.eventListeners.fireEvent($evt);
-			    	
-			    	$data = $evt.data.data;
-		        	
-				    if(!$modal){
-				    	setTimeout(function(){ 
-				    		$("#wait-modal").modal('hide');
-				    	}, 1000);
-				    }
-				    
-		        }
-			};
-		    
-	    	var $evt = {
-	    		sourceID: "utils.load_content",
-	    		type: "before",
-	    		data: opts
-		    };
-		    	
-	    	$.AppContext.eventListeners.fireEvent($evt);
-	    	
-	    	opts = $evt.data;
-	    	
-		    $.ajax(opts);
-			
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal);
 		},
 
 		/* send data function */
 		
 		submit: function ($form, $validate = true, $resource = null, $dest = null){
-			//alert($form + "\n" + $validate + "\n" + $resource + "\n" + $dest);
+
 			var $bv = $form.data('bootstrapValidator');
 			
 			if($validate && $bv){
@@ -362,12 +267,20 @@ $.AppContext.utils = {
 			}
 			
 			var $action      = $resource == null? $form.attr('action') : $resource;
+			var $modal       = $.AppContext.utils.isModal($action);
 			var $method      = $form.attr('method');
 			var $destContent = $dest == null? $form.attr('dest-content') : $dest;
 			var $enctype     = $form.attr('enctype');
+			var $data        = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
+
+		    $destContent = $.AppContext.utils.getDestContent($action, $destContent);
+		    $action      = $.AppContext.utils.getAddress($action);
 			
-			//var $data = $($form).serialize();
-			var $data = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
+			$.AppContext.utils.send($method, $action, $data, $enctype, $destContent, $modal);
+			
+		},
+		
+		send: function ($method, $action, $data, $enctype, $destContent, $modal){
 
 		    var opts = {
 		        type   : $method,
@@ -376,7 +289,7 @@ $.AppContext.utils = {
 		        success: function ($data){
 
 		        	var $evt = {
-				    		sourceID: "utils.submit",
+				    		sourceID: "utils.send",
 				    		type: "after",
 				    		data: {
 				        		opts: opts,
@@ -385,23 +298,33 @@ $.AppContext.utils = {
 				        	}
 					    };
 		        	
+		        	
 			    	$.AppContext.eventListeners.fireEvent($evt);
 			    	
 			    	$data = $evt.data.data;
+				    
+			    	if($modal){
+				    	$.AppContext.loadListeners.executeBefore($action);
+			    		$.AppContext.dialog.create();
+			    		$.AppContext.dialog.setContent($data);
+			    		$.AppContext.dialog.setVisible(true);
+				    	$.AppContext.loadListeners.executeAfter($action);
+			    	}
+			    	else{
+				    	$.AppContext.loadListeners.executeBefore($action);
+			    		$.AppContext.utils.updateContent($destContent, $data);
+				    	$.AppContext.loadListeners.executeAfter($action);
+			    	}		        	
 			    	
-			    	$.AppContext.loadListeners.executeBefore($action);
-		        	$.AppContext.utils.updateContent($destContent, $data);
-			    	$.AppContext.loadListeners.executeAfter($action);
-			    	
-			    	setTimeout(function(){ 
-			    		$("#wait-modal").modal('hide');
-			    	}, 1000);
+			    	//setTimeout(function(){ 
+			    	//	$("#wait-modal").modal('hide');
+			    	//}, 1000);
 			    	
 		        },
 		        error: function ($data){
 		        	
 		        	var $evt = {
-				    		sourceID: "utils.submit",
+				    		sourceID: "utils.send",
 				    		type: "after",
 				    		data: {
 				        		opts: opts,
@@ -414,9 +337,9 @@ $.AppContext.utils = {
 			    	
 			    	$data = $evt.data.data;
 		        	
-			    	setTimeout(function(){ 
-			    		$("#wait-modal").modal('hide');
-			    	}, 1000);
+			    	//setTimeout(function(){ 
+			    	//	$("#wait-modal").modal('hide');
+			    	//}, 1000);
 
 		        }
 		    };
@@ -428,10 +351,10 @@ $.AppContext.utils = {
 		    	opts.contentType = false;		    	
 		    }
 		    
-	    	$("#wait-modal").modal('show');
+	    	//$("#wait-modal").modal('show');
 			
 	    	var $evt = {
-	    		sourceID: "utils.submit",
+	    		sourceID: "utils.send",
 	    		type: "before",
 	    		data: opts
 		    };
@@ -457,59 +380,55 @@ $.AppContext.utils = {
 			window.scrollTo(0,0);
 		},
 		
-		getDestContent: function (link){
+		getDestContent: function ($address, $destContent){
 			
-			var address = link.attr("href");
-			var len     = address.length;
+			var len = $address.length;
 
 			if(len <= 2){
 				return null;
 			}
 			
-			var start       = address.substring(0, 2);
-			var destContent = link.attr('dest-content');
+			var start = $address.substring(0, 2);
 
 			if(start == '#!'){
-				return destContent? destContent : $.AppContext.vars.painel;
+				return $destContent? $destContent : $.AppContext.vars.painel;
 			}
 			else
 			if(start == '#m'){
-				return destContent? destContent : $.AppContext.vars.dialog;
+				return $destContent? $destContent : $.AppContext.vars.dialog;
 			}
 			
-			return null;
+			return $destContent;
 		},
 
-		isModal: function (link){
+		isModal: function ($address){
 			
-			var address = link.attr("href");
-			var len     = address.length;
+			var len = $address.length;
 
 			if(len <= 2){
 				return false;
 			}
 			
-			var start = address.substring(0, 2);
+			var start = $address.substring(0, 2);
 
 			return start == '#m';
 		},
 
-		getAddress: function (link){
+		getAddress: function ($address){
 			
-			var address = link.attr("href");
-			var len     = address.length;
+			var len = $address.length;
 
 			if(len <= 2){
-				return address;
+				return $address;
 			}
 			
-			var start   = address.substring(0, 2);
+			var start   = $address.substring(0, 2);
 
 			if(start == '#!' || start == '#m'){
-				return address.substring(2, address.length);
+				return $address.substring(2, $address.length);
 			}
 			
-			return address;
+			return $address;
 		},
 
 		isApplyAsyncGet: function (link){
