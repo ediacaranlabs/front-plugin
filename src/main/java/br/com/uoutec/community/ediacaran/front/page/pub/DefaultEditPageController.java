@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.brandao.brutos.annotation.Action;
 import org.brandao.brutos.annotation.Basic;
@@ -37,10 +39,13 @@ public class DefaultEditPageController {
 	@RequestMethod(RequestMethodTypes.POST)
 	@View(value="/pages/admin/save-result")
 	public void save(
+			@NotNull
+			@NotEmpty
 			String path,
+			@NotNull
+			@NotEmpty
 			String name,
-			@Basic(mappingType=MappingTypes.VALUE)
-			Locale locale,
+			String locale,
 			String title,
 			String content,
 			Map<String, String> header,
@@ -65,7 +70,7 @@ public class DefaultEditPageController {
 			page.setTemplate(template);
 			page.setTitle(title);
 			page.setContent(content == null? null : new CharArrayReader(content.toCharArray()));
-			pageManager.registerPage(path, name, locale, page);
+			//pageManager.registerPage(path, name, locale, page);
 		}
 		catch(InvalidRequestException ex) {
 			throw ex;

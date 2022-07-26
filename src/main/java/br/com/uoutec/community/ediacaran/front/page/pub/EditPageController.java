@@ -25,6 +25,7 @@ import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.page.Page;
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadata;
+import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadataImp;
 import br.com.uoutec.community.ediacaran.front.page.PageTemplateManager.PageTemplate;
 
 @Singleton
@@ -78,6 +79,33 @@ public class EditPageController {
 		return webResult;
 	}
 
+	@Action("/new")
+	public WebResultAction create(WebResultAction webResult){
+		
+		try {
+			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
+			List<PageTemplate> templates = pageManager.getTemplates();
+			PageTemplate template = templates.get(0);
+			
+			
+			webResult.setView(template.getFormPath(), true);
+			webResult.setDispatcher(WebDispatcherType.FORWARD);
+			webResult
+				.add("templates", templates)
+				.add("locales", langNames);
+
+			return webResult;
+		}
+		catch(Throwable ex) {
+			ex.printStackTrace();
+			WebFlowController
+				.redirect()
+				.put("exception", ex)
+				.to("${plugins.ediacaran.front.admin_context}/pages/list");
+			return null;
+		}
+	}
+	
 	@Action("/edit")
 	@RequestMethod(RequestMethodTypes.POST)
 	public WebResultAction edit(
@@ -89,22 +117,18 @@ public class EditPageController {
 		
 		try {
 			Locale loc = PluginLanguageUtils.toLocale(locale);
-			PageMetadata pg = pageManager.unique(path == null? "" : path, true, (e)->{
-				
-				if(name == null) {
-					return false;
-				}
-				
-				Locale l = (Locale) e.getExtMetadata("locale");
-				boolean result = loc == null? l == null : loc.equals(l);
-				result = result && path == null? e.getPath().isEmpty() : e.getPath().equals(path);
-				result = result && e.getName().equals(name);
-				return result;
-			});
+			PageMetadata pg = new PageMetadataImp(path, name, loc);
 
+			Page page = pageManager.getPage(pg);
+			
+			if(page == null) {
+				WebFlowController
+				.redirect()
+				.to("${plugins.ediacaran.front.admin_context}/pages/list");
+			}
+			
 			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
 			List<PageTemplate> templates = pageManager.getTemplates();
-			Page page = pg == null? null : pageManager.getPage(pg);
 			PageTemplate template = page == null? templates.get(0) : pageManager.getTemplate(page.getTemplate());
 			
 			
@@ -123,7 +147,7 @@ public class EditPageController {
 			WebFlowController
 				.redirect()
 				.put("exception", ex)
-				.to("${plugins.ediacaran.front.admin_context}/pages");
+				.to("${plugins.ediacaran.front.admin_context}/pages/list");
 			return null;
 		}
 	}

@@ -23,7 +23,7 @@
 	<ed:col size="12">
 		<ec:box>
 			<ec:box-body>
-				<ec:form method="POST" action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list" update="#pages_body">
+				<ec:form method="POST" update="#pages_body">
 					<ed:row>
 						<ed:col>
 							<ec:textfield label="Nome" name="name" value="${name}"/>
@@ -38,8 +38,21 @@
 						</ed:col>
 					</ed:row>
 					<ed:row>
-						<ed:col>
-							<ec:button label="Pesqusiar" actionType="submit"  align="right"/>
+						<ed:col size="8">
+						</ed:col>
+						<ed:col size="2">
+							<ec:button 
+								actionType="submit" 
+								action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new" 
+								label="Novo" 
+								align="right"/>
+						</ed:col>
+						<ed:col size="2">
+							<ec:button 
+								actionType="submit" 
+								action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list" 
+								label="Pesqusiar" 
+								align="center"/>
 						</ed:col>
 					</ed:row>
 				</ec:form>

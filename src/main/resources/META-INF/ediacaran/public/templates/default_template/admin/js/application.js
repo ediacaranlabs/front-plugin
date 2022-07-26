@@ -92,6 +92,22 @@ $.AppContext.utils = {
 
 		enableAsyncSubmit: function (local){
 
+			$((local? local + " " : "") + "form button[type=submit]").each(function() {
+				var $e = $(this);
+				console.log($e);
+				if( $e.is("button") && $e.attr("type") == "submit" ) {
+			         
+					$e.click(function(){
+						var $b = $(this);
+						
+						if($b.attr("formaction") !== undefined){
+							$form = $b.attr("form") !== undefined? $('#' + $b.attr("form")) : $b.parents('form:first');
+							$form.attr("action", $b.attr("formaction"));
+						}
+					})
+			    }					
+			});
+			
 			$((local? local + " " : "") + "form").each(function() {
 				var $f           = $(this);
 				var $destContent = $f.attr('dest-content');

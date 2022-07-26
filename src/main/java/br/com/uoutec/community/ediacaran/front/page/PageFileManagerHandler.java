@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import br.com.uoutec.community.ediacaran.core.system.util.DataUtil.ClassTypeAdapter;
+import br.com.uoutec.community.ediacaran.front.objects.FileManager;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.FileManagerHandler;
 import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadata;
@@ -29,15 +30,8 @@ public class PageFileManagerHandler implements FileManagerHandler{
 
 	private static final Gson gson;
 	
-	private static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*";
-	
-	private static final String ID_FORMAT = "[a-z][a-z0-9]+(-[a-z0-9]+)*";
 
-	//private static final String LOCALE_FORMAT = "(default)|([a-z]{2,2}_[A-Z]{2,2})";
-	
-	private static final String LOCALE_FORMAT = "[a-z]{2,2}_[A-Z]{2,2}";
-
-	private static final String FILENAME_FORMAT = "(" + ID_FORMAT + ")(_" + LOCALE_FORMAT + ")?\\.pag";
+	private static final String FILENAME_FORMAT = "(" + PageManager.ID_FORMAT + ")(_" + PageManager.LOCALE_FORMAT + ")?\\.pag";
 
 	static{
 		gson = new GsonBuilder()
@@ -46,9 +40,9 @@ public class PageFileManagerHandler implements FileManagerHandler{
         .create();		
 	}
 	
-	private Pattern idPattern = Pattern.compile(ID_FORMAT);
+	private Pattern idPattern = Pattern.compile(PageManager.ID_FORMAT);
 	
-	private Pattern pathPattern = Pattern.compile(PATH_FORMAT);
+	private Pattern pathPattern = Pattern.compile(PageManager.PATH_FORMAT);
 	
 	private Pattern fileNamePattern = Pattern.compile(FILENAME_FORMAT);
 	
@@ -96,7 +90,7 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		
 		Map<String,Object> md = new HashMap<String,Object>();
 		md.put("locale", locale);
-		return new FileMetadata(pathName, id, "pag", md);
+		return new FileMetadata(pathName.isEmpty()? FileManager.BASE_PATH : pathName, id, "pag", md);
 	}
 	
 	@Override
@@ -106,11 +100,11 @@ public class PageFileManagerHandler implements FileManagerHandler{
 			throw new IllegalStateException("invalid id: " + omd.getName());
 		}
 
-		if(!pathPattern.matcher(omd.getPath()).matches()) {
+		if(!FileManager.BASE_PATH.equals(omd.getPath()) && !pathPattern.matcher(omd.getPath()).matches()) {
 			throw new IllegalStateException("invalid path: " + omd.getPath());
 		}
 		
-		String path = toFilePath(omd.getPath() + "/" + omd.getName());
+		String path = toFilePath( omd.getPath() + "/" + omd.getName());
 		Locale locale = (Locale) omd.getExtMetadata("locale");
 		
 		StringBuilder builder = new StringBuilder(path);

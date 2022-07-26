@@ -18,11 +18,14 @@
 				<ec:table-col>${item.id}</ec:table-col>
 				<ec:table-col>${locales[item.locale]}</ec:table-col>
 				<ec:table-col>
-					<ec:form method="POST" action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/edit" update="#pages_body">
+					<ec:form method="POST" update="#pages_body">
 						<input type="hidden" name="path" value="${item.path}">
 						<input type="hidden" name="name" value="${item.id}">
 						<input type="hidden" name="locale" value="${item.locale}">
-						<ec:button actionType="submit" style="link" label="Editar"/>
+						<ec:button 
+							actionType="submit" 
+							action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/edit"
+							label="Editar"/>
 						<ec:button style="link" label="Remover"/>
 					</ec:form>
 				</ec:table-col>

@@ -59,6 +59,11 @@ public class Page {
 	}
 
 	public void write(Writer writer) throws IOException {
+		
+		if(content == null) {
+			return;
+		}
+		
 		char[] buf = new char[4096];
 		int l;
 		

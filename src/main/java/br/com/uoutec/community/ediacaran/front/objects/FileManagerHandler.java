@@ -9,6 +9,7 @@ public interface FileManagerHandler {
 
 	default String toFilePath(String value) {
 		try {
+			value = value.replaceAll("/+", "\\\\");
 			File f = new File(value);
 			f.getCanonicalFile();
 			return f.toString();

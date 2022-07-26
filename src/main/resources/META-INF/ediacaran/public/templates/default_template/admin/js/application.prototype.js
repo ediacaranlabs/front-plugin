@@ -8,8 +8,8 @@ $.AppContext.types.Form = function($form){
 	this.form = $form;
 };
 
-$.AppContext.types.Form.prototype.submit = function(){
-	$.AppContext.utils.submit(this.form);
+$.AppContext.types.Form.prototype.submit = function($validate = true, $resource = null, $dest = null){
+	$.AppContext.utils.submit(this.form,$validate, $resource, $dest);
 };
 
 $.AppContext.types.Form.prototype.getField = function(name, type = null){

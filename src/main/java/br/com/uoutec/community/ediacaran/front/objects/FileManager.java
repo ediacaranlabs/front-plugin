@@ -11,6 +11,8 @@ public class FileManager {
 
 	private static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+([_-][a-z0-9]+)*)+";
 	
+	public static final String BASE_PATH = "/";
+	
 	private Pattern pathPattern = Pattern.compile(PATH_FORMAT);
 
 	private FileManagerHandler fileManagerHandler;
@@ -70,7 +72,7 @@ public class FileManager {
 		
 		File base;
 		
-		if(path != null && !path.isEmpty()) {
+		if(path != null && !BASE_PATH.equals(path)) {
 			if(!pathPattern.matcher(path).matches()) {
 				throw new IllegalStateException("invalid path: " + path);
 			}

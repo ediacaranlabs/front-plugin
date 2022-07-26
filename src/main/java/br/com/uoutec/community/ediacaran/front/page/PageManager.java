@@ -10,6 +10,12 @@ import br.com.uoutec.community.ediacaran.front.page.PageTemplateManager.PageTemp
 
 public interface PageManager {
 
+	public static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*";
+	
+	public static final String ID_FORMAT = "[a-z][a-z0-9]+(-[a-z0-9]+)*";
+
+	public static final String LOCALE_FORMAT = "[a-z]{2,2}_[A-Z]{2,2}";
+	
 	void registerPage(String path, String name, Locale locale, Page page) throws PageManagerException;
 
 	void unregisterPage(String path, String name, Locale locale) throws PageManagerException;
@@ -76,4 +82,31 @@ public interface PageManager {
 		
 	}
 	
+	public static class PageMetadataImp implements PageMetadata{
+		
+		private final String path;
+		
+		private final String id;
+		
+		private final Locale locale;
+
+		public PageMetadataImp(String path, String id, Locale locale) {
+			this.path = path;
+			this.id = id;
+			this.locale = locale;
+		}
+
+		public String getPath() {
+			return path;
+		}
+
+		public String getId() {
+			return id;
+		}
+
+		public Locale getLocale() {
+			return locale;
+		}
+		
+	}
 }
