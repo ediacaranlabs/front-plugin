@@ -38,21 +38,22 @@
 						</ed:col>
 					</ed:row>
 					<ed:row>
-						<ed:col size="8">
-						</ed:col>
-						<ed:col size="2">
-							<ec:button 
-								actionType="submit" 
-								action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new" 
-								label="Novo" 
-								align="right"/>
+						<ed:col size="9">
 						</ed:col>
 						<ed:col size="2">
 							<ec:button 
 								actionType="submit" 
 								action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list" 
 								label="Pesqusiar" 
-								align="center"/>
+								align="right"/>
+						</ed:col>
+						<ed:col size="1">
+							<ec:button 
+								actionType="submit"
+								method="GET" 
+								action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new" 
+								label="Novo" 
+								align="right"/>
 						</ed:col>
 					</ed:row>
 				</ec:form>

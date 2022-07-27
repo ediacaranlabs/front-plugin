@@ -20,38 +20,50 @@
 	</ed:row>
 </section>
 
-<ed:row>
-	<ed:col size="5">
-		<ec:textfield name="path" label="path" value="${metadata.path}" enabled="${empty metadata}"/>
-	</ed:col>
-	<ed:col size="4">
-		<ec:textfield name="name" label="name" value="${metadata.id}" enabled="${empty metadata}"/>
-	</ed:col>
-	<ed:col size="3">
-		<ec:select label="Idioma" name="locale" enabled="${empty metadata}">
-			<ec:option value="" ></ec:option>
-			<c:forEach items="${locales}" var="loc">
-			<ec:option value="${loc.key}" selected="${metadata.locale == loc.key}">${loc.value}</ec:option>
-			</c:forEach>
-		</ec:select>
-	</ed:col>
-</ed:row>
-<ed:row>
-	<ed:col size="8">
-		<ec:textfield name="title" label="Title" value="${page.title}"/>
-	</ed:col>
-	<ed:col size="4">
-		<ec:select label="Template" name="template">
-			<c:forEach items="${templates}" var="template">
-			<ec:option value="${template.id}" selected="${page.template == template.id}">${template.name}</ec:option>
-			</c:forEach>
-		</ec:select>
-	</ed:col>
-</ed:row>
-<ed:row>
-	<ed:col size="12">
-		<ec:textarea name="content" classStyle="tinymce">
-			${page.write(pageContext.out)}
-		</ec:textarea>
-	</ed:col>
-</ed:row>
+<ec:form method="POST" update="#pages_body">
+	<input type="hidden" value="${metadata.hashCode()}" name="gid">
+	<ed:row>
+		<ed:col size="5" classStyle="form-group has-feedback">
+			<ec:textfield name="path" label="Path" value="${metadata.path}" enabled="${empty metadata}">
+				<ec:field-validator>
+					<ec:field-validator-rule name="regexp" message="Invalid path!">
+						<ec:field-validator-param name="regexp" raw="true">/^(\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*$/</ec:field-validator-param>
+					</ec:field-validator-rule>
+				</ec:field-validator>
+			</ec:textfield>
+		</ed:col>
+		<ed:col size="4">
+			<ec:textfield name="name" label="Name" value="${metadata.id}" enabled="false"/>
+		</ed:col>
+		<ed:col size="3" classStyle="form-group has-feedback">
+			<ec:select label="Language" name="locale" enabled="${empty metadata}">
+				<ec:field-validator>
+					<ec:field-validator-rule name="notEmpty" message="Please select the language!"/>
+				</ec:field-validator>
+				<ec:option value=""></ec:option>
+				<c:forEach items="${locales}" var="loc">
+				<ec:option value="${loc.key}" selected="${metadata.locale == loc.key}">${loc.value}</ec:option>
+				</c:forEach>
+			</ec:select>
+		</ed:col>
+	</ed:row>
+	<ed:row>
+		<ed:col size="8">
+			<ec:textfield name="title" label="Title" value="${page.title}"/>
+		</ed:col>
+		<ed:col size="4">
+			<ec:select label="Template" name="template">
+				<c:forEach items="${templates}" var="template">
+				<ec:option value="${template.id}" selected="${page.template == template.id}">${template.name}</ec:option>
+				</c:forEach>
+			</ec:select>
+		</ed:col>
+	</ed:row>
+	<ed:row>
+		<ed:col size="12">
+			<ec:textarea name="content" classStyle="tinymce">
+				${page.write(pageContext.out)}
+			</ec:textarea>
+		</ed:col>
+	</ed:row>
+</ec:form>
