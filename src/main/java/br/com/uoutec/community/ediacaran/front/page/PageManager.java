@@ -18,6 +18,10 @@ public interface PageManager {
 	
 	PageMetadata registerPage(String path, String name, Locale locale, Page page) throws PageManagerException;
 
+	PageMetadata registerPageIfNotExist(String path, String name, Locale locale, Page page) throws PageManagerException;
+	
+	PageMetadata registerPageIfExist(String path, String name, Locale locale, Page page) throws PageManagerException;
+	
 	void unregisterPage(String path, String name, Locale locale) throws PageManagerException;
 	
 	Page getPage(String path, Locale locale);
@@ -49,28 +53,6 @@ public interface PageManager {
 	List<PageTemplate> getTemplates();
 	
 	Map<String,PageTemplate> getTemplatesIdMap();
-	
-	public class PageManagerException extends Exception{
-
-		private static final long serialVersionUID = -5856344904897577103L;
-
-		public PageManagerException() {
-			super();
-		}
-
-		public PageManagerException(String message, Throwable cause) {
-			super(message, cause);
-		}
-
-		public PageManagerException(String message) {
-			super(message);
-		}
-
-		public PageManagerException(Throwable cause) {
-			super(cause);
-		}
-		
-	}
 	
 	public interface PageMetadata {
 		

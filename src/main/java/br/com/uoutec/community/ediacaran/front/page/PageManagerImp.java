@@ -56,6 +56,51 @@ public class PageManagerImp implements PageManager {
 		
 	}
 
+	public PageMetadata registerPageIfNotExist(String path, String name, Locale locale, Page page) throws PageManagerException{
+
+		Map<String,Object> ext = new HashMap<String, Object>();
+		ext.put("locale", locale);
+		FileMetadata fmd = new FileMetadata(path, normalize(name), "pag", ext);
+		
+		try {
+			FileValue fv = fileManager.get(fmd);
+			
+			if(fv != null) {
+				throw new PageExistsException();
+			}
+			
+			fileManager.persist(fmd, page);
+			return new PageMetadataImp(fmd);
+		}
+		catch(IOException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	public PageMetadata registerPageIfExist(String path, String name, Locale locale, Page page) throws PageManagerException{
+		
+		Map<String,Object> ext = new HashMap<String, Object>();
+		ext.put("locale", locale);
+		FileMetadata fmd = new FileMetadata(path, normalize(name), "pag", ext);
+		
+		try {
+			FileValue fv = fileManager.get(fmd);
+			
+			if(fv == null) {
+				throw new PageNotFoundException();
+			}
+			
+			fileManager.persist(fmd, page);
+			return new PageMetadataImp(fmd);
+		}
+		catch(IOException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
 	@Override
 	public void unregisterPage(String path, String name, Locale locale) throws PageManagerException {
 
