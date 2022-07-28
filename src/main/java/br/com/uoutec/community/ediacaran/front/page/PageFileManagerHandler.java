@@ -201,8 +201,10 @@ public class PageFileManagerHandler implements FileManagerHandler{
 				}
 				
 			}
-			else
-				throw new IllegalStateException(String.valueOf(content));
+			else {
+				writer.append("");
+			}
+				
 			
 			writer.flush();
 		}

@@ -1,23 +1,27 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
 import java.io.CharArrayReader;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.brandao.brutos.annotation.Action;
 import org.brandao.brutos.annotation.Controller;
 import org.brandao.brutos.annotation.DefaultThrowSafe;
+import org.brandao.brutos.annotation.Result;
+import org.brandao.brutos.annotation.ThrowSafe;
 import org.brandao.brutos.annotation.Transient;
 import org.brandao.brutos.annotation.View;
 import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.RequestMethodTypes;
+import org.brandao.brutos.validator.ValidatorException;
 
 import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.page.BreadcrumbPath;
@@ -39,31 +43,35 @@ public class DefaultEditPageController {
 	@Action("/save")
 	@RequestMethod(RequestMethodTypes.POST)
 	@View(value="/pages/admin/save-result")
-	public void save(
+	@ThrowSafe( rendered=true, target=ValidatorException.class, view="/pages/admin/validation-exception")
+	@Result("id")
+	public Map<String,Object> save(
 			Long gid,
 			@NotNull
-			@NotEmpty
-			@Pattern(regexp=PageManager.PATH_FORMAT)
+			@Size(max = 120)
+			@Pattern(regexp="(\\/|" + PageManager.PATH_FORMAT + ")")
 			String path,
+			@Size(max = 120)
 			@Pattern(regexp=PageManager.ID_FORMAT)
 			String name,
 			@Pattern(regexp=PageManager.LOCALE_FORMAT)
 			String locale,
 			@NotNull
-			@NotEmpty
+			@Size(max = 255)
 			String title,
+			@Size(max = 6000)
 			String content,
 			Map<String, String> header,
 			List<BreadcrumbPath> breadcrumb,
 			@NotNull
-			@NotEmpty
-			String template) throws InvalidRequestException{
+			@Size(max = 120)
+			String template) throws InvalidRequestException, ValidatorException{
 
 		try {
 			PageMetadata pg;
 			Page page;
 			Locale loc = PluginLanguageUtils.toLocale(locale);
-
+			
 			if(gid != null) {
 				
 				pg = new PageMetadataImp(path, name, loc);
@@ -108,13 +116,19 @@ public class DefaultEditPageController {
 			page.setTitle(title);
 			page.setContent(content == null? null : new CharArrayReader(content.toCharArray()));
 			
-			pageManager.registerPage(pg.getPath(), pg.getId(), pg.getLocale(), page);
+			pg = pageManager.registerPage(pg.getPath(), pg.getId(), pg.getLocale(), page);
+			Map<String,Object> id = new HashMap<String, Object>();
+			id.put("path", pg.getPath());
+			id.put("name", pg.getId());
+			id.put("locale", pg.getLocale());
+			id.put("gid", pg.hashCode());
+			return id;
 		}
 		catch(InvalidRequestException ex) {
 			throw ex;
 		}
 		catch(Throwable ex) {
-			throw new InvalidRequestException("interna error: ", ex);
+			throw new InvalidRequestException("internal error: ", ex);
 		}		
 	}
 	

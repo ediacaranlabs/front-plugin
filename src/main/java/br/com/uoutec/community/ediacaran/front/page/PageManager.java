@@ -16,7 +16,7 @@ public interface PageManager {
 
 	public static final String LOCALE_FORMAT = "[a-z]{2,2}_[A-Z]{2,2}";
 	
-	void registerPage(String path, String name, Locale locale, Page page) throws PageManagerException;
+	PageMetadata registerPage(String path, String name, Locale locale, Page page) throws PageManagerException;
 
 	void unregisterPage(String path, String name, Locale locale) throws PageManagerException;
 	

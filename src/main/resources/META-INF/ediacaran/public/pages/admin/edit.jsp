@@ -20,14 +20,19 @@
 	</ed:row>
 </section>
 
-<ec:form method="POST" update="#pages_body">
+<ec:form id="page_edit_form" method="POST" update="#result_page_edit_form">
 	<input type="hidden" value="${metadata.hashCode()}" name="gid">
+	<c:if test="${!empty metadata}">
+		<input type="hidden" value="${metadata.path}" name="path">
+		<input type="hidden" value="${metadata.id}" name="name">
+		<input type="hidden" value="${metadata.locale}" name="locale">
+	</c:if>
 	<ed:row>
 		<ed:col size="5" classStyle="form-group has-feedback">
-			<ec:textfield name="path" label="Path" value="${metadata.path}" enabled="${empty metadata}">
+			<ec:textfield name="path" label="Path" value="${metadata.path}"  enabled="${empty metadata}">
 				<ec:field-validator>
 					<ec:field-validator-rule name="regexp" message="Invalid path!">
-						<ec:field-validator-param name="regexp" raw="true">/^(\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*$/</ec:field-validator-param>
+						<ec:field-validator-param name="regexp" raw="true">/^(\/ | (\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*)$/</ec:field-validator-param>
 					</ec:field-validator-rule>
 				</ec:field-validator>
 			</ec:textfield>
@@ -64,6 +69,19 @@
 			<ec:textarea name="content" classStyle="tinymce">
 				${page.write(pageContext.out)}
 			</ec:textarea>
+		</ed:col>
+	</ed:row>
+	<ed:row>
+		<ed:col size="12" id="result_page_edit_form">
+		</ed:col>
+	</ed:row>
+	<ed:row>
+		<ed:col size="12">
+			<ec:button 
+				actionType="submit" 
+				action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/editor/default/save" 
+				label="Salvar" 
+				align="right"/>
 		</ed:col>
 	</ed:row>
 </ec:form>

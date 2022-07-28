@@ -28,7 +28,6 @@ public class TextareaTemplateComponent extends ComponentFormTemplateComponent {
 			add("placeholder");
 			add("required");
 			remove("value");
-			remove("name");
 		}});
 	
 	

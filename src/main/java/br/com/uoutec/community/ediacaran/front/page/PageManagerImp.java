@@ -40,7 +40,7 @@ public class PageManagerImp implements PageManager {
 	}
 	
 	@Override
-	public void registerPage(String path, String name, Locale locale, Page page) throws PageManagerException {
+	public PageMetadata registerPage(String path, String name, Locale locale, Page page) throws PageManagerException {
 		
 		Map<String,Object> ext = new HashMap<String, Object>();
 		ext.put("locale", locale);
@@ -48,6 +48,7 @@ public class PageManagerImp implements PageManager {
 		
 		try {
 			fileManager.persist(fmd, page);
+			return new PageMetadataImp(fmd);
 		}
 		catch(IOException ex) {
 			throw new PageManagerException(ex);
