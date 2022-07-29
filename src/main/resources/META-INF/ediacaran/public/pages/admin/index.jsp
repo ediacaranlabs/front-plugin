@@ -54,8 +54,8 @@
 								align="right">
 								<ec:event type="click">
 									$.AppContext.utils.loadResourceContent(
-										$.AppContext.vars.painel, 
-										"${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new");
+										null, 
+										"#m${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new");
 								</ec:event>
 							</ec:button>
 						</ed:col>

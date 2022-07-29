@@ -1,6 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
 import java.io.CharArrayReader;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -46,7 +47,7 @@ public class DefaultEditPageController {
 	@View(value="/pages/admin/save-result")
 	@ThrowSafe( rendered=true, target=ValidatorException.class, view="/pages/admin/validation-exception")
 	@Result(value="id", mappingType=MappingTypes.VALUE)
-	public PageMetadata save(
+	public Map<String,Object> save(
 			Long gid,
 			@NotNull
 			@Size(max = 120)
@@ -71,10 +72,6 @@ public class DefaultEditPageController {
 		try {
 			Locale loc = PluginLanguageUtils.toLocale(locale);
 
-			if(template == null || pageManager.getTemplate(template) == null ) {
-				throw new InvalidRequestException("invalid template");
-			}
-			
 			Page page = new Page();
 			page.setBreadcrumb(breadcrumb);
 			page.setHeader(header);
@@ -83,14 +80,37 @@ public class DefaultEditPageController {
 			page.setContent(content == null? null : new CharArrayReader(content.toCharArray()));
 			
 			if(gid == null) {
+
+				if(template == null || pageManager.getTemplate(template) == null ) {
+					throw new InvalidRequestException("invalid template");
+				}
 				
 				if(name == null) {
 					name = title;
 				}
 				
-				return pageManager.registerPageIfNotExist(path, name, loc, page);
+				PageMetadata pg = pageManager.registerPageIfNotExist(path, name, loc, page);
+
+				Map<String,Object> md = new HashMap<String,Object>();
+				md.put("path", pg.getPath());
+				md.put("id", pg.getId());
+				md.put("locale", pg.getLocale());
+				md.put("template", page.getTemplate());
+
+				return md;
 			}
 			else {
+				
+				Map<String,Object> md = new HashMap<String,Object>();
+				md.put("path", path);
+				md.put("id", name);
+				md.put("locale", loc);
+				md.put("template", template);
+				
+				if(gid != md.hashCode()) {
+					throw new InvalidRequestException("invalid id");
+				}
+				
 				pageManager.registerPageIfExist(path, name, loc, page);
 				return null;
 			}

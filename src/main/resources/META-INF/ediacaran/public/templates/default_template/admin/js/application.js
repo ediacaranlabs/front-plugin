@@ -239,6 +239,11 @@ $.AppContext.utils = {
 		/* load content functions */
 		
 		loadResourceContent: function ($destContent, $resource){
+			
+			var $address     = $.AppContext.utils.getAddress($resource);
+			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
+			var $modal       = $.AppContext.utils.isModal($resource);
+			
 			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $resource, null, null, $destContent, false);
 		},
 		

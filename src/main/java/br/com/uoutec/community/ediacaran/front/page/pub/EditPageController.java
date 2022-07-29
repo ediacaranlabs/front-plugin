@@ -81,6 +81,18 @@ public class EditPageController {
 	}
 
 	@Action("/new")
+	public WebResultAction selectTemplate(WebResultAction webResult){
+		
+		List<PageTemplate> templates = pageManager.getTemplates();
+		webResult
+			.setView("/pages/admin/select_template")
+			.add("templates", templates);
+		
+		return webResult;
+	}
+	
+	@Action("/new")
+	@RequestMethod(RequestMethodTypes.POST)
 	public WebResultAction create(String templateName, WebResultAction webResult){
 		
 		try {
