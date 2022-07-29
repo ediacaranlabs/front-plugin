@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -80,13 +81,12 @@ public class EditPageController {
 	}
 
 	@Action("/new")
-	public WebResultAction create(WebResultAction webResult){
+	public WebResultAction create(String templateName, WebResultAction webResult){
 		
 		try {
 			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
 			List<PageTemplate> templates = pageManager.getTemplates();
-			PageTemplate template = templates.get(0);
-			
+			PageTemplate template = templateName == null? templates.get(0) : pageManager.getTemplate(templateName);
 			
 			webResult.setView(template.getFormPath(), true);
 			webResult.setDispatcher(WebDispatcherType.FORWARD);
@@ -131,13 +131,18 @@ public class EditPageController {
 			List<PageTemplate> templates = pageManager.getTemplates();
 			PageTemplate template = page == null? templates.get(0) : pageManager.getTemplate(page.getTemplate());
 			
+			Map<String,Object> md = new HashMap<>();
+			md.put("path", pg.getPath());
+			md.put("id", pg.getId());
+			md.put("locale", pg.getLocale());
+			md.put("template", page.getTemplate());
 			
 			webResult.setView(template.getFormPath(), true);
 			webResult.setDispatcher(WebDispatcherType.FORWARD);
 			webResult
 				.add("page", page)
 				.add("templates", templates)
-				.add("metadata", pg)
+				.add("metadata", md)
 				.add("locales", langNames);
 
 			return webResult;

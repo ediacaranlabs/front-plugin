@@ -18,7 +18,7 @@
 				<ec:table-col>${item.id}</ec:table-col>
 				<ec:table-col>${locales[item.locale]}</ec:table-col>
 				<ec:table-col>
-					<ec:form method="POST" update="#pages_body">
+					<ec:form method="POST" update="#content-body">
 						<input type="hidden" name="path" value="${item.path}">
 						<input type="hidden" name="name" value="${item.id}">
 						<input type="hidden" name="locale" value="${item.locale}">

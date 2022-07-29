@@ -16,14 +16,16 @@
 	</c:if>
 	<c:if test="${empty exception}">
 		Update success!
+	</c:if>
+	<c:if test="${!empty id}">
+		<ec:form method="POST" action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/edit" id="form_update" update="#pages_body">
+			<input type="hidden" name="path" value="${id.path}">
+			<input type="hidden" name="name" value="${id.id}">
+			<input type="hidden" name="locale" value="${id.locale}">
+		</ec:form>
 		<script>
-			var $form = $.AppContext.utils.getById('page_edit_form');
-			<c:forEach items="${id}" var="val_id">
-				var ${val_id.key}_form = $form.getField('${val_id.key}');
-				${val_id.key}_form.setValue('${val_id.value}');
-				${val_id.key}_form.setProperty('disabled', true);
-			</c:forEach>
-			
+			var $form = $.AppContext.utils.getById('form_update');
+			$form.submit();
 		</script>
 	</c:if>
 </div>

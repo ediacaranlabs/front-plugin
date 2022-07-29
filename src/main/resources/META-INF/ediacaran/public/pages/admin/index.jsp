@@ -49,11 +49,15 @@
 						</ed:col>
 						<ed:col size="1">
 							<ec:button 
-								actionType="submit"
-								method="GET" 
-								action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new" 
+								actionType="button"
 								label="Novo" 
-								align="right"/>
+								align="right">
+								<ec:event type="click">
+									$.AppContext.utils.loadResourceContent(
+										$.AppContext.vars.painel, 
+										"${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new");
+								</ec:event>
+							</ec:button>
 						</ed:col>
 					</ed:row>
 				</ec:form>
