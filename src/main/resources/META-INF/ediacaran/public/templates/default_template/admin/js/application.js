@@ -244,7 +244,7 @@ $.AppContext.utils = {
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
 			var $modal       = $.AppContext.utils.isModal($resource);
 			
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $resource, null, null, $destContent, false);
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal);
 		},
 		
 		loadContent: function ($link){
@@ -387,23 +387,28 @@ $.AppContext.utils = {
 		
 		getDestContent: function ($address, $destContent){
 			
-			var len = $address.length;
+			if($destContent === undefined){
 
-			if(len <= 2){
-				return null;
-			}
-			
-			var start = $address.substring(0, 2);
+				var len = $address.length;
 
-			if(start == '#!'){
-				return $destContent? $destContent : $.AppContext.vars.painel;
+				if(len <= 2){
+					return null;
+				}
+ 				
+				var start = $address.substring(0, 2);
+
+				if(start == '#!'){
+					return $.AppContext.vars.painel;
+				}
+				else
+				if(start == '#m'){
+					return $.AppContext.vars.dialog;
+				}
+				
 			}
-			else
-			if(start == '#m'){
-				return $destContent? $destContent : $.AppContext.vars.dialog;
-			}
-			
+
 			return $destContent;
+			
 		},
 
 		isModal: function ($address){

@@ -18,7 +18,7 @@
 		</ed:col>
 	</ed:row>
 </section>
-
+<%--
 <ed:row>
 	<ed:col size="12">
 		<ec:box>
@@ -65,6 +65,8 @@
 		</ec:box>
 	</ed:col>
 </ed:row>
+--%>
+
 <ed:row>
 	<ed:col size="12">
 		<ec:box>
