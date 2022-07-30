@@ -4,14 +4,14 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt"                               prefix="fmt"%> 
 <ec:setTemplatePackage name="admin"/>
 
-<ed:row>
-	<ed:col size="4">Caminho</ed:col>
-	<ed:col size="3">Nome</ed:col>
-	<ed:col size="2">Idioma</ed:col>
-	<ed:col size="3">Ação</ed:col>
+<ed:row style="form">
+	<ed:col size="4"><h5>Caminho</h5></ed:col>
+	<ed:col size="3"><h5>Nome</h5></ed:col>
+	<ed:col size="2"><h5>Idioma</h5></ed:col>
+	<ed:col size="3"><h5>Ação</h5></ed:col>
 </ed:row>
 <ec:form method="POST" update="#pages_body">
-<ed:row>
+<ed:row style="form">
 	<ed:col size="4"><ec:textfield name="path" value="${path}"/></ed:col>
 	<ed:col size="3"><ec:textfield name="name" value="${name}"/></ed:col>
 	<ed:col size="2">
@@ -40,12 +40,12 @@
 </ed:row>
 </ec:form>
 <c:forEach items="${itens}" var="item">
-<ed:row>
+<ed:row style="form">
 	<ed:col size="12">
 		<hr>
 	</ed:col>
 </ed:row>
-<ed:row>
+<ed:row style="form">
 	<ed:col size="4">${item.path}</ed:col>
 	<ed:col size="3">${item.id}</ed:col>
 	<ed:col size="2">${locales[item.locale]}</ed:col>
