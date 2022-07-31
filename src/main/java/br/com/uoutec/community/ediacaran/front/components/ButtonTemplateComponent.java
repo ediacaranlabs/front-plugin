@@ -25,6 +25,7 @@ public class ButtonTemplateComponent extends ComponentFormTemplateComponent {
 			add("method");
 			add("target");
 			add("actionType");
+			add("update");
 			remove("classStyle");
 			remove("style");
 		}});
@@ -69,6 +70,19 @@ public class ButtonTemplateComponent extends ComponentFormTemplateComponent {
 				@Override
 				public String toName(String value, PropertiesComponentTemplate component) {
 					return value == null? null : "formtarget";
+				}
+			});
+			
+			put("update", new PropertyParserImp() {
+				
+				@Override
+				public String toName(String value, PropertiesComponentTemplate component) {
+					return "dest-content";
+				}
+				
+				@Override
+				public Object toValue(Object value, PropertiesComponentTemplate component) {
+					return value;
 				}
 			});
 			

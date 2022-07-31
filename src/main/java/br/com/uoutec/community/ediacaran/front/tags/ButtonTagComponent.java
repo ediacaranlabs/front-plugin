@@ -25,6 +25,8 @@ public class ButtonTagComponent extends FieldFormTagComponent {
 
 	private String actionType; //submit
 	
+	private String update;
+	
 	/* ------------ Prop ---------------*/
 	
 	private String label;
@@ -136,6 +138,15 @@ public class ButtonTagComponent extends FieldFormTagComponent {
 	@TagAttribute
 	public void setActionType(String actionType) {
 		this.actionType = actionType;
+	}
+
+	public String getUpdate() {
+		return update;
+	}
+
+	@TagAttribute
+	public void setUpdate(String update) {
+		this.update = update;
 	}
 
 }

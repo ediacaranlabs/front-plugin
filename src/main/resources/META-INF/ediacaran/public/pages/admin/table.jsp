@@ -10,7 +10,7 @@
 	<ed:col size="2"><h5>Idioma</h5></ed:col>
 	<ed:col size="3"><h5>Ação</h5></ed:col>
 </ed:row>
-<ec:form method="POST" update="#pages_body">
+<ec:form>
 <ed:row style="form">
 	<ed:col size="4"><ec:textfield name="path" value="${path}"/></ed:col>
 	<ed:col size="3"><ec:textfield name="name" value="${name}"/></ed:col>
@@ -25,8 +25,18 @@
 	<ed:col size="3">
 		<ec:button 
 			actionType="submit" 
-			action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list" 
+			action="#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list"
+			method="POST"
+			update="#pages_body" 
 			label="Pesqusiar"/>
+			
+		<ec:button 
+			actionType="submit"
+			label="Novo"
+			method="GET"
+			action="#m${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new"/>
+			
+<%--			
 		<ec:button 
 			actionType="button"
 			label="Novo">
@@ -36,6 +46,8 @@
 					"#m${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new");
 			</ec:event>
 		</ec:button>
+--%>
+
 	</ed:col>
 </ed:row>
 </ec:form>

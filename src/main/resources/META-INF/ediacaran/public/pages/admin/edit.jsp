@@ -23,12 +23,12 @@
 <ec:box>
 	<ec:box-body>	
 		<ec:form id="page_edit_form" method="POST" update="#result_page_edit_form">
+			<input type="hidden" value="${template}" name="template">
 			<c:if test="${!empty metadata}">
 				<input type="hidden" value="${metadata.hashCode()}" name="gid">
 				<input type="hidden" value="${metadata.path}" name="path">
 				<input type="hidden" value="${metadata.id}" name="name">
 				<input type="hidden" value="${metadata.locale}" name="locale">
-				<input type="hidden" value="${metadata.template}" name="template">
 			</c:if>
 			<ed:row>
 				<ed:col size="12" id="result_page_edit_form">

@@ -16,7 +16,7 @@
 <ec:modal-body>
 		<ed:row>
 			<ed:col size="12">
-				<ec:select label="Template" name="template">
+				<ec:select label="Template" name="templateName">
 					<c:forEach items="${templates}" var="template">
 					<ec:option value="${template.id}">${template.name}</ec:option>
 					</c:forEach>

@@ -104,7 +104,8 @@ public class EditPageController {
 			webResult.setDispatcher(WebDispatcherType.FORWARD);
 			webResult
 				.add("templates", templates)
-				.add("locales", langNames);
+				.add("locales", langNames)
+				.add("template", templateName);
 
 			return webResult;
 		}
@@ -155,7 +156,8 @@ public class EditPageController {
 				.add("page", page)
 				.add("templates", templates)
 				.add("metadata", md)
-				.add("locales", langNames);
+				.add("locales", langNames)
+				.add("template", page.getTemplate());
 
 			return webResult;
 		}

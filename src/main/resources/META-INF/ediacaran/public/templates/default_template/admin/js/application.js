@@ -95,53 +95,41 @@ $.AppContext.utils = {
 			$((local? local + " " : "") + "form button[type=submit]").each(function() {
 				
 				var $e = $(this);
-
+				
 				if( $e.is("button") && $e.attr("type") == "submit" ) {
 			         
-					$e.click(function(){
+					$e.click(function(event){
+						
 						var $b = $(this);
+
+						var $form = $b.attr("form") !== undefined? $('#' + $b.attr("form")) : $b.parents('form:first');
 						
-						$form = $b.attr("form") !== undefined? $('#' + $b.attr("form")) : $b.parents('form:first');
-						
-						var $destContent = $form.attr('dest-content');
-						
-						if(!$destContent){
+						if(!$form){
 							return;
 						}
 						
-						if($b.attr("formaction") !== undefined){
-							$form.attr("action", $b.attr("formaction"));
-						}
-						else{
-							$form.attr("action", $form.attr("action_default"));
-						}
+						$form.attr("action",       $b.attr("formaction") !== undefined?   $b.attr("formaction")   : $form.attr("action_default")       );
+						$form.attr("enctype",      $b.attr("formenctype") !== undefined?  $b.attr("formenctype")  : $form.attr("enctype_default")      );
+						$form.attr("method",       $b.attr("formmethod") !== undefined?   $b.attr("formmethod")   : $form.attr("method_default")       );
+						$form.attr("target",       $b.attr("formtarget") !== undefined?   $b.attr("formtarget")   : $form.attr("target_default")       );
+						$form.attr("dest-content", $b.attr("dest-content") !== undefined? $b.attr("dest-content") : $form.attr("dest_content_default") );
 						
-						if($b.attr("formenctype") !== undefined){
-							$form.attr("enctype", $b.attr("formenctype"));
-						}
-						else{
-							$form.attr("enctype", $form.attr("enctype_default"));
+						var $destContent = $form.attr('dest-content');
+						var $address     = $form.attr('action');
+						var actionType   = $address === undefined? "" : $address.substring(0, 2);
+						
+						if(actionType === '#!' || actionType === '#m'){
+					    	event.preventDefault();
+					    	$.AppContext.utils.submit($form);
 						}
 
-						if($b.attr("formmethod") !== undefined){
-							$form.attr("method", $b.attr("formmethod"));
-						}
-						else{
-							$form.attr("method", $form.attr("method_default"));
-						}
-						
-						if($b.attr("formtarget") !== undefined){
-							$form.attr("target", $b.attr("formtarget"));
-						}
-						else{
-							$form.attr("target", $form.attr("target_default"));
-						}
-						
+
 					})
 			    }					
 			});
 			
 			$((local? local + " " : "") + "form").each(function() {
+				
 				var $f           = $(this);
 				var $destContent = $f.attr('dest-content');
 				var $address     = $f.attr('action');
@@ -151,18 +139,20 @@ $.AppContext.utils = {
 					return;
 				}
 				
-				$($f).removeAttr('onsubmit');
-				$($f).unbind('submit');
+				$f.removeAttr('onsubmit');
+				$f.unbind('submit');
 				
 				$f.attr("action_default", $f.attr("action"));
 				$f.attr("enctype_default", $f.attr("enctype"));
 				$f.attr("method_default", $f.attr("method"));
 				$f.attr("target_default", $f.attr("target"));
+				$f.attr("dest_content_default", $f.attr("dest-content"));
 
 				
 				$($f).submit(function (event) {
-			    	var $form = $(this);
 
+			    	var $form = $(this);
+			    	
 			    	event.preventDefault();
 			    	$.AppContext.utils.submit($form);
 			        return false;
@@ -280,7 +270,7 @@ $.AppContext.utils = {
 
 		    $destContent = $.AppContext.utils.getDestContent($action, $destContent);
 		    $action      = $.AppContext.utils.getAddress($action);
-			
+
 			$.AppContext.utils.send($method, $action, $data, $enctype, $destContent, $modal);
 			
 		},
