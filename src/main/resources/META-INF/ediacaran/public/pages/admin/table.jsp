@@ -12,8 +12,8 @@
 </ed:row>
 <ec:form>
 <ed:row style="form">
-	<ed:col size="4"><ec:textfield name="path" value="${path}"/></ed:col>
-	<ed:col size="3"><ec:textfield name="name" value="${name}"/></ed:col>
+	<ed:col size="4"><ec:textfield name="path"/></ed:col>
+	<ed:col size="3"><ec:textfield name="name"/></ed:col>
 	<ed:col size="2">
 		<ec:select name="locale">
 			<ec:option value="" selected="true"></ec:option>
@@ -62,15 +62,18 @@
 	<ed:col size="3">${item.id}</ed:col>
 	<ed:col size="2">${locales[item.locale]}</ed:col>
 	<ed:col size="3">
-		<ec:form method="POST" update="#content-body">
+		<ec:form method="POST">
 			<input type="hidden" name="path" value="${item.path}">
 			<input type="hidden" name="name" value="${item.id}">
 			<input type="hidden" name="locale" value="${item.locale}">
 			<ec:button 
 				actionType="submit" 
-				action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/edit"
+				action="#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/edit"
 				label="Editar"/>
-			<ec:button label="Remover"/>
+			<ec:button 
+				actionType="submit" 
+				action="#m${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/confirm-delete"
+				label="Apagar"/>
 		</ec:form>
 	</ed:col>
 </ed:row>

@@ -90,6 +90,68 @@ public class EditPageController {
 		
 		return webResult;
 	}
+
+	@Action("/delete")
+	@RequestMethod(RequestMethodTypes.POST)
+	public WebResultAction delete(
+			Long gid,
+			String path, 
+			String name,
+			@Basic(mappingType=MappingTypes.VALUE)
+			String locale,
+			WebResultAction webResult){
+		
+		try {
+			Locale loc = PluginLanguageUtils.toLocale(locale);
+			
+			Map<String,Object> md = new HashMap<>();
+			md.put("path", path);
+			md.put("id", name);
+			md.put("locale", loc);
+			
+			if(gid == md.hashCode()) {
+				pageManager.unregisterPage(path, name, loc);
+			}
+			
+		}
+		catch(Throwable ex) {
+			webResult
+			.add("exception", ex);
+		}
+		
+		return index(webResult);
+	}
+	
+	@Action("/confirm-delete")
+	@RequestMethod(RequestMethodTypes.POST)
+	public WebResultAction confirmDelete(
+			String path, 
+			String name,
+			@Basic(mappingType=MappingTypes.VALUE)
+			String locale,
+			WebResultAction webResult){
+		
+		webResult.setView("/pages/admin/confirm_delete");
+		
+		try {
+			Locale loc = PluginLanguageUtils.toLocale(locale);
+			
+			Map<String,Object> md = new HashMap<>();
+			md.put("path", path);
+			md.put("id", name);
+			md.put("locale", loc);
+			
+			webResult
+				.add("metadata", md);
+
+		}
+		catch(Throwable ex) {
+			webResult
+			.add("exception", ex);
+		}
+		
+		return webResult;
+	}
 	
 	@Action("/new")
 	@RequestMethod(RequestMethodTypes.POST)
