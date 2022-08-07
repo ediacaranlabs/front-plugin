@@ -61,7 +61,7 @@ public class DefaultEditPageController {
 			@NotNull
 			@Size(max = 255)
 			String title,
-			@Size(max = 6000)
+			@Size(max = 200000)
 			String content,
 			Map<String, String> header,
 			List<BreadcrumbPath> breadcrumb,

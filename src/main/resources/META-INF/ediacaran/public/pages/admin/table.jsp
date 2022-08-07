@@ -5,15 +5,13 @@
 <ec:setTemplatePackage name="admin"/>
 
 <ed:row style="form">
-	<ed:col size="4"><h5>Caminho</h5></ed:col>
-	<ed:col size="3"><h5>Nome</h5></ed:col>
-	<ed:col size="2"><h5>Idioma</h5></ed:col>
-	<ed:col size="3"><h5>Ação</h5></ed:col>
+	<ed:col size="7"><h6>Caminho</h6></ed:col>
+	<ed:col size="2"><h6>Idioma</h6></ed:col>
+	<ed:col size="3"><h6>Ação</h6></ed:col>
 </ed:row>
 <ec:form>
 <ed:row style="form">
-	<ed:col size="4"><ec:textfield name="path"/></ed:col>
-	<ed:col size="3"><ec:textfield name="name"/></ed:col>
+	<ed:col size="7"><ec:textfield name="path"/></ed:col>
 	<ed:col size="2">
 		<ec:select name="locale">
 			<ec:option value="" selected="true"></ec:option>
@@ -58,8 +56,7 @@
 	</ed:col>
 </ed:row>
 <ed:row style="form">
-	<ed:col size="4">${item.path}</ed:col>
-	<ed:col size="3">${item.id}</ed:col>
+	<ed:col size="7"><a href="${item.path == '/'? '/' : item.path.concat('/')}${item.id}" target="_blank">${item.path == '/'? '/' : item.path.concat('/')}${item.id}</a></ed:col>
 	<ed:col size="2">${locales[item.locale]}</ed:col>
 	<ed:col size="3">
 		<ec:form method="POST">

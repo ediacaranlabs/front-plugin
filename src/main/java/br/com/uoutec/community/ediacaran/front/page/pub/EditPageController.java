@@ -1,9 +1,12 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -56,16 +59,52 @@ public class EditPageController {
 	@Result("itens")
 	//@View(value="/pages/admin/table")
 	public WebResultAction list(
-			String name,
+			@Basic(bean="path")
+			String fullPath,
 			String locale,
 			WebResultAction webResult){
+		
+		String path = null;
+		String name = null;
+		
+		if(fullPath != null) {
+			
+			fullPath = fullPath.replaceAll("/+", "/");
+			int lastIndex = fullPath.lastIndexOf("/");
+			
+			if(lastIndex == -1) {
+				path = ".*".concat(Arrays.stream(fullPath.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
+				name = path;
+			}
+			else{
+				path = fullPath.substring(0, lastIndex);
+				name = fullPath.substring(lastIndex + 1, fullPath.length());
+				
+				path = 
+					path.length() == 0?
+						null :
+						".*".concat(Arrays.stream(path.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
+				
+				name = 
+					name.length() == 0?
+						null :
+						".*".concat(Arrays.stream(name.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
+			}
+			
+		}
+		
+		String pathMath = path;
+		String nameMath = name;
 		
 		Locale loc = PluginLanguageUtils.toLocale(locale);
 		List<PageMetadata> list = 
 			pageManager.list(null, true, (e)->{
 				Locale l = (Locale) e.getExtMetadata("locale");
 				boolean result = loc == null? true : loc.equals(l);
-				result = result && (name == null? true : e.getName().contains(name));
+				result = result && (
+						(pathMath == null? true : e.getPath().matches(pathMath)) ||
+						(nameMath == null? true : e.getName().matches(nameMath))
+				);
 				return result;
 			});
 		
