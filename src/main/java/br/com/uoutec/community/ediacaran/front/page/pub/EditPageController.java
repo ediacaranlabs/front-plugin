@@ -76,19 +76,17 @@ public class EditPageController {
 				path = ".*".concat(Arrays.stream(fullPath.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
 				name = path;
 			}
+			else
+			if(lastIndex == 0) {
+				path = Arrays.stream(fullPath.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*")).concat(".*");
+				name = null;
+			}
 			else{
 				path = fullPath.substring(0, lastIndex);
 				name = fullPath.substring(lastIndex + 1, fullPath.length());
 				
-				path = 
-					path.length() == 0?
-						null :
-						".*".concat(Arrays.stream(path.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
-				
-				name = 
-					name.length() == 0?
-						null :
-						".*".concat(Arrays.stream(name.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
+				path = ".*".concat(Arrays.stream(path.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
+				name = ".*".concat(Arrays.stream(name.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
 			}
 			
 		}
@@ -102,7 +100,7 @@ public class EditPageController {
 				Locale l = (Locale) e.getExtMetadata("locale");
 				boolean result = loc == null? true : loc.equals(l);
 				result = result && (
-						(pathMath == null? true : e.getPath().matches(pathMath)) ||
+						(pathMath == null? true : e.getPath().matches(pathMath)) &&
 						(nameMath == null? true : e.getName().matches(nameMath))
 				);
 				return result;

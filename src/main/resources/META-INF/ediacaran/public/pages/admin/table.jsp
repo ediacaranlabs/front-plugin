@@ -56,7 +56,16 @@
 	</ed:col>
 </ed:row>
 <ed:row style="form">
-	<ed:col size="7"><a href="${item.path == '/'? '/' : item.path.concat('/')}${item.id}" target="_blank">${item.path == '/'? '/' : item.path.concat('/')}${item.id}</a></ed:col>
+	<ed:col size="7">
+	<c:choose>
+		<c:when test="${empty item.locale}">
+			<a href="${item.path == '/'? '/' : item.path.concat('/')}${item.id}" target="_blank">${item.path == '/'? '/' : item.path.concat('/')}${item.id}</a>
+		</c:when>
+		<c:otherwise>
+			<a href="${item.path == '/'? '/' : item.path.concat('/')}${item.id}?lang=${item.locale}" target="_blank">${item.path == '/'? '/' : item.path.concat('/')}${item.id}?lang=${item.locale}</a>
+		</c:otherwise>
+	</c:choose>
+	</ed:col>
 	<ed:col size="2">${locales[item.locale]}</ed:col>
 	<ed:col size="3">
 		<ec:form method="POST">

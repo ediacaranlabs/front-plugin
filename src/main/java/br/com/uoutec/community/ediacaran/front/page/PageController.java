@@ -9,6 +9,7 @@ import org.brandao.brutos.annotation.Action;
 import org.brandao.brutos.annotation.ActionStrategy;
 import org.brandao.brutos.annotation.Basic;
 import org.brandao.brutos.annotation.MappingTypes;
+import org.brandao.brutos.annotation.ScopeType;
 import org.brandao.brutos.annotation.Transient;
 import org.brandao.brutos.annotation.web.WebActionStrategyType;
 import org.brandao.brutos.web.HttpStatus;
@@ -29,7 +30,7 @@ public class PageController implements PublicType {
 	@Action("{uri:(/[a-z][a-z0-9]+(-[a-z0-9]+)*)+}")
 	public WebResultAction execute(
 			@Basic(bean="uri") String uri, 
-			@Basic(bean="locale", mappingType=MappingTypes.VALUE) Locale locale, 
+			@Basic(bean="locale", scope=ScopeType.REQUEST, mappingType=MappingTypes.VALUE) Locale locale, 
 			WebResultAction result) {
 		Page page = pageManager.getPage(uri, locale);
 		
