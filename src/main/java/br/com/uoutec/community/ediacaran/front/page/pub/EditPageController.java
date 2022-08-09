@@ -24,6 +24,7 @@ import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
+import br.com.uoutec.community.ediacaran.core.security.RequiresPermissions;
 import br.com.uoutec.community.ediacaran.core.system.i18n.LanguageRegistry;
 import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.page.Page;
@@ -48,6 +49,7 @@ public class EditPageController {
 	@Action("/")
 	@Result("itens")
 	//@View(value="/pages/admin/index")
+	@RequiresPermissions("CONTENT:PAGES:LIST")
 	public WebResultAction index(WebResultAction webResult){
 		webResult = list(null, null, webResult);
 		webResult.setView("/pages/admin/index");
@@ -58,6 +60,7 @@ public class EditPageController {
 	@RequestMethod(RequestMethodTypes.POST)
 	@Result("itens")
 	//@View(value="/pages/admin/table")
+	@RequiresPermissions("CONTENT:PAGES:LIST")
 	public WebResultAction list(
 			@Basic(bean="path")
 			String fullPath,
@@ -118,6 +121,7 @@ public class EditPageController {
 	}
 
 	@Action("/new")
+	@RequiresPermissions("CONTENT:PAGES:CREATE")
 	public WebResultAction selectTemplate(WebResultAction webResult){
 		
 		List<PageTemplate> templates = pageManager.getTemplates();
@@ -130,6 +134,7 @@ public class EditPageController {
 
 	@Action("/delete")
 	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction delete(
 			Long gid,
 			String path, 
@@ -161,6 +166,7 @@ public class EditPageController {
 	
 	@Action("/confirm-delete")
 	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction confirmDelete(
 			String path, 
 			String name,
@@ -192,6 +198,7 @@ public class EditPageController {
 	
 	@Action("/new")
 	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresPermissions("CONTENT:PAGES:CREATE")
 	public WebResultAction create(String templateName, WebResultAction webResult){
 		
 		try {
@@ -220,6 +227,7 @@ public class EditPageController {
 	
 	@Action("/edit")
 	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresPermissions("CONTENT:PAGES:EDIT")
 	public WebResultAction edit(
 			String path, 
 			String name,
