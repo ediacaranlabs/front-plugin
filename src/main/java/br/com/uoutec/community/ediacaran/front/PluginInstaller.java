@@ -7,6 +7,9 @@ import java.io.File;
 import br.com.uoutec.community.ediacaran.AbstractPlugin;
 import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
 import br.com.uoutec.community.ediacaran.VarParser;
+import br.com.uoutec.community.ediacaran.core.security.Authorization;
+import br.com.uoutec.community.ediacaran.core.security.Role;
+import br.com.uoutec.community.ediacaran.core.security.SecurityRegistry;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager;
 import br.com.uoutec.community.ediacaran.front.objects.FileObjectsManagerDriver;
@@ -29,6 +32,7 @@ import br.com.uoutec.community.ediacaran.front.pub.widget.WidgetException;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.security.pub.WebSecurityManagerPlugin;
+import br.com.uoutec.entity.registry.RegistryException;
 
 public class PluginInstaller 
 	extends AbstractPlugin {
@@ -243,7 +247,20 @@ public class PluginInstaller
 		ediacaranListenerManager.addListener(EntityContextPlugin.getEntity(LanguageRequestListener.class));
 	}
 	
-	private void installSecurityConfig() {
+	private void installSecurityConfig() throws RegistryException {
+		
+		SecurityRegistry securityRegistry = EntityContextPlugin.getEntity(SecurityRegistry.class);
+		
+		securityRegistry.registerRole(new Role("manager","Manager","Application Manger",null,null,null));
+		securityRegistry.registerRole(new Role("user","User","Authenticated user",null,null,null));
+		
+		
+		securityRegistry.registerAuthorization(new Authorization("CONTENT","Content","Content Manager"));
+		securityRegistry.registerAuthorization(new Authorization("PAGES"  ,"Pages","Page Manager"), "CONTENT");
+		securityRegistry.registerAuthorization(new Authorization("LIST"   ,"List","List Pages"),    "CONTENT", "PAGES");
+		securityRegistry.registerAuthorization(new Authorization("SAVE"   ,"List","List Pages"),    "CONTENT", "PAGES");
+		securityRegistry.registerAuthorization(new Authorization("UPDATE" ,"List","List Pages"),    "CONTENT", "PAGES");
+		securityRegistry.registerAuthorization(new Authorization("DELETE" ,"List","List Pages"),    "CONTENT", "PAGES");
 		
 		WebSecurityManagerPlugin webSecurityManagerPlugin = 
 				EntityContextPlugin.getEntity(WebSecurityManagerPlugin.class);
@@ -280,6 +297,11 @@ public class PluginInstaller
 	}
 	
 	private void uninstallSecurityConfig() {
+		SecurityRegistry securityRegistry = EntityContextPlugin.getEntity(SecurityRegistry.class);
+		securityRegistry.unregisterRole("manager");
+		securityRegistry.unregisterRole("user");
+		
+		securityRegistry.unregisterAuthorization("CONTENT");
 	}
 	
 	public void uninstallMenu() throws Throwable {
