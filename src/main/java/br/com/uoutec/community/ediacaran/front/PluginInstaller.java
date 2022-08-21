@@ -8,7 +8,6 @@ import br.com.uoutec.community.ediacaran.AbstractPlugin;
 import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
 import br.com.uoutec.community.ediacaran.VarParser;
 import br.com.uoutec.community.ediacaran.core.security.Authorization;
-import br.com.uoutec.community.ediacaran.core.security.Role;
 import br.com.uoutec.community.ediacaran.core.security.SecurityRegistry;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager;
@@ -250,10 +249,6 @@ public class PluginInstaller
 	private void installSecurityConfig() throws RegistryException {
 		
 		SecurityRegistry securityRegistry = EntityContextPlugin.getEntity(SecurityRegistry.class);
-		
-		securityRegistry.registerRole(new Role("manager","Manager","Application Manger",null,null,null));
-		securityRegistry.registerRole(new Role("user","User","Authenticated user",null,null,null));
-		
 		
 		securityRegistry.registerAuthorization(new Authorization("CONTENT","Content","Content Manager"));
 		securityRegistry.registerAuthorization(new Authorization("PAGES"  ,"Pages","Page Manager"), "CONTENT");
