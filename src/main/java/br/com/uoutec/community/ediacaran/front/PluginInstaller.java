@@ -22,7 +22,8 @@ import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectValu
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver.ObjectsManagerDriverListener;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriverException;
-import br.com.uoutec.community.ediacaran.front.page.PageManager;
+import br.com.uoutec.community.ediacaran.front.page.ObjectTemplateManager;
+import br.com.uoutec.community.ediacaran.front.page.PageFileManagerHandler;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBarManagerException;
@@ -58,6 +59,8 @@ public class PluginInstaller
 	
 	private ObjectsManagerDriver globalDriver;
 	
+	private ObjectsManagerDriver pageObjectDriver;
+
 	public void install() throws Throwable{
 		installPageTemplates();
 		installMenu();
@@ -68,8 +71,9 @@ public class PluginInstaller
 	
 	private void installPageTemplates() {
 		VarParser varParser = EntityContextPlugin.getEntity(VarParser.class);
-		PageManager pageManager = EntityContextPlugin.getEntity(PageManager.class);
-		pageManager.registerTemplate(
+		ObjectTemplateManager objectTemplateManager = EntityContextPlugin.getEntity(ObjectTemplateManager.class);
+		objectTemplateManager.registerTemplate(
+				"page",
 				"default", 
 				"Default Template", 
 				varParser.getValue("${plugins.ediacaran.front.web_path}:/pages/admin/edit.jsp"),
@@ -116,9 +120,18 @@ public class PluginInstaller
 			
 		});
 		
+		this.pageObjectDriver = 
+				new FileObjectsManagerDriver(
+						new FileManager(
+								new File(System.getProperty("app.web")), 
+								new PageFileManagerHandler()
+						), "pages"
+				);
+		
 		ObjectsManager objectsManager = EntityContextPlugin.getEntity(ObjectsManager.class);
 		
 		objectsManager.registerDriver(this.globalDriver);
+		objectsManager.registerDriver(this.pageObjectDriver);
 
 	}
 	
@@ -287,8 +300,8 @@ public class PluginInstaller
 	}
 
 	private void uninstallPageTemplates() {
-		PageManager pageManager = EntityContextPlugin.getEntity(PageManager.class);
-		pageManager.unregisterTemplate("default");
+		ObjectTemplateManager objectTemplateManager = EntityContextPlugin.getEntity(ObjectTemplateManager.class);
+		objectTemplateManager.unregisterTemplate("page", "default");
 	}
 	
 	private void uninstallSecurityConfig() {

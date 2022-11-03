@@ -31,7 +31,7 @@ import br.com.uoutec.community.ediacaran.front.page.Page;
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadata;
 import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadataImp;
-import br.com.uoutec.community.ediacaran.front.page.PageTemplateManager.PageTemplate;
+import br.com.uoutec.community.ediacaran.front.page.ObjectTemplateManager.ObjectTemplate;
 
 @Singleton
 @Controller(value="${plugins.ediacaran.front.admin_context}/pages", defaultActionName="/")
@@ -110,7 +110,7 @@ public class EditPageController {
 			});
 		
 		Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
-		Map<String,PageTemplate> editors = pageManager.getTemplatesIdMap();
+		Map<String,ObjectTemplate> editors = pageManager.getTemplatesIdMap();
 		webResult
 			.setView("/pages/admin/table")
 			.add("itens", list)
@@ -124,7 +124,7 @@ public class EditPageController {
 	@RequiresPermissions("CONTENT:PAGES:CREATE")
 	public WebResultAction selectTemplate(WebResultAction webResult){
 		
-		List<PageTemplate> templates = pageManager.getTemplates();
+		List<ObjectTemplate> templates = pageManager.getTemplates();
 		webResult
 			.setView("/pages/admin/select_template")
 			.add("templates", templates);
@@ -203,8 +203,8 @@ public class EditPageController {
 		
 		try {
 			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
-			List<PageTemplate> templates = pageManager.getTemplates();
-			PageTemplate template = templateName == null? templates.get(0) : pageManager.getTemplate(templateName);
+			List<ObjectTemplate> templates = pageManager.getTemplates();
+			ObjectTemplate template = templateName == null? templates.get(0) : pageManager.getTemplate(templateName);
 			
 			webResult.setView(template.getFormPath(), true);
 			webResult.setDispatcher(WebDispatcherType.FORWARD);
@@ -248,8 +248,8 @@ public class EditPageController {
 			}
 			
 			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
-			List<PageTemplate> templates = pageManager.getTemplates();
-			PageTemplate template = page == null? templates.get(0) : pageManager.getTemplate(page.getTemplate());
+			List<ObjectTemplate> templates = pageManager.getTemplates();
+			ObjectTemplate template = page == null? templates.get(0) : pageManager.getTemplate(page.getTemplate());
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", pg.getPath());

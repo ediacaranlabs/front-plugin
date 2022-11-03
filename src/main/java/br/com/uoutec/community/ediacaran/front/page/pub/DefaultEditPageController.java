@@ -25,11 +25,12 @@ import org.brandao.brutos.annotation.web.RequestMethodTypes;
 import org.brandao.brutos.validator.ValidatorException;
 
 import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
 import br.com.uoutec.community.ediacaran.front.page.BreadcrumbPath;
+import br.com.uoutec.community.ediacaran.front.page.ObjectTemplateManager;
 import br.com.uoutec.community.ediacaran.front.page.Page;
 import br.com.uoutec.community.ediacaran.front.page.PageExistsException;
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
-import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadata;
 import br.com.uoutec.community.ediacaran.front.page.PageNotFoundException;
 import br.com.uoutec.pub.entity.InvalidRequestException;
 
@@ -40,8 +41,12 @@ public class DefaultEditPageController {
 
 	@Transient
 	@Inject
-	public PageManager pageManager;
+	public ObjectsManager objectsManager;
 
+	@Transient
+	@Inject
+	public ObjectTemplateManager ObjectTemplateManager;
+	
 	@Action("/save")
 	@RequestMethod(RequestMethodTypes.POST)
 	@View(value="/pages/admin/save-result")
@@ -81,7 +86,7 @@ public class DefaultEditPageController {
 			
 			if(gid == null) {
 
-				if(template == null || pageManager.getTemplate(template) == null ) {
+				if(template == null || pageManager.getTemplate("page", template) == null ) {
 					throw new InvalidRequestException("invalid template");
 				}
 				

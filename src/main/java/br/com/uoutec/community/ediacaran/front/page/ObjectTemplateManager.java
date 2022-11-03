@@ -3,17 +3,17 @@ package br.com.uoutec.community.ediacaran.front.page;
 import java.util.List;
 import java.util.Map;
 
-public interface PageTemplateManager {
+public interface ObjectTemplateManager {
 
-	void registerTemplate(String id, String name, String formPath, String template) throws PageTemplateManagerException;
+	void registerTemplate(String type, String id, String name, String formPath, String template) throws PageTemplateManagerException;
 
-	void unregisterTemplate(String id);
+	void unregisterTemplate(String type, String id);
 	
-	PageTemplate getTemplate(String id);
+	ObjectTemplate getTemplate(String type, String id);
 	
-	List<PageTemplate> getTemplates();
+	List<ObjectTemplate> getTemplates(String type);
 
-	Map<String,PageTemplate> getTemplatesIdMap();
+	Map<String,ObjectTemplate> getTemplatesIdMap(String type);
 	
 	public static class PageTemplateManagerException extends RuntimeException{
 
@@ -37,7 +37,7 @@ public interface PageTemplateManager {
 		
 	}
 	
-	public static class PageTemplate {
+	public static class ObjectTemplate {
 		
 		private String id;
 		
@@ -47,7 +47,7 @@ public interface PageTemplateManager {
 		
 		private String template;
 
-		public PageTemplate(String id, String name, String formPath, String template) {
+		public ObjectTemplate(String id, String name, String formPath, String template) {
 			this.id = id;
 			this.name = name;
 			this.formPath = formPath;
@@ -86,7 +86,7 @@ public interface PageTemplateManager {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			PageTemplate other = (PageTemplate) obj;
+			ObjectTemplate other = (ObjectTemplate) obj;
 			if (id == null) {
 				if (other.id != null)
 					return false;

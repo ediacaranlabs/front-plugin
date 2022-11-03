@@ -24,14 +24,18 @@ import br.com.uoutec.community.ediacaran.core.system.util.DataUtil.ClassTypeAdap
 import br.com.uoutec.community.ediacaran.front.objects.FileManager;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.FileManagerHandler;
-import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadata;
 
 public class PageFileManagerHandler implements FileManagerHandler{
 
-	private static final Gson gson;
+	public static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*";
 	
+	public static final String ID_FORMAT = "[a-z][a-z0-9]+(-[a-z0-9]+)*";
 
-	private static final String FILENAME_FORMAT = "(" + PageManager.ID_FORMAT + ")(_" + PageManager.LOCALE_FORMAT + ")?\\.pag";
+	public static final String LOCALE_FORMAT = "[a-z]{2,2}_[A-Z]{2,2}";
+	
+	private static final Gson gson;
+
+	private static final String FILENAME_FORMAT = "(" + ID_FORMAT + ")(_" + LOCALE_FORMAT + ")?\\.pag";
 
 	static{
 		gson = new GsonBuilder()
@@ -40,9 +44,9 @@ public class PageFileManagerHandler implements FileManagerHandler{
         .create();		
 	}
 	
-	private Pattern idPattern = Pattern.compile(PageManager.ID_FORMAT);
+	private Pattern idPattern = Pattern.compile(ID_FORMAT);
 	
-	private Pattern pathPattern = Pattern.compile(PageManager.PATH_FORMAT);
+	private Pattern pathPattern = Pattern.compile(PATH_FORMAT);
 	
 	private Pattern fileNamePattern = Pattern.compile(FILENAME_FORMAT);
 	
@@ -213,39 +217,6 @@ public class PageFileManagerHandler implements FileManagerHandler{
 
 	public Writer getWriter(File file) throws FileNotFoundException {
 		return new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
-	}
-	
-	public static class PageMetadataImp implements PageMetadata{
-		
-		private String path;
-		
-		private String id;
-		
-		private Locale locale;
-
-		public PageMetadataImp(FileMetadata value) {
-			this(value.getPath(), value.getName(), (Locale)value.getExtMetadata("locale"));
-		}
-		
-		public PageMetadataImp(String path, String id, Locale locale) {
-			super();
-			this.path = path;
-			this.id = id;
-			this.locale = locale;
-		}
-
-		public String getPath() {
-			return path;
-		}
-
-		public String getId() {
-			return id;
-		}
-
-		public Locale getLocale() {
-			return locale;
-		}
-		
 	}
 	
 }

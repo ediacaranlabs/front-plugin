@@ -16,7 +16,8 @@ import org.brandao.brutos.web.HttpStatus;
 import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebResultAction;
 
-import br.com.uoutec.community.ediacaran.front.page.PageTemplateManager.PageTemplate;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
+import br.com.uoutec.community.ediacaran.front.page.ObjectTemplateManager.ObjectTemplate;
 import br.com.uoutec.community.ediacaran.plugins.PublicType;
 
 @Singleton
@@ -25,21 +26,25 @@ public class PageController implements PublicType {
 
 	@Inject
 	@Transient
-	private PageManager pageManager;
+	private ObjectsManager objectsManager;
+	
+	@Inject
+	@Transient
+	private ObjectTemplateManager objectTemplateManager;
 
 	@Action("{uri:(/[a-z][a-z0-9]+(-[a-z0-9]+)*)+}")
 	public WebResultAction execute(
 			@Basic(bean="uri") String uri, 
 			@Basic(bean="locale", scope=ScopeType.REQUEST, mappingType=MappingTypes.VALUE) Locale locale, 
 			WebResultAction result) {
-		Page page = pageManager.getPage(uri, locale);
+		Page page = (Page) objectsManager.getObject( "/pages" + uri, locale);
 		
 		if(page == null && locale != null) {
-			page = pageManager.getPage(uri, null);
+			page = (Page) objectsManager.getObject( "/pages" + uri, null);
 		}
 		
 		if(page != null) {
-			PageTemplate pg = pageManager.getTemplate(page.getTemplate());
+			ObjectTemplate pg = objectTemplateManager.getTemplate("page", page.getTemplate());
 			result.setView(pg.getTemplate(), true);
 			result.setDispatcher(WebDispatcherType.FORWARD);
 			result.add("page", page);

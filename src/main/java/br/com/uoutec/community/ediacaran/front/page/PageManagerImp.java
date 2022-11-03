@@ -17,20 +17,20 @@ import br.com.uoutec.community.ediacaran.front.objects.FileManager;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileValue;
 import br.com.uoutec.community.ediacaran.front.objects.FileManager.Filter;
-import br.com.uoutec.community.ediacaran.front.page.PageTemplateManager.PageTemplate;
+import br.com.uoutec.community.ediacaran.front.page.ObjectTemplateManager.ObjectTemplate;
 import br.com.uoutec.community.ediacaran.plugins.PluginType;
 
 @Singleton
 public class PageManagerImp implements PageManager {
-
+/*
 	public static final String PUBLIC_PATH = "/public";
 
 	private FileManager fileManager;
 	
-	private PageTemplateManager pageTemplateManager;
+	private ObjectTemplateManager pageTemplateManager;
 	
 	@Inject
-	public PageManagerImp(PluginType pluginType, PageTemplateManager pageTemplateManager) {
+	public PageManagerImp(PluginType pluginType, ObjectTemplateManager pageTemplateManager) {
 		//PluginConfigurationMetadata pcm = pluginType.getConfiguration().getMetadata();
 		//PluginPath pp = pcm.getPath();
 		//this.fileManager = new FileManager(new File(pp.getBase(), PUBLIC_PATH), new PageFileManagerHandler());
@@ -231,16 +231,16 @@ public class PageManagerImp implements PageManager {
 	}
 
 	@Override
-	public PageTemplate getTemplate(String id) {
+	public ObjectTemplate getTemplate(String id) {
 		return pageTemplateManager.getTemplate(id);
 	}
 
 	@Override
-	public List<PageTemplate> getTemplates() {
+	public List<ObjectTemplate> getTemplates() {
 		return pageTemplateManager.getTemplates();
 	}
 
-	public Map<String,PageTemplate> getTemplatesIdMap(){
+	public Map<String,ObjectTemplate> getTemplatesIdMap(){
 		return pageTemplateManager.getTemplatesIdMap();
 	}
 	
@@ -273,4 +273,5 @@ public class PageManagerImp implements PageManager {
 		}
 		
 	}
+	*/
 }
