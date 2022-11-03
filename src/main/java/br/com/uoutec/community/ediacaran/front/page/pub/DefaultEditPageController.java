@@ -26,12 +26,11 @@ import org.brandao.brutos.validator.ValidatorException;
 
 import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.page.BreadcrumbPath;
 import br.com.uoutec.community.ediacaran.front.page.ObjectTemplateManager;
 import br.com.uoutec.community.ediacaran.front.page.Page;
-import br.com.uoutec.community.ediacaran.front.page.PageExistsException;
-import br.com.uoutec.community.ediacaran.front.page.PageManager;
-import br.com.uoutec.community.ediacaran.front.page.PageNotFoundException;
+import br.com.uoutec.community.ediacaran.front.page.PageFileManagerHandler;
 import br.com.uoutec.pub.entity.InvalidRequestException;
 
 @Singleton
@@ -45,7 +44,7 @@ public class DefaultEditPageController {
 
 	@Transient
 	@Inject
-	public ObjectTemplateManager ObjectTemplateManager;
+	public ObjectTemplateManager objectTemplateManager;
 	
 	@Action("/save")
 	@RequestMethod(RequestMethodTypes.POST)
@@ -56,12 +55,12 @@ public class DefaultEditPageController {
 			Long gid,
 			@NotNull
 			@Size(max = 120)
-			@Pattern(regexp="(\\/|" + PageManager.PATH_FORMAT + ")")
+			@Pattern(regexp="(\\/|" + PageFileManagerHandler.PATH_FORMAT + ")")
 			String path,
 			@Size(max = 120)
-			@Pattern(regexp=PageManager.ID_FORMAT)
+			@Pattern(regexp=PageFileManagerHandler.ID_FORMAT)
 			String name,
-			@Pattern(regexp=PageManager.LOCALE_FORMAT)
+			@Pattern(regexp=PageFileManagerHandler.LOCALE_FORMAT)
 			String locale,
 			@NotNull
 			@Size(max = 255)
@@ -86,7 +85,7 @@ public class DefaultEditPageController {
 			
 			if(gid == null) {
 
-				if(template == null || pageManager.getTemplate("page", template) == null ) {
+				if(template == null || objectTemplateManager.getTemplate("page", template) == null ) {
 					throw new InvalidRequestException("invalid template");
 				}
 				
@@ -94,7 +93,7 @@ public class DefaultEditPageController {
 					name = title;
 				}
 				
-				PageMetadata pg = pageManager.registerPageIfNotExist(path, name, loc, page);
+				ObjectMetadata pg = objectsManager.registerObjectIfNotExist("/page/" + path + "/" + name, loc, page);
 
 				Map<String,Object> md = new HashMap<String,Object>();
 				md.put("path", pg.getPath());
@@ -116,7 +115,7 @@ public class DefaultEditPageController {
 					throw new InvalidRequestException("invalid id");
 				}
 				
-				pageManager.registerPageIfExist(path, name, loc, page);
+				objectsManager.registerObjectIfNotExist("/page/" + path + "/" + name, loc, page);
 				return null;
 			}
 			
@@ -124,12 +123,6 @@ public class DefaultEditPageController {
 		catch(InvalidRequestException ex) {
 			throw ex;
 		}
-		catch(PageExistsException ex) {
-			throw new InvalidRequestException("page has been registeded");
-		}		
-		catch(PageNotFoundException ex) {
-			throw new InvalidRequestException("page not found");
-		}		
 		catch(Throwable ex) {
 			throw new InvalidRequestException("internal error: ", ex);
 		}		

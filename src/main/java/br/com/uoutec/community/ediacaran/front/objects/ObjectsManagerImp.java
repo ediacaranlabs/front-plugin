@@ -114,6 +114,12 @@ public class ObjectsManagerImp
 		return new PathMetadata(driver, fullPath, null);
 	}
 	
+	@Override
+	public ObjectMetadata registerObjectIfNotExist(String id, Locale locale, Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	/* /global/admin/menus/adminmenubar */
 	/* /local/index */
 	/* /mysql/admin/menus/adminmenubar */
@@ -767,5 +773,5 @@ public class ObjectsManagerImp
 		}
 		
 	}
-	
+
 }

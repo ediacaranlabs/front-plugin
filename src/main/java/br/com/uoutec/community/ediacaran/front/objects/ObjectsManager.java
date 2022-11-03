@@ -8,6 +8,8 @@ public interface ObjectsManager {
 
 	void registerObject(String id, Locale locale, Object object);
 	
+	ObjectMetadata registerObjectIfNotExist(String id, Locale locale, Object object);
+	
 	void unregisterObject(String id, Locale locale);
 	
 	ObjectEntry getObjects(String id);
