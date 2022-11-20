@@ -1,26 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.page;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.Normalizer;
-import java.text.Normalizer.Form;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import br.com.uoutec.community.ediacaran.front.objects.FileManager;
-import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
-import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileValue;
-import br.com.uoutec.community.ediacaran.front.objects.FileManager.Filter;
-import br.com.uoutec.community.ediacaran.front.page.ObjectTemplateManager.ObjectTemplate;
-import br.com.uoutec.community.ediacaran.plugins.PluginType;
-
-@Singleton
+/* Moved to a Driver */
+@Deprecated
 public class PageManagerImp implements PageManager {
 /*
 	public static final String PUBLIC_PATH = "/public";

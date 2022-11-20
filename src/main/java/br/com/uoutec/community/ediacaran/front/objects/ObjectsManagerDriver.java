@@ -17,6 +17,8 @@ public interface ObjectsManagerDriver {
 
 	void setDefaultObjectHandler(ObjectHandler defaultObjectHandler);
 	
+	boolean isCacheable(ObjectMetadata omd);
+	
 	String getName();
 	
 	ObjectMetadata unique();

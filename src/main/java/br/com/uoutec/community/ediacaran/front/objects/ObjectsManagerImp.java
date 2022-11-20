@@ -68,19 +68,19 @@ public class ObjectsManagerImp
 		//this.objectFileManager = new ObjectFileManager(new File(System.getProperty("app.base"), OBJECTS_REPOSITORY));
 	}
 	
-	private boolean isVaidID(String value) {
+	protected boolean isVaidID(String value) {
 		return fullIdPattern.matcher(value).matches();
 	}
 	
-	private boolean isVaidSearch(String value) {
+	protected boolean isVaidSearch(String value) {
 		return searchPattern.matcher(value).matches();
 	}
 	
-	private String getID(ObjectsManagerDriver driver, String path, String id) {
+	protected String getID(ObjectsManagerDriver driver, String path, String id) {
 		return driver.getName() + path + "/" + id;
 	}
 	
-	private PathMetadata getPathMetadata(String id) {
+	protected PathMetadata getPathMetadata(String id) {
 		
 		if(!isVaidID(id)) {
 			return null;
@@ -626,34 +626,6 @@ public class ObjectsManagerImp
 		
 		return driver;
 	}	
-	
-	private class PathMetadata{
-		
-		public String driver;
-		
-		public String path;
-		
-		public String id;
-
-		public PathMetadata(String driver, String path, String id) {
-			this.driver = driver;
-			this.path = path;
-			this.id = id;
-		}
-
-		public String getDriver() {
-			return driver;
-		}
-
-		public String getPath() {
-			return path;
-		}
-
-		public String getId() {
-			return id;
-		}
-		
-	}
 	
 	private static class ObjectListenerManager implements ObjectListener{
 

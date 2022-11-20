@@ -6,7 +6,6 @@ import java.io.File;
 
 import br.com.uoutec.community.ediacaran.AbstractPlugin;
 import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
-import br.com.uoutec.community.ediacaran.VarParser;
 import br.com.uoutec.community.ediacaran.core.security.Authorization;
 import br.com.uoutec.community.ediacaran.core.security.SecurityRegistry;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
@@ -22,7 +21,6 @@ import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectValu
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver.ObjectsManagerDriverListener;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriverException;
-import br.com.uoutec.community.ediacaran.front.page.ObjectTemplateManager;
 import br.com.uoutec.community.ediacaran.front.page.PageFileManagerHandler;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
@@ -70,15 +68,6 @@ public class PluginInstaller
 	}
 	
 	private void installPageTemplates() {
-		VarParser varParser = EntityContextPlugin.getEntity(VarParser.class);
-		ObjectTemplateManager objectTemplateManager = EntityContextPlugin.getEntity(ObjectTemplateManager.class);
-		objectTemplateManager.registerTemplate(
-				"page",
-				"default", 
-				"Default Template", 
-				varParser.getValue("${plugins.ediacaran.front.web_path}:/pages/admin/edit.jsp"),
-				varParser.getValue("${plugins.ediacaran.front.web_path}:/pages/default-template.jsp")
-		);
 	}
 
 	private void installMenu() throws MenuBarManagerException, ObjectsManagerDriverException {
@@ -300,8 +289,6 @@ public class PluginInstaller
 	}
 
 	private void uninstallPageTemplates() {
-		ObjectTemplateManager objectTemplateManager = EntityContextPlugin.getEntity(ObjectTemplateManager.class);
-		objectTemplateManager.unregisterTemplate("page", "default");
 	}
 	
 	private void uninstallSecurityConfig() {

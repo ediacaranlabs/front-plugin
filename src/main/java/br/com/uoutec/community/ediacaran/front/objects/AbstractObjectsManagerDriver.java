@@ -32,6 +32,10 @@ public abstract class AbstractObjectsManagerDriver implements ObjectsManagerDriv
 		this.listeners = new ObjectsManagerDriverListenerWrapper();
 	}
 	
+	public boolean isCacheable(ObjectMetadata omd) {
+		return true;
+	}
+	
 	public String getName() {
 		return name;
 	}

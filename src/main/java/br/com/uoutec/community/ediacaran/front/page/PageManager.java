@@ -1,13 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.page;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import br.com.uoutec.community.ediacaran.front.objects.FileManager.Filter;
-import br.com.uoutec.community.ediacaran.front.page.ObjectTemplateManager.ObjectTemplate;
-import br.com.uoutec.community.ediacaran.front.page.ObjectTemplateManager.PageTemplateManagerException;
-
+/* Moved to a Driver */
+@Deprecated
 public interface PageManager {
 /*
 	public static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*";

@@ -1,43 +1,9 @@
 package br.com.uoutec.community.ediacaran.front.page;
 
-import java.util.List;
-import java.util.Map;
+import br.com.uoutec.community.ediacaran.VarParser;
+import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 
-public interface ObjectTemplateManager {
-
-	void registerTemplate(String type, String id, String name, String formPath, String template) throws PageTemplateManagerException;
-
-	void unregisterTemplate(String type, String id);
-	
-	ObjectTemplate getTemplate(String type, String id);
-	
-	List<ObjectTemplate> getTemplates(String type);
-
-	Map<String,ObjectTemplate> getTemplatesIdMap(String type);
-	
-	public static class PageTemplateManagerException extends RuntimeException{
-
-		private static final long serialVersionUID = 1231376961383126039L;
-
-		public PageTemplateManagerException() {
-			super();
-		}
-
-		public PageTemplateManagerException(String message, Throwable cause) {
-			super(message, cause);
-		}
-
-		public PageTemplateManagerException(String message) {
-			super(message);
-		}
-
-		public PageTemplateManagerException(Throwable cause) {
-			super(cause);
-		}
-		
-	}
-	
-	public static class ObjectTemplate {
+public class ObjectTemplate {
 		
 		private String id;
 		
@@ -63,11 +29,13 @@ public interface ObjectTemplateManager {
 		}
 
 		public String getFormPath() {
-			return formPath;
+			VarParser varParser = EntityContextPlugin.getEntity(VarParser.class);
+			return varParser.getValue(formPath);
 		}
 
 		public String getTemplate() {
-			return template;
+			VarParser varParser = EntityContextPlugin.getEntity(VarParser.class);
+			return varParser.getValue(template);
 		}
 
 		@Override
@@ -95,6 +63,4 @@ public interface ObjectTemplateManager {
 			return true;
 		}
 		
-	}
-	
 }

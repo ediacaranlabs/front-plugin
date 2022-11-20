@@ -1,6 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
-public class ObjectsManagerDriverException extends Exception{
+public class ObjectsManagerDriverException extends RuntimeException{
 
 	private static final long serialVersionUID = -676360776297912075L;
 
