@@ -27,11 +27,11 @@ import org.brandao.brutos.web.WebResultAction;
 import br.com.uoutec.community.ediacaran.core.security.RequiresPermissions;
 import br.com.uoutec.community.ediacaran.core.system.i18n.LanguageRegistry;
 import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
+import br.com.uoutec.community.ediacaran.front.page.ObjectTemplate;
+import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManager;
 import br.com.uoutec.community.ediacaran.front.page.Page;
-import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadata;
 import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadataImp;
-import br.com.uoutec.community.ediacaran.front.page.ObjectTemplateManager.ObjectTemplate;
 
 @Singleton
 @Controller(value="${plugins.ediacaran.front.admin_context}/pages", defaultActionName="/")
@@ -40,7 +40,7 @@ public class EditPageController {
 
 	@Transient
 	@Inject
-	public PageManager pageManager;
+	public ObjectsTemplateManager objectsTemplateManager;
 
 	@Transient
 	@Inject
@@ -99,7 +99,7 @@ public class EditPageController {
 		
 		Locale loc = PluginLanguageUtils.toLocale(locale);
 		List<PageMetadata> list = 
-			pageManager.list(null, true, (e)->{
+				objectsTemplateManager.list(null, true, (e)->{
 				Locale l = (Locale) e.getExtMetadata("locale");
 				boolean result = loc == null? true : loc.equals(l);
 				result = result && (

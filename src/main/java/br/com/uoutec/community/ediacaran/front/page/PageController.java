@@ -17,7 +17,6 @@ import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebResultAction;
 
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
-import br.com.uoutec.community.ediacaran.front.page.ObjectTemplateManager.ObjectTemplate;
 import br.com.uoutec.community.ediacaran.plugins.PublicType;
 
 @Singleton
@@ -30,7 +29,7 @@ public class PageController implements PublicType {
 	
 	@Inject
 	@Transient
-	private ObjectTemplateManager objectTemplateManager;
+	private ObjectsTemplateManager objectTemplateManager;
 
 	@Action("{uri:(/[a-z][a-z0-9]+(-[a-z0-9]+)*)+}")
 	public WebResultAction execute(
