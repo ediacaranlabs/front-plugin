@@ -47,6 +47,11 @@ public class PageObjectDriver
 	}
 
 	@Override
+	public ObjectTemplate getTemplateByName(String id) {
+		return templates.get(id);
+	}
+	
+	@Override
 	public List<ObjectTemplate> getTemplates() {
 		return Collections.unmodifiableList( templates.values().stream().collect(Collectors.toList()) );
 	}
@@ -55,5 +60,5 @@ public class PageObjectDriver
 	public Map<String, ObjectTemplate> getTemplatesIdMap() {
 		return Collections.unmodifiableMap(templates);
 	}
-	
+
 }

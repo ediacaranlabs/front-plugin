@@ -35,4 +35,10 @@ public class ObjectsTemplateManagerImp
 		return driver.getTemplatesIdMap();
 	}
 
+	@Override
+	public ObjectTemplate getTemplateById(String driverName, String name) {
+		ObjectsTemplateManagerDriver driver = (ObjectsTemplateManagerDriver)getSecureDriver(driverName);
+		return driver.getTemplateByName(name);
+	}
+
 }

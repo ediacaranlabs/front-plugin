@@ -25,10 +25,10 @@ import org.brandao.brutos.annotation.web.RequestMethodTypes;
 import org.brandao.brutos.validator.ValidatorException;
 
 import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
+import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.page.BreadcrumbPath;
-import br.com.uoutec.community.ediacaran.front.page.ObjectTemplateManager;
+import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManager;
 import br.com.uoutec.community.ediacaran.front.page.Page;
 import br.com.uoutec.community.ediacaran.front.page.PageFileManagerHandler;
 import br.com.uoutec.pub.entity.InvalidRequestException;
@@ -40,12 +40,8 @@ public class DefaultEditPageController {
 
 	@Transient
 	@Inject
-	public ObjectsManager objectsManager;
+	public ObjectsTemplateManager objectsManager;
 
-	@Transient
-	@Inject
-	public ObjectTemplateManager objectTemplateManager;
-	
 	@Action("/save")
 	@RequestMethod(RequestMethodTypes.POST)
 	@View(value="/pages/admin/save-result")
@@ -85,7 +81,7 @@ public class DefaultEditPageController {
 			
 			if(gid == null) {
 
-				if(template == null || objectTemplateManager.getTemplate("page", template) == null ) {
+				if(template == null || objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, template) == null ) {
 					throw new InvalidRequestException("invalid template");
 				}
 				

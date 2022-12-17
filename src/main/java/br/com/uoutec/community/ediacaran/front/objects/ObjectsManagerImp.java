@@ -270,6 +270,12 @@ public class ObjectsManagerImp
 	}
 	
 	@Override
+	public Object getObject(ObjectMetadata omd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public Object getObject(String id) {
 		return getObject(id, null);
 	}

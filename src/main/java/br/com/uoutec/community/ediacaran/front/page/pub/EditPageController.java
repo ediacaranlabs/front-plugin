@@ -183,7 +183,7 @@ public class EditPageController {
 		try {
 			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
 			List<ObjectTemplate> templates = objectsManager.getTemplates(PagesObjectsManagerDriver.DRIVER_NAME);
-			ObjectTemplate template = templateName == null? templates.get(0) : objectsManager.getTemplateByName(PagesObjectsManagerDriver.DRIVER_NAME, templateName);
+			ObjectTemplate template = templateName == null? templates.get(0) : objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, templateName);
 			
 			webResult.setView(template.getFormPath(), true);
 			webResult.setDispatcher(WebDispatcherType.FORWARD);
@@ -228,7 +228,7 @@ public class EditPageController {
 			
 			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
 			List<ObjectTemplate> templates = objectsManager.getTemplates(PagesObjectsManagerDriver.DRIVER_NAME);
-			ObjectTemplate template = page == null? templates.get(0) : objectsManager.getTemplateByName(PagesObjectsManagerDriver.DRIVER_NAME, page.getTemplate());
+			ObjectTemplate template = page == null? templates.get(0) : objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, page.getTemplate());
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", pg.getPath());
