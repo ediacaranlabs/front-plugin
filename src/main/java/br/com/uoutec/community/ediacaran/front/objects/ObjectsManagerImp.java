@@ -200,7 +200,7 @@ public class ObjectsManagerImp
 			PathMetadata pmd = getPathMetadata(id);
 			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
 			
-			ObjectMetadata omd = driver.unique(pmd.getPath(), pmd.getId(), locale);
+			ObjectMetadata omd = driver.unique(pmd.getPath(), pmd.getId(), locale, false, SearchType.EQUAL_LOCALE);
 			
 			if(omd == null) {
 				return;
@@ -315,7 +315,7 @@ public class ObjectsManagerImp
 			PathMetadata pmd = getPathMetadata(id);
 			ObjectsManagerDriver driver = getSecureDriver(pmd.getDriver());
 			
-			List<ObjectMetadata> list = driver.list(pmd.getPath(), pmd.getId(), null, true);
+			List<ObjectMetadata> list = driver.list(pmd.getPath(), pmd.getId(), null, false, SearchType.EQUAL);
 			
 			Map<Locale,Object> map = new HashMap<Locale, Object>();
 			for(ObjectMetadata omd: list) {
@@ -337,7 +337,7 @@ public class ObjectsManagerImp
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Object> list(String path, String name, Locale locale, boolean recursive) {
+	public List<Object> list(String path, String name, Locale locale, boolean recursive, Filter filter) {
 		
 		readLock.lock();
 		try {
@@ -357,7 +357,7 @@ public class ObjectsManagerImp
 				return result;
 			});
 			*/
-			List<ObjectMetadata> list = driver.list(pmd.getPath(), pmd.getId(), locale, recursive);
+			List<ObjectMetadata> list = driver.list(pmd.getPath(), pmd.getId(), locale, recursive, filter);
 			
 			List<Object> r = new ArrayList<Object>();
 			for(ObjectMetadata omd: list) {
@@ -384,14 +384,14 @@ public class ObjectsManagerImp
 	}
 
 	@Override
-	public List<ObjectMetadata> listMetadata(String path, String name, Locale locale, boolean recursive) {
+	public List<ObjectMetadata> listMetadata(String path, String name, Locale locale, boolean recursive, Filter filter) {
 		
 		readLock.lock();
 		try {
 			PathMetadata pmd = getSearchMetadata(path);
 			ObjectsManagerDriver driver = getSecureDriver(pmd.getDriver());
 			
-			return driver.list(pmd.getPath(), pmd.getId(), locale, recursive);
+			return driver.list(pmd.getPath(), pmd.getId(), locale, recursive, filter);
 		}
 		catch(ObjectsManagerDriverException e) {
 			throw new IllegalStateException(e);
@@ -403,14 +403,14 @@ public class ObjectsManagerImp
 	}
 	
 	@Override
-	public List<ObjectEntry> listObjects(String path, String name, boolean recursive) {
+	public List<ObjectEntry> listObjects(String path, String name, boolean recursive, Filter filter) {
 		
 		readLock.lock();
 		try {
 			PathMetadata pmd = getSearchMetadata(path);
 			ObjectsManagerDriver driver = getSecureDriver(pmd.getDriver());
 			
-			List<ObjectMetadata> list = driver.list(pmd.getPath(), pmd.getId(), null, recursive);
+			List<ObjectMetadata> list = driver.list(pmd.getPath(), pmd.getId(), null, recursive, filter);
 			
 			Map<String, List<ObjectMetadata>> group = new HashMap<String, List<ObjectMetadata>>();
 			
@@ -530,7 +530,7 @@ public class ObjectsManagerImp
 			}
 		}
 		
-		ObjectMetadata omd = driver.unique(pmd.getPath(), pmd.getId(), locale);
+		ObjectMetadata omd = driver.unique(pmd.getPath(), pmd.getId(), locale, false, SearchType.EQUAL_LOCALE);
 		
 		if(omd != null) {
 			

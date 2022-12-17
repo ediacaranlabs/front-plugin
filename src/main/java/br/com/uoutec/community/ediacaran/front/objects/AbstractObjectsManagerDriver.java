@@ -7,7 +7,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.Filter;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectValue;
 
@@ -120,48 +119,6 @@ public abstract class AbstractObjectsManagerDriver implements ObjectsManagerDriv
 		
 		
 		this.defaultObjectHandler = defaultObjectHandler;
-	}
-
-	@Override
-	public ObjectMetadata unique(){
-		return unique(null, null);
-	}
-	
-	@Override
-	public ObjectMetadata unique(Filter filter){
-		return unique(null, true, filter);
-	}
-
-	@Override
-	public ObjectMetadata unique(String path, Filter filter){
-		return unique(path, true, filter);
-	}
-
-	@Override
-	public ObjectMetadata unique(String path, boolean recursive, Filter filter) {
-		
-		List<ObjectMetadata> list = list(path, recursive, filter);
-		
-		if(list.size() > 1) {
-			throw new IllegalStateException("found: " + list.size());
-		}
-		
-		return list.isEmpty()? null : list.get(0);
-	}
-
-	@Override
-	public List<ObjectMetadata> list(){
-		return list(null);
-	}
-	
-	@Override
-	public List<ObjectMetadata> list(Filter filter){
-		return list(null, true, filter);
-	}
-
-	@Override
-	public List<ObjectMetadata> list(String path, Filter filter){
-		return list(path, true, filter);
 	}
 
 	public ObjectValue get(ObjectMetadata omd) {

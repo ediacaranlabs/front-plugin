@@ -27,11 +27,11 @@ import org.brandao.brutos.web.WebResultAction;
 import br.com.uoutec.community.ediacaran.core.security.RequiresPermissions;
 import br.com.uoutec.community.ediacaran.core.system.i18n.LanguageRegistry;
 import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.SearchType;
 import br.com.uoutec.community.ediacaran.front.page.ObjectTemplate;
 import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManager;
 import br.com.uoutec.community.ediacaran.front.page.Page;
-import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadata;
-import br.com.uoutec.community.ediacaran.front.page.PageManager.PageMetadataImp;
 
 @Singleton
 @Controller(value="${plugins.ediacaran.front.admin_context}/pages", defaultActionName="/")
@@ -40,7 +40,7 @@ public class EditPageController {
 
 	@Transient
 	@Inject
-	public ObjectsTemplateManager objectsTemplateManager;
+	public ObjectsTemplateManager objectsManager;
 
 	@Transient
 	@Inject
@@ -67,50 +67,28 @@ public class EditPageController {
 			String locale,
 			WebResultAction webResult){
 		
+		Locale loc  = PluginLanguageUtils.toLocale(locale);
 		String path = null;
 		String name = null;
+
+		fullPath = fullPath.replaceAll("/+", "/");
+		int lastIndex = fullPath.lastIndexOf("/");
 		
-		if(fullPath != null) {
+		if(lastIndex > 0 ) {
+			path = "/pages" + fullPath.substring(0, lastIndex);
+			name = fullPath.substring(lastIndex + 1, fullPath.length());
 			
-			fullPath = fullPath.replaceAll("/+", "/");
-			int lastIndex = fullPath.lastIndexOf("/");
-			
-			if(lastIndex == -1) {
-				path = ".*".concat(Arrays.stream(fullPath.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
-				name = path;
-			}
-			else
-			if(lastIndex == 0) {
-				path = Arrays.stream(fullPath.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*")).concat(".*");
-				name = null;
-			}
-			else{
-				path = fullPath.substring(0, lastIndex);
-				name = fullPath.substring(lastIndex + 1, fullPath.length());
-				
-				path = ".*".concat(Arrays.stream(path.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
-				name = ".*".concat(Arrays.stream(name.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
-			}
-			
+			name = ".*".concat(Arrays.stream(name.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
+		}
+		else {
+			path = "/pages" + fullPath;
 		}
 		
-		String pathMath = path;
-		String nameMath = name;
+		List<ObjectMetadata> list = objectsManager.listMetadata(path, name, loc, true, SearchType.REGEX);
 		
-		Locale loc = PluginLanguageUtils.toLocale(locale);
-		List<PageMetadata> list = 
-				objectsTemplateManager.list(null, true, (e)->{
-				Locale l = (Locale) e.getExtMetadata("locale");
-				boolean result = loc == null? true : loc.equals(l);
-				result = result && (
-						(pathMath == null? true : e.getPath().matches(pathMath)) &&
-						(nameMath == null? true : e.getName().matches(nameMath))
-				);
-				return result;
-			});
+		Map<Locale, String> langNames      = languageRegistry.getSupportedLocalesName();
+		Map<String,ObjectTemplate> editors = objectsManager.getTemplatesIdMap("pages");
 		
-		Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
-		Map<String,ObjectTemplate> editors = pageManager.getTemplatesIdMap();
 		webResult
 			.setView("/pages/admin/table")
 			.add("itens", list)
@@ -124,7 +102,7 @@ public class EditPageController {
 	@RequiresPermissions("CONTENT:PAGES:CREATE")
 	public WebResultAction selectTemplate(WebResultAction webResult){
 		
-		List<ObjectTemplate> templates = pageManager.getTemplates();
+		List<ObjectTemplate> templates = objectsManager.getTemplates("pages");
 		webResult
 			.setView("/pages/admin/select_template")
 			.add("templates", templates);
@@ -152,7 +130,7 @@ public class EditPageController {
 			md.put("locale", loc);
 			
 			if(gid == md.hashCode()) {
-				pageManager.unregisterPage(path, name, loc);
+				objectsManager.unregisterObject(path + "/" + name, loc);
 			}
 			
 		}
@@ -203,8 +181,8 @@ public class EditPageController {
 		
 		try {
 			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
-			List<ObjectTemplate> templates = pageManager.getTemplates();
-			ObjectTemplate template = templateName == null? templates.get(0) : pageManager.getTemplate(templateName);
+			List<ObjectTemplate> templates = objectsManager.getTemplates("pages");
+			ObjectTemplate template = templateName == null? templates.get(0) : objectsManager.getTemplateByName("pages", templateName);
 			
 			webResult.setView(template.getFormPath(), true);
 			webResult.setDispatcher(WebDispatcherType.FORWARD);
@@ -237,9 +215,9 @@ public class EditPageController {
 		
 		try {
 			Locale loc = PluginLanguageUtils.toLocale(locale);
-			PageMetadata pg = new PageMetadataImp(path, name, loc);
+			ObjectMetadata pg = new ObjectMetadata(path, name, loc, "pages");
 
-			Page page = pageManager.getPage(pg);
+			Page page = (Page)objectsManager.getObject(pg);
 			
 			if(page == null) {
 				WebFlowController
@@ -248,8 +226,8 @@ public class EditPageController {
 			}
 			
 			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
-			List<ObjectTemplate> templates = pageManager.getTemplates();
-			ObjectTemplate template = page == null? templates.get(0) : pageManager.getTemplate(page.getTemplate());
+			List<ObjectTemplate> templates = objectsManager.getTemplates("pages");
+			ObjectTemplate template = page == null? templates.get(0) : objectsManager.getTemplateByName("pages", page.getTemplate());
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", pg.getPath());

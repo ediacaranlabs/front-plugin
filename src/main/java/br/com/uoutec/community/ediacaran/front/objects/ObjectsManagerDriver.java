@@ -3,6 +3,7 @@ package br.com.uoutec.community.ediacaran.front.objects;
 import java.util.List;
 import java.util.Locale;
 
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.Filter;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectValue;
 
@@ -20,9 +21,9 @@ public interface ObjectsManagerDriver {
 	
 	String getName();
 
-	ObjectMetadata unique(String path, String name, Locale locale);
+	ObjectMetadata unique(String path, String name, Locale locale, boolean recursive, Filter type);
 
-	List<ObjectMetadata> list(String path, String name, Locale locale, boolean recursive);
+	List<ObjectMetadata> list(String path, String name, Locale locale, boolean recursive, Filter type);
 	
 	ObjectValue get(ObjectMetadata omd);
 	

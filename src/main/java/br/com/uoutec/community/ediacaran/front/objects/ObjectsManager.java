@@ -18,11 +18,13 @@ public interface ObjectsManager {
 	
 	Object getObject(String id, Locale locale);
 	
-	List<ObjectMetadata> listMetadata(String path, String name, Locale locale, boolean recursive);
+	Object getObject(ObjectMetadata omd);
 	
-	List<Object> list(String path, String name, Locale locale, boolean recursive);
+	List<ObjectMetadata> listMetadata(String path, String name, Locale locale, boolean recursive, Filter filter);
 	
-	List<ObjectEntry> listObjects(String path, String name, boolean recursive);
+	List<Object> list(String path, String name, Locale locale, boolean recursive, Filter filter);
+	
+	List<ObjectEntry> listObjects(String path, String name, boolean recursive, Filter filter);
 	
 	void registerDriver(ObjectsManagerDriver driver) throws ObjectsManagerDriverException;
 	
@@ -54,7 +56,181 @@ public interface ObjectsManager {
 	
 	public static interface Filter {
 		
-		boolean accept(ObjectMetadata omd);
+		boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd);
+		
+	}
+	
+	public static enum SearchType implements Filter{
+		
+		REGEX(){
+			
+			@Override
+			public boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd) {
+				
+				if(recursive) {
+					if(!omd.getPath().startsWith(path)) {
+						return false;
+					}
+				}
+				else
+				if(!omd.getPath().equals(path)) {
+					return false;
+				}
+				
+				if(locale != null) {
+					if(!omd.getLocale().equals(locale)) {
+						return false;
+					}
+				}
+
+
+				return omd.getId().matches(name);
+			}
+			
+		},
+		
+		EQUAL(){
+			
+			@Override
+			public boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd) {
+				
+				if(recursive) {
+					if(!omd.getPath().startsWith(path)) {
+						return false;
+					}
+				}
+				else
+				if(!omd.getPath().equals(path)) {
+					return false;
+				}
+				
+				if(locale != null) {
+					if(!omd.getLocale().equals(locale)) {
+						return false;
+					}
+				}
+
+
+				return omd.getId().equals(name);
+			}
+			
+		},
+
+		EQUAL_LOCALE(){
+			
+			@Override
+			public boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd) {
+				
+				if(recursive) {
+					if(!omd.getPath().startsWith(path)) {
+						return false;
+					}
+				}
+				else
+				if(!omd.getPath().equals(path)) {
+					return false;
+				}
+				
+				if(locale == null){
+					if(omd.getLocale() != null) {
+						return false;
+					}
+				}
+				else
+				if(!locale.equals(omd.getLocale())){
+					return false;
+				}
+				
+				return omd.getId().equals(name);
+			}
+			
+		},
+		
+		CONTAINS(){
+			
+			@Override
+			public boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd) {
+				
+				if(recursive) {
+					if(!omd.getPath().startsWith(path)) {
+						return false;
+					}
+				}
+				else
+				if(!omd.getPath().equals(path)) {
+					return false;
+				}
+				
+				if(locale != null) {
+					if(!omd.getLocale().equals(locale)) {
+						return false;
+					}
+				}
+
+
+				return omd.getId().contains(name);
+			}
+			
+		},
+		
+		NOT_EQUAL(){
+			
+			@Override
+			public boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd) {
+				
+				if(recursive) {
+					if(!omd.getPath().startsWith(path)) {
+						return false;
+					}
+				}
+				else
+				if(!omd.getPath().equals(path)) {
+					return false;
+				}
+				
+				if(locale != null) {
+					if(!omd.getLocale().equals(locale)) {
+						return false;
+					}
+				}
+
+
+				return !omd.getId().equals(name);
+			}
+			
+		},
+		
+		NOT_CONTAINS(){
+			
+			@Override
+			public boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd) {
+				
+				if(recursive) {
+					if(!omd.getPath().startsWith(path)) {
+						return false;
+					}
+				}
+				else
+				if(!omd.getPath().equals(path)) {
+					return false;
+				}
+				
+				if(locale != null) {
+					if(!omd.getLocale().equals(locale)) {
+						return false;
+					}
+				}
+
+
+				return !omd.getId().contains(name);
+			}
+			
+		};
+
+		@Override
+		public boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd) {
+			return false;
+		}
 		
 	}
 	

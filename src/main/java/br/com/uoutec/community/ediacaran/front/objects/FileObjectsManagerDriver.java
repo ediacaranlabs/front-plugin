@@ -23,9 +23,22 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 		this.fileManager = fileManager;
 	}
 	
-	public List<ObjectMetadata> list(String path, boolean recursive, Filter filter){
+	public ObjectMetadata unique(String path, String name, Locale locale, boolean recursive, Filter type) {
+		
+		List<ObjectMetadata> list = list(path, name, locale, recursive, type);
+		if(list.size() > 1) {
+			throw new IllegalStateException("size > 1");
+		}
+		
+		return list.isEmpty()? null : list.get(0);
+		
+	}
+
+	public List<ObjectMetadata> list(String path, String name, Locale locale, boolean recursive, Filter filter){
+		
 		List<FileMetadata> list = fileManager.list(path, recursive, (e)->{
-			return filter.accept(toObjectMetadata(e));
+			ObjectMetadata o = toObjectMetadata(e);
+			return filter.accept(path, name, locale, recursive, o);
 		});
 		
 		List<ObjectMetadata> r = new ArrayList<ObjectMetadata>();
