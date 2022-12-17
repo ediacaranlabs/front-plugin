@@ -29,6 +29,7 @@ import br.com.uoutec.community.ediacaran.core.system.i18n.LanguageRegistry;
 import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.SearchType;
+import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.page.ObjectTemplate;
 import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManager;
 import br.com.uoutec.community.ediacaran.front.page.Page;
@@ -75,19 +76,19 @@ public class EditPageController {
 		int lastIndex = fullPath.lastIndexOf("/");
 		
 		if(lastIndex > 0 ) {
-			path = "/pages" + fullPath.substring(0, lastIndex);
+			path = PagesObjectsManagerDriver.DRIVER_PATH + fullPath.substring(0, lastIndex);
 			name = fullPath.substring(lastIndex + 1, fullPath.length());
 			
 			name = ".*".concat(Arrays.stream(name.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
 		}
 		else {
-			path = "/pages" + fullPath;
+			path = PagesObjectsManagerDriver.DRIVER_PATH + fullPath;
 		}
 		
 		List<ObjectMetadata> list = objectsManager.listMetadata(path, name, loc, true, SearchType.REGEX);
 		
 		Map<Locale, String> langNames      = languageRegistry.getSupportedLocalesName();
-		Map<String,ObjectTemplate> editors = objectsManager.getTemplatesIdMap("pages");
+		Map<String,ObjectTemplate> editors = objectsManager.getTemplatesIdMap(PagesObjectsManagerDriver.DRIVER_NAME);
 		
 		webResult
 			.setView("/pages/admin/table")
@@ -102,7 +103,7 @@ public class EditPageController {
 	@RequiresPermissions("CONTENT:PAGES:CREATE")
 	public WebResultAction selectTemplate(WebResultAction webResult){
 		
-		List<ObjectTemplate> templates = objectsManager.getTemplates("pages");
+		List<ObjectTemplate> templates = objectsManager.getTemplates(PagesObjectsManagerDriver.DRIVER_NAME);
 		webResult
 			.setView("/pages/admin/select_template")
 			.add("templates", templates);
@@ -181,8 +182,8 @@ public class EditPageController {
 		
 		try {
 			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
-			List<ObjectTemplate> templates = objectsManager.getTemplates("pages");
-			ObjectTemplate template = templateName == null? templates.get(0) : objectsManager.getTemplateByName("pages", templateName);
+			List<ObjectTemplate> templates = objectsManager.getTemplates(PagesObjectsManagerDriver.DRIVER_NAME);
+			ObjectTemplate template = templateName == null? templates.get(0) : objectsManager.getTemplateByName(PagesObjectsManagerDriver.DRIVER_NAME, templateName);
 			
 			webResult.setView(template.getFormPath(), true);
 			webResult.setDispatcher(WebDispatcherType.FORWARD);
@@ -215,7 +216,7 @@ public class EditPageController {
 		
 		try {
 			Locale loc = PluginLanguageUtils.toLocale(locale);
-			ObjectMetadata pg = new ObjectMetadata(path, name, loc, "pages");
+			ObjectMetadata pg = new ObjectMetadata(path, name, loc, PagesObjectsManagerDriver.DRIVER_NAME);
 
 			Page page = (Page)objectsManager.getObject(pg);
 			
@@ -226,8 +227,8 @@ public class EditPageController {
 			}
 			
 			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
-			List<ObjectTemplate> templates = objectsManager.getTemplates("pages");
-			ObjectTemplate template = page == null? templates.get(0) : objectsManager.getTemplateByName("pages", page.getTemplate());
+			List<ObjectTemplate> templates = objectsManager.getTemplates(PagesObjectsManagerDriver.DRIVER_NAME);
+			ObjectTemplate template = page == null? templates.get(0) : objectsManager.getTemplateByName(PagesObjectsManagerDriver.DRIVER_NAME, page.getTemplate());
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", pg.getPath());

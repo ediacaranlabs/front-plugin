@@ -21,6 +21,7 @@ import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectValu
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver.ObjectsManagerDriverListener;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriverException;
+import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.page.PageFileManagerHandler;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
@@ -109,13 +110,7 @@ public class PluginInstaller
 			
 		});
 		
-		this.pageObjectDriver = 
-				new FileObjectsManagerDriver(
-						new FileManager(
-								new File(System.getProperty("app.web")), 
-								new PageFileManagerHandler()
-						), "pages"
-				);
+		this.pageObjectDriver = new PagesObjectsManagerDriver();
 		
 		ObjectsManager objectsManager = EntityContextPlugin.getEntity(ObjectsManager.class);
 		
