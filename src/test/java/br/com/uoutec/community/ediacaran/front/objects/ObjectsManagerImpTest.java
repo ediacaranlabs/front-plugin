@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -282,20 +285,22 @@ public class ObjectsManagerImpTest {
 		objectsManager.registerObject("global/path/type/path2/item2_val", new Locale("pt","BR"), "VALOR 6");
 		
 		List<ObjectEntry> list = objectsManager.listObjects("global/path/type", null, false, SearchType.EQUAL);
+		Map<String, ObjectEntry> map = list.stream().collect(Collectors.toMap(ObjectEntry::getFullId, Function.identity()));
 		
-		assertTrue(list.size() == 2);
+		assertTrue(map.size() == 2);
 		
-		assertEquals("/path/type/item1",list.get(0).getFullId());
-		assertEquals("item1",list.get(0).getId());
-		assertEquals("/path/type",list.get(0).getPath());
-		assertEquals("VALOR 2",list.get(0).getObject());
-		assertEquals("VALOR 3",list.get(0).getObject(new Locale("pt", "BR")));
+		
+		assertEquals("/path/type/item1", map.get("/path/type/item1").getFullId());
+		assertEquals("item1"           , map.get("/path/type/item1").getId());
+		assertEquals("/path/type"      , map.get("/path/type/item1").getPath());
+		assertEquals("VALOR 2"         , map.get("/path/type/item1").getObject());
+		assertEquals("VALOR 3"         , map.get("/path/type/item1").getObject(new Locale("pt", "BR")));
 
-		assertEquals("/path/type/item2",list.get(1).getFullId());
-		assertEquals("item2",list.get(1).getId());
-		assertEquals("/path/type",list.get(1).getPath());
-		assertEquals("VALOR 4",list.get(1).getObject());
-		assertNull(list.get(1).getObject(new Locale("pt", "BR")));
+		assertEquals("/path/type/item2", map.get("/path/type/item2").getFullId());
+		assertEquals("item2"           , map.get("/path/type/item2").getId());
+		assertEquals("/path/type"      , map.get("/path/type/item2").getPath());
+		assertEquals("VALOR 4"         , map.get("/path/type/item2").getObject());
+		assertNull(map.get("/path/type/item2").getObject(new Locale("pt", "BR")));
 		
 	}
 	
