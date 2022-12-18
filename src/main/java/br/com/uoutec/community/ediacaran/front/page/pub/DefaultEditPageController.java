@@ -89,7 +89,7 @@ public class DefaultEditPageController {
 					name = title;
 				}
 				
-				ObjectMetadata pg = objectsManager.registerObjectIfNotExist("/page/" + path + "/" + name, loc, page);
+				ObjectMetadata pg = objectsManager.registerObjectIfNotExist(PagesObjectsManagerDriver.DRIVER_PATH + path + "/" + name, loc, page);
 
 				Map<String,Object> md = new HashMap<String,Object>();
 				md.put("path", pg.getPath());
@@ -111,7 +111,7 @@ public class DefaultEditPageController {
 					throw new InvalidRequestException("invalid id");
 				}
 				
-				objectsManager.registerObjectIfNotExist("/page/" + path + "/" + name, loc, page);
+				objectsManager.registerObjectIfNotExist(PagesObjectsManagerDriver.DRIVER_PATH + path + "/" + name, loc, page);
 				return null;
 			}
 			

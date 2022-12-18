@@ -67,14 +67,16 @@ public interface ObjectsManager {
 			@Override
 			public boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd) {
 				
-				if(recursive) {
-					if(!omd.getPath().startsWith(path)) {
+				if(path != null) {
+					if(recursive) {
+						if(!omd.getPath().startsWith(path)) {
+							return false;
+						}
+					}
+					else
+					if(!omd.getPath().equals(path)) {
 						return false;
 					}
-				}
-				else
-				if(!omd.getPath().equals(path)) {
-					return false;
 				}
 				
 				if(locale != null) {
@@ -84,7 +86,7 @@ public interface ObjectsManager {
 				}
 
 
-				return omd.getId().matches(name);
+				return name == null || omd.getId().matches(name);
 			}
 			
 		},
@@ -92,16 +94,18 @@ public interface ObjectsManager {
 		EQUAL(){
 			
 			@Override
-			public boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd) {
+			public boolean accept(String path, String name, Locale locale, boolean recursive, ObjectMetadata omd) {
 				
-				if(recursive) {
-					if(!omd.getPath().startsWith(path)) {
+				if(path != null) {
+					if(recursive) {
+						if(!omd.getPath().startsWith(path)) {
+							return false;
+						}
+					}
+					else
+					if(!omd.getPath().equals(path)) {
 						return false;
 					}
-				}
-				else
-				if(!omd.getPath().equals(path)) {
-					return false;
 				}
 				
 				if(locale != null) {
@@ -111,7 +115,7 @@ public interface ObjectsManager {
 				}
 
 
-				return omd.getId().equals(name);
+				return name == null || omd.getId().equals(name);
 			}
 			
 		},
@@ -121,14 +125,16 @@ public interface ObjectsManager {
 			@Override
 			public boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd) {
 				
-				if(recursive) {
-					if(!omd.getPath().startsWith(path)) {
+				if(path != null) {
+					if(recursive) {
+						if(!omd.getPath().startsWith(path)) {
+							return false;
+						}
+					}
+					else
+					if(!omd.getPath().equals(path)) {
 						return false;
 					}
-				}
-				else
-				if(!omd.getPath().equals(path)) {
-					return false;
 				}
 				
 				if(locale == null){
@@ -141,7 +147,7 @@ public interface ObjectsManager {
 					return false;
 				}
 				
-				return omd.getId().equals(name);
+				return name == null || omd.getId().equals(name);
 			}
 			
 		},
@@ -151,14 +157,16 @@ public interface ObjectsManager {
 			@Override
 			public boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd) {
 				
-				if(recursive) {
-					if(!omd.getPath().startsWith(path)) {
+				if(path != null) {
+					if(recursive) {
+						if(!omd.getPath().startsWith(path)) {
+							return false;
+						}
+					}
+					else
+					if(!omd.getPath().equals(path)) {
 						return false;
 					}
-				}
-				else
-				if(!omd.getPath().equals(path)) {
-					return false;
 				}
 				
 				if(locale != null) {
@@ -168,7 +176,7 @@ public interface ObjectsManager {
 				}
 
 
-				return omd.getId().contains(name);
+				return name == null || omd.getId().contains(name);
 			}
 			
 		},
@@ -178,14 +186,16 @@ public interface ObjectsManager {
 			@Override
 			public boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd) {
 				
-				if(recursive) {
-					if(!omd.getPath().startsWith(path)) {
+				if(path != null) {
+					if(recursive) {
+						if(!omd.getPath().startsWith(path)) {
+							return false;
+						}
+					}
+					else
+					if(!omd.getPath().equals(path)) {
 						return false;
 					}
-				}
-				else
-				if(!omd.getPath().equals(path)) {
-					return false;
 				}
 				
 				if(locale != null) {
@@ -195,7 +205,7 @@ public interface ObjectsManager {
 				}
 
 
-				return !omd.getId().equals(name);
+				return name == null || !omd.getId().equals(name);
 			}
 			
 		},
@@ -205,14 +215,16 @@ public interface ObjectsManager {
 			@Override
 			public boolean accept(String path, String name,Locale locale, boolean recursive, ObjectMetadata omd) {
 				
-				if(recursive) {
-					if(!omd.getPath().startsWith(path)) {
+				if(path != null) {
+					if(recursive) {
+						if(!omd.getPath().startsWith(path)) {
+							return false;
+						}
+					}
+					else
+					if(!omd.getPath().equals(path)) {
 						return false;
 					}
-				}
-				else
-				if(!omd.getPath().equals(path)) {
-					return false;
 				}
 				
 				if(locale != null) {
@@ -222,7 +234,7 @@ public interface ObjectsManager {
 				}
 
 
-				return !omd.getId().contains(name);
+				return name == null || !omd.getId().contains(name);
 			}
 			
 		};

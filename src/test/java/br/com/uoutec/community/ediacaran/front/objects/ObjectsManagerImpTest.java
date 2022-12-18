@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectEntry;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.SearchType;
 
 public class ObjectsManagerImpTest {
 
@@ -192,7 +193,7 @@ public class ObjectsManagerImpTest {
 		objectsManager.registerObject("global/path/item2", null, "VALOR 3");
 		objectsManager.registerObject("global/path/type/item2_val", null, "VALOR 4");
 		
-		List<Object> list = objectsManager.list("global", null, null, true);
+		List<Object> list = objectsManager.list("global", null, null, true, SearchType.EQUAL);
 		
 		assertTrue(list.size() == 4);
 		assertTrue(list.indexOf("VALOR 1") != -1);
@@ -208,7 +209,7 @@ public class ObjectsManagerImpTest {
 		objectsManager.registerObject("global/path/item2", null, "VALOR 3");
 		objectsManager.registerObject("global/path/type/item2_val", null, "VALOR 4");
 		
-		List<Object> list = objectsManager.list("global/path", "item1", null, false);
+		List<Object> list = objectsManager.list("global/path", "item1", null, false, SearchType.EQUAL);
 		
 		assertTrue(list.size() == 1);
 		assertTrue(list.indexOf("VALOR 1") != -1);
@@ -221,7 +222,7 @@ public class ObjectsManagerImpTest {
 		objectsManager.registerObject("global/path/item2", null, "VALOR 3");
 		objectsManager.registerObject("global/path/type/item2_val", null, "VALOR 4");
 		
-		List<Object> list = objectsManager.list("global/path", "item1", null, true);
+		List<Object> list = objectsManager.list("global/path", "item1", null, true, SearchType.EQUAL);
 		
 		assertTrue(list.size() == 2);
 		assertTrue(list.indexOf("VALOR 1") != -1);
@@ -235,7 +236,7 @@ public class ObjectsManagerImpTest {
 		objectsManager.registerObject("global/path/item2", null, "VALOR 3");
 		objectsManager.registerObject("global/path/type/item2_val", new Locale("pt","BR"), "VALOR 4");
 		
-		List<Object> list = objectsManager.list("global/path", null, new Locale("pt","BR"), true);
+		List<Object> list = objectsManager.list("global/path", null, new Locale("pt","BR"), true, SearchType.EQUAL);
 		
 		assertTrue(list.size() == 2);
 		assertTrue(list.indexOf("VALOR 2") != -1);
@@ -250,7 +251,7 @@ public class ObjectsManagerImpTest {
 		objectsManager.registerObject("global/path/item2", null, "VALOR 4");
 		objectsManager.registerObject("global/path/type/path2/item2_val", new Locale("pt","BR"), "VALOR 5");
 		
-		List<Object> list = objectsManager.list("global/path/type", null, new Locale("pt","BR"), false);
+		List<Object> list = objectsManager.list("global/path/type", null, new Locale("pt","BR"), false, SearchType.EQUAL);
 		
 		assertTrue(list.size() == 2);
 		assertTrue(list.indexOf("VALOR 2") != -1);
@@ -265,7 +266,7 @@ public class ObjectsManagerImpTest {
 		objectsManager.registerObject("global/path/item2", null, "VALOR 4");
 		objectsManager.registerObject("global/path/type/path2/item2_val", new Locale("pt","BR"), "VALOR 5");
 		
-		List<Object> list = objectsManager.list("global/path/type", "2", new Locale("pt","BR"), false);
+		List<Object> list = objectsManager.list("global/path/type", "2", new Locale("pt","BR"), false, SearchType.CONTAINS);
 		
 		assertTrue(list.size() == 1);
 		assertTrue(list.indexOf("VALOR 3") != -1);
@@ -280,7 +281,7 @@ public class ObjectsManagerImpTest {
 		objectsManager.registerObject("global/path/item2", null, "VALOR 5");
 		objectsManager.registerObject("global/path/type/path2/item2_val", new Locale("pt","BR"), "VALOR 6");
 		
-		List<ObjectEntry> list = objectsManager.listObjects("global/path/type", null, false);
+		List<ObjectEntry> list = objectsManager.listObjects("global/path/type", null, false, SearchType.EQUAL);
 		
 		assertTrue(list.size() == 2);
 		
