@@ -19,7 +19,7 @@ public class PathMetadata{
 	}
 	
 	public String getGlobalId() {
-		return driver + "/" + path + "/" + id;
+		return driver + path + "/" + id;
 	}
 	
 	public String getDriver() {

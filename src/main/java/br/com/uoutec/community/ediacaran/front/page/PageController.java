@@ -16,17 +16,12 @@ import org.brandao.brutos.web.HttpStatus;
 import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebResultAction;
 
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
 import br.com.uoutec.community.ediacaran.plugins.PublicType;
 
 @Singleton
 @ActionStrategy(WebActionStrategyType.DETACHED)
 public class PageController implements PublicType {
 
-	@Inject
-	@Transient
-	private ObjectsManager objectsManager;
-	
 	@Inject
 	@Transient
 	private ObjectsTemplateManager objectTemplateManager;
@@ -36,10 +31,10 @@ public class PageController implements PublicType {
 			@Basic(bean="uri") String uri, 
 			@Basic(bean="locale", scope=ScopeType.REQUEST, mappingType=MappingTypes.VALUE) Locale locale, 
 			WebResultAction result) {
-		Page page = (Page) objectsManager.getObject( "/pages" + uri, locale);
+		Page page = (Page) objectTemplateManager.getObject( "/pages" + uri, locale);
 		
 		if(page == null && locale != null) {
-			page = (Page) objectsManager.getObject( "/pages" + uri, null);
+			page = (Page) objectTemplateManager.getObject( "/pages" + uri, null);
 		}
 		
 		if(page != null) {

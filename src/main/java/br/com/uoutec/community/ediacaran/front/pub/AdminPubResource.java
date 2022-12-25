@@ -25,7 +25,7 @@ import org.brandao.brutos.annotation.web.ResponseErrors;
 
 import br.com.uoutec.community.ediacaran.PluginConfigurationManager;
 import br.com.uoutec.community.ediacaran.SecurityPolicyUpdater;
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
+import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManager;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.plugins.MutablePluginConfiguration;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfiguration;
@@ -50,7 +50,7 @@ public class AdminPubResource {
 	
 	@Inject
 	@Transient
-	private ObjectsManager objectsManager;
+	private ObjectsTemplateManager objectsManager;
 	//private MenuBarManager menuBarManager;
 	
 	@Inject
