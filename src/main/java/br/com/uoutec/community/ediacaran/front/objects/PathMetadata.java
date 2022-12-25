@@ -14,6 +14,14 @@ public class PathMetadata{
 		this.id = id;
 	}
 
+	public String getFullId() {
+		return path + "/" + id;
+	}
+	
+	public String getGlobalId() {
+		return driver + "/" + path + "/" + id;
+	}
+	
 	public String getDriver() {
 		return driver;
 	}

@@ -76,10 +76,6 @@ public class ObjectsManagerImp
 		return searchPattern.matcher(value).matches();
 	}
 	
-	protected String getID(ObjectsManagerDriver driver, String path, String id) {
-		return driver.getName() + path + "/" + id;
-	}
-	
 	protected PathMetadata getPathMetadata(String id) {
 		
 		if(!isVaidID(id)) {
@@ -148,24 +144,28 @@ public class ObjectsManagerImp
 			
 			objectListenerManager.beforeRegister(id, locale, object);
 			
-			ConcurrentMap<Locale,ObjectValue> map = objects.get(id);
-			
-			if(map == null) {
-				map = new ConcurrentHashMap<Locale,ObjectValue>();
-				ConcurrentMap<Locale,ObjectValue> current = objects.putIfAbsent(id, map);
-				if(current != null) {
-					map = current;
-				}
-			}
-	
 			PathMetadata pmd = getPathMetadata(id);
 			
 			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
 			
 			ObjectValue obj = persistObject(driver, pmd, locale, object);
-			
-			if(obj.isValid()) {
-				map.put(getSafeLocale(locale), obj);
+
+			if(driver.isCacheable()) {
+				
+				ConcurrentMap<Locale,ObjectValue> map = objects.get(id);
+				
+				if(map == null) {
+					map = new ConcurrentHashMap<Locale,ObjectValue>();
+					ConcurrentMap<Locale,ObjectValue> current = objects.putIfAbsent(id, map);
+					if(current != null) {
+						map = current;
+					}
+				}
+				
+				if(obj.isValid()) {
+					map.put(getSafeLocale(locale), obj);
+				}
+				
 			}
 			
 			objectListenerManager.afterRegister(id, locale, object);
@@ -197,27 +197,29 @@ public class ObjectsManagerImp
 		writeLock.lock();
 		try {
 			
+			objectListenerManager.beforeUnregister(id, locale);
+			
 			PathMetadata pmd = getPathMetadata(id);
 			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
 			
 			ObjectMetadata omd = driver.unique(pmd.getPath(), pmd.getId(), locale, false, SearchType.EQUAL_LOCALE);
-			
-			if(omd == null) {
-				return;
-			}
 
-			objectListenerManager.beforeUnregister(id, locale);
-
-			ConcurrentMap<Locale,ObjectValue> map = objects.get(id);
-			
-			if(map != null) {
-				map.remove(getSafeLocale(locale));
-				if(map.isEmpty()) {
-					objects.remove(id, map);
+			if(driver.isCacheable()) {
+				
+				ConcurrentMap<Locale,ObjectValue> map = objects.get(id);
+				
+				if(map != null) {
+					map.remove(getSafeLocale(locale));
+					if(map.isEmpty()) {
+						objects.remove(id, map);
+					}
 				}
+				
 			}
 			
-			deleteObject(driver, pmd, omd);
+			if(omd != null) {
+				deleteObject(driver, pmd, omd);
+			}
 			
 			objectListenerManager.afterUnregister(id, locale);
 		}
@@ -271,8 +273,9 @@ public class ObjectsManagerImp
 	
 	@Override
 	public Object getObject(ObjectMetadata omd) {
-		// TODO Auto-generated method stub
-		return null;
+		PathMetadata pmd = omd.getPathMetadata();
+		ObjectsManagerDriver driver = getSecureDriver(pmd.getDriver());
+		return get(driver, pmd, omd.getLocale());
 	}
 	
 	@Override
@@ -292,10 +295,10 @@ public class ObjectsManagerImp
 			PathMetadata pmd = getPathMetadata(id);
 			ObjectsManagerDriver driver = getSecureDriver(pmd.getDriver());
 			
-			Object object = get(driver, pmd, id, locale);
+			Object object = get(driver, pmd, locale);
 			
 			if(object == null && locale != null) {
-				object = get(driver, pmd, id, null);
+				object = get(driver, pmd, null);
 			}
 			
 			return object;
@@ -325,7 +328,7 @@ public class ObjectsManagerImp
 			
 			Map<Locale,Object> map = new HashMap<Locale, Object>();
 			for(ObjectMetadata omd: list) {
-				Object o = get(driver, pmd, id, omd.getLocale());
+				Object o = get(driver, pmd, omd.getLocale());
 				if(o != null) {
 					map.put(omd.getLocale(), o);
 				}
@@ -370,8 +373,8 @@ public class ObjectsManagerImp
 				Object o = 
 						get(
 								driver, 
-								new PathMetadata(driver.getName(), omd.getPath(), omd.getId()), 
-								getID(driver, omd.getPath(), omd.getId()), omd.getLocale()
+								omd.getPathMetadata(), 
+								omd.getLocale()
 						);
 				
 				if(o != null) {
@@ -421,7 +424,7 @@ public class ObjectsManagerImp
 			Map<String, List<ObjectMetadata>> group = new HashMap<String, List<ObjectMetadata>>();
 			
 			for(ObjectMetadata omd: list) {
-				String id = getID(driver, omd.getPath(), omd.getId());
+				String id = omd.getPathMetadata().getFullId();
 				
 				List<ObjectMetadata> g = group.get(id);
 				
@@ -441,7 +444,7 @@ public class ObjectsManagerImp
 				
 				for(ObjectMetadata omd: e.getValue()) {
 					
-					Object o = get(driver, new PathMetadata(pmd.getDriver(), omd.getPath(), omd.getId()), e.getKey(), omd.getLocale());
+					Object o = get(driver, omd.getPathMetadata(), omd.getLocale());
 					
 					if(o != null) {
 						map.put(omd.getLocale(), o);
@@ -450,7 +453,8 @@ public class ObjectsManagerImp
 				
 				if(!map.isEmpty()) {
 					ObjectMetadata base = e.getValue().get(0);
-					r.add(new ObjectEntry(base.getPath(), base.getId(), map));
+					PathMetadata basePMD = base.getPathMetadata();
+					r.add(new ObjectEntry(basePMD.getPath(), basePMD.getId(), map));
 				}
 				
 			}
@@ -502,21 +506,26 @@ public class ObjectsManagerImp
 	
 	/* get */
 	
-	private Object get(ObjectsManagerDriver driver, PathMetadata pmd, String id, Locale locale) {
+	private Object get(ObjectsManagerDriver driver, PathMetadata pmd, Locale locale) {
 		
 		ObjectValue obj;
-		ConcurrentMap<Locale,ObjectValue> map = objects.get(id);
 		
-		if(map != null) {
-			obj = map.get(getSafeLocale(locale));
+		if(driver.isCacheable()) {
 			
-			if(obj != null && obj.isValid()) {
-				return obj.getObject();
+			ConcurrentMap<Locale,ObjectValue> map = objects.get(pmd.getGlobalId());
+			
+			if(map != null) {
+				obj = map.get(getSafeLocale(locale));
+				
+				if(obj != null && obj.isValid()) {
+					return obj.getObject();
+				}
 			}
+			
 		}
 		
 		try {
-			obj = loadObject(driver, pmd, id, locale);
+			obj = loadObject(driver, pmd, locale);
 		}
 		catch(IOException e) {
 			throw new IllegalStateException(e);
@@ -525,14 +534,16 @@ public class ObjectsManagerImp
 		return obj == null? null : obj.getObject(); 
 	}
 	
-	private synchronized ObjectValue loadObject(ObjectsManagerDriver driver, PathMetadata pmd, String id, Locale locale) throws IOException {
+	private synchronized ObjectValue loadObject(ObjectsManagerDriver driver, PathMetadata pmd, Locale locale) throws IOException {
 		
-		ConcurrentMap<Locale,ObjectValue> map = objects.get(id);
-		
-		if(map != null) {
-			ObjectValue obj = map.get(getSafeLocale(locale));
-			if(obj != null && obj.isValid()) {
-				return obj;
+		if(driver.isCacheable()) {
+			ConcurrentMap<Locale,ObjectValue> map = objects.get(pmd.getGlobalId());
+			
+			if(map != null) {
+				ObjectValue obj = map.get(getSafeLocale(locale));
+				if(obj != null && obj.isValid()) {
+					return obj;
+				}
 			}
 		}
 		
@@ -540,7 +551,7 @@ public class ObjectsManagerImp
 		
 		if(omd != null) {
 			
-			objectListenerManager.beforeLoad(id, locale);
+			objectListenerManager.beforeLoad(pmd.getGlobalId(), locale);
 
 			ObjectValue object;
 			
@@ -551,24 +562,28 @@ public class ObjectsManagerImp
 				throw new IllegalStateException(e);
 			}
 			
-			objectListenerManager.afterLoad(id, locale, object.getObject());
-			
-			map = new ConcurrentHashMap<Locale,ObjectValue>();
-			ConcurrentMap<Locale,ObjectValue> current = objects.putIfAbsent(id, map);
-			if(current != null) {
-				map = current;
+			if(driver.isCacheable()) {
+				ConcurrentMap<Locale,ObjectValue> map = new ConcurrentHashMap<Locale,ObjectValue>();
+				ConcurrentMap<Locale,ObjectValue> current = objects.putIfAbsent(pmd.getGlobalId(), map);
+				if(current != null) {
+					map = current;
+				}
+				map.put(getSafeLocale(locale), object);
 			}
-			map.put(getSafeLocale(locale), object);
+
+			objectListenerManager.afterLoad(pmd.getGlobalId(), locale, object.getObject());
 			
 			return object;
 		}
 		
-		map = objects.get(id);
-		
-		if(map != null ) {
-			map.remove(getSafeLocale(locale));
-			if(map.isEmpty()) {
-				objects.remove(id);
+		if(driver.isCacheable()) {
+			ConcurrentMap<Locale,ObjectValue> map = objects.get(pmd.getGlobalId());
+			
+			if(map != null ) {
+				map.remove(getSafeLocale(locale));
+				if(map.isEmpty()) {
+					objects.remove(pmd.getGlobalId());
+				}
 			}
 		}
 		

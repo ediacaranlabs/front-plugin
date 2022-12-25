@@ -69,12 +69,12 @@ public interface ObjectsManager {
 				
 				if(path != null) {
 					if(recursive) {
-						if(!omd.getPath().startsWith(path)) {
+						if(!omd.getPathMetadata().getPath().startsWith(path)) {
 							return false;
 						}
 					}
 					else
-					if(!omd.getPath().equals(path)) {
+					if(!omd.getPathMetadata().getPath().equals(path)) {
 						return false;
 					}
 				}
@@ -86,7 +86,7 @@ public interface ObjectsManager {
 				}
 
 
-				return name == null || omd.getId().matches(name);
+				return name == null || omd.getPathMetadata().getId().matches(name);
 			}
 			
 		},
@@ -98,12 +98,12 @@ public interface ObjectsManager {
 				
 				if(path != null) {
 					if(recursive) {
-						if(!omd.getPath().startsWith(path)) {
+						if(!omd.getPathMetadata().getPath().startsWith(path)) {
 							return false;
 						}
 					}
 					else
-					if(!omd.getPath().equals(path)) {
+					if(!omd.getPathMetadata().getPath().equals(path)) {
 						return false;
 					}
 				}
@@ -115,7 +115,7 @@ public interface ObjectsManager {
 				}
 
 
-				return name == null || omd.getId().equals(name);
+				return name == null || omd.getPathMetadata().getId().equals(name);
 			}
 			
 		},
@@ -127,12 +127,12 @@ public interface ObjectsManager {
 				
 				if(path != null) {
 					if(recursive) {
-						if(!omd.getPath().startsWith(path)) {
+						if(!omd.getPathMetadata().getPath().startsWith(path)) {
 							return false;
 						}
 					}
 					else
-					if(!omd.getPath().equals(path)) {
+					if(!omd.getPathMetadata().getPath().equals(path)) {
 						return false;
 					}
 				}
@@ -147,7 +147,7 @@ public interface ObjectsManager {
 					return false;
 				}
 				
-				return name == null || omd.getId().equals(name);
+				return name == null || omd.getPathMetadata().getId().equals(name);
 			}
 			
 		},
@@ -159,12 +159,12 @@ public interface ObjectsManager {
 				
 				if(path != null) {
 					if(recursive) {
-						if(!omd.getPath().startsWith(path)) {
+						if(!omd.getPathMetadata().getPath().startsWith(path)) {
 							return false;
 						}
 					}
 					else
-					if(!omd.getPath().equals(path)) {
+					if(!omd.getPathMetadata().getPath().equals(path)) {
 						return false;
 					}
 				}
@@ -176,7 +176,7 @@ public interface ObjectsManager {
 				}
 
 
-				return name == null || omd.getId().contains(name);
+				return name == null || omd.getPathMetadata().getId().contains(name);
 			}
 			
 		},
@@ -188,12 +188,12 @@ public interface ObjectsManager {
 				
 				if(path != null) {
 					if(recursive) {
-						if(!omd.getPath().startsWith(path)) {
+						if(!omd.getPathMetadata().getPath().startsWith(path)) {
 							return false;
 						}
 					}
 					else
-					if(!omd.getPath().equals(path)) {
+					if(!omd.getPathMetadata().getPath().equals(path)) {
 						return false;
 					}
 				}
@@ -205,7 +205,7 @@ public interface ObjectsManager {
 				}
 
 
-				return name == null || !omd.getId().equals(name);
+				return name == null || !omd.getPathMetadata().getId().equals(name);
 			}
 			
 		},
@@ -217,12 +217,12 @@ public interface ObjectsManager {
 				
 				if(path != null) {
 					if(recursive) {
-						if(!omd.getPath().startsWith(path)) {
+						if(!omd.getPathMetadata().getPath().startsWith(path)) {
 							return false;
 						}
 					}
 					else
-					if(!omd.getPath().equals(path)) {
+					if(!omd.getPathMetadata().getPath().equals(path)) {
 						return false;
 					}
 				}
@@ -234,7 +234,7 @@ public interface ObjectsManager {
 				}
 
 
-				return name == null || !omd.getId().contains(name);
+				return name == null || !omd.getPathMetadata().getId().contains(name);
 			}
 			
 		};
@@ -289,36 +289,23 @@ public interface ObjectsManager {
 	
 	public static class ObjectMetadata{
 		
-		private String path;
-		
-		private String id;
+		private PathMetadata pathMetadata;
 		
 		private Locale locale;
-		
-		private String type;
 
-		public ObjectMetadata(String path, String id, Locale locale, String type) {
-			this.path = path;
-			this.id = id;
+		public ObjectMetadata(PathMetadata pathMetadata, Locale locale) {
+			this.pathMetadata = pathMetadata;
 			this.locale = locale;
-			this.type = type;
 		}
 
-		public String getPath() {
-			return path;
-		}
-
-		public String getId() {
-			return id;
+		public PathMetadata getPathMetadata() {
+			return pathMetadata;
 		}
 
 		public Locale getLocale() {
 			return locale;
 		}
 
-		public String getType() {
-			return type;
-		}
 		
 	}
 	
@@ -328,5 +315,6 @@ public interface ObjectsManager {
 
 		Object getObject();
 		
-	}	
+	}
+	
 }

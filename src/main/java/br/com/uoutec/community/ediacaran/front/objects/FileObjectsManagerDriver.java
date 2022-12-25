@@ -54,7 +54,8 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 	protected ObjectValue getAction(ObjectMetadata omd) {
 
 		try {
-			ObjectHandler handler = getObjectHandler(omd.getType());
+			FileObjectMetadata fomd = (FileObjectMetadata)omd;
+			ObjectHandler handler = getObjectHandler(fomd.getType());
 			
 			FileMetadata fmd = toFileMetadata(omd);
 			FileValue fv = fileManager.get(fmd);
@@ -97,7 +98,7 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 	/* private */
 	
 	private ObjectMetadata toObjectMetadata(FileMetadata fmd) {
-		return fmd == null? null : new ObjectMetadata(fmd.getPath(),fmd.getName(), (Locale)fmd.getExtMetadata("locale"), fmd.getType());
+		return fmd == null? null : new FileObjectMetadata(fmd.getPath(),fmd.getName(), (Locale)fmd.getExtMetadata("locale"), fmd.getType(), getName());
 	}
 
 	private FileMetadata toFileMetadata(String path, String name, Locale locale, String type) {
@@ -108,12 +109,29 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 	
 	private FileMetadata toFileMetadata(ObjectMetadata omd) {
 		
+		FileObjectMetadata fomd = (FileObjectMetadata)omd;
+		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("locale", omd.getLocale());
 		
-		return new FileMetadata(omd.getPath(), omd.getId(), omd.getType(), map); 
+		return new FileMetadata(fomd.getPath(), fomd.getId(), fomd.getType(), map); 
 	}
 
+	public static class FileObjectMetadata extends ObjectMetadata{
+
+		private String type;
+		
+		public FileObjectMetadata(String path, String id, Locale locale, String type, String drive) {
+			super(path, id, locale, drive);
+			this.type = type;
+		}
+		
+		public String getType() {
+			return type;
+		}
+		
+	}
+	
 	public static class FileObjectsManagerDriverValue implements ObjectValue {
 		
 		private File file;
