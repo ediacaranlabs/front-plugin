@@ -92,8 +92,8 @@ public class DefaultEditPageController {
 				ObjectMetadata pg = objectsManager.registerObjectIfNotExist(PagesObjectsManagerDriver.DRIVER_PATH + path + "/" + name, loc, page);
 
 				Map<String,Object> md = new HashMap<String,Object>();
-				md.put("path", pg.getPath());
-				md.put("id", pg.getId());
+				md.put("path", pg.getPathMetadata().getPath());
+				md.put("id", pg.getPathMetadata().getId());
 				md.put("locale", pg.getLocale());
 				md.put("template", page.getTemplate());
 

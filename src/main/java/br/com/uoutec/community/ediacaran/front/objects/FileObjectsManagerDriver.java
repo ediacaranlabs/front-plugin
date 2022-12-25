@@ -98,7 +98,13 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 	/* private */
 	
 	private ObjectMetadata toObjectMetadata(FileMetadata fmd) {
-		return fmd == null? null : new FileObjectMetadata(fmd.getPath(),fmd.getName(), (Locale)fmd.getExtMetadata("locale"), fmd.getType(), getName());
+		return fmd == null? 
+				null : 
+				new FileObjectMetadata(
+						new PathMetadata(this.getName(), fmd.getPath(), fmd.getName()), 
+						fmd.getType(), 
+						(Locale)fmd.getExtMetadata("locale")
+				);
 	}
 
 	private FileMetadata toFileMetadata(String path, String name, Locale locale, String type) {
@@ -110,19 +116,20 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 	private FileMetadata toFileMetadata(ObjectMetadata omd) {
 		
 		FileObjectMetadata fomd = (FileObjectMetadata)omd;
+		PathMetadata pmd = fomd.getPathMetadata();
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("locale", omd.getLocale());
 		
-		return new FileMetadata(fomd.getPath(), fomd.getId(), fomd.getType(), map); 
+		return new FileMetadata(pmd.getPath(), pmd.getId(), fomd.getType(), map); 
 	}
 
 	public static class FileObjectMetadata extends ObjectMetadata{
 
 		private String type;
 		
-		public FileObjectMetadata(String path, String id, Locale locale, String type, String drive) {
-			super(path, id, locale, drive);
+		public FileObjectMetadata(PathMetadata pathMetadata, String type, Locale locale) {
+			super(pathMetadata, locale);
 			this.type = type;
 		}
 		
@@ -162,6 +169,11 @@ public class FileObjectsManagerDriver extends AbstractObjectsManagerDriver {
 			return object;
 		}
 		
+	}
+
+	@Override
+	public boolean isCacheable() {
+		return false;
 	}	
 	
 }

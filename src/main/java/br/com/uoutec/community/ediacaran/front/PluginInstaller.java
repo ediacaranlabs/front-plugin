@@ -22,6 +22,7 @@ import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver.ObjectsManagerDriverListener;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriverException;
 import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
+import br.com.uoutec.community.ediacaran.front.objects.PathMetadata;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBarManagerException;
@@ -93,13 +94,15 @@ public class PluginInstaller
 					return;
 				}
 
-				if(obj.getObject() instanceof MenuBar && omd.getPath().equals("/admin/menus")) {
+				PathMetadata pmd = omd.getPathMetadata();
+				
+				if(obj.getObject() instanceof MenuBar && pmd.getPath().equals("/admin/menus")) {
 					
-					if(omd.getId().equals(ADMIN_MENU_BAR)) {
+					if(pmd.getId().equals(ADMIN_MENU_BAR)) {
 						installDefaultMenu((MenuBar)obj.getObject());
 					}
 					else
-					if(omd.getId().equals(ADMIN_TOP_MENU_BAR)) {
+					if(pmd.getId().equals(ADMIN_TOP_MENU_BAR)) {
 						installDefaultTopMenu((MenuBar)obj.getObject());
 					}
 					

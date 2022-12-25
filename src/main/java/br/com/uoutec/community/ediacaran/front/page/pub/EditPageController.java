@@ -30,6 +30,7 @@ import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.SearchType;
 import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
+import br.com.uoutec.community.ediacaran.front.objects.PathMetadata;
 import br.com.uoutec.community.ediacaran.front.page.ObjectTemplate;
 import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManager;
 import br.com.uoutec.community.ediacaran.front.page.Page;
@@ -216,7 +217,7 @@ public class EditPageController {
 		
 		try {
 			Locale loc = PluginLanguageUtils.toLocale(locale);
-			ObjectMetadata pg = new ObjectMetadata(path, name, loc, PagesObjectsManagerDriver.DRIVER_NAME);
+			ObjectMetadata pg = new ObjectMetadata(new PathMetadata(PagesObjectsManagerDriver.DRIVER_NAME, path, name), loc); 
 
 			Page page = (Page)objectsManager.getObject(pg);
 			
@@ -231,8 +232,8 @@ public class EditPageController {
 			ObjectTemplate template = page == null? templates.get(0) : objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, page.getTemplate());
 			
 			Map<String,Object> md = new HashMap<>();
-			md.put("path", pg.getPath());
-			md.put("id", pg.getId());
+			md.put("path", pg.getPathMetadata().getPath());
+			md.put("id", pg.getPathMetadata().getId());
 			md.put("locale", pg.getLocale());
 			md.put("template", page.getTemplate());
 			
