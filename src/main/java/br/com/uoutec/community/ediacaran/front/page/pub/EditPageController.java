@@ -73,17 +73,17 @@ public class EditPageController {
 		String path = null;
 		String name = null;
 
-		fullPath = fullPath.replaceAll("/+", "/");
-		int lastIndex = fullPath.lastIndexOf("/");
+		fullPath = fullPath == null? null : fullPath.replaceAll("/+", "/");
+		int lastIndex = fullPath == null? -1 : fullPath.lastIndexOf("/");
 		
 		if(lastIndex > 0 ) {
-			path = PagesObjectsManagerDriver.DRIVER_PATH + fullPath.substring(0, lastIndex);
+			path = PagesObjectsManagerDriver.DRIVER_NAME + fullPath.substring(0, lastIndex);
 			name = fullPath.substring(lastIndex + 1, fullPath.length());
 			
 			name = ".*".concat(Arrays.stream(name.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
 		}
 		else {
-			path = PagesObjectsManagerDriver.DRIVER_PATH + fullPath;
+			path = PagesObjectsManagerDriver.DRIVER_NAME + (fullPath == null? "" : fullPath);
 		}
 		
 		List<ObjectMetadata> list = objectsManager.listMetadata(path, name, loc, true, SearchType.REGEX);

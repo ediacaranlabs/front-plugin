@@ -400,7 +400,7 @@ public class ObjectsManagerImp
 			PathMetadata pmd = getSearchMetadata(path);
 			ObjectsManagerDriver driver = getSecureDriver(pmd.getDriver());
 			
-			return driver.list(pmd.getPath(), name, locale, recursive, filter);
+			return driver.list(pmd.getFullId(), name, locale, recursive, filter);
 		}
 		catch(ObjectsManagerDriverException e) {
 			throw new IllegalStateException(e);

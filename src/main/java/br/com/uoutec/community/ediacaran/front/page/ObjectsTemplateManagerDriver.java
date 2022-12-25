@@ -7,6 +7,10 @@ import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver;
 
 public interface ObjectsTemplateManagerDriver extends ObjectsManagerDriver{
 
+	void registerTemplate(ObjectTemplate template);
+	
+	void unregisterTemplate(String id);
+	
 	ObjectTemplate getTemplateByName(String id);
 	
 	ObjectTemplate getTemplate(Object object);

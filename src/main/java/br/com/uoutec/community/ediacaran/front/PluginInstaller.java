@@ -6,6 +6,7 @@ import java.io.File;
 
 import br.com.uoutec.community.ediacaran.AbstractPlugin;
 import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
+import br.com.uoutec.community.ediacaran.VarParser;
 import br.com.uoutec.community.ediacaran.core.security.Authorization;
 import br.com.uoutec.community.ediacaran.core.security.SecurityRegistry;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
@@ -23,6 +24,8 @@ import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver.Obje
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriverException;
 import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.PathMetadata;
+import br.com.uoutec.community.ediacaran.front.page.ObjectTemplate;
+import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManagerDriver;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBarManagerException;
@@ -58,7 +61,7 @@ public class PluginInstaller
 	
 	private ObjectsManagerDriver globalDriver;
 	
-	private ObjectsManagerDriver pageObjectDriver;
+	private ObjectsTemplateManagerDriver pageObjectDriver;
 
 	public void install() throws Throwable{
 		installPageTemplates();
@@ -112,7 +115,17 @@ public class PluginInstaller
 			
 		});
 		
-		this.pageObjectDriver = new PagesObjectsManagerDriver();
+		pageObjectDriver = new PagesObjectsManagerDriver();
+		VarParser varParser = EntityContextPlugin.getEntity(VarParser.class);
+		
+		pageObjectDriver.registerTemplate( 
+				new ObjectTemplate(
+						"default", 
+						"Default Template", 
+						varParser.getValue("${plugins.ediacaran.front.web_path}:/pages/admin/edit.jsp"), 
+						varParser.getValue("${plugins.ediacaran.front.web_path}:/pages/default-template.jsp")
+				)
+		);
 		
 		ObjectsManager objectsManager = EntityContextPlugin.getEntity(ObjectsManager.class);
 		

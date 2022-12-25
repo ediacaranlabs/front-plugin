@@ -15,11 +15,25 @@ public class PathMetadata{
 	}
 
 	public String getFullId() {
-		return path + "/" + id;
+		StringBuilder sb = new StringBuilder();
+		
+		sb
+			.append(path == null || path.isEmpty()? "" : path    )
+			.append(id == null   || id.isEmpty()  ? "" : "/" + id);
+		
+		return sb.length() == 0? null : sb.toString();
 	}
 	
 	public String getGlobalId() {
-		return driver + path + "/" + id;
+		String fullId = getFullId();
+		
+		if(fullId == null) {
+			return driver;
+		}
+		else {
+			return driver + fullId;
+		}
+		
 	}
 	
 	public String getDriver() {
