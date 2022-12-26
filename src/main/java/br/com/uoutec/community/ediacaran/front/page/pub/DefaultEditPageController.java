@@ -89,7 +89,7 @@ public class DefaultEditPageController {
 					name = title;
 				}
 				
-				ObjectMetadata pg = objectsManager.registerObjectIfNotExist(PagesObjectsManagerDriver.DRIVER_PATH + path + "/" + name, loc, page);
+				ObjectMetadata pg = objectsManager.registerObjectIfNotExist(PagesObjectsManagerDriver.DRIVER_NAME + path + "/" + name, loc, page);
 
 				Map<String,Object> md = new HashMap<String,Object>();
 				md.put("path", pg.getPathMetadata().getPath());

@@ -112,8 +112,43 @@ public class ObjectsManagerImp
 	
 	@Override
 	public ObjectMetadata registerObjectIfNotExist(String id, Locale locale, Object object) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(!isVaidID(id)) {
+			throw new IllegalStateException("invalid format: " + id);
+		}
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(basePermission + id.replace("/", ".") + ".register"));
+		}
+		
+		writeLock.lock();
+		try {
+			
+			objectListenerManager.beforeRegister(id, locale, object);
+			
+			PathMetadata pmd = getPathMetadata(id);
+			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
+			
+			ObjectMetadata omd = 
+					driver.unique(pmd.getPath(), pmd.getId(), locale, false, SearchType.EQUAL_LOCALE);
+			
+			if(omd == null) {
+				omd = regiterObject(id, object, locale, pmd, driver);
+			}
+			
+			objectListenerManager.afterRegister(id, locale, object);
+			
+			return omd;
+		}
+		catch(ObjectsManagerDriverException e) {
+			throw new IllegalStateException(e);
+		}
+		finally {
+			writeLock.unlock();
+		}
+		
 	}
 	
 	/* /global/admin/menus/adminmenubar */
@@ -145,28 +180,8 @@ public class ObjectsManagerImp
 			objectListenerManager.beforeRegister(id, locale, object);
 			
 			PathMetadata pmd = getPathMetadata(id);
-			
 			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
-			
-			ObjectValue obj = persistObject(driver, pmd, locale, object);
-
-			if(driver.isCacheable()) {
-				
-				ConcurrentMap<Locale,ObjectValue> map = objects.get(id);
-				
-				if(map == null) {
-					map = new ConcurrentHashMap<Locale,ObjectValue>();
-					ConcurrentMap<Locale,ObjectValue> current = objects.putIfAbsent(id, map);
-					if(current != null) {
-						map = current;
-					}
-				}
-				
-				if(obj.isValid()) {
-					map.put(getSafeLocale(locale), obj);
-				}
-				
-			}
+			regiterObject(id, object, locale, pmd, driver);
 			
 			objectListenerManager.afterRegister(id, locale, object);
 			
@@ -181,6 +196,31 @@ public class ObjectsManagerImp
 		
 	}
 
+	private ObjectMetadata regiterObject(String id, Object object, Locale locale, PathMetadata pmd, ObjectsManagerDriver driver) {
+		
+		ObjectValue obj = persistObject(driver, pmd, locale, object);
+
+		if(driver.isCacheable()) {
+			
+			ConcurrentMap<Locale,ObjectValue> map = objects.get(id);
+			
+			if(map == null) {
+				map = new ConcurrentHashMap<Locale,ObjectValue>();
+				ConcurrentMap<Locale,ObjectValue> current = objects.putIfAbsent(id, map);
+				if(current != null) {
+					map = current;
+				}
+			}
+			
+			if(obj.isValid()) {
+				map.put(getSafeLocale(locale), obj);
+			}
+			
+		}
+
+		return new ObjectMetadata(pmd, locale);
+	}
+	
 	@Override
 	public void unregisterObject(String id, Locale locale) {
 

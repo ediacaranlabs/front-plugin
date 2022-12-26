@@ -115,9 +115,9 @@ public class PluginInstaller
 			
 		});
 		
-		pageObjectDriver = new PagesObjectsManagerDriver();
 		VarParser varParser = EntityContextPlugin.getEntity(VarParser.class);
-		
+		pageObjectDriver = new PagesObjectsManagerDriver();
+		pageObjectDriver.setDefaultObjectHandler(new ObjectHandlerImp());
 		pageObjectDriver.registerTemplate( 
 				new ObjectTemplate(
 						"default", 

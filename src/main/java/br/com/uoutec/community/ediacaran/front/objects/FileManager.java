@@ -93,6 +93,10 @@ public class FileManager {
 		
 		File[] l = path.listFiles();
 		
+		if(l == null) {
+			return;
+		}
+		
 		for(File f: l) {
 			if(f.isDirectory() && recursive) {
 				list(result, f, filter, recursive);
