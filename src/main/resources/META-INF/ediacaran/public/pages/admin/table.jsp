@@ -59,18 +59,18 @@
 	<ed:col size="7">
 	<c:choose>
 		<c:when test="${empty item.locale}">
-			<a href="${item.path == '/'? '/' : item.path.concat('/')}${item.id}" target="_blank">${item.path == '/'? '/' : item.path.concat('/')}${item.id}</a>
+			<a href="${item.pathMetadata.path == '/'? '/' : item.pathMetadata.path.concat('/')}${item.pathMetadata.id}" target="_blank">${item.pathMetadata.path == '/'? '/' : item.pathMetadata.path.concat('/')}${item.pathMetadata.id}</a>
 		</c:when>
 		<c:otherwise>
-			<a href="${item.path == '/'? '/' : item.path.concat('/')}${item.id}?lang=${item.locale}" target="_blank">${item.path == '/'? '/' : item.path.concat('/')}${item.id}?lang=${item.locale}</a>
+			<a href="${item.pathMetadata.path == '/'? '/' : item.pathMetadata.path.concat('/')}${item.pathMetadata.id}?lang=${item.pathMetadata.locale}" target="_blank">${item.pathMetadata.path == '/'? '/' : item.pathMetadata.path.concat('/')}${item.pathMetadata.id}?lang=${item.locale}</a>
 		</c:otherwise>
 	</c:choose>
 	</ed:col>
 	<ed:col size="2">${locales[item.locale]}</ed:col>
 	<ed:col size="3">
 		<ec:form method="POST">
-			<input type="hidden" name="path" value="${item.path}">
-			<input type="hidden" name="name" value="${item.id}">
+			<input type="hidden" name="path" value="${item.pathMetadata.path}">
+			<input type="hidden" name="name" value="${item.pathMetadata.id}">
 			<input type="hidden" name="locale" value="${item.locale}">
 			<ec:button 
 				actionType="submit" 

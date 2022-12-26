@@ -16,6 +16,7 @@ import org.brandao.brutos.web.HttpStatus;
 import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebResultAction;
 
+import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.plugins.PublicType;
 
 @Singleton
@@ -31,14 +32,15 @@ public class PageController implements PublicType {
 			@Basic(bean="uri") String uri, 
 			@Basic(bean="locale", scope=ScopeType.REQUEST, mappingType=MappingTypes.VALUE) Locale locale, 
 			WebResultAction result) {
-		Page page = (Page) objectTemplateManager.getObject( "/pages" + uri, locale);
+		
+		Page page = (Page) objectTemplateManager.getObject( PagesObjectsManagerDriver.DRIVER_NAME + uri, locale);
 		
 		if(page == null && locale != null) {
-			page = (Page) objectTemplateManager.getObject( "/pages" + uri, null);
+			page = (Page) objectTemplateManager.getObject( PagesObjectsManagerDriver.DRIVER_NAME + uri, null);
 		}
 		
 		if(page != null) {
-			ObjectTemplate pg = objectTemplateManager.getTemplate("page", page.getTemplate());
+			ObjectTemplate pg = objectTemplateManager.getTemplate(PagesObjectsManagerDriver.DRIVER_NAME, page);
 			result.setView(pg.getTemplate(), true);
 			result.setDispatcher(WebDispatcherType.FORWARD);
 			result.add("page", page);
