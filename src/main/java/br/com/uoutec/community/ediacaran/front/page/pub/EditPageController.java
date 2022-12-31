@@ -1,14 +1,10 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.brandao.brutos.annotation.Action;
@@ -25,14 +21,9 @@ import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
 import br.com.uoutec.community.ediacaran.core.security.RequiresPermissions;
-import br.com.uoutec.community.ediacaran.core.system.i18n.LanguageRegistry;
-import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.SearchType;
-import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
-import br.com.uoutec.community.ediacaran.front.objects.PathMetadata;
+import br.com.uoutec.community.ediacaran.front.page.EditPage;
 import br.com.uoutec.community.ediacaran.front.page.ObjectTemplate;
-import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManager;
 import br.com.uoutec.community.ediacaran.front.page.Page;
 
 @Singleton
@@ -41,16 +32,10 @@ import br.com.uoutec.community.ediacaran.front.page.Page;
 public class EditPageController {
 
 	@Transient
-	@Inject
-	public ObjectsTemplateManager objectsManager;
-
-	@Transient
-	@Inject
-	private LanguageRegistry languageRegistry;
+	private EditPage editpage;
 	
 	@Action("/")
 	@Result("itens")
-	//@View(value="/pages/admin/index")
 	@RequiresPermissions("CONTENT:PAGES:LIST")
 	public WebResultAction index(WebResultAction webResult){
 		webResult = list(null, null, webResult);
@@ -61,42 +46,27 @@ public class EditPageController {
 	@Action("/list")
 	@RequestMethod(RequestMethodTypes.POST)
 	@Result("itens")
-	//@View(value="/pages/admin/table")
 	@RequiresPermissions("CONTENT:PAGES:LIST")
 	public WebResultAction list(
 			@Basic(bean="path")
-			String fullPath,
+			String path,
 			String locale,
 			WebResultAction webResult){
 		
-		Locale loc  = PluginLanguageUtils.toLocale(locale);
-		String path = null;
-		String name = null;
-
-		fullPath = fullPath == null? null : fullPath.replaceAll("/+", "/");
-		int lastIndex = fullPath == null? -1 : fullPath.lastIndexOf("/");
+		webResult.setView("/pages/admin/table");
 		
-		if(lastIndex > 0 ) {
-			path = PagesObjectsManagerDriver.DRIVER_NAME + fullPath.substring(0, lastIndex);
-			name = fullPath.substring(lastIndex + 1, fullPath.length());
+		try {
+			List<ObjectMetadata> list     = editpage.list(path, locale);
+			Map<Locale, String> langNames = editpage.getSupportedLocales();
 			
-			name = ".*".concat(Arrays.stream(name.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
+			webResult.add("itens", list);
+			webResult.add("locales", langNames);
 		}
-		else {
-			path = PagesObjectsManagerDriver.DRIVER_NAME + (fullPath == null? "" : fullPath);
+		catch(Throwable ex) {
+			webResult
+			.add("exception", ex);
 		}
-		
-		List<ObjectMetadata> list = objectsManager.listMetadata(path, name, loc, true, SearchType.REGEX);
-		
-		Map<Locale, String> langNames      = languageRegistry.getSupportedLocalesName();
-		Map<String,ObjectTemplate> editors = objectsManager.getTemplatesIdMap(PagesObjectsManagerDriver.DRIVER_NAME);
-		
-		webResult
-			.setView("/pages/admin/table")
-			.add("itens", list)
-			.add("locales", langNames)
-			.add("editors", editors);
-		
+			
 		return webResult;
 	}
 
@@ -104,10 +74,16 @@ public class EditPageController {
 	@RequiresPermissions("CONTENT:PAGES:CREATE")
 	public WebResultAction selectTemplate(WebResultAction webResult){
 		
-		List<ObjectTemplate> templates = objectsManager.getTemplates(PagesObjectsManagerDriver.DRIVER_NAME);
-		webResult
-			.setView("/pages/admin/select_template")
-			.add("templates", templates);
+		webResult.setView("/pages/admin/select_template");
+		
+		try {
+			Map<String,ObjectTemplate> templates = editpage.getTemplates();
+			webResult.add("templates", templates);
+		}
+		catch(Throwable ex) {
+			webResult
+			.add("exception", ex);
+		}
 		
 		return webResult;
 	}
@@ -118,23 +94,18 @@ public class EditPageController {
 	public WebResultAction delete(
 			Long gid,
 			String path, 
-			String name,
 			@Basic(mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
 		
 		try {
-			Locale loc = PluginLanguageUtils.toLocale(locale);
-			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", path);
-			md.put("id", name);
-			md.put("locale", loc);
+			md.put("locale", locale);
 			
 			if(gid == md.hashCode()) {
-				objectsManager.unregisterObject(path + "/" + name, loc);
+				editpage.unregisterPage(path, locale);
 			}
-			
 		}
 		catch(Throwable ex) {
 			webResult
@@ -149,7 +120,6 @@ public class EditPageController {
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction confirmDelete(
 			String path, 
-			String name,
 			@Basic(mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
@@ -157,12 +127,10 @@ public class EditPageController {
 		webResult.setView("/pages/admin/confirm_delete");
 		
 		try {
-			Locale loc = PluginLanguageUtils.toLocale(locale);
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", path);
-			md.put("id", name);
-			md.put("locale", loc);
+			md.put("locale", locale);
 			
 			webResult
 				.add("metadata", md);
@@ -182,9 +150,9 @@ public class EditPageController {
 	public WebResultAction create(String templateName, WebResultAction webResult){
 		
 		try {
-			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
-			List<ObjectTemplate> templates = objectsManager.getTemplates(PagesObjectsManagerDriver.DRIVER_NAME);
-			ObjectTemplate template = templateName == null? templates.get(0) : objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, templateName);
+			Map<Locale, String> langNames = editpage.getSupportedLocales();
+			Map<String,ObjectTemplate> templates = editpage.getTemplates();
+			ObjectTemplate template = editpage.getTemplate(templateName);
 			
 			webResult.setView(template.getFormPath(), true);
 			webResult.setDispatcher(WebDispatcherType.FORWARD);
@@ -209,17 +177,14 @@ public class EditPageController {
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresPermissions("CONTENT:PAGES:EDIT")
 	public WebResultAction edit(
-			String path, 
-			String name,
+			String path,
 			@Basic(mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
 		
 		try {
-			Locale loc = PluginLanguageUtils.toLocale(locale);
-			ObjectMetadata pg = new ObjectMetadata(new PathMetadata(PagesObjectsManagerDriver.DRIVER_NAME, path, name), loc); 
-
-			Page page = (Page)objectsManager.getObject(pg);
+			
+			Page page = editpage.getPage(path, locale);
 			
 			if(page == null) {
 				WebFlowController
@@ -227,18 +192,18 @@ public class EditPageController {
 				.to("${plugins.ediacaran.front.admin_context}/pages/list");
 			}
 			
-			Map<Locale, String> langNames = languageRegistry.getSupportedLocalesName();
-			List<ObjectTemplate> templates = objectsManager.getTemplates(PagesObjectsManagerDriver.DRIVER_NAME);
-			ObjectTemplate template = page == null? templates.get(0) : objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, page.getTemplate());
+			Map<Locale, String> langNames = editpage.getSupportedLocales();
+			Map<String,ObjectTemplate> templates = editpage.getTemplates();
+			ObjectTemplate template = editpage.getTemplate(page.getTemplate());
 			
 			Map<String,Object> md = new HashMap<>();
-			md.put("path", pg.getPathMetadata().getPath());
-			md.put("id", pg.getPathMetadata().getId());
-			md.put("locale", pg.getLocale());
+			md.put("path", path);
+			md.put("locale", locale);
 			md.put("template", page.getTemplate());
 			
 			webResult.setView(template.getFormPath(), true);
 			webResult.setDispatcher(WebDispatcherType.FORWARD);
+			
 			webResult
 				.add("page", page)
 				.add("templates", templates)

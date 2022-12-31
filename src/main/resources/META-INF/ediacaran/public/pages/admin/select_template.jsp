@@ -18,7 +18,7 @@
 			<ed:col size="12">
 				<ec:select label="Template" name="templateName">
 					<c:forEach items="${templates}" var="template">
-					<ec:option value="${template.id}">${template.name}</ec:option>
+					<ec:option value="${template.key}">${template.value.name}</ec:option>
 					</c:forEach>
 				</ec:select>
 			</ed:col>

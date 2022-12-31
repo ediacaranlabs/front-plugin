@@ -68,7 +68,7 @@
 				<ed:col size="4">
 					<ec:select label="Template" name="template" enabled="false">
 						<c:forEach items="${templates}" var="template">
-						<ec:option value="${template.id}" selected="${page.template == template.id}">${template.name}</ec:option>
+						<ec:option value="${template.id}" selected="${page.template == template.key}">${template.value.name}</ec:option>
 						</c:forEach>
 					</ec:select>
 				</ed:col>

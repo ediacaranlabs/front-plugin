@@ -33,19 +33,6 @@
 			label="Novo"
 			method="GET"
 			action="#m${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new"/>
-			
-<%--			
-		<ec:button 
-			actionType="button"
-			label="Novo">
-			<ec:event type="click">
-				$.AppContext.utils.loadResourceContent(
-					null, 
-					"#m${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new");
-			</ec:event>
-		</ec:button>
---%>
-
 	</ed:col>
 </ed:row>
 </ec:form>
@@ -69,8 +56,7 @@
 	<ed:col size="2">${locales[item.locale]}</ed:col>
 	<ed:col size="3">
 		<ec:form method="POST">
-			<input type="hidden" name="path" value="${item.pathMetadata.path}">
-			<input type="hidden" name="name" value="${item.pathMetadata.id}">
+			<input type="hidden" name="path" value="${item.pathMetadata.path == '/'? '/' : item.pathMetadata.path.concat('/')}${item.pathMetadata.id}">
 			<input type="hidden" name="locale" value="${item.locale}">
 			<ec:button 
 				actionType="submit" 
@@ -83,37 +69,4 @@
 		</ec:form>
 	</ed:col>
 </ed:row>
-
 </c:forEach>
-
-<%--
-	<ec:table style="sm" >
-		<ec:table-header>
-			<ec:table-col>Caminho</ec:table-col>
-			<ec:table-col>Nome</ec:table-col>
-			<ec:table-col>Idioma</ec:table-col>
-			<ec:table-col>Ação</ec:table-col>
-		</ec:table-header>
-		<ec:table-body>
-			<c:forEach items="${itens}" var="item">
-			<ec:table-row>
-				<ec:table-col>${item.path}</ec:table-col>
-				<ec:table-col>${item.id}</ec:table-col>
-				<ec:table-col>${locales[item.locale]}</ec:table-col>
-				<ec:table-col>
-					<ec:form method="POST" update="#content-body">
-						<input type="hidden" name="path" value="${item.path}">
-						<input type="hidden" name="name" value="${item.id}">
-						<input type="hidden" name="locale" value="${item.locale}">
-						<ec:button 
-							actionType="submit" 
-							action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/edit"
-							label="Editar"/>
-						<ec:button style="link" label="Remover"/>
-					</ec:form>
-				</ec:table-col>
-			</ec:table-row>
-			</c:forEach>
-		</ec:table-body>
-	</ec:table>
---%>
