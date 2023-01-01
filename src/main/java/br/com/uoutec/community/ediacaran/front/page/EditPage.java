@@ -1,5 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.page;
 
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -51,6 +53,29 @@ public class EditPage {
 		
 	}
 
+	public ObjectMetadata registerPageByTitle(String path, String title, String locale, Object object) {
+		title = normalize(title);
+		return registerPage(path + "/" + title, PluginLanguageUtils.toLocale(locale), object);
+	}
+
+	public ObjectMetadata registerPageByName(String path, String name, String locale, Object object) {
+		name = normalize(name);
+		return registerPage(path + "/" + name, PluginLanguageUtils.toLocale(locale), object);
+	}
+	
+	public ObjectMetadata registerPage(String page, String locale, Object object) {
+		return registerPage(page, PluginLanguageUtils.toLocale(locale), object);
+	}
+	
+	public ObjectMetadata registerPage(String page, Locale locale, Object object) {
+		return objectsManager.registerObject(PagesObjectsManagerDriver.DRIVER_NAME +  page, locale, object);
+	}
+
+	public void unregisterPageByName(String path, String name, String locale) {
+		name = normalize(name);
+		unregisterPage(path + "/" + name, locale);
+	}
+	
 	public void unregisterPage(String page, String locale) {
 		unregisterPage(page, PluginLanguageUtils.toLocale(locale));
 	}
@@ -68,14 +93,32 @@ public class EditPage {
 	}
 
 	public ObjectTemplate getTemplate(String name){
-		return objectsManager.getTemplate(PagesObjectsManagerDriver.DRIVER_NAME, name);
+		return objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, name);
 	}
 
+	public Page getPageByName(String path, String name, String locale) {
+		name = normalize(name);
+		return getPage(path + "/" + name, locale);
+	}
+	
 	public Page getPage(String path, String locale) {
 		return getPage(path, PluginLanguageUtils.toLocale(locale));
 	}
 	
 	public Page getPage(String path, Locale locale) {
-		return (Page) objectsManager.getObject(path, locale);
+		return (Page) objectsManager.getObject(PagesObjectsManagerDriver.DRIVER_NAME + path, locale);
 	}
+	
+	public boolean isValidTemplate(String value) {
+		return value != null && objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, value) != null;
+	}
+	
+	private String normalize(String name) {
+		return 
+			Normalizer.normalize(name, Form.NFD)
+			.replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+			.toLowerCase()
+			.replaceAll("\\s+", "-");
+	}
+	
 }

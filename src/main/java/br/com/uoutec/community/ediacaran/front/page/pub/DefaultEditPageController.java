@@ -3,7 +3,6 @@ package br.com.uoutec.community.ediacaran.front.page.pub;
 import java.io.CharArrayReader;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -24,11 +23,9 @@ import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.RequestMethodTypes;
 import org.brandao.brutos.validator.ValidatorException;
 
-import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
-import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.page.BreadcrumbPath;
-import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManager;
+import br.com.uoutec.community.ediacaran.front.page.EditPage;
 import br.com.uoutec.community.ediacaran.front.page.Page;
 import br.com.uoutec.community.ediacaran.front.page.PageFileManagerHandler;
 import br.com.uoutec.pub.entity.InvalidRequestException;
@@ -40,7 +37,7 @@ public class DefaultEditPageController {
 
 	@Transient
 	@Inject
-	public ObjectsTemplateManager objectsManager;
+	public EditPage editPage;
 
 	@Action("/save")
 	@RequestMethod(RequestMethodTypes.POST)
@@ -50,10 +47,11 @@ public class DefaultEditPageController {
 	public Map<String,Object> save(
 			Long gid,
 			@NotNull
-			@Size(max = 120)
+			@Size(max = 600)
 			@Pattern(regexp="(\\/|" + PageFileManagerHandler.PATH_FORMAT + ")")
+			//@Pattern(regexp=PageFileManagerHandler.PATH_FORMAT)
 			String path,
-			@Size(max = 120)
+			@Size(max = 255)
 			@Pattern(regexp=PageFileManagerHandler.ID_FORMAT)
 			String name,
 			@Pattern(regexp=PageFileManagerHandler.LOCALE_FORMAT)
@@ -61,7 +59,7 @@ public class DefaultEditPageController {
 			@NotNull
 			@Size(max = 255)
 			String title,
-			@Size(max = 200000)
+			@Size(max = 2097152)
 			String content,
 			Map<String, String> header,
 			List<BreadcrumbPath> breadcrumb,
@@ -70,8 +68,6 @@ public class DefaultEditPageController {
 			String template) throws InvalidRequestException, ValidatorException{
 
 		try {
-			Locale loc = PluginLanguageUtils.toLocale(locale);
-
 			Page page = new Page();
 			page.setBreadcrumb(breadcrumb);
 			page.setHeader(header);
@@ -81,21 +77,18 @@ public class DefaultEditPageController {
 			
 			if(gid == null) {
 
-				if(template == null || objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, template) == null ) {
+				if(!editPage.isValidTemplate(template)) {
 					throw new InvalidRequestException("invalid template");
 				}
 				
-				if(name == null) {
-					name = title;
-				}
-				
-				ObjectMetadata pg = objectsManager.registerObjectIfNotExist(PagesObjectsManagerDriver.DRIVER_NAME + path + "/" + name, loc, page);
+				ObjectMetadata omd = name == null? 
+						editPage.registerPageByTitle(path, title, locale, page) :
+						editPage.registerPageByName(path, name, locale, page);
 
 				Map<String,Object> md = new HashMap<String,Object>();
-				md.put("path", pg.getPathMetadata().getPath());
-				md.put("id", pg.getPathMetadata().getId());
-				md.put("locale", pg.getLocale());
-				md.put("template", page.getTemplate());
+				md.put("path", omd.getPathMetadata().getPath());
+				md.put("id", omd.getPathMetadata().getId());
+				md.put("locale", omd.getLocale());
 
 				return md;
 			}
@@ -104,14 +97,14 @@ public class DefaultEditPageController {
 				Map<String,Object> md = new HashMap<String,Object>();
 				md.put("path", path);
 				md.put("id", name);
-				md.put("locale", loc);
-				md.put("template", template);
+				md.put("locale", locale);
 				
 				if(gid != md.hashCode()) {
 					throw new InvalidRequestException("invalid id");
 				}
 				
-				objectsManager.registerObjectIfNotExist(PagesObjectsManagerDriver.DRIVER_PATH + path + "/" + name, loc, page);
+				editPage.registerPageByName(path, name, locale, page);
+
 				return null;
 			}
 			

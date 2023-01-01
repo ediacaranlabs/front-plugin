@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface ObjectsManager {
 
-	void registerObject(String id, Locale locale, Object object);
+	ObjectMetadata registerObject(String id, Locale locale, Object object);
 	
 	ObjectMetadata registerObjectIfNotExist(String id, Locale locale, Object object);
 	

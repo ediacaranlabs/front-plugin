@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.brandao.brutos.annotation.Action;
@@ -21,6 +22,7 @@ import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
 import br.com.uoutec.community.ediacaran.core.security.RequiresPermissions;
+import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.page.EditPage;
 import br.com.uoutec.community.ediacaran.front.page.ObjectTemplate;
@@ -32,6 +34,7 @@ import br.com.uoutec.community.ediacaran.front.page.Page;
 public class EditPageController {
 
 	@Transient
+	@Inject
 	private EditPage editpage;
 	
 	@Action("/")
@@ -93,7 +96,8 @@ public class EditPageController {
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction delete(
 			Long gid,
-			String path, 
+			String path,
+			String name, 
 			@Basic(mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
@@ -101,10 +105,11 @@ public class EditPageController {
 		try {
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", path);
+			md.put("id", name);
 			md.put("locale", locale);
 			
 			if(gid == md.hashCode()) {
-				editpage.unregisterPage(path, locale);
+				editpage.unregisterPageByName(path, name, locale);
 			}
 		}
 		catch(Throwable ex) {
@@ -120,6 +125,7 @@ public class EditPageController {
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction confirmDelete(
 			String path, 
+			String name,
 			@Basic(mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
@@ -130,6 +136,7 @@ public class EditPageController {
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", path);
+			md.put("id", name);
 			md.put("locale", locale);
 			
 			webResult
@@ -178,13 +185,14 @@ public class EditPageController {
 	@RequiresPermissions("CONTENT:PAGES:EDIT")
 	public WebResultAction edit(
 			String path,
+			String name,
 			@Basic(mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
 		
 		try {
 			
-			Page page = editpage.getPage(path, locale);
+			Page page = editpage.getPageByName(path, name, locale);
 			
 			if(page == null) {
 				WebFlowController
@@ -198,8 +206,8 @@ public class EditPageController {
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", path);
-			md.put("locale", locale);
-			md.put("template", page.getTemplate());
+			md.put("id", name);
+			md.put("locale", PluginLanguageUtils.toLocale(locale));
 			
 			webResult.setView(template.getFormPath(), true);
 			webResult.setDispatcher(WebDispatcherType.FORWARD);

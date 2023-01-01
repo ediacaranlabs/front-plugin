@@ -19,8 +19,7 @@
 	</c:if>
 	<c:if test="${!empty id}">
 		<ec:form method="POST" action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/edit" id="form_update" update="#pages_body">
-			<input type="hidden" name="path" value="${id.path}">
-			<input type="hidden" name="name" value="${id.id}">
+			<input type="hidden" name="path" value="${id.path}/${id.id}">
 			<input type="hidden" name="locale" value="${id.locale}">
 		</ec:form>
 		<script>

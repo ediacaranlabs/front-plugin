@@ -24,9 +24,9 @@ import br.com.uoutec.community.ediacaran.plugins.PublicBean;
 public class ObjectsManagerImp 
 	implements ObjectsManager, PublicBean {
 
-	private static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)+";
+	private static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+([_-][a-z0-9]+)*)+";
 	
-	private static final String ID_FORMAT = "[a-z][a-z0-9]+(_[a-z0-9]+)*";
+	private static final String ID_FORMAT = "[a-z][a-z0-9]+([_-][a-z0-9]+)*";
 
 	private static final String DRIVER_FORMAT = "[a-z0-9]+([_-][a-z0-9]+)*";
 	
@@ -158,7 +158,7 @@ public class ObjectsManagerImp
 	/* /mysql/users/id/afonso%brandao */
 	
 	@Override
-	public void registerObject(String id, Locale locale, Object object) {
+	public ObjectMetadata registerObject(String id, Locale locale, Object object) {
 		
 		if(object == null) {
 			throw new NullPointerException("object");
@@ -181,10 +181,11 @@ public class ObjectsManagerImp
 			
 			PathMetadata pmd = getPathMetadata(id);
 			ObjectsManagerDriver driver = getDriver(pmd.getDriver());
-			regiterObject(id, object, locale, pmd, driver);
+			ObjectMetadata o = regiterObject(id, object, locale, pmd, driver);
 			
 			objectListenerManager.afterRegister(id, locale, object);
 			
+			return o;
 		}
 		catch(ObjectsManagerDriverException e) {
 			throw new IllegalStateException(e);

@@ -27,9 +27,9 @@ import br.com.uoutec.community.ediacaran.front.objects.FileManagerHandler;
 
 public class PageFileManagerHandler implements FileManagerHandler{
 
-	public static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*";
+	public static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+([_-][a-z0-9]+)*)*";
 	
-	public static final String ID_FORMAT = "[a-z][a-z0-9]+(-[a-z0-9]+)*";
+	public static final String ID_FORMAT = "[a-z][a-z0-9]+([_-][a-z0-9]+)*";
 
 	public static final String LOCALE_FORMAT = "[a-z]{2,2}_[A-Z]{2,2}";
 	

@@ -17,6 +17,7 @@
 			<ed:col size="12">
 				<input type="hidden" value="${metadata.hashCode()}" name="gid">
 				<input type="hidden" value="${metadata.path}" name="path">
+				<input type="hidden" value="${metadata.id}" name="name">
 				<input type="hidden" value="${metadata.locale}" name="locale">
 				Deseja realmente apagar a página?
 			</ed:col>

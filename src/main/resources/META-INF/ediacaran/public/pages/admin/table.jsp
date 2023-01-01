@@ -56,7 +56,8 @@
 	<ed:col size="2">${locales[item.locale]}</ed:col>
 	<ed:col size="3">
 		<ec:form method="POST">
-			<input type="hidden" name="path" value="${item.pathMetadata.path == '/'? '/' : item.pathMetadata.path.concat('/')}${item.pathMetadata.id}">
+			<input type="hidden" name="path" value="${item.pathMetadata.path}">
+			<input type="hidden" name="name" value="${item.pathMetadata.id}">
 			<input type="hidden" name="locale" value="${item.locale}">
 			<ec:button 
 				actionType="submit" 
