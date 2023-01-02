@@ -1,6 +1,7 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core"                 prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"                   prefix="c"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions"              prefix = "fn"%>
 <%@page trimDirectiveWhitespaces="true" %>
 <ec:load-data file="index" locale="${locale}" var="pageObjects" />
 <!DOCTYPE html>
@@ -29,7 +30,7 @@
 					</div>
 				</ed:col>
 				<ed:col size="8">
-					<ec:breadcrumb title="${page.title}">
+					<ec:breadcrumb title="${fn:length(page.title) > 30? fn:substring(page.title, 0, 15).concat(' ... ').concat(fn:substring(page.title, fn:length(page.title) - 10, fn:length(page.title))) : page.title }">
 						<c:forEach items="${page.breadcrumb}" var="item">
 							<ec:breadcrumb-path icon="${item.icon}" text="${item.name}" lnk="${item.link}" />
 						</c:forEach>
