@@ -2,6 +2,7 @@ package br.com.uoutec.community.ediacaran.front.page;
 
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -53,22 +54,27 @@ public class EditPage {
 		
 	}
 
-	public ObjectMetadata registerPageByTitle(String path, String title, String locale, Object object) {
+	public ObjectMetadata registerPageByTitle(String path, String title, String locale, Page page) {
 		title = normalize(title);
-		return registerPage(path + "/" + title, PluginLanguageUtils.toLocale(locale), object);
+		return registerPage(path + "/" + title, PluginLanguageUtils.toLocale(locale), page);
 	}
 
-	public ObjectMetadata registerPageByName(String path, String name, String locale, Object object) {
+	public ObjectMetadata registerPageByName(String path, String name, String locale, Page page) {
 		name = normalize(name);
-		return registerPage(path + "/" + name, PluginLanguageUtils.toLocale(locale), object);
+		return registerPage(path + "/" + name, PluginLanguageUtils.toLocale(locale), page);
 	}
 	
-	public ObjectMetadata registerPage(String page, String locale, Object object) {
-		return registerPage(page, PluginLanguageUtils.toLocale(locale), object);
+	public ObjectMetadata registerPage(String path, String locale, Page page) {
+		return registerPage(path, PluginLanguageUtils.toLocale(locale), page);
 	}
 	
-	public ObjectMetadata registerPage(String page, Locale locale, Object object) {
-		return objectsManager.registerObject(PagesObjectsManagerDriver.DRIVER_NAME +  page, locale, object);
+	public ObjectMetadata registerPage(String path, Locale locale, Page page) {
+		
+		if(page.getBreadcrumb() == null) {
+			page.setBreadcrumb(createBreadcrumbPath(path, page));
+		}
+		
+		return objectsManager.registerObject(PagesObjectsManagerDriver.DRIVER_NAME +  path, locale, page);
 	}
 
 	public void unregisterPageByName(String path, String name, String locale) {
@@ -117,8 +123,39 @@ public class EditPage {
 		return 
 			Normalizer.normalize(name, Form.NFD)
 			.replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+			.replaceAll("[^a-zA-Z0-9\\s]", " ")
 			.toLowerCase()
 			.replaceAll("\\s+", "-");
 	}
-	
+
+	private List<BreadcrumbPath> createBreadcrumbPath(String path, Page page){
+		
+		List<BreadcrumbPath> list = new ArrayList<BreadcrumbPath>();
+		
+		String[] paths = path.split("/+");
+		StringBuilder fullPath = new StringBuilder();
+		
+		list.add(new BreadcrumbPath("Home", "home", "/"));
+		for(int i=1;i<paths.length -1;i++) {
+			
+			String p = paths[i];
+			
+			fullPath.append("/").append(p);
+			String index = fullPath.toString() + "/index";
+			
+			BreadcrumbPath bcp;
+			
+			if(getPage(index, (Locale)null) != null) {
+				bcp = new BreadcrumbPath(p, null, fullPath.toString());
+			}
+			else {
+				bcp = new BreadcrumbPath(p, null, "#");
+			}
+			
+			list.add(bcp);
+		}
+		
+		return list;
+		
+	}
 }
