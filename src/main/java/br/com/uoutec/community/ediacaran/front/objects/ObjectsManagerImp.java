@@ -24,9 +24,9 @@ import br.com.uoutec.community.ediacaran.plugins.PublicBean;
 public class ObjectsManagerImp 
 	implements ObjectsManager, PublicBean {
 
-	private static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+([_-][a-z0-9]+)*)+";
+	private static final String PATH_FORMAT = "(\\/[a-z0-9][a-z0-9]+([_-][a-z0-9]+)*)+";
 	
-	private static final String ID_FORMAT = "[a-z][a-z0-9]+([_-][a-z0-9]+)*";
+	private static final String ID_FORMAT = "[a-z0-9][a-z0-9]+([_-][a-z0-9]+)*";
 
 	private static final String DRIVER_FORMAT = "[a-z0-9]+([_-][a-z0-9]+)*";
 	
