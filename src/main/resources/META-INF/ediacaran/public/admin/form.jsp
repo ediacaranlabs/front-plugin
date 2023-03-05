@@ -376,5 +376,17 @@
 			</ec:box>
 		</ed:col>
 		<ed:col size="6">
+			<ec:box>
+				<ec:box-header>
+					<h3>Image field</h3>
+				</ec:box-header>
+				<ec:box-body>
+				<div>
+					<div>croppie</div>
+					<label for="image">Select Image</label>
+					<input id="field_image" name="image" type="file">
+				</div>
+				</ec:box-body>
+			</ec:box>		
 		</ed:col>
    	</ed:row>

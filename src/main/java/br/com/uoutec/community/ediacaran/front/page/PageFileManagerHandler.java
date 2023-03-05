@@ -11,6 +11,9 @@ import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -137,12 +140,29 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		
 		return new File(fileMtadata.getParentFile(), builder.toString());
 	}
+
+	private File toThumbnailFile(File fileMtadata, FileMetadata omd) {
+		
+		String name = omd.getName();
+		Locale locale = (Locale) omd.getExtMetadata("locale");
+		
+		StringBuilder builder = new StringBuilder(name);
+		
+		if(locale != null) {
+			builder.append("_").append(locale.getLanguage()).append("_").append(locale.getCountry());
+		}
+		
+		builder.append(".png");
+		
+		return new File(fileMtadata.getParentFile(), builder.toString());
+	}
 	
 	@Override
 	@SuppressWarnings("unchecked")
 	public Object read(File file, FileMetadata metadata) throws IOException {
 
-		File contentFile = toContentFile(file, metadata);
+		File contentFile   = toContentFile(file, metadata);
+		File thumbnailFile = toThumbnailFile(file, metadata);
 		
 		Object data;
 		
@@ -160,6 +180,10 @@ public class PageFileManagerHandler implements FileManagerHandler{
 			page.setContent(getReader(contentFile));
 		}
 		
+		if(thumbnailFile.exists()) {
+			page.setThumbnail(thumbnailFile);
+		}
+		
 		return page;
 	}
 
@@ -170,7 +194,8 @@ public class PageFileManagerHandler implements FileManagerHandler{
 	@Override
 	public void write(File file, FileMetadata metadata, Object value) throws FileNotFoundException, IOException {
 		
-		File contentFile = toContentFile(file, metadata);
+		File contentFile   = toContentFile(file, metadata);
+		File thumbnailFile = toThumbnailFile(file, metadata);
 		
 		Page page = (Page)value;
 		
@@ -213,6 +238,12 @@ public class PageFileManagerHandler implements FileManagerHandler{
 			writer.flush();
 		}
 		
+		if(page.getThumbnail() != null && !page.getThumbnail().equals(thumbnailFile)) {
+			Path copied = thumbnailFile.toPath();
+		    Path originalPath = page.getThumbnail().toPath();
+		    Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+		    page.setThumbnail(thumbnailFile);
+		}
 	}
 
 	public Writer getWriter(File file) throws FileNotFoundException {

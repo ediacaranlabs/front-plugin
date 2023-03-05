@@ -11,6 +11,8 @@ public class PageObjectDataParser{
 		Map<String,Object> o = new HashMap<String,Object>();
 		o.put("title", page.getTitle());
 		o.put("template", page.getTemplate());
+		o.put("thumbnailTitle", page.getThumbnailTitle());
+		o.put("thumbnailDescription", page.getThumbnailDescription());
 		
 		Map<String,String> header = page.getHeader();
 		List<BreadcrumbPath> breadcrumb = page.getBreadcrumb();

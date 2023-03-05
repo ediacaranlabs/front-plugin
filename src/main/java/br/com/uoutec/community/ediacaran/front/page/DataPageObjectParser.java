@@ -15,6 +15,9 @@ public class DataPageObjectParser {
 		
 		page.setTemplate((String) data.get("template"));
 		
+		page.setThumbnailTitle((String) data.get("thumbnailTitle"));
+		page.setThumbnailDescription((String) data.get("thumbnailDescription"));
+
 		Map<String,Object> headerMAP = (Map<String,Object>) data.get("header");
 
 		List<Map<String,Object>> breadcrumbMAP = (List<Map<String,Object>>) data.get("breadcrumb");
