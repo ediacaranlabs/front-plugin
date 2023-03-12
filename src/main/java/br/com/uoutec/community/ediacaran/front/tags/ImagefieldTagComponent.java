@@ -1,0 +1,112 @@
+package br.com.uoutec.community.ediacaran.front.tags;
+
+import java.util.Map;
+
+import br.com.uoutec.community.ediacaran.front.components.Component;
+import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
+import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
+import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+
+@Tag(
+	name="imagefield", 
+	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
+	bodycontent=BodyTypes.SCRIPTLESS
+)
+public class ImagefieldTagComponent extends FieldFormTagComponent {
+
+	public static final String TEMPLATE = "/components/imagefield";
+	
+	/* ------------ Attr ---------------*/
+	
+	private Boolean required;
+	
+	/* ------------ Prop ---------------*/
+	
+	private String label;
+	
+	private Integer width;
+	
+	private Integer height;
+	
+	private String borderType;
+	
+	private String src;
+	
+	public ImagefieldTagComponent() {
+		super.setComponentType("file");
+	}
+	
+    protected Component createComponent() {
+    	return new Component() {
+    		
+    		public void beforePrepareVars(Map<String, Object> vars) {
+    			vars.put("empty", label == null? "sr-only" : null);
+    	    }
+    		
+    	};
+    }
+	
+    public Integer getWidth() {
+		return width;
+	}
+
+	@TagAttribute
+	public void setWidth(Integer width) {
+		this.width = width;
+	}
+
+	public Integer getHeight() {
+		return height;
+	}
+
+	@TagAttribute
+	public void setHeight(Integer height) {
+		this.height = height;
+	}
+
+	public String getSrc() {
+		return src;
+	}
+
+	@TagAttribute
+	public void setSrc(String src) {
+		this.src = src;
+	}
+
+	public String getBorderType() {
+		return borderType;
+	}
+
+	@TagAttribute(displayName="type")
+	public void setBorderType(String borderType) {
+		this.borderType = borderType;
+	}
+
+	public String getDefaultTemplate() {
+    	return TEMPLATE;
+    }
+
+	public Boolean getRequired() {
+		return required;
+	}
+
+	@TagAttribute
+	public void setRequired(Boolean required) {
+		this.required = required;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	@TagAttribute
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	@Override
+	public String getType() {
+		return "textfield";
+	}
+	
+}

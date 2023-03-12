@@ -1,0 +1,16 @@
+<label class="{empty}" for="{id}">{label}</label>
+<div id="{id}" class="form-control {enabled} {size} {classStyle} {align}" {attr}>
+	<div class="croppie-image" style="border: 1px solid #ced4da;"></div>
+	<input name="{name}.x1" type="hidden" value="0">
+	<input name="{name}.y1" type="hidden" value="0">
+	<input name="{name}.x2" type="hidden" value="0">
+	<input name="{name}.y2" type="hidden" value="0">
+	<input name="{name}.file" type="file" style="display: none">
+</div>
+$.AppContext.onload(function()&#123;
+	
+	$.AppContext.imageField.apply(
+			$('#{id}'), '{id}', {width}, {height}, '{type}', '{default}'
+	);
+&#125;);
+{content}
