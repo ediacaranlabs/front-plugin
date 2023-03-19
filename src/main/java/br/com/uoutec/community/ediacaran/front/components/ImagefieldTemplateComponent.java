@@ -40,6 +40,7 @@ public class ImagefieldTemplateComponent extends ComponentFormTemplateComponent 
 			add("height");
 			add("src");
 			
+			add("button");
 			add("label");
 			add("enabled");
 			add("content");

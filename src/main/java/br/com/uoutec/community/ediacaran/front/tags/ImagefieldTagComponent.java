@@ -30,6 +30,8 @@ public class ImagefieldTagComponent extends FieldFormTagComponent {
 	
 	private String borderType;
 	
+	private String button;
+	
 	private String src;
 	
 	public ImagefieldTagComponent() {
@@ -50,7 +52,7 @@ public class ImagefieldTagComponent extends FieldFormTagComponent {
 		return width;
 	}
 
-	@TagAttribute
+	@TagAttribute(required=true)
 	public void setWidth(Integer width) {
 		this.width = width;
 	}
@@ -59,7 +61,7 @@ public class ImagefieldTagComponent extends FieldFormTagComponent {
 		return height;
 	}
 
-	@TagAttribute
+	@TagAttribute(required=true)
 	public void setHeight(Integer height) {
 		this.height = height;
 	}
@@ -68,7 +70,7 @@ public class ImagefieldTagComponent extends FieldFormTagComponent {
 		return src;
 	}
 
-	@TagAttribute
+	@TagAttribute(required=true)
 	public void setSrc(String src) {
 		this.src = src;
 	}
@@ -77,7 +79,7 @@ public class ImagefieldTagComponent extends FieldFormTagComponent {
 		return borderType;
 	}
 
-	@TagAttribute(displayName="type")
+	@TagAttribute(displayName="type", required=true)
 	public void setBorderType(String borderType) {
 		this.borderType = borderType;
 	}
@@ -102,6 +104,15 @@ public class ImagefieldTagComponent extends FieldFormTagComponent {
 	@TagAttribute
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public String getButton() {
+		return button;
+	}
+
+	@TagAttribute(required=true)
+	public void setButton(String button) {
+		this.button = button;
 	}
 
 	@Override

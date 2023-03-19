@@ -381,11 +381,7 @@
 					<h3>Image field</h3>
 				</ec:box-header>
 				<ec:box-body>
-				<div>
-					<div>croppie</div>
-					<label for="image">Select Image</label>
-					<input id="field_image" name="image" type="file">
-				</div>
+				<ec:imagefield label="Image Field" width="560" height="292" borderType="squad" src="" button="Select Image" />
 				</ec:box-body>
 			</ec:box>		
 		</ed:col>
