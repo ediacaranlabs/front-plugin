@@ -41,6 +41,10 @@
         			<ed:col size="12" align="center">
 						<ed:row style="form">
 							<ed:col size="8" classStyle="form-group has-feedback mx-auto d-block">
+								<ec:imagefield name="thumbnail" 
+								width="560" height="292" button="Select image" borderType="squad"
+								src="${page.publicThumbnailPath}" />
+<%--							
 							    <link rel="Stylesheet" type="text/css" href="/plugins/ediacaran/front/templates/default_template/front/plugins/imageField/css/croppie.css" />
 								<script src="/plugins/ediacaran/front/templates/default_template/front/plugins/imageField/js/croppie.js"></script>
 								<script type="text/javascript">
@@ -135,7 +139,8 @@
 									<input name="thumbnail.y2" type="hidden" value="0">
 									<input name="thumbnail.file" type="file" style="display: none">
 		
-								</div>					
+								</div>	
+--%>												
 							</ed:col>
 						</ed:row>
 		        		<ed:row style="form">

@@ -1,19 +1,22 @@
+<!-- imagefield -->
 <label class="{empty}" for="{id}.filename">{label}</label>
 <div id="{id}" class="form-control {enabled} {size} {classStyle} {align}" {attr}>
-	<div class="croppie-image" style="border: 1px solid #ced4da;"></div>
-	<button>{button}</button>
+	<div class="croppie-image"></div>
+	<button id="{id}_button" type="button">{button}</button>
 	<input name="{name}.x1" type="hidden" value="0">
 	<input name="{name}.y1" type="hidden" value="0">
 	<input name="{name}.x2" type="hidden" value="0">
 	<input name="{name}.y2" type="hidden" value="0">
 	<input id="{id}.filename" name="{name}.file" type="file" style="display: none">
 </div>
-<script language="text/javascript">
+
+<script language="javascript">
 $.AppContext.onload(function()&#123;
 	
 	$.AppContext.imageField.apply(
-			$('#{id}'), '{id}', {width}, {height}, '{borderType}', '{default}'
+			'{id}', '{name}', {width}, {height}, '{borderType}', '{src}'
 	);
 &#125;);
 </script>
 {content}
+<!-- /imagefield -->

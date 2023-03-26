@@ -67,12 +67,12 @@ public class ImagefieldTagComponent extends FieldFormTagComponent {
 	}
 
 	public String getSrc() {
-		return src;
+		return src == null? "/plugins/ediacaran/front/templates/default_template/front/plugins/imageField/img/default.png" : "";
 	}
 
-	@TagAttribute(required=true)
+	@TagAttribute
 	public void setSrc(String src) {
-		this.src = src;
+		this.src = src == null || src.trim().length() == 0? null : src;
 	}
 
 	public String getBorderType() {

@@ -1,13 +1,17 @@
 $.AppContext.imageField = {};
 
-$.AppContext.imageField.apply = function ($root, $fieldName, $width, $height, $type, $default){
+$.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $default){
 	
+	var $root      = $('#' + $id)
 	var $croppie   = $root.find(".croppie-image");
-	var $button    = $root.find("button");
+	var $button    = $('#' + $id + "_button");//$root.find("button[type='button']");
 	var $fileField = $root.find("input[type='file']");
 	
-	$root.width($width);
-	$root.height($height);
+	$croppie.width($width);
+	$croppie.height($height);
+	
+	$root.width($($croppie).outerWidth());
+	$root.height($($croppie).outerHeight() + $($button).outerHeight());
 	
 	var $croppieObj = $($croppie).croppie({
 		viewport: {
@@ -22,17 +26,21 @@ $.AppContext.imageField.apply = function ($root, $fieldName, $width, $height, $t
 		showZoomer: false
 	});
 
-	$croppieObj.croppie(
-			'bind',{
-				url: $default
-	});
+	setTimeout(function(){
+		$croppieObj.croppie(
+				'bind',{
+					url: $default
+		});
+		
+	},
+	500);
 	
 	$croppieObj.on('update.croppie', function(ev, cropData) {
 		
-		var $x1 = $($root).find("input[name='" + $fieldName + ".x1']");
-		var $x2 = $($root).find("input[name='" + $fieldName + ".x2']");
-		var $y1 = $($root).find("input[name='" + $fieldName + ".y1']");
-		var $y2 = $($root).find("input[name='" + $fieldName + ".y2']");
+		var $x1 = $($root).find("input[name='" + $name + ".x1']");
+		var $x2 = $($root).find("input[name='" + $name + ".x2']");
+		var $y1 = $($root).find("input[name='" + $name + ".y1']");
+		var $y2 = $($root).find("input[name='" + $name + ".y2']");
 
 		$x1.val(cropData.points[0]);
 		$y1.val(cropData.points[1]);
@@ -40,16 +48,8 @@ $.AppContext.imageField.apply = function ($root, $fieldName, $width, $height, $t
 		$x2.val(cropData.points[2]);
 		$y2.val(cropData.points[3]);
 
-		/*
-		console.log(
-				 "x1=" + cropData.points[0] +
-				",y1=" + cropData.points[1] +
-				",x2=" + cropData.points[2] +
-				",y2=" + cropData.points[3]
-		);
-		*/
-		
 	});
+
 
 	$($fileField).on('change', function(event){
 		var $url = URL.createObjectURL(event.target.files[0]);
