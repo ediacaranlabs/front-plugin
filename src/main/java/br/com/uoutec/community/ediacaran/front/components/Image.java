@@ -8,13 +8,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.brandao.brutos.annotation.Basic;
-import org.brandao.brutos.annotation.Constructor;
 
-public class ImageField {
+public class Image {
 
 	private static final int maxWidth = 2048; 
+	
 	private static final int maxHeight = 1024;
-	private static final int maxPoints = maxWidth*maxHeight*4;
+	
+	private static final int maxPoints = maxWidth*maxHeight;
 			
 	private Double x1;
 	
@@ -92,6 +93,10 @@ public class ImageField {
 			throw new IllegalStateException("x | y");
 		}
 
+		if((x2-x1)*(y2-y1) > maxPoints) {
+			throw new IllegalStateException("maxPoints");
+		}
+		
 		BufferedImage img = ImageIO.read(tmpFile);
 		
 		if(img == null) {

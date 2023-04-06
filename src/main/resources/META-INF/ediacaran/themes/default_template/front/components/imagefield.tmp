@@ -14,7 +14,7 @@
 $.AppContext.onload(function()&#123;
 	
 	$.AppContext.imageField.apply(
-			'{id}', '{name}', {width}, {height}, '{borderType}', '{src}'
+			'{id}', '{name}', {width}, {height}, '{border}', '{src}'
 	);
 &#125;);
 </script>

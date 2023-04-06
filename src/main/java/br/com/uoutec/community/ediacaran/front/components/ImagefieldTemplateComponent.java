@@ -35,7 +35,7 @@ public class ImagefieldTemplateComponent extends ComponentFormTemplateComponent 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			add("id");
 			add("name");
-			add("borderType");
+			add("border");
 			add("width");
 			add("height");
 			add("src");

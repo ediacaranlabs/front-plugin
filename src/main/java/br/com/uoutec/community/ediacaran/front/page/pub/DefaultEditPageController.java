@@ -23,7 +23,7 @@ import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.RequestMethodTypes;
 import org.brandao.brutos.validator.ValidatorException;
 
-import br.com.uoutec.community.ediacaran.front.components.ImageField;
+import br.com.uoutec.community.ediacaran.front.components.Image;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.page.BreadcrumbPath;
 import br.com.uoutec.community.ediacaran.front.page.EditPage;
@@ -64,7 +64,7 @@ public class DefaultEditPageController {
 			String content,
 			Map<String, String> header,
 			List<BreadcrumbPath> breadcrumb,
-			ImageField thumbnail,
+			Image thumbnail,
 			@Size(max = 255)
 			String titleThumbnail,
 			@Size(max = 255)

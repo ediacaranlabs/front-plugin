@@ -28,7 +28,7 @@ public class ImagefieldTagComponent extends FieldFormTagComponent {
 	
 	private Integer height;
 	
-	private String borderType;
+	private String border;
 	
 	private String button;
 	
@@ -75,13 +75,13 @@ public class ImagefieldTagComponent extends FieldFormTagComponent {
 		this.src = src == null || src.trim().length() == 0? null : src;
 	}
 
-	public String getBorderType() {
-		return borderType;
+	public String getBorder() {
+		return border;
 	}
 
 	@TagAttribute(displayName="type", required=true)
-	public void setBorderType(String borderType) {
-		this.borderType = borderType;
+	public void setBorder(String border) {
+		this.border = border;
 	}
 
 	public String getDefaultTemplate() {
