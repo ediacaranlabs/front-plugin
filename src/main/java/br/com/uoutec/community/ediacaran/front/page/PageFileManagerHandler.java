@@ -250,4 +250,16 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		return new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
 	}
 	
+	@Override
+	public void delete(File file, FileMetadata metadata) throws IOException {
+		
+		File contentFile   = toContentFile(file, metadata);
+		File thumbnailFile = toThumbnailFile(file, metadata);
+		
+		contentFile.delete();
+		thumbnailFile.delete();
+		file.delete();
+		
+	}
+	
 }

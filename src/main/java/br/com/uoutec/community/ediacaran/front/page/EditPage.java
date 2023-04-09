@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
@@ -20,6 +21,7 @@ import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
 
 @Singleton
+@Named("editPage")
 public class EditPage {
 
 	@Inject

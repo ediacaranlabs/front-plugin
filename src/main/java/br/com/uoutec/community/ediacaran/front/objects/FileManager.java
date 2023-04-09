@@ -156,18 +156,20 @@ public class FileManager {
 			throw new IOException("invalid path: " + fmd);
 		}
 		
-		delete(basePath, file);
+		fileManagerHandler.delete(file, fmd);
+		
+		delete(basePath, file.getParentFile());
 	}
 	
 	private void delete(File base, File file) throws IOException {
 		
+		if(file.equals(base)) {
+			return;
+		}
+		
 		file.delete();
 		
 		File parent = file.getParentFile();
-		
-		if(parent.equals(base)) {
-			return;
-		}
 		
 		if(parent.listFiles(e->e.isFile()).length == 0) {
 			delete(base, parent);

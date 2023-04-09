@@ -10,6 +10,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.brandao.brutos.annotation.Basic;
+import org.brandao.brutos.annotation.MappingTypes;
 import org.brandao.brutos.annotation.ScopeType;
 
 import br.com.uoutec.community.ediacaran.front.components.Image;
@@ -62,7 +63,7 @@ public class PagePubEntity
 	@Size(max = 120)
 	private String template;
 
-	@Basic(scope=ScopeType.IOC)
+	@Basic(scope=ScopeType.IOC, mappingType=MappingTypes.VALUE)
 	public EditPage editPage;
  
 	public Long getGid() {

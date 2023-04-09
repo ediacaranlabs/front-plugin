@@ -31,4 +31,6 @@ public interface FileManagerHandler {
 	
 	void write(File file, FileMetadata metadata, Object value) throws IOException;
 	
+	void delete(File file, FileMetadata metadata) throws IOException;
+	
 }

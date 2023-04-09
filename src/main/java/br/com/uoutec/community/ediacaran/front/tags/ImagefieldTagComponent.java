@@ -67,7 +67,7 @@ public class ImagefieldTagComponent extends FieldFormTagComponent {
 	}
 
 	public String getSrc() {
-		return src == null? "/plugins/ediacaran/front/templates/default_template/front/plugins/imageField/img/default.png" : "";
+		return src == null? "/plugins/ediacaran/front/templates/default_template/front/plugins/imageField/img/default.png" : src;
 	}
 
 	@TagAttribute
