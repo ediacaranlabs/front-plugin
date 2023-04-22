@@ -38,7 +38,7 @@
 	        <ec:tabs>
         	<ec:tabs-item active="true" title="Miniatura">
         		<ed:row>
-        			<ed:col size="12" align="center">
+        			<ed:col size="12">
 						<ed:row style="form">
 							<ed:col size="8" align="center" classStyle="form-group has-feedback">
 								<ec:imagefield name="thumbnail"	width="560" height="292" 
@@ -46,15 +46,15 @@
 							</ed:col>
 						</ed:row>
 		        		<ed:row>
-		        			<ed:col>
+		        			<ed:col classStyle="form-group has-feedback">
 								<ec:textfield name="titleThumbnail" placeholder="Title" align="center" value="${page.thumbnailTitle}"/>
 		        			</ed:col>
 		        		</ed:row>
 		        		<ed:row style="form">
-		        			<ed:col>
-								<ec:textfield name="titleThumbnail" placeholder="keywords" align="center" value="${page.keywords}">
+		        			<ed:col classStyle="form-group has-feedback">
+								<ec:textfield name="keywords" placeholder="keywords" align="center" value="${page.keywords}">
 									<ec:field-validator>
-										<ec:field-validator-rule name="regexp" message="Invalid path!">
+										<ec:field-validator-rule name="regexp" message="Invalid keywords!">
 											<ec:field-validator-param name="regexp" raw="true">/^([^,.]+(\,[^,.]+)*)$/</ec:field-validator-param>
 										</ec:field-validator-rule>
 									</ec:field-validator>								
@@ -62,8 +62,14 @@
 		        			</ed:col>
 		        		</ed:row>
 		        		<ed:row style="form">
-		        			<ed:col>
+		        			<ed:col classStyle="form-group has-feedback">
 								<ec:textarea rows="6" name="shortDescription" align="center">${page.thumbnailDescription}</ec:textarea>
+								<ec:field-validator form="page_edit_form" field="shortDescription">
+									<ec:field-validator-rule name="stringLength" message="It must be less than 255 characters">
+										<ec:field-validator-param name="max" raw="true">255</ec:field-validator-param>
+									</ec:field-validator-rule>
+								</ec:field-validator>								
+
 		        			</ed:col>
 		        		</ed:row>
         			</ed:col>
@@ -76,7 +82,7 @@
 								<ec:field-validator>
 									<ec:field-validator-rule name="notEmpty" message="Please inform the Path!"/>
 									<ec:field-validator-rule name="regexp" message="Invalid path!">
-										<ec:field-validator-param name="regexp" raw="true">/^(\/|(\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*)$/</ec:field-validator-param>
+										<ec:field-validator-param name="regexp" raw="true">/^(\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*$/</ec:field-validator-param>
 									</ec:field-validator-rule>
 								</ec:field-validator>
 							</ec:textfield>

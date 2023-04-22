@@ -23,17 +23,19 @@
 	<section class="inner-headline">
 		<ed:container>
 			<ed:row>
-				<ed:col size="4">
-					<div class="inner-heading">
-						<h2>${page.title}</h2>
-					</div>
-				</ed:col>
-				<ed:col size="8">
+				<ed:col size="12" align="right">
 					<ec:breadcrumb title="${page.title}">
 						<c:forEach items="${page.breadcrumb}" var="item">
 							<ec:breadcrumb-path icon="${item.icon}" text="${item.name}" lnk="${item.link}" />
 						</c:forEach>
 					</ec:breadcrumb>
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col size="12">
+					<div class="inner-heading">
+						<h2>${page.title}</h2>
+					</div>
 				</ed:col>
 			</ed:row>
 		</ed:container>

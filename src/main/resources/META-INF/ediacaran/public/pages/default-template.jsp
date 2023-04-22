@@ -48,12 +48,12 @@
 	<section class="inner-headline">
 		<ed:container>
 			<ed:row>
-				<ed:col size="4">
+				<ed:col size="7">
 					<div class="inner-heading">
 						<h2>${page.title}</h2>
 					</div>
 				</ed:col>
-				<ed:col size="8">
+				<ed:col size="5">
 					<ec:breadcrumb title="${fn:length(page.title) > 30? fn:substring(page.title, 0, 15).concat(' ... ').concat(fn:substring(page.title, fn:length(page.title) - 10, fn:length(page.title))) : page.title }">
 						<c:forEach items="${page.breadcrumb}" var="item">
 							<ec:breadcrumb-path icon="${item.icon}" text="${item.name}" lnk="${item.link}" />

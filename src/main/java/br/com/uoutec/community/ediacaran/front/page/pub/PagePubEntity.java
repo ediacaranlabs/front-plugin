@@ -186,7 +186,7 @@ public class PagePubEntity
 
 	@Override
 	protected Page reloadEntity() throws Throwable {
-		return editPage.getPage(path, locale);
+		return editPage.getPageByName(path, name, locale);
 	}
 
 	@Override
