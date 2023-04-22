@@ -21,6 +21,8 @@ public class Page {
 
 	private String thumbnailTitle;
 	
+	private String keywords;
+	
 	private String thumbnailDescription;
 	
 	private transient File thumbnail;
@@ -39,6 +41,14 @@ public class Page {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
 	}
 
 	public Map<String, String> getHeader() {

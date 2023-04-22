@@ -14,7 +14,7 @@ public class DataPageObjectParser {
 		page.setTitle((String) data.get("title"));
 		
 		page.setTemplate((String) data.get("template"));
-		
+		page.setKeywords((String) data.get("keywords"));
 		page.setThumbnailTitle((String) data.get("thumbnailTitle"));
 		page.setThumbnailDescription((String) data.get("thumbnailDescription"));
 

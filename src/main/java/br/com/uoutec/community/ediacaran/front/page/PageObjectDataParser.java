@@ -13,6 +13,7 @@ public class PageObjectDataParser{
 		o.put("template", page.getTemplate());
 		o.put("thumbnailTitle", page.getThumbnailTitle());
 		o.put("thumbnailDescription", page.getThumbnailDescription());
+		o.put("keywords", page.getKeywords());
 		
 		Map<String,String> header = page.getHeader();
 		List<BreadcrumbPath> breadcrumb = page.getBreadcrumb();

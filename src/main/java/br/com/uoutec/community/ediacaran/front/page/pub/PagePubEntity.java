@@ -55,6 +55,10 @@ public class PagePubEntity
 	
 	@Size(max = 255)
 	private String titleThumbnail;
+
+	@Size(max = 600)
+	@Pattern(regexp="^([^\"\',]+)(,([^\"\',]+))*$")
+	private String keywords;
 	
 	@Size(max = 255)
 	private String shortDescription;
@@ -76,6 +80,14 @@ public class PagePubEntity
 
 	public String getPath() {
 		return path;
+	}
+
+	public EditPage getEditPage() {
+		return editPage;
+	}
+
+	public void setEditPage(EditPage editPage) {
+		this.editPage = editPage;
 	}
 
 	public void setPath(String path) {
@@ -192,6 +204,7 @@ public class PagePubEntity
 		
 		o.setBreadcrumb(breadcrumb);
 		o.setHeader(header);
+		o.setKeywords(keywords);
 		o.setThumbnailDescription(shortDescription);
 		o.setThumbnailTitle(titleThumbnail);
 		o.setThumbnail(thumbnail == null? null : thumbnail.save(560, 292));

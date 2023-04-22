@@ -40,112 +40,25 @@
         		<ed:row>
         			<ed:col size="12" align="center">
 						<ed:row style="form">
-							<ed:col size="8" classStyle="form-group has-feedback mx-auto d-block">
-								<ec:imagefield name="thumbnail" 
-								width="560" height="292" button="Select image" borderType="squad"
-								src="${page.publicThumbnailPath}" />
-<%--							
-							    <link rel="Stylesheet" type="text/css" href="/plugins/ediacaran/front/templates/default_template/front/plugins/imageField/css/croppie.css" />
-								<script src="/plugins/ediacaran/front/templates/default_template/front/plugins/imageField/js/croppie.js"></script>
-								<script type="text/javascript">
-									$.AppContext.imageField = {};
-									
-									$.AppContext.imageField.apply = function ($root, $fieldName, $width, $height, $type, $default){
-										
-										var $croppie   = $root.find(".croppie-image");
-										var $button    = $root.find("button");
-										var $fileField = $root.find("input[type='file']");
-										//var $fieldName = $fileField.attr('name');
-										
-										$root.width($width);
-										$root.height($height);
-										
-										var $croppieObj = $($croppie).croppie({
-											viewport: {
-												width: $width,
-												height: $height,
-												type: $type
-											},
-											boundary: {
-												width: $width,
-												height: $height
-											},
-											showZoomer: false
-										});
-		
-										$croppieObj.croppie(
-												'bind',{
-													url: $default
-										});
-										
-										$croppieObj.on('update.croppie', function(ev, cropData) {
-											
-											var $x1 = $($root).find("input[name='" + $fieldName + ".x1']");
-											var $x2 = $($root).find("input[name='" + $fieldName + ".x2']");
-											var $y1 = $($root).find("input[name='" + $fieldName + ".y1']");
-											var $y2 = $($root).find("input[name='" + $fieldName + ".y2']");
-			
-											$x1.val(cropData.points[0]);
-											$y1.val(cropData.points[1]);
-											
-											$x2.val(cropData.points[2]);
-											$y2.val(cropData.points[3]);
-											
-											console.log(
-													 "x1=" + cropData.points[0] +
-													",y1=" + cropData.points[1] +
-													",x2=" + cropData.points[2] +
-													",y2=" + cropData.points[3]
-											);
-											
-											//console.log(JSON.stringify(cropData));
-										});
-			
-										$($fileField).on('change', function(event){
-											var $url = URL.createObjectURL(event.target.files[0]);
-											
-											$croppieObj.croppie('bind', {
-												url: $url,
-											});
-											
-										});
-										
-										$button.click(function(){
-											$fileField.click();
-										});
-									};
-			
-									$.AppContext.onload(function(){
-										
-										$.AppContext.imageField.apply(
-												$('#thumbnail'), 
-												'thumbnail', 
-												560, 
-												292, 
-												'squad', 
-												'${empty page.publicThumbnailPath? '/plugins/ediacaran/front/templates/default_template/front/plugins/imageField/img/default.png' : page.publicThumbnailPath}'
-										);
-										
-									});
-									
-								</script>
-								<div id="thumbnail" class=" mx-auto d-block">
-									<div class="croppie-image" style="border: 1px solid #ced4da;"></div>
-									<br>
-									<ec:button actionType="button"  label="Select Image" align="right"/>
-									<input name="thumbnail.x1" type="hidden" value="0">
-									<input name="thumbnail.y1" type="hidden" value="0">
-									<input name="thumbnail.x2" type="hidden" value="0">
-									<input name="thumbnail.y2" type="hidden" value="0">
-									<input name="thumbnail.file" type="file" style="display: none">
-		
-								</div>	
---%>												
+							<ed:col size="8" align="center" classStyle="form-group has-feedback">
+								<ec:imagefield name="thumbnail"	width="560" height="292" 
+								button="Select image" border="squad" src="${page.publicThumbnailPath}" />
 							</ed:col>
 						</ed:row>
+		        		<ed:row>
+		        			<ed:col>
+								<ec:textfield name="titleThumbnail" placeholder="Title" align="center" value="${page.thumbnailTitle}"/>
+		        			</ed:col>
+		        		</ed:row>
 		        		<ed:row style="form">
 		        			<ed:col>
-								<ec:textfield name="titleThumbnail" align="center" value="${page.thumbnailTitle}"/>
+								<ec:textfield name="titleThumbnail" placeholder="keywords" align="center" value="${page.keywords}">
+									<ec:field-validator>
+										<ec:field-validator-rule name="regexp" message="Invalid path!">
+											<ec:field-validator-param name="regexp" raw="true">/^([^,.]+(\,[^,.]+)*)$/</ec:field-validator-param>
+										</ec:field-validator-rule>
+									</ec:field-validator>								
+								</ec:textfield>
 		        			</ed:col>
 		        		</ed:row>
 		        		<ed:row style="form">
