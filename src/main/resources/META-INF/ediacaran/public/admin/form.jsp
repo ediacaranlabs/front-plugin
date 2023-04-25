@@ -396,6 +396,11 @@
 				<ec:box-body>
 					<ec:textfield id="fieldAutocomplete" name="autocomplete" label="Country" placeholder="Country name">
 					</ec:textfield>
+					<style>
+					#fieldAutocomplete_list {
+						position: absolute;
+					}
+					</style>
 					<ec:select id="fieldAutocomplete_list" rows="3"></ec:select>
 					<script type="text/javascript">
 							
@@ -418,7 +423,8 @@
 												if(obj.length > 4 ){
 													$("#"+listIDResult).attr("size", 4);
 												}
-												if(obj.length > 2 ){
+												else
+												if(obj.length >= 2 ){
 													$("#"+listIDResult).attr("size", obj.length);
 												}
 												else{
@@ -460,7 +466,7 @@
 							$.AppContext.onload(function(){
 
 								$( "#fieldAutocomplete_list").hide();
-								
+								$( "#fieldAutocomplete_list").css('max-width', $( "#fieldAutocomplete").outerWidth() + "px");
 								$("#fieldAutocomplete").on("input", function(){
 									
 									$.AppContext.autocomplete.search(
@@ -471,7 +477,6 @@
 									);
 								});
 								
-								$.AppContext.utils
 							});
 					</script>				
 				</ec:box-body>
