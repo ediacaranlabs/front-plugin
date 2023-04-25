@@ -381,8 +381,102 @@
 					<h3>Image field</h3>
 				</ec:box-header>
 				<ec:box-body>
-				<ec:imagefield label="Image Field" width="560" height="292" borderType="squad" src="" button="Select Image" />
+				<ec:imagefield align="center" 
+					width="320" height="200" border="squad" button="Select Image" />
 				</ec:box-body>
 			</ec:box>		
+		</ed:col>
+   	</ed:row>
+   	<ed:row>
+		<ed:col size="6">
+			<ec:box>
+				<ec:box-header>
+					<h3>Autocomplete</h3>
+				</ec:box-header>
+				<ec:box-body>
+					<ec:textfield id="fieldAutocomplete" name="autocomplete" label="Country" placeholder="Country name">
+					</ec:textfield>
+					<ec:select id="fieldAutocomplete_list" rows="3"></ec:select>
+					<script type="text/javascript">
+							
+							$.AppContext.autocomplete = {};
+		
+							$.AppContext.autocomplete.search = function(resource, request, fieldID, listIDResult){
+								
+								$.AppContext.utils.postJson(
+										resource,
+										request,
+										function(obj){
+											
+											$("#"+listIDResult).empty();
+											
+											if(obj.length == 0 ){
+												$("#"+listIDResult).hide();
+											}
+											else{
+												
+												if(obj.length > 4 ){
+													$("#"+listIDResult).attr("size", 4);
+												}
+												if(obj.length > 2 ){
+													$("#"+listIDResult).attr("size", obj.length);
+												}
+												else{
+													$("#"+listIDResult).attr("size", 2);
+												}
+												
+												$("#"+listIDResult).show();
+											}
+											
+											for (let i in obj) {
+												$("#"+listIDResult).append( "<option value=\"" + obj[i] + "\">" + obj[i] + "</option> " );
+											}
+											
+											$( "#"+listIDResult ).find("option")
+											.each(function() {
+												
+												$(this).on( "mouseover", function(){
+													$(this).attr('selected','selected');
+												})
+												.on( "mouseout", function() {
+													$( "#"+listIDResult ).find("option")
+													.each(function() {
+														$(this).removeAttr('selected');
+													});
+    												
+  												})
+												.on( "click", function() {
+													$("#"+fieldID).val($(this).val());
+													$( "#"+listIDResult ).hide();
+  												});
+												
+											});
+											
+										}
+								)
+								
+							};
+							
+							$.AppContext.onload(function(){
+
+								$( "#fieldAutocomplete_list").hide();
+								
+								$("#fieldAutocomplete").on("input", function(){
+									
+									$.AppContext.autocomplete.search(
+										"/plugins/ediacaran/front/autocomplete/search",
+										{ "name" : $("#fieldAutocomplete").val()},
+										"fieldAutocomplete",
+										"fieldAutocomplete_list"
+									);
+								});
+								
+								$.AppContext.utils
+							});
+					</script>				
+				</ec:box-body>
+			</ec:box>
+		</ed:col>
+		<ed:col size="6">
 		</ed:col>
    	</ed:row>

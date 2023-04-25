@@ -213,13 +213,15 @@ $.AppContext.utils = {
 			
 			$.ajax({
 			    type: 'POST',
-			    headers: { 
-			        'Accept': 'application/json',
-			        'Content-Type': 'application/json' 
-			    },			    
-			    dataType: "json",
+			    //headers: { 
+			    //    'Accept': 'application/json',
+			    //    'Content-Type': 'application/json' 
+			    //},
+			    contentType: "application/json; charset=utf-8",
 			    url: $.AppContext.vars.contextPath + resource,
-			    data: request,
+			    data: JSON.stringify(request),
+			    traditional: true,
+			    //data: request,
 			    success: success,
 			    error : error
 			});
