@@ -406,54 +406,73 @@
 							
 							$.AppContext.autocomplete = {};
 		
-							$.AppContext.autocomplete.search = function(resource, request, fieldID, listIDResult){
+							$.AppContext.autocomplete.apply = function($resource, $fieldID){
+								
+								var $field     = $( "#" + $fieldID );
+								var $fieldList = $( "#" + $field + "_list" );
+								
+								$fieldList.hide();
+								$fieldList.css('max-width', $field.outerWidth() + "px");
+								$field.on("input", function(){
+									
+									$.AppContext.autocomplete.search(
+										$resource,
+										{ "value" : $field.val() },
+										$field,
+										$fieldList
+									);
+								});
+								
+							};
+							
+							$.AppContext.autocomplete.search = function($resource, $request, $field, $fieldList){
 								
 								$.AppContext.utils.postJson(
-										resource,
-										request,
+										$resource,
+										$request,
 										function(obj){
 											
-											$("#"+listIDResult).empty();
+											$fieldList.empty();
 											
 											if(obj.length == 0 ){
-												$("#"+listIDResult).hide();
+												$fieldList.hide();
 											}
 											else{
 												
 												if(obj.length > 4 ){
-													$("#"+listIDResult).attr("size", 4);
+													$fieldList.attr("size", 4);
 												}
 												else
-												if(obj.length >= 2 ){
-													$("#"+listIDResult).attr("size", obj.length);
+												if(obj.length < 2 ){
+													$fieldList.attr("size", 2);
 												}
-												else{
-													$("#"+listIDResult).attr("size", 2);
+												else
+													$fieldList.attr("size", obj.length);
 												}
 												
-												$("#"+listIDResult).show();
+												$fieldList.show();
 											}
 											
 											for (let i in obj) {
-												$("#"+listIDResult).append( "<option value=\"" + obj[i] + "\">" + obj[i] + "</option> " );
+												$fieldList.append( "<option value=\"" + obj[i] + "\">" + obj[i] + "</option> " );
 											}
 											
-											$( "#"+listIDResult ).find("option")
+											$fieldList.find("option")
 											.each(function() {
 												
 												$(this).on( "mouseover", function(){
 													$(this).attr('selected','selected');
 												})
 												.on( "mouseout", function() {
-													$( "#"+listIDResult ).find("option")
+													$fieldList.find("option")
 													.each(function() {
 														$(this).removeAttr('selected');
 													});
     												
   												})
 												.on( "click", function() {
-													$("#"+fieldID).val($(this).val());
-													$( "#"+listIDResult ).hide();
+													$field.val($(this).val());
+													$fieldList.hide();
   												});
 												
 											});
@@ -464,19 +483,10 @@
 							};
 							
 							$.AppContext.onload(function(){
-
-								$( "#fieldAutocomplete_list").hide();
-								$( "#fieldAutocomplete_list").css('max-width', $( "#fieldAutocomplete").outerWidth() + "px");
-								$("#fieldAutocomplete").on("input", function(){
-									
-									$.AppContext.autocomplete.search(
-										"/plugins/ediacaran/front/autocomplete/search",
-										{ "name" : $("#fieldAutocomplete").val()},
-										"fieldAutocomplete",
-										"fieldAutocomplete_list"
-									);
-								});
-								
+								$.AppContext.autocomplete.apply(
+										"/plugins/ediacaran/front/autocomplete/search", 
+										"fieldAutocomplete"
+								);
 							});
 					</script>				
 				</ec:box-body>
