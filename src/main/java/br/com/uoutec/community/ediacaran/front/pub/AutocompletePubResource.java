@@ -67,9 +67,9 @@ public class AutocompletePubResource {
 	
 	@Action(value="/search")
 	@RequestMethod("POST")
-	public synchronized Serializable loadData(String name){
+	public synchronized Serializable loadData(String value){
 		return (Serializable)list.stream()
-			.filter(e->name != null && e.toLowerCase().contains(name.toLowerCase()))
+			.filter(e->value != null && e.toLowerCase().contains(value.toLowerCase()))
 			.collect(Collectors.toList());
 	}
 

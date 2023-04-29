@@ -1,5 +1,5 @@
 <label class="{empty}" for="{name}">{label}</label>
-<select class="form-control {enabled} {size} {align}" {attr}>
+<select class="form-control {classStyle} {enabled} {size} {align}" {attr}>
 	{content}
 </select>
 

@@ -401,7 +401,7 @@
 						position: absolute;
 					}
 					</style>
-					<ec:select id="fieldAutocomplete_list" rows="3"></ec:select>
+					<ec:select id="fieldAutocomplete_list" classStyle="autocomplete-list" rows="3"></ec:select>
 					<script type="text/javascript">
 							
 							$.AppContext.autocomplete = {};
@@ -409,24 +409,138 @@
 							$.AppContext.autocomplete.apply = function($resource, $fieldID){
 								
 								var $field     = $( "#" + $fieldID );
-								var $fieldList = $( "#" + $field + "_list" );
+								var $fieldList = $( "#" + $fieldID + "_list" );
 								
 								$fieldList.hide();
 								$fieldList.css('max-width', $field.outerWidth() + "px");
-								$field.on("input", function(){
-									
+								
+								$field.addClass('autocomplete-field');
+								$field.attr("select-data", $fieldList.attr("id"));
+								
+								$field
+								.on("input", function(){
+
 									$.AppContext.autocomplete.search(
 										$resource,
 										{ "value" : $field.val() },
 										$field,
 										$fieldList
 									);
-								});
+
+								})
+								.on("click", function(){
+
+									$.AppContext.autocomplete.search(
+										$resource,
+										{ "value" : $field.val() },
+										$field,
+										$fieldList
+									);
+
+								})
+								.on("focusout", function(){
+									$fieldList.hide();
+								})
+								.hover(
+									function(){
+										$field.addClass('hover-autocomplete');
+									}, 
+									function(){
+										$field.removeClass('hover-autocomplete');
+									}
+								);
 								
 							};
 							
 							$.AppContext.autocomplete.search = function($resource, $request, $field, $fieldList){
+
+								$.AppContext.utils.postJson(
+										$resource,
+										$request,
+										function(obj){
+											
+											$fieldList.empty();
+
+											if(obj.length == 0 ){
+												$fieldList.hide();
+												return;
+											}
+											else{
+												
+												if(obj.length > 4 ){
+													$fieldList.attr("size", 4);
+												}
+												else
+												if(obj.length < 2 ){
+													$fieldList.attr("size", 2);
+												}
+												else{
+													$fieldList.attr("size", obj.length);
+												}
+												
+												$fieldList.show();
+											}
+											
+											//update values
+											for (let i in obj) {
+												$fieldList.append( "<option value=\"" + obj[i] + "\">" + obj[i] + "</option> " );
+											}
+											
+											$field.hover(function(){
+												$field.addClass('hover-autocomplete');
+											}, function(){
+												$field.removeClass('hover-autocomplete');
+											});
+										
+											$fieldList.find("option")
+											.each(function() {
+												
+												$(this).hover(function(){
+													
+													$(this).attr('selected','selected');
+													
+												}, function(){
+													
+													$fieldList.find("option")
+													.each(function() {
+														$(this).removeAttr('selected');
+													});
+
+												})
+												.click(function(){
+													
+													$field.val($(this).val());
+													$fieldList.hide();
+													
+												});
+												
+											});
+											
+											/*
+											$fieldList.find("option")
+											.each(function() {
+												
+												$(this).on( "mouseover", function(){
+													$(this).attr('selected','selected');
+												})
+												.on( "mouseout", function() {
+													$fieldList.find("option")
+													.each(function() {
+														$(this).removeAttr('selected');
+													});
+    												
+  												})
+												.on( "click", function() {
+													$field.val($(this).val());
+													$fieldList.hide();
+  												});
+												
+											});
+											*/
+										}
+								);
 								
+								/*
 								$.AppContext.utils.postJson(
 										$resource,
 										$request,
@@ -479,10 +593,25 @@
 											
 										}
 								)
-								
+								*/
 							};
 							
 							$.AppContext.onload(function(){
+								
+								$(window).click(function(){
+									
+									$(".autocomplete-field").each(function() {
+										
+										$fieldListID = $(this).attr("select-data");
+										
+										if(!$(this).hasClass('hover-autocomplete')){
+											$("#" + $fieldListID).hide();
+										}
+											
+									});
+
+								});	
+								
 								$.AppContext.autocomplete.apply(
 										"/plugins/ediacaran/front/autocomplete/search", 
 										"fieldAutocomplete"
