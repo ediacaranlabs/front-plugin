@@ -70,6 +70,7 @@ public class AutocompletePubResource {
 	public synchronized Serializable loadData(String value){
 		return (Serializable)list.stream()
 			.filter(e->value != null && e.toLowerCase().contains(value.toLowerCase()))
+			.limit(10)
 			.collect(Collectors.toList());
 	}
 

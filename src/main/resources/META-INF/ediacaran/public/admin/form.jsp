@@ -21,15 +21,179 @@
 		<ed:col size="6">
 			<ec:box>
 				<ec:box-header>
-					<h3>Example form</h3>
+					<h3>Autocomplete</h3>
 				</ec:box-header>
 				<ec:box-body>
-					<ec:form>
-						<ec:textfield name="email" label="Email address" placeholder="Enter email"/>
-						<ec:passwordfield name="senha" label="Password" placeholder="Password"/>
-						<ec:checkbox name="check" label="Check me out"/>
-						<ec:button label="Submit" actionType="submit"/>
-					</ec:form>				
+					<ec:textfield id="fieldAutocomplete" name="autocomplete" label="Country" placeholder="Country name">
+					</ec:textfield>
+					<style>
+					.autocomplete-list {
+						position: absolute;
+					    width: 100%;
+					    background: #ffffff;
+						border: 1px solid #ced4da;
+    					border-radius: 0.25rem;
+						list-style: none;
+						padding-left: 0px;
+						margin: 0;
+						z-index:1;
+						max-height: 100px;
+    					overflow: overlay;
+					}
+					.autocomplete-list li {
+					    padding: 5px;
+					    cursor: pointer;
+					}
+					.select-autocomplete {
+						background-color: #cccccc;
+					}
+					</style>
+					<ul id="fieldAutocomplete_list" class="autocomplete-list"></ul>
+					
+					<script type="text/javascript">
+							
+							$.AppContext.autocomplete = {};
+		
+							$.AppContext.autocomplete.apply = function($resource, $fieldID){
+								
+								var $field     = $( "#" + $fieldID );
+								var $fieldList = $( "#" + $fieldID + "_list" );
+								
+								$fieldList.hide();
+								$fieldList.css('max-width', $field.outerWidth() + "px");
+								
+								$field.addClass('autocomplete-field');
+								$field.attr("select-data", $fieldList.attr("id"));
+								
+								$field
+								.on( "resize", function() {
+									$fieldList.css('max-width', $field.outerWidth() + "px");
+								})								
+								.on("input", function(){
+
+									$.AppContext.autocomplete.search(
+										$resource,
+										{ "value" : $field.val() },
+										$field,
+										$fieldList
+									);
+
+								})
+								.on("click", function(){
+
+									$.AppContext.autocomplete.search(
+										$resource,
+										{ "value" : $field.val() },
+										$field,
+										$fieldList
+									);
+
+								})
+								.on("focusout", function(){
+									//if(!$(this).hasClass('hover-autocomplete')){
+										setTimeout(function(){
+											$fieldList.hide();
+										}, 500);
+									//}
+								})
+								.hover(
+									function(){
+										$field.addClass('hover-autocomplete');
+									}, 
+									function(){
+										$field.removeClass('hover-autocomplete');
+									}
+								);
+								
+								/*
+								$fieldList
+								.hover(
+									function(){
+										$field.addClass('hover-autocomplete');
+									}, 
+									function(){
+										$field.removeClass('hover-autocomplete');
+									}
+								);
+								*/
+								
+							};
+							
+							$.AppContext.autocomplete.search = function($resource, $request, $field, $fieldList){
+
+								$.AppContext.utils.postJson(
+										$resource,
+										$request,
+										function(obj){
+											
+											$fieldList.empty();
+
+											if(obj.length == 0 ){
+												$fieldList.hide();
+												return;
+											}
+											else{
+												
+												if(obj.length > 4 ){
+													$fieldList.attr("size", 4);
+												}
+												else
+												if(obj.length < 2 ){
+													$fieldList.attr("size", 2);
+												}
+												else{
+													$fieldList.attr("size", obj.length);
+												}
+												
+												$fieldList.show();
+											}
+											
+											//update values
+											for (let i in obj) {
+												$fieldList.append( "<li>" + obj[i] + "</li>" );
+											}
+											
+											$field.hover(function(){
+												$field.addClass('hover-autocomplete');
+											}, function(){
+												$field.removeClass('hover-autocomplete');
+											});
+										
+											
+											$fieldList.find("li")
+											.each(function() {
+												
+												$(this).click(function(){
+													$field.val($(this).text());
+													$fieldList.hide();
+												})
+												.hover(function(){
+													
+													$(this).addClass('select-autocomplete');
+													
+												}, function(){
+													
+													$fieldList.find("li")
+													.each(function() {
+														$(this).removeClass('select-autocomplete');
+													});
+
+												});
+												
+											});
+											
+										}
+								);
+								
+							};
+							
+							$.AppContext.onload(function(){
+								$.AppContext.autocomplete.apply(
+										"/plugins/ediacaran/front/autocomplete/search", 
+										"fieldAutocomplete"
+								);
+							});
+					</script>				
 				</ec:box-body>
 			</ec:box>
 		</ed:col>
@@ -391,233 +555,15 @@
 		<ed:col size="6">
 			<ec:box>
 				<ec:box-header>
-					<h3>Autocomplete</h3>
+					<h3>Example form</h3>
 				</ec:box-header>
 				<ec:box-body>
-					<ec:textfield id="fieldAutocomplete" name="autocomplete" label="Country" placeholder="Country name">
-					</ec:textfield>
-					<style>
-					#fieldAutocomplete_list {
-						position: absolute;
-					}
-					</style>
-					<ec:select id="fieldAutocomplete_list" classStyle="autocomplete-list" rows="3"></ec:select>
-					<script type="text/javascript">
-							
-							$.AppContext.autocomplete = {};
-		
-							$.AppContext.autocomplete.apply = function($resource, $fieldID){
-								
-								var $field     = $( "#" + $fieldID );
-								var $fieldList = $( "#" + $fieldID + "_list" );
-								
-								$fieldList.hide();
-								$fieldList.css('max-width', $field.outerWidth() + "px");
-								
-								$field.addClass('autocomplete-field');
-								$field.attr("select-data", $fieldList.attr("id"));
-								
-								$field
-								.on("input", function(){
-
-									$.AppContext.autocomplete.search(
-										$resource,
-										{ "value" : $field.val() },
-										$field,
-										$fieldList
-									);
-
-								})
-								.on("click", function(){
-
-									$.AppContext.autocomplete.search(
-										$resource,
-										{ "value" : $field.val() },
-										$field,
-										$fieldList
-									);
-
-								})
-								.on("focusout", function(){
-									$fieldList.hide();
-								})
-								.hover(
-									function(){
-										$field.addClass('hover-autocomplete');
-									}, 
-									function(){
-										$field.removeClass('hover-autocomplete');
-									}
-								);
-								
-							};
-							
-							$.AppContext.autocomplete.search = function($resource, $request, $field, $fieldList){
-
-								$.AppContext.utils.postJson(
-										$resource,
-										$request,
-										function(obj){
-											
-											$fieldList.empty();
-
-											if(obj.length == 0 ){
-												$fieldList.hide();
-												return;
-											}
-											else{
-												
-												if(obj.length > 4 ){
-													$fieldList.attr("size", 4);
-												}
-												else
-												if(obj.length < 2 ){
-													$fieldList.attr("size", 2);
-												}
-												else{
-													$fieldList.attr("size", obj.length);
-												}
-												
-												$fieldList.show();
-											}
-											
-											//update values
-											for (let i in obj) {
-												$fieldList.append( "<option value=\"" + obj[i] + "\">" + obj[i] + "</option> " );
-											}
-											
-											$field.hover(function(){
-												$field.addClass('hover-autocomplete');
-											}, function(){
-												$field.removeClass('hover-autocomplete');
-											});
-										
-											$fieldList.find("option")
-											.each(function() {
-												
-												$(this).hover(function(){
-													
-													$(this).attr('selected','selected');
-													
-												}, function(){
-													
-													$fieldList.find("option")
-													.each(function() {
-														$(this).removeAttr('selected');
-													});
-
-												})
-												.click(function(){
-													
-													$field.val($(this).val());
-													$fieldList.hide();
-													
-												});
-												
-											});
-											
-											/*
-											$fieldList.find("option")
-											.each(function() {
-												
-												$(this).on( "mouseover", function(){
-													$(this).attr('selected','selected');
-												})
-												.on( "mouseout", function() {
-													$fieldList.find("option")
-													.each(function() {
-														$(this).removeAttr('selected');
-													});
-    												
-  												})
-												.on( "click", function() {
-													$field.val($(this).val());
-													$fieldList.hide();
-  												});
-												
-											});
-											*/
-										}
-								);
-								
-								/*
-								$.AppContext.utils.postJson(
-										$resource,
-										$request,
-										function(obj){
-											
-											$fieldList.empty();
-											
-											if(obj.length == 0 ){
-												$fieldList.hide();
-											}
-											else{
-												
-												if(obj.length > 4 ){
-													$fieldList.attr("size", 4);
-												}
-												else
-												if(obj.length < 2 ){
-													$fieldList.attr("size", 2);
-												}
-												else
-													$fieldList.attr("size", obj.length);
-												}
-												
-												$fieldList.show();
-											}
-											
-											for (let i in obj) {
-												$fieldList.append( "<option value=\"" + obj[i] + "\">" + obj[i] + "</option> " );
-											}
-											
-											$fieldList.find("option")
-											.each(function() {
-												
-												$(this).on( "mouseover", function(){
-													$(this).attr('selected','selected');
-												})
-												.on( "mouseout", function() {
-													$fieldList.find("option")
-													.each(function() {
-														$(this).removeAttr('selected');
-													});
-    												
-  												})
-												.on( "click", function() {
-													$field.val($(this).val());
-													$fieldList.hide();
-  												});
-												
-											});
-											
-										}
-								)
-								*/
-							};
-							
-							$.AppContext.onload(function(){
-								
-								$(window).click(function(){
-									
-									$(".autocomplete-field").each(function() {
-										
-										$fieldListID = $(this).attr("select-data");
-										
-										if(!$(this).hasClass('hover-autocomplete')){
-											$("#" + $fieldListID).hide();
-										}
-											
-									});
-
-								});	
-								
-								$.AppContext.autocomplete.apply(
-										"/plugins/ediacaran/front/autocomplete/search", 
-										"fieldAutocomplete"
-								);
-							});
-					</script>				
+					<ec:form>
+						<ec:textfield name="email" label="Email address" placeholder="Enter email"/>
+						<ec:passwordfield name="senha" label="Password" placeholder="Password"/>
+						<ec:checkbox name="check" label="Check me out"/>
+						<ec:button label="Submit" actionType="submit"/>
+					</ec:form>				
 				</ec:box-body>
 			</ec:box>
 		</ed:col>
