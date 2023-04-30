@@ -1,9 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
@@ -39,17 +35,12 @@ public class FlotChartsDataTagComponent extends AbstractSimpleTagComponent {
     	return TEMPLATE;
     }
 
-    protected Component createComponent() {
-    	return new Component() {
-    		
-    	    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
-    			flotchartid = ((FlotChartsSeriesTagComponent)super.getParentTag()).getFlotchartid();
-    			flotchartseriesid = ((FlotChartsSeriesTagComponent)super.getParentTag()).getId();
-    			label = ((FlotChartsSeriesTagComponent)super.getParentTag()).getLabel();
-    	    }
-    		
-    	};
-    }
+	protected void beforeBuildComponent(Component component) {
+		FlotChartsSeriesTagComponent fcstg = (FlotChartsSeriesTagComponent)getParentTag();
+		flotchartid = fcstg.getFlotchartid();
+		flotchartseriesid = fcstg.getId();
+		label = fcstg.getLabel();
+	}
 	
 	public Double getX() {
 		return x;

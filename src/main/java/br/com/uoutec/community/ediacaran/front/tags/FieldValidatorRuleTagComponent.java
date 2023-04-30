@@ -1,9 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.FieldValidatorTagComponent.ValidatorEntity;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
@@ -26,6 +22,28 @@ public class FieldValidatorRuleTagComponent extends AbstractSimpleTagComponent {
 	private ValidatorEntity validator;
 
 	private Boolean raw;
+
+	protected void beforeBuildComponent(Component component) {
+		FieldValidatorTagComponent tag = (FieldValidatorTagComponent)getParentTag();
+		
+		if(tag == null) {
+			throw new IllegalStateException("field not found");
+		}
+    	
+    	if(raw == null || !raw) {
+    		message = "\"" + message + "\"";
+    	}
+    	
+    	validator = new ValidatorEntity(name, message);
+		
+	}
+
+	protected void afterBuildComponent(Component component) {
+    	FieldValidatorTagComponent tag = (FieldValidatorTagComponent)getParentTag();
+    	tag.getValidator().add(validator);
+    	
+		validator = null;
+	}
 	
     public String getName() {
 		return name;
@@ -61,38 +79,7 @@ public class FieldValidatorRuleTagComponent extends AbstractSimpleTagComponent {
 	public void setRaw(Boolean raw) {
 		this.raw = raw;
 	}
-
-    protected Component createComponent() {
-    	return new Component() {
-    		
-    		protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
-    	    		Writer out) throws IOException {
-    	    	
-    			FieldValidatorTagComponent tag = (FieldValidatorTagComponent)super.getParentTag();
-    			
-    			if(tag == null) {
-    				throw new IllegalStateException("field not found");
-    			}
-    	    	
-    	    	if(raw == null || !raw) {
-    	    		message = "\"" + message + "\"";
-    	    	}
-    	    	
-    	    	validator = new ValidatorEntity(name, message);
-    	    	
-    	    }
-    	    
-    	    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
-    	    		Writer out) throws IOException {
-    	    	FieldValidatorTagComponent tag = (FieldValidatorTagComponent)super.getParentTag();
-    	    	tag.getValidator().add(validator);
-    	    	
-    			validator = null;
-    	    }
-    		
-    	};
-    }
-	
+		
     public String getDefaultTemplate() {
     	return TEMPLATE;
     }

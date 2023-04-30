@@ -1,0 +1,11 @@
+<ul {attr} class="autocomplete-list {classStyle} {enabled} {size} {align}">
+	<script type="text/javascript">
+		$.AppContext.onload(function()&#123;
+			$.AppContext.autocomplete.apply(
+					"{resource}", 
+					"{fieldID}",
+					"{id}"
+			);
+		&#125;);
+	</script>
+</ul>

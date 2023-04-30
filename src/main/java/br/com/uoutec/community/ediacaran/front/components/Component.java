@@ -64,12 +64,12 @@ public class Component
 		
 		beforeApplyTemplate(template, vars, out);
 
-    	Object oldParent = getParentTag();
-    	setParentTag(componentData);
+    	//Object oldParent = getParentTag();
+    	//setParentTag(componentData);
     	
 		applyTemplate(template, vars, out);
     	
-		setParentTag(oldParent);
+		//setParentTag(oldParent);
 		
 		afterApplyTemplate(template, vars, out);
 		
@@ -85,12 +85,12 @@ public class Component
     	
 		beforeApplyTemplate(template, vars, out);
 
-    	Object oldParent = getParentTag();
-    	setParentTag(componentData);
+    	//Object oldParent = getParentTag();
+    	//setParentTag(componentData);
 		
     	applyTemplate(template, vars, out);
     	
-    	setParentTag(oldParent);
+    	//setParentTag(oldParent);
 		afterApplyTemplate(template, vars, out);
 		
     	setProperty(componentData.getClass().getName() + ":CONTEXT", null);    	
@@ -137,13 +137,13 @@ public class Component
     	getTheme().buildComponent(template, getPackageTheme(), this, vars, out);
     }
     
-    public void setParentTag(Object tag) {
-    	setProperty(PARENT_TAG, tag);
-    }
+    //public void setParentTag(Object tag) {
+    //	setProperty(PARENT_TAG, tag);
+    //}
     
-    public Object getParentTag() {
-    	return getProperty(PARENT_TAG);
-    }
+    //public Object getParentTag() {
+    //	return getProperty(PARENT_TAG);
+    //}
     
 	protected void beforePrepareVars(Map<String, Object> vars) {
 	}
@@ -204,7 +204,7 @@ public class Component
 		return sb.toString();
 		
 	}
-	
+
 	public Map<String, Object> prepareVars(Map<String, PropertyParser> propertyParsers, Set<String> defaultProperties,
 			Map<String, PropertyParser> attributeParsers, Set<String> emptyAttributes, Set<String> defaultAttributes) {
 		

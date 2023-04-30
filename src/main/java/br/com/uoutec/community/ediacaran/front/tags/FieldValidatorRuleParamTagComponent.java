@@ -1,10 +1,8 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.FieldValidatorTagComponent.ValidatorParamEntity;
@@ -36,33 +34,27 @@ public class FieldValidatorRuleParamTagComponent extends AbstractSimpleTagCompon
     	this.contentWriter = new PrintWriter(bout, true);
 	}
 	
-    protected Component createComponent() {
-    	return new Component() {
-    		
-    	    public Writer getOut() {
-    	    	return contentWriter;
-    	    }
-
-    	    protected void afterApplyTemplate(String template, Map<String,Object> vars, 
-    	    		Writer out) throws IOException {
-    	    	
-    	    	contentWriter.flush();
-    	    	
-    	    	byte[] bValue = bout.toByteArray();
-    	    	value = new String(bValue, "utf-8");
-    	    	
-    	    	if(raw == null || !raw) {
-    		    	value = value.replaceAll("^[\\t\\n\\s]+", "");
-    		    	value = value.replaceAll("[\\t\\n\\s]+$", "");
-    		    	value = "\"" + value + "\"";
-    	    	}
-    	    	
-    	    	FieldValidatorRuleTagComponent tag = (FieldValidatorRuleTagComponent)super.getParentTag();
-    	    	tag.getValidator().getParams().add(new ValidatorParamEntity(name, value));
-    	    	
-    	    }
-    	    
-    	};
+	protected void afterBuildComponent(Component component) {
+		
+    	contentWriter.flush();
+    	
+    	byte[] bValue = bout.toByteArray();
+    	value = new String(bValue);
+    	//value = new String(bValue, "utf-8");
+    	
+    	if(raw == null || !raw) {
+	    	value = value.replaceAll("^[\\t\\n\\s]+", "");
+	    	value = value.replaceAll("[\\t\\n\\s]+$", "");
+	    	value = "\"" + value + "\"";
+    	}
+    	
+    	FieldValidatorRuleTagComponent tag = (FieldValidatorRuleTagComponent)getParentTag();
+    	tag.getValidator().getParams().add(new ValidatorParamEntity(name, value));
+		
+	}
+	
+    protected Writer getOut() {
+    	return contentWriter;
     }
 	
     public String getName() {

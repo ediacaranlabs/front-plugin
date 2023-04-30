@@ -1,6 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
+import java.io.Writer;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
@@ -19,6 +20,8 @@ public abstract class AbstractSimpleTagComponent
 	extends SimpleTagSupport
 	implements ComponentData {
 
+	private static final String TAG_CONTEXT = Component.class.getSimpleName() + ":CONTEXT";
+	
 	private	String id;
 
 	private String uniqueID;
@@ -38,18 +41,47 @@ public abstract class AbstractSimpleTagComponent
 	private VarParser content;
 
 	private boolean escapeContent;
+
+	private Object parentTag;
 	
 	private Component component;
 	
+	protected void beforeBuildComponent(Component component) {
+	}
+
+	protected void afterBuildComponent(Component component) {
+	}
+	
     public void doTag() throws JspException, IOException {
+    	
+    	registerParentTag();
+    	
+		beforeBuildComponent(component);
+		
     	try {
     		component.build();
     	}
 	    catch(ThemeException e) {
 	    	throw new JspException(e);
 	    }
+    	finally {
+    		afterBuildComponent(component);
+    		
+    		unregisterParentTag();
+    	}
+    	
     }
 
+    private void registerParentTag() {
+		parentTag = getProperty(TAG_CONTEXT);
+		setProperty(TAG_CONTEXT, this);
+    }
+
+    private void unregisterParentTag() {
+		setProperty(TAG_CONTEXT, parentTag);
+		parentTag = null;
+    }
+    
     public void setJspContext(JspContext pc) {
     	
     	super.setJspContext(pc);
@@ -57,10 +89,15 @@ public abstract class AbstractSimpleTagComponent
     	component = createComponent();
     	component.setComponentData(this);
     	component.setPageContext((PageContext)pc);
-    	component.setOut(pc.getOut());
+    	//component.setOut(pc.getOut());
+    	component.setOut(getOut());
     	this.uniqueID = component.getId();
     }
 
+    protected Writer getOut() {
+    	return super.getJspContext().getOut();
+    }
+    
     public Component getComponent() {
 		return component;
 	}
@@ -90,7 +127,7 @@ public abstract class AbstractSimpleTagComponent
     }
     
     protected Object getParentTag() {
-    	return component.getParentTag();
+    	return parentTag;
     }
     
     protected VarParser toVarParser() {

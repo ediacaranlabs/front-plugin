@@ -1,9 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
@@ -39,25 +35,18 @@ public class PropertyConfigTagComponent extends AbstractSimpleTagComponent {
 	public PropertyConfigTagComponent() {
 	}
 	
-    protected Component createComponent() {
-    	return new Component() {
-    		
-    		public void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
-    			Object cp = super.getParentTag();
-    			if(cp != null) {
-    				if(cp instanceof AbstractSimpleTagComponent) {
-    					parentID = ((AbstractSimpleTagComponent)cp).getId();
-    				}
-    				else
-    				if(cp instanceof AbstractBodyTagComponent) {
-    					parentID = ((AbstractBodyTagComponent)cp).getId();
-    				}
-    			}
-    			
-    		}
-    		
-    	};
-    }
+	protected void beforeBuildComponent(Component component) {
+		Object cp = getParentTag();
+		if(cp != null) {
+			if(cp instanceof AbstractSimpleTagComponent) {
+				parentID = ((AbstractSimpleTagComponent)cp).getId();
+			}
+			else
+			if(cp instanceof AbstractBodyTagComponent) {
+				parentID = ((AbstractBodyTagComponent)cp).getId();
+			}
+		}
+	}
 	
     public String getDefaultTemplate() {
     	

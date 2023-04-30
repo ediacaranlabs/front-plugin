@@ -59,7 +59,7 @@ public class FieldValidatorTagComponent extends AbstractBodyTagComponent {
 		this.field = field;
 	}
 
-	public void doInitBody() throws JspException {
+	protected void beforeBuildComponent(Component component) {
 		validator = new HashSet<ValidatorEntity>();
 		
 		if(form == null) {
@@ -69,7 +69,7 @@ public class FieldValidatorTagComponent extends AbstractBodyTagComponent {
 					form = ((FormTagComponent)formTag).getId();
 				}
 				else {
-					throw new JspException("invalid form tag: " + formTag);
+					throw new IllegalStateException("invalid form tag: " + formTag);
 				}
 			}
 		}
@@ -82,7 +82,7 @@ public class FieldValidatorTagComponent extends AbstractBodyTagComponent {
 					field = ((FieldFormTagComponent)componentFormTag).getName();
 				}
 				else {
-					throw new JspException("invalid field tag: " + componentFormTag);
+					throw new IllegalStateException("invalid field tag: " + componentFormTag);
 				}
 			}
 		}
@@ -98,7 +98,6 @@ public class FieldValidatorTagComponent extends AbstractBodyTagComponent {
 			throw new IllegalStateException("field not found");
 		}
 
-		super.doInitBody();
     }
     
     public int doAfterBody() throws JspException {

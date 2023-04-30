@@ -1,9 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
@@ -27,20 +23,14 @@ public class GalleryImagesTagComponent  extends AbstractSimpleTagComponent {
 	public GalleryImagesTagComponent() {
 	}
 	
+	protected void beforeBuildComponent(Component component) {
+		if(galleryID == null) {
+			galleryID = ((GalleryTagComponent)getParentTag()).getId();
+		}
+	}
+	
     public String getDefaultTemplate() {
     	return TEMPLATE;
-    }
-    
-    protected Component createComponent() {
-    	return new Component() {
-    		
-    	    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
-    			if(galleryID == null) {
-    				galleryID = ((GalleryTagComponent)super.getParentTag()).getId();
-    			}
-    	    }
-    		
-    	};
     }
     
 	public String getGalleryID() {

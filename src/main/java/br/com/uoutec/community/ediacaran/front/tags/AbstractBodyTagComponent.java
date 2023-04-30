@@ -1,6 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
+import java.io.Writer;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
@@ -17,6 +18,8 @@ public abstract class AbstractBodyTagComponent
 
 	private static final long serialVersionUID = -5353589232919296817L;
 
+	private static final String TAG_CONTEXT = Component.class.getSimpleName() + ":CONTEXT";
+	
 	public static final String WRAPPER_TEMPLATE		= "/components/wrapper";
 	
 	public static final String ID_COUNT				= "_component_id_count";
@@ -37,26 +40,36 @@ public abstract class AbstractBodyTagComponent
 	
 	private boolean wrapper;
 	
-	private Object oldParent;
+	//private Object oldParent;
 	
 	private String style;
 	
 	private String align;
 	
+	private Object parentTag;
+	
 	protected Component component;
 	
+	protected void beforeBuildComponent(Component component) {
+	}
+
+	protected void afterBuildComponent(Component component) {
+	}
+	
     public void doInitBody() throws JspException {
+    	
 		component.setProperty(getClass().getName() + ":CONTEXT", this);
-    	oldParent = component.getParentTag();
-		component.setParentTag(this);
+		
+    	registerParentTag();
+    	
+		beforeBuildComponent(component);
+		
     }
 	
     public int doAfterBody() throws JspException {
+    	
     	try {
     		component.build();
-    		component.setParentTag(oldParent);
-    		component.setProperty(getClass().getName() + ":CONTEXT", null);
-        	return SKIP_BODY;
     	}
 	    catch(ThemeException e) {
 	    	throw new JspException(e);
@@ -65,8 +78,29 @@ public abstract class AbstractBodyTagComponent
 	    	throw new JspException(e);
 		}
     	
+		component.setProperty(getClass().getName() + ":CONTEXT", null);
+		
+		unregisterParentTag();
+		
+		afterBuildComponent(component);
+		
+    	return SKIP_BODY;
+    	
     }
 
+    protected Writer getOut() {
+    	return getBodyContent().getEnclosingWriter();
+    }
+    
+    private void registerParentTag() {
+		this.parentTag = getProperty(TAG_CONTEXT);
+		setProperty(TAG_CONTEXT, this);
+    }
+
+    private void unregisterParentTag() {
+		this.parentTag = null;
+    }
+    
     public void setBodyContent(BodyContent b) {
     	super.setBodyContent(b);
     	
@@ -76,7 +110,8 @@ public abstract class AbstractBodyTagComponent
         	this.uniqueID = component.getId();
     	}
     	
-    	component.setOut(getBodyContent().getEnclosingWriter());
+    	//component.setOut(getBodyContent().getEnclosingWriter());
+    	component.setOut(getOut());
     	
     	if(uniqueID == null) {
         	this.uniqueID = component.getId();
@@ -128,7 +163,7 @@ public abstract class AbstractBodyTagComponent
     }
     
     protected Object getParentTag() {
-    	return component.getParentTag();
+    	return parentTag;
     }
     
 	public boolean isWrapper() {
