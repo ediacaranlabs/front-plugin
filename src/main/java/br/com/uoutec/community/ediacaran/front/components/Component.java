@@ -2,9 +2,6 @@ package br.com.uoutec.community.ediacaran.front.components;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.lang.reflect.InvocationTargetException;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -13,12 +10,9 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
-import org.brandao.brutos.bean.BeanInstance;
-
-import br.com.uoutec.community.ediacaran.DoPrivilegedException;
-import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 import br.com.uoutec.community.ediacaran.front.tags.SetTemplatePackageTag;
 import br.com.uoutec.community.ediacaran.front.theme.ComponentVars;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateVarParser;
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
@@ -248,44 +242,6 @@ public class Component
 	
 	private Map<String,Object> getVars(Set<String> defaultProperties, Set<String> emptyProperties){
 		return componentData.getProperties(defaultProperties, emptyProperties);
-		/*
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		BeanInstance i = 
-			AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
-            public BeanInstance run() {
-                return new BeanInstance(componentData);
-            }
-        });
-
-		for(String p: defaultProperties) {
-			final String k = p;
-			
-			Object v = 
-					AccessController.doPrivileged(new PrivilegedAction<Object>() {
-		            public Object run() {
-		                try {
-							return i.get(k);
-						} catch (IllegalAccessException e) {
-							throw new DoPrivilegedException(e);
-						} catch (IllegalArgumentException e) {
-							throw new DoPrivilegedException(e);
-						} catch (InvocationTargetException e) {
-							throw new DoPrivilegedException(e);
-						}
-		            }
-		        });
-			
-			
-			if(emptyProperties != null && emptyProperties.contains(p)) {
-				continue;
-			}
-			
-			map.put(p, v);
-		}
-		
-		return map;
-		*/
 	}
 	
 	public Theme getTheme() {
