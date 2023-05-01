@@ -38,8 +38,7 @@ public class BreadcrumbPathTemplateComponent extends AbstractTemplateComponent {
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						ComponentVarsBuilder cv = new ComponentVarsBuilder();
-						return value == null || ((String)value).isEmpty()? null : new TemplateVarParser("/components/icon", component.getPackageTheme(), cv, component.getTheme()).put("icon", value);
+						return value == null || ((String)value).isEmpty()? null : new TemplateVarParser("/components/icon", component.getPackageTheme(), component.getTheme()).put("icon", value);
 					}
 				});
 			}});

@@ -1,6 +1,8 @@
 package br.com.uoutec.community.ediacaran.front.theme;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +18,14 @@ public class TemplateVarParser  extends AbstractVarParser{
 	private Map<String, Object> vars;
 	
 	private ComponentVars componentVars;
+
+	public TemplateVarParser(String template, Theme theme) {
+		this(template, null, new ComponentVarsBuilder(), theme);
+	}
+	
+	public TemplateVarParser(String template, String packageName, Theme theme) {
+		this(template, packageName, new ComponentVarsBuilder(), theme);
+	}
 	
 	public TemplateVarParser(String template, String packageName, ComponentVars componentVars, Theme theme) {
 		this.template = template;
@@ -24,7 +34,7 @@ public class TemplateVarParser  extends AbstractVarParser{
 		this.theme = theme;
 		this.componentVars = componentVars;
 	}
-	
+
 	public TemplateVarParser clear() {
 		vars.clear();
 		return this;
@@ -47,6 +57,17 @@ public class TemplateVarParser  extends AbstractVarParser{
 
 	@Override
 	public String parse() throws IOException {
-		throw new UnsupportedOperationException();
+		
+		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+		PrintWriter contentWriter = new PrintWriter(bout, true);
+		
+		parse(contentWriter);
+		
+		contentWriter.flush();
+		
+    	byte[] bValue = bout.toByteArray();
+    	return new String(bValue);
+    	
 	}
+	
 }

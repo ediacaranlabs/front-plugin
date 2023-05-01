@@ -83,7 +83,7 @@ $.AppContext.autocomplete.search = function($resource, $request, $field, $fieldL
 				
 				//update values
 				for (let i in obj) {
-					$fieldList.append( "<li>" + obj[i] + "</li>" );
+					$fieldList.append( "<li value=\"" + obj[i].value + "\">" + obj[i].label + "</li>" );
 				}
 				
 				$field.hover(function(){
@@ -97,7 +97,7 @@ $.AppContext.autocomplete.search = function($resource, $request, $field, $fieldL
 				.each(function() {
 					
 					$(this).click(function(){
-						$field.val($(this).text());
+						$field.val($(this).attr("value"));
 						$fieldList.hide();
 					})
 					.hover(function(){

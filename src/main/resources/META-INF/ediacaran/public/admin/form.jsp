@@ -24,9 +24,20 @@
 					<h3>Autocomplete</h3>
 				</ec:box-header>
 				<ec:box-body>
-					<ec:textfield id="fieldAutocomplete" name="autocomplete" label="Country" placeholder="Country name">
-						<ec:autocomplete resource="/plugins/ediacaran/front/autocomplete/search" />
-					</ec:textfield>
+					<ed:row>
+						<ed:col>
+							<ec:textfield name="autocomplete" label="Country" placeholder="Country name">
+								<ec:autocomplete resource="/plugins/ediacaran/front/autocomplete/search" />
+							</ec:textfield>
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col>
+							<ec:textfield name="autocomplete" label="Icons" placeholder="Icon name">
+								<ec:autocomplete resource="/plugins/ediacaran/front/autocomplete/search-icons" />
+							</ec:textfield>
+						</ed:col>
+					</ed:row>
 				</ec:box-body>
 			</ec:box>
 		</ed:col>
