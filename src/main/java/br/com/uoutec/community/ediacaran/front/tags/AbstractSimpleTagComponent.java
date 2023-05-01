@@ -91,7 +91,7 @@ public abstract class AbstractSimpleTagComponent
 		BeanInstance i = 
 			AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
             public BeanInstance run() {
-                return new BeanInstance(this);
+                return new BeanInstance(AbstractSimpleTagComponent.this);
             }
         });
 

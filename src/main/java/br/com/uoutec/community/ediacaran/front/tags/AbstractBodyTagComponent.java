@@ -107,7 +107,7 @@ public abstract class AbstractBodyTagComponent
 		BeanInstance i = 
 			AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
             public BeanInstance run() {
-                return new BeanInstance(this);
+                return new BeanInstance(AbstractBodyTagComponent.this);
             }
         });
 

@@ -247,7 +247,8 @@ public class Component
 	}
 	
 	private Map<String,Object> getVars(Set<String> defaultProperties, Set<String> emptyProperties){
-		
+		return componentData.getProperties(defaultProperties, emptyProperties);
+		/*
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		BeanInstance i = 
@@ -284,6 +285,7 @@ public class Component
 		}
 		
 		return map;
+		*/
 	}
 	
 	public Theme getTheme() {
