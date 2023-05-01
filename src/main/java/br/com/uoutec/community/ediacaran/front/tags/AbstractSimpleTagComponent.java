@@ -2,12 +2,21 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.lang.reflect.InvocationTargetException;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+import org.brandao.brutos.bean.BeanInstance;
+
+import br.com.uoutec.community.ediacaran.DoPrivilegedException;
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.components.ComponentData;
 import br.com.uoutec.community.ediacaran.front.components.EscapeVarParser;
@@ -49,6 +58,10 @@ public abstract class AbstractSimpleTagComponent
 	protected void beforeBuildComponent(Component component) {
 	}
 
+	protected void buildComponent(Component component) throws ThemeException, IOException {
+		component.build();
+	}
+	
 	protected void afterBuildComponent(Component component) {
 	}
 	
@@ -59,7 +72,7 @@ public abstract class AbstractSimpleTagComponent
 		beforeBuildComponent(component);
 		
     	try {
-    		component.build();
+    		buildComponent(component);
     	}
 	    catch(ThemeException e) {
 	    	throw new JspException(e);
@@ -72,6 +85,45 @@ public abstract class AbstractSimpleTagComponent
     	
     }
 
+    public Map<String, Object> getProperties(Set<String> defaultProperties, Set<String> emptyProperties){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		BeanInstance i = 
+			AccessController.doPrivileged(new PrivilegedAction<BeanInstance>() {
+            public BeanInstance run() {
+                return new BeanInstance(this);
+            }
+        });
+
+		for(String p: defaultProperties) {
+			final String k = p;
+			
+			Object v = 
+					AccessController.doPrivileged(new PrivilegedAction<Object>() {
+		            public Object run() {
+		                try {
+							return i.get(k);
+						} catch (IllegalAccessException e) {
+							throw new DoPrivilegedException(e);
+						} catch (IllegalArgumentException e) {
+							throw new DoPrivilegedException(e);
+						} catch (InvocationTargetException e) {
+							throw new DoPrivilegedException(e);
+						}
+		            }
+		        });
+			
+			
+			if(emptyProperties != null && emptyProperties.contains(p)) {
+				continue;
+			}
+			
+			map.put(p, v);
+		}
+		
+		return map;
+    }
+    
     private void registerParentTag() {
 		parentTag = getProperty(TAG_CONTEXT);
 		setProperty(TAG_CONTEXT, this);

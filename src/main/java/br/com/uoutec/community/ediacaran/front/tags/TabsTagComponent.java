@@ -1,7 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import javax.servlet.jsp.JspException;
-
+import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -48,20 +47,17 @@ public class TabsTagComponent extends AbstractBodyTagComponent {
 		
 	}
 	
-    public int doStartTag() throws JspException {
+	protected void beforeBuildComponent(Component component) {
     	this.index   = 1;
 		this.header  = new TemplateListVarsParser(HEADER_ITEM, component.getPackageTheme(), component.getTheme());
 		this.content = new TemplateListVarsParser(CONTENT_ITEM, component.getPackageTheme(), component.getTheme());
-        return EVAL_BODY_BUFFERED;
-    }
+	}
 
-
-    public int doEndTag() throws JspException {
+	protected void afterBuildComponent(Component component) {
     	this.index   = 0;
 		this.header  = null;
 		this.content = null;
-    	return super.doEndTag();
-    }
+	}
 	
     public String getDefaultTemplate() {
     	return TEMPLATE;

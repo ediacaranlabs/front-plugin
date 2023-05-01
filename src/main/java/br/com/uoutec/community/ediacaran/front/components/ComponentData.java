@@ -1,5 +1,8 @@
 package br.com.uoutec.community.ediacaran.front.components;
 
+import java.util.Map;
+import java.util.Set;
+
 public interface ComponentData {
 
 	String getExtAttrs();
@@ -13,5 +16,7 @@ public interface ComponentData {
     String getDefaultTemplate();
 	
     String getType();
+    
+    Map<String, Object> getProperties(Set<String> defaultProperties, Set<String> emptyProperties);
     
 }
