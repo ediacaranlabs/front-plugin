@@ -9,8 +9,8 @@
 <%--<ec:load-data file="footer.json" var="objects" />--%>
 <ec:import-object id="global/front/social_links" var="socialLinks"/>
 <ec:import-object id="global/front/address" var="address"/>
-<ec:import-object id="global/front/menus/footer_menu2" var="footerMenu2"/>
-<ec:import-object id="global/front/menus/footer_menu" var="footerMenu"/>
+<ec:import-object id="menubar/front/footer_menu2" var="footerMenu2"/>
+<ec:import-object id="menubar/front/footer_menu" var="footerMenu"/>
 
 <footer>
 	<ed:container>

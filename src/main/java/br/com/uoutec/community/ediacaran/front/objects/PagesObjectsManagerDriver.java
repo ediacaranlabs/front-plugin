@@ -21,6 +21,7 @@ public class PagesObjectsManagerDriver
 						new PageFileManagerHandler()
 				), DRIVER_NAME
 		);
+		setDefaultObjectHandler(new ObjectHandlerImp());
 	}
 
 	@Override

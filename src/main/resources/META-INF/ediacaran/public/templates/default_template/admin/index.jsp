@@ -14,8 +14,8 @@
 </head>
 
 <body>
-<ec:import-object var="adminmenubar" id="global/admin/menus/adminmenubar"/>
-<ec:import-object var="admintopmenubar" id="global/admin/menus/admintopmenubar"/>
+<ec:import-object var="adminmenubar" id="menubar/admin/adminmenubar"/>
+<ec:import-object var="admintopmenubar" id="menubar/admin/admintopmenubar"/>
 <ec:sidebar-group id="pageBody" show="true">
 
 	<ec:sidebar>

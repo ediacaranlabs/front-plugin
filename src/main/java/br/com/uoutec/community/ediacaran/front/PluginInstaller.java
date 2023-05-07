@@ -13,8 +13,7 @@ import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEven
 import br.com.uoutec.community.ediacaran.front.objects.FileManager;
 import br.com.uoutec.community.ediacaran.front.objects.FileObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.JsonFileManagerHandler;
-import br.com.uoutec.community.ediacaran.front.objects.MenubarObjectHandler;
-import br.com.uoutec.community.ediacaran.front.objects.ObjectHandler;
+import br.com.uoutec.community.ediacaran.front.objects.MenubarObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectHandlerImp;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
@@ -40,7 +39,7 @@ public class PluginInstaller
 	extends AbstractPlugin {
 
 	public static final String OBJECTS_REPOSITORY       = "objects/";
-	
+
 	public static final String PACKAGE 					= "community";
 
 	public static final String PROVIDER 				= "ediacaran";
@@ -57,12 +56,12 @@ public class PluginInstaller
 	
 	private static final String ADMIN_TOP_MENU_BAR      = "admintopmenubar";
 
-	private ObjectHandler menubarObjectHandler;
-	
 	private ObjectsManagerDriver globalDriver;
 	
 	private ObjectsTemplateManagerDriver pageObjectDriver;
 
+	private MenubarObjectsManagerDriver menubarObjectDriver;
+	
 	public void install() throws Throwable{
 		installPageTemplates();
 		installMenu();
@@ -76,7 +75,7 @@ public class PluginInstaller
 
 	private void installMenu() throws MenuBarManagerException, ObjectsManagerDriverException {
 
-		this.menubarObjectHandler = new MenubarObjectHandler();
+		/* Global Object Driver */
 		
 		this.globalDriver = 
 				new FileObjectsManagerDriver(
@@ -86,10 +85,13 @@ public class PluginInstaller
 						), "global"
 				); 
 
-		this.globalDriver.registerObjectHandler(this.menubarObjectHandler);
-		
 		this.globalDriver.setDefaultObjectHandler(new ObjectHandlerImp());
-		this.globalDriver.addListener(new ObjectsManagerDriverListener() {
+		
+		/* Menu Object Driver */
+		
+		this.menubarObjectDriver = new MenubarObjectsManagerDriver();
+		
+		this.menubarObjectDriver.addListener(new ObjectsManagerDriverListener() {
 			
 			public void afterLoad(ObjectMetadata omd, ObjectValue obj) {
 				
@@ -99,7 +101,7 @@ public class PluginInstaller
 
 				PathMetadata pmd = omd.getPathMetadata();
 				
-				if(obj.getObject() instanceof MenuBar && pmd.getPath().equals("/admin/menus")) {
+				if(obj.getObject() instanceof MenuBar && pmd.getPath().equals("/admin")) {
 					
 					if(pmd.getId().equals(ADMIN_MENU_BAR)) {
 						installDefaultMenu((MenuBar)obj.getObject());
@@ -115,15 +117,18 @@ public class PluginInstaller
 			
 		});
 		
+		/* Page Object Driver */
+		
 		VarParser varParser = EntityContextPlugin.getEntity(VarParser.class);
+		
 		pageObjectDriver = new PagesObjectsManagerDriver();
-		pageObjectDriver.setDefaultObjectHandler(new ObjectHandlerImp());
+
 		pageObjectDriver.registerTemplate( 
 				new ObjectTemplate(
 						"default", 
 						"Default Template", 
-						varParser.getValue("${plugins.ediacaran.front.web_path}:/pages/admin/edit.jsp"), 
-						varParser.getValue("${plugins.ediacaran.front.web_path}:/pages/default-template.jsp")
+						varParser.getValue("${plugins.ediacaran.front.web_path}:/admin/pages/edit.jsp"), 
+						varParser.getValue("${plugins.ediacaran.front.web_path}:/templates/default_template/pages/default-template.jsp")
 				)
 		);
 		
@@ -131,6 +136,7 @@ public class PluginInstaller
 		
 		objectsManager.registerDriver(this.globalDriver);
 		objectsManager.registerDriver(this.pageObjectDriver);
+		objectsManager.registerDriver(this.menubarObjectDriver);
 
 	}
 	
@@ -263,11 +269,18 @@ public class PluginInstaller
 		SecurityRegistry securityRegistry = EntityContextPlugin.getEntity(SecurityRegistry.class);
 		
 		securityRegistry.registerAuthorization(new Authorization("CONTENT","Content","Content Manager"));
-		securityRegistry.registerAuthorization(new Authorization("PAGES"  ,"Pages","Page Manager"), "CONTENT");
-		securityRegistry.registerAuthorization(new Authorization("LIST"   ,"List","List Pages"),    "CONTENT", "PAGES");
-		securityRegistry.registerAuthorization(new Authorization("SAVE"   ,"List","List Pages"),    "CONTENT", "PAGES");
-		securityRegistry.registerAuthorization(new Authorization("UPDATE" ,"List","List Pages"),    "CONTENT", "PAGES");
-		securityRegistry.registerAuthorization(new Authorization("DELETE" ,"List","List Pages"),    "CONTENT", "PAGES");
+		
+		securityRegistry.registerAuthorization(new Authorization("PAGES"  ,"Pages","Page Manager"),  "CONTENT");
+		securityRegistry.registerAuthorization(new Authorization("LIST"   ,"List","List Pages"),     "CONTENT", "PAGES");
+		securityRegistry.registerAuthorization(new Authorization("SAVE"   ,"Save","Save Pages"),     "CONTENT", "PAGES");
+		securityRegistry.registerAuthorization(new Authorization("UPDATE" ,"Update","Update Pages"), "CONTENT", "PAGES");
+		securityRegistry.registerAuthorization(new Authorization("DELETE" ,"Delete","Delete Pages"), "CONTENT", "PAGES");
+		
+		securityRegistry.registerAuthorization(new Authorization("MENUBAR","Menubar","Menubar Manager"), "CONTENT");
+		securityRegistry.registerAuthorization(new Authorization("LIST"   ,"List","List Menubar"),       "CONTENT", "MENUBAR");
+		securityRegistry.registerAuthorization(new Authorization("SAVE"   ,"Save","Save Menubar"),       "CONTENT", "MENUBAR");
+		securityRegistry.registerAuthorization(new Authorization("UPDATE" ,"Update","Update Menubar"),   "CONTENT", "MENUBAR");
+		securityRegistry.registerAuthorization(new Authorization("DELETE" ,"Delete","Delete Menubar"),   "CONTENT", "MENUBAR");
 		
 		WebSecurityManagerPlugin webSecurityManagerPlugin = 
 				EntityContextPlugin.getEntity(WebSecurityManagerPlugin.class);
@@ -310,15 +323,10 @@ public class PluginInstaller
 	}
 	
 	public void uninstallMenu() throws Throwable {
-		
 		ObjectsManager objectsManager = EntityContextPlugin.getEntity(ObjectsManager.class);
 		objectsManager.unregisterDriver(globalDriver);
-		
-		/*
-		MenuBarManager mbm = EntityContextPlugin.getEntity(MenuBarManager.class);
-		mbm.removeMenuBar(ADMIN_MENU_BAR);
-		mbm.removeMenuBar(ADMIN_TOP_MENU_BAR);
-		*/
+		objectsManager.unregisterDriver(menubarObjectDriver);
+		objectsManager.unregisterDriver(pageObjectDriver);
 	}
 
 	public void uninstallWidget() throws Throwable {

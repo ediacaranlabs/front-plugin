@@ -42,7 +42,7 @@ public class EditPageController {
 	@RequiresPermissions("CONTENT:PAGES:LIST")
 	public WebResultAction index(WebResultAction webResult){
 		webResult = list(null, null, webResult);
-		webResult.setView("/pages/admin/index");
+		webResult.setView("/admin/pages/index");
 		return webResult;
 	}
 	
@@ -56,7 +56,7 @@ public class EditPageController {
 			String locale,
 			WebResultAction webResult){
 		
-		webResult.setView("/pages/admin/table");
+		webResult.setView("/admin/pages/table");
 		
 		try {
 			List<ObjectMetadata> list     = editpage.list(path, locale);
@@ -77,7 +77,7 @@ public class EditPageController {
 	@RequiresPermissions("CONTENT:PAGES:CREATE")
 	public WebResultAction selectTemplate(WebResultAction webResult){
 		
-		webResult.setView("/pages/admin/select_template");
+		webResult.setView("/admin/pages/select_template");
 		
 		try {
 			Map<String,ObjectTemplate> templates = editpage.getTemplates();
@@ -130,7 +130,7 @@ public class EditPageController {
 			String locale,
 			WebResultAction webResult){
 		
-		webResult.setView("/pages/admin/confirm_delete");
+		webResult.setView("/admin/pages/confirm_delete");
 		
 		try {
 			
