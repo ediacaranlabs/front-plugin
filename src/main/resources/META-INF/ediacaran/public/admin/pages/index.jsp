@@ -71,7 +71,7 @@
 	<ed:col size="12">
 		<ec:box>
 			<ec:box-body id="pages_body">
-				<jsp:include page="/pages/admin/table.jsp"/>
+				<jsp:include page="/admin/pages/table.jsp"/>
 			</ec:box-body>
 		</ec:box>
 	</ed:col>

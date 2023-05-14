@@ -214,7 +214,7 @@ $.AppContext.types.Field.prototype.getOptions = function(){
 };
 
 /*---------------------------------------------------------------*/
-/* Option                                                         */
+/* Option                                                        */
 /*---------------------------------------------------------------*/
 
 $.AppContext.types.Option = function($form, $field, $option, $type){
@@ -282,13 +282,22 @@ $.AppContext.types.Object.prototype.getProperty = function(name){
 	
 };
 
-$.AppContext.types.Field.prototype.registerEvent = function(name, handler){
+$.AppContext.types.Object.prototype.setVisible = function($value){
+	if($value){
+		$(this.obj).show();
+	}
+	else{
+		$(this.obj).hide();
+	}
+};
+
+$.AppContext.types.Object.prototype.registerEvent = function(name, handler){
 
 	$.AppContext.events.add(this.obj, name, handler);
 
 };
 
-$.AppContext.types.Field.prototype.unregisterEvent = function(name){
+$.AppContext.types.Object.prototype.unregisterEvent = function(name){
 
 	$.AppContext.events.remove(this.obj, name);
 

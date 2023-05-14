@@ -27,6 +27,7 @@ import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.page.EditMenubar;
 import br.com.uoutec.community.ediacaran.front.page.EditPage;
+import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 
 @Singleton
@@ -107,6 +108,36 @@ public class MenubarController {
 			
 			webResult
 				.add("menubar", menuBar)
+				.add("metadata", md)
+				.add("locales", langNames)
+				.setView("/admin/menubar/menubar");
+
+			return webResult;
+		}
+		catch(Throwable ex) {
+			ex.printStackTrace();
+			WebFlowController
+				.redirect()
+				.put("exception", ex)
+				.to("${plugins.ediacaran.front.admin_context}/menubar/list");
+			return null;
+		}
+	}
+	
+	@Action("/new")
+	@RequestMethod(RequestMethodTypes.GET)
+	@RequiresPermissions("CONTENT:MENUBAR:NEW")
+	public WebResultAction newMenu(
+			WebResultAction webResult){
+		
+		try {
+			
+			Map<Locale, String> langNames = editMenubar.getSupportedLocales();
+			
+			Map<String,Object> md = new HashMap<>();
+			
+			webResult
+				.add("menubar", new Menu())
 				.add("metadata", md)
 				.add("locales", langNames)
 				.setView("/admin/menubar/menubar");

@@ -33,52 +33,9 @@
 		<ed:row>
 			<ed:col size="12">
 				<c:forEach varStatus="menubarItemStatus" var="menubarItem" items="${menubar.itens}">
-				<ec:accordion>
-					<ec:accordion-item title="${menubarItem.name}">
-					<ed:row>
-						<ed:col size="3" classStyle="form-group has-feedback">
-							<ec:textfield label="ID" value="${menubarItem.id}" enabled="false"/>
-						</ed:col>
-						<ed:col size="3" classStyle="form-group has-feedback">
-							<ec:textfield label="Icon" value="${menubarItem.icon}"/>
-						</ed:col>
-						<ed:col size="6" classStyle="form-group has-feedback">
-							<ec:textfield label="Name" value="${menubarItem.name}"/>
-						</ed:col>
-					</ed:row>
-					<ed:row>
-						<ed:col size="12" classStyle="form-group has-feedback">
-							<ec:textfield label="Resource" value="${menubarItem.rawResource}"/>
-						</ed:col>
-					</ed:row>
-					<ed:row>
-						<ed:col size="12">
-							<c:forEach varStatus="menuItemStatus" var="menuItem" items="${menubarItem.itens}">
-							<ec:accordion>
-								<ec:accordion-item title="${menuItem.name}">
-								<ed:row>
-									<ed:col size="3" classStyle="form-group has-feedback">
-										<ec:textfield label="ID" value="${menuItem.id}" enabled="false"/>
-									</ed:col>
-									<ed:col size="3" classStyle="form-group has-feedback">
-										<ec:textfield label="Icon" value="${menuItem.icon}"/>
-									</ed:col>
-									<ed:col size="6" classStyle="form-group has-feedback">
-										<ec:textfield label="Name" value="${menuItem.name}"/>
-									</ed:col>
-								</ed:row>
-								<ed:row>
-									<ed:col size="12" classStyle="form-group has-feedback">
-										<ec:textfield label="Resource" value="${menuItem.rawResource}"/>
-									</ed:col>
-								</ed:row>
-								</ec:accordion-item>
-							</ec:accordion>
-							</c:forEach>
-						</ed:col>
-					</ed:row>
-					</ec:accordion-item>
-				</ec:accordion>
+				<c:set scope="request" var="param1_" value="${menubarItem}"/>
+				<c:set scope="request" var="d_eep" value="0"/>
+				<c:import url="/admin/menubar/menu.jsp"/>
 				</c:forEach>
 			</ed:col>
 		</ed:row>
