@@ -7,7 +7,7 @@
 	id="new_page_form"
 	method="POST" 
 	action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new" 
-	update="#content-body">
+	update="content-body">
 <ec:modal-header>
 	<h4 class="modal-title">Select a template</h4>
 	<ec:button id="close_model" extAttrs="modal-action=\"close\" aria-label=\"Close\"" 

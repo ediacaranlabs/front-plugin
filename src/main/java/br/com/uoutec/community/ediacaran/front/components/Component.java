@@ -294,10 +294,10 @@ public class Component
 	public String getId() {
 		HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 		
-		Integer acc = (Integer) request.getAttribute(ID_COUNT);
-		request.setAttribute(ID_COUNT, acc = acc == null? 0 : acc.intValue() + 1);
+		Long acc = (Long) request.getAttribute(ID_COUNT);
+		request.setAttribute(ID_COUNT, acc = acc == null? System.currentTimeMillis() : acc.intValue() + 1);
 		
-		return componentData.getClass().getSimpleName().toLowerCase() + String.valueOf(acc);
+		return componentData.getClass().getSimpleName().toLowerCase() + "_" + Long.toString(acc, Character.MAX_RADIX);
 	}
 
 }

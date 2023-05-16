@@ -140,7 +140,8 @@ public class MenubarController {
 				.add("menubar", new Menu())
 				.add("metadata", md)
 				.add("locales", langNames)
-				.setView("/admin/menubar/menubar");
+				.add("countMenuID", System.currentTimeMillis())
+				.setView("/admin/menubar/menu");
 
 			return webResult;
 		}

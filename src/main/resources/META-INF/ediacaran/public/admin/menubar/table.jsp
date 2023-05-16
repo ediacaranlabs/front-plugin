@@ -25,7 +25,7 @@
 			actionType="submit" 
 			action="#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/list"
 			method="POST"
-			update="#pages_body" 
+			update="pages_body" 
 			label="Pesqusiar"/>
 		<ec:button 
 			actionType="submit"

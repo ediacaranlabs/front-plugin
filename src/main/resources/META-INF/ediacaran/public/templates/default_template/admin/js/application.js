@@ -104,7 +104,7 @@ $.AppContext.utils = {
 
 						var $form = $b.attr("form") !== undefined? $('#' + $b.attr("form")) : $b.parents('form:first');
 						
-						if(!$form){
+						if(!$form || $form.attr('asyncEnabled')){
 							return;
 						}
 						
@@ -130,7 +130,12 @@ $.AppContext.utils = {
 			
 			$((local? local + " " : "") + "form").each(function() {
 				
-				var $f           = $(this);
+				var $f = $(this);
+				
+				if($f.attr('asyncEnabled')){
+					return;
+				}
+				
 				var $destContent = $f.attr('dest-content');
 				var $address     = $f.attr('action');
 				var actionType   = $address === undefined? "" : $address.substring(0, 2);
@@ -158,6 +163,8 @@ $.AppContext.utils = {
 			        return false;
 				});
 					
+				$f.attr('asyncEnabled', true);
+				
 			});
 			
 		},
@@ -182,7 +189,7 @@ $.AppContext.utils = {
 		},
 		
 		loadJson: function (resource, success = null, error = null){
-			//alert(success);
+
 		    $.ajax({
 		        type   : 'GET',
 		        contentType: 'application/json',
@@ -192,21 +199,6 @@ $.AppContext.utils = {
 		        error: error
 		    });
 			
-		    /*
-			$.ajax({
-			    type: 'GET',
-			    headers: { 
-			        'Accept': 'application/json',
-			        'Content-Type': 'application/json' 
-			    },			    
-			    dataType: "json",
-			    url: $.AppContext.vars.contextPath + resource,
-			    success: function(data){
-			    	alert(data);
-			    },
-			    error : error
-			});
-			*/
 		},
 		
 		postJson: function (resource, request, success = null, error = null){
@@ -236,7 +228,34 @@ $.AppContext.utils = {
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
 			var $modal       = $.AppContext.utils.isModal($resource);
 			
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal);
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
+		},
+
+		updateContentByID: function ($resource, $destContent){
+			
+			var $address     = $.AppContext.utils.getAddress($resource);
+			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
+			var $modal       = $.AppContext.utils.isModal($resource);
+			
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
+		},
+		
+		appendContentByID: function ($resource, $destContent){
+			
+			var $address     = $.AppContext.utils.getAddress($resource);
+			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
+			var $modal       = $.AppContext.utils.isModal($resource);
+			
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'append');
+		},
+
+		insertContentByID: function ($resource, $destContent){
+			
+			var $address     = $.AppContext.utils.getAddress($resource);
+			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
+			var $modal       = $.AppContext.utils.isModal($resource);
+			
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'insert');
 		},
 		
 		loadContent: function ($link){
@@ -245,7 +264,7 @@ $.AppContext.utils = {
 			var $destContent = $.AppContext.utils.getDestContent($link.attr("href"), $link.attr('dest-content'));
 			var $modal       = $.AppContext.utils.isModal($link.attr("href"));
 
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal);
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
 		},
 
 		/* send data function */
@@ -273,11 +292,11 @@ $.AppContext.utils = {
 		    $destContent = $.AppContext.utils.getDestContent($action, $destContent);
 		    $action      = $.AppContext.utils.getAddress($action);
 
-			$.AppContext.utils.send($method, $action, $data, $enctype, $destContent, $modal);
+			$.AppContext.utils.send($method, $action, $data, $enctype, $destContent, $modal, null);
 			
 		},
 		
-		send: function ($method, $action, $data, $enctype, $destContent, $modal){
+		send: function ($method, $action, $data, $enctype, $destContent, $modal, $destContentType = null){
 
 		    var opts = {
 		        type   : $method,
@@ -309,13 +328,9 @@ $.AppContext.utils = {
 			    	}
 			    	else{
 				    	$.AppContext.loadListeners.executeBefore($action);
-			    		$.AppContext.utils.updateContent($destContent, $data);
+			    		$.AppContext.utils.updateContentData($destContent, $data, $destContentType);
 				    	$.AppContext.loadListeners.executeAfter($action);
 			    	}		        	
-			    	
-			    	//setTimeout(function(){ 
-			    	//	$("#wait-modal").modal('hide');
-			    	//}, 1000);
 			    	
 		        },
 		        error: function ($data){
@@ -334,10 +349,6 @@ $.AppContext.utils = {
 			    	
 			    	$data = $evt.data.data;
 		        	
-			    	//setTimeout(function(){ 
-			    	//	$("#wait-modal").modal('hide');
-			    	//}, 1000);
-
 		        }
 		    };
 			
@@ -348,8 +359,6 @@ $.AppContext.utils = {
 		    	opts.contentType = false;		    	
 		    }
 		    
-	    	//$("#wait-modal").modal('show');
-			
 	    	var $evt = {
 	    		sourceID: "utils.send",
 	    		type: "before",
@@ -366,15 +375,25 @@ $.AppContext.utils = {
 		
 		/* simple functions */
 		
-		updateContent: function ($local, $content){
+		updateContentData: function ($local, $content, $position = null){
 			
 			$content = 
-				' <script type="text/javascript">' + 
-				'  $.AppContext.utils.enableActions("' + $local + '");' +
-				'</script>' + $content;
+				'<script type="text/javascript">' + 
+				'   $.AppContext.utils.enableActions("#' + $local + '");' +
+				'</script>' +
+				$content; 
 			
-			$($local).html($content);
-			window.scrollTo(0,0);
+			if($position === 'append'){
+				$('#' + $local).append($content);
+			}
+			else
+			if($position === 'insert'){
+				$('#' + $local).prepend($content);
+			}
+			else{
+				$('#' + $local).html($content);
+			}
+			//window.scrollTo(0,0);
 		},
 		
 		getDestContent: function ($address, $destContent){
@@ -688,7 +707,7 @@ $.AppContext.dialog = {
 			
 			$id = "#" + $id;
 			
-			$.AppContext.utils.updateContent($id + " .modal-content", $value);
+			$.AppContext.utils.updateContentData($id + " .modal-content", $value);
 			
 			$($id).find("[modal-action='close']").click(function(){
 				$($id).modal("hide");

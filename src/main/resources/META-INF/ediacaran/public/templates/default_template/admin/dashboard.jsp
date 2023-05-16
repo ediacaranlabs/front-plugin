@@ -35,7 +35,7 @@
 		function (){
 			<c:forEach begin="0" end="${fn:length(vars.widgets)}" varStatus="loop">
 				<c:if test="${!empty vars.widgets[loop.index].resource}">
-				$.AppContext.loadContent("#widget_${loop.index}", "${vars.widgets[loop.index].resource}");		
+				$.AppContext.loadContent("widget_${loop.index}", "${vars.widgets[loop.index].resource}");		
 				</c:if>
 			</c:forEach>
 		}

@@ -43,7 +43,7 @@
 		<ec:box>
 			<ec:box-body id="plugin_body">
 			
-				<ec:form method="POST" update="#result-install-file" 
+				<ec:form method="POST" update="result-install-file" 
 					action="/plugins/ediacaran/front/admin/plugins/install-file" 
 					enctype="multipart/form-data">
 					<ed:row>
@@ -86,7 +86,7 @@
 					</ed:row>
 				</ec:form>
 					
-				<ec:form method="POST" update="#result-install-url"  action="/plugins/ediacaran/front/admin/plugins/install-url">
+				<ec:form method="POST" update="result-install-url"  action="/plugins/ediacaran/front/admin/plugins/install-url">
 					<ed:row>
 						<ed:col size="12">
 							<h5><fmt:message key="url_install.title" bundle="${messages}"/></h5>

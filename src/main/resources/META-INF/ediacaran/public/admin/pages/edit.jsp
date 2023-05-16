@@ -23,7 +23,7 @@
 <ec:box>
 	<ec:box-body>	
 	
-		<ec:form id="page_edit_form" method="POST" enctype="multipart/form-data" update="#result_page_edit_form">
+		<ec:form id="page_edit_form" method="POST" enctype="multipart/form-data" update="result_page_edit_form">
 			<input type="hidden" value="${template}" name="template">
 			<c:if test="${!empty metadata}">
 				<input type="hidden" value="${metadata.hashCode()}" name="gid">

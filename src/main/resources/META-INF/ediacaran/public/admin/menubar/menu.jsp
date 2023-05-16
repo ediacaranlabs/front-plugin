@@ -5,7 +5,9 @@
 <ec:setTemplatePackage name="admin"/>
 
 <c:set var="obj" value="${param1_}"/>
-<c:set scope="request" var="menuID" value="${empty menuID? 1 : menuID + 1}"/>
+<c:set scope="request" var="countMenuID" value="${empty countMenuID? 1 : countMenuID + 1}"/>
+<c:set var="menuID" value="${countMenuID}"/>
+
 <ec:accordion id="MenuID_${menuID}">
 	<ec:accordion-item title="${obj.name}">
 	<ed:row>
@@ -25,7 +27,8 @@
 		</ed:col>
 	</ed:row>
 	<ed:row>
-		<ed:col size="12">
+		<ed:col size="12" id="list_menus_${menuID}">
+			<!-- List Menus -->
 			<c:forEach var="item" items="${obj.itens}">
 				<c:set scope="request" var="param1_" value="${item}"/>
 				<c:set scope="request" var="d_eep" value="${empty d_eep? 1 : d_eep + 1}"/>
@@ -47,7 +50,14 @@
 					$obj.setVisible(false);
 				</ec:event>
 			</ec:button>
-			<ec:button label="Add Menu"/>
+			<ec:button label="Add Menu">
+				<ec:event type="click">
+					$.AppContext.utils.appendContentByID(
+						'${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/new',
+						'list_menus_${menuID}'
+					);
+				</ec:event>
+			</ec:button>
 		</ed:col>
 	</ed:row>
 	</ec:accordion-item>

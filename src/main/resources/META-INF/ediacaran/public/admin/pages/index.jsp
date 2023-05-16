@@ -23,7 +23,7 @@
 	<ed:col size="12">
 		<ec:box>
 			<ec:box-body>
-				<ec:form method="POST" update="#pages_body">
+				<ec:form method="POST" update="pages_body">
 					<ed:row>
 						<ed:col>
 							<ec:textfield label="Nome" name="name" value="${name}"/>
