@@ -31,7 +31,7 @@
 			</ed:col>
 		</ed:row>
 		<ed:row>
-			<ed:col size="12">
+			<ed:col size="12" id="list_menus">
 				<c:forEach varStatus="menubarItemStatus" var="menubarItem" items="${menubar.itens}">
 				<c:set scope="request" var="param1_" value="${menubarItem}"/>
 				<c:set scope="request" var="d_eep" value="0"/>
@@ -39,6 +39,30 @@
 				</c:forEach>
 			</ed:col>
 		</ed:row>
+	<ed:row>
+		<ed:col size="12">
+			<ec:button label="Add Menu" align="right" classStyle="last-item">
+				<ec:event type="click">
+				
+					$.AppContext.utils.appendContentByID(
+						'${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/new',
+						'list_menus'
+					);
+					
+				</ec:event>
+			</ec:button>
+			<ec:button align="right" label="Delete" classStyle="last-item">
+				<ec:event type="click">
+				</ec:event>
+			</ec:button>
+			<span></span>
+			<ec:button label="Save" align="right" classStyle="last-item">
+				<ec:event type="click">
+				</ec:event>
+			</ec:button>
+		</ed:col>
+	</ed:row>
+		
 	</ec:box-body>
 </ec:box>
 

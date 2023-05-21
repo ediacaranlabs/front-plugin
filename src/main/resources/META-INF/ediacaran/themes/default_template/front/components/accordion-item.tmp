@@ -1,4 +1,4 @@
-<div class="card"> 
+<div {attr} class="card"> 
 	<div class="card-header"  
 		id="heading{id}">  
 		<a class="btn btn-link text-left btn-block collapsed" data-toggle="collapse"  
@@ -7,7 +7,7 @@
 			aria-controls="collapse{id}">
 			<i class="fa fa-plus plus-button"></i>  
 			<i class="fa fa-minus minus-button"></i>  
-			{title} </a>  
+			<span id="{id}_title">{title}<span> </a>  
 	</div>  
 	<div id="collapse{id}"  
 		class="collapse{show}"  

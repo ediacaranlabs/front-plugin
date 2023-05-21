@@ -24,7 +24,16 @@ $.AppContext.vars = {
 $.AppContext.events = {
 
 		add: function (component, type, handler){
-			$('#' + component).on(type, handler);
+			//$('#' + component).on(type, handler);
+			$('#' + component).on(type, function(){
+				handler({
+					'sourceID' : component,
+					'eventType': type,
+					'handler' : handler,
+					'source': $.AppContext.utils.toObject(this),
+					'originalSource': $(this)
+				});
+			});
 		},
 		
 		remove: function (component, type){
@@ -34,6 +43,10 @@ $.AppContext.events = {
 };
 
 $.AppContext.utils = {
+		
+		toObject: function(obj){
+			return $.AppContext.utils.getById($(obj).attr('id'));
+		},
 		
 		getById: function(id){
 			var element = $('#' + id );

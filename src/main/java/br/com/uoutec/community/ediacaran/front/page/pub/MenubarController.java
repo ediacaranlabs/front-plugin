@@ -137,7 +137,7 @@ public class MenubarController {
 			Map<String,Object> md = new HashMap<>();
 			
 			webResult
-				.add("menubar", new Menu())
+				.add("param1_", new Menu())
 				.add("metadata", md)
 				.add("locales", langNames)
 				.add("countMenuID", System.currentTimeMillis())

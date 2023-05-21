@@ -268,6 +268,16 @@ $.AppContext.types.Object = function($ref){
 	this.obj = $ref;
 };
 
+$.AppContext.types.Object.prototype.setValue = function(name, value){
+	var $id = $(this.obj).attr('id');
+	$('#' + $id + '_' + name).html(value);
+};
+
+$.AppContext.types.Object.prototype.getValue = function(name){
+	var $id = $(this.obj).attr('id');
+	return $('#' + $id + '_' + name).html();
+};
+
 $.AppContext.types.Object.prototype.setProperty = function(name, value){
 
 	$(this.obj).prop(name, value);
@@ -278,7 +288,7 @@ $.AppContext.types.Object.prototype.getProperty = function(name){
 	
 	var $result = $(this.obj).prop(name);
 	
-	return result;
+	return $result;
 	
 };
 

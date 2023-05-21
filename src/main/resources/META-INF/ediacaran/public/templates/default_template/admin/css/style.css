@@ -16,6 +16,10 @@ body {
     background-color: #fff;
 }
 
+.last-item {
+	margin-left: 1em;
+}
+
 a:active {
   outline: 0;
 }

@@ -4,7 +4,7 @@
 		$.AppContext.events.add(
 			"{componentName}",
 			"{type}", 
-			function (e)&#123; {content} &#125;
+			function ($event)&#123; {content} &#125;
 		);
 		
 	&#125;);
