@@ -25,11 +25,11 @@ $.AppContext.events = {
 
 		add: function (component, type, handler){
 			//$('#' + component).on(type, handler);
-			$('#' + component).on(type, function(){
+			$('#' + component).on(type, function(event){
 				handler({
 					'sourceID' : component,
 					'eventType': type,
-					'handler' : handler,
+					'handler' : event.originalEvent,
 					'source': $.AppContext.utils.toObject(this),
 					'originalSource': $(this)
 				});

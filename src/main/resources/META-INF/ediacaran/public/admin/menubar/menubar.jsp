@@ -39,6 +39,8 @@
 				</c:forEach>
 			</ed:col>
 		</ed:row>
+		
+<%--		
 	<ed:row>
 		<ed:col size="12">
 			<ec:button label="Add Menu" align="right" classStyle="last-item">
@@ -62,7 +64,7 @@
 			</ec:button>
 		</ed:col>
 	</ed:row>
-		
+ --%>
 	</ec:box-body>
 </ec:box>
 

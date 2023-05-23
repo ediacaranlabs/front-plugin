@@ -303,13 +303,13 @@ $.AppContext.types.Object.prototype.setVisible = function($value){
 
 $.AppContext.types.Object.prototype.registerEvent = function(name, handler){
 
-	$.AppContext.events.add(this.obj, name, handler);
+	$.AppContext.events.add($(this.obj).prop("id"), name, handler);
 
 };
 
 $.AppContext.types.Object.prototype.unregisterEvent = function(name){
 
-	$.AppContext.events.remove(this.obj, name);
+	$.AppContext.events.remove($(this.obj).prop("id"), name);
 
 };
 
