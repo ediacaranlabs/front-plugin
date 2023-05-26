@@ -280,7 +280,12 @@ $.AppContext.types.Object.prototype.getValue = function(name){
 
 $.AppContext.types.Object.prototype.setProperty = function(name, value){
 
-	$(this.obj).prop(name, value);
+	if(value == null){
+		$(this.obj).removeProp(name, value);
+	}
+	else{
+		$(this.obj).prop(name, value);
+	}
 	
 };
 
@@ -313,6 +318,96 @@ $.AppContext.types.Object.prototype.unregisterEvent = function(name){
 
 };
 
+$.AppContext.types.Object.prototype.addClass = function(value){
+
+	$(this.obj).addClass(value);
+
+};
+
+$.AppContext.types.Object.prototype.removeClass = function(value){
+
+	$(this.obj).removeClass(value);
+
+};
+
+$.AppContext.types.Object.prototype.containsClass = function(value){
+
+	return $(this.obj).hasClass(value);
+
+};
+
+$.AppContext.types.Object.prototype.getParent = function(){
+
+	$parent = $(this.obj).parent();
+	
+	return $parent == null? null : $.AppContext.utils.getByAdvise($parent);
+
+};
+
+$.AppContext.types.Object.prototype.getNext = function(){
+
+	return $.AppContext.utils.getByAdvise($(this.obj).next());
+
+};
+
+$.AppContext.types.Object.prototype.getPrevious = function(){
+
+	return $.AppContext.utils.getByAdvise($(this.obj).prev());
+
+};
+
+$.AppContext.types.Object.prototype.insertAfter = function($obj){
+
+	$(this.obj).insertAfter($obj.obj);
+
+};
+
+$.AppContext.types.Object.prototype.insertBefore = function($obj){
+
+	$(this.obj).insertBefore($obj.obj);
+
+};
+
+$.AppContext.types.Object.prototype.getFirstChild = function(){
+	var $first = $(this.obj).children().first();
+	return $first == null? null : $.AppContext.utils.getByAdvise($first);	
+};
+
+$.AppContext.types.Object.prototype.each = function(e){
+	
+	$(this.obj).find('*').each(function () {
+		var $o = $.AppContext.utils.getByAdvise($(this));
+	    return e($o);
+	});
+	
+};
+
+$.AppContext.types.Object.prototype.getLeft = function(){
+	
+	return $(this.obj).offset().left;
+	
+};
+
+$.AppContext.types.Object.prototype.getTop = function(){
+	
+	return $(this.obj).offset().top;
+	
+};
+
+$.AppContext.types.Object.prototype.getHeight = function(){
+	
+	return $(this.obj).outerHeight();
+	
+};
+
+$.AppContext.types.Object.prototype.getWidth = function(){
+	
+	return $(this.obj).outerWifth();
+	
+};
+
 $.AppContext.types._map = {};
+
 $.AppContext.types._map['form'] = $.AppContext.types.Form;
 $.AppContext.types._map['object'] = $.AppContext.types.Object;
+

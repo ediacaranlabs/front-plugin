@@ -4,6 +4,20 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt"                    prefix="fmt"%> 
 <ec:setTemplatePackage name="admin"/>
 
+<style>
+<!--
+/*.menu-item div:not(:first-of-type, .card) {*/
+.menu-item > .menu-item > div {
+    margin-left: 2em;
+}
+
+.card-header-temp{
+	border-style: dashed;
+	border-width: 1px;
+}
+
+-->
+</style>
 <section class="inner-headline">
 	<ed:row>
 		<ed:col size="4">
@@ -31,7 +45,7 @@
 			</ed:col>
 		</ed:row>
 		<ed:row>
-			<ed:col size="12" id="list_menus">
+			<ed:col size="12" id="list_menus" classStyle="list-menus">
 				<c:forEach varStatus="menubarItemStatus" var="menubarItem" items="${menubar.itens}">
 				<c:set scope="request" var="param1_" value="${menubarItem}"/>
 				<c:set scope="request" var="d_eep" value="0"/>
@@ -39,7 +53,6 @@
 				</c:forEach>
 			</ed:col>
 		</ed:row>
-		
 <%--		
 	<ed:row>
 		<ed:col size="12">
@@ -67,7 +80,6 @@
  --%>
 	</ec:box-body>
 </ec:box>
-
 
 <%--	
 	<ed:row>

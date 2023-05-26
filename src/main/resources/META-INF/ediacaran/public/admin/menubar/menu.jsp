@@ -7,50 +7,8 @@
 <c:set var="obj" value="${param1_}"/>
 <c:set scope="request" var="countMenuID" value="${empty countMenuID? 1 : countMenuID + 1}"/>
 <c:set var="menuID" value="${countMenuID}"/>
-<style>
-<!--
-.menu-item div:not(:first-of-type, .card) {
-    margin-left: 2em;
-}
--->
-</style>
-<script type="text/javascript">
-<!--
 
-$.AppContext.onload(function(){
-
-	var $accordionItem = $.AppContext.utils.getById("MenuID_${menuID}");
-	
-	$accordionItem.registerEvent("dragover", function ($event){
-		$event.handler.preventDefault();
-	});
-
-	$accordionItem.registerEvent("dragstart", function ($event){
-		$event.handler.dataTransfer.setData("text", $event.handler.target.id);
-	});
-
-	$accordionItem.registerEvent("drop", function ($event){
-		$event.handler.preventDefault();
-		var data = $event.handler.dataTransfer.getData("text");
-		//$event.handler.target.appendChild(document.getElementById(data));
-		//$event.handler.target.parentNode.insertBefore(document.getElementById(data), $event.handler.target);
-		
-		var i = 0;
-		var p = $event.handler.target.parentNode;
-		while(p !== 'undefined' && i < 100 ){
-			if(p.draggable){
-				p.parentNode.insertBefore(document.getElementById(data), p);
-				break;
-			}
-			p = p.parentNode;
-			i = i + 1;
-		}
-	});
-	
-});
-//-->
-</script>
-<div id="MenuID_${menuID}" draggable="true" class="menu-item">
+<div id="MenuID_${menuID}" menuid="${obj.id}" draggable="true" class="menu-item">
 <ec:accordion>
 	<ec:accordion-item id="menu_item_${menuID}" title="${obj.name}">
 	<ed:row>
@@ -77,7 +35,6 @@ $.AppContext.onload(function(){
 	</ed:row>
 	</ec:accordion-item>
 </ec:accordion>
-
 <c:forEach var="item" items="${obj.itens}">
 	<c:set scope="request" var="param1_" value="${item}"/>
 	<c:set scope="request" var="d_eep" value="${empty d_eep? 1 : d_eep + 1}"/>
@@ -87,7 +44,133 @@ $.AppContext.onload(function(){
 	<c:set scope="request" var="d_eep" value="${d_eep - 1}"/>
 </c:forEach>
 </div>
+<script type="text/javascript">
+<!--
+
+$.AppContext.onload(function(){
+
+	var localContext = {};
 	
+	localContext.dragging = false;
+	localContext.currentDragging = null;
+	localContext.drafts = [];
+	
+	localContext.enableDraft = function ($target){
+		
+		$target.each(function (e){
+			if(e.containsClass('card')){
+				e.addClass('card-header-temp');
+				return false;
+			}
+		});
+		
+	};
+
+	localContext.disableDraft = function ($target){
+		
+		if($target == null){
+			return;
+		}
+		
+		$target.each(function (e){
+			if(e.containsClass('card')){
+				e.removeClass('card-header-temp');
+				return false;
+			}
+		});
+		
+	};
+	
+	localContext.getRoot = function ($target){
+
+		if($target.getProperty('draggable')){
+			return $target;
+		}
+		
+		var i = 0;
+
+		while($target !== 'undefined' && i < 1000 ){
+			
+			if($target.getProperty('draggable')){
+				return $target;
+			}
+			
+			$target = $target.getParent();
+			i = i + 1;
+		}
+		
+		return null;
+	};
+	
+	var $accordionItem = $.AppContext.utils.getById("MenuID_${menuID}");
+
+	$accordionItem.registerEvent("dragstart", function ($event){
+		$event.handler.dataTransfer.setData("data", $event.handler.target.id);
+		localContext.dragging = true;
+	});
+	
+	$accordionItem.registerEvent("dragover", function ($event){
+		$event.handler.preventDefault();
+
+
+		$target = $.AppContext.utils.getById($event.sourceID);
+		localContext.enableDraft($target);
+
+		
+	});
+
+	$accordionItem.registerEvent("dragleave", function ($event){
+		$event.handler.preventDefault();
+
+		$target = $.AppContext.utils.getById($event.sourceID);
+		localContext.disableDraft($target);
+
+	});
+	
+	$accordionItem.registerEvent("drop", function ($event){
+		$event.handler.preventDefault();
+		
+		var $data   = $event.handler.dataTransfer.getData("data");
+		var $obj    = $.AppContext.utils.getById($data);
+		var $target = $.AppContext.utils.getByAdvise($event.handler.target);
+
+		$target = localContext.getRoot($target);
+		localContext.disableDraft($target);
+		
+		setTimeout(function(){
+			
+			$x = $.AppContext.utils.mouse.position.x;
+			$left = $target.getLeft();
+			
+			if($x - $left > 120){
+				$obj.insertAfter($target.getFirstChild());
+			}
+			else{
+				$obj.insertAfter($target);
+			}
+
+			var $parent = $target.getParent();
+			
+			while($parent != null){
+				
+				if($parent.getProperty('draggable')){
+					localContext.disableDraft($parent);
+				}
+
+				$parent = $parent.getParent();
+			}
+			
+		}, 100);
+		
+		localContext.dragging = false;
+		
+	});
+
+	
+});
+//-->
+</script>
+
 <%--	
 	<ed:row>
 		<ed:col size="9">

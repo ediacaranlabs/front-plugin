@@ -56,6 +56,14 @@ $.AppContext.utils = {
 			return type == null? new $.AppContext.types._map['object'](element) : new type(element);
 		},
 
+		getByAdvise: function($obj){
+			$obj = $($obj);
+			var elementType = $obj.prop("tagName").toLowerCase();
+
+			var type = $.AppContext.types._map[elementType];
+			return type == null? new $.AppContext.types._map['object']($obj) : new type($obj);
+		},
+		
 		setContentById: function(id, value){
 			$('#' + id).html(value);
 		},
@@ -505,6 +513,18 @@ $.AppContext.utils = {
 		
 };
 
+$.AppContext.utils.mouse = {};
+
+$.AppContext.utils.mouse.position = null;
+
+$.AppContext.utils.mouse.installMouseMonitor = function (){
+	
+	window.addEventListener('mousemove', function (event){
+		$.AppContext.utils.mouse.position = { x: event.clientX, y: event.clientY };
+	});
+	
+};
+
 $.AppContext.vars.eventListeners = [];
 
 $.AppContext.eventListeners = {
@@ -777,6 +797,7 @@ $.AppContext.loadContentOnPanel = function ($resource){
 };
 
 $(function (){
+	$.AppContext.utils.mouse.installMouseMonitor();
 	$.AppContext.vars.loaded = true;
 	$.AppContext.utils.enableActions(null);
 	$.AppContext.utils.executeAsyncLoad();
