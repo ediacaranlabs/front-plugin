@@ -337,40 +337,38 @@ $.AppContext.types.Object.prototype.containsClass = function(value){
 };
 
 $.AppContext.types.Object.prototype.getParent = function(){
-
-	$parent = $(this.obj).parent();
-	
-	return $parent == null? null : $.AppContext.utils.getByAdvise($parent);
-
+	$o = $(this.obj).parent();
+	return $o != null? $.AppContext.utils.getByAdvise($o) : null;
 };
 
 $.AppContext.types.Object.prototype.getNext = function(){
-
-	return $.AppContext.utils.getByAdvise($(this.obj).next());
-
+	var $o = $(this.obj).next();
+	return $o.length > 0? $.AppContext.utils.getByAdvise($o) : null;
 };
 
 $.AppContext.types.Object.prototype.getPrevious = function(){
-
-	return $.AppContext.utils.getByAdvise($(this.obj).prev());
-
+	var $o = $(this.obj).prev();
+	return $o.length > 0? $.AppContext.utils.getByAdvise($o) : null;
 };
 
 $.AppContext.types.Object.prototype.insertAfter = function($obj){
-
 	$(this.obj).insertAfter($obj.obj);
-
 };
 
 $.AppContext.types.Object.prototype.insertBefore = function($obj){
-
 	$(this.obj).insertBefore($obj.obj);
-
 };
 
 $.AppContext.types.Object.prototype.getFirstChild = function(){
-	var $first = $(this.obj).children().first();
-	return $first == null? null : $.AppContext.utils.getByAdvise($first);	
+	
+	var $childs = $(this.obj).children();
+	
+	if($childs.length > 0 ) {
+		var $first = $childs.first();
+		return $first.length > 0? $.AppContext.utils.getByAdvise($first) : null;
+	}
+
+	return null;
 };
 
 $.AppContext.types.Object.prototype.each = function(e){

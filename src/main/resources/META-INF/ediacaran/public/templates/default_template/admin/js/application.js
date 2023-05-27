@@ -49,19 +49,30 @@ $.AppContext.utils = {
 		},
 		
 		getById: function(id){
+			return $.AppContext.utils.getByAdvise('#' + id);
+			/*
 			var element = $('#' + id );
 			var elementType = element.prop("tagName").toLowerCase();
 
 			var type = $.AppContext.types._map[elementType];
 			return type == null? new $.AppContext.types._map['object'](element) : new type(element);
+			*/
 		},
 
 		getByAdvise: function($obj){
+			
 			$obj = $($obj);
-			var elementType = $obj.prop("tagName").toLowerCase();
-
-			var type = $.AppContext.types._map[elementType];
-			return type == null? new $.AppContext.types._map['object']($obj) : new type($obj);
+			
+			var $tagNameProp = $obj.prop("tagName");
+			
+			if($tagNameProp == null){
+				return null;
+			}
+			
+			var $elementType = $tagNameProp.toLowerCase();
+			var $type = $.AppContext.types._map[$elementType];
+			
+			return $type == null? new $.AppContext.types._map['object']($obj) : new $type($obj);
 		},
 		
 		setContentById: function(id, value){

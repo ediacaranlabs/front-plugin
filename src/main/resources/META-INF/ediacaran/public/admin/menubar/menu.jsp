@@ -44,6 +44,7 @@
 	<c:set scope="request" var="d_eep" value="${d_eep - 1}"/>
 </c:forEach>
 </div>
+<%--
 <script type="text/javascript">
 <!--
 
@@ -170,7 +171,7 @@ $.AppContext.onload(function(){
 });
 //-->
 </script>
-
+--%>
 <%--	
 	<ed:row>
 		<ed:col size="9">

@@ -13,7 +13,7 @@
 
 .card-header-temp{
 	border-style: dashed;
-	border-width: 1px;
+	border-color: black;
 }
 
 -->
@@ -132,7 +132,7 @@ $.AppContext.onload(function(){
 	localContext.enableDraft = function ($target){
 		
 		$target.each(function (e){
-			if(e.containsClass('card')){
+			if(e.containsClass('card-header')){
 				e.addClass('card-header-temp');
 				return false;
 			}
@@ -147,7 +147,7 @@ $.AppContext.onload(function(){
 		}
 		
 		$target.each(function (e){
-			if(e.containsClass('card')){
+			if(e.containsClass('card-header')){
 				e.removeClass('card-header-temp');
 				return false;
 			}
