@@ -8,13 +8,13 @@
 <c:set scope="request" var="countMenuID" value="${empty countMenuID? 1 : countMenuID + 1}"/>
 <c:set var="menuID" value="${countMenuID}"/>
 
-<div id="MenuID_${menuID}" menuid="${obj.id}" draggable="true" class="menu-item">
+<div id="MenuID_${menuID}" formgroup="${obj.id}" draggable="true" class="menu-item">
 <ec:accordion>
 	<ec:accordion-item id="menu_item_${menuID}" title="${obj.name}">
 	<ed:row>
 		<ed:col size="3" classStyle="form-group has-feedback">
 			<input type="hidden" value="${obj.id}" name="id">
-			<ec:textfield label="Icon" value="${obj.icon}"/>
+			<ec:textfield label="Icon" value="${obj.icon}" name="icon" />
 		</ed:col>
 		<ed:col size="9" classStyle="form-group has-feedback">
 			<ec:textfield label="Nome" name="name" value="${obj.name}">

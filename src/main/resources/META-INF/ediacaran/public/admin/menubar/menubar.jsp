@@ -39,6 +39,8 @@ $.AppContext.onload(function(){
 	localContext.init = function(){
 		var $allMenus = $.AppContext.utils.getById("menus");
 		localContext.init0($allMenus);
+		
+		localContext.updateFieldIndex();
 	};
 	
 	localContext.init0 = function($obj){
@@ -124,7 +126,13 @@ $.AppContext.onload(function(){
 		}
 
 		localContext.disableDraftAll($target);
-		
+		localContext.updateFieldIndex();		
+	};
+
+	localContext.updateFieldIndex = function(){
+		var $form = $.AppContext.utils.getById("menubarForm");
+		$form.updateFieldIndex();
+		$form.updateFieldNames();
 	};
 	
 	/* utils  */
@@ -218,7 +226,8 @@ $.AppContext.onload(function(){
 </section>
 
 <ec:box>
-	<ec:box-body>	
+	<ec:box-body>
+		<ec:form id="menubarForm">	
 		<ed:row>
 			<ed:col size="3" classStyle="form-group has-feedback">
 				<ec:textfield label="ID" name="id" value="${menubar.id}"/>
@@ -236,6 +245,7 @@ $.AppContext.onload(function(){
 				</c:forEach>
 			</ed:col>
 		</ed:row>
+		</ec:form>
 <%--		
 	<ed:row>
 		<ed:col size="12">
