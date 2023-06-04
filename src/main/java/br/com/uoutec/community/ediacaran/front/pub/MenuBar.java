@@ -32,10 +32,14 @@ public class MenuBar {
 	public MenuBar(){
 		this(null);
 	}
-	
+
 	public MenuBar(String id){
+		this(id, null);
+	}
+	
+	public MenuBar(String id, List<Menu> itens){
 		this.propertyChangeSupport = new PropertyChangeSupport(this);
-		this.list = new ArrayList<Menu>();
+		this.list = itens == null? new ArrayList<Menu>() : itens;
 		this.map = new HashMap<String, Menu>();
 		this.id = id;
 		this.authorizationManager = EntityContextPlugin.getEntity(AuthorizationManager.class);
@@ -105,38 +109,42 @@ public class MenuBar {
 	}
 	
 	public Menu addMenu(String id){
-		
-		synchronized (this) {
-			
-			SecurityManager sm = System.getSecurityManager();
-			
-			if(sm != null) {
-				sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + ".register"));
-			}
-			
-			if(map.containsKey(id)) {
-				throw new IllegalStateException("menu exist: " + id);
-			}
-
-			Menu menu = new Menu(id, null, this);
-			
-			this.list.add(menu);
-			this.map.put(menu.getId(), menu);
-			
-			Collections.sort(this.list, new Comparator<Menu>(){
-
-				public int compare(Menu o1, Menu o2) {
-					return o2.getOrder() - o1.getOrder();
-				}
-				
-			});
-			
-			propertyChangeSupport.fireIndexedPropertyChange("menu", list.size() - 1, null, menu);
-			
-			return menu;
-		}
+		Menu menu = new Menu(id, this);
+		addMenu(menu);
+		return menu;
 	}
 
+	public synchronized void addMenu(Menu ... menu) {
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + ".register"));
+		}
+		
+		for(Menu m: menu) {
+			
+			if(map.containsKey(m.getId())) {
+				throw new IllegalStateException("menu exist: " + id);
+			}
+	
+			this.list.add(m);
+			this.map.put(m.getId(), m);
+		
+			propertyChangeSupport.fireIndexedPropertyChange("menu", list.size() - 1, null, m);
+		}
+		
+		Collections.sort(this.list, new Comparator<Menu>(){
+
+			public int compare(Menu o1, Menu o2) {
+				return o2.getOrder() - o1.getOrder();
+			}
+			
+		});
+		
+		
+	}
+	
 	public Menu getMenu(String id){
 		
 		SecurityManager sm = System.getSecurityManager();

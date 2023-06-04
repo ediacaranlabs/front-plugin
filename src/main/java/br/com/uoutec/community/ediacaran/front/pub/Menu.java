@@ -67,6 +67,26 @@ public class Menu implements Serializable {
 	public Menu(String id, Menu parent, MenuBar parentMenuBar){
 		this(id, null, null, null, null, null, new ArrayList<Menu>(), null, null, null, parent, parentMenuBar, 0);
 	}
+
+	public Menu(String id, Menu parent, MenuBar parentMenuBar, List<Menu> itens){
+		this(id, null, null, null, null, null, itens, null, null, null, parent, parentMenuBar, 0);
+	}
+	
+	public Menu(String id, Menu parent){
+		this(id, null, null, null, null, null, new ArrayList<Menu>(), null, null, null, parent, null, 0);
+	}
+
+	public Menu(String id, MenuBar parentMenuBar){
+		this(id, null, null, null, null, null, new ArrayList<Menu>(), null, null, null, null, parentMenuBar, 0);
+	}
+
+	public Menu(String id, Menu parent, List<Menu> itens){
+		this(id, null, null, null, null, null, itens, null, null, null, parent, null, 0);
+	}
+
+	public Menu(String id, MenuBar parentMenuBar, List<Menu> itens){
+		this(id, null, null, null, null, null, itens, null, null, null, null, parentMenuBar, 0);
+	}
 	
 	public Menu(String id, String name, String icon, String resource,
 			String resourceBundle, String template, String badge, String badgeStyle, String body, Menu parent, MenuBar parentMenuBar, int order) {
@@ -322,38 +342,41 @@ public class Menu implements Serializable {
 	}
 
 	public Menu addItem(String id){
-		
-		synchronized (this) {
-			
-			SecurityManager sm = System.getSecurityManager();
-			
-			if(sm != null) {
-				sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".register"));
-			}
-			
-			if(map.containsKey(id)) {
-				throw new IllegalStateException("menu exist: " + id);
-			}
-			
-			Menu item = new Menu(id, this, null);
-			
-			this.itens.add(item);
-			this.map.put(item.getId(), item);
-			
-			Collections.sort(this.itens, new Comparator<Menu>(){
-
-				public int compare(Menu o1, Menu o2) {
-					return o2.getOrder() - o1.getOrder();
-				}
-				
-			});
-			
-			propertyChangeSupport.fireIndexedPropertyChange("item", itens.size() - 1, null, item);
-			
-			return item;
-		}
+		Menu menu = new Menu(id, this);
+		addItem(menu);
+		return menu;
 	}
 
+	public synchronized void addItem(Menu ... menu){
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".register"));
+		}
+		
+		for(Menu m: menu) {
+			
+			if(map.containsKey(m.getId())) {
+				throw new IllegalStateException("menu exist: " + id);
+			}
+	
+			this.itens.add(m);
+			this.map.put(m.getId(), m);
+		
+			propertyChangeSupport.fireIndexedPropertyChange("menu", itens.size() - 1, null, m);
+		}
+		
+		Collections.sort(this.itens, new Comparator<Menu>(){
+
+			public int compare(Menu o1, Menu o2) {
+				return o2.getOrder() - o1.getOrder();
+			}
+			
+		});
+			
+	}
+	
 	public Menu getItem(String name){
 		
 		SecurityManager sm = System.getSecurityManager();

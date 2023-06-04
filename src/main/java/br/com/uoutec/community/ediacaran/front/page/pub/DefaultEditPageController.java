@@ -35,8 +35,8 @@ public class DefaultEditPageController {
 
 	@Action("/save")
 	@RequestMethod(RequestMethodTypes.POST)
-	@View(value="/pages/admin/save-result")
-	@ThrowSafe( rendered=true, target=ValidatorException.class, view="/pages/admin/validation-exception")
+	@View(value="/admin/pages/save-result")
+	@ThrowSafe( rendered=true, target=ValidatorException.class, view="/admin/pages/validation-exception")
 	@Result(value="id", mappingType=MappingTypes.VALUE)
 	public Map<String,Object> save(@DetachedName PagePubEntity pageEntity) throws InvalidRequestException, ValidatorException{
 

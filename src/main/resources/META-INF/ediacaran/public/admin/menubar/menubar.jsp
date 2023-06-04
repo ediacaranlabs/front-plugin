@@ -228,12 +228,51 @@ $.AppContext.onload(function(){
 <ec:box>
 	<ec:box-body>
 		<ec:form id="menubarForm">	
+		<c:if test="${!empty metadata}">
+			<input type="hidden" value="${metadata.hashCode()}" name="gid">
+			<input type="hidden" value="${metadata.path}" name="path">
+			<input type="hidden" value="${metadata.id}" name="name">
+			<input type="hidden" value="${metadata.locale}" name="locale">
+		</c:if>
 		<ed:row>
-			<ed:col size="3" classStyle="form-group has-feedback">
-				<ec:textfield label="ID" name="id" value="${menubar.id}"/>
+			<ed:col size="7" classStyle="form-group has-feedback">
+				<ec:textfield name="path" label="Path" value="${metadata.path}" enabled="${empty metadata}">
+					<ec:field-validator>
+						<ec:field-validator-rule name="notEmpty" message="Please inform the Path!"/>
+						<ec:field-validator-rule name="regexp" message="Invalid path!">
+							<ec:field-validator-param name="regexp" raw="true">/^(\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*$/</ec:field-validator-param>
+						</ec:field-validator-rule>
+					</ec:field-validator>
+				</ec:textfield>
 			</ed:col>
+			<ed:col size="5" classStyle="form-group has-feedback">
+				<ec:textfield label="ID" name="id" value="${menubar.id}" enabled="${empty metadata}">
+					<ec:field-validator>
+						<ec:field-validator-rule name="notEmpty" message="Please inform the ID!"/>
+						<ec:field-validator-rule name="regexp" message="Invalid ID!">
+							<ec:field-validator-param name="regexp" raw="true">/^[a-z0-9][a-z0-9]+([_-][a-z0-9]+)*$/</ec:field-validator-param>
+						</ec:field-validator-rule>
+					</ec:field-validator>
+				</ec:textfield>
+			</ed:col>
+		</ed:row>
+		<ed:row>
 			<ed:col size="9" classStyle="form-group has-feedback">
-				<ec:textfield label="Nome" name="name" value="${menubar.name}"/>
+				<ec:textfield label="Name" name="name" value="${menubar.name}">
+					<%--
+					<ec:field-validator>
+						<ec:field-validator-rule name="notEmpty" message="Please inform the Name!"/>
+					</ec:field-validator>
+					--%>
+				</ec:textfield>
+			</ed:col>
+			<ed:col size="3" classStyle="form-group has-feedback">
+				<ec:select label="Language" name="locale" enabled="${empty metadata}">
+					<ec:option value=""></ec:option>
+					<c:forEach items="${locales}" var="loc">
+					<ec:option value="${loc.key}" selected="${metadata.locale == loc.key}">${loc.value}</ec:option>
+					</c:forEach>
+				</ec:select>
 			</ed:col>
 		</ed:row>
 		<ed:row>
@@ -243,6 +282,24 @@ $.AppContext.onload(function(){
 				<c:set scope="request" var="d_eep" value="0"/>
 				<c:import url="/admin/menubar/menu.jsp"/>
 				</c:forEach>
+			</ed:col>
+		</ed:row>
+		<ed:row>
+			<ed:col size="12">
+				<ec:button label="Add Menu" align="right" classStyle="last-item">
+					<ec:event type="click">
+					
+						$.AppContext.utils.appendContentByID(
+							'${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/new',
+							'menus'
+						);
+						
+					</ec:event>
+				</ec:button>
+				<ec:button label="Save" align="right" classStyle="last-item">
+					<ec:event type="click">
+					</ec:event>
+				</ec:button>
 			</ed:col>
 		</ed:row>
 		</ec:form>

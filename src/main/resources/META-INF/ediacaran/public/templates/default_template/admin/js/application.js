@@ -18,6 +18,8 @@ $.AppContext.vars = {
 		
 		panel: "#panel",
 
+		document: null,
+
 		loaded: false
 };
 
@@ -50,13 +52,6 @@ $.AppContext.utils = {
 		
 		getById: function(id){
 			return $.AppContext.utils.getByAdvise('#' + id);
-			/*
-			var element = $('#' + id );
-			var elementType = element.prop("tagName").toLowerCase();
-
-			var type = $.AppContext.types._map[elementType];
-			return type == null? new $.AppContext.types._map['object'](element) : new type(element);
-			*/
 		},
 
 		getByAdvise: function($obj){
@@ -123,22 +118,24 @@ $.AppContext.utils = {
 		},
 
 		enableAsyncSubmit: function (local){
-
-			$((local? local + " " : "") + "form button[type=submit]").each(function() {
+			
+			var $region = local == null? '' : '#' + local;
+			
+			$($region + " form button[type=submit]").each(function() {
 				
 				var $e = $(this);
 				
 				if( $e.is("button") && $e.attr("type") == "submit" ) {
-			         
+			        
+					if($e.attr('asyncEnabled')){
+						return;
+					}
+					
 					$e.click(function(event){
 						
 						var $b = $(this);
 
 						var $form = $b.attr("form") !== undefined? $('#' + $b.attr("form")) : $b.parents('form:first');
-						
-						if(!$form || $form.attr('asyncEnabled')){
-							return;
-						}
 						
 						$form.attr("action",       $b.attr("formaction") !== undefined?   $b.attr("formaction")   : $form.attr("action_default")       );
 						$form.attr("enctype",      $b.attr("formenctype") !== undefined?  $b.attr("formenctype")  : $form.attr("enctype_default")      );
@@ -156,11 +153,14 @@ $.AppContext.utils = {
 						}
 
 
-					})
+					});
+					
+					$e.attr('asyncEnabled', true);
+
 			    }					
 			});
 			
-			$((local? local + " " : "") + "form").each(function() {
+			$($region + " form").each(function() {
 				
 				var $f = $(this);
 				
@@ -203,7 +203,9 @@ $.AppContext.utils = {
 
 		enableAsyncGet: function (local){
 
-			$((local? local + " " : "") + "a[href]").each(function(e) {
+			var $region = local == null? '' : '#' + local;
+			
+			$($region + " a[href]").each(function(e) {
 				var $lnk = $(this);
 				
 				if($.AppContext.utils.isApplyAsyncGet($lnk)){
@@ -411,10 +413,10 @@ $.AppContext.utils = {
 			
 			$content = 
 				'<script type="text/javascript">' + 
-				'   $.AppContext.utils.enableActions("#' + $local + '");' +
+				'   $.AppContext.utils.enableActions("' + $local + '");' +
 				'</script>' +
 				$content; 
-			
+
 			if($position === 'append'){
 				$('#' + $local).append($content);
 			}
@@ -749,8 +751,6 @@ $.AppContext.dialog = {
 				$id = "defaultDialog";
 			}
 			
-			$id = "#" + $id;
-			
 			$.AppContext.utils.updateContentData($id + " .modal-content", $value);
 			
 			$($id).find("[modal-action='close']").click(function(){
@@ -808,9 +808,13 @@ $.AppContext.loadContentOnPanel = function ($resource){
 };
 
 $(function (){
+	$.AppContext.vars.document = $.AppContext.utils.getByAdvise('body'); 
+	
 	$.AppContext.utils.mouse.installMouseMonitor();
-	$.AppContext.vars.loaded = true;
 	$.AppContext.utils.enableActions(null);
 	$.AppContext.utils.executeAsyncLoad();
 	$.AppContext.eventListeners.init();
+	
+	$.AppContext.vars.loaded   = true;
+	
 });

@@ -14,11 +14,15 @@ import org.brandao.brutos.annotation.Action;
 import org.brandao.brutos.annotation.Basic;
 import org.brandao.brutos.annotation.Controller;
 import org.brandao.brutos.annotation.DefaultThrowSafe;
+import org.brandao.brutos.annotation.DetachedName;
 import org.brandao.brutos.annotation.MappingTypes;
 import org.brandao.brutos.annotation.Result;
+import org.brandao.brutos.annotation.ThrowSafe;
 import org.brandao.brutos.annotation.Transient;
+import org.brandao.brutos.annotation.View;
 import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.RequestMethodTypes;
+import org.brandao.brutos.validator.ValidatorException;
 import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
@@ -29,6 +33,7 @@ import br.com.uoutec.community.ediacaran.front.page.EditMenubar;
 import br.com.uoutec.community.ediacaran.front.page.EditPage;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
+import br.com.uoutec.pub.entity.InvalidRequestException;
 
 @Singleton
 @Controller(value="${plugins.ediacaran.front.admin_context}/menubar", defaultActionName="/")
@@ -122,6 +127,50 @@ public class MenubarController {
 				.to("${plugins.ediacaran.front.admin_context}/menubar/list");
 			return null;
 		}
+	}
+
+	@Action("/save")
+	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresPermissions("CONTENT:MENUBAR:SAVE")
+	@View(value="/admin/menubar/save-result")
+	@ThrowSafe(rendered=true, target=ValidatorException.class, view="/admin/menubar/validation-exception")
+	@Result(value="id", mappingType=MappingTypes.VALUE)
+	public Map<String,Object> save(
+			@Basic(mappingType=MappingTypes.OBJECT)
+			@DetachedName
+			MenubarPubEntity menubarPubEntity) throws InvalidRequestException{
+		
+		try {
+			
+			MenuBar menuBar = menubarPubEntity.rebuild(menubarPubEntity.getGid() != null, true, true);
+			
+			ObjectMetadata omd = editMenubar
+				.registerMenubarByName(
+						menubarPubEntity.getPath(), 
+						menubarPubEntity.getName(), 
+						menubarPubEntity.getLocale(), 
+						menuBar
+				);
+			
+			Map<String,Object> md = new HashMap<String,Object>();
+			md.put("path", omd.getPathMetadata().getPath());
+			md.put("id", omd.getPathMetadata().getId());
+			md.put("locale", omd.getLocale());
+			return md;
+			
+		}
+		catch(InvalidRequestException ex) {
+			ex.printStackTrace();
+			throw ex;
+		}
+		catch(ValidatorException ex) {
+			throw ex;
+		}
+		catch(Throwable ex) {
+			ex.printStackTrace();
+			throw new InvalidRequestException("internal error: ", ex);
+		}
+		
 	}
 	
 	@Action("/new")

@@ -129,7 +129,7 @@
 				<ed:col size="12">
 					<ec:button 
 						actionType="submit" 
-						action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/editor/default/save" 
+						action="#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/editor/default/save" 
 						label="Salvar" 
 						align="right"/>
 				</ed:col>

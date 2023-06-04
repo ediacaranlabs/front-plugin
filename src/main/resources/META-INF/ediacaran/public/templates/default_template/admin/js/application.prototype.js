@@ -66,33 +66,23 @@ $.AppContext.types.Object.prototype.setVisible = function($value){
 };
 
 $.AppContext.types.Object.prototype.registerEvent = function(name, handler){
-
 	$.AppContext.events.add($(this.obj).prop("id"), name, handler);
-
 };
 
 $.AppContext.types.Object.prototype.unregisterEvent = function(name){
-
 	$.AppContext.events.remove($(this.obj).prop("id"), name);
-
 };
 
 $.AppContext.types.Object.prototype.addClass = function(value){
-
 	$(this.obj).addClass(value);
-
 };
 
 $.AppContext.types.Object.prototype.removeClass = function(value){
-
 	$(this.obj).removeClass(value);
-
 };
 
 $.AppContext.types.Object.prototype.containsClass = function(value){
-
 	return $(this.obj).hasClass(value);
-
 };
 
 $.AppContext.types.Object.prototype.getParent = function(){
@@ -157,6 +147,15 @@ $.AppContext.types.Object.prototype.getWidth = function(){
 
 $.AppContext.types.Object.prototype.getTagName = function(){
 	return $(this.obj).prop("tagName").toLowerCase();
+};
+
+$.AppContext.types.Object.prototype.eachParent = function($filter){
+	
+	$(this.obj).parents().each(function ($o){
+		var $tmp = $.AppContext.utils.getByAdvise($o);
+		return $filter(tmp);
+	});
+	
 };
 
 /*---------------------------------------------------------------*/

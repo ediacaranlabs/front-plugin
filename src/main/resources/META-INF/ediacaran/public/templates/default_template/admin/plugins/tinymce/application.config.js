@@ -34,7 +34,7 @@ $.AppContext.onload(function(){
 	$.AppContext.addLoadListener("tinymce-link-load", "^.*", {
 		
 		after: function(){
-			$.AppContext.tinymce.apply($.AppContext.vars.painel);
+			$.AppContext.tinymce.apply('#' + $.AppContext.vars.painel);
 		}
 	
 	});
