@@ -316,9 +316,6 @@ public class PluginInstaller
 	
 	private void uninstallSecurityConfig() {
 		SecurityRegistry securityRegistry = EntityContextPlugin.getEntity(SecurityRegistry.class);
-		securityRegistry.unregisterRole("manager");
-		securityRegistry.unregisterRole("user");
-		
 		securityRegistry.unregisterAuthorization("CONTENT");
 	}
 	

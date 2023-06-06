@@ -24,96 +24,96 @@
 
 $.AppContext.onload(function(){
 	
-	localContext = {};
+	pageContext = {};
 	
 	/* vars */
 
-	localContext.dragging = false;
+	pageContext.dragging = false;
 	
-	localContext.currentDragging = null;
+	pageContext.currentDragging = null;
 	
-	localContext.drafts = [];
+	pageContext.drafts = [];
 	
 	/* functions */
 	
-	localContext.init = function(){
+	pageContext.init = function(){
 		//var $allMenus = $.AppContext.utils.getById("menus");
-		//localContext.init0($allMenus);
+		//pageContext.init0($allMenus);
 		
-		localContext.updateFieldIndex();
+		pageContext.updateFieldIndex();
 	};
 	
-	localContext.init0 = function($obj){
+	pageContext.init0 = function($obj){
 		
 		var $o = $obj.getFirstChild()
 		
 		while($o != null){
 			
 			if($o.containsClass('menu-item')){
-				localContext.install($o)
+				pageContext.install($o)
 			}
 			
-			localContext.init0($o);
+			pageContext.init0($o);
 			
 			$o = $o.getNext();
 		}
 		
 	};
 	
-	localContext.install = function ($o){
+	pageContext.install = function ($o){
 		
 		$o.registerEvent("dragstart", function ($event){
-			localContext.dragstart($event);
+			pageContext.dragstart($event);
 		});
 		
 		$o.registerEvent("dragover", function ($event){
 			$event.handler.preventDefault();
-			localContext.dragover($event);
+			pageContext.dragover($event);
 		});
 
 		$o.registerEvent("dragleave", function ($event){
 			$event.handler.preventDefault();
-			localContext.dragleave($event);
+			pageContext.dragleave($event);
 		});
 		
 		$o.registerEvent("drop", function ($event){
 			$event.handler.preventDefault();
-			localContext.drop($event);
+			pageContext.drop($event);
 		});
 		
 	};
 
-	localContext.dragstart = function($event){
+	pageContext.dragstart = function($event){
 		$event.handler.dataTransfer.setData("data", $event.handler.target.id);
-		localContext.dragging = true;
+		pageContext.dragging = true;
 	};
 	
-	localContext.dragover = function($event){
+	pageContext.dragover = function($event){
 		$target = $.AppContext.utils.getById($event.sourceID);
-		localContext.enableDraft($target);
+		pageContext.enableDraft($target);
 	};
 
-	localContext.dragleave = function($event){
+	pageContext.dragleave = function($event){
 		$target = $.AppContext.utils.getById($event.sourceID);
-		localContext.disableDraft($target);
+		pageContext.disableDraft($target);
 	};
 
-	localContext.drop = function($event){
+	pageContext.drop = function($event){
 		var $data   = $event.handler.dataTransfer.getData("data");
 		var $obj    = $.AppContext.utils.getById($data);
 		var $target = $.AppContext.utils.getByAdvise($event.handler.target);
 
-		localContext.dragging = false;
+		pageContext.dragging = false;
 		
-		$target = localContext.getRoot($target);
+		$target = pageContext.getRoot($target);
 		
 		setTimeout(function(){
-			localContext.dropObject($obj, $target);
+			pageContext.dropObject($obj, $target);
 		}, 100);
 		
 	};
 
-	localContext.dropObject = function($obj, $target){
+	pageContext.dropObject = function($obj, $target){
 		
 		var $x    = $.AppContext.utils.mouse.position.x;
 		var $left = $target.getLeft();
@@ -125,11 +125,11 @@ $.AppContext.onload(function(){
 			$obj.insertAfter($target);
 		}
 
-		localContext.disableDraftAll($target);
-		localContext.updateFieldIndex();		
+		pageContext.disableDraftAll($target);
+		pageContext.updateFieldIndex();		
 	};
 
-	localContext.updateFieldIndex = function(){
+	pageContext.updateFieldIndex = function(){
 		var $form = $.AppContext.utils.getById("menubarForm");
 		$form.updateFieldIndex();
 		$form.updateFieldNames();
@@ -137,7 +137,7 @@ $.AppContext.onload(function(){
 	
 	/* utils  */
 	
-	localContext.enableDraft = function ($target){
+	pageContext.enableDraft = function ($target){
 		
 		$target.each(function (e){
 			if(e.containsClass('card-header')){
@@ -148,7 +148,7 @@ $.AppContext.onload(function(){
 		
 	};
 
-	localContext.disableDraft = function ($target){
+	pageContext.disableDraft = function ($target){
 		
 		if($target == null){
 			return;
@@ -163,16 +163,16 @@ $.AppContext.onload(function(){
 		
 	};
 
-	localContext.disableDraftAll = function ($target){
+	pageContext.disableDraftAll = function ($target){
 		
-		localContext.disableDraft($target);
+		pageContext.disableDraft($target);
 		
 		var $parent = $target.getParent();
 		
 		while($parent != null){
 			
 			if($parent.getProperty('draggable')){
-				localContext.disableDraft($parent);
+				pageContext.disableDraft($parent);
 			}
 
 			$parent = $parent.getParent();
@@ -180,7 +180,7 @@ $.AppContext.onload(function(){
 		
 	};
 	
-	localContext.getRoot = function ($target){
+	pageContext.getRoot = function ($target){
 
 		if($target.getProperty('draggable')){
 			return $target;
@@ -202,7 +202,7 @@ $.AppContext.onload(function(){
 	};
 	
 	
-	localContext.init();
+	pageContext.init();
 	
 });
 
@@ -292,7 +292,7 @@ $.AppContext.onload(function(){
 		</ed:row>
 		<ed:row>
 			<ed:col size="12">
-				<ec:button actionType="button" label="Add Menu" align="right" classStyle="last-item">
+				<ec:button actionType="button" label="Novo menu" align="right" classStyle="last-item">
 					<ec:event type="click">
 					
 						$.AppContext.utils.appendContentByID(

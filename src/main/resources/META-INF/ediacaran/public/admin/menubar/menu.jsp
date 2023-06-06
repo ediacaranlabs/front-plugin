@@ -16,7 +16,7 @@
 			<input type="hidden" value="${obj.id}" name="id">
 			<ec:textfield label="Icon" value="${obj.icon}" name="icon" />
 		</ed:col>
-		<ed:col size="9" classStyle="form-group has-feedback">
+		<ed:col size="6" classStyle="form-group has-feedback">
 			<ec:textfield label="Nome" name="name" value="${obj.name}">
 				<ec:event type="keyup">
 
@@ -27,12 +27,32 @@
 				</ec:event>
 			</ec:textfield>
 		</ed:col>
+		<ed:col size="3" classStyle="form-group has-feedback">
+			<ec:select label="Prioridade" name="order">
+				<ec:option value="100" selected="${obj.order >= 100}">Alta</ec:option>
+				<ec:option value="0" selected="${obj.order == 0}">Normal</ec:option>
+				<ec:option value="-100" selected="${obj.order <= -100}">Baixa</ec:option>
+			</ec:select>
+		</ed:col>
 	</ed:row>
 	<ed:row>
 		<ed:col size="12" classStyle="form-group has-feedback">
 			<ec:textfield label="Resource" name="resource" value="${obj.rawResource}">
 				<ec:autocomplete resource="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/search-resource" />			
 			</ec:textfield>
+		</ed:col>
+	</ed:row>
+	<ed:row>
+		<ed:col size="4" classStyle="form-group has-feedback">
+			<ec:select label="Role" name="role">
+				<ec:option selected="${empty obj.role}"></ec:option>
+				<c:forEach items="${roles}"  var="role">
+				<ec:option value="${role.id}" selected="${obj.hasRole(role.id)}">${role.description}</ec:option>
+				</c:forEach>
+			</ec:select>
+		</ed:col>
+		<ed:col size="8" classStyle="form-group has-feedback">
+			<ec:textfield label="Permissões" name="permission" value="${obj.permission}"/>
 		</ed:col>
 	</ed:row>
 	</ec:accordion-item>
@@ -50,166 +70,8 @@
 <!--
 $.AppContext.onload(function(){
 	var $accordionItem = $.AppContext.utils.getById("MenuID_${menuID}");
-	localContext.install($accordionItem);
-	localContext.updateFieldIndex();
+	pageContext.install($accordionItem);
+	pageContext.updateFieldIndex();
 });
 //-->
 </script>
-<%--
-<script type="text/javascript">
-<!--
-
-$.AppContext.onload(function(){
-
-	var localContext = {};
-	
-	localContext.dragging = false;
-	localContext.currentDragging = null;
-	localContext.drafts = [];
-	
-	localContext.enableDraft = function ($target){
-		
-		$target.each(function (e){
-			if(e.containsClass('card')){
-				e.addClass('card-header-temp');
-				return false;
-			}
-		});
-		
-	};
-
-	localContext.disableDraft = function ($target){
-		
-		if($target == null){
-			return;
-		}
-		
-		$target.each(function (e){
-			if(e.containsClass('card')){
-				e.removeClass('card-header-temp');
-				return false;
-			}
-		});
-		
-	};
-	
-	localContext.getRoot = function ($target){
-
-		if($target.getProperty('draggable')){
-			return $target;
-		}
-		
-		var i = 0;
-
-		while($target !== 'undefined' && i < 1000 ){
-			
-			if($target.getProperty('draggable')){
-				return $target;
-			}
-			
-			$target = $target.getParent();
-			i = i + 1;
-		}
-		
-		return null;
-	};
-	
-	var $accordionItem = $.AppContext.utils.getById("MenuID_${menuID}");
-
-	$accordionItem.registerEvent("dragstart", function ($event){
-		$event.handler.dataTransfer.setData("data", $event.handler.target.id);
-		localContext.dragging = true;
-	});
-	
-	$accordionItem.registerEvent("dragover", function ($event){
-		$event.handler.preventDefault();
-
-
-		$target = $.AppContext.utils.getById($event.sourceID);
-		localContext.enableDraft($target);
-
-		
-	});
-
-	$accordionItem.registerEvent("dragleave", function ($event){
-		$event.handler.preventDefault();
-
-		$target = $.AppContext.utils.getById($event.sourceID);
-		localContext.disableDraft($target);
-
-	});
-	
-	$accordionItem.registerEvent("drop", function ($event){
-		$event.handler.preventDefault();
-		
-		var $data   = $event.handler.dataTransfer.getData("data");
-		var $obj    = $.AppContext.utils.getById($data);
-		var $target = $.AppContext.utils.getByAdvise($event.handler.target);
-
-		$target = localContext.getRoot($target);
-		localContext.disableDraft($target);
-		
-		setTimeout(function(){
-			
-			$x = $.AppContext.utils.mouse.position.x;
-			$left = $target.getLeft();
-			
-			if($x - $left > 120){
-				$obj.insertAfter($target.getFirstChild());
-			}
-			else{
-				$obj.insertAfter($target);
-			}
-
-			var $parent = $target.getParent();
-			
-			while($parent != null){
-				
-				if($parent.getProperty('draggable')){
-					localContext.disableDraft($parent);
-				}
-
-				$parent = $parent.getParent();
-			}
-			
-		}, 100);
-		
-		localContext.dragging = false;
-		
-	});
-
-	
-});
-//-->
-</script>
---%>
-<%--	
-	<ed:row>
-		<ed:col size="9">
-		</ed:col>
-		<ed:col size="3">
-			<ec:button align="right" label="Delete" classStyle="last-item">
-				<ec:event type="click">
-				
-					var $obj = $.AppContext.utils.getById("MenuID_${menuID}");
-					
-					$obj.setProperty("removed", true);
-					$obj.setVisible(false);
-					
-				</ec:event>
-			</ec:button>
-			<span></span>
-			<ec:button label="Add Menu" align="right">
-				<ec:event type="click">
-				
-					$.AppContext.utils.appendContentByID(
-						'${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/new',
-						'list_menus_${menuID}'
-					);
-					
-				</ec:event>
-			</ec:button>
-		</ed:col>
-	</ed:row>
- --%>	
-	

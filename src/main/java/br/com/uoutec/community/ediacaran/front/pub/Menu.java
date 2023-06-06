@@ -440,6 +440,10 @@ public class Menu implements Serializable {
 		return role;
 	}
 
+	public boolean hasRole(String role) {
+		return role != null && role.equals(this.role);
+	}
+	
 	public Menu setRole(String role) {
 		
 		String oldValue = this.role;

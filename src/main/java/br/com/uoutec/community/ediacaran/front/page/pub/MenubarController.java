@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -27,6 +28,8 @@ import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
 import br.com.uoutec.community.ediacaran.core.security.RequiresPermissions;
+import br.com.uoutec.community.ediacaran.core.security.Role;
+import br.com.uoutec.community.ediacaran.core.security.SecurityRegistry;
 import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.page.EditMenubar;
@@ -47,6 +50,10 @@ public class MenubarController {
 	@Transient
 	@Inject
 	private EditPage editPage;
+
+	@Transient
+	@Inject
+	private SecurityRegistry securityRegistry;
 	
 	@Action("/")
 	@Result("itens")
@@ -105,6 +112,7 @@ public class MenubarController {
 			}
 			
 			Map<Locale, String> langNames = editMenubar.getSupportedLocales();
+			Set<Role> roles = securityRegistry.getAll();
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", path);
@@ -115,6 +123,7 @@ public class MenubarController {
 				.add("menubar", menuBar)
 				.add("metadata", md)
 				.add("locales", langNames)
+				.add("roles", roles)
 				.setView("/admin/menubar/menubar");
 
 			return webResult;
@@ -183,6 +192,7 @@ public class MenubarController {
 		try {
 			
 			Map<Locale, String> langNames = editMenubar.getSupportedLocales();
+			Set<Role> roles = securityRegistry.getAll();
 			
 			Map<String,Object> md = new HashMap<>();
 			
@@ -191,6 +201,7 @@ public class MenubarController {
 				.add("metadata", md)
 				.add("locales", langNames)
 				.add("countMenuID", System.currentTimeMillis())
+				.add("roles", roles)
 				.setView("/admin/menubar/menu");
 
 			return webResult;
