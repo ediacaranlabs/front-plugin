@@ -60,6 +60,10 @@ public class EditMenubar {
 		name = normalize(name);
 		return registerMenubar(path + "/" + name, PluginLanguageUtils.toLocale(locale), page);
 	}
+
+	public ObjectMetadata registerMenubarById(String path, String id, String locale, MenuBar page) {
+		return registerMenubar(path + "/" + id, PluginLanguageUtils.toLocale(locale), page);
+	}
 	
 	public ObjectMetadata registerMenubar(String path, String locale, MenuBar page) {
 		return registerMenubar(path, PluginLanguageUtils.toLocale(locale), page);

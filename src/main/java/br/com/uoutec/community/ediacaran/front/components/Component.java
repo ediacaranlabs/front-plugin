@@ -297,7 +297,7 @@ public class Component
 		Long acc = (Long) request.getAttribute(ID_COUNT);
 		request.setAttribute(ID_COUNT, acc = acc == null? System.currentTimeMillis() : acc.intValue() + 1);
 		
-		return componentData.getClass().getSimpleName().toLowerCase() + "_" + Long.toString(acc, Character.MAX_RADIX);
+		return componentData.getClass().getSimpleName().toLowerCase() + "_" + Long.toHexString(acc);
 	}
 
 }

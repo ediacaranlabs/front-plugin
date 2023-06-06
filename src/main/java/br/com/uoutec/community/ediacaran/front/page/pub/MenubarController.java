@@ -142,12 +142,13 @@ public class MenubarController {
 		
 		try {
 			
+			menubarPubEntity.setEditMenubar(editMenubar);
 			MenuBar menuBar = menubarPubEntity.rebuild(menubarPubEntity.getGid() != null, true, true);
 			
 			ObjectMetadata omd = editMenubar
-				.registerMenubarByName(
+				.registerMenubarById(
 						menubarPubEntity.getPath(), 
-						menubarPubEntity.getName(), 
+						menubarPubEntity.getId(), 
 						menubarPubEntity.getLocale(), 
 						menuBar
 				);

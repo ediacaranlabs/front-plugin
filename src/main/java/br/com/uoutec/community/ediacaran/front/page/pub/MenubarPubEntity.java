@@ -1,13 +1,15 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.brandao.brutos.annotation.Basic;
+import org.brandao.brutos.annotation.MappingTypes;
 import org.brandao.brutos.annotation.Transient;
 
 import br.com.uoutec.community.ediacaran.front.page.EditMenubar;
@@ -35,13 +37,14 @@ public class MenubarPubEntity
 	private String id;
 
 	@NotNull
-	@Size(max = 10)
+	@Size(min = 5)
 	private String name;
 	
 	@Pattern(regexp=PageFileManagerHandler.LOCALE_FORMAT)
 	private String locale;
 	
-	private Map<String, MenuPubEntity> menus;
+	@Basic(mappingType=MappingTypes.OBJECT)
+	private List<MenuPubEntity> menus;
  
 	@Transient
 	private EditMenubar editMenubar;
@@ -86,6 +89,22 @@ public class MenubarPubEntity
 		this.editMenubar = editMenubar;
 	}
 
+	public List<MenuPubEntity> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(List<MenuPubEntity> menus) {
+		this.menus = menus;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	@Override
 	protected boolean isEqualId(MenuBar instance) throws Throwable {
 		return false;
@@ -98,7 +117,7 @@ public class MenubarPubEntity
 
 	@Override
 	protected MenuBar reloadEntity() throws Throwable {
-		MenuBar mb = editMenubar.getMenubarByName(path, name, locale);
+		MenuBar mb = editMenubar.getMenubarByName(path, id, locale);
 		
 		if(mb == null) {
 			throw new NullPointerException();
@@ -121,12 +140,11 @@ public class MenubarPubEntity
 	protected void copyTo(MenuBar o, boolean reload, boolean override, boolean validate) throws Throwable {
 		
 		o.setName(name);
-		
+
 		if(menus != null) {
-			for(Entry<String, MenuPubEntity> e: menus.entrySet()) {
-				MenuPubEntity mpe = e.getValue();
-				mpe.setParentMenuBar(o);
-				Menu m = mpe.rebuild(false, true, true);
+			for(MenuPubEntity e: menus) {
+				e.setParentMenuBar(o);
+				Menu m = e.rebuild(false, true, true);
 				o.addMenu(m);
 			}
 		}

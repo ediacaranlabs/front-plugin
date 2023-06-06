@@ -8,7 +8,7 @@
 <c:set scope="request" var="countMenuID" value="${empty countMenuID? 1 : countMenuID + 1}"/>
 <c:set var="menuID" value="${countMenuID}"/>
 
-<div id="MenuID_${menuID}" formgroup="menus.${obj.id}" draggable="true" class="menu-item">
+<div id="MenuID_${menuID}" formgroup="menus" formgrouptype="index" draggable="true" class="menu-item">
 <ec:accordion>
 	<ec:accordion-item id="menu_item_${menuID}" title="${obj.name}">
 	<ed:row>
@@ -30,7 +30,7 @@
 	</ed:row>
 	<ed:row>
 		<ed:col size="12" classStyle="form-group has-feedback">
-			<ec:textfield label="Resource" name="rawResource" value="${obj.rawResource}">
+			<ec:textfield label="Resource" name="resource" value="${obj.rawResource}">
 				<ec:autocomplete resource="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/search-resource" />			
 			</ec:textfield>
 		</ed:col>
@@ -46,6 +46,15 @@
 	<c:set scope="request" var="d_eep" value="${d_eep - 1}"/>
 </c:forEach>
 </div>
+<script type="text/javascript">
+<!--
+$.AppContext.onload(function(){
+	var $accordionItem = $.AppContext.utils.getById("MenuID_${menuID}");
+	localContext.install($accordionItem);
+	localContext.updateFieldIndex();
+});
+//-->
+</script>
 <%--
 <script type="text/javascript">
 <!--

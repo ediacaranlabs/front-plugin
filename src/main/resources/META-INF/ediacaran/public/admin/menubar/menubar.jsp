@@ -24,7 +24,7 @@
 
 $.AppContext.onload(function(){
 	
-	var localContext = {};
+	localContext = {};
 	
 	/* vars */
 
@@ -37,8 +37,8 @@ $.AppContext.onload(function(){
 	/* functions */
 	
 	localContext.init = function(){
-		var $allMenus = $.AppContext.utils.getById("menus");
-		localContext.init0($allMenus);
+		//var $allMenus = $.AppContext.utils.getById("menus");
+		//localContext.init0($allMenus);
 		
 		localContext.updateFieldIndex();
 	};
@@ -227,13 +227,17 @@ $.AppContext.onload(function(){
 
 <ec:box>
 	<ec:box-body>
-		<ec:form id="menubarForm">	
+		<ec:form id="menubarForm" extAttrs="formgrouptype=\"index\"" update="result_page_edit_form">	
 		<c:if test="${!empty metadata}">
 			<input type="hidden" value="${metadata.hashCode()}" name="gid">
 			<input type="hidden" value="${metadata.path}" name="path">
-			<input type="hidden" value="${metadata.id}" name="name">
+			<input type="hidden" value="${metadata.id}" name="id">
 			<input type="hidden" value="${metadata.locale}" name="locale">
 		</c:if>
+			<ed:row>
+				<ed:col size="12" id="result_page_edit_form">
+				</ed:col>
+			</ed:row>
 		<ed:row>
 			<ed:col size="7" classStyle="form-group has-feedback">
 				<ec:textfield name="path" label="Path" value="${metadata.path}" enabled="${empty metadata}">
@@ -278,15 +282,17 @@ $.AppContext.onload(function(){
 		<ed:row>
 			<ed:col size="12" id="menus" classStyle="list-menus">
 				<c:forEach varStatus="menubarItemStatus" var="menubarItem" items="${menubar.itens}">
-				<c:set scope="request" var="param1_" value="${menubarItem}"/>
-				<c:set scope="request" var="d_eep" value="0"/>
-				<c:import url="/admin/menubar/menu.jsp"/>
+				<c:if test="${menubarItem.persistent}">
+					<c:set scope="request" var="param1_" value="${menubarItem}"/>
+					<c:set scope="request" var="d_eep" value="0"/>
+					<c:import url="/admin/menubar/menu.jsp"/>
+				</c:if>
 				</c:forEach>
 			</ed:col>
 		</ed:row>
 		<ed:row>
 			<ed:col size="12">
-				<ec:button label="Add Menu" align="right" classStyle="last-item">
+				<ec:button actionType="button" label="Add Menu" align="right" classStyle="last-item">
 					<ec:event type="click">
 					
 						$.AppContext.utils.appendContentByID(
@@ -296,10 +302,14 @@ $.AppContext.onload(function(){
 						
 					</ec:event>
 				</ec:button>
-				<ec:button label="Save" align="right" classStyle="last-item">
-					<ec:event type="click">
-					</ec:event>
-				</ec:button>
+				<ec:button 
+					actionType="submit"
+					method="POST"
+					action="#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/save" 
+					label="Salvar" 
+					classStyle="last-item"
+					align="right"/>
+				
 			</ed:col>
 		</ed:row>
 		</ec:form>

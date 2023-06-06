@@ -98,7 +98,7 @@ public class Menu implements Serializable {
 			String resourceBundle, String template, List<Menu> itens,
 			String badge, String badgeStyle, String body, Menu parent, MenuBar parentMenuBar, int order) {
 		super();
-		this.id = id == null? IDGenerator.getUniqueOrderID('M', this.hashCode()) : id;
+		this.id = id == null? IDGenerator.getUniqueOrderID('M', this.hashCode()).toLowerCase() : id;
 		this.propertyChangeSupport = new PropertyChangeSupport(this);
 		this.name = name;
 		this.icon = icon;

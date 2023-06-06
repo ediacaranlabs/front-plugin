@@ -1,12 +1,13 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.brandao.brutos.annotation.Basic;
+import org.brandao.brutos.annotation.MappingTypes;
 import org.brandao.brutos.annotation.Transient;
 
 import br.com.uoutec.community.ediacaran.front.page.PageFileManagerHandler;
@@ -30,8 +31,11 @@ public class MenuPubEntity
 	
 	private String icon;
 	
-	private Map<String, MenuPubEntity> menus;
+	@Basic(mappingType=MappingTypes.OBJECT)
+	private List<MenuPubEntity> menus;
  
+	private String resource;
+	
 	private Integer order;
 	
 	@Transient
@@ -62,6 +66,22 @@ public class MenuPubEntity
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public List<MenuPubEntity> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(List<MenuPubEntity> menus) {
+		this.menus = menus;
+	}
+
+	public String getResource() {
+		return resource;
+	}
+
+	public void setResource(String resource) {
+		this.resource = resource;
 	}
 
 	public Integer getOrder() {
@@ -120,13 +140,14 @@ public class MenuPubEntity
 		o.setName(name);
 		o.setIcon(icon);
 		o.setOrder(order == null? 0 : order);
+		o.setPersistent(true);
+		o.setResource(resource);
 		
 		if(menus != null) {
 			
-			for(Entry<String, MenuPubEntity> e: menus.entrySet()) {
-				MenuPubEntity m = e.getValue();
-				m.setParent(o);
-				Menu x = m.rebuild(false, true, true);
+			for(MenuPubEntity e: menus) {
+				e.setParent(o);
+				Menu x = e.rebuild(false, true, true);
 				o.addItem(x);
 			}
 			

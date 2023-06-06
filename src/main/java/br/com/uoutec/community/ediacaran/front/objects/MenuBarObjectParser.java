@@ -37,7 +37,7 @@ public class MenuBarObjectParser {
 		i.put("id", item.getId());
 		i.put("name", item.getName());
 		i.put("icon", item.getIcon());
-		i.put("resource", item.getResource());
+		i.put("resource", item.getRawResource());
 		i.put("body", item.getBody());
 		i.put("resourceBundle", item.getResourceBundle());
 		i.put("badgeStyle", item.getBadgeStyle());

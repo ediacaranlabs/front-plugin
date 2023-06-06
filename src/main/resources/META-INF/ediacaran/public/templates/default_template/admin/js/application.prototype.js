@@ -170,10 +170,17 @@ $.AppContext.types.Form.prototype.submit = function($validate = true, $resource 
 	$.AppContext.utils.submit(this.obj,$validate, $resource, $dest);
 };
 
-$.AppContext.types.Form.prototype.updateFieldIndex = function($groupPath = null, $no = null){
+$.AppContext.types.Form.prototype.updateFieldIndex = function($group = null, $no = null){
 
 	if($no == null){
 		$no = this
+	}
+	
+	if($group == null){
+		$group = {
+				path: null,
+				index: $no.getAttribute('formgrouptype') == 'index'? 0 : -1
+		};
 	}
 	
 	var $o = $no.getFirstChild();
@@ -183,20 +190,26 @@ $.AppContext.types.Form.prototype.updateFieldIndex = function($groupPath = null,
 		var $type = $o.getTagName();
 		
 		if($type == 'input' || $type == 'textarea' || $type == 'select' ){
-			$o.setAttribute('formindex', $groupPath);
+			$o.setAttribute('formindex', $group.path);
 		}
 		
 		var $groupName = $o.getAttribute('formgroup');
-
-		if($groupPath == null){
-			this.updateFieldIndex($groupName, $o);
-		}
-		else
+		
 		if($groupName != null){
-			this.updateFieldIndex($groupPath + "." + $groupName, $o);
+
+			var $newGroup   = {};
+			$newGroup.path  = $group.path != null? $group.path + "." + $groupName : $groupName;
+			$newGroup.index =  $o.getAttribute('formgrouptype') == 'index'? 0 : -1;
+
+			if($group.index != -1){
+				$newGroup.path = $newGroup.path + '[' + $group.index +']';
+				$group.index   = $group.index + 1;
+			}
+			
+			this.updateFieldIndex($newGroup, $o);
 		}
 		else{
-			this.updateFieldIndex($groupPath, $o);
+			this.updateFieldIndex($group, $o);
 		}
 		
 		$o = $o.getNext();

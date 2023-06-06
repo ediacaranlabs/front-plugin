@@ -192,7 +192,6 @@ $.AppContext.utils = {
 			    	
 			    	event.preventDefault();
 			    	$.AppContext.utils.submit($form);
-			        return false;
 				});
 					
 				$f.attr('asyncEnabled', true);
