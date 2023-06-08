@@ -66,6 +66,18 @@ public class MenuBar {
 		propertyChangeSupport.firePropertyChange("resourceBundle", oldName, name);
 	}
 
+	public List<Menu> getAllItens(){
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + ".list.all"));
+		}
+
+		List<Menu> result =  new ArrayList<Menu>(list);
+		return Collections.unmodifiableList(result);
+	}
+	
 	public List<Menu> getItens(){
 		
 		SecurityManager sm = System.getSecurityManager();

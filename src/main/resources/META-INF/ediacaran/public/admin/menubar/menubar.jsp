@@ -281,7 +281,7 @@ $.AppContext.onload(function(){
 		</ed:row>
 		<ed:row>
 			<ed:col size="12" id="menus" classStyle="list-menus">
-				<c:forEach varStatus="menubarItemStatus" var="menubarItem" items="${menubar.itens}">
+				<c:forEach varStatus="menubarItemStatus" var="menubarItem" items="${menubar.allItens}">
 				<c:if test="${menubarItem.persistent}">
 					<c:set scope="request" var="param1_" value="${menubarItem}"/>
 					<c:set scope="request" var="d_eep" value="0"/>

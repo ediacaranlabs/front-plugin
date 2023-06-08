@@ -280,12 +280,25 @@ public class Menu implements Serializable {
 		return Collections.unmodifiableList(itens);
 	}
 */
+
+	public List<Menu> getAllItens(){
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".list.all"));
+		}
+
+		List<Menu> result =  new ArrayList<Menu>(itens);
+		return Collections.unmodifiableList(result);
+	}
+	
 	public List<Menu> getItens() {
 		
 		SecurityManager sm = System.getSecurityManager();
 		
 		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".list.*"));
+			sm.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".list"));
 		}
 
 		List<Menu> result =  new ArrayList<Menu>();

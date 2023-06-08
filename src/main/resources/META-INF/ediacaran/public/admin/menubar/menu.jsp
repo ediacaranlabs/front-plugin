@@ -57,7 +57,7 @@
 	</ed:row>
 	</ec:accordion-item>
 </ec:accordion>
-<c:forEach var="item" items="${obj.itens}">
+<c:forEach var="item" items="${obj.allItens}">
 	<c:set scope="request" var="param1_" value="${item}"/>
 	<c:set scope="request" var="d_eep" value="${empty d_eep? 1 : d_eep + 1}"/>
 	<c:if test="${d_eep < 3}">

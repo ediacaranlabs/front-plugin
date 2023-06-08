@@ -38,6 +38,10 @@ public class MenuPubEntity
 	
 	private Integer order;
 	
+	private String role;
+	
+	private String permission;
+	
 	@Transient
 	private Menu parent;
 	
@@ -66,6 +70,22 @@ public class MenuPubEntity
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getPermission() {
+		return permission;
+	}
+
+	public void setPermission(String permission) {
+		this.permission = permission;
 	}
 
 	public List<MenuPubEntity> getMenus() {
@@ -142,6 +162,8 @@ public class MenuPubEntity
 		o.setOrder(order == null? 0 : order);
 		o.setPersistent(true);
 		o.setResource(resource);
+		o.setRole(role);
+		o.setPermission(permission);
 		
 		if(menus != null) {
 			
