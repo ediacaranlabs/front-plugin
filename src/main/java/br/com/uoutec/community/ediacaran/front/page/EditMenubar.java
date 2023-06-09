@@ -77,6 +77,10 @@ public class EditMenubar {
 		name = normalize(name);
 		unregisterMenubar(path + "/" + name, locale);
 	}
+
+	public void unregisterMenubarById(String path, String id, String locale) {
+		unregisterMenubar(path + "/" + id, locale);
+	}
 	
 	public void unregisterMenubar(String page, String locale) {
 		unregisterMenubar(page, PluginLanguageUtils.toLocale(locale));
@@ -93,6 +97,10 @@ public class EditMenubar {
 	public MenuBar getMenubarByName(String path, String name, String locale) {
 		name = normalize(name);
 		return getMenubar(path + "/" + name, locale);
+	}
+
+	public MenuBar getMenubarById(String path, String id, String locale) {
+		return getMenubar(path + "/" + id, locale);
 	}
 	
 	public MenuBar getMenubar(String path, String locale) {

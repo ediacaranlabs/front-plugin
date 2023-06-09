@@ -292,7 +292,7 @@ $.AppContext.types.Form.prototype.getField = function(name, type = null){
 	for (var $p in $map) {
 		
 		if($p == 'checkbox' || $p == 'radio'){
-			$result.push(new $.AppContext.types.Field($form, name, $p));
+			$result.push(new $.AppContext.types.Field($form, $map[$p], $p));
 		}
 		else{
 			
@@ -321,36 +321,25 @@ $.AppContext.types.Field = function($form, $field, $type){
 
 $.AppContext.types.Field.prototype.setProperty = function(name, value){
 
-	/*
-	if(!Array.isArray(this.field)){
-		$(this.field).prop(name, value);
-	}
-	*/
-	
 	if(this.type == 'checkbox' || this.type == 'radio'){
-		$(this.form).find('input:' + this.type + '[name=' + this.field + ']').each(function() {
-			$(this).prop(name, value);
-		});
-	}
-	if(this.type == 'select'){
-		$(this.form).find('select[name=' + this.field + ']').prop(name, value);
+		
+		for(var $i of this.field){
+			$($i).prop(name, value);
+		}
+
 	}
 	else{
-		$(this.field).val(value);
+		$(this.field).prop(name, value);
 	}
 	
 };
 
 $.AppContext.types.Field.prototype.getProperty = function(name){
 	
-	$result = null;
+	var $result = null;
 
-	if(this.type == 'checkbox' || this.type == 'radio' || this.type == 'select'){
-		$result = $(this.form).find('input' + ':' + this.type + '[name=' + this.field + ']').first().prop(name);
-	}
-	else
-	if(this.type == 'select'){
-		$result = $(this.form).find('select[name=' + this.field + ']').prop(name);
+	if(this.type == 'checkbox' || this.type == 'radio'){
+		$result = $(this.field[0]).prop(name);
 	}
 	else{
 		$result = $(this.field).prop(name);
@@ -358,40 +347,80 @@ $.AppContext.types.Field.prototype.getProperty = function(name){
 	
 	return $result;
 	
-	/*
-	var $result = null;
-	
-	if(!Array.isArray(this.field)){
-		$result = $(this.field).prop(name);
+};
+
+$.AppContext.types.Field.prototype.setAttribute = function(name, value){
+
+	if(this.type == 'checkbox' || this.type == 'radio'){
+		
+		for(var $i of this.field){
+			$($i).attr(name, value);
+		}
+
+	}
+	else{
+		$(this.field).attr(name, value);
 	}
 	
-	return result;
-	*/
+};
+
+$.AppContext.types.Field.prototype.getAttribute = function(name){
+	
+	var $result = null;
+
+	if(this.type == 'checkbox' || this.type == 'radio'){
+		$result = $(this.field[0]).attr(name);
+	}
+	else{
+		$result = $(this.field).attr(name);
+	}
+	
+	return $result;
 	
 };
 
 $.AppContext.types.Field.prototype.registerEvent = function(name, handler){
 
-	if(this.type !== 'checkbox' && this.type !== 'radio'){
-		$.AppContext.events.add(this.field, name, handler);
-	}
+	if(this.type == 'checkbox' || this.type == 'radio'){
+		
+		for(var $i of this.field){
+			$.AppContext.events.add($($i).attr('id'), name, handler);
+		}
 
+	}
+	else{
+		$.AppContext.events.add($(this.field).attr('id'), name, handler);
+	}
+	
 };
 
 $.AppContext.types.Field.prototype.unregisterEvent = function(name){
 
-	if(this.type !== 'checkbox' && this.type !== 'radio'){
-		$.AppContext.events.remove(this.field, name);
+	if(this.type == 'checkbox' || this.type == 'radio'){
+		
+		for(var $i of this.field){
+			$.AppContext.events.remove($($i).attr('id'), name, handler);
+		}
+
+	}
+	else{
+		$.AppContext.events.remove($(this.field).attr('id'), name, handler);
 	}
 
 };
 
 $.AppContext.types.Field.prototype.setValue = function(value){
 
+	
 	if(this.type == 'checkbox' || this.type == 'radio'){
-		$(this.form).find('input:' + this.type + '[value=' + value + ']').prop('checked', true);
+		
+		for(var $i of this.field){
+			if($($i).attr('value') == value){
+				$($i).prop('checked', true);
+			}
+		}
+
 	}
-	else
 	if(this.type == 'select' ){
 		$(this.field).find('option[value=' + value + ']').attr('selected','selected');
 	}
@@ -406,7 +435,12 @@ $.AppContext.types.Field.prototype.getValue = function(){
 	$result = null;
 
 	if(this.type == 'checkbox' || this.type == 'radio'){
-		$result = $(this.form).find('input' + ':' + this.type + '[name=' + this.name + ']:checked').val();
+		
+		for(var $i of this.field){
+			if($($i).prop('checked')){
+				$result = $($i).val();
+			}
+		}
 	}
 	else
 	if(this.type == 'select' ){
@@ -425,11 +459,10 @@ $.AppContext.types.Field.prototype.getOptions = function(){
 	var $result = null;
 	
 	if(this.type == 'checkbox' || this.type == 'radio'){
-		var $options = $(this.form).filter('input' + ':' + this.type + '[name=' + this.name + ']');
-
-		$options.each(function(){
-			$result.push(new $.AppContext.types.Option(this.form, this.field, $(this), this.type));
-		});
+		
+		for(var $i of this.field){
+			$result.push(new $.AppContext.types.Option(this.form, this.field, $i, this.type));
+		}
 		
 	}
 	else
@@ -464,8 +497,8 @@ $.AppContext.types.Option.prototype.getDescription = function(){
 	if(this.type == 'option'){
 		$result = $(this.option).html();
 	}
-	else{
-		$result = $(this.form).filter('label[for=' + $(this.field).attr('id') + ']').html();
+	if(this.type == 'checkbox' || this.type == 'radio'){
+		$result = $(this.form).filter('label[for=' + $(this.option).attr('id') + ']').html();
 	}
 	
 	return $result;

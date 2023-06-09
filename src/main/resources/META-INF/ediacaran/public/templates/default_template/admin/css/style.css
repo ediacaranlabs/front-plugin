@@ -16,6 +16,12 @@ body {
     background-color: #fff;
 }
 
+select[readonly] {
+  background: #eee;
+  pointer-events: none;
+  touch-action: none;
+}
+
 .last-item {
 	margin-left: 1em;
 }

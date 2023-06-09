@@ -96,14 +96,14 @@ public class MenubarController {
 	@RequiresPermissions("CONTENT:MENUBAR:EDIT")
 	public WebResultAction edit(
 			String path,
-			String name,
+			String id,
 			@Basic(mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
 		
 		try {
 			
-			MenuBar menuBar = editMenubar.getMenubarByName(path, name, locale);
+			MenuBar menuBar = editMenubar.getMenubarById(path, id, locale);
 			
 			if(menuBar == null) {
 				WebFlowController
@@ -116,7 +116,7 @@ public class MenubarController {
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", path);
-			md.put("id", name);
+			md.put("id", id);
 			md.put("locale", PluginLanguageUtils.toLocale(locale));
 			
 			webResult
@@ -183,9 +183,9 @@ public class MenubarController {
 		
 	}
 	
-	@Action("/new")
+	@Action("/new-menu")
 	@RequestMethod(RequestMethodTypes.GET)
-	@RequiresPermissions("CONTENT:MENUBAR:NEW")
+	@RequiresPermissions("CONTENT:MENUBAR:NEW-MENU")
 	public WebResultAction newMenu(
 			WebResultAction webResult){
 		
@@ -214,6 +214,92 @@ public class MenubarController {
 				.to("${plugins.ediacaran.front.admin_context}/menubar/list");
 			return null;
 		}
+	}
+
+	@Action("/new")
+	@RequestMethod(RequestMethodTypes.GET)
+	@RequiresPermissions("CONTENT:MENUBAR:NEW")
+	public WebResultAction newMenubar(
+			WebResultAction webResult){
+		
+		try {
+			
+			Map<Locale, String> langNames = editMenubar.getSupportedLocales();
+			
+			webResult
+				.add("locales", langNames)
+				.setView("/admin/menubar/menubar");
+
+			return webResult;
+		}
+		catch(Throwable ex) {
+			ex.printStackTrace();
+			WebFlowController
+				.redirect()
+				.put("exception", ex)
+				.to("${plugins.ediacaran.front.admin_context}/menubar/list");
+			return null;
+		}
+	}
+	
+	@Action("/delete")
+	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresPermissions("CONTENT:PAGES:DELETE")
+	public WebResultAction delete(
+			Long gid,
+			String path,
+			String id, 
+			@Basic(mappingType=MappingTypes.VALUE)
+			String locale,
+			WebResultAction webResult){
+		
+		try {
+			Map<String,Object> md = new HashMap<>();
+			md.put("path", path);
+			md.put("id", id);
+			md.put("locale", locale);
+			
+			if(gid == md.hashCode()) {
+				editMenubar.unregisterMenubarById(path, id, locale);
+			}
+		}
+		catch(Throwable ex) {
+			webResult
+			.add("exception", ex);
+		}
+		
+		return index(webResult);
+	}
+	
+	@Action("/confirm-delete")
+	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresPermissions("CONTENT:PAGES:DELETE")
+	public WebResultAction confirmDelete(
+			String path, 
+			String id,
+			@Basic(mappingType=MappingTypes.VALUE)
+			String locale,
+			WebResultAction webResult){
+		
+		webResult.setView("/admin/menubar/confirm_delete");
+		
+		try {
+			
+			Map<String,Object> md = new HashMap<>();
+			md.put("path", path);
+			md.put("id", id);
+			md.put("locale", locale);
+			
+			webResult
+				.add("metadata", md);
+
+		}
+		catch(Throwable ex) {
+			webResult
+			.add("exception", ex);
+		}
+		
+		return webResult;
 	}
 	
 	@Action("/search-resource")

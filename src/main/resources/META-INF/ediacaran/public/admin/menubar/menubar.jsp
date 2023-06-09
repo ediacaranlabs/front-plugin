@@ -6,7 +6,6 @@
 
 <style>
 <!--
-/*.menu-item div:not(:first-of-type, .card) {*/
 .menu-item > .menu-item > div {
     margin-left: 2em;
 }
@@ -213,13 +212,13 @@ $.AppContext.onload(function(){
 	<ed:row>
 		<ed:col size="4">
 			<div class="inner-heading">
-				<h2>Editar Menubar</h2>
+				<h2>Menubar</h2>
 			</div>
 		</ed:col>
 		<ed:col size="8">
 			<ec:breadcrumb title="Editar">
 				<ec:breadcrumb-path icon="home" text="" lnk="#" />
-				<ec:breadcrumb-path text="menubar" lnk="#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar" />
+				<ec:breadcrumb-path text="Menubar" lnk="#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar" />
 			</ec:breadcrumb>
 		</ed:col>
 	</ed:row>
@@ -227,20 +226,15 @@ $.AppContext.onload(function(){
 
 <ec:box>
 	<ec:box-body>
-		<ec:form id="menubarForm" extAttrs="formgrouptype=\"index\"" update="result_page_edit_form">	
-		<c:if test="${!empty metadata}">
-			<input type="hidden" value="${metadata.hashCode()}" name="gid">
-			<input type="hidden" value="${metadata.path}" name="path">
-			<input type="hidden" value="${metadata.id}" name="id">
-			<input type="hidden" value="${metadata.locale}" name="locale">
-		</c:if>
+		<ec:form id="menubarForm" extAttrs="formgrouptype=\"index\"" update="result_page_edit_form">
+			<input type="hidden" value="${empty metadata? '' : metadata.hashCode()}" name="gid">
 			<ed:row>
 				<ed:col size="12" id="result_page_edit_form">
 				</ed:col>
 			</ed:row>
 		<ed:row>
 			<ed:col size="7" classStyle="form-group has-feedback">
-				<ec:textfield name="path" label="Path" value="${metadata.path}" enabled="${empty metadata}">
+				<ec:textfield name="path" label="Path" value="${metadata.path}" readonly="${!empty metadata}">
 					<ec:field-validator>
 						<ec:field-validator-rule name="notEmpty" message="Please inform the Path!"/>
 						<ec:field-validator-rule name="regexp" message="Invalid path!">
@@ -250,7 +244,7 @@ $.AppContext.onload(function(){
 				</ec:textfield>
 			</ed:col>
 			<ed:col size="5" classStyle="form-group has-feedback">
-				<ec:textfield label="ID" name="id" value="${menubar.id}" enabled="${empty metadata}">
+				<ec:textfield label="ID" name="id" value="${menubar.id}" readonly="${!empty metadata}">
 					<ec:field-validator>
 						<ec:field-validator-rule name="notEmpty" message="Please inform the ID!"/>
 						<ec:field-validator-rule name="regexp" message="Invalid ID!">
@@ -263,15 +257,16 @@ $.AppContext.onload(function(){
 		<ed:row>
 			<ed:col size="9" classStyle="form-group has-feedback">
 				<ec:textfield label="Name" name="name" value="${menubar.name}">
-					<%--
 					<ec:field-validator>
 						<ec:field-validator-rule name="notEmpty" message="Please inform the Name!"/>
+						<ec:field-validator-rule name="regexp" message="Invalid name!">
+							<ec:field-validator-param name="regexp" raw="true">/^.{5,60}$/</ec:field-validator-param>
+						</ec:field-validator-rule>
 					</ec:field-validator>
-					--%>
 				</ec:textfield>
 			</ed:col>
 			<ed:col size="3" classStyle="form-group has-feedback">
-				<ec:select label="Language" name="locale" enabled="${empty metadata}">
+				<ec:select label="Language" name="locale" readonly="${!empty metadata}">
 					<ec:option value=""></ec:option>
 					<c:forEach items="${locales}" var="loc">
 					<ec:option value="${loc.key}" selected="${metadata.locale == loc.key}">${loc.value}</ec:option>
@@ -281,6 +276,8 @@ $.AppContext.onload(function(){
 		</ed:row>
 		<ed:row>
 			<ed:col size="12" id="menus" classStyle="list-menus">
+				<h5>Menus</h5>
+				<ec:separator/>
 				<c:forEach varStatus="menubarItemStatus" var="menubarItem" items="${menubar.allItens}">
 				<c:if test="${menubarItem.persistent}">
 					<c:set scope="request" var="param1_" value="${menubarItem}"/>
@@ -296,7 +293,7 @@ $.AppContext.onload(function(){
 					<ec:event type="click">
 					
 						$.AppContext.utils.appendContentByID(
-							'${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/new',
+							'${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/new-menu',
 							'menus'
 						);
 						
@@ -313,40 +310,5 @@ $.AppContext.onload(function(){
 			</ed:col>
 		</ed:row>
 		</ec:form>
-<%--		
-	<ed:row>
-		<ed:col size="12">
-			<ec:button label="Add Menu" align="right" classStyle="last-item">
-				<ec:event type="click">
-				
-					$.AppContext.utils.appendContentByID(
-						'${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/new',
-						'list_menus'
-					);
-					
-				</ec:event>
-			</ec:button>
-			<ec:button align="right" label="Delete" classStyle="last-item">
-				<ec:event type="click">
-				</ec:event>
-			</ec:button>
-			<span></span>
-			<ec:button label="Save" align="right" classStyle="last-item">
-				<ec:event type="click">
-				</ec:event>
-			</ec:button>
-		</ed:col>
-	</ed:row>
- --%>
 	</ec:box-body>
 </ec:box>
-
-<%--	
-	<ed:row>
-		<ed:col size="12" classStyle="form-group has-feedback">
-			<ec:textfield name="resource">
-				<ec:autocomplete resource="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/search-resource" />
-			</ec:textfield>
-		</ed:col>
-	</ed:row>
- --%>
