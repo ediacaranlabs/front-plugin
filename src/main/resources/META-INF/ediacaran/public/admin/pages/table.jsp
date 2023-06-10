@@ -56,7 +56,7 @@
 	<ed:col size="3" align="right">
 		<ec:form method="POST">
 			<input type="hidden" name="path" value="${item.pathMetadata.path}">
-			<input type="hidden" name="name" value="${item.pathMetadata.id}">
+			<input type="hidden" name="id" value="${item.pathMetadata.id}">
 			<input type="hidden" name="locale" value="${item.locale}">
 			<ec:button 
 				actionType="submit" 

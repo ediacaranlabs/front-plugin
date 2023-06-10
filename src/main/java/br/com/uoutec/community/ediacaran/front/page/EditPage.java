@@ -48,8 +48,11 @@ public class EditPage {
 			
 			name = ".*".concat(Arrays.stream(name.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
 		}
-		else {
-			path = PagesObjectsManagerDriver.DRIVER_NAME + (basePath == null? "" : basePath);
+		else{
+			if(basePath != null) {
+				name = ".*".concat(Arrays.stream(basePath.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
+			}
+			path = PagesObjectsManagerDriver.DRIVER_NAME;
 		}
 		
 		return objectsManager.listMetadata(path, name, locale, true, SearchType.REGEX);
@@ -84,6 +87,10 @@ public class EditPage {
 		unregisterPage(path + "/" + name, locale);
 	}
 	
+	public void unregisterPage(String path, String id, String locale) {
+		unregisterPage(path + "/" + id, PluginLanguageUtils.toLocale(locale));
+	}
+	
 	public void unregisterPage(String page, String locale) {
 		unregisterPage(page, PluginLanguageUtils.toLocale(locale));
 	}
@@ -107,6 +114,10 @@ public class EditPage {
 	public Page getPageByName(String path, String name, String locale) {
 		name = normalize(name);
 		return getPage(path + "/" + name, locale);
+	}
+
+	public Page getPageById(String path, String id, String locale) {
+		return getPage(path + "/" + id, locale);
 	}
 	
 	public Page getPage(String path, String locale) {

@@ -14,7 +14,7 @@
 	<ed:row>
 		<ed:col size="3" classStyle="form-group has-feedback">
 			<input type="hidden" value="${obj.id}" name="id">
-			<ec:textfield label="Icon" value="${obj.icon}" name="icon" />
+			<ec:textfield label="Ícone" value="${obj.icon}" name="icon" />
 		</ed:col>
 		<ed:col size="6" classStyle="form-group has-feedback">
 			<ec:textfield label="Nome" name="name" value="${obj.name}">
@@ -37,14 +37,14 @@
 	</ed:row>
 	<ed:row>
 		<ed:col size="12" classStyle="form-group has-feedback">
-			<ec:textfield label="Resource" name="resource" value="${obj.rawResource}">
+			<ec:textfield label="Recurso" name="resource" value="${obj.rawResource}">
 				<ec:autocomplete resource="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/search-resource" />			
 			</ec:textfield>
 		</ed:col>
 	</ed:row>
 	<ed:row>
 		<ed:col size="4" classStyle="form-group has-feedback">
-			<ec:select label="Role" name="role">
+			<ec:select label="Nível" name="role">
 				<ec:option selected="${empty obj.role}"></ec:option>
 				<c:forEach items="${roles}"  var="role">
 				<ec:option value="${role.id}" selected="${obj.hasRole(role.id)}">${role.description}</ec:option>

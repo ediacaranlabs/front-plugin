@@ -22,6 +22,7 @@
 			var $form = $.AppContext.utils.getById('page_edit_form');
 			$form.getField('path').setAttribute('readonly', true);
 			$form.getField('id').setAttribute('readonly', true);
+			$form.getField('id').setValue('${id.id}');
 			$form.getField('locale').setAttribute('readonly', true);
 			$form.getField('gid').setValue('${id.hashCode()}');
 		</script>

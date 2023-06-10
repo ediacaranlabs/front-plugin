@@ -8,11 +8,11 @@
 	<ed:row>
 		<ed:col size="4">
 			<div class="inner-heading">
-				<h2>Menubar</h2>
+				<h2>Menu</h2>
 			</div>
 		</ed:col>
 		<ed:col size="8">
-			<ec:breadcrumb title="Menubar">
+			<ec:breadcrumb title="Menu">
 				<ec:breadcrumb-path icon="home" text="" lnk="#" />
 			</ec:breadcrumb>
 		</ed:col>

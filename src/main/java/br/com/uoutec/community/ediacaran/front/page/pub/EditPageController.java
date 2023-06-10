@@ -97,7 +97,7 @@ public class EditPageController {
 	public WebResultAction delete(
 			Long gid,
 			String path,
-			String name, 
+			String id, 
 			@Basic(mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
@@ -105,11 +105,11 @@ public class EditPageController {
 		try {
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", path);
-			md.put("id", name);
+			md.put("id", id);
 			md.put("locale", locale);
 			
 			if(gid == md.hashCode()) {
-				editpage.unregisterPageByName(path, name, locale);
+				editpage.unregisterPage(path, id, locale);
 			}
 		}
 		catch(Throwable ex) {
@@ -125,7 +125,7 @@ public class EditPageController {
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction confirmDelete(
 			String path, 
-			String name,
+			String id,
 			@Basic(mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
@@ -136,7 +136,7 @@ public class EditPageController {
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", path);
-			md.put("id", name);
+			md.put("id", id);
 			md.put("locale", locale);
 			
 			webResult
@@ -185,19 +185,19 @@ public class EditPageController {
 	@RequiresPermissions("CONTENT:PAGES:EDIT")
 	public WebResultAction edit(
 			String path,
-			String name,
+			String id,
 			@Basic(mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
 		
 		try {
 			
-			Page page = editpage.getPageByName(path, name, locale);
+			Page page = editpage.getPageById(path, id, locale);
 			
 			if(page == null) {
 				WebFlowController
 				.redirect()
-				.to("${plugins.ediacaran.front.admin_context}/pages/list");
+				.to("${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list");
 			}
 			
 			Map<Locale, String> langNames = editpage.getSupportedLocales();
@@ -206,7 +206,7 @@ public class EditPageController {
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", path);
-			md.put("id", name);
+			md.put("id", id);
 			md.put("locale", PluginLanguageUtils.toLocale(locale));
 			
 			webResult.setView(template.getFormPath(), true);
@@ -226,7 +226,7 @@ public class EditPageController {
 			WebFlowController
 				.redirect()
 				.put("exception", ex)
-				.to("${plugins.ediacaran.front.admin_context}/pages/list");
+				.to("${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list");
 			return null;
 		}
 	}

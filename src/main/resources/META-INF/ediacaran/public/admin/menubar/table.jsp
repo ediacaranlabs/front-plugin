@@ -8,11 +8,11 @@
 <ec:form>
 <ed:row>
 	<ed:col size="9">
-		<ec:textfield name="path" label="Path" />
+		<ec:textfield name="path" label="Caminho" />
 	</ed:col>
 	<ed:col size="3" align="right">
-		<ec:select name="locale" label="Locale">
-			<ec:option value="" selected="true">Locale</ec:option>
+		<ec:select name="locale" label="Idioma">
+			<ec:option value="" selected="true"></ec:option>
 			<c:forEach items="${locales}" var="loc">
 			<ec:option value="${loc.key}">${loc.value}</ec:option>
 			</c:forEach>

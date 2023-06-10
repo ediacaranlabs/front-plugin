@@ -35,7 +35,7 @@ public class PagePubEntity
 	
 	@Size(max = 255)
 	@Pattern(regexp=PageFileManagerHandler.ID_FORMAT)
-	private String name;
+	private String id;
 	
 	@Pattern(regexp=PageFileManagerHandler.LOCALE_FORMAT)
 	private String locale;
@@ -94,12 +94,12 @@ public class PagePubEntity
 		this.path = path;
 	}
 
-	public String getName() {
-		return name;
+	public String getId() {
+		return id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getLocale() {
@@ -186,7 +186,7 @@ public class PagePubEntity
 
 	@Override
 	protected Page reloadEntity() throws Throwable {
-		return editPage.getPageByName(path, name, locale);
+		return editPage.getPageById(path, id, locale);
 	}
 
 	@Override
@@ -220,7 +220,7 @@ public class PagePubEntity
 		if(gid != null) {
 			Map<String,Object> md = new HashMap<String,Object>();
 			md.put("path", path);
-			md.put("id", name);
+			md.put("id", id);
 			md.put("locale", locale);
 
 			if(gid != md.hashCode()) {

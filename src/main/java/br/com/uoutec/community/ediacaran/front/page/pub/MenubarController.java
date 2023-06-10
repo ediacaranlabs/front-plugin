@@ -11,16 +11,19 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import org.brandao.brutos.annotation.AcceptRequestType;
 import org.brandao.brutos.annotation.Action;
 import org.brandao.brutos.annotation.Basic;
 import org.brandao.brutos.annotation.Controller;
 import org.brandao.brutos.annotation.DefaultThrowSafe;
 import org.brandao.brutos.annotation.DetachedName;
 import org.brandao.brutos.annotation.MappingTypes;
+import org.brandao.brutos.annotation.ResponseType;
 import org.brandao.brutos.annotation.Result;
 import org.brandao.brutos.annotation.ThrowSafe;
 import org.brandao.brutos.annotation.Transient;
 import org.brandao.brutos.annotation.View;
+import org.brandao.brutos.annotation.web.MediaTypes;
 import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.RequestMethodTypes;
 import org.brandao.brutos.validator.ValidatorException;
@@ -306,6 +309,8 @@ public class MenubarController {
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresPermissions("CONTENT:MENUBAR:EDIT")
 	@SuppressWarnings("serial")
+	@AcceptRequestType(MediaTypes.APPLICATION_JSON)
+	@ResponseType(MediaTypes.APPLICATION_JSON)
 	public Serializable searchResource(
 			String value){
 		

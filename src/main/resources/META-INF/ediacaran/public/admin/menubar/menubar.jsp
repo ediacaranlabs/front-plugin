@@ -212,13 +212,13 @@ $.AppContext.onload(function(){
 	<ed:row>
 		<ed:col size="4">
 			<div class="inner-heading">
-				<h2>Menubar</h2>
+				<h2>Menu</h2>
 			</div>
 		</ed:col>
 		<ed:col size="8">
 			<ec:breadcrumb title="Editar">
 				<ec:breadcrumb-path icon="home" text="" lnk="#" />
-				<ec:breadcrumb-path text="Menubar" lnk="#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar" />
+				<ec:breadcrumb-path text="Menu" lnk="#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar" />
 			</ec:breadcrumb>
 		</ed:col>
 	</ed:row>
@@ -234,7 +234,7 @@ $.AppContext.onload(function(){
 			</ed:row>
 		<ed:row>
 			<ed:col size="7" classStyle="form-group has-feedback">
-				<ec:textfield name="path" label="Path" value="${metadata.path}" readonly="${!empty metadata}">
+				<ec:textfield name="path" label="Caminho" value="${metadata.path}" readonly="${!empty metadata}">
 					<ec:field-validator>
 						<ec:field-validator-rule name="notEmpty" message="Please inform the Path!"/>
 						<ec:field-validator-rule name="regexp" message="Invalid path!">
@@ -244,7 +244,7 @@ $.AppContext.onload(function(){
 				</ec:textfield>
 			</ed:col>
 			<ed:col size="5" classStyle="form-group has-feedback">
-				<ec:textfield label="ID" name="id" value="${menubar.id}" readonly="${!empty metadata}">
+				<ec:textfield label="Identificação" name="id" value="${menubar.id}" readonly="${!empty metadata}">
 					<ec:field-validator>
 						<ec:field-validator-rule name="notEmpty" message="Please inform the ID!"/>
 						<ec:field-validator-rule name="regexp" message="Invalid ID!">
@@ -256,7 +256,7 @@ $.AppContext.onload(function(){
 		</ed:row>
 		<ed:row>
 			<ed:col size="9" classStyle="form-group has-feedback">
-				<ec:textfield label="Name" name="name" value="${menubar.name}">
+				<ec:textfield label="Nome" name="name" value="${menubar.name}">
 					<ec:field-validator>
 						<ec:field-validator-rule name="notEmpty" message="Please inform the Name!"/>
 						<ec:field-validator-rule name="regexp" message="Invalid name!">
@@ -266,7 +266,7 @@ $.AppContext.onload(function(){
 				</ec:textfield>
 			</ed:col>
 			<ed:col size="3" classStyle="form-group has-feedback">
-				<ec:select label="Language" name="locale" readonly="${!empty metadata}">
+				<ec:select label="Idioma" name="locale" readonly="${!empty metadata}">
 					<ec:option value=""></ec:option>
 					<c:forEach items="${locales}" var="loc">
 					<ec:option value="${loc.key}" selected="${metadata.locale == loc.key}">${loc.value}</ec:option>
@@ -289,7 +289,7 @@ $.AppContext.onload(function(){
 		</ed:row>
 		<ed:row>
 			<ed:col size="12">
-				<ec:button actionType="button" label="Novo menu" align="right" classStyle="last-item">
+				<ec:button actionType="button" label="Novo" align="right" classStyle="last-item">
 					<ec:event type="click">
 					
 						$.AppContext.utils.appendContentByID(

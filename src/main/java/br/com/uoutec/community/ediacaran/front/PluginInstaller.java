@@ -288,8 +288,8 @@ public class PluginInstaller
 		webSecurityManagerPlugin
 			.addConstraint("/admin/manager/*")
 				.addRole("manager")
-				.addRole("user")
 			.addConstraint("/admin/*")
+				.addRole("manager")
 				.addRole("user")
 			.form("/login", "/login?error=true");
 		

@@ -45,9 +45,9 @@ public class DefaultEditPageController {
 
 			ObjectMetadata omd;
 			
-			if(pageEntity.getName() != null) {
+			if(pageEntity.getId() != null) {
 				omd = editPage.registerPageByName(pageEntity.getPath(), 
-						pageEntity.getName(), pageEntity.getLocale(), page);
+						pageEntity.getId(), pageEntity.getLocale(), page);
 			}
 			else {
 				omd = editPage.registerPageByTitle(pageEntity.getPath(), 

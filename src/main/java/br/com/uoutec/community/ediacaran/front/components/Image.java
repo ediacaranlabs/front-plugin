@@ -1,6 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.components;
 
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -105,7 +106,9 @@ public class Image {
 
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = (Graphics2D) image.getGraphics();
-
+		
+		//java.awt.Image rescaled = img.getScaledInstance(width, height, java.awt.Image.SCALE_AREA_AVERAGING);
+		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		g2.drawImage(img, 0, 0, width, height, x1.intValue(), y1.intValue(), x2.intValue(), y2.intValue(), null);
 		
 		ImageIO.write(image, "png", file);

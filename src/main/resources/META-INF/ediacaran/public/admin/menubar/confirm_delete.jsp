@@ -19,7 +19,7 @@
 				<input type="hidden" value="${metadata.path}" name="path">
 				<input type="hidden" value="${metadata.id}" name="id">
 				<input type="hidden" value="${metadata.locale}" name="locale">
-				Deseja realmente apagar o menubar?
+				Deseja realmente apagar?
 			</ed:col>
 		</ed:row>
 </ec:modal-body>
