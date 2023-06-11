@@ -30,7 +30,7 @@ public class ObjectsManagerImp
 
 	private static final String DRIVER_FORMAT = "[a-z0-9]+([_-][a-z0-9]+)*";
 	
-	private static final String FULLID_FORMAT = "(" + DRIVER_FORMAT + ")(" + PATH_FORMAT + ")\\/(" + ID_FORMAT + ")";
+	private static final String FULLID_FORMAT = "(" + DRIVER_FORMAT + ")(" + PATH_FORMAT + ")?\\/(" + ID_FORMAT + ")";
 
 	private static final String SEARCH_FORMAT = "(" + DRIVER_FORMAT + ")(" + PATH_FORMAT + ")*";
 	
@@ -90,7 +90,7 @@ public class ObjectsManagerImp
 		
 		int lastIndex = fullPath.lastIndexOf("/");
 		
-		String path = fullPath.substring(0, lastIndex);
+		String path = lastIndex == 0? "/" : fullPath.substring(0, lastIndex);
 		String objId = fullPath.substring(lastIndex + 1);
 		return new PathMetadata(driver, path, objId);
 	}

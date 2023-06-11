@@ -33,22 +33,32 @@ public class PageController implements PublicType {
 			@Basic(bean="locale", scope=ScopeType.REQUEST, mappingType=MappingTypes.VALUE) Locale locale, 
 			WebResultAction result) {
 		
-		Page page = (Page) objectTemplateManager.getObject( PagesObjectsManagerDriver.DRIVER_NAME + uri, locale);
-		
-		if(page == null && locale != null) {
-			page = (Page) objectTemplateManager.getObject( PagesObjectsManagerDriver.DRIVER_NAME + uri, null);
+		try {
+			Page page = (Page) objectTemplateManager.getObject( PagesObjectsManagerDriver.DRIVER_NAME + uri, locale);
+			
+			if(page == null && locale != null) {
+				page = (Page) objectTemplateManager.getObject( PagesObjectsManagerDriver.DRIVER_NAME + uri, null);
+			}
+			
+			if(page != null) {
+				ObjectTemplate pg = objectTemplateManager.getTemplate(PagesObjectsManagerDriver.DRIVER_NAME, page);
+				result.setView(pg.getTemplate(), true);
+				result.setDispatcher(WebDispatcherType.FORWARD);
+				result.add("page", page);
+			}
+			else {
+				result.setResponseStatus(HttpStatus.NOT_FOUND);
+				result.setReason(uri + " not found!");
+			}
+			
 		}
-		
-		if(page != null) {
-			ObjectTemplate pg = objectTemplateManager.getTemplate(PagesObjectsManagerDriver.DRIVER_NAME, page);
-			result.setView(pg.getTemplate(), true);
-			result.setDispatcher(WebDispatcherType.FORWARD);
-			result.add("page", page);
-		}
-		else {
-			result.setResponseStatus(HttpStatus.NOT_FOUND);
+		catch(Throwable ex) {
+			ex.printStackTrace();
+			result.setResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+			result.setReason(ex.toString());
 		}
 		
 		return result;
+		
 	}
 }
