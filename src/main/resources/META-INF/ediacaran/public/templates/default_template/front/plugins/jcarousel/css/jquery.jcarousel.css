@@ -43,6 +43,12 @@
 
 /** Carousel Controls **/
 
+.jcarousel-control-prev:hover,
+.jcarousel-control-next:hover {
+    text-decoration: none;
+    color: #fcfc;
+}
+
 .jcarousel-control-prev,
 .jcarousel-control-next {
     position: absolute;

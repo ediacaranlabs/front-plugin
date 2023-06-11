@@ -18,13 +18,24 @@ $.AppContext.vars = {
 		
 		panel: "#panel",
 
+		document: null,
+
 		loaded: false
 };
 
 $.AppContext.events = {
 
 		add: function (component, type, handler){
-			$('#' + component).on(type, handler);
+			//$('#' + component).on(type, handler);
+			$('#' + component).on(type, function(event){
+				handler({
+					'sourceID' : component,
+					'eventType': type,
+					'handler' : event.originalEvent,
+					'source': $.AppContext.utils.toObject(this),
+					'originalSource': $(this)
+				});
+			});
 		},
 		
 		remove: function (component, type){
@@ -35,14 +46,30 @@ $.AppContext.events = {
 
 $.AppContext.utils = {
 		
+		toObject: function(obj){
+			return $.AppContext.utils.getById($(obj).attr('id'));
+		},
+		
 		getById: function(id){
-			var element = $('#' + id );
-			var elementType = element.prop("tagName").toLowerCase();
-
-			var type = $.AppContext.types._map[elementType];
-			return type == null? new $.AppContext.types._map['object'](element) : new type(element);
+			return $.AppContext.utils.getByAdvise('#' + id);
 		},
 
+		getByAdvise: function($obj){
+			
+			$obj = $($obj);
+			
+			var $tagNameProp = $obj.prop("tagName");
+			
+			if($tagNameProp == null){
+				return null;
+			}
+			
+			var $elementType = $tagNameProp.toLowerCase();
+			var $type = $.AppContext.types._map[$elementType];
+			
+			return $type == null? new $.AppContext.types._map['object']($obj) : new $type($obj);
+		},
+		
 		setContentById: function(id, value){
 			$('#' + id).html(value);
 		},
@@ -91,33 +118,93 @@ $.AppContext.utils = {
 		},
 
 		enableAsyncSubmit: function (local){
-
-			$((local? local + " " : "") + "form").each(function() {
-				var $f           = $(this);
-				var $destContent = $f.attr('dest-content');
+			
+			var $region = local == null? '' : '#' + local;
+			
+			$($region + " form button[type=submit]").each(function() {
 				
-				if(!$destContent){
+				var $e = $(this);
+				
+				if( $e.is("button") && $e.attr("type") == "submit" ) {
+			        
+					if($e.attr('asyncEnabled')){
+						return;
+					}
+					
+					$e.click(function(event){
+						
+						var $b = $(this);
+
+						var $form = $b.attr("form") !== undefined? $('#' + $b.attr("form")) : $b.parents('form:first');
+						
+						$form.attr("action",       $b.attr("formaction") !== undefined?   $b.attr("formaction")   : $form.attr("action_default")       );
+						$form.attr("enctype",      $b.attr("formenctype") !== undefined?  $b.attr("formenctype")  : $form.attr("enctype_default")      );
+						$form.attr("method",       $b.attr("formmethod") !== undefined?   $b.attr("formmethod")   : $form.attr("method_default")       );
+						$form.attr("target",       $b.attr("formtarget") !== undefined?   $b.attr("formtarget")   : $form.attr("target_default")       );
+						$form.attr("dest-content", $b.attr("dest-content") !== undefined? $b.attr("dest-content") : $form.attr("dest_content_default") );
+						
+						var $destContent = $form.attr('dest-content');
+						var $address     = $form.attr('action');
+						var actionType   = $address === undefined? "" : $address.substring(0, 2);
+						
+						if(actionType === '#!' || actionType === '#m'){
+					    	event.preventDefault();
+					    	$.AppContext.utils.submit($form);
+						}
+
+
+					});
+					
+					$e.attr('asyncEnabled', true);
+
+			    }					
+			});
+			
+			$($region + " form").each(function() {
+				
+				var $f = $(this);
+				
+				if($f.attr('asyncEnabled')){
 					return;
 				}
 				
-				$($f).removeAttr('onsubmit');
-				$($f).unbind('submit');
+				var $destContent = $f.attr('dest-content');
+				var $address     = $f.attr('action');
+				var actionType   = $address === undefined? "" : $address.substring(0, 2);
+
+				if( (actionType !== '#!' && actionType !== '#m') && !$destContent){
+					return;
+				}
+				
+				$f.removeAttr('onsubmit');
+				$f.unbind('submit');
+				
+				$f.attr("action_default", $f.attr("action"));
+				$f.attr("enctype_default", $f.attr("enctype"));
+				$f.attr("method_default", $f.attr("method"));
+				$f.attr("target_default", $f.attr("target"));
+				$f.attr("dest_content_default", $f.attr("dest-content"));
+
 				
 				$($f).submit(function (event) {
-			    	var $form = $(this);
 
+			    	var $form = $(this);
+			    	
 			    	event.preventDefault();
 			    	$.AppContext.utils.submit($form);
-			        return false;
 				});
 					
+				$f.attr('asyncEnabled', true);
+				
 			});
 			
 		},
 
 		enableAsyncGet: function (local){
 
-			$((local? local + " " : "") + "a[href]").each(function(e) {
+			var $region = local == null? '' : '#' + local;
+			
+			$($region + " a[href]").each(function(e) {
 				var $lnk = $(this);
 				
 				if($.AppContext.utils.isApplyAsyncGet($lnk)){
@@ -151,13 +238,15 @@ $.AppContext.utils = {
 			
 			$.ajax({
 			    type: 'POST',
-			    headers: { 
-			        'Accept': 'application/json',
-			        'Content-Type': 'application/json' 
-			    },			    
-			    dataType: "json",
+			    //headers: { 
+			    //    'Accept': 'application/json',
+			    //    'Content-Type': 'application/json' 
+			    //},
+			    contentType: "application/json; charset=utf-8",
 			    url: $.AppContext.vars.contextPath + resource,
-			    data: request,
+			    data: JSON.stringify(request),
+			    traditional: true,
+			    //data: request,
 			    success: success,
 			    error : error
 			});
@@ -167,158 +256,54 @@ $.AppContext.utils = {
 		/* load content functions */
 		
 		loadResourceContent: function ($destContent, $resource){
+			
+			var $address     = $.AppContext.utils.getAddress($resource);
+			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
+			var $modal       = $.AppContext.utils.isModal($resource);
+			
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
+		},
 
-			var opts = {
-			    type: 'GET',
-			    url: $.AppContext.vars.contextPath + $resource,
-			    success: function($data) {
-			    	
-		        	var $evt = {
-				    		sourceID: "utils.load_resource_content",
-				    		type: "after",
-				    		data: {
-				        		opts: opts,
-				        		success: true,
-				        		data: $data,
-				        	}
-					    };
-		        	
-			    	$.AppContext.eventListeners.fireEvent($evt);
-			    	
-			    	$data = $evt.data.data;
-			    	
-			    	$.AppContext.loadListeners.executeBefore($resource);
-		    		$.AppContext.utils.updateContent($destContent, $data);
-			    	$.AppContext.loadListeners.executeAfter($resource);
-		        },
-		        error: function($data){
-		        	
-		        	var $evt = {
-				    		sourceID: "utils.load_resource_content",
-				    		type: "after",
-				    		data: {
-				        		opts: opts,
-				        		success: false,
-				        		data: $data,
-				        	}
-					    };
-		        	
-			    	$.AppContext.eventListeners.fireEvent($evt);
-			    	
-			    	$data = $evt.data.data;
-		        	
-		        }
-		        
-			};
+		updateContentByID: function ($resource, $destContent){
 			
-	    	var $evt = {
-	    		sourceID: "utils.load_resource_content",
-	    		type: "before",
-	    		data: opts
-		    };
-		    	
-	    	$.AppContext.eventListeners.fireEvent($evt);
-	    	
-	    	opts = $evt.data;
+			var $address     = $.AppContext.utils.getAddress($resource);
+			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
+			var $modal       = $.AppContext.utils.isModal($resource);
 			
-			$.ajax(opts);
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
+		},
+		
+		appendContentByID: function ($resource, $destContent){
 			
+			var $address     = $.AppContext.utils.getAddress($resource);
+			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
+			var $modal       = $.AppContext.utils.isModal($resource);
+			
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'append');
+		},
+
+		insertContentByID: function ($resource, $destContent){
+			
+			var $address     = $.AppContext.utils.getAddress($resource);
+			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
+			var $modal       = $.AppContext.utils.isModal($resource);
+			
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'insert');
 		},
 		
 		loadContent: function ($link){
 
-			var $address     = $.AppContext.utils.getAddress($link);
-			var $destContent = $.AppContext.utils.getDestContent($link);
-			var $modal       = $.AppContext.utils.isModal($link);
+			var $address     = $.AppContext.utils.getAddress($link.attr("href"));
+			var $destContent = $.AppContext.utils.getDestContent($link.attr("href"), $link.attr('dest-content'));
+			var $modal       = $.AppContext.utils.isModal($link.attr("href"));
 
-		    if(!$modal){
-	    		$("#wait-modal").modal('show');
-		    }
-
-		    var opts = {
-			    type: 'GET',
-			    url: $.AppContext.vars.contextPath + $address,
-			    success: function($data) {
-			    	
-		        	var $evt = {
-				    		sourceID: "utils.load_content",
-				    		type: "after",
-				    		data: {
-				        		opts: opts,
-				        		success: true,
-				        		data: $data,
-				        		modal: $modal
-				        	}
-					    };
-		        	
-			    	$.AppContext.eventListeners.fireEvent($evt);
-			    	
-			    	$data = $evt.data.data;
-				    
-			    	if($.AppContext.utils.isModal($link)){
-				    	$.AppContext.loadListeners.executeBefore($address);
-			    		$.AppContext.dialog.create();
-			    		$.AppContext.dialog.setContent($data);
-			    		$.AppContext.dialog.setVisible(true);
-				    	$.AppContext.loadListeners.executeAfter($address);
-			    	}
-			    	else{
-				    	$.AppContext.loadListeners.executeBefore($address);
-			    		$.AppContext.utils.updateContent($destContent, $data);
-				    	$.AppContext.loadListeners.executeAfter($address);
-			    	}
-			    	
-				    if(!$modal){
-				    	setTimeout(function(){ 
-				    		$("#wait-modal").modal('hide');
-				    	}, 1000);
-				    }
-			    	
-		        },
-		        error: function($data){
-		        	
-		        	var $evt = {
-				    		sourceID: "utils.load_content",
-				    		type: "after",
-				    		data: {
-				        		opts: opts,
-				        		success: false,
-				        		data: $data,
-				        		modal: $modal
-				        	}
-					    };
-		        	
-			    	$.AppContext.eventListeners.fireEvent($evt);
-			    	
-			    	$data = $evt.data.data;
-		        	
-				    if(!$modal){
-				    	setTimeout(function(){ 
-				    		$("#wait-modal").modal('hide');
-				    	}, 1000);
-				    }
-				    
-		        }
-			};
-		    
-	    	var $evt = {
-	    		sourceID: "utils.load_content",
-	    		type: "before",
-	    		data: opts
-		    };
-		    	
-	    	$.AppContext.eventListeners.fireEvent($evt);
-	    	
-	    	opts = $evt.data;
-	    	
-		    $.ajax(opts);
-			
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
 		},
 
 		/* send data function */
 		
 		submit: function ($form, $validate = true, $resource = null, $dest = null){
-			//alert($form + "\n" + $validate + "\n" + $resource + "\n" + $dest);
+
 			var $bv = $form.data('bootstrapValidator');
 			
 			if($validate && $bv){
@@ -331,12 +316,20 @@ $.AppContext.utils = {
 			}
 			
 			var $action      = $resource == null? $form.attr('action') : $resource;
+			var $modal       = $.AppContext.utils.isModal($action);
 			var $method      = $form.attr('method');
 			var $destContent = $dest == null? $form.attr('dest-content') : $dest;
 			var $enctype     = $form.attr('enctype');
+			var $data        = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
+
+		    $destContent = $.AppContext.utils.getDestContent($action, $destContent);
+		    $action      = $.AppContext.utils.getAddress($action);
+
+			$.AppContext.utils.send($method, $action, $data, $enctype, $destContent, $modal, null);
 			
-			//var $data = $($form).serialize();
-			var $data = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
+		},
+		
+		send: function ($method, $action, $data, $enctype, $destContent, $modal, $destContentType = null){
 
 		    var opts = {
 		        type   : $method,
@@ -345,7 +338,7 @@ $.AppContext.utils = {
 		        success: function ($data){
 
 		        	var $evt = {
-				    		sourceID: "utils.submit",
+				    		sourceID: "utils.send",
 				    		type: "after",
 				    		data: {
 				        		opts: opts,
@@ -354,23 +347,29 @@ $.AppContext.utils = {
 				        	}
 					    };
 		        	
+		        	
 			    	$.AppContext.eventListeners.fireEvent($evt);
 			    	
 			    	$data = $evt.data.data;
-			    	
-			    	$.AppContext.loadListeners.executeBefore($action);
-		        	$.AppContext.utils.updateContent($destContent, $data);
-			    	$.AppContext.loadListeners.executeAfter($action);
-			    	
-			    	setTimeout(function(){ 
-			    		$("#wait-modal").modal('hide');
-			    	}, 1000);
+				    
+			    	if($modal){
+				    	$.AppContext.loadListeners.executeBefore($action);
+			    		$.AppContext.dialog.create();
+			    		$.AppContext.dialog.setContent($data);
+			    		$.AppContext.dialog.setVisible(true);
+				    	$.AppContext.loadListeners.executeAfter($action);
+			    	}
+			    	else{
+				    	$.AppContext.loadListeners.executeBefore($action);
+			    		$.AppContext.utils.updateContentData($destContent, $data, $destContentType);
+				    	$.AppContext.loadListeners.executeAfter($action);
+			    	}		        	
 			    	
 		        },
 		        error: function ($data){
 		        	
 		        	var $evt = {
-				    		sourceID: "utils.submit",
+				    		sourceID: "utils.send",
 				    		type: "after",
 				    		data: {
 				        		opts: opts,
@@ -383,10 +382,6 @@ $.AppContext.utils = {
 			    	
 			    	$data = $evt.data.data;
 		        	
-			    	setTimeout(function(){ 
-			    		$("#wait-modal").modal('hide');
-			    	}, 1000);
-
 		        }
 		    };
 			
@@ -397,10 +392,8 @@ $.AppContext.utils = {
 		    	opts.contentType = false;		    	
 		    }
 		    
-	    	$("#wait-modal").modal('show');
-			
 	    	var $evt = {
-	    		sourceID: "utils.submit",
+	    		sourceID: "utils.send",
 	    		type: "before",
 	    		data: opts
 		    };
@@ -415,70 +408,81 @@ $.AppContext.utils = {
 		
 		/* simple functions */
 		
-		updateContent: function ($local, $content){
+		updateContentData: function ($local, $content, $position = null){
 			
 			$content = 
-				' <script type="text/javascript">' + 
-				'  $.AppContext.utils.enableActions("' + $local + '");' +
-				'</script>' + $content;
-			
-			$($local).html($content);
-			window.scrollTo(0,0);
-		},
-		
-		getDestContent: function (link){
-			
-			var address = link.attr("href");
-			var len     = address.length;
+				'<script type="text/javascript">' + 
+				'   $.AppContext.utils.enableActions("' + $local + '");' +
+				'</script>' +
+				$content; 
 
-			if(len <= 2){
-				return null;
-			}
-			
-			var start       = address.substring(0, 2);
-			var destContent = link.attr('dest-content');
-
-			if(start == '#!'){
-				return destContent? destContent : $.AppContext.vars.painel;
+			if($position === 'append'){
+				$('#' + $local).append($content);
 			}
 			else
-			if(start == '#m'){
-				return destContent? destContent : $.AppContext.vars.dialog;
+			if($position === 'insert'){
+				$('#' + $local).prepend($content);
 			}
+			else{
+				$('#' + $local).html($content);
+			}
+			//window.scrollTo(0,0);
+		},
+		
+		getDestContent: function ($address, $destContent){
 			
-			return null;
+			if($destContent === undefined){
+
+				var len = $address.length;
+
+				if(len <= 2){
+					return null;
+				}
+ 				
+				var start = $address.substring(0, 2);
+
+				if(start == '#!'){
+					return $.AppContext.vars.painel;
+				}
+				else
+				if(start == '#m'){
+					return $.AppContext.vars.dialog;
+				}
+				
+			}
+
+			return $destContent;
+			
 		},
 
-		isModal: function (link){
+		isModal: function ($address){
 			
-			var address = link.attr("href");
-			var len     = address.length;
+			var len = $address.length;
 
 			if(len <= 2){
 				return false;
 			}
 			
-			var start = address.substring(0, 2);
+			var start = $address.substring(0, 2);
 
 			return start == '#m';
 		},
 
-		getAddress: function (link){
+		getAddress: function ($address){
 			
-			var address = link.attr("href");
-			var len     = address.length;
+			var len = $address.length;
 
 			if(len <= 2){
-				return address;
+				return $address;
 			}
 			
-			var start   = address.substring(0, 2);
+			var start   = $address.substring(0, 2);
 
 			if(start == '#!' || start == '#m'){
-				return address.substring(2, address.length);
+				return $address.substring(2, $address.length);
 			}
 			
-			return address;
+			return $address;
 		},
 
 		isApplyAsyncGet: function (link){
@@ -519,6 +523,18 @@ $.AppContext.utils = {
 			return obj1;
 		}
 		
+};
+
+$.AppContext.utils.mouse = {};
+
+$.AppContext.utils.mouse.position = null;
+
+$.AppContext.utils.mouse.installMouseMonitor = function (){
+	
+	window.addEventListener('mousemove', function (event){
+		$.AppContext.utils.mouse.position = { x: event.clientX, y: event.clientY };
+	});
+	
 };
 
 $.AppContext.vars.eventListeners = [];
@@ -734,9 +750,7 @@ $.AppContext.dialog = {
 				$id = "defaultDialog";
 			}
 			
-			$id = "#" + $id;
-			
-			$.AppContext.utils.updateContent($id + " .modal-content", $value);
+			$.AppContext.utils.updateContentData($id + " .modal-content", $value);
 			
 			$($id).find("[modal-action='close']").click(function(){
 				$($id).modal("hide");
@@ -793,8 +807,13 @@ $.AppContext.loadContentOnPanel = function ($resource){
 };
 
 $(function (){
-	$.AppContext.vars.loaded = true;
+	$.AppContext.vars.document = $.AppContext.utils.getByAdvise('body'); 
+	
+	$.AppContext.utils.mouse.installMouseMonitor();
 	$.AppContext.utils.enableActions(null);
 	$.AppContext.utils.executeAsyncLoad();
 	$.AppContext.eventListeners.init();
+	
+	$.AppContext.vars.loaded   = true;
+	
 });

@@ -2,13 +2,18 @@ $.AppContext.tinymce = {};
 
 $.AppContext.tinymce.apply = function ($id){
 
-	tinymce.remove('#' + $id + ' .tinymce');
+	tinymce.remove('#' + $id);
  
 	tinymce.init({
-	        selector: '#' + $id + ' .tinymce',
+	        selector: '#' + $id,
 	        strict_loading_mode : true,
 	        menubar: false,
 	        run_local: true,
+	        setup: function (editor) {
+	            editor.on('change', function () {
+	                editor.save();
+	            });
+	        },
 	        plugins: [
 	          'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
 	          'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
@@ -21,3 +26,16 @@ $.AppContext.tinymce.apply = function ($id){
 		 
 	 
 };
+
+$.AppContext.onload(function(){			
+		
+	$.AppContext.eventListeners.addListener("tinymce-save",{
+		
+		fireEvent: function($evt){
+			if($evt.type === 'before' && $evt.sourceID === 'utils.send'){
+				tinymce.triggerSave();
+			}
+		}
+	});
+	
+});

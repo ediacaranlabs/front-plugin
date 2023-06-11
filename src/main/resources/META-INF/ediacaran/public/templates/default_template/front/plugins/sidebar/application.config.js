@@ -33,7 +33,7 @@ $.AppContext.sidebar.apply = function($id){
 		var $content = $($body).find(".sidebar-content");
 		console.log($($content).height());
 		
-		var bodyHeight = $($content).outerHeight();
+		var bodyHeight = $($body).outerHeight();
 		var barHeight = $($bar).outerHeight();
 		
 /*		
@@ -54,8 +54,8 @@ $.AppContext.sidebar.apply = function($id){
 			$($bar).css('min-height', bodyHeight + "px");
 		}
 */
-	});
 
+	});
 		
 };
 
