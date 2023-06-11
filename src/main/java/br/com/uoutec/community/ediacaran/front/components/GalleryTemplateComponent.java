@@ -24,6 +24,7 @@ public class GalleryTemplateComponent  extends AbstractTemplateComponent {
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
+			add("id");
 			add("content");
 		}});
 	

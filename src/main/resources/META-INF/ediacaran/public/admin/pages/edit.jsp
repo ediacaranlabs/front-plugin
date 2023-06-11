@@ -82,10 +82,10 @@
 				</ed:col>
 			</ed:row>
 			<ed:row>
-				<ed:col size="12">
-					<ec:textarea name="content" classStyle="tinymce">
+				<ed:col size="12" classStyle="form-group has-feedback">
+					<ec:tinymce name="content">
 						${page.write(pageContext.out)}
-					</ec:textarea>
+					</ec:tinymce>
 				</ed:col>
 			</ed:row>
 			<ed:row>

@@ -1,3 +1,4 @@
+<!-- carousel:{id} -->
 <div {attr} class="jcarousel-wrapper">
     <div class="jcarousel">
         <ul>
@@ -10,3 +11,9 @@
 
     <p class="jcarousel-pagination"></p>
 </div>
+<script language="javascript">
+$.AppContext.onload(function()&#123;
+	$.AppContext.carousel.apply('{id}');
+&#125;);
+</script>
+<!-- /carousel:{id} -->

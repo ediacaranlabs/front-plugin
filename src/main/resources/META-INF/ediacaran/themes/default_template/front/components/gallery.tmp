@@ -1,1 +1,14 @@
-{content}
+<!-- gallery:{id} -->
+<div {attr} class="row">
+	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+		{content}
+	</div>
+</div>
+<script language="javascript">
+$.AppContext.onload(function()&#123;
+
+	$.AppContext.gallery.apply('{id}');
+	
+&#125;);
+</script>
+<!-- /gallery:{id} -->

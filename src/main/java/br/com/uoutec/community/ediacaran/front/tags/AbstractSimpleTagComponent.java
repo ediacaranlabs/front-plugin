@@ -124,12 +124,12 @@ public abstract class AbstractSimpleTagComponent
 		return map;
     }
     
-    private void registerParentTag() {
+    protected void registerParentTag() {
 		parentTag = getProperty(TAG_CONTEXT);
 		setProperty(TAG_CONTEXT, this);
     }
 
-    private void unregisterParentTag() {
+    protected void unregisterParentTag() {
 		setProperty(TAG_CONTEXT, parentTag);
 		parentTag = null;
     }

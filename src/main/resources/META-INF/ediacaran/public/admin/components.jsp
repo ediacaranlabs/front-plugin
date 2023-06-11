@@ -453,22 +453,16 @@
 							<p><strong>Augue iriure</strong> dolorum per ex, ne iisque ornatus veritus duo. Ex nobis integre 
 		                    lucilius sit, pri ea falli ludus appareat. Eum quodsi fuisset id, nostro patrioque qui id. Nominati 
 		                    eloquentiam in mea.</p>
-		                    <p>No eum sanctus vituperata reformidans, dicant abhorreant ut pro. Duo id enim iisque praesent, 
-		                    amet intellegat per et, solet referrentur eum et.</p>						
 						</ec:nivo-slider-item>
 						<ec:nivo-slider-item link="#" image="/img/slides/nivo/bg-2.jpg" title="Calypte Cache">
 							<p><strong>Augue iriure</strong> dolorum per ex, ne iisque ornatus veritus duo. Ex nobis integre 
 		                    lucilius sit, pri ea falli ludus appareat. Eum quodsi fuisset id, nostro patrioque qui id. Nominati 
 		                    eloquentiam in mea.</p>
-		                    <p>No eum sanctus vituperata reformidans, dicant abhorreant ut pro. Duo id enim iisque praesent, 
-		                    amet intellegat per et, solet referrentur eum et.</p>						
 						</ec:nivo-slider-item>
 						<ec:nivo-slider-item link="#" image="/img/slides/nivo/bg-3.jpg" title="Brutos Framework">
 							<p><strong>Augue iriure</strong> dolorum per ex, ne iisque ornatus veritus duo. Ex nobis integre 
 		                    lucilius sit, pri ea falli ludus appareat. Eum quodsi fuisset id, nostro patrioque qui id. Nominati 
 		                    eloquentiam in mea.</p>
-		                    <p>No eum sanctus vituperata reformidans, dicant abhorreant ut pro. Duo id enim iisque praesent, 
-		                    amet intellegat per et, solet referrentur eum et.</p>						
 						</ec:nivo-slider-item>
 					</ec:nivo-slider>
 				</ec:box-body>

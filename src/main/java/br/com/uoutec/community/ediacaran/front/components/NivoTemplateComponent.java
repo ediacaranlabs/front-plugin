@@ -23,6 +23,8 @@ public class NivoTemplateComponent extends AbstractTemplateComponent {
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
+			add("captions");
+			add("images");
 			add("button");
 		}});
 	

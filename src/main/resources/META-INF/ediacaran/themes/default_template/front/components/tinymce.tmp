@@ -1,0 +1,11 @@
+<!-- editor:{id} -->
+<label class="{empty}" for="{id}">{label}</label>
+<textarea class="tinymce {enabled} {align} {classStyle}" {attr}>{value}{content}</textarea>
+<script language="javascript">
+$.AppContext.onload(function()&#123;
+
+	$.AppContext.tinymce.apply('{id}');
+	
+&#125;);
+</script>
+<!-- /editor:{id} -->

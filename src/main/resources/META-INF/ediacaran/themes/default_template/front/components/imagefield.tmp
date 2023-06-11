@@ -1,4 +1,4 @@
-<!-- imagefield -->
+<!-- imagefield:{id} -->
 <label class="{empty}" for="{id}.filename">{label}</label>
 <div id="{id}" class="form-control {enabled} {size} {classStyle} {align}" {attr}>
 	<div class="croppie-image"></div>
@@ -19,4 +19,4 @@ $.AppContext.onload(function()&#123;
 &#125;);
 </script>
 {content}
-<!-- /imagefield -->
+<!-- /imagefield:{id} -->

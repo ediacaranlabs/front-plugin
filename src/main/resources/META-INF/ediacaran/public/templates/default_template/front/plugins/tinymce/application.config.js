@@ -2,10 +2,10 @@ $.AppContext.tinymce = {};
 
 $.AppContext.tinymce.apply = function ($id){
 
-	tinymce.remove($id + ' .tinymce');
+	tinymce.remove('#' + $id + ' .tinymce');
  
 	tinymce.init({
-	        selector: $id + ' .tinymce',
+	        selector: '#' + $id + ' .tinymce',
 	        strict_loading_mode : true,
 	        menubar: false,
 	        run_local: true,
@@ -21,17 +21,3 @@ $.AppContext.tinymce.apply = function ($id){
 		 
 	 
 };
-
-$.AppContext.onload(function(){			
-		
-	$.AppContext.tinymce.apply('');
-	
-	$.AppContext.addLoadListener("tinymce-link-load", "^.*", {
-		
-		after: function(){
-			$.AppContext.tinymce.apply($.AppContext.vars.painel);
-		}
-	
-	});
- 
-});

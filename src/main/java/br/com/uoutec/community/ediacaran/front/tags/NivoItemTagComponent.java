@@ -1,13 +1,14 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import javax.servlet.jsp.JspException;
-
+import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
+import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 
 @Tag(
 	name="nivo-slider-item", 
@@ -26,20 +27,35 @@ public class NivoItemTagComponent extends AbstractSimpleTagComponent {
 	
 	private String link;
 	
-    public void doTag() throws JspException, IOException{
-    	
-    	Object parent = super.getParentTag();
+	protected void beforeBuildComponent(Component component) {
+		
+    	Object parent = getParentTag();
     	
     	if(parent instanceof NivoTagComponent) {
     		StringWriter stringWriter = new StringWriter();
     		if(this.getJspBody() != null) {
+    			try {
     			this.getJspBody().invoke(stringWriter);
+    			}
+    			catch(Throwable ex) {
+    				try(PrintWriter pw = new PrintWriter(stringWriter, true)) {
+    					ex.printStackTrace(pw);
+    				}
+    				catch(Throwable fail) {
+    					fail.printStackTrace();
+    				}
+    				
+    			}
     		}
     		((NivoTagComponent)parent).add(this.image, this.title, this.link, stringWriter.toString());
     	}
-    	
-    }
+		
+	}
 
+	protected void buildComponent(Component component) throws ThemeException, IOException {
+		//o componente é construido em NivoTagComponent
+	}
+	
     public String getDefaultTemplate() {
     	return null;
     }

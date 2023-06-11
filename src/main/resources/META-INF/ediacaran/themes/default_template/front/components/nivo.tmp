@@ -1,5 +1,5 @@
-<!-- Slider --> 
-<div>
+<!-- nivo:{id} -->
+<div {attr}>
 	<div class="nivo-slider">
 		{images}
 	</div>
@@ -11,4 +11,11 @@
 		</div> 
 	</div> 
 </div>
-<!-- end slider -->
+<script language="javascript">
+$.AppContext.onload(function()&#123;
+
+	$.AppContext.nivo.apply('{id}');
+	
+&#125;);
+</script>
+<!-- /nivo:{id} -->
