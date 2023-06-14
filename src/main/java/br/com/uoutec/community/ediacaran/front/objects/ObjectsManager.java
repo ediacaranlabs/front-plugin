@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public interface ObjectsManager {
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver.ObjectsManagerDriverListener;
+import br.com.uoutec.community.ediacaran.plugins.PublicBean;
+
+public interface ObjectsManager extends PublicBean {
 
 	ObjectMetadata registerObject(String id, Locale locale, Object object);
 	
@@ -35,6 +38,10 @@ public interface ObjectsManager {
 	void addListener(ObjectListener listener);
 
 	void removeListener(ObjectListener listener);
+
+	void addListener(String driverName, ObjectsManagerDriverListener listener);
+
+	void removeListener(String driverName, ObjectsManagerDriverListener listener);
 	
 	void flush();
 	

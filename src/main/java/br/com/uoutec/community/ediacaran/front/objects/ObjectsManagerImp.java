@@ -18,11 +18,11 @@ import java.util.regex.Pattern;
 
 import javax.inject.Singleton;
 
-import br.com.uoutec.community.ediacaran.plugins.PublicBean;
+import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver.ObjectsManagerDriverListener;
 
 @Singleton
 public class ObjectsManagerImp 
-	implements ObjectsManager, PublicBean {
+	implements ObjectsManager {
 
 	private static final String PATH_FORMAT = "(\\/[a-z0-9][a-z0-9]+([_-][a-z0-9]+)*)+";
 	
@@ -275,7 +275,7 @@ public class ObjectsManagerImp
 
 	@Override
 	public void registerDriver(ObjectsManagerDriver driver) throws ObjectsManagerDriverException {
-		
+
 		SecurityManager sm = System.getSecurityManager();
 		
 		if(sm != null) {
@@ -531,6 +531,31 @@ public class ObjectsManagerImp
 		}
 		
 		objectListenerManager.unregisterListener(listener);
+	}
+	
+	public void addListener(String driverName, ObjectsManagerDriverListener listener) {
+		
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(basePermission + ".listener.register"));
+		}
+
+		ObjectsManagerDriver driver = getSecureDriver(driverName);
+		driver.addListener(listener);
+		
+	}
+
+	public void removeListener(String driverName, ObjectsManagerDriverListener listener) {
+
+		SecurityManager sm = System.getSecurityManager();
+		
+		if(sm != null) {
+			sm.checkPermission(new RuntimePermission(basePermission + ".listener.unregister"));
+		}
+		
+		ObjectsManagerDriver driver = getSecureDriver(driverName);
+		driver.removeListener(listener);
 	}
 	
 	public void flush() {

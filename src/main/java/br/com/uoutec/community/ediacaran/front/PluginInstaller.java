@@ -20,6 +20,7 @@ import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriverException;
 import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.page.ObjectTemplate;
+import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManager;
 import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManagerDriver;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
@@ -94,7 +95,7 @@ public class PluginInstaller
 				)
 		);
 		
-		ObjectsManager objectsManager = EntityContextPlugin.getEntity(ObjectsManager.class);
+		ObjectsTemplateManager objectsManager = EntityContextPlugin.getEntity(ObjectsTemplateManager.class);
 		
 		objectsManager.registerDriver(this.globalDriver);
 		objectsManager.registerDriver(this.pageObjectDriver);
