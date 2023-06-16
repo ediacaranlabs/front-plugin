@@ -13,12 +13,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import br.com.uoutec.community.ediacaran.core.system.i18n.LanguageRegistry;
-import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.objects.MenubarObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.SearchType;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
+import br.com.uoutec.community.ediacaran.system.i18n.LanguageRegistry;
+import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 
 @Singleton
 @Named("editMenubar")

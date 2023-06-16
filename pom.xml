@@ -63,11 +63,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- dependencies -->
-		<dependency>
-			<groupId>br.com.uoutec</groupId>
-			<artifactId>front-ediacaran-core-plugin</artifactId>
-			<version>1.0.0</version>
-		</dependency>
 		<!-- ediacaran -->
 		<dependency>
 			<groupId>br.com.uoutec</groupId>

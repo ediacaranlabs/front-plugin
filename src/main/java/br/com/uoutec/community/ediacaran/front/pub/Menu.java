@@ -14,9 +14,9 @@ import java.util.Map;
 import br.com.uoutec.community.ediacaran.VarParser;
 import br.com.uoutec.community.ediacaran.core.security.AuthorizationManager;
 import br.com.uoutec.community.ediacaran.core.security.Subject;
-import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
-import br.com.uoutec.community.ediacaran.core.system.util.IDGenerator;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
+import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
+import br.com.uoutec.community.ediacaran.system.util.IDGenerator;
 
 public class Menu implements Serializable {
 

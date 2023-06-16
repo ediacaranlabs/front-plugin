@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import br.com.uoutec.community.ediacaran.EdiacaranEventListener;
 import br.com.uoutec.community.ediacaran.EdiacaranEventObject;
-import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
+import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.web.ContextInitializer;
 import br.com.uoutec.i18n.MessageBundleThread;
 

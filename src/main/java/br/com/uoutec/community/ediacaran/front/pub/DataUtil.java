@@ -7,7 +7,7 @@ import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import br.com.uoutec.community.ediacaran.core.system.util.DataUtil.ClassTypeAdapter;
+import br.com.uoutec.community.ediacaran.system.util.DataUtil.ClassTypeAdapter;
 
 public class DataUtil {
 

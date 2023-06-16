@@ -16,8 +16,8 @@ import javax.inject.Singleton;
 
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.SearchType;
-import br.com.uoutec.community.ediacaran.core.system.i18n.LanguageRegistry;
-import br.com.uoutec.community.ediacaran.core.system.i18n.PluginLanguageUtils;
+import br.com.uoutec.community.ediacaran.system.i18n.LanguageRegistry;
+import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
 
 @Singleton

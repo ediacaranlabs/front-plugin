@@ -9,7 +9,6 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.jstl.fmt.LocalizationContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import br.com.uoutec.community.ediacaran.core.system.i18n.LanguageRegistry;
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
@@ -17,6 +16,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfigurationMetadata;
 import br.com.uoutec.community.ediacaran.plugins.PluginType;
+import br.com.uoutec.community.ediacaran.system.i18n.LanguageRegistry;
 
 @Tag(
 	name="setBundle", 
