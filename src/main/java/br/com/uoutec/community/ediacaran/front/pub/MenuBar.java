@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.com.uoutec.community.ediacaran.core.security.AuthorizationManager;
-import br.com.uoutec.community.ediacaran.core.security.Subject;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
+import br.com.uoutec.community.ediacaran.security.AuthorizationManager;
+import br.com.uoutec.community.ediacaran.security.Subject;
 
 public class MenuBar {
 

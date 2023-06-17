@@ -21,11 +21,11 @@ import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
-import br.com.uoutec.community.ediacaran.core.security.RequiresPermissions;
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.page.EditPage;
 import br.com.uoutec.community.ediacaran.front.page.ObjectTemplate;
 import br.com.uoutec.community.ediacaran.front.page.Page;
+import br.com.uoutec.community.ediacaran.security.RequiresPermissions;
 import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 
 @Singleton

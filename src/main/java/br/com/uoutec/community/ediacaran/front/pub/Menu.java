@@ -12,9 +12,9 @@ import java.util.Locale;
 import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.VarParser;
-import br.com.uoutec.community.ediacaran.core.security.AuthorizationManager;
-import br.com.uoutec.community.ediacaran.core.security.Subject;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
+import br.com.uoutec.community.ediacaran.security.AuthorizationManager;
+import br.com.uoutec.community.ediacaran.security.Subject;
 import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.util.IDGenerator;
 
