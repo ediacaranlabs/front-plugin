@@ -1,3 +1,3 @@
-<div class="box-header">
+<div {attr} class="box-header {align}">
 	{content}
 </div>
