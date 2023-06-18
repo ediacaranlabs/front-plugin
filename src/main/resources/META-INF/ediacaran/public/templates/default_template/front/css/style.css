@@ -225,17 +225,19 @@ Navbar
     content: unset;
 }
 
-.navbar-footer .dropdown-menu{
+.navbar-footer .dropdown-menu {
 	display: block;
     position: unset !important;
     background-color: unset;
     font-size: unset;
     padding: unset;
     margin: unset;
+    border: unset;
 }
 
 .navbar-footer .dropdown-item{
-    padding: 0 1.5rem;
+    /*padding: 0 1.5rem;*/
+    padding: 2px 1.5rem 2px 1.5rem;
 }
 
 .navbar-footer .dropdown-item:active{

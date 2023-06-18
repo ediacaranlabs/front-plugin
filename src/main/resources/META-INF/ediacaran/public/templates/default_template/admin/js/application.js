@@ -335,6 +335,7 @@ $.AppContext.utils = {
 		        type   : $method,
 		        url    : $action,
 		        data   : $data,
+		        cache  : false,
 		        success: function ($data){
 
 		        	var $evt = {

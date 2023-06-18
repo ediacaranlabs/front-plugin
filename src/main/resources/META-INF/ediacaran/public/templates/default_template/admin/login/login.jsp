@@ -59,8 +59,12 @@
 	      </ed:row>
 		</ec:form>
 		
+		<c:if test="${!empty plugins.ediacaran.front.user_forgot_page}">
 	    <a href="${plugins.ediacaran.front.user_forgot_page}"><fmt:message key="box.forgot_pass" bundle="${sys_messages}"/></a><br>
+		</c:if>
+		<c:if test="${!empty plugins.ediacaran.front.user_register_page}">
 	    <a href="${plugins.ediacaran.front.user_register_page}" class="text-center"><fmt:message key="box.register" bundle="${sys_messages}"/></a>
+		</c:if>
 		
     </ec:box-body>
 </ec:box>

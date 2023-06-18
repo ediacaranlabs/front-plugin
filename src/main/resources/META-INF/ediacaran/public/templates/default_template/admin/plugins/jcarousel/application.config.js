@@ -10,13 +10,16 @@ $.AppContext.carousel.apply = function($id){
             var carousel = $(this),
                 width = carousel.innerWidth();
 
-            /*
-            if (width >= 600) {
-                width = width / 3;
-            } else if (width >= 350) {
+        	var carousel = $(this);
+        	var width = carousel.innerWidth();
+
+            if (width >= 992) {
+                width = width / 4;
+            }
+            if (width >= 576) {
                 width = width / 2;
             }
-            */
+            
             carousel.jcarousel('items').css('width', Math.ceil(width) + 'px');
         })
         .jcarousel({
