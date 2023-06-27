@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 import javax.inject.Singleton;
 
 import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver.ObjectsManagerDriverListener;
+import br.com.uoutec.community.ediacaran.plugins.SecurityUtil;
 
 @Singleton
 public class ObjectsManagerImp 
@@ -117,11 +118,7 @@ public class ObjectsManagerImp
 			throw new IllegalStateException("invalid format: " + id);
 		}
 		
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + id.replace("/", ".") + ".register"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + id.replace("/", ".") + ".register"));
 		
 		writeLock.lock();
 		try {
@@ -168,11 +165,7 @@ public class ObjectsManagerImp
 			throw new IllegalStateException("invalid id: " + id);
 		}
 
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + id.replace("/", ".") + ".register"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + id.replace("/", ".") + ".register"));
 
 		writeLock.lock();
 		try {
@@ -229,11 +222,7 @@ public class ObjectsManagerImp
 			throw new IllegalStateException("invalid format: " + id);
 		}
 		
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + id.replace("/", ".") + ".unregister"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + id.replace("/", ".") + ".unregister"));
 		
 		writeLock.lock();
 		try {
@@ -276,11 +265,7 @@ public class ObjectsManagerImp
 	@Override
 	public void registerDriver(ObjectsManagerDriver driver) throws ObjectsManagerDriverException {
 
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".driver.register"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".driver.register"));
 		
 		if(drivers.putIfAbsent(driver.getName().toLowerCase(), driver) != null) {
 			throw new ObjectsManagerDriverException("driver exists: " + driver.getName());
@@ -291,11 +276,7 @@ public class ObjectsManagerImp
 	@Override
 	public void unregisterDriver(ObjectsManagerDriver driver) {
 		
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".driver.unregister"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".driver.unregister"));
 		
 		drivers.remove(driver.getName().toLowerCase(), driver);
 	}
@@ -303,11 +284,7 @@ public class ObjectsManagerImp
 	@Override
 	public ObjectsManagerDriver getDriver(String driverName) {
 
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".driver.get"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".driver.get"));
 		
 		return drivers.get(driverName);
 	}
@@ -513,33 +490,21 @@ public class ObjectsManagerImp
 
 	public void addListener(ObjectListener listener) {
 		
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".listener.register"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".listener.register"));
 		
 		objectListenerManager.registerListener(listener);
 	}
 
 	public void removeListener(ObjectListener listener) {
 		
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".listener.unregister"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".listener.unregister"));
 		
 		objectListenerManager.unregisterListener(listener);
 	}
 	
 	public void addListener(String driverName, ObjectsManagerDriverListener listener) {
 		
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".listener.register"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".listener.register"));
 
 		ObjectsManagerDriver driver = getSecureDriver(driverName);
 		driver.addListener(listener);
@@ -548,11 +513,7 @@ public class ObjectsManagerImp
 
 	public void removeListener(String driverName, ObjectsManagerDriverListener listener) {
 
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".listener.unregister"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".listener.unregister"));
 		
 		ObjectsManagerDriver driver = getSecureDriver(driverName);
 		driver.removeListener(listener);

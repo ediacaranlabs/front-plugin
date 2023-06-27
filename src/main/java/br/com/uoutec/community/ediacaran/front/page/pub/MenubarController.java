@@ -1,6 +1,8 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
 import java.io.Serializable;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -80,7 +82,9 @@ public class MenubarController {
 		webResult.setView("/pages/admin/table");
 		
 		try {
-			List<ObjectMetadata> list     = editMenubar.list(path, locale);
+			List<ObjectMetadata> list =
+					AccessController.doPrivileged((PrivilegedAction<List<ObjectMetadata>>)()->editMenubar.list(path, locale));					
+
 			Map<Locale, String> langNames = editMenubar.getSupportedLocales();
 			
 			webResult.add("itens", list);
@@ -106,7 +110,8 @@ public class MenubarController {
 		
 		try {
 			
-			MenuBar menuBar = editMenubar.getMenubarById(path, id, locale);
+			MenuBar menuBar =
+					AccessController.doPrivileged((PrivilegedAction<MenuBar>)()->editMenubar.getMenubarById(path, id, locale));					
 			
 			if(menuBar == null) {
 				WebFlowController
@@ -155,7 +160,8 @@ public class MenubarController {
 		try {
 			
 			menubarPubEntity.setEditMenubar(editMenubar);
-			MenuBar menuBar = menubarPubEntity.rebuild(menubarPubEntity.getGid() != null, true, true);
+			MenuBar menuBar =
+					AccessController.doPrivileged((PrivilegedAction<MenuBar>)()->menubarPubEntity.rebuild(menubarPubEntity.getGid() != null, true, true));					
 			
 			ObjectMetadata omd = editMenubar
 				.registerMenubarById(
@@ -263,7 +269,10 @@ public class MenubarController {
 			md.put("locale", locale);
 			
 			if(gid == md.hashCode()) {
-				editMenubar.unregisterMenubarById(path, id, locale);
+				AccessController.doPrivileged((PrivilegedAction<MenuBar>)()->{
+					editMenubar.unregisterMenubarById(path, id, locale);
+					return null;
+				});					
 			}
 		}
 		catch(Throwable ex) {
@@ -314,7 +323,8 @@ public class MenubarController {
 	public Serializable searchResource(
 			String value){
 		
-		List<ObjectMetadata> list = editPage.list(value, (Locale)null);
+		List<ObjectMetadata> list =
+				AccessController.doPrivileged((PrivilegedAction<List<ObjectMetadata>>)()->editPage.list(value, (Locale)null));					
 		
 		if(list == null) {
 			return null;

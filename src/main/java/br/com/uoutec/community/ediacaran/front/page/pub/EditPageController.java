@@ -1,5 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -59,7 +61,9 @@ public class EditPageController {
 		webResult.setView("/admin/pages/table");
 		
 		try {
-			List<ObjectMetadata> list     = editpage.list(path, locale);
+			List<ObjectMetadata> list =
+					AccessController.doPrivileged((PrivilegedAction<List<ObjectMetadata>>)()->editpage.list(path, locale));
+			
 			Map<Locale, String> langNames = editpage.getSupportedLocales();
 			
 			webResult.add("itens", list);
@@ -109,7 +113,12 @@ public class EditPageController {
 			md.put("locale", locale);
 			
 			if(gid == md.hashCode()) {
-				editpage.unregisterPage(path, id, locale);
+				AccessController.doPrivileged((PrivilegedAction<List<ObjectMetadata>>)()->{
+					editpage.unregisterPage(path, id, locale);
+					return null;
+				});
+
+				
 			}
 		}
 		catch(Throwable ex) {
@@ -192,7 +201,8 @@ public class EditPageController {
 		
 		try {
 			
-			Page page = editpage.getPageById(path, id, locale);
+			Page page =
+					AccessController.doPrivileged((PrivilegedAction<Page>)()->editpage.getPageById(path, id, locale));
 			
 			if(page == null) {
 				WebFlowController

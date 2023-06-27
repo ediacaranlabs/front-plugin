@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import br.com.uoutec.community.ediacaran.front.page.ObjectTemplate;
 import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManagerDriver;
+import br.com.uoutec.community.ediacaran.plugins.SecurityUtil;
 
 public abstract class FileObjectsTemplateManagerDriver 
 	extends FileObjectsManagerDriver
@@ -24,11 +25,7 @@ public abstract class FileObjectsTemplateManagerDriver
 	@Override
 	public void registerTemplate(ObjectTemplate template) {
 		
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".templates.register"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".templates.register"));
 		
 		templates.put(template.getId(), template);
 	}
@@ -36,11 +33,7 @@ public abstract class FileObjectsTemplateManagerDriver
 	@Override
 	public void unregisterTemplate(String id) {
 		
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + ".templates.unregister"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".templates.unregister"));
 		
 		templates.remove(id);
 		

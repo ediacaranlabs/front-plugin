@@ -5,6 +5,8 @@ import java.util.concurrent.ConcurrentMap;
 
 import javax.inject.Singleton;
 
+import br.com.uoutec.community.ediacaran.plugins.SecurityUtil;
+
 @Singleton
 @Deprecated
 public class MenuBarManagerImp implements MenuBarManager{
@@ -18,11 +20,7 @@ public class MenuBarManagerImp implements MenuBarManager{
 	@Override
 	public void registerMenuBar(MenuBar menuBar) throws MenuBarManagerException {
 		
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + "." + menuBar.getId() + ".register"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + "." + menuBar.getId() + ".register"));
 		
 		if(this.map.containsKey(menuBar.getId())){
 			throw new MenuBarManagerException("menu bar has already been registered: " + menuBar.getId());
@@ -35,11 +33,7 @@ public class MenuBarManagerImp implements MenuBarManager{
 	@Override
 	public MenuBar getMenuBar(String name) throws MenuBarManagerException {
 
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + "." + name + ".list"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + "." + name + ".list"));
 		
 		MenuBar menubar = this.map.get(name);
 		
@@ -53,11 +47,7 @@ public class MenuBarManagerImp implements MenuBarManager{
 	@Override
 	public void removeMenuBar(String name) throws MenuBarManagerException {
 		
-		SecurityManager sm = System.getSecurityManager();
-		
-		if(sm != null) {
-			sm.checkPermission(new RuntimePermission(basePermission + "." + name + ".remove"));
-		}
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + "." + name + ".remove"));
 		
 		map.remove(name);
 	}

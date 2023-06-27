@@ -1,7 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -32,14 +31,8 @@ public abstract class AbstractFileManagerHandler implements FileManagerHandler {
 	
 	@Override
 	public String toFilePath(String value) {
-		try {
-			File f = new File(value);
-			f.getCanonicalFile();
-			return f.toString();
-		}
-		catch(IOException e) {
-			return null;
-		}
+		File f = new File(value);
+		return f.toString();
 	}
 
 	@Override

@@ -3,6 +3,8 @@ package br.com.uoutec.community.ediacaran.front;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -154,7 +156,23 @@ public class ThemeEdiacaranListener implements EdiacaranEventListener{
 					if("tags".equals(path[2])) {
 						String[] tmp = Arrays.copyOfRange(path, 3, path.length);
 						String template = "/" + String.join("/", tmp);
-						TemplateComponent c = (TemplateComponent)ClassUtil.getInstance(value);
+						
+						final ReflectiveOperationException[] doException = new ReflectiveOperationException[1];
+						TemplateComponent c = (TemplateComponent)
+								AccessController.doPrivileged((PrivilegedAction<Object>)()->{
+									try {
+										return ClassUtil.getInstance(value);
+									} 
+									catch (ReflectiveOperationException e) {
+										doException[0] = e;
+										return null;
+									}
+								});
+						
+						if(doException[0] != null) {
+							throw doException[0];
+						}
+						
 						c.loadConfiguration();
 						c.loadTemplate();
 						themeRegistry.registerTemplateComponent(path[0], path[1], template, c);

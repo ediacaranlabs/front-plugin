@@ -1,5 +1,7 @@
 package br.com.uoutec.community.ediacaran.front;
 
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.Locale;
 
 import javax.inject.Singleton;
@@ -31,11 +33,17 @@ public class LanguageRequestListener implements EdiacaranEventListener{
 		if(event.getSource() instanceof ContextInitializer) {
 			
 			if("requestInitialized".equals(event.getType())) {
-				requestInitialized((ServletRequestEvent)event.getData());
+				AccessController.doPrivileged((PrivilegedAction<Object>)()->{
+					requestInitialized((ServletRequestEvent)event.getData());
+					return null;
+				});
 			}
 			else
 			if("requestDestroyed".equals(event.getType())) {
-				requestDestroyed((ServletRequestEvent)event.getData());
+				AccessController.doPrivileged((PrivilegedAction<Object>)()->{
+					requestDestroyed((ServletRequestEvent)event.getData());
+						return null;
+				});
 			}
 		}
 	}
