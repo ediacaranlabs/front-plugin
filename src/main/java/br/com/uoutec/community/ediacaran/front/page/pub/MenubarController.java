@@ -76,6 +76,7 @@ public class MenubarController {
 	public WebResultAction list(
 			@Basic(bean="path")
 			String path,
+			@Basic(bean="locale")
 			String locale,
 			WebResultAction webResult){
 		
@@ -102,9 +103,11 @@ public class MenubarController {
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresPermissions("CONTENT:MENUBAR:EDIT")
 	public WebResultAction edit(
+			@Basic(bean="path")
 			String path,
+			@Basic(bean="id")
 			String id,
-			@Basic(mappingType=MappingTypes.VALUE)
+			@Basic(bean="locale", mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
 		
@@ -255,10 +258,13 @@ public class MenubarController {
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction delete(
+			@Basic(bean="gid")
 			Long gid,
+			@Basic(bean="path")
 			String path,
+			@Basic(bean="path")
 			String id, 
-			@Basic(mappingType=MappingTypes.VALUE)
+			@Basic(bean="locale", mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
 		
@@ -287,9 +293,11 @@ public class MenubarController {
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction confirmDelete(
+			@Basic(bean="path")
 			String path, 
+			@Basic(bean="id")
 			String id,
-			@Basic(mappingType=MappingTypes.VALUE)
+			@Basic(bean="locale", mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
 		
@@ -321,6 +329,7 @@ public class MenubarController {
 	@AcceptRequestType(MediaTypes.APPLICATION_JSON)
 	@ResponseType(MediaTypes.APPLICATION_JSON)
 	public Serializable searchResource(
+			@Basic(bean="value")
 			String value){
 		
 		List<ObjectMetadata> list =

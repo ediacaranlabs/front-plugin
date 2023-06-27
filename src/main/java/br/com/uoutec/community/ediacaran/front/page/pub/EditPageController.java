@@ -55,6 +55,7 @@ public class EditPageController {
 	public WebResultAction list(
 			@Basic(bean="path")
 			String path,
+			@Basic(bean="locale")
 			String locale,
 			WebResultAction webResult){
 		
@@ -99,10 +100,13 @@ public class EditPageController {
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction delete(
+			@Basic(bean="gid")
 			Long gid,
+			@Basic(bean="path")
 			String path,
+			@Basic(bean="id")
 			String id, 
-			@Basic(mappingType=MappingTypes.VALUE)
+			@Basic(bean="locale", mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
 		
@@ -133,9 +137,11 @@ public class EditPageController {
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction confirmDelete(
+			@Basic(bean="path")
 			String path, 
+			@Basic(bean="id")
 			String id,
-			@Basic(mappingType=MappingTypes.VALUE)
+			@Basic(bean="locale", mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
 		
@@ -163,7 +169,10 @@ public class EditPageController {
 	@Action("/new")
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresPermissions("CONTENT:PAGES:CREATE")
-	public WebResultAction create(String templateName, WebResultAction webResult){
+	public WebResultAction create(
+			@Basic(bean="templateName")
+			String templateName, 
+			WebResultAction webResult){
 		
 		try {
 			Map<Locale, String> langNames = editpage.getSupportedLocales();
@@ -193,9 +202,11 @@ public class EditPageController {
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresPermissions("CONTENT:PAGES:EDIT")
 	public WebResultAction edit(
+			@Basic(bean="path")
 			String path,
+			@Basic(bean="id")
 			String id,
-			@Basic(mappingType=MappingTypes.VALUE)
+			@Basic(bean="locale", mappingType=MappingTypes.VALUE)
 			String locale,
 			WebResultAction webResult){
 		

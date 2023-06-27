@@ -6,7 +6,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
+import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManager;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -27,7 +27,7 @@ public class ImportObject extends SimpleTagSupport {
 	}
 
     public void doTag() throws JspException, IOException {
-    	ObjectsManager om = EntityContextPlugin.getEntity(ObjectsManager.class);
+    	ObjectsTemplateManager om = EntityContextPlugin.getEntity(ObjectsTemplateManager.class);
     	Object o = om.getObject(id);
     	((PageContext)getJspContext()).getRequest().setAttribute(var, o);
     }
