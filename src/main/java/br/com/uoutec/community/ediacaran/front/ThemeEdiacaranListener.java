@@ -3,6 +3,7 @@ package br.com.uoutec.community.ediacaran.front;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.security.AccessControlException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Arrays;
@@ -12,6 +13,8 @@ import java.util.Properties;
 import javax.inject.Singleton;
 
 import org.brandao.brutos.ClassUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.com.uoutec.community.ediacaran.EdiacaranEventListener;
 import br.com.uoutec.community.ediacaran.EdiacaranEventObject;
@@ -29,7 +32,7 @@ import br.com.uoutec.community.ediacaran.web.WebUtil;
 @Singleton
 public class ThemeEdiacaranListener implements EdiacaranEventListener{
 
-	//private static final Logger logger = LoggerFactory.getLogger(WebEdiacaranListener.class);
+	private static final Logger logger = LoggerFactory.getLogger(ThemeEdiacaranListener.class);
 	
 	@Override
 	public void onEvent(EdiacaranEventObject event) {
@@ -51,6 +54,9 @@ public class ThemeEdiacaranListener implements EdiacaranEventListener{
 	private void startContext(PluginNode node) {
 		try {
 			loadThemes();
+		}
+		catch(AccessControlException ex) {
+			logger.warn("don't have permission to load theme", ex);
 		}
 		catch(Throwable ex) {
 			throw new RuntimeException(ex);
