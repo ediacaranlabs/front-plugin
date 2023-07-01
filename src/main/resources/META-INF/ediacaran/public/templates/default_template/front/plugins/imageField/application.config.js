@@ -9,9 +9,9 @@ $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $d
 	
 	$croppie.width($width);
 	$croppie.height($height);
-	
+
 	$root.width($($croppie).outerWidth());
-	$root.height($($croppie).outerHeight() + $($button).outerHeight());
+	$root.height('auto');
 	
 	var $croppieObj = $($croppie).croppie({
 		viewport: {

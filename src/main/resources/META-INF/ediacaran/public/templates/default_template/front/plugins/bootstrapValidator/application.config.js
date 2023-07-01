@@ -1,3 +1,4 @@
+$.fn.bootstrapValidator.DEFAULT_OPTIONS.excluded = [];
 
 $.AppContext.validator = {
 		

@@ -30,76 +30,71 @@
 				<ed:col size="12" id="result_page_edit_form">
 				</ed:col>
 			</ed:row>
-			<ed:row>
-				<ed:col size="12">
-					<h5>Conteúdo</h5>
-					<ec:separator/>
-				</ed:col>
-			</ed:row>
-			<ed:row>
-				<ed:col size="5" classStyle="form-group has-feedback">
-					<ec:textfield name="path" label="Caminho" value="${metadata.path}" readonly="${!empty metadata}">
-						<ec:field-validator>
-							<ec:field-validator-rule name="notEmpty" message="Informe um caminho! ( ex: /caminho )"/>
-							<ec:field-validator-rule name="regexp" message="Caminho inválido! ( ex: /caminho )">
-								<ec:field-validator-param name="regexp" raw="true">/^(\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*$/</ec:field-validator-param>
-							</ec:field-validator-rule>
-						</ec:field-validator>
-					</ec:textfield>
-				</ed:col>
-				<ed:col size="4" classStyle="form-group has-feedback">
-					<ec:textfield name="id" label="Identificação" value="${metadata.id}" readonly="${!empty metadata}">
-						<ec:field-validator>
-							<ec:field-validator-rule name="regexp" message="Identificação inválida! ( ex: pagina-teste )">
-								<ec:field-validator-param name="regexp" raw="true">/^[a-z0-9][a-z0-9]+([_-][a-z0-9]+)*$/</ec:field-validator-param>
-							</ec:field-validator-rule>
-						</ec:field-validator>
-					</ec:textfield>
-				</ed:col>
-				<ed:col size="3" classStyle="form-group has-feedback">
-					<ec:select label="Idioma" name="locale" readonly="${!empty metadata}">
-						<ec:option value=""></ec:option>
-						<c:forEach items="${locales}" var="loc">
-						<ec:option value="${loc.key}" selected="${metadata.locale == loc.key}">${loc.value}</ec:option>
-						</c:forEach>
-					</ec:select>
-				</ed:col>
-			</ed:row>
-			<ed:row>
-				<ed:col size="8" classStyle="form-group has-feedback">
-					<ec:textfield name="title" label="Título" value="${page.title}">
-						<ec:field-validator>
-							<ec:field-validator-rule name="notEmpty" message="Informe um título!"/>
-						</ec:field-validator>
-					</ec:textfield>
-				</ed:col>
-				<ed:col size="4">
-					<ec:select label="Template" name="Modelo" enabled="false">
-						<c:forEach items="${templates}" var="template">
-						<ec:option value="${template.key}" selected="${page.template == template.key}">${template.value.name}</ec:option>
-						</c:forEach>
-					</ec:select>
-				</ed:col>
-			</ed:row>
-			<ed:row>
-				<ed:col size="12" classStyle="form-group has-feedback">
-					<ec:tinymce name="content">
-						${page.write(pageContext.out)}
-					</ec:tinymce>
-				</ed:col>
-			</ed:row>
-			<ed:row>
-				<ed:col size="12">
-					<h5>Minuatura</h5>
-					<ec:separator/>
-				</ed:col>
-			</ed:row>
-       		<ed:row>
-       			<ed:col size="12">
-					<ed:row style="form">
+			<ec:tabs>
+				<ec:tabs-item title="Conteúdo" active="true">
+				
+					<ed:row>
+						<ed:col size="5" classStyle="form-group has-feedback">
+							<ec:textfield name="path" label="Caminho" value="${metadata.path}" readonly="${!empty metadata}">
+								<ec:field-validator>
+									<ec:field-validator-rule name="notEmpty" message="Informe um caminho! ( ex: /caminho )"/>
+									<ec:field-validator-rule name="regexp" message="Caminho inválido! ( ex: /caminho )">
+										<ec:field-validator-param name="regexp" raw="true">/^(\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*$/</ec:field-validator-param>
+									</ec:field-validator-rule>
+								</ec:field-validator>
+							</ec:textfield>
+						</ed:col>
+						<ed:col size="4" classStyle="form-group has-feedback">
+							<ec:textfield name="id" label="Identificação" value="${metadata.id}" readonly="${!empty metadata}">
+								<ec:field-validator>
+									<ec:field-validator-rule name="regexp" message="Identificação inválida! ( ex: pagina-teste )">
+										<ec:field-validator-param name="regexp" raw="true">/^[a-z0-9][a-z0-9]+([_-][a-z0-9]+)*$/</ec:field-validator-param>
+									</ec:field-validator-rule>
+								</ec:field-validator>
+							</ec:textfield>
+						</ed:col>
+						<ed:col size="3" classStyle="form-group has-feedback">
+							<ec:select label="Idioma" name="locale" readonly="${!empty metadata}">
+								<ec:option value=""></ec:option>
+								<c:forEach items="${locales}" var="loc">
+								<ec:option value="${loc.key}" selected="${metadata.locale == loc.key}">${loc.value}</ec:option>
+								</c:forEach>
+							</ec:select>
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col size="8" classStyle="form-group has-feedback">
+							<ec:textfield name="title" label="Título" value="${page.title}">
+								<ec:field-validator>
+									<ec:field-validator-rule name="notEmpty" message="Informe um título!"/>
+								</ec:field-validator>
+							</ec:textfield>
+						</ed:col>
+						<ed:col size="4">
+							<ec:select label="Template" name="Modelo" enabled="false">
+								<c:forEach items="${templates}" var="template">
+								<ec:option value="${template.key}" selected="${page.template == template.key}">${template.value.name}</ec:option>
+								</c:forEach>
+							</ec:select>
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col size="12" classStyle="form-group has-feedback">
+							<ec:tinymce name="content">
+								${page.write(pageContext.out)}
+							</ec:tinymce>
+						</ed:col>
+					</ed:row>
+				
+				
+				</ec:tabs-item>
+				<ec:tabs-item title="Miniatura">
+				
+					<ed:row style="form" classStyle="form-group has-feedback">
 						<ed:col size="8" align="center" classStyle="form-group has-feedback">
 							<ec:imagefield name="thumbnail"	width="560" height="292" 
-							button="Selecione uma imagem" border="squad" src="${page.publicThumbnailPath}" />
+							button="Selecione uma imagem" border="squad" src="${page.publicThumbnailPath}" >
+							</ec:imagefield>
 						</ed:col>
 					</ed:row>
 	        		<ed:row>
@@ -135,8 +130,10 @@
 
 	        			</ed:col>
 	        		</ed:row>
-       			</ed:col>
-       		</ed:row>
+	        		
+	        						
+				</ec:tabs-item>
+			</ec:tabs>
 			<ed:row>
 				<ed:col size="12">
 					<ec:button 
