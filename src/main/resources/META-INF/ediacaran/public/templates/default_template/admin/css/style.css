@@ -69,6 +69,12 @@ h4.heading {
     margin-bottom: 30px;
 }
 
+.form-control {
+	border-top: 0px;
+	border-right: 0px;
+	border-left: 0px;
+}
+
 /*
 body[class*='collapse']:not(.show) {
     display: unset;
