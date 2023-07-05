@@ -262,7 +262,7 @@ public class MenubarController {
 			Long gid,
 			@Basic(bean="path")
 			String path,
-			@Basic(bean="path")
+			@Basic(bean="id")
 			String id, 
 			@Basic(bean="locale", mappingType=MappingTypes.VALUE)
 			String locale,

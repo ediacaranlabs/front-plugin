@@ -6,10 +6,10 @@
 <div class="alert alert-${empty exception? 'success' : 'danger'} alert-dismissable">
 	<div id="result-action" style="display: none">${empty vars.error? 'success' : 'error'}</div>
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	<c:if test="${!empty exception && exception.class.simpleName != 'ValidatorException'}">
+	<c:if test="${!empty exception && exception.getClass().getSimpleName() != 'ValidatorException'}">
 		${exception.message}
 	</c:if>
-	<c:if test="${!empty exception && exception.class.simpleName == 'ValidatorException'}">
+	<c:if test="${!empty exception && exception.getClass().getSimpleName() == 'ValidatorException'}">
 		<c:forEach items="${exception.causes}" var="cause">
 			<p> * ${cause.key} : ${cause.value} </p> 
 		</c:forEach>

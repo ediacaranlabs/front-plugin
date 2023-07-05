@@ -117,7 +117,7 @@ public class MenubarPubEntity
 
 	@Override
 	protected MenuBar reloadEntity() throws Throwable {
-		MenuBar mb = editMenubar.getMenubarByName(path, id, locale);
+		MenuBar mb = editMenubar.getMenubarById(path, id, locale);
 		
 		if(mb == null) {
 			throw new NullPointerException();

@@ -41,7 +41,7 @@ public class ObjectsManagerImp
 	
 	//private Pattern driverPattern = Pattern.compile(DRIVER_FORMAT);
 	
-	public static final String basePermission = "app.objs";
+	public static final String basePermission = "app.objs.";
 	
 	public static final String OBJECTS_REPOSITORY = "objects/";
 	
@@ -265,7 +265,7 @@ public class ObjectsManagerImp
 	@Override
 	public void registerDriver(ObjectsManagerDriver driver) throws ObjectsManagerDriverException {
 
-		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".driver.register"));
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + "driver.register"));
 		
 		if(drivers.putIfAbsent(driver.getName().toLowerCase(), driver) != null) {
 			throw new ObjectsManagerDriverException("driver exists: " + driver.getName());
@@ -276,7 +276,7 @@ public class ObjectsManagerImp
 	@Override
 	public void unregisterDriver(ObjectsManagerDriver driver) {
 		
-		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".driver.unregister"));
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + "driver.unregister"));
 		
 		drivers.remove(driver.getName().toLowerCase(), driver);
 	}
@@ -284,7 +284,7 @@ public class ObjectsManagerImp
 	@Override
 	public ObjectsManagerDriver getDriver(String driverName) {
 
-		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".driver.get"));
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + "driver.get"));
 		
 		return drivers.get(driverName);
 	}
@@ -490,21 +490,21 @@ public class ObjectsManagerImp
 
 	public void addListener(ObjectListener listener) {
 		
-		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".listener.register"));
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + "listener.register"));
 		
 		objectListenerManager.registerListener(listener);
 	}
 
 	public void removeListener(ObjectListener listener) {
 		
-		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".listener.unregister"));
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + "listener.unregister"));
 		
 		objectListenerManager.unregisterListener(listener);
 	}
 	
 	public void addListener(String driverName, ObjectsManagerDriverListener listener) {
 		
-		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".listener.register"));
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + "listener.register"));
 
 		ObjectsManagerDriver driver = getSecureDriver(driverName);
 		driver.addListener(listener);
@@ -513,7 +513,7 @@ public class ObjectsManagerImp
 
 	public void removeListener(String driverName, ObjectsManagerDriverListener listener) {
 
-		SecurityUtil.checkPermission(new RuntimePermission(basePermission + ".listener.unregister"));
+		SecurityUtil.checkPermission(new RuntimePermission(basePermission + "listener.unregister"));
 		
 		ObjectsManagerDriver driver = getSecureDriver(driverName);
 		driver.removeListener(listener);

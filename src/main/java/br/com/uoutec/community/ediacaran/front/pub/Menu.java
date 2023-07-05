@@ -130,7 +130,8 @@ public class Menu implements Serializable {
 		if(parent != null) {
 			sb.append(parent.getPath()).append(".");
 		}
-		else {
+		else
+		if(parentMenuBar != null){
 			sb.append(parentMenuBar.getId()).append(".");
 		}
 		
