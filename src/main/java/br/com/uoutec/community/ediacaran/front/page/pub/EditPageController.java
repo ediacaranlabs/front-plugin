@@ -63,7 +63,12 @@ public class EditPageController {
 		
 		try {
 			List<ObjectMetadata> list =
-					AccessController.doPrivileged((PrivilegedAction<List<ObjectMetadata>>)()->editpage.list(path, locale));
+					AccessController.doPrivileged(new PrivilegedAction<List<ObjectMetadata>>() {
+						
+						public List<ObjectMetadata> run() {
+							return editpage.list(path, locale);
+						};
+					});
 			
 			Map<Locale, String> langNames = editpage.getSupportedLocales();
 			
@@ -117,12 +122,15 @@ public class EditPageController {
 			md.put("locale", locale);
 			
 			if(gid == md.hashCode()) {
-				AccessController.doPrivileged((PrivilegedAction<List<ObjectMetadata>>)()->{
-					editpage.unregisterPage(path, id, locale);
-					return null;
+				AccessController.doPrivileged(new PrivilegedAction<List<ObjectMetadata>>() {
+					@Override
+					public List<ObjectMetadata> run() {
+						editpage.unregisterPage(path, id, locale);
+						return null;
+					}
+					
 				});
-
-				
+						
 			}
 		}
 		catch(Throwable ex) {
@@ -213,7 +221,11 @@ public class EditPageController {
 		try {
 			
 			Page page =
-					AccessController.doPrivileged((PrivilegedAction<Page>)()->editpage.getPageById(path, id, locale));
+					AccessController.doPrivileged(new PrivilegedAction<Page>() {
+						public Page run() {
+							return editpage.getPageById(path, id, locale);
+						};
+					});
 			
 			if(page == null) {
 				WebFlowController
