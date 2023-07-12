@@ -25,13 +25,13 @@ import br.com.uoutec.community.ediacaran.plugins.SecurityUtil;
 public class ObjectsManagerImp 
 	implements ObjectsManager {
 
-	private static final String PATH_FORMAT = "(\\/[a-z0-9][a-z0-9]+([_-][a-z0-9]+)*)+";
+	private static final String PATH_FORMAT = "(\\/+[a-z0-9][a-z0-9]+([_-][a-z0-9]+)*)+";
 	
 	private static final String ID_FORMAT = "[a-z0-9][a-z0-9]+([_-][a-z0-9]+)*";
 
 	private static final String DRIVER_FORMAT = "[a-z0-9]+([_-][a-z0-9]+)*";
 	
-	private static final String FULLID_FORMAT = "(" + DRIVER_FORMAT + ")(" + PATH_FORMAT + ")?\\/(" + ID_FORMAT + ")";
+	private static final String FULLID_FORMAT = "(" + DRIVER_FORMAT + ")(" + PATH_FORMAT + ")?\\/+(" + ID_FORMAT + ")";
 
 	private static final String SEARCH_FORMAT = "(" + DRIVER_FORMAT + ")(" + PATH_FORMAT + ")*";
 	
@@ -77,13 +77,17 @@ public class ObjectsManagerImp
 		return searchPattern.matcher(value).matches();
 	}
 	
+	protected String toNormalize(String value) {
+		return value.trim().replaceAll("/+", "/");
+	}
+	
 	protected PathMetadata getPathMetadata(String id) {
 		
 		if(!isVaidID(id)) {
 			return null;
 		}
 		
-		id = id.trim();
+		id = toNormalize(id);
 		
 		String[] parts = id.split("/+", 2);
 		String driver = parts[0];

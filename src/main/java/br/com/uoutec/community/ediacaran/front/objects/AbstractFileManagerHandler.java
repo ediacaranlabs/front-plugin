@@ -30,12 +30,6 @@ public abstract class AbstractFileManagerHandler implements FileManagerHandler {
 	private Pattern fileNamePattern = Pattern.compile(FILENAME_FORMAT);
 	
 	@Override
-	public String toFilePath(String value) {
-		File f = new File(value);
-		return f.toString();
-	}
-
-	@Override
 	public FileMetadata toMetadata(File base, File file) {
 		
 		String fileName = file.getName();

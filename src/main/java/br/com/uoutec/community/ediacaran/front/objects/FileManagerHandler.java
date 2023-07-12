@@ -8,8 +8,19 @@ import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
 public interface FileManagerHandler {
 
 	default String toFilePath(String value) {
+		
+		if(value == null) {
+			return null;
+		}
+		
+		return value
+				.replaceAll("\\\\+"             , "\\" + File.separator)
+				.replaceAll("/+"                , "\\" + File.separator)
+				.replaceAll(File.separator + "+", "\\" + File.separator);
+		
+		/*
 		try {
-			value = value.replaceAll("/+", "\\\\");
+			value = value.replaceAll("\\\\+", File.separator).replaceAll("/+", File.separator);
 			File f = new File(value);
 			f.getCanonicalFile();
 			return f.toString();
@@ -17,6 +28,7 @@ public interface FileManagerHandler {
 		catch(IOException e) {
 			return null;
 		}
+		*/
 	}
 	
 	FileMetadata toMetadata(File base, File file);

@@ -111,11 +111,11 @@ public class PageFileManagerHandler implements FileManagerHandler{
 			throw new IllegalStateException("invalid path: " + omd.getPath());
 		}
 		
-		String path = toFilePath( omd.getPath() + "/" + omd.getName());
-		Locale locale = (Locale) omd.getExtMetadata("locale");
+		String path = toFilePath(omd.getPath() + "/" + omd.getName());
 		
 		StringBuilder builder = new StringBuilder(path);
 		
+		Locale locale = (Locale) omd.getExtMetadata("locale");
 		if(locale != null) {
 			builder.append("_").append(locale.getLanguage()).append("_").append(locale.getCountry());
 		}
