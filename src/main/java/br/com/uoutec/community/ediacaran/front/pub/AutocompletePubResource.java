@@ -11,6 +11,7 @@ import javax.inject.Singleton;
 
 import org.brandao.brutos.annotation.AcceptRequestType;
 import org.brandao.brutos.annotation.Action;
+import org.brandao.brutos.annotation.Basic;
 import org.brandao.brutos.annotation.Controller;
 import org.brandao.brutos.annotation.ResponseType;
 import org.brandao.brutos.annotation.web.MediaTypes;
@@ -144,7 +145,7 @@ public class AutocompletePubResource {
 	@SuppressWarnings("serial")
 	@Action(value="/search-icons")
 	@RequestMethod("POST")
-	public synchronized Serializable searchIcons(String value){
+	public synchronized Serializable searchIcons(@Basic(bean="value") String value){
 		
 		ThemeRegistry tr = EntityContextPlugin.getEntity(ThemeRegistry.class);
 		Theme theme = tr.getCurrentTheme();
@@ -171,7 +172,7 @@ public class AutocompletePubResource {
 	@SuppressWarnings("serial")
 	@Action(value="/search")
 	@RequestMethod("POST")
-	public synchronized Serializable loadData(String value){
+	public synchronized Serializable loadData(@Basic(bean="value") String value){
 		return (Serializable)list.stream()
 			.filter(e->value != null && e.toLowerCase().contains(value.toLowerCase()))
 			.map(e-> new HashMap<String,String>(){{
