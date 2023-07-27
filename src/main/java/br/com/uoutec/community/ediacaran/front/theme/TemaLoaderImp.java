@@ -11,18 +11,23 @@ import org.brandao.brutos.io.ResourceLoader;
 import br.com.uoutec.community.ediacaran.plugins.PluginException;
 import br.com.uoutec.community.ediacaran.plugins.PublicBean;
 
+@SuppressWarnings("deprecation")
 public class TemaLoaderImp implements TemaLoader, PublicBean{
 
 	private File templatesPath;
 	
 	private ResourceLoader loader;
 	
+	@SuppressWarnings("unused")
 	private TemplateLoader templateLoader;
 	
+	@SuppressWarnings("unused")
 	private String charset;
 	
+	@SuppressWarnings("unused")
 	private String context;
 	
+	@SuppressWarnings("unused")
 	private String base;
 	
 	public TemaLoaderImp(File templatesPath, ResourceLoader loader, TemplateLoader templateLoader, String charset,
@@ -45,6 +50,7 @@ public class TemaLoaderImp implements TemaLoader, PublicBean{
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private Map<String,ComponentTemplate> getTagTemplates() throws IOException, PluginException {
 		
 		Map<String,ComponentTemplate> templates = new HashMap<String, ComponentTemplate>();
