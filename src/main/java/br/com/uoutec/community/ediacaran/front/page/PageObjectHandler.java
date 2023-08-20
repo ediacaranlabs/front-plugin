@@ -2,7 +2,7 @@ package br.com.uoutec.community.ediacaran.front.page;
 
 import java.util.Map;
 
-import br.com.uoutec.community.ediacaran.front.objects.ObjectHandler;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectHandler;
 
 public class PageObjectHandler implements ObjectHandler{
 

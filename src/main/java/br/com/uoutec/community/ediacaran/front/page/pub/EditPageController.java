@@ -23,12 +23,13 @@ import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
-import br.com.uoutec.community.ediacaran.front.page.EditPage;
-import br.com.uoutec.community.ediacaran.front.page.ObjectTemplate;
+import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplateType;
+import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.page.Page;
 import br.com.uoutec.community.ediacaran.security.RequiresPermissions;
 import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectTemplate;
 
 @Singleton
 @Controller(value="${plugins.ediacaran.front.admin_context}/pages", defaultActionName="/")
@@ -37,7 +38,7 @@ public class EditPageController {
 
 	@Transient
 	@Inject
-	private EditPage editpage;
+	private PageManager editpage;
 	
 	@Action("/")
 	@Result("itens")
@@ -90,7 +91,7 @@ public class EditPageController {
 		webResult.setView("/admin/pages/select_template");
 		
 		try {
-			Map<String,ObjectTemplate> templates = editpage.getTemplates();
+			Map<String,ObjectTemplate> templates = editpage.getTemplates(PageObjectTemplateType.FORM);
 			webResult.add("templates", templates);
 		}
 		catch(Throwable ex) {
@@ -184,10 +185,10 @@ public class EditPageController {
 		
 		try {
 			Map<Locale, String> langNames = editpage.getSupportedLocales();
-			Map<String,ObjectTemplate> templates = editpage.getTemplates();
-			ObjectTemplate template = editpage.getTemplate(templateName);
+			Map<String,ObjectTemplate> templates = editpage.getTemplates(PageObjectTemplateType.FORM);
+			ObjectTemplate template = editpage.getTemplate(templateName, PageObjectTemplateType.FORM);
 			
-			webResult.setView(template.getFormPath(), true);
+			webResult.setView(template.getTemplate(), true);
 			webResult.setDispatcher(WebDispatcherType.FORWARD);
 			webResult
 				.add("templates", templates)
@@ -234,15 +235,15 @@ public class EditPageController {
 			}
 			
 			Map<Locale, String> langNames = editpage.getSupportedLocales();
-			Map<String,ObjectTemplate> templates = editpage.getTemplates();
-			ObjectTemplate template = editpage.getTemplate(page.getTemplate());
+			Map<String,ObjectTemplate> templates = editpage.getTemplates(PageObjectTemplateType.FORM);
+			ObjectTemplate template = editpage.getTemplate(page.getTemplate(), PageObjectTemplateType.FORM);
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", path);
 			md.put("id", id);
 			md.put("locale", PluginLanguageUtils.toLocale(locale));
 			
-			webResult.setView(template.getFormPath(), true);
+			webResult.setView(template.getTemplate(), true);
 			webResult.setDispatcher(WebDispatcherType.FORWARD);
 			
 			webResult

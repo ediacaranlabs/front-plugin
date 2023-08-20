@@ -1,126 +1,206 @@
 package br.com.uoutec.community.ediacaran.front.page;
 
-/* Moved to a Driver */
-@Deprecated
-public interface PageManager {
-/*
-	public static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)*";
-	
-	public static final String ID_FORMAT = "[a-z][a-z0-9]+(-[a-z0-9]+)*";
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-	public static final String LOCALE_FORMAT = "[a-z]{2,2}_[A-Z]{2,2}";
-	
-	PageMetadata registerPage(String path, String name, Locale locale, Page page) throws PageManagerException;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
-	PageMetadata registerPageIfNotExist(String path, String name, Locale locale, Page page) throws PageManagerException;
-	
-	PageMetadata registerPageIfExist(String path, String name, Locale locale, Page page) throws PageManagerException;
-	
-	void unregisterPage(String path, String name, Locale locale) throws PageManagerException;
-	
-	Page getPage(String path, Locale locale);
-	
-	Page getPage(PageMetadata value);
-	
-	PageMetadata unique();
-	
-	PageMetadata unique(Filter filter);
+import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplate;
+import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplateType;
+import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
+import br.com.uoutec.community.ediacaran.system.i18n.LanguageRegistry;
+import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectTemplate;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectsTemplateManager;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectsTemplateManagerDriver;
+import br.com.uoutec.community.ediacaran.system.repository.SearchType;
 
-	PageMetadata unique(String path, Filter filter);
-	
-	PageMetadata unique(String path, boolean recursive, Filter filter);
-	
-	List<PageMetadata> list();
-	
-	List<PageMetadata> list(Filter filter);
+@Singleton
+@Named("editPage")
+public class PageManager {
 
-	List<PageMetadata> list(String path, Filter filter);
-	
-	List<PageMetadata> list(String path, boolean recursive, Filter filter);
-	
-	void registerTemplate(String id, String name, String formPath, String template) throws PageTemplateManagerException;
+	@Inject
+	public ObjectsTemplateManager objectsManager;
 
-	void unregisterTemplate(String id);
+	@Inject
+	private LanguageRegistry languageRegistry;
 	
-	PageTemplate getTemplate(String id);
-	
-	List<PageTemplate> getTemplates();
-	
-	Map<String,PageTemplate> getTemplatesIdMap();
-	
-	public interface PageMetadata {
-		
-		String getPath();
-		
-		String getId();
-		
-		Locale getLocale();
-		
+	public List<ObjectMetadata> list(String basePath, String locale){
+		return list(basePath, PluginLanguageUtils.toLocale(locale));
 	}
 	
-	public static class PageMetadataImp implements PageMetadata{
+	public List<ObjectMetadata> list(String basePath, Locale locale){
 		
-		private final String path;
+		String path = null;
+		String name = null;
+
+		basePath      = basePath == null? null : basePath.replaceAll("/+", "/");
+		int lastIndex = basePath == null? -1 : basePath.lastIndexOf("/");
 		
-		private final String id;
+		if(lastIndex > 0 ) {
+			path = PagesObjectsManagerDriver.DRIVER_NAME + basePath.substring(0, lastIndex);
+			name = basePath.substring(lastIndex + 1, basePath.length());
+			
+			name = ".*".concat(Arrays.stream(name.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
+		}
+		else{
+			if(basePath != null) {
+				name = ".*".concat(Arrays.stream(basePath.split("\\*+")).map(e->Pattern.quote(e)).collect(Collectors.joining(".*"))).concat(".*");
+			}
+			path = PagesObjectsManagerDriver.DRIVER_NAME;
+		}
 		
-		private final Locale locale;
-
-		public PageMetadataImp(String path, String id, Locale locale) {
-			this.path = path;
-			this.id = id;
-			this.locale = locale;
-		}
-
-		public String getPath() {
-			return path;
-		}
-
-		public String getId() {
-			return id;
-		}
-
-		public Locale getLocale() {
-			return locale;
-		}
-
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((id == null) ? 0 : id.hashCode());
-			result = prime * result + ((locale == null) ? 0 : locale.hashCode());
-			result = prime * result + ((path == null) ? 0 : path.hashCode());
-			return result;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			PageMetadataImp other = (PageMetadataImp) obj;
-			if (id == null) {
-				if (other.id != null)
-					return false;
-			} else if (!id.equals(other.id))
-				return false;
-			if (locale == null) {
-				if (other.locale != null)
-					return false;
-			} else if (!locale.equals(other.locale))
-				return false;
-			if (path == null) {
-				if (other.path != null)
-					return false;
-			} else if (!path.equals(other.path))
-				return false;
-			return true;
-		}
+		return objectsManager.listMetadata(path, name, locale, true, SearchType.REGEX);
 		
 	}
-	*/
+
+	public ObjectMetadata registerPageByTitle(String path, String title, String locale, Page page) {
+		title = normalize(title);
+		return registerPage(path + "/" + title, PluginLanguageUtils.toLocale(locale), page);
+	}
+
+	public ObjectMetadata registerPageByName(String path, String name, String locale, Page page) {
+		name = normalize(name);
+		return registerPage(path + "/" + name, PluginLanguageUtils.toLocale(locale), page);
+	}
+	
+	public ObjectMetadata registerPage(String path, String locale, Page page) {
+		return registerPage(path, PluginLanguageUtils.toLocale(locale), page);
+	}
+	
+	public ObjectMetadata registerPage(String path, Locale locale, Page page) {
+		
+		if(page.getBreadcrumb() == null) {
+			page.setBreadcrumb(createBreadcrumbPath(path, page));
+		}
+		
+		return objectsManager.registerObject(PagesObjectsManagerDriver.DRIVER_NAME +  path, locale, page);
+	}
+
+	public void unregisterPageByName(String path, String name, String locale) {
+		name = normalize(name);
+		unregisterPage(path + "/" + name, locale);
+	}
+	
+	public void unregisterPage(String path, String id, String locale) {
+		unregisterPage(path + "/" + id, PluginLanguageUtils.toLocale(locale));
+	}
+	
+	public void unregisterPage(String page, String locale) {
+		unregisterPage(page, PluginLanguageUtils.toLocale(locale));
+	}
+	
+	public void unregisterPage(String page, Locale locale) {
+		objectsManager.unregisterObject(PagesObjectsManagerDriver.DRIVER_NAME +  page, locale);
+	}
+	
+	public Map<Locale, String> getSupportedLocales() {
+		return languageRegistry.getSupportedLocalesName();
+	}
+ 
+	public Map<String,ObjectTemplate> getTemplates(PageObjectTemplateType type){
+		return objectsManager.getTemplatesIdMap(PagesObjectsManagerDriver.DRIVER_NAME)
+				.entrySet().stream()
+				.filter((r)->((PageObjectTemplate)r.getValue()).getType() == type)
+				.collect(Collectors.toMap((e)->e.getKey().split("\\;")[0], Entry::getValue));
+	}
+
+	public void registerTemplate(String id, String name, String template, PageObjectTemplateType type){
+		
+		ObjectsTemplateManagerDriver driver = 
+				(ObjectsTemplateManagerDriver) objectsManager.getDriver(PagesObjectsManagerDriver.DRIVER_NAME);
+		
+		driver.registerTemplate( 
+				new PageObjectTemplate(
+						name + ";" + type.name().toLowerCase(), 
+						name, 
+						template,
+						type
+				)
+		);
+
+	}
+
+	public void unregisterTemplate(String id, PageObjectTemplateType type){
+		ObjectsTemplateManagerDriver driver = 
+				(ObjectsTemplateManagerDriver) objectsManager.getDriver(PagesObjectsManagerDriver.DRIVER_NAME);
+		
+		driver.unregisterTemplate(id + ";" + type.name().toLowerCase());
+	}
+	
+	public ObjectTemplate getTemplate(String name, PageObjectTemplateType type){
+		return objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, name + "-" + type.name().toLowerCase());
+	}
+
+	public Page getPageByName(String path, String name, String locale) {
+		name = normalize(name);
+		return getPage(path + "/" + name, locale);
+	}
+
+	public Page getPageById(String path, String id, String locale) {
+		return getPage(path + "/" + id, locale);
+	}
+	
+	public Page getPage(String path, String locale) {
+		return getPage(path, PluginLanguageUtils.toLocale(locale));
+	}
+	
+	public Page getPage(String path, Locale locale) {
+		return (Page) objectsManager.getObject(PagesObjectsManagerDriver.DRIVER_NAME + path, locale);
+	}
+	
+	public boolean isValidTemplate(String value) {
+		return value != null && objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, value) != null;
+	}
+	
+	private String normalize(String name) {
+		return 
+			Normalizer.normalize(name, Form.NFD)
+			.replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+			.replaceAll("[^a-zA-Z0-9\\s]", " ")
+			.toLowerCase()
+			.replaceAll("\\s+", "-");
+	}
+
+	private List<BreadcrumbPath> createBreadcrumbPath(String path, Page page){
+		
+		List<BreadcrumbPath> list = new ArrayList<BreadcrumbPath>();
+		
+		String[] paths = path.split("/+");
+		StringBuilder fullPath = new StringBuilder();
+		
+		list.add(new BreadcrumbPath("Home", "home", "/"));
+		for(int i=1;i<paths.length -1;i++) {
+			
+			String p = paths[i];
+			
+			fullPath.append("/").append(p);
+			String index = fullPath.toString() + "/index";
+			
+			BreadcrumbPath bcp;
+			
+			if(getPage(index, (Locale)null) != null) {
+				bcp = new BreadcrumbPath(p, null, fullPath.toString());
+			}
+			else {
+				bcp = new BreadcrumbPath(p, null, "#");
+			}
+			
+			list.add(bcp);
+		}
+		
+		return list;
+		
+	}
 }

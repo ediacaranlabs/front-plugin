@@ -19,9 +19,9 @@ import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.RequestMethodTypes;
 import org.brandao.brutos.validator.ValidatorException;
 
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
-import br.com.uoutec.community.ediacaran.front.page.EditPage;
+import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.page.Page;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 import br.com.uoutec.pub.entity.InvalidRequestException;
 
 @Singleton
@@ -31,7 +31,7 @@ public class DefaultEditPageController {
 
 	@Transient
 	@Inject
-	public EditPage editPage;
+	public PageManager editPage;
 
 	@Action("/save")
 	@RequestMethod(RequestMethodTypes.POST)

@@ -23,10 +23,10 @@ import java.util.regex.Pattern;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import br.com.uoutec.community.ediacaran.front.objects.FileManager;
-import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
+import br.com.uoutec.community.ediacaran.system.repository.FileManager;
+import br.com.uoutec.community.ediacaran.system.repository.FileManagerHandler;
+import br.com.uoutec.community.ediacaran.system.repository.FileMetadata;
 import br.com.uoutec.community.ediacaran.system.util.DataUtil.ClassTypeAdapter;
-import br.com.uoutec.community.ediacaran.front.objects.FileManagerHandler;
 
 public class PageFileManagerHandler implements FileManagerHandler{
 

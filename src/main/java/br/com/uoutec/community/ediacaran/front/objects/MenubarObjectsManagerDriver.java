@@ -2,7 +2,10 @@ package br.com.uoutec.community.ediacaran.front.objects;
 
 import java.io.File;
 
-import br.com.uoutec.community.ediacaran.front.page.ObjectTemplate;
+import br.com.uoutec.community.ediacaran.system.repository.FileManager;
+import br.com.uoutec.community.ediacaran.system.repository.FileObjectsTemplateManagerDriver;
+import br.com.uoutec.community.ediacaran.system.repository.JsonFileManagerHandler;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectTemplate;
 
 public class MenubarObjectsManagerDriver 
 	extends FileObjectsTemplateManagerDriver {

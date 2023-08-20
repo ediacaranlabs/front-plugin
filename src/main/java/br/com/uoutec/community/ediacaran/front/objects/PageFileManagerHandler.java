@@ -8,7 +8,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import br.com.uoutec.community.ediacaran.front.objects.FileManager.FileMetadata;
+import br.com.uoutec.community.ediacaran.system.repository.FileManagerHandler;
+import br.com.uoutec.community.ediacaran.system.repository.FileMetadata;
 
 @Deprecated
 public class PageFileManagerHandler implements FileManagerHandler{

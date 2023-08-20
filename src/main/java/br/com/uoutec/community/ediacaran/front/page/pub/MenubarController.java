@@ -32,15 +32,15 @@ import org.brandao.brutos.validator.ValidatorException;
 import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.front.page.EditMenubar;
-import br.com.uoutec.community.ediacaran.front.page.EditPage;
+import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.security.RequiresPermissions;
 import br.com.uoutec.community.ediacaran.security.Role;
 import br.com.uoutec.community.ediacaran.security.SecurityRegistry;
 import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 import br.com.uoutec.pub.entity.InvalidRequestException;
 
 @Singleton
@@ -54,7 +54,7 @@ public class MenubarController {
 
 	@Transient
 	@Inject
-	private EditPage editPage;
+	private PageManager editPage;
 
 	@Transient
 	@Inject

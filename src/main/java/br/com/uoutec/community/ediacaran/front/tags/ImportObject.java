@@ -6,11 +6,11 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManager;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectsTemplateManager;
 
 @Tag(
 	name="import-object", 

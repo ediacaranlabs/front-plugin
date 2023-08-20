@@ -3,6 +3,7 @@ package br.com.uoutec.community.ediacaran.front.objects;
 import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectHandler;
 
 public class MenubarObjectHandler implements ObjectHandler{
 

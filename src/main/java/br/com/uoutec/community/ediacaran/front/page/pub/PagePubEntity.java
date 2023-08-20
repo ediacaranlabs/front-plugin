@@ -15,7 +15,7 @@ import org.brandao.brutos.annotation.ScopeType;
 
 import br.com.uoutec.community.ediacaran.front.components.Image;
 import br.com.uoutec.community.ediacaran.front.page.BreadcrumbPath;
-import br.com.uoutec.community.ediacaran.front.page.EditPage;
+import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.page.Page;
 import br.com.uoutec.community.ediacaran.front.page.PageFileManagerHandler;
 import br.com.uoutec.i18n.ValidationException;
@@ -68,7 +68,7 @@ public class PagePubEntity
 	private String template;
 
 	@Basic(scope=ScopeType.IOC, mappingType=MappingTypes.VALUE)
-	public EditPage editPage;
+	public PageManager editPage;
  
 	public Long getGid() {
 		return gid;
@@ -82,11 +82,11 @@ public class PagePubEntity
 		return path;
 	}
 
-	public EditPage getEditPage() {
+	public PageManager getEditPage() {
 		return editPage;
 	}
 
-	public void setEditPage(EditPage editPage) {
+	public void setEditPage(PageManager editPage) {
 		this.editPage = editPage;
 	}
 

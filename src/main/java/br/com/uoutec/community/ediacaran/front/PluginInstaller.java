@@ -6,20 +6,11 @@ import java.io.File;
 
 import br.com.uoutec.community.ediacaran.AbstractPlugin;
 import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
-import br.com.uoutec.community.ediacaran.VarParser;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
-import br.com.uoutec.community.ediacaran.front.objects.FileManager;
-import br.com.uoutec.community.ediacaran.front.objects.FileObjectsManagerDriver;
-import br.com.uoutec.community.ediacaran.front.objects.JsonFileManagerHandler;
 import br.com.uoutec.community.ediacaran.front.objects.MenubarObjectsManagerDriver;
-import br.com.uoutec.community.ediacaran.front.objects.ObjectHandlerImp;
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManager;
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriver;
-import br.com.uoutec.community.ediacaran.front.objects.ObjectsManagerDriverException;
+import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplateType;
 import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
-import br.com.uoutec.community.ediacaran.front.page.ObjectTemplate;
-import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManager;
-import br.com.uoutec.community.ediacaran.front.page.ObjectsTemplateManagerDriver;
+import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBarManagerException;
@@ -27,6 +18,15 @@ import br.com.uoutec.community.ediacaran.front.security.pub.WebSecurityManagerPl
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.security.Authorization;
 import br.com.uoutec.community.ediacaran.security.SecurityRegistry;
+import br.com.uoutec.community.ediacaran.system.repository.FileManager;
+import br.com.uoutec.community.ediacaran.system.repository.FileObjectsManagerDriver;
+import br.com.uoutec.community.ediacaran.system.repository.JsonFileManagerHandler;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectHandlerImp;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectsManager;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectsManagerDriver;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectsManagerDriverException;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectsTemplateManager;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectsTemplateManagerDriver;
 import br.com.uoutec.entity.registry.RegistryException;
 
 public class PluginInstaller 
@@ -82,25 +82,34 @@ public class PluginInstaller
 		
 		/* Page Object Driver */
 		
-		VarParser varParser = EntityContextPlugin.getEntity(VarParser.class);
-		
 		pageObjectDriver = new PagesObjectsManagerDriver();
 
-		pageObjectDriver.registerTemplate( 
-				new ObjectTemplate(
-						"default", 
-						"Default Template", 
-						varParser.getValue("${plugins.ediacaran.front.web_path}:/admin/pages/edit.jsp"), 
-						varParser.getValue("${plugins.ediacaran.front.web_path}:/templates/default_template/pages/default-template.jsp")
-				)
-		);
-		
 		ObjectsTemplateManager objectsManager = EntityContextPlugin.getEntity(ObjectsTemplateManager.class);
 		
 		objectsManager.registerDriver(this.globalDriver);
 		objectsManager.registerDriver(this.pageObjectDriver);
 		objectsManager.registerDriver(this.menubarObjectDriver);
 
+		/* Page Templates */
+		
+		PageManager editPage = EntityContextPlugin.getEntity(PageManager.class);
+		
+		editPage
+			.registerTemplate(
+					"default", 
+					"Default Template", 
+					"${plugins.ediacaran.front.web_path}:/templates/default_template/pages/default-template.jsp", 
+					PageObjectTemplateType.VIEW
+			);
+		
+		editPage
+			.registerTemplate(
+					"default", 
+					"Default Template", 
+					"${plugins.ediacaran.front.web_path}:/admin/pages/edit.jsp", 
+					PageObjectTemplateType.FORM
+			);
+		
 	}
 
 	private void installListeners() {
