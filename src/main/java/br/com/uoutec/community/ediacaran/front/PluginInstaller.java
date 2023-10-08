@@ -78,7 +78,7 @@ public class PluginInstaller
 		
 		/* Menu Object Driver */
 		
-		this.menubarObjectDriver = new MenubarObjectsManagerDriver();
+		this.menubarObjectDriver = EntityContextPlugin.getEntity(MenubarObjectsManagerDriver.class);
 		
 		/* Page Object Driver */
 		
