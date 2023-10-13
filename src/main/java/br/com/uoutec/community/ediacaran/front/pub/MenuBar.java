@@ -11,14 +11,14 @@ import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.plugins.SecurityUtil;
-import br.com.uoutec.community.ediacaran.security.AuthorizationManager;
 import br.com.uoutec.community.ediacaran.security.Subject;
+import br.com.uoutec.community.ediacaran.security.SubjectProvider;
 
 public class MenuBar {
 
 	public static final String basePermission = "app.menu";
 
-	private final AuthorizationManager authorizationManager;
+	private final SubjectProvider subjectProvider;
 	
 	private final String id;
 	
@@ -43,7 +43,7 @@ public class MenuBar {
 		this.list = itens == null? new ArrayList<Menu>() : itens;
 		this.map = new HashMap<String, Menu>();
 		this.id = id;
-		this.authorizationManager = EntityContextPlugin.getEntity(AuthorizationManager.class);
+		this.subjectProvider = EntityContextPlugin.getEntity(SubjectProvider.class);
 	}
 	
 	public String getId() {
@@ -77,7 +77,7 @@ public class MenuBar {
 
 		List<Menu> result =  new ArrayList<Menu>();
 		
-		Subject subject = authorizationManager.getSubject();
+		Subject subject = subjectProvider.getSubject();
 		
 		for(Menu m: list) {
 			

@@ -14,8 +14,8 @@ import java.util.Map;
 import br.com.uoutec.community.ediacaran.VarParser;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.plugins.SecurityUtil;
-import br.com.uoutec.community.ediacaran.security.AuthorizationManager;
 import br.com.uoutec.community.ediacaran.security.Subject;
+import br.com.uoutec.community.ediacaran.security.SubjectProvider;
 import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.util.IDGenerator;
 
@@ -23,7 +23,7 @@ public class Menu implements Serializable {
 
 	private static final long serialVersionUID = -110898947175676961L;
 
-	private transient AuthorizationManager authorizationManager;
+	private transient SubjectProvider subjectProvider;
 	
 	private transient PropertyChangeSupport propertyChangeSupport;
 
@@ -112,7 +112,7 @@ public class Menu implements Serializable {
 		this.parent = parent;
 		this.parentMenuBar = parentMenuBar;
 		this.map = new HashMap<String, Menu>();
-		this.authorizationManager = EntityContextPlugin.getEntity(AuthorizationManager.class);
+		this.subjectProvider = EntityContextPlugin.getEntity(SubjectProvider.class);
 		this.persistent = false;
 		/*
 		if(itens != null) {
@@ -297,7 +297,7 @@ public class Menu implements Serializable {
 
 		List<Menu> result =  new ArrayList<Menu>();
 		
-		Subject subject = authorizationManager.getSubject();
+		Subject subject = subjectProvider.getSubject();
 		
 		for(Menu m: itens) {
 			
