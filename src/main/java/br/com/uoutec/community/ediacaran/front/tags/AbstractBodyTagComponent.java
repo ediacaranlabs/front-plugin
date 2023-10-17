@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.jstl.fmt.LocalizationContext;
 import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
@@ -56,6 +57,8 @@ public abstract class AbstractBodyTagComponent
 	private String align;
 	
 	private Object parentTag;
+	
+	private LocalizationContext bundle;
 	
 	protected Component component;
 	
@@ -132,6 +135,14 @@ public abstract class AbstractBodyTagComponent
 			
 			if(emptyProperties != null && emptyProperties.contains(p)) {
 				continue;
+			}
+			
+			if(bundle != null && v instanceof String) {
+				String key = (String)v;
+				if(key.startsWith("#{") && key.endsWith("}")) {
+					key = key.substring(2, key.length() - 1);
+					v = bundle.getResourceBundle().getObject((String)key);
+				}
 			}
 			
 			map.put(p, v);
@@ -251,6 +262,15 @@ public abstract class AbstractBodyTagComponent
 	@TagAttribute
 	public void setTemplate(String template) {
 		this.template = template;
+	}
+
+	public LocalizationContext getBundle() {
+		return bundle;
+	}
+
+	@TagAttribute
+	public void setBundle(LocalizationContext bundle) {
+		this.bundle = bundle;
 	}
 
 	public String getClassStyle() {

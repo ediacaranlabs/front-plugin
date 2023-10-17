@@ -1,5 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import javax.servlet.jsp.jstl.fmt.LocalizationContext;
+
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.FieldValidatorTagComponent.ValidatorEntity;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
@@ -30,11 +32,24 @@ public class FieldValidatorRuleTagComponent extends AbstractSimpleTagComponent {
 			throw new IllegalStateException("field not found");
 		}
     	
+		String msg = message;
+		
     	if(raw == null || !raw) {
-    		message = "\"" + message + "\"";
+    		LocalizationContext bundle = getBundle();
+    		
+			if(bundle != null && msg != null) {
+				
+				if(msg.startsWith("#{") && msg.endsWith("}")) {
+					msg = msg.substring(2, msg.length() - 1);
+					msg = bundle.getResourceBundle().getString(msg);
+				}
+				
+			}
+    		
+			msg = "\"" + msg + "\"";
     	}
     	
-    	validator = new ValidatorEntity(name, message);
+    	validator = new ValidatorEntity(name, msg);
 		
 	}
 
