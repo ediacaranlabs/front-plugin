@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
@@ -31,6 +32,8 @@ public abstract class AbstractSimpleTagComponent
 	implements ComponentData {
 
 	private static final String TAG_CONTEXT = Component.class.getSimpleName() + ":CONTEXT";
+	
+	private static final String PARENT_PROPERTY = Component.class.getSimpleName() + ":PARENT";
 	
 	private	String id;
 
@@ -135,14 +138,43 @@ public abstract class AbstractSimpleTagComponent
 		return map;
     }
     
+	@SuppressWarnings("unchecked")
     protected void registerParentTag() {
-		parentTag = getProperty(TAG_CONTEXT);
-		setProperty(TAG_CONTEXT, this);
+		LinkedList<Object> parent = (LinkedList<Object>) getProperty(PARENT_PROPERTY);
+    	
+    	if(parent == null) {
+    		parent = new LinkedList<>();
+    		setProperty(PARENT_PROPERTY, parent);
+    		parentTag = null;
+    	}
+    	else {
+    		parentTag = parent.getLast();
+    	}
+    	
+    	parent.add(this);
+		//parentTag = getProperty(TAG_CONTEXT);
+		//setProperty(TAG_CONTEXT, this);
     }
 
+	@SuppressWarnings("unchecked")
     protected void unregisterParentTag() {
-		setProperty(TAG_CONTEXT, parentTag);
+    	
+    	LinkedList<Object> parent = (LinkedList<Object>) getProperty(PARENT_PROPERTY);
+    	
+    	if(parent != null) {
+    		
+    		parent.removeLast();
+    		
+    		if(parent.isEmpty()) {
+    			setProperty(PARENT_PROPERTY, null);	
+    		}
+    		
+    	}
+    	
 		parentTag = null;
+    	
+		//setProperty(TAG_CONTEXT, parentTag);
+		//parentTag = null;
     }
     
     public void setJspContext(JspContext pc) {

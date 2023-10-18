@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,6 +30,8 @@ public abstract class AbstractBodyTagComponent
 	private static final long serialVersionUID = -5353589232919296817L;
 
 	private static final String TAG_CONTEXT = Component.class.getSimpleName() + ":CONTEXT";
+	
+	private static final String PARENT_PROPERTY = Component.class.getSimpleName() + ":PARENT";
 	
 	public static final String WRAPPER_TEMPLATE		= "/components/wrapper";
 	
@@ -155,6 +158,7 @@ public abstract class AbstractBodyTagComponent
     	return getBodyContent().getEnclosingWriter();
     }
     
+    /*
     private void registerParentTag() {
 		this.parentTag = getProperty(TAG_CONTEXT);
 		setProperty(TAG_CONTEXT, this);
@@ -162,6 +166,46 @@ public abstract class AbstractBodyTagComponent
 
     private void unregisterParentTag() {
 		this.parentTag = null;
+    }
+    */
+    
+	@SuppressWarnings("unchecked")
+    protected void registerParentTag() {
+		LinkedList<Object> parent = (LinkedList<Object>) getProperty(PARENT_PROPERTY);
+    	
+    	if(parent == null) {
+    		parent = new LinkedList<>();
+    		setProperty(PARENT_PROPERTY, parent);
+    		parentTag = null;
+    	}
+    	else {
+    		parentTag = parent.getLast();
+    	}
+    	
+    	parent.add(this);
+		//parentTag = getProperty(TAG_CONTEXT);
+		//setProperty(TAG_CONTEXT, this);
+    }
+
+	@SuppressWarnings("unchecked")
+    protected void unregisterParentTag() {
+    	
+    	LinkedList<Object> parent = (LinkedList<Object>) getProperty(PARENT_PROPERTY);
+    	
+    	if(parent != null) {
+    		
+    		parent.removeLast();
+    		
+    		if(parent.isEmpty()) {
+    			setProperty(PARENT_PROPERTY, null);	
+    		}
+    		
+    	}
+    	
+		parentTag = null;
+    	
+		//setProperty(TAG_CONTEXT, parentTag);
+		//parentTag = null;
     }
     
     public void setBodyContent(BodyContent b) {
