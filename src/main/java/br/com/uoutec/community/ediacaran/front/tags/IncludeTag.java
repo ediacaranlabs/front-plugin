@@ -57,6 +57,10 @@ public class IncludeTag extends SimpleTagSupport {
     	ImportResponseWrapper irw = new ImportResponseWrapper(pageContext); 
     	
     	try {
+    		boolean newContext = !servletContext.equals(pageContext.getServletContext());
+    		
+    		pageContext.getRequest().setAttribute("newContext", newContext);
+    		
     		servletContext.getRequestDispatcher(path).include(pageContext.getRequest(), irw);
     	}
     	catch(ServletException e) {
