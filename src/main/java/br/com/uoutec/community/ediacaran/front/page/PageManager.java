@@ -140,7 +140,7 @@ public class PageManager {
 	}
 	
 	public ObjectTemplate getTemplate(String name, PageObjectTemplateType type){
-		return objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, name + "-" + type.name().toLowerCase());
+		return objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, name + ";" + type.name().toLowerCase());
 	}
 
 	public Page getPageByName(String path, String name, String locale) {
