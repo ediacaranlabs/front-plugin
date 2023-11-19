@@ -1,7 +1,6 @@
 package br.com.uoutec.community.ediacaran.front;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.AccessControlException;
 import java.security.AccessController;
@@ -21,6 +20,7 @@ import br.com.uoutec.community.ediacaran.EdiacaranEventObject;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateComponent;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeRegistry;
+import br.com.uoutec.community.ediacaran.io.FileSystem;
 import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.plugins.PluginConfigurationMetadata;
 import br.com.uoutec.community.ediacaran.plugins.PluginInitializer;
@@ -83,7 +83,7 @@ public class ThemeEdiacaranListener implements EdiacaranEventListener{
 		if(packages.exists() && !packages.isDirectory()) {
 			Properties p = new Properties();
 			
-			try (InputStream i = new FileInputStream(packages)){
+			try (InputStream i = FileSystem.getInputStream(packages)){
 				p.load(i);
 			}
 			

@@ -1,9 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.page;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -23,6 +21,7 @@ import java.util.regex.Pattern;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import br.com.uoutec.community.ediacaran.io.FileSystem;
 import br.com.uoutec.community.ediacaran.system.repository.FileManager;
 import br.com.uoutec.community.ediacaran.system.repository.FileManagerHandler;
 import br.com.uoutec.community.ediacaran.system.repository.FileMetadata;
@@ -188,7 +187,7 @@ public class PageFileManagerHandler implements FileManagerHandler{
 	}
 
 	private Reader getReader(File file) throws FileNotFoundException {
-		return new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
+		return new InputStreamReader(FileSystem.getInputStream(file), StandardCharsets.UTF_8);
 	}
 	
 	@Override
@@ -247,7 +246,7 @@ public class PageFileManagerHandler implements FileManagerHandler{
 	}
 
 	public Writer getWriter(File file) throws FileNotFoundException {
-		return new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
+		return new OutputStreamWriter(FileSystem.getOutputStream(file), StandardCharsets.UTF_8);
 	}
 	
 	@Override
