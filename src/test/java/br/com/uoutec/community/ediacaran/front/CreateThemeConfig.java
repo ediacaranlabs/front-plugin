@@ -4,9 +4,9 @@ import java.lang.reflect.Modifier;
 import java.util.List;
 
 import br.com.uoutec.application.ClassUtil;
+import br.com.uoutec.application.io.Vfs;
 import br.com.uoutec.application.scanner.DefaultScanner;
 import br.com.uoutec.application.scanner.TypeFilter;
-import br.com.uoutec.application.scanner.vfs.Vfs;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateComponent;
 
 public class CreateThemeConfig {

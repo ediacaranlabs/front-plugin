@@ -9,8 +9,8 @@ import java.util.List;
 import org.brandao.brutos.io.Resource;
 import org.brandao.brutos.io.ResourceLoader;
 
+import br.com.uoutec.application.io.Vfs;
 import br.com.uoutec.application.scanner.vfs.Dir;
-import br.com.uoutec.application.scanner.vfs.Vfs;
 
 public class TagTemplateSearch {
 
@@ -46,9 +46,9 @@ public class TagTemplateSearch {
 	
 	private void search(Dir origin, List<Resource> templates) throws IOException {
 		
-		br.com.uoutec.application.scanner.vfs.File[] files = origin.getFiles();
+		br.com.uoutec.application.io.Path[] files = origin.getFiles();
 		
-		for(br.com.uoutec.application.scanner.vfs.File f: files) {
+		for(br.com.uoutec.application.io.Path f: files) {
 			
 			if(f.isDirectory()) {
 				search(Vfs.getDir(f.toURL()), templates);

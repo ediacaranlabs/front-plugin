@@ -12,9 +12,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import br.com.uoutec.application.ClassUtil;
+import br.com.uoutec.application.io.Vfs;
 import br.com.uoutec.application.scanner.DefaultScanner;
 import br.com.uoutec.application.scanner.TypeFilter;
-import br.com.uoutec.application.scanner.vfs.Vfs;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
