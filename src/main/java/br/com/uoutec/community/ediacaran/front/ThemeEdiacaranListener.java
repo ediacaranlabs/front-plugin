@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front;
 
-import java.io.File;
 import java.io.InputStream;
 import java.security.AccessControlException;
 import java.security.AccessController;
@@ -15,19 +14,19 @@ import org.brandao.brutos.ClassUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.com.uoutec.community.ediacaran.EdiacaranEventListener;
-import br.com.uoutec.community.ediacaran.EdiacaranEventObject;
+import br.com.uoutec.application.io.Path;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateComponent;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeRegistry;
-import br.com.uoutec.community.ediacaran.io.FileSystem;
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.community.ediacaran.plugins.PluginConfigurationMetadata;
-import br.com.uoutec.community.ediacaran.plugins.PluginInitializer;
-import br.com.uoutec.community.ediacaran.plugins.PluginNode;
-import br.com.uoutec.community.ediacaran.plugins.PluginPath;
-import br.com.uoutec.community.ediacaran.plugins.PluginType;
-import br.com.uoutec.community.ediacaran.web.WebUtil;
+import br.com.uoutec.ediacaran.core.EdiacaranEventListener;
+import br.com.uoutec.ediacaran.core.EdiacaranEventObject;
+import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
+import br.com.uoutec.ediacaran.core.plugins.PluginConfigurationMetadata;
+import br.com.uoutec.ediacaran.core.plugins.PluginInitializer;
+import br.com.uoutec.ediacaran.core.plugins.PluginNode;
+import br.com.uoutec.ediacaran.core.plugins.PluginPath;
+import br.com.uoutec.ediacaran.core.plugins.PluginType;
+import br.com.uoutec.ediacaran.web.WebUtil;
 
 @Singleton
 public class ThemeEdiacaranListener implements EdiacaranEventListener{
@@ -75,15 +74,15 @@ public class ThemeEdiacaranListener implements EdiacaranEventListener{
 		PluginConfigurationMetadata pmd = pluginType.getConfiguration().getMetadata();
 		
 		PluginPath pp = pmd.getPath();
-		File base = pp.getBase();
-		base = new File(base, "themes");
-		File packages = new File(base, "themes.properties");
-		packages = packages.getAbsoluteFile();
+		Path base = pp.getBase();
+		base = base.getPath("themes");
+		Path packages = base.getPath("themes.properties");
+		packages = packages.getAbsolutePath();
 		
 		if(packages.exists() && !packages.isDirectory()) {
 			Properties p = new Properties();
 			
-			try (InputStream i = FileSystem.getInputStream(packages)){
+			try (InputStream i = packages.openInputStream()){
 				p.load(i);
 			}
 			

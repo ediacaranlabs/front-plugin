@@ -4,8 +4,8 @@ import java.util.Map;
 
 import org.brandao.brutos.ClassUtil;
 
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.system.entity.EntityInheritanceManager;
+import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
 import br.com.uoutec.pub.entity.AbstractPubEntity;
 import br.com.uoutec.pub.entity.InvalidRequestException;
 

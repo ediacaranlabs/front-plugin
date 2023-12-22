@@ -1,19 +1,45 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import br.com.uoutec.application.io.Path;
 import br.com.uoutec.community.ediacaran.system.repository.FileManagerHandler;
 import br.com.uoutec.community.ediacaran.system.repository.FileMetadata;
 
 @Deprecated
 public class PageFileManagerHandler implements FileManagerHandler{
 
+	@Override
+	public FileMetadata toMetadata(Path base, Path file) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Path toFile(Path base, FileMetadata omd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object read(Path file, FileMetadata metadata) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void write(Path file, FileMetadata metadata, Object value) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Path file, FileMetadata metadata) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/*
 	private static final String PATH_FORMAT = "(\\/[a-z][a-z0-9]+(_[a-z0-9]+)*)+";
 	
 	private static final String ID_FORMAT = "[a-z][a-z0-9]+([_-][a-z0-9]+)*";

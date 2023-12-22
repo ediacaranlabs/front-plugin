@@ -18,11 +18,11 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
-import br.com.uoutec.community.ediacaran.DoPrivilegedException;
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.components.ComponentData;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
+import br.com.uoutec.ediacaran.DoPrivilegedException;
 
 public abstract class AbstractBodyTagComponent 
 	extends BodyTagSupport implements ComponentData {

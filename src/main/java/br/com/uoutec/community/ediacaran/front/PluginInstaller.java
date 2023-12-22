@@ -2,10 +2,9 @@ package br.com.uoutec.community.ediacaran.front;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
 
-import br.com.uoutec.community.ediacaran.AbstractPlugin;
-import br.com.uoutec.community.ediacaran.EdiacaranListenerManager;
+import br.com.uoutec.application.SystemProperties;
+import br.com.uoutec.application.io.Vfs;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
 import br.com.uoutec.community.ediacaran.front.objects.MenubarObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplateType;
@@ -15,7 +14,6 @@ import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBarManagerException;
 import br.com.uoutec.community.ediacaran.front.security.pub.WebSecurityManagerPlugin;
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.security.Authorization;
 import br.com.uoutec.community.ediacaran.security.SecurityRegistry;
 import br.com.uoutec.community.ediacaran.system.repository.FileManager;
@@ -27,6 +25,9 @@ import br.com.uoutec.community.ediacaran.system.repository.ObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectsManagerDriverException;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectsTemplateManager;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectsTemplateManagerDriver;
+import br.com.uoutec.ediacaran.core.AbstractPlugin;
+import br.com.uoutec.ediacaran.core.EdiacaranListenerManager;
+import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
 import br.com.uoutec.entity.registry.RegistryException;
 
 public class PluginInstaller 
@@ -69,7 +70,7 @@ public class PluginInstaller
 		this.globalDriver = 
 				new FileObjectsManagerDriver(
 						new FileManager(
-								new File(System.getProperty("app.base"), OBJECTS_REPOSITORY), 
+								Vfs.getPath(SystemProperties.getProperty("app.base")).getPath(OBJECTS_REPOSITORY), 
 								new JsonFileManagerHandler()
 						), "global"
 				); 

@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import javax.inject.Singleton;
 
-import br.com.uoutec.community.ediacaran.plugins.SecurityUtil;
+import br.com.uoutec.ediacaran.plugins.SecurityUtil;
 
 @Singleton
 @Deprecated

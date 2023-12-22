@@ -10,7 +10,6 @@ import java.io.Writer;
 import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Locale;
@@ -21,11 +20,12 @@ import java.util.regex.Pattern;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import br.com.uoutec.community.ediacaran.io.FileSystem;
+import br.com.uoutec.application.io.Path;
 import br.com.uoutec.community.ediacaran.system.repository.FileManager;
 import br.com.uoutec.community.ediacaran.system.repository.FileManagerHandler;
 import br.com.uoutec.community.ediacaran.system.repository.FileMetadata;
 import br.com.uoutec.community.ediacaran.system.util.DataUtil.ClassTypeAdapter;
+import br.com.uoutec.ediacaran.io.FileSystem;
 
 public class PageFileManagerHandler implements FileManagerHandler{
 
@@ -62,7 +62,7 @@ public class PageFileManagerHandler implements FileManagerHandler{
 	}
 	
 	@Override
-	public FileMetadata toMetadata(File base, File file) {
+	public FileMetadata toMetadata(Path base, Path file) {
 		
 		String fileName = file.getName();
 		
@@ -78,8 +78,8 @@ public class PageFileManagerHandler implements FileManagerHandler{
 			throw new IllegalStateException("id");
 		}
 		
-		String baseName = base.getAbsolutePath();
-		String pathName = file.getParentFile().getAbsolutePath();
+		String baseName = base.getFullName();
+		String pathName = file.getParent().getFullName();
 		
 		if(!pathName.startsWith(baseName)) {
 			throw new IllegalStateException("path");
@@ -100,7 +100,7 @@ public class PageFileManagerHandler implements FileManagerHandler{
 	}
 	
 	@Override
-	public File toFile(File base, FileMetadata omd) {
+	public Path toFile(Path base, FileMetadata omd) {
 		
 		if(!idPattern.matcher(omd.getName()).matches()) {
 			throw new IllegalStateException("invalid id: " + omd.getName());
@@ -121,10 +121,10 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		
 		builder.append(".pag");
 		
-		return new File(base, builder.toString());
+		return base.getPath(builder.toString());
 	}
 	
-	private File toContentFile(File fileMtadata, FileMetadata omd) {
+	private Path toContentFile(Path fileMtadata, FileMetadata omd) {
 		
 		String name = omd.getName();
 		Locale locale = (Locale) omd.getExtMetadata("locale");
@@ -137,10 +137,10 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		
 		builder.append(".cpag");
 		
-		return new File(fileMtadata.getParentFile(), builder.toString());
+		return fileMtadata.getParent().getPath(builder.toString());
 	}
 
-	private File toThumbnailFile(File fileMtadata, FileMetadata omd) {
+	private Path toThumbnailFile(Path fileMtadata, FileMetadata omd) {
 		
 		String name = omd.getName();
 		Locale locale = (Locale) omd.getExtMetadata("locale");
@@ -153,15 +153,15 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		
 		builder.append(".png");
 		
-		return new File(fileMtadata.getParentFile(), builder.toString());
+		return fileMtadata.getParent().getPath(builder.toString());
 	}
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	public Object read(File file, FileMetadata metadata) throws IOException {
+	public Object read(Path file, FileMetadata metadata) throws IOException {
 
-		File contentFile   = toContentFile(file, metadata);
-		File thumbnailFile = toThumbnailFile(file, metadata);
+		Path contentFile   = toContentFile(file, metadata);
+		Path thumbnailFile = toThumbnailFile(file, metadata);
 		
 		Object data;
 		
@@ -186,15 +186,15 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		return page;
 	}
 
-	private Reader getReader(File file) throws FileNotFoundException {
-		return new InputStreamReader(FileSystem.getInputStream(file), StandardCharsets.UTF_8);
+	private Reader getReader(Path file) throws FileNotFoundException {
+		return new InputStreamReader(file.openInputStream(), StandardCharsets.UTF_8);
 	}
 	
 	@Override
-	public void write(File file, FileMetadata metadata, Object value) throws FileNotFoundException, IOException {
+	public void write(Path file, FileMetadata metadata, Object value) throws FileNotFoundException, IOException {
 		
-		File contentFile   = toContentFile(file, metadata);
-		File thumbnailFile = toThumbnailFile(file, metadata);
+		Path contentFile   = toContentFile(file, metadata);
+		Path thumbnailFile = toThumbnailFile(file, metadata);
 		
 		Page page = (Page)value;
 		
@@ -238,22 +238,22 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		}
 		
 		if(page.getThumbnail() != null && !page.getThumbnail().equals(thumbnailFile)) {
-			Path copied = thumbnailFile.toPath();
-		    Path originalPath = page.getThumbnail().toPath();
+			Path copied = thumbnailFile;
+		    Path originalPath = page.getThumbnail();
 		    Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
 		    page.setThumbnail(thumbnailFile);
 		}
 	}
 
-	public Writer getWriter(File file) throws FileNotFoundException {
-		return new OutputStreamWriter(FileSystem.getOutputStream(file), StandardCharsets.UTF_8);
+	public Writer getWriter(Path file) throws FileNotFoundException {
+		return new OutputStreamWriter(file.openOutputStream(), StandardCharsets.UTF_8);
 	}
 	
 	@Override
-	public void delete(File file, FileMetadata metadata) throws IOException {
+	public void delete(Path file, FileMetadata metadata) throws IOException {
 		
-		File contentFile   = toContentFile(file, metadata);
-		File thumbnailFile = toThumbnailFile(file, metadata);
+		Path contentFile   = toContentFile(file, metadata);
+		Path thumbnailFile = toThumbnailFile(file, metadata);
 		
 		contentFile.delete();
 		thumbnailFile.delete();

@@ -16,7 +16,7 @@ import org.brandao.brutos.annotation.web.WebActionStrategyType;
 
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
+import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
 import br.com.uoutec.filter.invoker.annotation.EnableFilters;
 
 @Singleton

@@ -17,9 +17,9 @@ import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebResultAction;
 
 import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
-import br.com.uoutec.community.ediacaran.plugins.PublicType;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectTemplate;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectsTemplateManager;
+import br.com.uoutec.ediacaran.core.plugins.PublicType;
 
 @Singleton
 @ActionStrategy(WebActionStrategyType.DETACHED)

@@ -17,7 +17,7 @@ import br.com.uoutec.community.ediacaran.front.theme.TemplateVarParser;
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeRegistry;
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
+import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
 
 public class Component 
 	implements ComponentVars {

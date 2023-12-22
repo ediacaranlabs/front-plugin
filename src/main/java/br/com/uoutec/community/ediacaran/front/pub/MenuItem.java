@@ -2,8 +2,8 @@ package br.com.uoutec.community.ediacaran.front.pub;
 
 import java.io.Serializable;
 
-import br.com.uoutec.community.ediacaran.VarParser;
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
+import br.com.uoutec.ediacaran.core.VarParser;
+import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
 
 @Deprecated
 public class MenuItem implements Serializable{

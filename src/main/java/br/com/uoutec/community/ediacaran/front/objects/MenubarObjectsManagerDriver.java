@@ -1,12 +1,12 @@
 package br.com.uoutec.community.ediacaran.front.objects;
 
-import java.io.File;
-
-import br.com.uoutec.community.ediacaran.plugins.PublicBean;
+import br.com.uoutec.application.SystemProperties;
+import br.com.uoutec.application.io.Vfs;
 import br.com.uoutec.community.ediacaran.system.repository.FileManager;
 import br.com.uoutec.community.ediacaran.system.repository.FileObjectsTemplateManagerDriver;
 import br.com.uoutec.community.ediacaran.system.repository.JsonFileManagerHandler;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectTemplate;
+import br.com.uoutec.ediacaran.core.plugins.PublicBean;
 
 public class MenubarObjectsManagerDriver 
 	extends FileObjectsTemplateManagerDriver
@@ -19,7 +19,7 @@ public class MenubarObjectsManagerDriver
 	public MenubarObjectsManagerDriver() {
 		super(
 				new FileManager(
-						new File(System.getProperty("app.base"), REPOSITORY), 
+						Vfs.getPath(SystemProperties.getProperty("app.base")).getPath(REPOSITORY), 
 						new JsonFileManagerHandler()
 				), DRIVER_NAME
 		);

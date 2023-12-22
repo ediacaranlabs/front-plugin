@@ -8,8 +8,8 @@ import java.util.Map;
 import org.brandao.brutos.io.Resource;
 import org.brandao.brutos.io.ResourceLoader;
 
-import br.com.uoutec.community.ediacaran.plugins.PluginException;
-import br.com.uoutec.community.ediacaran.plugins.PublicBean;
+import br.com.uoutec.ediacaran.core.plugins.PluginException;
+import br.com.uoutec.ediacaran.core.plugins.PublicBean;
 
 @SuppressWarnings("deprecation")
 public class TemaLoaderImp implements TemaLoader, PublicBean{

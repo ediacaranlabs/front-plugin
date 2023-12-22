@@ -9,8 +9,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectsTemplateManager;
+import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
 
 @Tag(
 	name="import-object", 

@@ -5,9 +5,9 @@ import javax.validation.constraints.NotNull;
 import org.brandao.brutos.annotation.Enumerated;
 import org.brandao.brutos.annotation.EnumerationType;
 
-import br.com.uoutec.community.ediacaran.security.PermissionType;
-import br.com.uoutec.community.ediacaran.security.SecurityPermissionRequest;
-import br.com.uoutec.community.ediacaran.security.SecurityPermissionStatus;
+import br.com.uoutec.ediacaran.core.security.PermissionType;
+import br.com.uoutec.ediacaran.core.security.SecurityPermissionRequest;
+import br.com.uoutec.ediacaran.core.security.SecurityPermissionStatus;
 
 public class SecurityPermissionStatusPubEntity 
 	extends GenericPubEntity<SecurityPermissionStatus>{

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
-import br.com.uoutec.community.ediacaran.io.FileSystem;
+import br.com.uoutec.ediacaran.io.FileSystem;
 
 public class TemplateLoader {
 

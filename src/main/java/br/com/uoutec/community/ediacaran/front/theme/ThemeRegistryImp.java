@@ -11,9 +11,9 @@ import javax.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.com.uoutec.community.ediacaran.plugins.PluginType;
-import br.com.uoutec.community.ediacaran.plugins.PublicBean;
-import br.com.uoutec.community.ediacaran.plugins.SecurityUtil;
+import br.com.uoutec.ediacaran.core.plugins.PluginType;
+import br.com.uoutec.ediacaran.core.plugins.PublicBean;
+import br.com.uoutec.ediacaran.plugins.SecurityUtil;
 
 @Singleton
 public class ThemeRegistryImp implements ThemeRegistry, PublicBean{

@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import br.com.uoutec.community.ediacaran.VarParser;
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.community.ediacaran.plugins.SecurityUtil;
 import br.com.uoutec.community.ediacaran.security.Subject;
 import br.com.uoutec.community.ediacaran.security.SubjectProvider;
 import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.util.IDGenerator;
+import br.com.uoutec.ediacaran.core.VarParser;
+import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
+import br.com.uoutec.ediacaran.plugins.SecurityUtil;
 
 public class Menu implements Serializable {
 

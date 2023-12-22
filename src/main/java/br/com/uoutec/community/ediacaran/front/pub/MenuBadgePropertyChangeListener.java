@@ -5,7 +5,7 @@ import java.beans.PropertyChangeListener;
 
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
+import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
 
 public class MenuBadgePropertyChangeListener implements PropertyChangeListener{
 

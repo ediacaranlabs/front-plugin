@@ -23,13 +23,13 @@ import org.brandao.brutos.annotation.View;
 import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.ResponseErrors;
 
-import br.com.uoutec.community.ediacaran.PluginConfigurationManager;
-import br.com.uoutec.community.ediacaran.SecurityPolicyUpdater;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
-import br.com.uoutec.community.ediacaran.plugins.MutablePluginConfiguration;
-import br.com.uoutec.community.ediacaran.plugins.PluginConfiguration;
-import br.com.uoutec.community.ediacaran.plugins.PluginStatus;
-import br.com.uoutec.community.ediacaran.security.SecurityPermissionStatus;
+import br.com.uoutec.ediacaran.core.PluginConfigurationManager;
+import br.com.uoutec.ediacaran.core.SecurityPolicyUpdater;
+import br.com.uoutec.ediacaran.core.plugins.MutablePluginConfiguration;
+import br.com.uoutec.ediacaran.core.plugins.PluginConfiguration;
+import br.com.uoutec.ediacaran.core.plugins.PluginStatus;
+import br.com.uoutec.ediacaran.core.security.SecurityPermissionStatus;
 import br.com.uoutec.pub.entity.InvalidRequestException;
 
 @Singleton

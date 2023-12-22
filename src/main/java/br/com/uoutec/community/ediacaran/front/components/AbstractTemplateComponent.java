@@ -14,8 +14,8 @@ import br.com.uoutec.community.ediacaran.front.theme.TemplateComponent;
 import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateLoader;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
-import br.com.uoutec.community.ediacaran.plugins.PluginType;
+import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
+import br.com.uoutec.ediacaran.core.plugins.PluginType;
 
 public abstract class AbstractTemplateComponent 
 	implements TemplateComponent{

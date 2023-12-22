@@ -1,6 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.theme;
 
-import br.com.uoutec.community.ediacaran.plugins.PublicBean;
+import br.com.uoutec.ediacaran.core.plugins.PublicBean;
 
 public interface ThemeRegistry extends PublicBean{
 

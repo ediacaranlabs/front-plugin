@@ -1,11 +1,13 @@
 package br.com.uoutec.community.ediacaran.front.page;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
+
+import br.com.uoutec.application.io.Path;
+import br.com.uoutec.application.io.Vfs;
 
 public class Page {
 
@@ -25,7 +27,7 @@ public class Page {
 	
 	private String thumbnailDescription;
 	
-	private transient File thumbnail;
+	private transient Path thumbnail;
 	
 	public List<BreadcrumbPath> getBreadcrumb() {
 		return breadcrumb;
@@ -91,11 +93,11 @@ public class Page {
 		this.thumbnailDescription = thumbnailDescription;
 	}
 
-	public File getThumbnail() {
+	public Path getThumbnail() {
 		return thumbnail;
 	}
 
-	public void setThumbnail(File thumbnail) {
+	public void setThumbnail(Path thumbnail) {
 		this.thumbnail = thumbnail;
 	}
 
@@ -103,8 +105,8 @@ public class Page {
 		
 		if(thumbnail != null) {
 			String baseWebApp = System.getProperty("app.web");
-			File fileBaseWebApp = new File(baseWebApp);
-			String relative = fileBaseWebApp.toURI().relativize(thumbnail.toURI()).getPath();
+			Path fileBaseWebApp = Vfs.getPath(baseWebApp);
+			String relative = fileBaseWebApp.getRelativePath(thumbnail).getFullName();
 			relative = relative.replaceAll("\\+", "/");
 			return "/" + relative;
 		}

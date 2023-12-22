@@ -1,7 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.pub.widget;
 
-import br.com.uoutec.community.ediacaran.VarParser;
-import br.com.uoutec.community.ediacaran.plugins.EntityContextPlugin;
+import br.com.uoutec.ediacaran.core.VarParser;
+import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
 
 public class Widget {
 
