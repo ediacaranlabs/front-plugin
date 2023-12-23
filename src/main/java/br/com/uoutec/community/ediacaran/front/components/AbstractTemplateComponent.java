@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.components;
 
-import java.io.File;
 import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,10 +7,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import br.com.uoutec.application.io.Path;
+import br.com.uoutec.application.io.Vfs;
+import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateComponent;
-import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateLoader;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
@@ -154,10 +155,7 @@ public abstract class AbstractTemplateComponent
 		
 		try {
 			PluginType pd = EntityContextPlugin.getEntity(PluginType.class);
-			File file = new File(pd.getConfiguration().getMetadata().getPath().getBase() + t);
-			
-			file = file.getCanonicalFile();
-			
+			Path file = Vfs.getPath(pd.getConfiguration().getMetadata().getPath().getBase() + t);
 			TemplateLoader loader = new TemplateLoader();
 			this.componentTemplate = loader.load(file, "UTF-8");
 		}
