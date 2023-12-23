@@ -5,10 +5,14 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 
 import org.brandao.brutos.annotation.Basic;
+
+import br.com.uoutec.application.io.Path;
+import br.com.uoutec.application.io.Vfs;
 
 public class Image {
 
@@ -69,9 +73,9 @@ public class Image {
 		return y2;
 	}
 
-	public File save(int width, int height) throws IOException {
+	public Path save(int width, int height) throws IOException {
 		if(tmpFile != null) {
-			File f = File.createTempFile("img-field", ".png");
+			Path f = Vfs.createTempFile("img-field", ".png");
 			f.deleteOnExit();
 			save(width, height, f);
 			return f;
@@ -80,7 +84,7 @@ public class Image {
 		return null;
 	}
 
-	public void save(int width, int height, File file) throws IOException {
+	public void save(int width, int height, Path file) throws IOException {
 		
 		if(x1 == null || x2 == null || y1 == null || y2 == null) {
 			throw new IllegalStateException("x1 | x2 | y1 | y2");
@@ -111,7 +115,10 @@ public class Image {
 		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		g2.drawImage(img, 0, 0, width, height, x1.intValue(), y1.intValue(), x2.intValue(), y2.intValue(), null);
 		
-		ImageIO.write(image, "png", file);
+		try (OutputStream out = file.openOutputStream()){
+			ImageIO.write(image, "png", out);
+		}
+		
 	}
 	
 }

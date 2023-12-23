@@ -9,10 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.com.uoutec.application.security.ContextSystemSecurityCheck;
+import br.com.uoutec.application.security.RuntimeSecurityPermission;
 import br.com.uoutec.community.ediacaran.security.Subject;
 import br.com.uoutec.community.ediacaran.security.SubjectProvider;
 import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
-import br.com.uoutec.ediacaran.plugins.SecurityUtil;
 
 public class MenuBar {
 
@@ -56,7 +57,7 @@ public class MenuBar {
 
 	public void setName(String name) {
 		
-		SecurityUtil.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + ".name"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(MenuBar.basePermission + "." + this.id + ".name"));
 
 		String oldName = this.name;
 		this.name = name;
@@ -65,7 +66,7 @@ public class MenuBar {
 
 	public List<Menu> getAllItens(){
 		
-		SecurityUtil.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + ".list.all"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(MenuBar.basePermission + "." + this.id + ".list.all"));
 
 		List<Menu> result =  new ArrayList<Menu>(list);
 		return Collections.unmodifiableList(result);
@@ -73,7 +74,7 @@ public class MenuBar {
 	
 	public List<Menu> getItens(){
 		
-		SecurityUtil.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + ".list"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(MenuBar.basePermission + "." + this.id + ".list"));
 
 		List<Menu> result =  new ArrayList<Menu>();
 		
@@ -117,7 +118,7 @@ public class MenuBar {
 
 	public synchronized void addMenu(Menu ... menu) {
 		
-		SecurityUtil.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + ".register"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(MenuBar.basePermission + "." + this.id + ".register"));
 		
 		for(Menu m: menu) {
 			
@@ -144,7 +145,7 @@ public class MenuBar {
 	
 	public Menu getMenu(String id){
 		
-		SecurityUtil.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + "." + id + ".list"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(MenuBar.basePermission + "." + this.id + "." + id + ".list"));
 		
 		return map.get(id);
 	}
@@ -152,7 +153,7 @@ public class MenuBar {
 	public void removeMenu(String id){
 		synchronized (this) {
 			
-			SecurityUtil.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + this.id + "." + id + ".remove"));
+			ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(MenuBar.basePermission + "." + this.id + "." + id + ".remove"));
 			
 			Menu m = this.map.get(id);
 			

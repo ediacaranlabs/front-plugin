@@ -11,13 +11,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import br.com.uoutec.application.security.ContextSystemSecurityCheck;
+import br.com.uoutec.application.security.RuntimeSecurityPermission;
 import br.com.uoutec.community.ediacaran.security.Subject;
 import br.com.uoutec.community.ediacaran.security.SubjectProvider;
 import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.util.IDGenerator;
 import br.com.uoutec.ediacaran.core.VarParser;
 import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
-import br.com.uoutec.ediacaran.plugins.SecurityUtil;
 
 public class Menu implements Serializable {
 
@@ -285,7 +286,7 @@ public class Menu implements Serializable {
 
 	public List<Menu> getAllItens(){
 		
-		SecurityUtil.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".list.all"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(MenuBar.basePermission + "." + getPath() + ".list.all"));
 
 		List<Menu> result =  new ArrayList<Menu>(itens);
 		return Collections.unmodifiableList(result);
@@ -293,7 +294,7 @@ public class Menu implements Serializable {
 	
 	public List<Menu> getItens() {
 		
-		SecurityUtil.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".list"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(MenuBar.basePermission + "." + getPath() + ".list"));
 
 		List<Menu> result =  new ArrayList<Menu>();
 		
@@ -356,7 +357,7 @@ public class Menu implements Serializable {
 
 	public synchronized void addItem(Menu ... menu){
 		
-		SecurityUtil.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".register"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(MenuBar.basePermission + "." + getPath() + ".register"));
 		
 		for(Menu m: menu) {
 			
@@ -382,7 +383,7 @@ public class Menu implements Serializable {
 	
 	public Menu getItem(String name){
 		
-		SecurityUtil.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".list"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(MenuBar.basePermission + "." + getPath() + ".list"));
 		
 		return map.get(name);
 	}
@@ -390,7 +391,7 @@ public class Menu implements Serializable {
 	public Menu removeItem(String name){
 		synchronized (this) {
 			
-			SecurityUtil.checkPermission(new RuntimePermission(MenuBar.basePermission + "." + getPath() + ".remove"));
+			ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(MenuBar.basePermission + "." + getPath() + ".remove"));
 			
 			Menu m = map.get(name);
 			

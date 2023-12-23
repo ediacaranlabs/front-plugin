@@ -1,16 +1,27 @@
 package br.com.uoutec.community.ediacaran.front.pub;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-
-import javax.inject.Singleton;
-
-import br.com.uoutec.ediacaran.plugins.SecurityUtil;
-
-@Singleton
 @Deprecated
 public class MenuBarManagerImp implements MenuBarManager{
 
+	@Override
+	public void registerMenuBar(MenuBar menuBar) throws MenuBarManagerException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public MenuBar getMenuBar(String name) throws MenuBarManagerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeMenuBar(String name) throws MenuBarManagerException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+/*
 	private ConcurrentMap<String, MenuBar> map;
 	
 	public MenuBarManagerImp(){
@@ -51,5 +62,5 @@ public class MenuBarManagerImp implements MenuBarManager{
 		
 		map.remove(name);
 	}
-
+*/
 }

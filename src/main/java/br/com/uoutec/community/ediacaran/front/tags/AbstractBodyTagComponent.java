@@ -2,7 +2,6 @@ package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.lang.reflect.InvocationTargetException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.HashMap;
@@ -18,18 +17,18 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
+import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.components.ComponentData;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
-import br.com.uoutec.ediacaran.DoPrivilegedException;
 
 public abstract class AbstractBodyTagComponent 
 	extends BodyTagSupport implements ComponentData {
 
 	private static final long serialVersionUID = -5353589232919296817L;
 
-	private static final String TAG_CONTEXT = Component.class.getSimpleName() + ":CONTEXT";
+	//private static final String TAG_CONTEXT = Component.class.getSimpleName() + ":CONTEXT";
 	
 	private static final String PARENT_PROPERTY = Component.class.getSimpleName() + ":PARENT";
 	
@@ -120,20 +119,9 @@ public abstract class AbstractBodyTagComponent
 		for(String p: defaultProperties) {
 			final String k = p;
 			
-			Object v = 
-					AccessController.doPrivileged(new PrivilegedAction<Object>() {
-		            public Object run() {
-		                try {
-							return i.get(k);
-						} catch (IllegalAccessException e) {
-							throw new DoPrivilegedException(e);
-						} catch (IllegalArgumentException e) {
-							throw new DoPrivilegedException(e);
-						} catch (InvocationTargetException e) {
-							throw new DoPrivilegedException(e);
-						}
-		            }
-		        });
+			Object v = ContextSystemSecurityCheck.doPrivileged(()->{
+				return i.get(k);
+			});
 			
 			
 			if(emptyProperties != null && emptyProperties.contains(p)) {

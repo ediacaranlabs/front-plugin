@@ -9,8 +9,6 @@ import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -21,11 +19,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import br.com.uoutec.application.io.Path;
+import br.com.uoutec.application.io.Vfs;
 import br.com.uoutec.community.ediacaran.system.repository.FileManager;
 import br.com.uoutec.community.ediacaran.system.repository.FileManagerHandler;
 import br.com.uoutec.community.ediacaran.system.repository.FileMetadata;
 import br.com.uoutec.community.ediacaran.system.util.DataUtil.ClassTypeAdapter;
-import br.com.uoutec.ediacaran.io.FileSystem;
 
 public class PageFileManagerHandler implements FileManagerHandler{
 
@@ -240,7 +238,7 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		if(page.getThumbnail() != null && !page.getThumbnail().equals(thumbnailFile)) {
 			Path copied = thumbnailFile;
 		    Path originalPath = page.getThumbnail();
-		    Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
+		    Vfs.copy(originalPath, copied);
 		    page.setThumbnail(thumbnailFile);
 		}
 	}
