@@ -1,7 +1,6 @@
 package br.com.uoutec.community.ediacaran.front;
 
 import java.io.InputStream;
-import java.security.AccessControlException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Arrays;
@@ -54,7 +53,7 @@ public class ThemeEdiacaranListener implements EdiacaranEventListener{
 		try {
 			loadThemes();
 		}
-		catch(AccessControlException ex) {
+		catch(SecurityException ex) {
 			logger.warn("don't have permission to load theme", ex);
 		}
 		catch(Throwable ex) {
