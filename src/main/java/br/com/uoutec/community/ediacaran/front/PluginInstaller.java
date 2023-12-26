@@ -70,7 +70,7 @@ public class PluginInstaller
 		this.globalDriver = 
 				new FileObjectsManagerDriver(
 						new FileManager(
-								Vfs.getPath(SystemProperties.getProperty("app.base")).getPath(OBJECTS_REPOSITORY), 
+								Vfs.getPath(SystemProperties.getProperty("app.base") + "/" + OBJECTS_REPOSITORY), 
 								new JsonFileManagerHandler()
 						), "global"
 				); 
