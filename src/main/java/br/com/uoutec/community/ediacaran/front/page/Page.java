@@ -6,6 +6,7 @@ import java.io.Writer;
 import java.util.List;
 import java.util.Map;
 
+import br.com.uoutec.application.SystemProperties;
 import br.com.uoutec.application.io.Path;
 import br.com.uoutec.application.io.Vfs;
 
@@ -104,7 +105,7 @@ public class Page {
 	public String getPublicThumbnailPath() {
 		
 		if(thumbnail != null) {
-			String baseWebApp = System.getProperty("app.web");
+			String baseWebApp = SystemProperties.getProperty("app.web");
 			Path fileBaseWebApp = Vfs.getPath(baseWebApp);
 			String relative = fileBaseWebApp.getRelativePath(thumbnail).getFullName();
 			relative = relative.replaceAll("\\+", "/");

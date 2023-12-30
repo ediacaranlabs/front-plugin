@@ -1,8 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +12,7 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.com.uoutec.application.io.Path;
 import br.com.uoutec.community.ediacaran.front.pub.DataUtil;
 
 public class ReadData {
@@ -21,14 +21,14 @@ public class ReadData {
 	
 	
 	@SuppressWarnings("unchecked")
-	public static Map<Object,Object> loadData(String path, File base, File root, Locale locale) throws IOException{
+	public static Map<Object,Object> loadData(String path, Path base, Path root, Locale locale) throws IOException{
 		
-		File fData              = new File(base, path + ".dpag");
+		Path fData              = base.getPath(path + ".dpag");
 		Map<Object,Object> data = loadData(fData, root, locale);
 		
 		if(data != null && locale != null) {
 			String localePath = path + "_" + locale.toString() + ".dpag";
-			File localeFile = new File(base, localePath);
+			Path localeFile = base.getPath(localePath);
 			Map<Object,Object> localeData = loadData(localeFile, root, locale);
 			
 			if(localeData != null) {
@@ -42,7 +42,7 @@ public class ReadData {
 			Map<Object,Object> vars = new HashMap<Object,Object>();
 
 			if(inc != null) {
-				List<Map<Object,Object>> incData = loadIncludes(inc, fData.getParentFile().getCanonicalFile(), root, locale);
+				List<Map<Object,Object>> incData = loadIncludes(inc, fData.getParent().normalizePath(), root, locale);
 				
 				for(Map<Object,Object> i: incData) {
 					merge(i, vars, null);
@@ -56,7 +56,7 @@ public class ReadData {
 		return data;
 	}
 	
-	private static Map<Object,Object> loadData(File file, File root, Locale locale) throws IOException{
+	private static Map<Object,Object> loadData(Path file, Path root, Locale locale) throws IOException{
 		
 		if(!file.exists() || !file.isFile() || !file.canRead()) {
 			return null;
@@ -65,7 +65,7 @@ public class ReadData {
 		return getData(file, root);
 	}
 	
-	private static List<Map<Object,Object>> loadIncludes(List<Object> includes, File basePath, File root, Locale locale) throws IOException{
+	private static List<Map<Object,Object>> loadIncludes(List<Object> includes, Path basePath, Path root, Locale locale) throws IOException{
 		
 		List<Map<Object,Object>> incData = new ArrayList<Map<Object,Object>>();
 		
@@ -211,11 +211,11 @@ public class ReadData {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static Map<Object,Object> getData(File dta, File root) throws IOException{
+	private static Map<Object,Object> getData(Path dta, Path root) throws IOException{
 		
-		dta = dta.getCanonicalFile();
+		dta = dta.normalizePath();
 		
-		if(!dta.getAbsolutePath().startsWith(root.getAbsolutePath())) {
+		if(!dta.getFullName().startsWith(root.getFullName())) {
 			return null;
 		}
 		
@@ -227,24 +227,17 @@ public class ReadData {
 		return (Map<Object, Object>) DataUtil.decode(text);
 	}
 	
-	private static String readData(File f) throws IOException {
+	private static String readData(Path f) throws IOException {
 		byte[] b = new byte[2048];
 		int l;
 		
 		StringBuilder builder = new StringBuilder();
-		FileInputStream fin = null;
-		try {
-			fin = new FileInputStream(f);
-			
+
+		try(InputStream fin = f.openInputStream()) {
 			while((l = fin.read(b)) != -1) {
 				builder.append(new String(b, 0, l));
 			}
 			return builder.toString();
-		}
-		finally {
-			if(fin != null) {
-				fin.close();
-			}
 		}
 	}
 	

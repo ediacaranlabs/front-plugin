@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Locale;
@@ -11,6 +10,8 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+import br.com.uoutec.application.io.Path;
+import br.com.uoutec.application.io.Vfs;
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
@@ -42,8 +43,8 @@ public class LoadDataTag  extends SimpleTagSupport {
     	Component tagComponent = new Component();
     	tagComponent.setPageContext((PageContext) getJspContext());
 
-    	File root = getRootPath();
-    	File base = file.startsWith("/")? root : getBasePath(tagComponent.getRequestPath(), root);
+    	Path root = getRootPath();
+    	Path base = file.startsWith("/")? root : getBasePath(tagComponent.getRequestPath(), root);
     	Map<Object,Object> dta = ReadData.loadData(file, base, root, locale);
     	/*
     			.loadData(
@@ -56,7 +57,7 @@ public class LoadDataTag  extends SimpleTagSupport {
     	((PageContext)getJspContext()).getRequest().setAttribute(var == null? "vars" : var, dta);
 	}
 
-    private File getRootPath() {
+    private Path getRootPath() {
     	ServletContext servletContext;
     	
     	if(context == null) {
@@ -66,12 +67,12 @@ public class LoadDataTag  extends SimpleTagSupport {
     		servletContext = ((PageContext)getJspContext()).getServletContext().getContext(context);
     	}
     			
-		return new File(servletContext.getRealPath("/"));
+		return Vfs.getPath(servletContext.getRealPath("/"));
     }
 
-    private File getBasePath(String path, File root) {
-    	File fullPath = new File(root, path);
-		return root.equals(fullPath)? fullPath : fullPath.getParentFile();
+    private Path getBasePath(String path, Path root) {
+    	Path fullPath = root.getPath(path);
+		return root.getFullName().equals(fullPath.getFullName())? fullPath : fullPath.getParent();
     }
     
     protected void applyTemplate(String template, 

@@ -346,6 +346,12 @@
 					<string/>
 				</void>
 				
+				<void method="addDefaultSecurityPermission">
+					<string>runtime</string>
+					<string>method.java.lang.reflect.Method.getAnnotation</string>
+					<string/>
+				</void>
+				
 			</object>
 		</void>
 
