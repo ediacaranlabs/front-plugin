@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.pub;
 
-import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,6 +22,7 @@ import org.brandao.brutos.annotation.View;
 import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.ResponseErrors;
 
+import br.com.uoutec.application.io.Path;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.ediacaran.core.PluginConfigurationManager;
 import br.com.uoutec.ediacaran.core.SecurityPolicyUpdater;
@@ -145,23 +145,20 @@ public class AdminPubResource {
 	@View("${plugins.ediacaran.front.template}/admin/update-install-file")
 	public void installPlugin(
 			@Basic(bean="file")
-			File pluginPackage) throws InvalidRequestException{
+			Path pluginPackage) throws InvalidRequestException{
 
 		if(pluginPackage == null) {
 			throw new InvalidRequestException("plugin package not found");
 		}
 		
 		try {
-			File newFile = 
-				new File(
-					pluginPackage.getParentFile(), 
-					pluginPackage.getName().split("\\.")[0] + ".jar");
+			Path newFile = pluginPackage.getParent().getPath(pluginPackage.getName().split("\\.")[0] + ".jar"); 
 			
 			if(pluginPackage.renameTo(newFile)) {
 				pluginPackage = newFile;
 			}
 			
-			pluginConfigurationManager.install(pluginPackage.toURI().toURL());
+			pluginConfigurationManager.install(pluginPackage.toURL());
 		}
 		catch(Throwable e) {
 			throw new InvalidRequestException("failed to install plugin", e);

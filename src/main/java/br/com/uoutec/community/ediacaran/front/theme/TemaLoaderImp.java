@@ -1,19 +1,15 @@
 package br.com.uoutec.community.ediacaran.front.theme;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.brandao.brutos.io.Resource;
-import org.brandao.brutos.io.ResourceLoader;
-
-import br.com.uoutec.ediacaran.core.plugins.PluginException;
 import br.com.uoutec.ediacaran.core.plugins.PublicBean;
 
 @SuppressWarnings("deprecation")
 public class TemaLoaderImp implements TemaLoader, PublicBean{
 
+	@Override
+	public Theme loadTema() throws ThemeException {
+		throw new UnsupportedOperationException();
+	}
+/*
 	private File templatesPath;
 	
 	private ResourceLoader loader;
@@ -72,5 +68,5 @@ public class TemaLoaderImp implements TemaLoader, PublicBean{
 		
 		return templates;
 	}
-	
+*/	
 }

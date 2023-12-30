@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.page;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -84,7 +83,7 @@ public class PageFileManagerHandler implements FileManagerHandler{
 		}
 		
 		pathName = pathName.substring(baseName.length());
-		pathName = pathName.replace(File.separator, "/");
+		pathName = pathName.replace(Vfs.getSeparator(), "/");
 		
 		String id = m.group(1);
 		String localeName = m.group(3);
