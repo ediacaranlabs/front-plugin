@@ -3,7 +3,6 @@ package br.com.uoutec.community.ediacaran.front.components;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -30,14 +29,14 @@ public class Image {
 	
 	private Double y2;
 	
-	private File tmpFile;
+	private Path tmpFile;
 
-	public File getTmpFile() {
+	public Path getTmpFile() {
 		return tmpFile;
 	}
 
 	@Basic(bean="file")
-	public void setTmpFile(File tmpFile) {
+	public void setTmpFile(Path tmpFile) {
 		this.tmpFile = tmpFile;
 	}
 
@@ -102,7 +101,7 @@ public class Image {
 			throw new IllegalStateException("maxPoints");
 		}
 		
-		BufferedImage img = ImageIO.read(tmpFile);
+		BufferedImage img = ImageIO.read(tmpFile.openInputStream());
 		
 		if(img == null) {
 			throw new IllegalStateException("image");
