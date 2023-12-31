@@ -352,6 +352,24 @@
 					<string/>
 				</void>
 				
+				<void method="addDefaultSecurityPermission">
+					<string>runtime</string>
+					<string>method.java.io.CharArrayReader.*</string>
+					<string/>
+				</void>
+				
+				<void method="addDefaultSecurityPermission">
+					<string>runtime</string>
+					<string>method.java.lang.Thread.sleep</string>
+					<string/>
+				</void>
+
+				<void method="addDefaultSecurityPermission">
+					<string>runtime</string>
+					<string>method.java.lang.ClassLoader.getResources</string>
+					<string/>
+				</void>
+				
 			</object>
 		</void>
 
