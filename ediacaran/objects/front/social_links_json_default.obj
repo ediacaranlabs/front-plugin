@@ -1,0 +1,17 @@
+[
+	{
+		"id": "facebook",
+		"icon": "facebook",
+		"src": "#"
+	},
+	{
+		"id": "twitter",
+		"icon": "twitter",
+		"src": "#"
+	},
+	{
+		"id": "linkedin",
+		"icon": "linkedin",
+		"src": "#"
+	}
+]

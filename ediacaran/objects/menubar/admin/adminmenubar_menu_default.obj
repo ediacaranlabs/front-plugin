@@ -1,0 +1,42 @@
+{
+	"id": "adminMenuBar",
+	"name": "Admin Menu Bar",
+	"itens": [
+		{
+			"id": "dashboard",
+			"name": "Dashboard",
+			"icon": "tachometer",
+			"resource": "#!/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard",
+			"order": 100
+		},	
+		{
+			"id": "conteudo",
+			"name": "Conteúdo",
+			"icon": "pie-chart",
+			"role": "manager",
+			"itens": [
+				{
+					"id": "menubar",
+					"name": "Menu",
+					"icon": "pie-chart",
+					"resource": "#!/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/menubar"
+				},
+				{
+					"id": "paginas",
+					"name": "Páginas",
+					"icon": "pie-chart",
+					"resource": "#!/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/pages"
+				}
+			],
+			"order": -100
+		},
+		{
+			"id": "plugins",
+			"name": "Plugins",
+			"icon": "pie-chart",
+			"resource": "#!/plugins/ediacaran/front/admin/plugins",
+			"role": "manager",
+			"order": -100
+		}	
+	]
+}

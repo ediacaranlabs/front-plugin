@@ -144,7 +144,7 @@ public class AdminPubResource {
 	@RequestMethod("POST")
 	@View("${plugins.ediacaran.front.template}/admin/update-install-file")
 	public void installPlugin(
-			@Basic(bean="file")
+			@Basic(bean="file", mappingType = MappingTypes.VALUE)
 			Path pluginPackage) throws InvalidRequestException{
 
 		if(pluginPackage == null) {

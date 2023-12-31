@@ -1,0 +1,11 @@
+{
+	"id": "default", 
+	"name": "Default front menu",
+	"itens": [
+		{
+			"id": "home",
+			"name": "Home",
+			"resource": "/"
+		}
+	] 
+}
