@@ -1,11 +1,1 @@
-{
-	"id": "default", 
-	"name": "Default front menu",
-	"itens": [
-		{
-			"id": "home",
-			"name": "Home",
-			"resource": "/"
-		}
-	] 
-}
+{"itens":[{"itens":[],"resource":"/","name":"Home","id":"home","persistent":true,"order":0}],"name":"Default front menu","id":"default"}
