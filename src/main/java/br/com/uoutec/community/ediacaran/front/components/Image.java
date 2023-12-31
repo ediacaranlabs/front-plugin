@@ -9,7 +9,6 @@ import java.io.OutputStream;
 import javax.imageio.ImageIO;
 
 import org.brandao.brutos.annotation.Basic;
-import org.brandao.brutos.annotation.MappingTypes;
 
 import br.com.uoutec.application.io.Path;
 import br.com.uoutec.application.io.Vfs;
@@ -36,7 +35,7 @@ public class Image {
 		return tmpFile;
 	}
 
-	@Basic(bean="file", mappingType = MappingTypes.VALUE)
+	@Basic(bean="file")
 	public void setTmpFile(Path tmpFile) {
 		this.tmpFile = tmpFile;
 	}
