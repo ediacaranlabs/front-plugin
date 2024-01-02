@@ -306,6 +306,13 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 				</ed:row>				
 			</ec:form>
 		</ec:tabs-item>
+		<ec:tabs-item title="Error Message">
+			<ed:row>
+				<ed:col size="12">
+					<ec:textarea rows="30" enabled="false">${vars.error}</ec:textarea>
+				</ed:col>
+			</ed:row>
+		</ec:tabs-item>
 	</ec:tabs>
 
 <script type="text/javascript" src="/plugins/ediacaran/front/default_template/admin/js/pages/update-status-plugin-detail.js" charset="utf-8"></script>

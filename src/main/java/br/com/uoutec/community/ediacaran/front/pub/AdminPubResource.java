@@ -24,6 +24,7 @@ import org.brandao.brutos.annotation.web.ResponseErrors;
 
 import br.com.uoutec.application.io.Path;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
+import br.com.uoutec.community.ediacaran.system.util.StringUtil;
 import br.com.uoutec.ediacaran.core.PluginConfigurationManager;
 import br.com.uoutec.ediacaran.core.SecurityPolicyUpdater;
 import br.com.uoutec.ediacaran.core.plugins.MutablePluginConfiguration;
@@ -82,6 +83,13 @@ public class AdminPubResource {
 		vars.put("config", pc);
 		vars.put("status", pluginConfigurationManager.getStatus(pc));
 		vars.put("security", securityPolicyUpdater.getPermissions(pc.getMetadata().getCode()));
+		
+		Throwable ex = pluginConfigurationManager.getError(pc);
+		
+		if(ex != null) {
+			vars.put("error", StringUtil.toString(ex));
+		}
+		
 		return vars;
 	}
 
