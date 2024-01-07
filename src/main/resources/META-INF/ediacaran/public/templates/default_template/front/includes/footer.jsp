@@ -2,7 +2,6 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"                   prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions"              prefix="fn"%>
-<ec:load-data context="/" file="/objects/address" var="address" />
 <%--<ec:load-data context="/" file="/objects/menus/footer-menu" var="footerMenu" />--%>
 <%--<ec:load-data context="/" file="/objects/menus/footer-menu2" var="footerMenu2" />--%>
 <%--<ec:load-data context="/" file="/objects/social-links" var="socialLinks" />--%>
