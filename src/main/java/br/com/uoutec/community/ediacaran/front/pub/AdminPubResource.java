@@ -140,7 +140,7 @@ public class AdminPubResource {
 			PluginStatus status = pluginConfigurationManager.getStatus(mpc);
 			Throwable error = pluginConfigurationManager.getError(mpc);
 			
-			vars.put("status", PluginStatus.RUNNING == status);
+			vars.put("status", PluginStatus.RUNNING.equals(status));
 			vars.put("error", success? null : error);
 		}
 		
