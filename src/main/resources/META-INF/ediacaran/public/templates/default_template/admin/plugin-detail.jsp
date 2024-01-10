@@ -5,7 +5,7 @@
 <ec:setTemplatePackage name="admin"/>
 <ec:setBundle var="messages" locale="${locale}"/>
 
-<ec:form method="POST" id="status_config_fr" update="enable_plugin_result" 
+<ec:form method="POST" id="status_config_fr" update="enable_plugin_result_${vars.config.metadata.code}" 
 action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/status" acceptCharset="UTF-8">
 	<ed:row style="form">
 		<ed:col size="8">
@@ -39,7 +39,7 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 		</ed:col>
 	</ed:row>
 	<ed:row style="form">
-		<ed:col id="enable_plugin_result" size="12">
+		<ed:col id="enable_plugin_result_${vars.config.metadata.code}" size="12">
 		</ed:col>
 	</ed:row>
 	</ec:form>	
@@ -47,7 +47,7 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 	<ec:tabs>
 		<fmt:message key="tabs.configuration.title" bundle="${messages}" var="msg_tmp"/>
 		<ec:tabs-item active="true" icon="cog" title="${msg_tmp}">
-			<ec:form method="POST" id="tab1" update="enable_plugin_result" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}">
+			<ec:form method="POST" id="tab1" update="enable_plugin_result_${vars.config.metadata.code}" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}">
 				<ec:table style="striped">
 					<ec:table-body>
 					<c:forEach items="${vars.config.metadata.properties}" var="property">
@@ -146,7 +146,7 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 		</ec:tabs-item>
 		<fmt:message key="tabs.security.title" bundle="${messages}" var="msg_tmp"/>
 		<ec:tabs-item icon="life-saver" title="${msg_tmp}">
-			<ec:form method="POST" id="tab2" update="enable_plugin_result" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}">
+			<ec:form method="POST" id="tab2" update="enable_plugin_result_${vars.config.metadata.code}" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}">
 				<ec:table style="striped">
 					<ec:table-body>
 						<c:set var="count" value="0"/>
@@ -265,7 +265,7 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 		</ec:tabs-item>
 		<fmt:message key="tabs.uninstall.title" bundle="${messages}" var="msg_tmp"/>
 		<ec:tabs-item icon="warning" title="${msg_tmp}">
-			<ec:form method="post" id="tab3" update="enable_plugin_result" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/uninstall">
+			<ec:form method="post" id="tab3" update="enable_plugin_result_${vars.config.metadata.code}" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/uninstall">
 				<ed:row>
 					<ed:col size="12">
 						<fmt:message key="tabs.uninstall.description" bundle="${messages}">
@@ -306,5 +306,3 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 			</ed:row>
 		</ec:tabs-item>
 	</ec:tabs>
-
-<script type="text/javascript" src="/plugins/ediacaran/front/default_template/admin/js/pages/update-status-plugin-detail.js" charset="utf-8"></script>

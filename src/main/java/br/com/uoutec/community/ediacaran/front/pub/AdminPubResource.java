@@ -78,7 +78,7 @@ public class AdminPubResource {
 		if(pc == null)
 			throw new NullPointerException("PluginConfiguration");
 		
-		
+
 		Map<String,Object> vars = new HashMap<String,Object>();
 		vars.put("config", pc);
 		vars.put("status", pluginConfigurationManager.getStatus(pc));

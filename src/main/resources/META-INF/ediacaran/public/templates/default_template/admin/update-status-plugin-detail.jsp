@@ -15,7 +15,7 @@
 	<script>
 		var $form = $.AppContext.utils.getById('status_config_fr');
 		var $statusField = $form.getField('status');
-		$statusField.setValue(${vars.status});
+		$statusField.setValue('${vars.status}');
 		$statusField.setProperty('disabled', false);
 	</script>
 </div>
