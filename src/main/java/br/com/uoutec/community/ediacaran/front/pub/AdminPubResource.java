@@ -23,6 +23,7 @@ import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.ResponseErrors;
 
 import br.com.uoutec.application.io.Path;
+import br.com.uoutec.application.io.Vfs;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.system.util.StringUtil;
 import br.com.uoutec.ediacaran.core.PluginConfigurationManager;
@@ -161,17 +162,23 @@ public class AdminPubResource {
 			throw new InvalidRequestException("plugin package not found");
 		}
 		
+		Path newFile = 
+				pluginPackage.getParent()
+				.getPath(pluginPackage.getName().split("\\.")[0] + ".jar"); 
 		try {
-			Path newFile = pluginPackage.getParent().getPath(pluginPackage.getName().split("\\.")[0] + ".jar"); 
 			
-			if(pluginPackage.renameTo(newFile)) {
-				pluginPackage = newFile;
-			}
-			
-			pluginConfigurationManager.install(pluginPackage.toURL());
+			//if(pluginPackage.renameTo(newFile)) {
+			//	pluginPackage = newFile;
+			//}
+			Vfs.copy(pluginPackage, newFile);
+			pluginConfigurationManager.install(newFile.toURL());
 		}
 		catch(Throwable e) {
+			e.printStackTrace();
 			throw new InvalidRequestException("failed to install plugin", e);
+		}
+		finally {
+			newFile.delete();
 		}
 		
 	}
