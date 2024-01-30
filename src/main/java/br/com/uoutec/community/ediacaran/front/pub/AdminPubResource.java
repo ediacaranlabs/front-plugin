@@ -23,7 +23,6 @@ import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.ResponseErrors;
 
 import br.com.uoutec.application.io.Path;
-import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.pub.widget.Widgets;
 import br.com.uoutec.community.ediacaran.system.util.StringUtil;
 import br.com.uoutec.ediacaran.core.PluginConfigurationManager;
@@ -108,14 +107,12 @@ public class AdminPubResource {
 		MutablePluginConfiguration mpc = (MutablePluginConfiguration)pluginConfigurationManager.getPluginConfiguartion(code);
 		
 		if(values != null && mpc != null) {
+			
 			for(Entry<String, List<String>> e: values.entrySet()) {
 				mpc.setStrings(e.getKey(), e.getValue());
 			}
 			
-			//ContextSystemSecurityCheck.doPrivileged(()->{
-				pluginConfigurationManager.savePluginMetadata(mpc);
-//				return null;
-			//});
+			pluginConfigurationManager.savePluginMetadata(mpc);
 			
 		}
 
