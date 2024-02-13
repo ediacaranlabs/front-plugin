@@ -69,23 +69,10 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- dependencies -->
-        <!-- weld -->
 		<dependency>
-			<groupId>org.jboss.weld.se</groupId>
-			<artifactId>weld-se</artifactId>
-			<version>2.4.8.Final</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss</groupId>
-			<artifactId>jandex</artifactId>
-			<version>2.0.5.Final</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.weld.servlet</groupId>
-			<artifactId>weld-servlet</artifactId>
-			<version>2.4.8.Final</version>
+			<groupId>br.com.uoutec</groupId>
+			<artifactId>ediacaran-weld</artifactId>
+			<version>1.0.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- ediacaran -->
@@ -102,6 +89,24 @@
 			<scope>provided</scope>
 		</dependency>
 		<!--  Test -->
+        <dependency>
+			<groupId>br.com.uoutec</groupId>
+			<artifactId>ediacaran-junit</artifactId>
+			<version>1.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.uoutec</groupId>
+			<artifactId>ediacaran-junit-mock</artifactId>
+			<version>1.0.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-core</artifactId>
+		    <version>5.4.0</version>
+		    <scope>test</scope>
+		</dependency>
 		<dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -113,12 +118,6 @@
 		    <artifactId>junit-jupiter-engine</artifactId>
 		    <version>5.8.2</version>
 		    <scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>br.com.uoutec</groupId>
-			<artifactId>ediacaran-weld</artifactId>
-			<version>1.0.0</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
