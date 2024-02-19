@@ -37,7 +37,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	@Override
 	public synchronized void registerTheme(String name, String context, String template) throws ThemeException{
 		
-		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + "theme." + name + ".register"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + name + ".register"));
 		
 		ThemeEntry entry = themes.get(name);
 		
@@ -64,7 +64,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	@Override
 	public void unregisterTheme(String name) {
 
-		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + "theme." + name + ".unregister"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + name + ".unregister"));
 		
 		if(themes.remove(name) != null) {
 			if(logger.isWarnEnabled()) {
@@ -81,7 +81,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	@Override
 	public synchronized void registerPackageTheme(String name, String packageName, String template) throws ThemeException{
 
-		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + "theme." + name + ".package.register"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + name + ".package.register"));
 		
 		ThemeEntry entry = themes.get(name);
 		
@@ -115,7 +115,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	@Override
 	public synchronized void unregisterPackageTheme(String name, String packageName) {
 
-		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + "theme." + name + ".package.register"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + name + ".package.register"));
 		
 		if(packageName == null) {
 			throw new ThemeException("theme package not found: " + name + "/" + packageName);
@@ -140,7 +140,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	@Override
 	public synchronized void registerTemplateComponent(String name, String packageName, String template, TemplateComponent tagTemplate) throws ThemeException{
 
-		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + "theme." + name + ".component.register"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + name + ".component.register"));
 
 		ThemeEntry entry = themes.get(name);
 		
@@ -173,7 +173,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	@Override
 	public synchronized void unregisterTemplateComponent(String name, String packageName, String template, TemplateComponent tagTemplate) {
 
-		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + "theme." + name + ".component.unregister"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX +  name + ".component.unregister"));
 
 		ThemeEntry entry = themes.get(name);
 		
@@ -199,7 +199,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	@Override
 	public synchronized void registerResource(String name, String packageName, String resource, String type, String path) throws ThemeException{
 
-		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + "theme." + name + ".resource.register"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + name + ".resource.register"));
 
 		ThemeEntry entry = themes.get(name);
 		
@@ -253,7 +253,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	@Override
 	public synchronized void unregisterResource(String name, String packageName, String resource, String type, String path) {
 
-		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + "theme." + name + ".resource.unregister"));
+		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + name + ".resource.unregister"));
 
 		ThemeEntry entry = themes.get(name);
 		

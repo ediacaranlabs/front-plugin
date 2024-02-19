@@ -2,9 +2,11 @@ package br.com.uoutec.community.ediacaran.front;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 import br.com.uoutec.application.SystemProperties;
 import br.com.uoutec.application.io.Vfs;
+import br.com.uoutec.application.io.VfsException;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
 import br.com.uoutec.community.ediacaran.front.objects.MenubarObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplateType;
@@ -14,8 +16,10 @@ import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBarManagerException;
 import br.com.uoutec.community.ediacaran.front.security.pub.WebSecurityManagerPlugin;
+import br.com.uoutec.community.ediacaran.front.theme.PluginThemesManager;
 import br.com.uoutec.community.ediacaran.security.Authorization;
 import br.com.uoutec.community.ediacaran.security.SecurityRegistry;
+import br.com.uoutec.community.ediacaran.system.i18n.Plugini18nManager;
 import br.com.uoutec.community.ediacaran.system.repository.FileManager;
 import br.com.uoutec.community.ediacaran.system.repository.FileObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.system.repository.JsonFileManagerHandler;
@@ -58,6 +62,18 @@ public class PluginInstaller
 		installMenu();
 		installSecurityConfig();
 		installListeners();
+		installThemes();
+		installI18n();
+	}
+
+	private void installI18n() throws VfsException, IOException, ReflectiveOperationException {
+		Plugini18nManager pi18n = EntityContextPlugin.getEntity(Plugini18nManager.class);
+		pi18n.registerLanguages();
+	}
+	
+	private void installThemes() throws VfsException, IOException, ReflectiveOperationException {
+		PluginThemesManager ptm = EntityContextPlugin.getEntity(PluginThemesManager.class);
+		ptm.registerThemes();
 	}
 	
 	private void installPageTemplates() {
@@ -115,7 +131,7 @@ public class PluginInstaller
 
 	private void installListeners() {
 		EdiacaranListenerManager  ediacaranListenerManager = EntityContextPlugin.getEntity(EdiacaranListenerManager.class);
-		ediacaranListenerManager.addListener(EntityContextPlugin.getEntity(ThemeEdiacaranListener.class));
+		//ediacaranListenerManager.addListener(EntityContextPlugin.getEntity(ThemeEdiacaranListener.class));
 		ediacaranListenerManager.addListener(EntityContextPlugin.getEntity(LanguageRequestListener.class));
 	}
 	
@@ -151,6 +167,8 @@ public class PluginInstaller
 	}
 	
 	public void uninstall() throws Throwable {
+		uninstallI18n();
+		uninstallThemes();
 		uninstallPageTemplates();
 		uninstallMenu();
 		uninstallSecurityConfig();
@@ -173,11 +191,20 @@ public class PluginInstaller
 	}
 
 	private void uninstallListeners() {
-		
 		EdiacaranListenerManager ediacaranListenerManager = EntityContextPlugin.getEntity(EdiacaranListenerManager.class);
-		ediacaranListenerManager.removeListener(EntityContextPlugin.getEntity(ThemeEdiacaranListener.class));
+		//ediacaranListenerManager.removeListener(EntityContextPlugin.getEntity(ThemeEdiacaranListener.class));
 		ediacaranListenerManager.removeListener(EntityContextPlugin.getEntity(LanguageRequestListener.class));
 		
+	}
+
+	private void uninstallThemes() throws VfsException, IOException, ReflectiveOperationException {
+		PluginThemesManager ptm = EntityContextPlugin.getEntity(PluginThemesManager.class);
+		ptm.unregisterThemes();
+	}
+	
+	private void uninstallI18n() throws VfsException, IOException, ReflectiveOperationException {
+		Plugini18nManager pi18n = EntityContextPlugin.getEntity(Plugini18nManager.class);
+		pi18n.unregisterLanguages();
 	}
 	
 	public static class MenuPropertyChangeListener implements PropertyChangeListener{
