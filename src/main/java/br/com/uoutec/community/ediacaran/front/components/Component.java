@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
+import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.tags.SetTemplatePackageTag;
 import br.com.uoutec.community.ediacaran.front.theme.ComponentVars;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
@@ -245,8 +246,10 @@ public class Component
 	}
 	
 	public Theme getTheme() {
-		ThemeRegistry themeRegistry = EntityContextPlugin.getEntity(ThemeRegistry.class);
-    	return themeRegistry.getCurrentTheme();
+		return ContextSystemSecurityCheck.doPrivileged(()->{
+			ThemeRegistry themeRegistry = EntityContextPlugin.getEntity(ThemeRegistry.class);
+	    	return themeRegistry.getCurrentTheme();
+		});
 	}
 	
 	public String getPackageTheme() {

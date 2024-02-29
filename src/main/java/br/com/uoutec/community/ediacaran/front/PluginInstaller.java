@@ -7,6 +7,7 @@ import java.io.IOException;
 import br.com.uoutec.application.SystemProperties;
 import br.com.uoutec.application.io.Vfs;
 import br.com.uoutec.application.io.VfsException;
+import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
 import br.com.uoutec.community.ediacaran.front.objects.MenubarObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplateType;
@@ -58,12 +59,15 @@ public class PluginInstaller
 	private MenubarObjectsManagerDriver menubarObjectDriver;
 	
 	public void install() throws Throwable{
-		installPageTemplates();
-		installMenu();
-		installSecurityConfig();
-		installListeners();
-		installThemes();
-		installI18n();
+		ContextSystemSecurityCheck.doPrivileged(()->{
+			installPageTemplates();
+			installMenu();
+			installSecurityConfig();
+			installListeners();
+			installThemes();
+			installI18n();
+			return null;
+		});
 	}
 
 	private void installI18n() throws VfsException, IOException, ReflectiveOperationException {
@@ -167,12 +171,15 @@ public class PluginInstaller
 	}
 	
 	public void uninstall() throws Throwable {
-		uninstallI18n();
-		uninstallThemes();
-		uninstallPageTemplates();
-		uninstallMenu();
-		uninstallSecurityConfig();
-		uninstallListeners();
+		ContextSystemSecurityCheck.doPrivileged(()->{
+			uninstallI18n();
+			uninstallThemes();
+			uninstallPageTemplates();
+			uninstallMenu();
+			uninstallSecurityConfig();
+			uninstallListeners();
+			return null;
+		});
 	}
 
 	private void uninstallPageTemplates() {
