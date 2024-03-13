@@ -14,12 +14,13 @@ public class MenubarObjectsManagerDriver
 
 	public static final String DRIVER_NAME = "menubar";
 	
-	public static final String REPOSITORY = "objects/" + DRIVER_NAME + "/";
+	public static final String REPOSITORY = 
+			SystemProperties.getProperty("app.base") + "/objects/" + DRIVER_NAME + "/";
 	
 	public MenubarObjectsManagerDriver() {
 		super(
 				new FileManager(
-						Vfs.getPath(SystemProperties.getProperty("app.base")).getPath(REPOSITORY), 
+						Vfs.getPath(REPOSITORY), 
 						new JsonFileManagerHandler()
 				), DRIVER_NAME
 		);
