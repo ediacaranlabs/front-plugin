@@ -5,6 +5,7 @@ import br.com.uoutec.application.io.Vfs;
 import br.com.uoutec.community.ediacaran.system.repository.FileManager;
 import br.com.uoutec.community.ediacaran.system.repository.FileObjectsTemplateManagerDriver;
 import br.com.uoutec.community.ediacaran.system.repository.JsonFileManagerHandler;
+import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectTemplate;
 import br.com.uoutec.ediacaran.core.plugins.PublicBean;
 
@@ -27,6 +28,10 @@ public class MenubarObjectsManagerDriver
 		setDefaultObjectHandler(new MenubarObjectHandler());
 	}
 
+	public boolean isCacheable(ObjectMetadata omd) {
+		return false;
+	}
+	
 	@Override
 	public ObjectTemplate getTemplate(Object object) {
 		throw new UnsupportedOperationException();
