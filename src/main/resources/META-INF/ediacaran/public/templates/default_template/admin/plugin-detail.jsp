@@ -93,7 +93,7 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 										</c:forEach>
 									</c:when>
 								</c:choose>
-								<ec:field-validator form="config_fr" field="config.${property.code}">
+								<ec:field-validator form="tab1" field="config.${property.code}">
 								
 									<c:if test="${!property.allowEmpty}">
 									<ec:field-validator-rule name="notEmpty" message="The ${property.name} is required"/>
