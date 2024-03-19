@@ -141,8 +141,9 @@ public class Menu implements Serializable {
 		return sb.toString();
 	}
 	
-	public void setId(String id) {
+	public Menu setId(String id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getId() {
