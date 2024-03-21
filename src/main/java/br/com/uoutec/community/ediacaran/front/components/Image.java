@@ -15,11 +15,11 @@ import br.com.uoutec.application.io.Vfs;
 
 public class Image {
 
-	private static final int maxWidth = 2048; 
+	//private static final int maxWidth = 2048; 
 	
-	private static final int maxHeight = 1024;
+	//private static final int maxHeight = 2048;
 	
-	private static final int maxPoints = maxWidth*maxHeight;
+	//private static final int maxPoints = maxWidth*maxHeight;
 			
 	private Double x1;
 	
@@ -97,9 +97,9 @@ public class Image {
 			throw new IllegalStateException("x | y");
 		}
 
-		if((x2-x1)*(y2-y1) > maxPoints) {
-			throw new IllegalStateException("maxPoints");
-		}
+		//if((x2-x1)*(y2-y1) > maxPoints) {
+		//	throw new IllegalStateException("maxPoints");
+		//}
 		
 		BufferedImage img = null;
 		

@@ -40,7 +40,6 @@ public class ImagefieldTemplateComponent extends ComponentFormTemplateComponent 
 			add("width");
 			add("height");
 			add("src");
-			add("accept");
 			
 			add("button");
 			add("label");
@@ -80,20 +79,6 @@ public class ImagefieldTemplateComponent extends ComponentFormTemplateComponent 
 					
 				});
 
-				put("accept", new PropertyParserImp() {
-					
-					@Override
-					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						
-						if(value != null) {
-							return "accept=\"" + ((String)value).replace("\"", "\\\"") + "\"";
-						}
-						
-						return null; 
-					}
-					
-				});
-				
 			}});
 
 	}
