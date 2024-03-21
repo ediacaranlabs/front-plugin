@@ -4,12 +4,12 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
-
-import javax.imageio.ImageIO;
 
 import org.brandao.brutos.annotation.Basic;
 
+import br.com.uoutec.application.imageio.ImageIO;
 import br.com.uoutec.application.io.Path;
 import br.com.uoutec.application.io.Vfs;
 
@@ -101,13 +101,17 @@ public class Image {
 			throw new IllegalStateException("maxPoints");
 		}
 		
-		BufferedImage img = ImageIO.read(tmpFile.openInputStream());
+		BufferedImage img = null;
+		
+		try(InputStream in = tmpFile.openInputStream()){
+			img = ImageIO.read(in);	
+		}
 		
 		if(img == null) {
 			throw new IllegalStateException("image");
 		}
 
-		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2 = (Graphics2D) image.getGraphics();
 		
 		//java.awt.Image rescaled = img.getScaledInstance(width, height, java.awt.Image.SCALE_AREA_AVERAGING);
@@ -116,6 +120,7 @@ public class Image {
 		
 		try (OutputStream out = file.openOutputStream()){
 			ImageIO.write(image, "png", out);
+			out.flush();
 		}
 		
 	}

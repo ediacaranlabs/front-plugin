@@ -34,6 +34,8 @@ public class ImagefieldTagComponent extends FieldFormTagComponent {
 	
 	private String src;
 	
+	private String accept;
+	
 	public ImagefieldTagComponent() {
 		super.setComponentType("file");
 	}
@@ -48,7 +50,16 @@ public class ImagefieldTagComponent extends FieldFormTagComponent {
     	};
     }
 	
-    public Integer getWidth() {
+    public String getAccept() {
+		return accept;
+	}
+
+	@TagAttribute
+	public void setAccept(String accept) {
+		this.accept = accept;
+	}
+
+	public Integer getWidth() {
 		return width;
 	}
 

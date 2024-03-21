@@ -15,6 +15,7 @@ import br.com.uoutec.application.ClassUtil;
 import br.com.uoutec.application.io.Vfs;
 import br.com.uoutec.application.scanner.DefaultScanner;
 import br.com.uoutec.application.scanner.TypeFilter;
+import br.com.uoutec.community.ediacaran.front.tags.AccordionItemTagComponent;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -27,8 +28,11 @@ public class CreateTagsTLD {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] a) throws InstantiationException, IllegalAccessException, FileNotFoundException, IOException {
 
+		System.setProperty("system.security.print",	"false");
+		System.setProperty("system.security","false");
+		
 		DefaultScanner s = new DefaultScanner();
-		s.setBasePackage(new String[] {"br.com.uoutec.community.ediacaran.front"});
+		s.setBasePackage(new String[] {AccordionItemTagComponent.class.getPackage().getName()});
 		s.addIncludeFilter(new TypeFilter() {
 			
 			@Override

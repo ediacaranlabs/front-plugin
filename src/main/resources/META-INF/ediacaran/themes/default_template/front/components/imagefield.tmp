@@ -7,7 +7,7 @@
 	<input name="{name}.y1" type="hidden" value="0">
 	<input name="{name}.x2" type="hidden" value="0">
 	<input name="{name}.y2" type="hidden" value="0">
-	<input id="{id}.filename" name="{name}.file" type="file" style="display: none">
+	<input id="{id}.filename" name="{name}.file" {accept} type="file" style="display: none">
 </div>
 
 <script language="javascript">
