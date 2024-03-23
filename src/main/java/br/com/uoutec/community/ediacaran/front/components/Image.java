@@ -1,6 +1,9 @@
 package br.com.uoutec.community.ediacaran.front.components;
 
+import java.awt.AlphaComposite;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -31,6 +34,8 @@ public class Image {
 	
 	private Path tmpFile;
 
+	private String border;
+	
 	public Path getTmpFile() {
 		return tmpFile;
 	}
@@ -38,6 +43,14 @@ public class Image {
 	@Basic(bean="file")
 	public void setTmpFile(Path tmpFile) {
 		this.tmpFile = tmpFile;
+	}
+
+	public String getBorder() {
+		return border;
+	}
+
+	public void setBorder(String border) {
+		this.border = border;
 	}
 
 	public void setX1(Double x1) {
@@ -72,6 +85,43 @@ public class Image {
 		return y2;
 	}
 
+	public ImageStream stream() {
+		
+		if(x1 == null || x2 == null || y1 == null || y2 == null) {
+			throw new IllegalStateException("x1 | x2 | y1 | y2");
+		}
+
+		return  new ImageStream()
+		.dimension(new Dimension(
+				x2.intValue()-x1.intValue(), 
+				y2.intValue()-y1.intValue()
+		))
+		.imageBounds(new Rectangle(
+				x1.intValue(), 
+				y1.intValue(), 
+				x2.intValue()-x1.intValue(), 
+				y2.intValue()-y1.intValue()
+		))
+		.image(()->{
+			
+			BufferedImage img = null;
+			
+			try(InputStream in = tmpFile.openInputStream()){
+				img = ImageIO.read(in);	
+			}
+			catch(Throwable ex) {
+				throw new RuntimeException(ex);
+			}
+			
+			return img;
+		})
+		.mask(
+			"circle".equals(border)? 
+				ImageStream.CIRCLE_MASK_RENDER : 
+				null 
+		);
+	}
+	
 	public Path save(int width, int height) throws IOException {
 		if(tmpFile != null) {
 			Path f = Vfs.createTempFile("img-field", ".png");
@@ -84,22 +134,39 @@ public class Image {
 	}
 
 	public void save(int width, int height, Path file) throws IOException {
-		
-		if(x1 == null || x2 == null || y1 == null || y2 == null) {
-			throw new IllegalStateException("x1 | x2 | y1 | y2");
-		}
 
-		if(width < 10 || height < 10) {
-			throw new IllegalStateException("width | height");
-		}
-		
-		if(x2-x1 < 10 || y2-y1 < 10) {
-			throw new IllegalStateException("x | y");
-		}
-
-		//if((x2-x1)*(y2-y1) > maxPoints) {
-		//	throw new IllegalStateException("maxPoints");
-		//}
+		/*
+		stream()
+			.dimension(new Dimension(
+					width, 
+					height
+			))
+			.imageBounds(new Rectangle(
+					x1.intValue(), 
+					y1.intValue(), 
+					x2.intValue()-x1.intValue(), 
+					y2.intValue()-y1.intValue()
+			))
+			.image(()->{
+				
+				BufferedImage img = null;
+				
+				try(InputStream in = tmpFile.openInputStream()){
+					img = ImageIO.read(in);	
+				}
+				catch(Throwable ex) {
+					throw new RuntimeException(ex);
+				}
+				
+				return img;
+			})
+			.save((img)->{
+				try (OutputStream out = file.openOutputStream()){
+					ImageIO.write(img, "png", out);
+					out.flush();
+				}
+			});
+		*/
 		
 		BufferedImage img = null;
 		
@@ -111,17 +178,43 @@ public class Image {
 			throw new IllegalStateException("image");
 		}
 
-		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		BufferedImage mask = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+	    Graphics2D g2d = mask.createGraphics();
+	    g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+	    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+	    g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+	    g2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+	    g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+	    g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+	    g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+	    g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+	    
+	    g2d.fillOval(0, 0, width -1, height - 1);
+	    g2d.dispose();
+	    
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = (Graphics2D) image.getGraphics();
 		
-		//java.awt.Image rescaled = img.getScaledInstance(width, height, java.awt.Image.SCALE_AREA_AVERAGING);
-		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+	    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+	    g2.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+	    g2.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+	    g2.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+	    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+	    g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+	    g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+	    
 		g2.drawImage(img, 0, 0, width, height, x1.intValue(), y1.intValue(), x2.intValue(), y2.intValue(), null);
+	    g2.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_IN));
+	    g2.drawImage(mask, 0, 0, null);
+		g2.dispose();
 		
 		try (OutputStream out = file.openOutputStream()){
 			ImageIO.write(image, "png", out);
 			out.flush();
 		}
+		
 		
 	}
 	

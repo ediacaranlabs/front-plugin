@@ -6,7 +6,10 @@ $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $d
 	var $croppie   = $root.find(".croppie-image");
 	var $button    = $('#' + $id + "_button");//$root.find("button[type='button']");
 	var $fileField = $root.find("input[type='file']");
+	var $border    = $root.find("input[name='" + $name + ".border']");
 	
+	$border.val($type);
+	 
 	$croppie.width($width);
 	$croppie.height($height);
 
