@@ -1,8 +1,8 @@
 <%@page trimDirectiveWhitespaces="true" %>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/components" prefix="ec"%>
-<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"                   prefix="c"%>
+<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions"              prefix="fn"%>
 <ec:import-object id="menubar/front/default" var="defaultMenu"/>
 
@@ -13,7 +13,13 @@
 				style="light">
 			<ed:container>
 			<ec:menu-bar-brand>
-				<ec:image src="/img/logo.png"/>
+				<c:if test="${empty plugins.ediacaran.front.image_logo}">
+					<h1>${plugins.ediacaran.front.text_logo}</h1>
+				</c:if>
+				<c:if test="${!empty plugins.ediacaran.front.image_logo}">
+					<ec:image src="${plugins.ediacaran.front.image_logo}"/>
+				</c:if>
+				<%--<ec:image src="/img/logo.png"/>--%>
 			</ec:menu-bar-brand>
 			<ec:menu-toggler menuID="top_menu_body">
 				<ec:icon icon="bars" />

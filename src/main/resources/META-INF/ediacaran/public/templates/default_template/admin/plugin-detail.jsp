@@ -163,6 +163,8 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 									<%--<ec:textfield name="security[${count}].permission" readonly="true" value="${per.request.permission}"></ec:textfield>--%>
 									
 									<ec:select name="security[${count}].permission" enabled="false">
+										<ec:option label="#{tabs.security.security_tab.type.resource}" bundle="${messages}" value="RESOURCE" selected="${per.request.permission == 'RESOURCE'}"/>
+										
 										<fmt:message key="tabs.security.security_tab.type.file" bundle="${messages}" var="msg_tmp"/>
 										<ec:option label="${msg_tmp}" value="FILE" selected="${per.request.permission == 'FILE'}"/>
 										
