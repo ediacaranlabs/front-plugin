@@ -36,42 +36,32 @@ public class ImageStream {
 	
 	private Dimension dimension;
 	
-	private IRender render;
+	private IRender render = (g, i, d, ib)->{
+		g.drawImage(
+				i, 
+				0, 0, (int)d.getWidth(), (int)d.getHeight(), 
+				(int)ib.getX(), (int)ib.getY(), (int)ib.getMaxX(), (int)ib.getMaxY(), 
+				null
+		);
+	};
 	
 	private IMask mask;
 	
-	private IQuality quality;
+	private IQuality quality = (g)->{
+		g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+		g.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+		g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+	};
 	
 	private ILoadImage loadImage;
 	
 	public ImageStream() {
-		this.imageBounds = null;
-		this.dimension = null;
-		this.render = (g, i, d, ib)->{
-			g
-			.drawImage(
-					i, 
-					0, 0, (int)d.getWidth(), (int)d.getHeight(), 
-					(int)ib.getX(), (int)ib.getY(), (int)ib.getMaxX(), (int)ib.getMaxY(), 
-					null
-			);
-		};
-		
-		this.mask = null;
-		
-		this.quality = (g)->{
-			g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			g.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
-			g.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
-			g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-			g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-			g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-			g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
-		};
-		this.loadImage = null;
 	}
-	
 	
 	public ImageStream dimension(Dimension value) {
 		
