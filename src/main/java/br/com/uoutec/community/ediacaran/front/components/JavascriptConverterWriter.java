@@ -5,6 +5,16 @@ import java.io.Writer;
 
 public class JavascriptConverterWriter extends EscapeWriter{
 
+	//.join("")
+	
+	private static final String START_CONTENT = "out_.push(\"";
+
+	private static final String END_CONTENT = "\");\r\n";
+
+	private static final String START_CODE = "out_.push(";
+
+	private static final String END_CODE = ");\r\n";
+	
 	private static final int FIRST_CHAR = 1;
 
 	private static final int JS_CONTENT = 2;
@@ -15,18 +25,20 @@ public class JavascriptConverterWriter extends EscapeWriter{
 	
 	private Writer o;
 	
-	private int count;
+	private boolean first;
+	
 	public JavascriptConverterWriter(Writer o) {
 		super(o);
 		this.o = o;
-		this.count = 0;
+		this.first = true;
 	}
 
 	@Override
 	public void write(char[] cbuf, int off, int len) throws IOException {
 		
-		if(count++ == 0) {
-			o.write("\"");
+		if(first) {
+			o.write(START_CONTENT);
+			first = false;
 		}
 		
 		int max   = off + len;
@@ -43,7 +55,8 @@ public class JavascriptConverterWriter extends EscapeWriter{
 				if(cbuf[i] == '{') {
 					status = JS_CONTENT;
 					super.write(cbuf, start, i - start - 1);
-					o.write("\" + \r\n");
+					o.write(END_CONTENT);
+					o.write(START_CODE);
 				}
 				else {
 					o.write('#');
@@ -56,7 +69,8 @@ public class JavascriptConverterWriter extends EscapeWriter{
 			if(status == JS_CONTENT && cbuf[i] == '}') {
 				status = NORMAL_CONTENT;
 				o.write(cbuf, start, i - start);
-				o.write(" + \r\n\"");
+				o.write(END_CODE);
+				o.write(START_CONTENT);
 				start = i + 1;
 			}
 				
@@ -66,7 +80,7 @@ public class JavascriptConverterWriter extends EscapeWriter{
 	}
 
 	public void close() throws IOException {
-		o.write("\";");
+		o.write(END_CONTENT);
 		o.flush();
 		super.close();
 	}
