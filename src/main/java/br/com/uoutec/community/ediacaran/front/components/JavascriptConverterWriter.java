@@ -15,14 +15,20 @@ public class JavascriptConverterWriter extends EscapeWriter{
 	
 	private Writer o;
 	
-	public JavascriptConverterWriter(Writer o) throws IOException {
+	private int count;
+	public JavascriptConverterWriter(Writer o) {
 		super(o);
 		this.o = o;
-		o.write("\"");
+		this.count = 0;
 	}
 
 	@Override
 	public void write(char[] cbuf, int off, int len) throws IOException {
+		
+		if(count++ == 0) {
+			o.write("\"");
+		}
+		
 		int max   = off + len;
 		int start = off;
 
