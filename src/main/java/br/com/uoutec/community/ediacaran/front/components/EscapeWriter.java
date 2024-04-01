@@ -49,7 +49,7 @@ public class EscapeWriter extends Writer{
 			}
 		}
 		
-		o.write(cbuf, start, len - start);
+		o.write(cbuf, start, max - start);
 	}
 
 	private void write(char[] cbuf, int off, int len, int index) throws IOException {
