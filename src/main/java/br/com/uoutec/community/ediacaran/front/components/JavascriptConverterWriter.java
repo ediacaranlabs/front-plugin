@@ -7,6 +7,10 @@ public class JavascriptConverterWriter extends EscapeWriter{
 
 	//.join("")
 	
+	public static final char DISABLE_PARSER = 0x0;
+
+	public static final char ENABLE_PARSER = 0x1;
+	
 	private static final String START_CONTENT = "out_.push(\"";
 
 	private static final String END_CONTENT = "\");\r\n";
@@ -15,28 +19,31 @@ public class JavascriptConverterWriter extends EscapeWriter{
 
 	private static final String END_CODE = ");\r\n";
 	
+	private static final int NORMAL_CONTENT = 0;
+	
 	private static final int FIRST_CHAR = 1;
 
 	private static final int JS_CONTENT = 2;
 
-	private static final int NORMAL_CONTENT = 0;
-	
 	private int status;
 	
 	private Writer o;
 	
 	private boolean first;
 	
+	private boolean enabled;
+	
 	public JavascriptConverterWriter(Writer o) {
 		super(o);
 		this.o = o;
 		this.first = true;
+		this.enabled = true;
 	}
 
 	@Override
 	public void write(char[] cbuf, int off, int len) throws IOException {
 		
-		if(first) {
+		if(first && enabled) {
 			o.write(START_CONTENT);
 			first = false;
 		}
@@ -46,6 +53,33 @@ public class JavascriptConverterWriter extends EscapeWriter{
 
 		for(int i=off;i<max;i++) {
 			
+			if(!enabled) {
+				if(cbuf[i] == ENABLE_PARSER) {
+					enabled = true;
+					super.write(cbuf, start, i - start - 1);
+					if(status == JS_CONTENT) {
+						o.write(START_CODE);
+					}
+					else {
+						o.write(START_CONTENT);
+					}
+						
+				}
+				continue;
+			}
+			else
+			if(cbuf[i] == DISABLE_PARSER) {
+				enabled = false;
+				super.write(cbuf, start, i - start - 1);
+				if(status == JS_CONTENT) {
+					o.write(END_CODE);
+				}
+				else {
+					o.write(END_CONTENT);
+				}
+				continue;
+			}
+				
 			if(status == NORMAL_CONTENT && cbuf[i] == '#') {
 				status = FIRST_CHAR;
 			}
@@ -80,8 +114,10 @@ public class JavascriptConverterWriter extends EscapeWriter{
 	}
 
 	public void close() throws IOException {
-		o.write(END_CONTENT);
-		o.flush();
+		if(enabled) {
+			o.write(END_CONTENT);
+			o.flush();
+		}
 		super.close();
 	}
 	
