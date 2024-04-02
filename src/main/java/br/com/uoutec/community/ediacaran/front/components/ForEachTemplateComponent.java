@@ -6,14 +6,14 @@ import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 
-public class IfTemplateComponent extends AbstractTemplateComponent {
+public class ForEachTemplateComponent extends AbstractTemplateComponent {
 
 	
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {
 		super.loadConfiguration();
 
-		super.template = "/default_template/front/components/if.tmp";
+		super.template = "/default_template/front/components/foreach.tmp";
 	
 	
 		super.default_attrs = 
@@ -26,7 +26,8 @@ public class IfTemplateComponent extends AbstractTemplateComponent {
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>() {{
-			add("test");
+			add("var");
+			add("items");
 			add("content");
 		}});
 	

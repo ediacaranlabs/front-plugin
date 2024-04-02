@@ -17,7 +17,9 @@ public class JavascriptConverterWriterTest {
 		String str = 
 		"<ed:row>" +
 		"	<ed:col size=\"2\">" +
+		"   \u0000if(test == null){\u0001" +
 		"		#{item.id}" +
+		"   \u0000}\u0001" +
 		"	</ed:col>" +
 		"	<ed:col size=\"6\">" +
 		"		#{item.name}" +

@@ -6,14 +6,14 @@ import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 
-public class IfTemplateComponent extends AbstractTemplateComponent {
+public class WhileTemplateComponent extends AbstractTemplateComponent {
 
 	
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {
 		super.loadConfiguration();
 
-		super.template = "/default_template/front/components/if.tmp";
+		super.template = "/default_template/front/components/while.tmp";
 	
 	
 		super.default_attrs = 

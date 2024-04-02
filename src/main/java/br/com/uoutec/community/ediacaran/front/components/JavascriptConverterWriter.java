@@ -11,6 +11,8 @@ public class JavascriptConverterWriter extends EscapeWriter{
 
 	public static final char ENABLE_PARSER = 0x1;
 	
+	//private static final String QUOTE = "\\\"";
+	
 	private static final String START_CONTENT = "out_.push(\"";
 
 	private static final String END_CONTENT = "\");\r\n";
@@ -56,27 +58,28 @@ public class JavascriptConverterWriter extends EscapeWriter{
 			if(!enabled) {
 				if(cbuf[i] == ENABLE_PARSER) {
 					enabled = true;
-					super.write(cbuf, start, i - start - 1);
+					super.write(cbuf, start, i - start);
 					if(status == JS_CONTENT) {
-						o.write(START_CODE);
+						o.write("\r\n" + START_CODE);
 					}
 					else {
-						o.write(START_CONTENT);
+						o.write("\r\n" + START_CONTENT);
 					}
-						
+					start = i + 1;
 				}
 				continue;
 			}
 			else
-			if(cbuf[i] == DISABLE_PARSER) {
+			if(enabled && cbuf[i] == DISABLE_PARSER) {
 				enabled = false;
-				super.write(cbuf, start, i - start - 1);
+				super.write(cbuf, start, i - start);
 				if(status == JS_CONTENT) {
 					o.write(END_CODE);
 				}
 				else {
 					o.write(END_CONTENT);
 				}
+				start = i + 1;
 				continue;
 			}
 				

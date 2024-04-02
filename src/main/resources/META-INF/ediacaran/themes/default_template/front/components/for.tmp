@@ -1,0 +1,7 @@
+var {var};
+
+\u0000for (
+	{var}={begin};
+	{var} >= {begin} && {var} <= {end};{var}+={step})&#123;\u0001
+  {content}
+\u0000&#125;;\u0001
