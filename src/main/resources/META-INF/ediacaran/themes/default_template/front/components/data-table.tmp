@@ -1,4 +1,4 @@
-<form {attr} method="POST" action="{action}">
+<form {attr} data-table="true" method="POST" action="{action}">
 	<input type="hidden" name="page" value="1">
 	{content}
 	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 pagination dataTablePagination">

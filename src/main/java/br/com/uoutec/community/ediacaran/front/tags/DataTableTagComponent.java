@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -11,6 +12,8 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 )
 public class DataTableTagComponent extends AbstractSimpleTagComponent {
 
+	public static final String DATA_TABLE_PROPERTY = DataTableTagComponent.class.getName() + ":object";
+	
 	public static final String TEMPLATE = "/components/data-table";
 	
 	/* ------------ Attr ---------------*/
@@ -35,6 +38,21 @@ public class DataTableTagComponent extends AbstractSimpleTagComponent {
 		this.action = action;
 	}
 
+	protected void beforeBuildComponent(Component component) {
+		DataTableTagComponent tag = 
+				(DataTableTagComponent) super.getProperty(DATA_TABLE_PROPERTY);
+		
+		if(tag != null) {
+			throw new IllegalStateException("multiples <data-table/>");
+		}
+		
+		super.setProperty(DATA_TABLE_PROPERTY, this);
+	}
+
+	protected void afterBuildComponent(Component component) {
+		super.setProperty(DATA_TABLE_PROPERTY, null);
+	}
+	
 	@Override
 	public String getType() {
 		return "data-table";

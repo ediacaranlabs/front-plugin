@@ -44,16 +44,19 @@ public class DataResultTagComponent extends AbstractSimpleTagComponent {
 	}
 
 	public String getFrom() {
+		
 		if(from == null) {
-	    	Object parent = getParentTag();
-			if(parent instanceof DataTableTagComponent) {
-				String id = ((DataTableTagComponent)parent).getId();
-				return id;
-			}
-			else {
+			DataTableTagComponent parent = 
+					(DataTableTagComponent) super.getProperty(DataTableTagComponent.DATA_TABLE_PROPERTY);
+			
+			if(parent == null) {
 				throw new IllegalArgumentException("expected parent <data-table/>");
 			}
+			
+			String id = parent.getId();
+			return id;
 		}
+		
 		return from;
 	}
 
