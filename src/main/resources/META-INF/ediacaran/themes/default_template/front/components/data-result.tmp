@@ -1,0 +1,12 @@
+<script type="text/javascript">
+	$.AppContext.onload(function()&#123;
+		
+		var $func = function({var})&#123;
+			var out_ = [];
+			{content}
+			return out_.join("");
+		&#125;;
+		
+		$.AppContext.dataTable.apply("{from}", $func);
+	&#125;);
+</script>	
