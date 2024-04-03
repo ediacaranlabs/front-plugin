@@ -5,10 +5,10 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
 @Tag(
-	name="if", 
-	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
-	bodycontent=BodyTypes.SCRIPTLESS
-)
+		name="if", 
+		uri="https://www.uoutec.com.br/ediacaran/tags/components", 
+		bodycontent=BodyTypes.SCRIPTLESS
+	)
 public class IfTagComponent extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE = "/components/if";

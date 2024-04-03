@@ -55,10 +55,14 @@ public class JavascriptConverterWriter extends EscapeWriter{
 
 		for(int i=off;i<max;i++) {
 			
+			if(cbuf[i] == '\r' || cbuf[i] == '\n') {
+				cbuf[i] = ' ';
+			}
+			
 			if(!enabled) {
 				if(cbuf[i] == ENABLE_PARSER) {
 					enabled = true;
-					super.write(cbuf, start, i - start);
+					o.write(cbuf, start, i - start);
 					if(status == JS_CONTENT) {
 						o.write("\r\n" + START_CODE);
 					}
@@ -72,7 +76,7 @@ public class JavascriptConverterWriter extends EscapeWriter{
 			else
 			if(enabled && cbuf[i] == DISABLE_PARSER) {
 				enabled = false;
-				super.write(cbuf, start, i - start);
+				o.write(cbuf, start, i - start);
 				if(status == JS_CONTENT) {
 					o.write(END_CODE);
 				}
@@ -83,7 +87,7 @@ public class JavascriptConverterWriter extends EscapeWriter{
 				continue;
 			}
 				
-			if(status == NORMAL_CONTENT && cbuf[i] == '#') {
+			if(status == NORMAL_CONTENT && cbuf[i] == '!') {
 				status = FIRST_CHAR;
 			}
 			else
@@ -91,15 +95,21 @@ public class JavascriptConverterWriter extends EscapeWriter{
 				
 				if(cbuf[i] == '{') {
 					status = JS_CONTENT;
-					super.write(cbuf, start, i - start - 1);
+					o.write(cbuf, start, i - start - 1);
 					o.write(END_CONTENT);
 					o.write(START_CODE);
 				}
 				else {
-					o.write('#');
+					o.write('!');
 					o.write(cbuf[i]);
 				}
 				
+				start = i + 1;
+			}
+			else
+			if(status == NORMAL_CONTENT && cbuf[i] == '\"') {
+				o.write(cbuf, start, i - start);
+				o.write("\\\"");
 				start = i + 1;
 			}
 			else
@@ -113,15 +123,16 @@ public class JavascriptConverterWriter extends EscapeWriter{
 				
 		}
 		
-		super.write(cbuf, start, max - start);		
+		o.write(cbuf, start, max - start);		
 	}
 
-	public void close() throws IOException {
-		if(enabled) {
-			o.write(END_CONTENT);
-			o.flush();
+	public void end() throws IOException {
+		if(!enabled) {
+			o.write(END_CODE);
 		}
-		super.close();
+		else {
+			o.write(END_CONTENT);
+		}
 	}
 	
 }

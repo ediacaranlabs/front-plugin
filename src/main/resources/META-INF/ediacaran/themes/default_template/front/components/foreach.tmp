@@ -1,4 +1,4 @@
-var {var};
-\u0000for ({var} of {items})&#123;\u0001
+\u0000var {var};
+for ({var} of {items})&#123;\u0001
   {content}
 \u0000&#125;;\u0001
