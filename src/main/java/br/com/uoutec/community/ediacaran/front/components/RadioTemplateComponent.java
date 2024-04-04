@@ -33,7 +33,23 @@ public class RadioTemplateComponent extends ComponentFormTemplateComponent {
 				
 				@Override
 				public Object toValue(Object value, PropertiesComponentTemplate component) {
-					return value != null && (Boolean)value? "checked" : "";
+					if(value == null) {
+						return null;
+					}
+					else
+					if("true".equals(String.valueOf(value))) {
+						return "checked";
+					}
+					else
+					if("false".equals(String.valueOf(value))) {
+						return "";
+					}
+					else
+					if(FrontCodeUtil.isCode(String.valueOf(value))) {
+						return "!{( " + FrontCodeUtil.toRequiredCode(String.valueOf(value)) + " )? \"\" : \" checked \"}"; 
+					}
+					
+					return "";
 				}
 			});
 			

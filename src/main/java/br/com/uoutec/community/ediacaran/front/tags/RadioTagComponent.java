@@ -15,7 +15,7 @@ public class RadioTagComponent extends FieldFormTagComponent {
 	
 	/* ------------ Attr ---------------*/
 	
-	private Boolean selected;
+	private String selected;
 	
 	/* ------------ Prop ---------------*/
 	
@@ -31,12 +31,16 @@ public class RadioTagComponent extends FieldFormTagComponent {
     	return TEMPLATE;
     }
 
-	public Boolean getSelected() {
+	public String getSelected() {
 		return selected;
 	}
 
-	@TagAttribute
 	public void setSelected(Boolean selected) {
+		this.selected = selected == null? null : selected.toString(); 
+	}
+	
+	@TagAttribute
+	public void setSelected(String selected) {
 		this.selected = selected;
 	}
 

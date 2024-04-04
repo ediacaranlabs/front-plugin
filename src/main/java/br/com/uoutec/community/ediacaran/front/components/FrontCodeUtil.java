@@ -2,6 +2,10 @@ package br.com.uoutec.community.ediacaran.front.components;
 
 public class FrontCodeUtil {
 
+	public static boolean isCode(String value) {
+		return value.startsWith("!{") && value.endsWith("}");
+	}
+	
 	public static String toRequiredCode(String value) {
 		if(value == null) {
 			throw new IllegalArgumentException("value");

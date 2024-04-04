@@ -34,7 +34,23 @@ public class OptionTemplateComponent extends ComponentFormTemplateComponent {
 				
 				@Override
 				public Object toValue(Object value, PropertiesComponentTemplate component) {
-					return value != null && !(Boolean)value? "" : "disabled";
+					if(value == null) {
+						return null;
+					}
+					else
+					if("true".equals(String.valueOf(value))) {
+						return "";
+					}
+					else
+					if("false".equals(String.valueOf(value))) {
+						return "disabled";
+					}
+					else
+					if(FrontCodeUtil.isCode(String.valueOf(value))) {
+						return "!{( " + FrontCodeUtil.toRequiredCode(String.valueOf(value)) + " )? \"\" : \" disabled \"}"; 
+					}
+					
+					return "";
 				}
 				
 			});
@@ -48,7 +64,23 @@ public class OptionTemplateComponent extends ComponentFormTemplateComponent {
 				
 				@Override
 				public Object toValue(Object value, PropertiesComponentTemplate component) {
-					return value != null && (Boolean)value? "selected" : "";
+					if(value == null) {
+						return null;
+					}
+					else
+					if("true".equals(String.valueOf(value))) {
+						return "selected";
+					}
+					else
+					if("false".equals(String.valueOf(value))) {
+						return "";
+					}
+					else
+					if(FrontCodeUtil.isCode(String.valueOf(value))) {
+						return "!{( " + FrontCodeUtil.toRequiredCode(String.valueOf(value)) + " )? \" selected \" : \"\"}"; 
+					}
+					
+					return "";
 				}
 				
 			});
