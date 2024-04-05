@@ -118,7 +118,7 @@ $.AppContext.utils = {
 		},
 
 		enableAsyncSubmit: function (local){
-			
+
 			var $region = local == null? '' : '#' + local;
 			
 			$($region + " form button[type=submit]").each(function() {
@@ -320,8 +320,21 @@ $.AppContext.utils = {
 			var $method      = $form.attr('method');
 			var $destContent = $dest == null? $form.attr('dest-content') : $dest;
 			var $enctype     = $form.attr('enctype');
-			var $data        = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
+			var $data;//        = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
 
+			if($enctype === 'multipart/form-data'){
+				$data = new FormData($form[0]);
+			}
+			else
+			if($enctype === 'json'){
+				$data = new FormData($form[0]);
+				$data = Object.fromEntries($data.entries())
+				$data = JSON.stringify($data);
+			}
+			else{
+				$data = $($form).serialize();
+			}
+			
 		    $destContent = $.AppContext.utils.getDestContent($action, $destContent);
 		    $action      = $.AppContext.utils.getAddress($action);
 
@@ -335,7 +348,6 @@ $.AppContext.utils = {
 		        type   : $method,
 		        url    : $action,
 		        data   : $data,
-		        cache  : false,
 		        success: function ($data){
 
 		        	var $evt = {
@@ -353,6 +365,15 @@ $.AppContext.utils = {
 			    	
 			    	$data = $evt.data.data;
 				    
+				    if($destContent != null){
+						var $destObj = $( "#" + $destContent + "_front_code");
+						if($destObj.hasClass("code-template")){
+							var $code = $destObj.html() + "";
+							eval( "var $func = " + $code);
+							$data = $func($data)
+						}
+					}
+					
 			    	if($modal){
 				    	$.AppContext.loadListeners.executeBefore($action);
 			    		$.AppContext.dialog.create();
@@ -382,7 +403,7 @@ $.AppContext.utils = {
 			    	$.AppContext.eventListeners.fireEvent($evt);
 			    	
 			    	$data = $evt.data.data;
-
+		        	
 		        }
 		    };
 			
@@ -391,6 +412,12 @@ $.AppContext.utils = {
 		    	opts.enctype = $enctype;
 		    	opts.processData = false;
 		    	opts.contentType = false;		    	
+		    }
+		    else
+		    if($enctype === 'json') {
+		    	opts.contentType = "application/json; charset=utf-8";
+		    	opts.traditional = true;
+		    	opts.enctype = null;
 		    }
 		    
 	    	var $evt = {
@@ -402,7 +429,7 @@ $.AppContext.utils = {
 	    	$.AppContext.eventListeners.fireEvent($evt);
 	    	
 	    	opts = $evt.data;
-	    	
+
 		    $.ajax(opts);
 			
 		},
@@ -816,5 +843,4 @@ $(function (){
 	$.AppContext.eventListeners.init();
 	
 	$.AppContext.vars.loaded   = true;
-	
 });
