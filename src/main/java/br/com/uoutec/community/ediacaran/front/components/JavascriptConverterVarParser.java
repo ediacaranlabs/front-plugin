@@ -20,6 +20,7 @@ public class JavascriptConverterVarParser extends AbstractVarParser{
 		try {
 			if(jspBody != null) {
 				JavascriptConverterWriter jscw = new JavascriptConverterWriter(writter);
+				jscw.start();
 				jspBody.invoke(jscw);
 				jscw.end();
 			}

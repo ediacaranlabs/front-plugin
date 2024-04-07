@@ -31,24 +31,20 @@ public class JavascriptConverterWriter extends EscapeWriter{
 	
 	private Writer o;
 	
-	private boolean first;
-	
 	private boolean enabled;
 	
 	public JavascriptConverterWriter(Writer o) {
 		super(o);
 		this.o = o;
-		this.first = true;
 		this.enabled = true;
 	}
 
+	public void start() throws IOException {
+		o.write(START_CONTENT);
+	}
+	
 	@Override
 	public void write(char[] cbuf, int off, int len) throws IOException {
-		
-		if(first && enabled) {
-			o.write(START_CONTENT);
-			first = false;
-		}
 		
 		int max   = off + len;
 		int start = off;
@@ -110,6 +106,12 @@ public class JavascriptConverterWriter extends EscapeWriter{
 			if(status == NORMAL_CONTENT && cbuf[i] == '\"') {
 				o.write(cbuf, start, i - start);
 				o.write("\\\"");
+				start = i + 1;
+			}
+			else
+			if(status == NORMAL_CONTENT && cbuf[i] == '\\') {
+				o.write(cbuf, start, i - start);
+				o.write("\\\\");
 				start = i + 1;
 			}
 			else
