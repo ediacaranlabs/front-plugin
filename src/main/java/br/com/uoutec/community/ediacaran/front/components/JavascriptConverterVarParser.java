@@ -22,24 +22,9 @@ public class JavascriptConverterVarParser extends AbstractVarParser{
 		try {
 			if(jspBody != null) {
 				JavascriptConverterWriter jscw = new JavascriptConverterWriter(writter);
-				
-				Boolean active = (Boolean)jspBody.getJspContext().getAttribute(WRAPPER);
-				
-				if(active == null || !active.booleanValue()) {
-					active = false;
-					jspBody.getJspContext().setAttribute(WRAPPER, Boolean.TRUE);
-				}
-				
-				try {
-					jscw.start();
-					jspBody.invoke(jscw);
-					jscw.end();
-				}
-				finally {
-					if(!active) {
-						jspBody.getJspContext().removeAttribute(WRAPPER);
-					}
-				}
+				jscw.start();
+				jspBody.invoke(jscw);
+				jscw.end();
 			}
 		}
 		catch(Throwable e) {

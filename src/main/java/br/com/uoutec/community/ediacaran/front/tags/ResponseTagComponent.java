@@ -1,6 +1,8 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.components.JavascriptConverterVarParser;
+import br.com.uoutec.community.ediacaran.front.components.ResponseComponent;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -32,6 +34,10 @@ public class ResponseTagComponent extends AbstractSimpleTagComponent {
 	
     protected VarParser toVarParser() {
 		return new JavascriptConverterVarParser(getJspBody());
+    }
+    
+    protected Component createComponent() {
+    	return new ResponseComponent();
     }
     
 	public String getTo() {

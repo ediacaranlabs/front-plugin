@@ -49,8 +49,8 @@ public class Component
     	
 		Map<String, Object> vars = new HashMap<String, Object>();
 		Writer out               = getOut();
-		String template          = componentData.getWrapperTemplate();
-    	String contentTemplate   = componentData.getTemplate() == null? getDefaultTemplate() : componentData.getTemplate();
+		String template          = getWrapperTemplate();
+    	String contentTemplate   = getTemplate() == null? getDefaultTemplate() : getTemplate();
     	Theme theme              = getTheme();
     	String packageName       = getPackageTheme();
 		
@@ -75,7 +75,7 @@ public class Component
     	
 		Map<String, Object> vars = new HashMap<String, Object>();
     	Writer out               = getOut();
-    	String template          = componentData.getTemplate() == null? getDefaultTemplate() : componentData.getTemplate();
+    	String template          = getTemplate() == null? getDefaultTemplate() : getTemplate();
     	
 		beforeApplyTemplate(template, vars, out);
 
@@ -89,6 +89,14 @@ public class Component
 		
     	setProperty(componentData.getClass().getName() + ":CONTEXT", null);    	
     	
+    }
+    
+    public String getWrapperTemplate() {
+    	return componentData.getWrapperTemplate();
+    }
+    
+    public String getTemplate() {
+    	return componentData.getTemplate();
     }
     
     public String getDefaultTemplate() {
