@@ -5,13 +5,9 @@ import java.io.Writer;
 
 public class JavascriptConverterWriter extends EscapeWriter{
 
-	//.join("")
-	
 	public static final char DISABLE_PARSER = 0x0;
 
 	public static final char ENABLE_PARSER = 0x1;
-	
-	//private static final String QUOTE = "\\\"";
 	
 	private static final String START_CONTENT = "out_.push(\"";
 
@@ -43,7 +39,6 @@ public class JavascriptConverterWriter extends EscapeWriter{
 		o.write(START_CONTENT);
 	}
 	
-	@Override
 	public void write(char[] cbuf, int off, int len) throws IOException {
 		
 		int max   = off + len;
@@ -91,15 +86,18 @@ public class JavascriptConverterWriter extends EscapeWriter{
 				
 				if(cbuf[i] == '{') {
 					status = JS_CONTENT;
-					o.write(cbuf, start, i - start - 1);
+					int count = i - start - 1;
+					if(count > 0) {
+						o.write(cbuf, start, count);
+					}
 					o.write(END_CONTENT);
 					o.write(START_CODE);
 				}
 				else {
 					o.write('!');
 					o.write(cbuf[i]);
+					status = NORMAL_CONTENT;
 				}
-				
 				start = i + 1;
 			}
 			else

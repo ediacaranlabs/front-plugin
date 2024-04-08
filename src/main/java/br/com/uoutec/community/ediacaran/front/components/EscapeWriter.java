@@ -12,6 +12,7 @@ public class EscapeWriter extends Writer{
 				"&amp;".toCharArray(), // &
 				"&apos;".toCharArray(), //'
 				"&quot;".toCharArray(), //"	
+				"&#45;".toCharArray(), //-	
 			};
 			
 	private Writer o;
@@ -44,6 +45,10 @@ public class EscapeWriter extends Writer{
 				break;
 			case '\"':
 				write(cbuf, start, i - start, 4);
+				start = i + 1;
+				break;
+			case '-':
+				write(cbuf, start, i - start, 5);
 				start = i + 1;
 				break;
 			}
