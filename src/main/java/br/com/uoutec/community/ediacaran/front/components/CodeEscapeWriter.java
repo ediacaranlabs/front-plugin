@@ -46,44 +46,6 @@ public class CodeEscapeWriter extends Writer{
 				o.write("&amp;");
 				start = i + 1;
 			}
-			
-
-/*
-			else
-			if(cbuf[i] == '&') {
-				o.write(cbuf, start, i - start);
-				o.write("&amp;");
-				start = i + 1;
-			}
-*/
-			/*
-			else
-			if(cbuf[i] == '&') {
-				o.write(cbuf, start, i - start);
-				o.write("&amp;");
-				start = i + 1;
-			}
-			*/
-			
-			/*
-			if(cbuf[i] == '\\') {
-				o.write(cbuf, start, i - start);
-				o.write("\\\\");
-				start = i + 1;
-			}
-			else
-			if(cbuf[i] == '<') {
-				o.write(cbuf, start, i - start);
-				o.write("\\<");
-				start = i + 1;
-			}
-			else
-			if(cbuf[i] == '>') {
-				o.write(cbuf, start, i - start);
-				o.write("\\>");
-				start = i + 1;
-			}
-			*/
 		}
 		
 		o.write(cbuf, start, max - start);
