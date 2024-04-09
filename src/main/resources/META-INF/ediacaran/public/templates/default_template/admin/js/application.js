@@ -14,9 +14,9 @@ $.AppContext.vars = {
 		
 		contextPath: "/",
 		
-		dialog: "#defaultDialog",
+		dialog: "defaultDialog",
 		
-		panel: "#panel",
+		panel: "panel",
 
 		document: null,
 
