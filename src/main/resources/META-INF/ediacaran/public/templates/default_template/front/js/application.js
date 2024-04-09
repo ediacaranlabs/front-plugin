@@ -366,25 +366,7 @@ $.AppContext.utils = {
 			    	$data = $evt.data.data;
 				    
 				    if($destContent != null){
-						var $destObj = $( "#" + $destContent + "_front_code");
-						if($destObj.hasClass("code-template")){
-							var $code = $destObj.html() + "";
-							try {
-								$code = $code.replaceAll("&amp;", "&");
-								$code = $code.replaceAll("&lt;", "<");
-								$code = $code.replaceAll("&gt;", ">");
-								$code = $code.replace(/^\s*\<\!\-\-/, "<!--\r\n");
-								$code = $code.replace(/\-\-\>\s*$/, "\r\n-->");
-								$code = "var $func = " + $code;
-								eval( $code );
-								$data = $func($data);
-							}
-							catch (e) {
-							    if (e instanceof SyntaxError) {
-							        alert(e.stack);
-							    }
-							}							
-						}
+						$data = $.AppContext.utils.applyTemplate($destContent, $data);
 					}
 					
 			    	if($modal){
@@ -448,6 +430,28 @@ $.AppContext.utils = {
 		},
 		
 		/* simple functions */
+		
+		applyTemplate: function($id, $data){
+			var $template = $( "#" + $id + "_front_code");
+
+			if(!$template.hasClass("code-template")){
+				return $data;
+			}
+			
+			var $code = $template.html();
+			$code = $code.replaceAll("&amp;", "&");
+			$code = $code.replaceAll("&lt;", "<");
+			$code = $code.replaceAll("&gt;", ">");
+			$code = $code.replace(/^\s*\<\!\-\-/, "<!--\r\n");
+			$code = $code.replace(/\-\-\>\s*$/, "\r\n-->");
+			$code = "var $func = " + $code;
+			
+			eval( $code );
+			
+			$data = $func($data);
+			
+			return $data;
+		},
 		
 		updateContentData: function ($local, $content, $position = null){
 			
