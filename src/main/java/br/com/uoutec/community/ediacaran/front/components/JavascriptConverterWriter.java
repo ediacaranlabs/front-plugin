@@ -11,8 +11,9 @@ public class JavascriptConverterWriter extends EscapeWriter{
 	
 	private static final String START_CONTENT = "out_.push(\"";
 
-	private static final String END_CONTENT = "\");\r\n";
-
+	private static final String END_CONTENT = 
+			"\");\r\n";
+	
 	private static final String START_CODE = "out_.push(";
 
 	private static final String END_CODE = ");\r\n";
@@ -80,6 +81,14 @@ public class JavascriptConverterWriter extends EscapeWriter{
 				
 			if(status == NORMAL_CONTENT && cbuf[i] == '!') {
 				status = FIRST_CHAR;
+				
+				int count = i - start;
+				
+				if(count > 0) {
+					o.write(cbuf, start, count);
+				}
+				
+				start = i + 1;
 			}
 			else
 			if(status == FIRST_CHAR) {
@@ -107,12 +116,14 @@ public class JavascriptConverterWriter extends EscapeWriter{
 				start = i + 1;
 			}
 			else
+				/*
 			if(status == NORMAL_CONTENT && cbuf[i] == '\\') {
 				o.write(cbuf, start, i - start);
 				o.write("\\\\");
 				start = i + 1;
 			}
 			else
+			*/
 			if(status == JS_CONTENT && cbuf[i] == '}') {
 				status = NORMAL_CONTENT;
 				o.write(cbuf, start, i - start);

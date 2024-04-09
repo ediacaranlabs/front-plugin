@@ -369,8 +369,21 @@ $.AppContext.utils = {
 						var $destObj = $( "#" + $destContent + "_front_code");
 						if($destObj.hasClass("code-template")){
 							var $code = $destObj.html() + "";
-							eval( "var $func = " + $code);
-							$data = $func($data)
+							try {
+								$code = $code.replaceAll("&amp;", "&");
+								$code = $code.replaceAll("&lt;", "<");
+								$code = $code.replaceAll("&gt;", ">");
+								$code = $code.replace(/^\s*\<\!\-\-/, "<!--\r\n");
+								$code = $code.replace(/\-\-\>\s*$/, "\r\n-->");
+								$code = "var $func = " + $code;
+								eval( $code );
+								$data = $func($data);
+							}
+							catch (e) {
+							    if (e instanceof SyntaxError) {
+							        alert(e.stack);
+							    }
+							}							
 						}
 					}
 					

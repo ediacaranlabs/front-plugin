@@ -19,13 +19,14 @@ public class ResponseComponent extends Component {
 		Object old = setProperty(ESCAPE_CONTENT, Boolean.TRUE);
 		
 		try {
+
 			if(old != null) {
 				Writer out = getOut();
-				if(!(out instanceof EscapeWriter)) {
-					setOut(new EscapeWriter(out));
+				if(!(out instanceof CodeEscapeWriter)) {
+					setOut(new CodeEscapeWriter(out));
 				}
 			}
-			
+
 			super.build();
 		}
 		finally {

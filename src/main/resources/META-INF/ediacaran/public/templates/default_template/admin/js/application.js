@@ -371,6 +371,8 @@ $.AppContext.utils = {
 							var $code = $destObj.html() + "";
 							eval( "var $func = " + $code);
 							$data = $func($data)
+							alert($data);
+							$data = $data.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">");
 						}
 					}
 					
