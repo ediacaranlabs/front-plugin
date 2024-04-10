@@ -494,6 +494,46 @@ card
 }
 
 /* ===================================
+pagination
+==================================== */
+
+.pagination {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin: auto;
+	text-align: center;
+  	display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination span {
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #0073b7;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #808080;
+  border-radius: 5px;
+}
+
+.pagination a.deactive {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+/* ===================================
 lists
 ==================================== */
 ul,
