@@ -255,38 +255,38 @@ $.AppContext.utils = {
 		
 		/* load content functions */
 		
-		loadResourceContent: function ($destContent, $resource){
+		loadResourceContent: function ($destContent, $resource, $isModal = false){
 			
 			var $address     = $.AppContext.utils.getAddress($resource);
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
-			var $modal       = $.AppContext.utils.isModal($resource);
+			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
 			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
 		},
 
-		updateContentByID: function ($resource, $destContent){
+		updateContentByID: function ($resource, $destContent, $isModal = false){
 			
 			var $address     = $.AppContext.utils.getAddress($resource);
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
-			var $modal       = $.AppContext.utils.isModal($resource);
+			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
 			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
 		},
 		
-		appendContentByID: function ($resource, $destContent){
+		appendContentByID: function ($resource, $destContent, $isModal = false){
 			
 			var $address     = $.AppContext.utils.getAddress($resource);
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
-			var $modal       = $.AppContext.utils.isModal($resource);
+			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
 			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'append');
 		},
 
-		insertContentByID: function ($resource, $destContent){
+		insertContentByID: function ($resource, $destContent, $isModal = false){
 			
 			var $address     = $.AppContext.utils.getAddress($resource);
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
-			var $modal       = $.AppContext.utils.isModal($resource);
+			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
 			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'insert');
 		},
