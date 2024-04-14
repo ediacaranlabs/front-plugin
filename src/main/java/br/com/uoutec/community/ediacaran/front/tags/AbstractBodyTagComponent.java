@@ -202,14 +202,14 @@ public abstract class AbstractBodyTagComponent
     	if(component == null) {
         	component = createComponent();
         	component.setComponentData(this);
-        	this.uniqueID = component.getId();
+        	this.uniqueID = component.getUniqueID();
     	}
     	
     	//component.setOut(getBodyContent().getEnclosingWriter());
     	component.setOut(getOut());
     	
     	if(uniqueID == null) {
-        	this.uniqueID = component.getId();
+        	this.uniqueID = component.getUniqueID();
     	}
     	
     }
@@ -225,7 +225,7 @@ public abstract class AbstractBodyTagComponent
     	component.setPageContext(pageContext);
     	
     	if(uniqueID == null) {
-        	this.uniqueID = component.getId();
+        	this.uniqueID = component.getUniqueID();
     	}
     }
     

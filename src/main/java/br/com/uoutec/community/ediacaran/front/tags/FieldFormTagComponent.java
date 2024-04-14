@@ -1,12 +1,14 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
+import br.com.uoutec.community.ediacaran.front.components.Component;
+import br.com.uoutec.community.ediacaran.front.components.FieldComponent;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
 public abstract class FieldFormTagComponent extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE = "/components/form-group";
 	
-	public static final String FORM = FieldFormTagComponent.class.getSimpleName() + ":form";
+	//public static final String FORM = FieldFormTagComponent.class.getSimpleName() + ":form";
 	
 	/* ------------ Attr ---------------*/
 	
@@ -31,6 +33,10 @@ public abstract class FieldFormTagComponent extends AbstractSimpleTagComponent {
 	public FieldFormTagComponent() {
 		setEscape(true);
 	}
+	
+    protected Component createComponent() {
+    	return new FieldComponent();
+    }
 	
     public String getWrapperTemplate() {
     	return TEMPLATE;

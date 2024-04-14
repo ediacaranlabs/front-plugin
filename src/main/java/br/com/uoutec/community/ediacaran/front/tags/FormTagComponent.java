@@ -1,9 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.Writer;
-import java.util.Map;
-
 import br.com.uoutec.community.ediacaran.front.components.Component;
+import br.com.uoutec.community.ediacaran.front.components.FormComponent;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -15,9 +13,9 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 )
 public class FormTagComponent extends AbstractSimpleTagComponent {
 
-	public static final String TEMPLATE = "/components/form";
+	//public static final String TEMPLATE = "/components/form";
 	
-	public static final String FORM = FormTagComponent.class.getSimpleName() + ":form";
+	//public static final String FORM = FormTagComponent.class.getSimpleName() + ":form";
 	
 	public static final String VERTICAL_FORM = FormTagComponent.class.getSimpleName() + ":vertical_form";
 	
@@ -45,21 +43,15 @@ public class FormTagComponent extends AbstractSimpleTagComponent {
 	}
 
     protected Component createComponent() {
-    	return new Component() {
-    		
-    		protected void applyTemplate(String template, Map<String, Object> vars, Writer out){
-    	    	Object oldForm = super.setProperty(FORM, FormTagComponent.this);
-    			super.applyTemplate(template, vars, out);
-    	    	super.setProperty(FORM, oldForm);
-    		}
-    		
-    	};
+    	return new FormComponent();
     }
 	
+    /*
     public String getDefaultTemplate() {
     	return TEMPLATE;
     }
-	
+	*/
+
 	public String getAcceptCharset() {
 		return acceptCharset;
 	}

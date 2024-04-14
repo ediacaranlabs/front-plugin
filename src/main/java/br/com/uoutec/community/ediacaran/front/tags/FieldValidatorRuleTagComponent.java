@@ -1,9 +1,12 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import javax.servlet.jsp.jstl.fmt.LocalizationContext;
+import java.io.IOException;
 
-import br.com.uoutec.community.ediacaran.front.components.Component;
-import br.com.uoutec.community.ediacaran.front.tags.FieldValidatorTagComponent.ValidatorEntity;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
+
+import br.com.uoutec.community.ediacaran.front.components.ValidatorEntity;
+import br.com.uoutec.community.ediacaran.front.components.ValidatorParamEntity;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -13,10 +16,8 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class FieldValidatorRuleTagComponent extends AbstractSimpleTagComponent {
+public class FieldValidatorRuleTagComponent extends SimpleTagSupport {
 
-	public static final String TEMPLATE  = "/components/content";
-	
 	private String name;
 	
 	private String message;
@@ -25,41 +26,39 @@ public class FieldValidatorRuleTagComponent extends AbstractSimpleTagComponent {
 
 	private Boolean raw;
 
-	protected void beforeBuildComponent(Component component) {
-		FieldValidatorTagComponent tag = (FieldValidatorTagComponent)getParentTag();
-		
-		if(tag == null) {
-			throw new IllegalStateException("field not found");
-		}
+    public void doTag() throws JspException, IOException {
     	
-		String msg = message;
-		
-    	if(raw == null || !raw) {
-    		LocalizationContext bundle = getBundle();
-    		
-			if(bundle != null && msg != null) {
-				
-				if(msg.startsWith("#{") && msg.endsWith("}")) {
-					msg = msg.substring(2, msg.length() - 1);
-					msg = bundle.getResourceBundle().getString(msg);
-				}
-				
-			}
-    		
-			msg = "\"" + msg + "\"";
+    	FieldValidatorTagComponent fvtc = 
+    			(FieldValidatorTagComponent)super.getJspContext()
+    			.getAttribute(FieldValidatorTagComponent.class.getName());
+    	
+    	if(fvtc == null) {
+			throw new IllegalStateException("field-validator not found");
     	}
     	
-    	validator = new ValidatorEntity(name, msg);
-		
-	}
-
-	protected void afterBuildComponent(Component component) {
-    	FieldValidatorTagComponent tag = (FieldValidatorTagComponent)getParentTag();
-    	tag.getValidator().add(validator);
+    	this.validator = 
+    			new ValidatorEntity(
+    					name, 
+    					message, 
+    					raw == null? false : raw.booleanValue()
+				);
     	
-		validator = null;
-	}
+    	fvtc.addValidator(this.validator);
+    	
+    	super.getJspContext().setAttribute(FieldValidatorRuleTagComponent.class.getName(), this);
+    	
+    	try {
+    		getJspBody().invoke(getJspContext().getOut());
+    	}
+    	finally {
+        	super.getJspContext().setAttribute(FieldValidatorRuleTagComponent.class.getName(), null);
+    	}
+    }
 	
+    public void addRule(ValidatorParamEntity value) {
+    	this.validator.getParams().add(value);
+    }
+    
     public String getName() {
 		return name;
 	}
@@ -95,13 +94,4 @@ public class FieldValidatorRuleTagComponent extends AbstractSimpleTagComponent {
 		this.raw = raw;
 	}
 		
-    public String getDefaultTemplate() {
-    	return TEMPLATE;
-    }
-    
-	@Override
-	public String getType() {
-		return "field-validator-rule";
-	}
-    
 }

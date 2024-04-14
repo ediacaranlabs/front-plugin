@@ -17,6 +17,7 @@ import br.com.uoutec.community.ediacaran.front.theme.TemplateVarParser;
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeRegistry;
+import br.com.uoutec.community.ediacaran.system.util.IDGenerator;
 import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
 
 public class Component 
@@ -29,6 +30,8 @@ public class Component
 	public static final String ATTR_FORMAT			= "([a-z-_]+)=([^\\;]+)";
 
 	public static final String PARENT_TAG			= "Component:parent";
+
+	private final String uniqueID = IDGenerator.getUniqueOrderID('M', this.hashCode());
 
 	private PageContext pageContext;
 	
@@ -299,13 +302,21 @@ public class Component
         return path.substring( contextPath.length(), path.length() );
     }
     
+	public String getUniqueID() {
+		return uniqueID;
+	}
+
 	public String getId() {
+		String id = componentData.getId();
+		return id == null? uniqueID : id;
+		/*
 		HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
 		
 		Long acc = (Long) request.getAttribute(ID_COUNT);
 		request.setAttribute(ID_COUNT, acc = acc == null? System.currentTimeMillis() : acc.intValue() + 1);
 		
 		return componentData.getClass().getSimpleName().toLowerCase() + "_" + Long.toHexString(acc);
+		*/
 	}
 
 }
