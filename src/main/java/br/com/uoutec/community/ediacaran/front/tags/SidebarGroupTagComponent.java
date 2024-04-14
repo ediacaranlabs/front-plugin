@@ -9,7 +9,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class SidebarGroupTagComponent extends FieldFormTagComponent {
+public class SidebarGroupTagComponent extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE = "/components/sidebar-group";
 	
