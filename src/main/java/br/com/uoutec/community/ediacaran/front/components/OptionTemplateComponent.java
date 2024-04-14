@@ -20,6 +20,12 @@ public class OptionTemplateComponent extends ComponentFormTemplateComponent {
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
 			add("selected");
 			add("label");
+			remove("name");
+			remove("componentType");
+			remove("form");
+			remove("required");
+			remove("enabled");
+			remove("readonly");
 		}});
 	
 		super.default_attribute_parsers = 

@@ -23,6 +23,7 @@ public class FieldValidatorTemplateComponent extends AbstractTemplateComponent {
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
+			add("validators");
 		}});
 	
 		super.default_property_parsers = 

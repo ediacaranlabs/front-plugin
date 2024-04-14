@@ -31,13 +31,17 @@ public class Component
 
 	public static final String PARENT_TAG			= "Component:parent";
 
-	private final String uniqueID = IDGenerator.getUniqueOrderID('M', this.hashCode());
+	private final String uniqueID = IDGenerator.getUniqueOrderID('M', this.hashCode()).toLowerCase();
 
 	private PageContext pageContext;
 	
 	private Writer out;
 	
 	private ComponentData componentData;
+	
+	public Object getAttribute(String name) {
+		return componentData.getAttribute(name);
+	}
 	
 	public void build() throws ThemeException, IOException{
     	if(!componentData.isWrapper()) {

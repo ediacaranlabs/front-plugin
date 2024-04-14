@@ -45,6 +45,10 @@ public class FieldValidatorRuleTagComponent extends SimpleTagSupport {
     	
     	fvtc.addValidator(this.validator);
     	
+    	if(getJspBody() == null) {
+    		return;
+    	}
+    	
     	super.getJspContext().setAttribute(FieldValidatorRuleTagComponent.class.getName(), this);
     	
     	try {

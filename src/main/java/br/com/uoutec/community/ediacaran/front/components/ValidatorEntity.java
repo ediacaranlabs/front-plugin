@@ -26,7 +26,7 @@ public class ValidatorEntity {
 	}
 
 	public String getMessage() {
-		return message;
+		return message == null? null : (raw? message : "\"" + message +"\"");
 	}
 
 	public boolean isRaw() {

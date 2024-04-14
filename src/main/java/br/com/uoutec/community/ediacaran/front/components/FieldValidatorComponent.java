@@ -1,7 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.components;
 
-import java.io.IOException;
-import java.io.Writer;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,9 +23,7 @@ public class FieldValidatorComponent extends Component {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
-    		Writer out) throws IOException {
-		
+	protected void afterPrepareVars(Map<String, Object> vars) {
 		Set<ValidatorEntity> validators = (Set<ValidatorEntity>)vars.get("validators");
 		vars.put("validators", getValidators(validators));
 		
@@ -65,7 +61,7 @@ public class FieldValidatorComponent extends Component {
 			throw new IllegalStateException("field not found");
 		}
 	
-		return fieldComponent.getId();
+		return (String)fieldComponent.getAttribute("name");
 	}
 	
 	protected VarParser getValidators(Set<ValidatorEntity> validators) {

@@ -9,7 +9,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class OptionTagComponent extends FieldFormTagComponent {
+public class OptionTagComponent extends AbstractSimpleTagComponent {
 
 	public static final String TEMPLATE = "/components/option";
 	
@@ -18,6 +18,8 @@ public class OptionTagComponent extends FieldFormTagComponent {
 	private String selected;
 	
 	private String label;
+	
+	private String value;
 	
 	/* ------------ Prop ---------------*/
 
@@ -48,6 +50,15 @@ public class OptionTagComponent extends FieldFormTagComponent {
 	@TagAttribute
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public String getValue() {
+		return value;
+	}
+	
+	@TagAttribute
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	@Override

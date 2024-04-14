@@ -19,6 +19,8 @@ public interface ComponentData {
     
     String getId();
     
+    Object getAttribute(String name);
+    
     Map<String, Object> getProperties(Set<String> defaultProperties, Set<String> emptyProperties);
     
 }

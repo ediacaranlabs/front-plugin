@@ -20,7 +20,7 @@ public class ValidatorParamEntity {
 	}
 
 	public String getValue() {
-		return value;
+		return value == null? null : (raw? value : "\"" + value +"\"");
 	}
 
 	public boolean isRaw() {

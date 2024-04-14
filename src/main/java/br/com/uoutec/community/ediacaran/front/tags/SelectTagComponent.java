@@ -3,6 +3,7 @@ package br.com.uoutec.community.ediacaran.front.tags;
 import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.front.components.Component;
+import br.com.uoutec.community.ediacaran.front.components.FieldComponent;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -38,7 +39,7 @@ public class SelectTagComponent extends FieldFormTagComponent {
 	}
 	
     protected Component createComponent() {
-    	return new Component() {
+    	return new FieldComponent() {
     		
     		public void beforePrepareVars(Map<String, Object> vars) {
     			vars.put("empty",   label == null? "sr-only" : null);

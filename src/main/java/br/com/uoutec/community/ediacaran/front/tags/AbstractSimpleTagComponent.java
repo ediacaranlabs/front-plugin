@@ -17,6 +17,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import org.brandao.brutos.bean.BeanInstance;
 
+import br.com.uoutec.application.bean.Bean;
 import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.components.ComponentData;
@@ -60,6 +61,17 @@ public abstract class AbstractSimpleTagComponent
 	
 	private Component component;
 	
+	private Bean bean;
+	
+	public AbstractSimpleTagComponent() {
+		this.bean = ContextSystemSecurityCheck.doPrivileged(()->new Bean(this, this.getClass()));
+	}
+	
+	@Override
+    public Object getAttribute(String name) {
+    	return ContextSystemSecurityCheck.doPrivileged(()->bean.get(name));
+    }
+
 	protected void beforeBuildComponent(Component component) {
 	}
 

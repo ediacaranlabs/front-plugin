@@ -5,6 +5,7 @@ import java.io.Writer;
 import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.front.components.Component;
+import br.com.uoutec.community.ediacaran.front.components.FieldComponent;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
@@ -16,7 +17,7 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 		)
 public class TinymceTagComponent extends FieldFormTagComponent {
 
-	public static final String TEMPLATE       = "/components/tinymce";
+	public static final String TEMPLATE = "/components/tinymce";
 	
 	/* ------------ Attr ---------------*/
 	
@@ -35,7 +36,7 @@ public class TinymceTagComponent extends FieldFormTagComponent {
 	}
 
     protected Component createComponent() {
-    	return new Component() {
+    	return new FieldComponent() {
     		
     	    protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     	    		Writer out) throws IOException {
