@@ -28,7 +28,6 @@ public class FieldValidatorTagComponent extends AbstractBodyTagComponent {
 	private Set<ValidatorEntity> validators;
 	
 	public FieldValidatorTagComponent() {
-		this.validators = new HashSet<>();
 	}
 	
     protected Component createComponent() {
@@ -37,6 +36,7 @@ public class FieldValidatorTagComponent extends AbstractBodyTagComponent {
 	
     @Override
     public int doStartTag() throws JspException {
+		this.validators = new HashSet<>();
     	super.pageContext.setAttribute(FieldValidatorTagComponent.class.getName(), this);
         return super.doStartTag();
     }
@@ -49,6 +49,7 @@ public class FieldValidatorTagComponent extends AbstractBodyTagComponent {
     public int doEndTag() throws JspException {
         int result = super.doEndTag();
         super.pageContext.setAttribute(FieldValidatorTagComponent.class.getName(), null);
+        this.validators.clear();
         return result;
     }
     
