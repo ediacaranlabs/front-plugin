@@ -3,6 +3,7 @@ package br.com.uoutec.community.ediacaran.front.tags;
 import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.jstl.fmt.LocalizationContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import br.com.uoutec.community.ediacaran.front.components.ValidatorEntity;
@@ -26,6 +27,8 @@ public class FieldValidatorRuleTagComponent extends SimpleTagSupport {
 
 	private Boolean raw;
 
+	private LocalizationContext bundle;
+	
     public void doTag() throws JspException, IOException {
     	
     	FieldValidatorTagComponent fvtc = 
@@ -36,10 +39,13 @@ public class FieldValidatorRuleTagComponent extends SimpleTagSupport {
 			throw new IllegalStateException("field-validator not found");
     	}
     	
+    	if(message.startsWith("#{") && message.endsWith("}")) {
+    		
+    	}
     	this.validator = 
     			new ValidatorEntity(
     					name, 
-    					message, 
+    					getMsg(), 
     					raw == null? false : raw.booleanValue()
 				);
     	
@@ -59,15 +65,38 @@ public class FieldValidatorRuleTagComponent extends SimpleTagSupport {
     	}
     }
 	
+    private String getMsg() {
+    	if(message.startsWith("#{") && message.endsWith("}")) {
+    		
+    		if(bundle == null) {
+    			throw new NullPointerException("bundle");
+    		}
+    		
+			String value = message.substring(2, message.length() - 1);
+			return String.valueOf(bundle.getResourceBundle().getObject(value));
+    	}
+    	
+    	return message;
+    }
+    
     public void addRule(ValidatorParamEntity value) {
     	this.validator.getParams().add(value);
     }
     
-    public String getName() {
-		return name;
+    public LocalizationContext getBundle() {
+		return bundle;
 	}
 
     @TagAttribute
+	public void setBundle(LocalizationContext bundle) {
+		this.bundle = bundle;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+    @TagAttribute(required = true)
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -76,7 +105,7 @@ public class FieldValidatorRuleTagComponent extends SimpleTagSupport {
 		return message;
 	}
 
-    @TagAttribute
+    @TagAttribute(required = true)
 	public void setMessage(String message) {
 		this.message = message;
 	}

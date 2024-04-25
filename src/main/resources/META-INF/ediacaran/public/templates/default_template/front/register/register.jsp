@@ -64,17 +64,18 @@
 		<ec:form id="registerForm" action="${plugins.ediacaran.front.user_register_page}" method="post"
 		update="result">
 			<input type="hidden" name="redirectTo" value="${plugins.ediacaran.user.admin_context}">
+			<%--
 			<ed:row>
 				<ed:col classStyle="form-group has-feedback">
 					<ec:field-group>
 						<ec:textfield bundle="${sys_messages}" 
 							name="firstName" placeholder="#{box.first_name.placeholder}">
 							<ec:field-validator>
-								<ec:field-validator-rule name="notEmpty" message="Obrigatório"/>
-								<ec:field-validator-rule name="regexp" message="Inválido">
+								<ec:field-validator-rule name="notEmpty" message="#{box.first_name.validation.notEmpty}" bundle="${sys_messages}" />
+								<ec:field-validator-rule name="regexp" message="#{box.first_name.validation.regexp}" bundle="${sys_messages}">
 									<ec:field-validator-param name="regexp" raw="true">$.AppContext.regexUtil.patterns().NAME_FORMAT</ec:field-validator-param>
 								</ec:field-validator-rule>
-								<ec:field-validator-rule name="stringLength" message="Inválido">
+								<ec:field-validator-rule name="stringLength" message="#{box.first_name.validation.stringLength}" bundle="${sys_messages}">
 										<ec:field-validator-param name="min">3</ec:field-validator-param>
 										<ec:field-validator-param name="max">60</ec:field-validator-param>
 								</ec:field-validator-rule>
@@ -83,11 +84,11 @@
 						<ec:textfield bundle="${sys_messages}" 
 							name="lastName" placeholder="#{box.last_name.placeholder}">
 							<ec:field-validator>
-								<ec:field-validator-rule name="notEmpty" message="Obrigatório"/>
-								<ec:field-validator-rule name="regexp" message="Inválido">
+								<ec:field-validator-rule name="notEmpty" message="#{box.last_name.validation.notEmpty}" bundle="${sys_messages}" />
+								<ec:field-validator-rule name="regexp" message="#{box.last_name.validation.regexp}" bundle="${sys_messages}">
 									<ec:field-validator-param name="regexp" raw="true">$.AppContext.regexUtil.patterns().NAME_FORMAT</ec:field-validator-param>
 								</ec:field-validator-rule>
-								<ec:field-validator-rule name="stringLength" message="Inválido">
+								<ec:field-validator-rule name="stringLength" message="#{box.last_name.validation.stringLength}" bundle="${sys_messages}">
 										<ec:field-validator-param name="min">3</ec:field-validator-param>
 										<ec:field-validator-param name="max">60</ec:field-validator-param>
 								</ec:field-validator-rule>
@@ -96,25 +97,27 @@
 					</ec:field-group>
 				</ed:col>
 			</ed:row>
+			--%>
 			<ed:row>
 				<ed:col classStyle="form-group has-feedback">
 					<ec:textfield bundle="${sys_messages}" 
 							name="email" placeholder="#{box.email.placeholder}">
 						<ec:field-validator>
-							<ec:field-validator-rule name="notEmpty" message="Obrigatório"/>
-							<ec:field-validator-rule name="regexp" message="Inválido">
+							<ec:field-validator-rule name="notEmpty" message="#{box.email.validation.notEmpty}" bundle="${sys_messages}"/>
+							<ec:field-validator-rule name="regexp" message="#{box.email.validation.regexp}" bundle="${sys_messages}">
 								<ec:field-validator-param name="regexp" raw="true">$.AppContext.regexUtil.patterns().EMAIL</ec:field-validator-param>
 							</ec:field-validator-rule>
 						</ec:field-validator>
 					</ec:textfield>
 				</ed:col>
 			</ed:row>
+			<%--
 			<ed:row>
 				<ed:col classStyle="form-group has-feedback">
 					<ec:select name="country">
 						<ec:field-validator>
-							<ec:field-validator-rule name="notEmpty" message="Obrigatório"/>
-							<ec:field-validator-rule name="stringLength" message="Inválido">
+							<ec:field-validator-rule name="notEmpty" message="#{box.country.validation.notEmpty}" bundle="${sys_messages}"/>
+							<ec:field-validator-rule name="stringLength" message="invalid">
 									<ec:field-validator-param name="min">3</ec:field-validator-param>
 									<ec:field-validator-param name="max">3</ec:field-validator-param>
 							</ec:field-validator-rule>
@@ -126,12 +129,13 @@
 					</ec:select>
 				</ed:col>
 			</ed:row>
+			--%>
 			<ed:row>
 				<ed:col classStyle="form-group has-feedback">
-					<ec:passwordfield name="password">
+					<ec:passwordfield name="password" placeholder="#{box.password.placeholder}" bundle="${sys_messages}">
 						<ec:field-validator>
-							<ec:field-validator-rule name="notEmpty" message="Obrigatório"/>
-							<ec:field-validator-rule name="stringLength" message="Inválido">
+							<ec:field-validator-rule name="notEmpty" message="#{box.password.validation.notEmpty}" bundle="${sys_messages}"/>
+							<ec:field-validator-rule name="stringLength" message="#{box.password.validation.stringLength}" bundle="${sys_messages}">
 									<ec:field-validator-param name="min">12</ec:field-validator-param>
 									<ec:field-validator-param name="max">128</ec:field-validator-param>
 							</ec:field-validator-rule>
@@ -141,10 +145,10 @@
 			</ed:row>
 			<ed:row>
 				<ed:col classStyle="form-group has-feedback">
-					<ec:passwordfield name="retypePassword">
+					<ec:passwordfield name="retypePassword" placeholder="#{box.retype_password.placeholder}" bundle="${sys_messages}">
 						<ec:field-validator>
-							<ec:field-validator-rule name="notEmpty" message="Obrigatório"/>
-							<ec:field-validator-rule name="identical" message="Inválido">
+							<ec:field-validator-rule name="notEmpty" message="#{box.retype_password.validation.notEmpty}" bundle="${sys_messages}"/>
+							<ec:field-validator-rule name="identical" message="#{box.retype_password.validation.identical}" bundle="${sys_messages}">
 								<ec:field-validator-param name="field">password</ec:field-validator-param>
 							</ec:field-validator-rule>
 						</ec:field-validator>
