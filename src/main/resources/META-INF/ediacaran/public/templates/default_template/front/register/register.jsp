@@ -55,91 +55,121 @@
 </head>
 
 <body class="hold-transition register-page">
-<div class="register-box">
-  <div class="register-logo">
+<ec:box>
+	<ec:box-header>
     <a href="#"><fmt:message key="box.title" bundle="${sys_messages}"/></a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="register-box-body">
-    <p class="login-box-msg"><fmt:message key="box.message" bundle="${sys_messages}"/></p>
-
-	<form id="registerForm" action="${plugins.ediacaran.front.user_register_page}" method="post"
-		dest-content="#result" accept-charset="UTF-8">
-		<input type="hidden" name="redirectTo" value="${plugins.ediacaran.user.admin_context}">
-		<div class="input-group">
-		<div class="form-group has-feedback">
-			<input name="firstName" type="text" class="form-control" placeholder="<fmt:message key="box.first_name.placeholder" bundle="${sys_messages}"/>">
-		</div>
-		<div class="form-group has-feedback">
-			<input name="lastName" type="text" class="form-control" placeholder="<fmt:message key="box.last_name.placeholder" bundle="${sys_messages}"/>">
-			<span class="glyphicon glyphicon-user form-control-feedback"></span>
-		</div>
-		</div>
-		<div class="form-group has-feedback">
-			<input name="email" type="email" class="form-control" placeholder="<fmt:message key="box.email.placeholder" bundle="${sys_messages}"/>">
-			<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-		</div>
-		<div class="form-group has-feedback">
-			<select name="country" class="form-control">
-				<option value="">
-					<fmt:message key="box.country" bundle="${sys_messages}" />
-				</option>
-				<c:forEach items="${Controller.getCountries(locale)}" var="country">
-					<option value="${country.isoAlpha3}">${country.name}</option>
-				</c:forEach>
-				<option value="XXX">
-					<fmt:message key="box.country.default" bundle="${sys_messages}" />
-				</option>
-			</select>
-		</div>
-		<div class="form-group has-feedback">
-			<input name="password" type="password" class="form-control" placeholder="<fmt:message key="box.password.placeholder" bundle="${sys_messages}"/>">
-			<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-		</div>
-		<div class="form-group has-feedback">
-			<input name="retypePassword" type="password" class="form-control"
-				placeholder="<fmt:message key="box.retype_password.placeholder" bundle="${sys_messages}"/>"> 
-			<span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-		</div>
-	      <div class="row">
-	        <div class="col-xs-12">
-		        <div id="result" class="result-check"></div>
-	        </div>
-	        <!-- /.col -->
-	      </div>
-		<div class="row">
-			<div class="col-xs-8">
-				<c:set var="terms" value="${plugins.ediacaran.user.terms}"/>
-				<c:if test="${!empty terms && terms != ''}">
-				<div class="checkbox icheck">
-					<label> 
-						<input name="terms" type="checkbox" class="icheckbox_square-blue">
-							<fmt:message key="box.terms" bundle="${sys_messages}">
-							 	<fmt:param value="${'#m'.concat(terms)}" />
-							</fmt:message>
-					</label>
-				</div>
-				</c:if>
-			</div>
-			<!-- /.col -->
-			<div class="col-xs-4">
-				<button type="submit" class="btn btn-primary btn-block btn-flat"><fmt:message key="box.register_button" bundle="${sys_messages}"/></button>
-			</div>
-			<!-- /.col -->
-		</div>
-	</form>
-
-    <a href="${plugins.ediacaran.front.admin_login_page}"><fmt:message key="box.login" bundle="${sys_messages}"/></a><br>
-
-  </div>
-  <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
- 
-	<ec:include uri="/includes/footer.jsp"/>
-
-	<script type="text/javascript" src="${plugins.ediacaran.front.web_path}/templates/default_template/front/register/js/register.js"                            charset="utf-8"></script>
-
-	
-</body>
-</html>
+    </ec:box-header>
+    <ec:box-body>
+	    <p class="box-msg"><fmt:message key="box.message" bundle="${sys_messages}"/></p>
+		<ec:form id="registerForm" action="${plugins.ediacaran.front.user_register_page}" method="post"
+		update="result">
+			<input type="hidden" name="redirectTo" value="${plugins.ediacaran.user.admin_context}">
+			<ed:row>
+				<ed:col classStyle="form-group has-feedback">
+					<ec:field-group>
+						<ec:textfield bundle="${sys_messages}" 
+							name="firstName" placeholder="#{box.first_name.placeholder}">
+							<ec:field-validator>
+								<ec:field-validator-rule name="notEmpty" message="Obrigatório"/>
+								<ec:field-validator-rule name="regexp" message="Inválido">
+									<ec:field-validator-param name="regexp" raw="true">$.AppContext.regexUtil.patterns().NAME_FORMAT</ec:field-validator-param>
+								</ec:field-validator-rule>
+								<ec:field-validator-rule name="stringLength" message="Inválido">
+										<ec:field-validator-param name="min">3</ec:field-validator-param>
+										<ec:field-validator-param name="max">60</ec:field-validator-param>
+								</ec:field-validator-rule>
+							</ec:field-validator>
+						</ec:textfield>
+						<ec:textfield bundle="${sys_messages}" 
+							name="lastName" placeholder="#{box.last_name.placeholder}">
+							<ec:field-validator>
+								<ec:field-validator-rule name="notEmpty" message="Obrigatório"/>
+								<ec:field-validator-rule name="regexp" message="Inválido">
+									<ec:field-validator-param name="regexp" raw="true">$.AppContext.regexUtil.patterns().NAME_FORMAT</ec:field-validator-param>
+								</ec:field-validator-rule>
+								<ec:field-validator-rule name="stringLength" message="Inválido">
+										<ec:field-validator-param name="min">3</ec:field-validator-param>
+										<ec:field-validator-param name="max">60</ec:field-validator-param>
+								</ec:field-validator-rule>
+							</ec:field-validator>
+						</ec:textfield>
+					</ec:field-group>
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col classStyle="form-group has-feedback">
+					<ec:textfield bundle="${sys_messages}" 
+							name="email" placeholder="#{box.email.placeholder}">
+						<ec:field-validator>
+							<ec:field-validator-rule name="notEmpty" message="Obrigatório"/>
+							<ec:field-validator-rule name="regexp" message="Inválido">
+								<ec:field-validator-param name="regexp" raw="true">$.AppContext.regexUtil.patterns().EMAIL</ec:field-validator-param>
+							</ec:field-validator-rule>
+						</ec:field-validator>
+					</ec:textfield>
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col classStyle="form-group has-feedback">
+					<ec:select name="country">
+						<ec:field-validator>
+							<ec:field-validator-rule name="notEmpty" message="Obrigatório"/>
+							<ec:field-validator-rule name="stringLength" message="Inválido">
+									<ec:field-validator-param name="min">3</ec:field-validator-param>
+									<ec:field-validator-param name="max">3</ec:field-validator-param>
+							</ec:field-validator-rule>
+						</ec:field-validator>
+						<ec:option value=""><fmt:message key="box.country" bundle="${sys_messages}"/></ec:option>
+						<c:forEach items="${Controller.getCountries(locale)}" var="country">
+							<ec:option value="${country.isoAlpha3}">${country.name}</ec:option>
+						</c:forEach>
+					</ec:select>
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col classStyle="form-group has-feedback">
+					<ec:passwordfield name="password">
+						<ec:field-validator>
+							<ec:field-validator-rule name="notEmpty" message="Obrigatório"/>
+							<ec:field-validator-rule name="stringLength" message="Inválido">
+									<ec:field-validator-param name="min">12</ec:field-validator-param>
+									<ec:field-validator-param name="max">128</ec:field-validator-param>
+							</ec:field-validator-rule>
+						</ec:field-validator>
+					</ec:passwordfield>
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col classStyle="form-group has-feedback">
+					<ec:passwordfield name="retypePassword">
+						<ec:field-validator>
+							<ec:field-validator-rule name="notEmpty" message="Obrigatório"/>
+							<ec:field-validator-rule name="identical" message="Inválido">
+								<ec:field-validator-param name="field">password</ec:field-validator-param>
+							</ec:field-validator-rule>
+						</ec:field-validator>
+					</ec:passwordfield>
+				</ed:col>
+			</ed:row>
+			<ed:row>
+				<ed:col size="8" classStyle="form-group has-feedback">
+					<c:set var="terms" value="${plugins.ediacaran.user.terms}"/>
+					<c:if test="${!empty terms && terms != ''}">
+						<fmt:message var="terms_label" key="box.terms" bundle="${sys_messages}">
+						 	<fmt:param value="${'#m'.concat(terms)}" />
+						</fmt:message>
+						<ec:checkbox label="${terms_label}" name="terms">
+							<ec:field-validator>
+								<ec:field-validator-rule name="notEmpty" message="Obrigatório"/>
+							</ec:field-validator>
+						</ec:checkbox>
+					</c:if>
+				</ed:col>
+				<ed:col size="4">
+					<ec:button bundle="${sys_messages}" actionType="submit" label="#{box.register_button}"/>
+				</ed:col>
+			</ed:row>
+		
+		</ec:form>
+    </ec:box-body>
+</ec:box>
