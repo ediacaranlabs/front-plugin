@@ -18,7 +18,7 @@ import javax.inject.Singleton;
 import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplate;
 import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplateType;
 import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
-import br.com.uoutec.community.ediacaran.system.i18n.LanguageRegistry;
+import br.com.uoutec.community.ediacaran.system.i18n.I18nRegistry;
 import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectTemplate;
@@ -34,7 +34,7 @@ public class PageManager {
 	public ObjectsTemplateManager objectsManager;
 
 	@Inject
-	private LanguageRegistry languageRegistry;
+	private I18nRegistry languageRegistry;
 	
 	public List<ObjectMetadata> list(String basePath, String locale){
 		return list(basePath, PluginLanguageUtils.toLocale(locale));

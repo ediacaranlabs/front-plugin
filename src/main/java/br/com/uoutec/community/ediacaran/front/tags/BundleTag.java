@@ -13,7 +13,7 @@ import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
-import br.com.uoutec.community.ediacaran.system.i18n.LanguageRegistry;
+import br.com.uoutec.community.ediacaran.system.i18n.I18nRegistry;
 import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
 import br.com.uoutec.ediacaran.core.plugins.PluginConfigurationMetadata;
 import br.com.uoutec.ediacaran.core.plugins.PluginType;
@@ -53,10 +53,10 @@ public class BundleTag extends SimpleTagSupport {
 		Locale currentLocale;
 		
     	if(basename == null) {
-			packageID = LanguageRegistry.TEMPLATE_PACKAGE + reqID;
+			packageID = I18nRegistry.TEMPLATE_PACKAGE + reqID;
     	}
     	else {
-    		packageID = LanguageRegistry.TEMPLATE_PACKAGE + "/" + basename;
+    		packageID = I18nRegistry.TEMPLATE_PACKAGE + "/" + basename;
     	}
     	
 		PageContext pageContext = (PageContext) getJspContext();  
@@ -69,7 +69,7 @@ public class BundleTag extends SimpleTagSupport {
     	}
     	
 		//MessageBundle lm = (MessageBundle)pageContext.getServletContext().getAttribute(Constants.MESSAGEBUNDLE);
-    	LanguageRegistry lm = EntityContextPlugin.getEntity(LanguageRegistry.class);
+    	I18nRegistry lm = EntityContextPlugin.getEntity(I18nRegistry.class);
     	
 		ResourceBundle value = lm.getResourceBundle(packageID, currentLocale);
 		

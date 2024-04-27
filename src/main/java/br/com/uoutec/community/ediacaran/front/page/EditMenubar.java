@@ -15,7 +15,7 @@ import javax.inject.Singleton;
 
 import br.com.uoutec.community.ediacaran.front.objects.MenubarObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
-import br.com.uoutec.community.ediacaran.system.i18n.LanguageRegistry;
+import br.com.uoutec.community.ediacaran.system.i18n.I18nRegistry;
 import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectsTemplateManager;
@@ -29,7 +29,7 @@ public class EditMenubar {
 	public ObjectsTemplateManager objectsManager;
 
 	@Inject
-	private LanguageRegistry languageRegistry;
+	private I18nRegistry languageRegistry;
 	
 	public List<ObjectMetadata> list(String basePath, String locale){
 		return list(basePath, PluginLanguageUtils.toLocale(locale));
