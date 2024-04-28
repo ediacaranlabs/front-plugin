@@ -156,6 +156,10 @@
 				</ed:col>
 			</ed:row>
 			<ed:row>
+				<ed:col size="12" id="result">
+				</ed:col>
+			</ed:row>
+			<ed:row>
 				<ed:col size="8" classStyle="form-group has-feedback">
 					<c:set var="terms" value="${plugins.ediacaran.user.terms}"/>
 					<c:if test="${!empty terms && terms != ''}">

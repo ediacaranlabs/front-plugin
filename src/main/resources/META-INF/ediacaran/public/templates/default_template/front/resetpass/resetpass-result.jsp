@@ -11,7 +11,7 @@
 	<script type="text/javascript">
 		$.AppContext.onload(
 			function (){
-				$.AppContext.plugins.community.ediacaran.user.setVisibleMessage(true)
+				$.AppContext.openLink("${empty refererResource? pageContext.request.contextPath.concat(plugins.front.admin_context) : refererResource }");
 			}
 		);
 	</script>
