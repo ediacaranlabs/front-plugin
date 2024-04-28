@@ -28,7 +28,8 @@
     <a href="#"><fmt:message key="box.title" bundle="${sys_messages}"/></a>
     </ec:box-header>
     <ec:box-body>
-	    <p id="msg_result" success="${empty exception}" class="box-msg">
+	    <p id="msg_result" class="box-msg">
+	    	<div style="display:none">>@web-result=${empty exception}</div>
 	    	<c:if test="${empty exception}">
 	    		<fmt:message key="box.success_msg" bundle="${sys_messages}"/>
 	    	</c:if>
