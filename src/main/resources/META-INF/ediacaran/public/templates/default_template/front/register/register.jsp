@@ -57,7 +57,14 @@
 <body class="hold-transition register-page">
 <ec:box>
 	<ec:box-header>
-    <a href="#"><fmt:message key="box.title" bundle="${sys_messages}"/></a>
+    <a href="#">
+		<c:if test="${empty plugins.ediacaran.front.image_logo}">
+			 <a href="#">${plugins.ediacaran.front.text_logo}</a>
+		</c:if>
+		<c:if test="${!empty plugins.ediacaran.front.image_logo}">
+			<ec:image src="${plugins.ediacaran.front.image_logo}"/>
+		</c:if>
+   	</a>
     </ec:box-header>
     <ec:box-body>
 	    <p class="box-msg"><fmt:message key="box.message" bundle="${sys_messages}"/></p>
@@ -181,3 +188,5 @@
 		</ec:form>
     </ec:box-body>
 </ec:box>
+</body>
+</html>

@@ -11,7 +11,7 @@
 	<script type="text/javascript">
 		$.AppContext.onload(
 			function (){
-				$.AppContext.plugins.community.ediacaran.user.setVisibleMessage(true)
+				$.AppContext.openLink("${plugins.ediacaran.user.success_register_uri}");
 			}
 		);
 	</script>

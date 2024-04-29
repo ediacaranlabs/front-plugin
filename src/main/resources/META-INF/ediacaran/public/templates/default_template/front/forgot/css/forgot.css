@@ -1,0 +1,66 @@
+.box {
+    width: 360px;
+    margin: 7% auto;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.box-header {
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 300;
+    border-bottom: 0px !important;
+}
+
+.box-header a {
+    color: #444;
+}
+
+.box-footer{
+	border-top: 0px !important;
+}
+
+.box-body{
+	background-color: #fff;	
+}
+
+.box-body .box-msg {
+    margin: 0;
+    text-align: center;
+    padding: 0 20px 20px 20px;
+}
+
+
+.forgot-page {
+    background: #d2d6de;
+}
+
+.forgot-box {
+    width: 360px;
+    margin: 7% auto;
+}
+
+.forgot-logo {
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 300;
+}
+
+.forgot-logo a {
+    color: #444;
+}
+
+.forgot-box-body {
+    background: #fff;
+    padding: 20px;
+    border-top: 0;
+    color: #666;
+}
+
+.forgot-box-msg {
+    margin: 0;
+    text-align: center;
+    padding: 0 20px 20px 20px;
+}
