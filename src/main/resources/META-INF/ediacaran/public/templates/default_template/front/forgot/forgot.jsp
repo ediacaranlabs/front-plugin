@@ -92,8 +92,27 @@
 						<ec:button align="right" bundle="${sys_messages}" actionType="submit" label="#{box.reset_button}"/>
 					</ed:col>
 				</ed:row>
-			
 			</ec:form>
+		<div id="success_result" style="display:none">
+	    	<ed:row>
+	    		<ed:col size="12">
+	    			<p class="box-msg">
+	    				<fmt:message key="box.success_msg" bundle="${sys_messages}"/>
+	    			</p>
+		    		<ec:alert style="success"><fmt:message key="box.success_msg_alert" bundle="${sys_messages}"/></ec:alert>
+	    		</ed:col>
+	    	</ed:row>
+	    	<ed:row>
+	    		<ed:col size="8"></ed:col>
+	    		<ed:col size="4">
+	    			<ec:button align="right" bundle="${sys_messages}" label="#{box.back_button}">
+	    				<ec:event type="click">
+	    					$.AppContext.openLink("${plugins.ediacaran.user.success_actions_uri}");
+	    				</ec:event>
+	    			</ec:button>
+	   			</ed:col>
+	    	</ed:row>
+		</div>
 	    </ec:box-body>
 	</ec:box>
 
