@@ -31,7 +31,7 @@
     </ec:box-header>
     <ec:box-body>
 	    <p class="box-msg"><fmt:message key="box.message" bundle="${sys_messages}"/></p>
-		<ec:form id="registerForm" action="${plugins.ediacaran.front.user_resetpass_page}" method="post"
+		<ec:form id="resetpassForm" action="${plugins.ediacaran.front.user_resetpass_page}" method="post"
 		update="result">
 			<input type="hidden" name="requestID" value="${requestID}">
 			<input type="hidden" name="gen" value="${gen}">
