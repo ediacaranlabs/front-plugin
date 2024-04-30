@@ -12,7 +12,7 @@
 		var resetpassForm = $.AppContext.utils.getById("resetpassForm");
 		resetpassForm.setVisible(false);
 
-		var successMsg = $.AppContext.utils.getById("success_msg");
+		var successMsg = $.AppContext.utils.getById("success_result");
 		successMsg.setVisible(true);
 	</script>
 </c:if>
