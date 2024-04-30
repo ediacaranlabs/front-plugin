@@ -89,7 +89,7 @@
 					<ed:col size="8">
 					</ed:col>
 					<ed:col size="4">
-						<ec:button bundle="${sys_messages}" actionType="submit" label="#{box.reset_button}"/>
+						<ec:button align="right" bundle="${sys_messages}" actionType="submit" label="#{box.reset_button}"/>
 					</ed:col>
 				</ed:row>
 			
