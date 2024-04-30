@@ -67,7 +67,8 @@
 					<ec:button bundle="${sys_messages}" actionType="submit" label="#{box.reset_button}"/>
 				</ed:col>
 			</ed:row>
-		
 		</ec:form>
+		
+		<h3 id="success_msg" style="display:none"><fmt:message key="box.message.success" bundle="${sys_messages}"/></h3>
     </ec:box-body>
 </ec:box>

@@ -9,10 +9,10 @@
 </c:if>
 <c:if test="${empty exception}">
 	<script type="text/javascript">
-		$.AppContext.onload(
-			function (){
-				$.AppContext.openLink("${plugins.ediacaran.user.success_actions_uri}");
-			}
-		);
+		var resetpassForm = $.AppContext.utils.getById("resetpassForm");
+		resetpassForm.setVisible(false);
+
+		var successMsg = $.AppContext.utils.getById("success_msg");
+		successMsg.setVisible(true);
 	</script>
 </c:if>

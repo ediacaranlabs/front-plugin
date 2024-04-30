@@ -25,17 +25,39 @@
 <body class="hold-transition register-page">
 <ec:box>
 	<ec:box-header>
-    <a href="#"><fmt:message key="box.title" bundle="${sys_messages}"/></a>
+    <a href="#">
+		<c:if test="${empty plugins.ediacaran.front.image_logo}">
+			 <a href="#">${plugins.ediacaran.front.text_logo}</a>
+		</c:if>
+		<c:if test="${!empty plugins.ediacaran.front.image_logo}">
+			<ec:image src="${plugins.ediacaran.front.image_logo}"/>
+		</c:if>
+    </a>
     </ec:box-header>
     <ec:box-body>
-	    <p id="msg_result" class="box-msg">
-	    	<div style="display:none">>@web-result=${empty exception}</div>
-	    	<c:if test="${empty exception}">
-	    		<fmt:message key="box.success_msg" bundle="${sys_messages}"/>
-	    	</c:if>
-	    	<c:if test="${!empty exception}">
-	    		${exception.message}
-	    	</c:if>
-    	</p>
+    	<ed:row>
+    		<ed:col size="12">
+			    <p class="box-msg"><fmt:message key="box.message" bundle="${sys_messages}"/></p>
+			    <p id="msg_result" class="box-msg">
+			    	<div style="display:none">>@web-result=${empty exception}</div>
+			    	<c:if test="${empty exception}">
+			    		<ec:alert style="success"><fmt:message key="box.success_msg" bundle="${sys_messages}"/></ec:alert>
+			    	</c:if>
+			    	<c:if test="${!empty exception}">
+			    		<ec:alert style="danger">${exception.message}</ec:alert>
+			    	</c:if>
+		    	</p>
+    		</ed:col>
+    	</ed:row>
+    	<ed:row>
+    		<ed:col size="8"></ed:col>
+    		<ed:col size="4">
+    			<ec:button align="right" bundle="${sys_messages}" label="#{box.back_button}">
+    				<ec:event type="click">
+    					$.AppContext.openLink("${plugins.ediacaran.user.success_actions_uri}");
+    				</ec:event>
+    			</ec:button>
+   			</ed:col>
+    	</ed:row>
     </ec:box-body>
 </ec:box>
