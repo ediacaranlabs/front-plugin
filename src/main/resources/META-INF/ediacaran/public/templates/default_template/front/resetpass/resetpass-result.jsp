@@ -11,7 +11,7 @@
 	<script type="text/javascript">
 		$.AppContext.onload(
 			function (){
-				$.AppContext.openLink("${empty refererResource? pageContext.request.contextPath.concat(plugins.front.admin_context) : refererResource }");
+				$.AppContext.openLink("${plugins.ediacaran.user.success_actions_uri}");
 			}
 		);
 	</script>

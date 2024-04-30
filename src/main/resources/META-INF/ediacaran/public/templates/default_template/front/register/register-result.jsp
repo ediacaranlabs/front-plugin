@@ -11,7 +11,7 @@
 	<script type="text/javascript">
 		$.AppContext.onload(
 			function (){
-				$.AppContext.openLink("${plugins.ediacaran.user.success_register_uri}");
+				$.AppContext.openLink("${plugins.ediacaran.user.success_actions_uri}");
 			}
 		);
 	</script>
