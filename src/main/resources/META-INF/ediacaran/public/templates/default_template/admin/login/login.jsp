@@ -32,7 +32,7 @@
     <ec:box-body>
 	    <p class="box-msg"><fmt:message key="box.message" bundle="${sys_messages}"/></p>
 <%--	<ec:form action="${plugins.ediacaran.front.admin_login_page}" method="POST" update="result" acceptCharset="UTF-8"> --%>
-	<ec:form action="${plugins.ediacaran.front.admin_login_page}" method="POST" update="result" acceptCharset="UTF-8">
+	<ec:form id="authForm" action="${plugins.ediacaran.front.admin_login_page}" method="POST" update="result" acceptCharset="UTF-8">
 	      <input type="hidden" name="redirectTo" value="${plugins.ediacaran.front.landing_page}">
 	      <ed:row>
       		<ed:col>
