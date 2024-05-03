@@ -69,8 +69,5 @@
     </ec:box-body>
 </ec:box>
 
-<script type="text/javascript" src="/plugins/ediacaran/front/default_template/admin/login/js/language/${locale}/login.js"></script>
-<script type="text/javascript" src="/plugins/ediacaran/front/default_template/admin/login/js/login.js"></script>
-
 </body>
 </html>

@@ -2,6 +2,8 @@ if (typeof jQuery === "undefined") {
   throw new Error("Application requires jQuery");
 }
 
+$ = {};
+
 $.AppContext = {};
 
 $.AppContext.pages = {};
