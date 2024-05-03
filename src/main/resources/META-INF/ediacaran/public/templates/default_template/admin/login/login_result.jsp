@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"                  prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"                  prefix="c"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/components" prefix="ec"%>
 <c:if test="${!empty exception}">
 	<ec:alert style="danger">

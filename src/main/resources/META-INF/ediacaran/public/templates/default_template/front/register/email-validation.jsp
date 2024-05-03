@@ -39,12 +39,13 @@
     		<ed:col size="12">
 			    <p class="box-msg"><fmt:message key="box.message" bundle="${sys_messages}"/></p>
 			    <p id="msg_result" class="box-msg">
-			    	<div style="display:none">>@web-result=${empty exception}</div>
 			    	<c:if test="${empty exception}">
-			    		<ec:alert style="success"><fmt:message key="box.success_msg" bundle="${sys_messages}"/></ec:alert>
+			    		<ec:alert style="success">
+			    			<fmt:message key="box.success_msg" bundle="${sys_messages}"/>
+			    		</ec:alert>
 			    	</c:if>
 			    	<c:if test="${!empty exception}">
-			    		<ec:alert style="danger">${exception.message}</ec:alert>
+			    		<ec:alert style="danger"><div id="exceptionMessage">${exception.message}</div></ec:alert>
 			    	</c:if>
 		    	</p>
     		</ed:col>

@@ -1,11 +1,9 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div style="display:none">>@web-result=${empty exception}</div>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"                   prefix="c"%>
+<%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/components" prefix="ec"%>
 <c:if test="${!empty exception}">
-	<div class="alert alert-danger alert-dismissable col-xs-12">
-		<button type="button" class="close" data-dismiss="alert"
-			aria-hidden="true">&times;</button>
-		${exception.message}
-	</div>				
+	<ec:alert style="danger">
+		<div id="exceptionMessage">${exception.message}</div>
+	</ec:alert>
 </c:if>
 <c:if test="${empty exception}">
 	<script type="text/javascript">
