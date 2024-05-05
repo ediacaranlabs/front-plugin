@@ -68,12 +68,13 @@ public class LanguageRequestListener implements EdiacaranEventListener{
 			Locale locale = null;
 			Cookie[] cookies = request.getCookies();
 			
-			for(Cookie c: cookies) {
-				if("app-locale".equals(c.getName())){
-					langVar = c.getValue();
+			if(cookies != null) {
+				for(Cookie c: cookies) {
+					if("app-locale".equals(c.getName())){
+						langVar = c.getValue();
+					}
 				}
 			}
-			
 			if(langVar != null) {
 				locale = getLocale(langVar);
 				if(locale != null) {
