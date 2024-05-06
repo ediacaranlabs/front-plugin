@@ -32,6 +32,8 @@ import br.com.uoutec.community.ediacaran.system.repository.ObjectsTemplateManage
 import br.com.uoutec.community.ediacaran.system.repository.ObjectsTemplateManagerDriver;
 import br.com.uoutec.ediacaran.core.AbstractPlugin;
 import br.com.uoutec.ediacaran.core.EdiacaranListenerManager;
+import br.com.uoutec.ediacaran.core.VarParser;
+import br.com.uoutec.ediacaran.core.VarParserConfiguration;
 import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
 import br.com.uoutec.entity.registry.RegistryException;
 
@@ -66,10 +68,18 @@ public class PluginInstaller
 			installListeners();
 			installThemes();
 			installI18n();
+			installVarParser();
 			return null;
 		});
 	}
 
+	private void installVarParser() {
+		VarParserConfiguration vpc = 
+				(VarParserConfiguration) EntityContextPlugin.getEntity(VarParser.class);
+		
+		vpc.registerVarResolver("theme", new ThemeVarResolver());
+	}
+	
 	private void installI18n() throws VfsException, IOException, ReflectiveOperationException {
 		Plugini18nManager pi18n = EntityContextPlugin.getEntity(Plugini18nManager.class);
 		pi18n.registerLanguages();
@@ -178,10 +188,18 @@ public class PluginInstaller
 			uninstallMenu();
 			uninstallSecurityConfig();
 			uninstallListeners();
+			uninstallVarParser();
 			return null;
 		});
 	}
 
+	private void uninstallVarParser() {
+		VarParserConfiguration vpc = 
+				(VarParserConfiguration) EntityContextPlugin.getEntity(VarParser.class);
+		
+		vpc.unregisterVarResolver("theme");
+	}
+	
 	private void uninstallPageTemplates() {
 	}
 	
