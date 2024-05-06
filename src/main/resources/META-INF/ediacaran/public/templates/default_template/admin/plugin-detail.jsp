@@ -82,14 +82,14 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 										<ec:label>${property.name}</ec:label><br>
 										<c:set var="opt_selected" value="${vars.config.getRawValue(property.code)}"/>
 										<c:forEach items="${property.options}" var="opts">
-											<ec:radio inline="true" name="config.${property.code}" label="${opts.description}" value="${opts.value}" selected="${opts.value == opt_selected}"/>
+											<ec:radio inline="true" name="config.${property.code}" label="${opts.description}" value="${opts.value}" selected="${opts.value == opt_selected}"/><br>
 										</c:forEach>
 									</c:when>
 									<c:when test="${property.type == 'MULTISELECT_LIST'}">
 										<ec:label>${property.name}</ec:label><br>
 										<c:forEach items="${property.options}" var="opts">
 											<ec:checkbox inline="true" name="config.${property.code}" label="${opts.description}" value="${opts.value}" 
-												selected="${vars.config.containsRawValue(property.code, opts.value)}"/>
+												selected="${vars.config.containsRawValue(property.code, opts.value)}"/><br>
 										</c:forEach>
 									</c:when>
 								</c:choose>

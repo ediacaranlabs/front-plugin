@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -123,7 +122,7 @@ public class MenubarController {
 			}
 			
 			Map<Locale, String> langNames = editMenubar.getSupportedLocales();
-			Set<Role> roles = securityRegistry.getAll();
+			List<Role> roles = securityRegistry.getAllRoles();
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", path);
@@ -204,7 +203,7 @@ public class MenubarController {
 		try {
 			
 			Map<Locale, String> langNames = editMenubar.getSupportedLocales();
-			Set<Role> roles = securityRegistry.getAll();
+			List<Role> roles = securityRegistry.getAllRoles();
 			
 			Map<String,Object> md = new HashMap<>();
 			
