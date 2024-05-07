@@ -113,7 +113,7 @@ public class AdminPubResource {
 				mpc.setStrings(e.getKey(), e.getValue());
 			}
 			
-			pluginConfigurationManager.savePluginMetadata(mpc);
+			pluginConfigurationManager.saveAllPluginMetadata(mpc);
 			
 		}
 
