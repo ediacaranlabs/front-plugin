@@ -58,7 +58,10 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 										<c:if test="${property.protectedValue}">
 											<ec:passwordfield label="${property.name}" name="config.${property.code}" value="************"/>
 										</c:if>
-										<c:if test="${!property.protectedValue}">
+										<c:if test="${property.rows > 0 && !property.protectedValue}">
+											<ec:textarea rows="${property.rows}" label="${property.name}" name="config.${property.code}">${vars.config.getRawValue(property.code)}</ec:textarea>
+										</c:if>
+										<c:if test="${property.rows <= 0 && !property.protectedValue}">
 											<ec:textfield label="${property.name}" name="config.${property.code}" value="${vars.config.getRawValue(property.code)}"/>
 										</c:if>
 									</c:when>
