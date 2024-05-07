@@ -1,9 +1,11 @@
 package br.com.uoutec.community.ediacaran.front.theme;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -32,6 +34,12 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	public ThemeRegistryImp(PluginType pluginData) {
 		this.themes = new ConcurrentHashMap<String, ThemeEntry>();
 		this.pluginData = pluginData;
+	}
+	
+	public List<String> getThemeNames(){
+		return Collections
+				.unmodifiableList(
+						themes.keySet().stream().collect(Collectors.toList()));
 	}
 	
 	@Override
