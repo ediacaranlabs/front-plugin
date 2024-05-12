@@ -23,7 +23,8 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 		this.data = data;
 	}
 
-	public T rebuild(T instance, boolean reload, boolean override, boolean validate, boolean direct) throws Throwable {
+	public T rebuild(T instance, boolean reload, boolean override, 
+			boolean validate, boolean direct) throws Throwable {
 		
 		preRebuild(instance, reload, override, validate);
 		
@@ -41,16 +42,24 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	protected T createInstance(T instance, boolean reload, boolean override, boolean validate) throws Throwable {
+	protected T createInstance(T instance, boolean reload, 
+			boolean override, boolean validate) throws Throwable {
 
 		String type = getCodeType();
 		
-		EntityInheritanceManager entityInheritanceUtil = EntityContextPlugin.getEntity(EntityInheritanceManager.class);
-		Map<String, Class<?>> clazzMap = entityInheritanceUtil.getMap(getGenericType());
+		EntityInheritanceManager entityInheritanceUtil = 
+				EntityContextPlugin.getEntity(EntityInheritanceManager.class);
+		
+		Map<String, Class<?>> clazzMap = 
+				entityInheritanceUtil.getMap(getGenericType());
 		
 		Class<? extends GenericPubEntity> ptype;
 		
-		ptype = (Class<? extends GenericPubEntity>) (clazzMap == null? getGenericType() : (Class<? extends GenericPubEntity>) clazzMap.get(type));
+		ptype = (Class<? extends GenericPubEntity>)(
+			clazzMap == null || type == null? 
+				getGenericType() : 
+				clazzMap.get(type)
+		);
 
 		GenericPubEntity p;
 		
@@ -64,8 +73,6 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 		p.setData(data);
 		p.loadProperties(this);
 		return (T) p.rebuild(instance, reload, override, validate, true);
-		//return (T) p.rebuild(instance, reload, override, validate);
-		
 	}
 
 	protected abstract String getCodeType();
