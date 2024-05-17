@@ -153,19 +153,19 @@ public class PluginInstaller
 		
 		SecurityRegistry securityRegistry = EntityContextPlugin.getEntity(SecurityRegistry.class);
 		
-		securityRegistry.registerAuthorization(new Authorization("CONTENT","Content","Content Manager"));
+		securityRegistry.registerAuthorization(new Authorization("CONTENT","Content - Manager","Content Manager"));
 		
-		securityRegistry.registerAuthorization(new Authorization("PAGES"  ,"Pages","Page Manager"),  "CONTENT");
-		securityRegistry.registerAuthorization(new Authorization("LIST"   ,"List","List Pages"),     "CONTENT", "PAGES");
-		securityRegistry.registerAuthorization(new Authorization("SAVE"   ,"Save","Save Pages"),     "CONTENT", "PAGES");
-		securityRegistry.registerAuthorization(new Authorization("UPDATE" ,"Update","Update Pages"), "CONTENT", "PAGES");
-		securityRegistry.registerAuthorization(new Authorization("DELETE" ,"Delete","Delete Pages"), "CONTENT", "PAGES");
+		securityRegistry.registerAuthorization(new Authorization("PAGES"  ,"Page - Edit","Page Manager"),  "CONTENT");
+		securityRegistry.registerAuthorization(new Authorization("LIST"   ,"Page - List","List Pages"),     "CONTENT", "PAGES");
+		securityRegistry.registerAuthorization(new Authorization("SAVE"   ,"Page - Save","Save Pages"),     "CONTENT", "PAGES");
+		securityRegistry.registerAuthorization(new Authorization("UPDATE" ,"Page - Update","Update Pages"), "CONTENT", "PAGES");
+		securityRegistry.registerAuthorization(new Authorization("DELETE" ,"Page - Delete","Delete Pages"), "CONTENT", "PAGES");
 		
-		securityRegistry.registerAuthorization(new Authorization("MENUBAR","Menubar","Menubar Manager"), "CONTENT");
-		securityRegistry.registerAuthorization(new Authorization("LIST"   ,"List","List Menubar"),       "CONTENT", "MENUBAR");
-		securityRegistry.registerAuthorization(new Authorization("SAVE"   ,"Save","Save Menubar"),       "CONTENT", "MENUBAR");
-		securityRegistry.registerAuthorization(new Authorization("UPDATE" ,"Update","Update Menubar"),   "CONTENT", "MENUBAR");
-		securityRegistry.registerAuthorization(new Authorization("DELETE" ,"Delete","Delete Menubar"),   "CONTENT", "MENUBAR");
+		securityRegistry.registerAuthorization(new Authorization("MENUBAR","Menubar - Manager","Menubar Manager"), "CONTENT");
+		securityRegistry.registerAuthorization(new Authorization("LIST"   ,"Menubar - List","List Menubar"),       "CONTENT", "MENUBAR");
+		securityRegistry.registerAuthorization(new Authorization("SAVE"   ,"Menubar - Save","Save Menubar"),       "CONTENT", "MENUBAR");
+		securityRegistry.registerAuthorization(new Authorization("UPDATE" ,"Menubar - Update","Update Menubar"),   "CONTENT", "MENUBAR");
+		securityRegistry.registerAuthorization(new Authorization("DELETE" ,"Menubar - Delete","Delete Menubar"),   "CONTENT", "MENUBAR");
 		
 		WebSecurityManagerPlugin webSecurityManagerPlugin = 
 				EntityContextPlugin.getEntity(WebSecurityManagerPlugin.class);
