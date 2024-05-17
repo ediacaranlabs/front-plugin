@@ -151,8 +151,8 @@ $.AppContext.dataTable.apply = function($id, $template){
 
 	  	var $dta = $("#" + $id + " div[class*=dataTablePagination]");
     	
-	  	$dataTableObj.addClass("disabledDiv");
-	  	
+	  	$dataTableObj.addClass("disabled");
+
     	$.AppContext.utils.postJson(
     			$resource, 
     			$request,
@@ -164,11 +164,11 @@ $.AppContext.dataTable.apply = function($id, $template){
 						$(this).addClass("dataTableRow");
 					});
 
-			    	$e.find("div[class*=dataTableRow]").each(function() {
-		    			var $dta = $(this);
-		    			$dta.remove();
-		    		});
-					
+			    	$e.find("[class*=dataTableRow]").each(function() {
+						var $dta = $(this);
+						$dta.remove();
+					});
+
     				$tag.insertBefore($dta);
     				$.AppContext.utils.enableActions($id);
 				  	$.AppContext.dataTable.applyPages(
@@ -180,7 +180,7 @@ $.AppContext.dataTable.apply = function($id, $template){
 				  	$dataTableObj.removeClass("disabled");
     			},
     			function ($response){
-    				$dataTableObj.removeClass("disabled");
+				  	$dataTableObj.removeClass("disabled");
     			}
 		);
 	});				    		

@@ -1,7 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.components;
 
-import java.io.IOException;
-import java.io.Writer;
 import java.util.Map;
 
 public class DataResultComponent extends Component {
@@ -14,11 +12,18 @@ public class DataResultComponent extends Component {
 		return TEMPLATE;
 	}
 
+	protected void afterPrepareVars(Map<String, Object> vars) {
+		String from = (String) vars.get("from");
+		vars.put("from", getFrom(from));
+	}
+
+	/*
 	protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
 		String from = (String) vars.get("from");
 		vars.put("from", getFrom(from));
     }
+	*/
 	
 	protected String getFrom(String from) {
 		

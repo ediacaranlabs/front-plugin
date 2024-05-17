@@ -16,6 +16,11 @@ body {
     background-color: #fff;
 }
 
+.disabled {
+	pointer-events: none;
+	opacity: 0.4;
+}
+
 select[readonly] {
   background: #eee;
   pointer-events: none;
