@@ -18,8 +18,7 @@ import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBarManagerException;
 import br.com.uoutec.community.ediacaran.front.security.pub.WebSecurityManagerPlugin;
 import br.com.uoutec.community.ediacaran.front.theme.PluginThemesManager;
-import br.com.uoutec.community.ediacaran.security.Authorization;
-import br.com.uoutec.community.ediacaran.security.SecurityRegistry;
+import br.com.uoutec.community.ediacaran.security.AuthorizationManager;
 import br.com.uoutec.community.ediacaran.system.i18n.Plugini18nManager;
 import br.com.uoutec.community.ediacaran.system.repository.FileManager;
 import br.com.uoutec.community.ediacaran.system.repository.FileObjectsManagerDriver;
@@ -151,21 +150,21 @@ public class PluginInstaller
 	
 	private void installSecurityConfig() throws RegistryException {
 		
-		SecurityRegistry securityRegistry = EntityContextPlugin.getEntity(SecurityRegistry.class);
+		AuthorizationManager am = EntityContextPlugin.getEntity(AuthorizationManager.class);
 		
-		securityRegistry.registerAuthorization(new Authorization("CONTENT","Content - Manager","Content Manager"));
+		am.registerAuthorization("CONTENT", "Content - Manager", "Content Manager", null);
 		
-		securityRegistry.registerAuthorization(new Authorization("PAGES"  ,"Page - Edit","Page Manager"),  "CONTENT");
-		securityRegistry.registerAuthorization(new Authorization("LIST"   ,"Page - List","List Pages"),     "CONTENT", "PAGES");
-		securityRegistry.registerAuthorization(new Authorization("SAVE"   ,"Page - Save","Save Pages"),     "CONTENT", "PAGES");
-		securityRegistry.registerAuthorization(new Authorization("UPDATE" ,"Page - Update","Update Pages"), "CONTENT", "PAGES");
-		securityRegistry.registerAuthorization(new Authorization("DELETE" ,"Page - Delete","Delete Pages"), "CONTENT", "PAGES");
+		am.registerAuthorization("CONTENT:PAGES",			"Page - Edit",		"Page Manager", null);
+		am.registerAuthorization("CONTENT:PAGES:LIST",		"Page - List",		"List Pages", 	null);
+		am.registerAuthorization("CONTENT:PAGES:SAVE",		"Page - Save",		"Save Pages", 	null);
+		am.registerAuthorization("CONTENT:PAGES:UPDATE",	"Page - Update",	"Update Pages", null);
+		am.registerAuthorization("CONTENT:PAGES:DELETE",	"Page - Delete",	"Delete Pages", null);
 		
-		securityRegistry.registerAuthorization(new Authorization("MENUBAR","Menubar - Manager","Menubar Manager"), "CONTENT");
-		securityRegistry.registerAuthorization(new Authorization("LIST"   ,"Menubar - List","List Menubar"),       "CONTENT", "MENUBAR");
-		securityRegistry.registerAuthorization(new Authorization("SAVE"   ,"Menubar - Save","Save Menubar"),       "CONTENT", "MENUBAR");
-		securityRegistry.registerAuthorization(new Authorization("UPDATE" ,"Menubar - Update","Update Menubar"),   "CONTENT", "MENUBAR");
-		securityRegistry.registerAuthorization(new Authorization("DELETE" ,"Menubar - Delete","Delete Menubar"),   "CONTENT", "MENUBAR");
+		am.registerAuthorization("CONTENT:MENUBAR",			"Menubar - Manager","Menubar Manager", 	null);
+		am.registerAuthorization("CONTENT:MENUBAR:LIST",	"Menubar - List","List Menubar", 		null);
+		am.registerAuthorization("CONTENT:MENUBAR:SAVE",	"Menubar - Save","Save Menubar", 		null);
+		am.registerAuthorization("CONTENT:MENUBAR:UPDATE",	"Menubar - Update","Update Menubar", 	null);
+		am.registerAuthorization("CONTENT:MENUBAR:DELETE",	"Menubar - Delete","Delete Menubar", 	null);
 		
 		WebSecurityManagerPlugin webSecurityManagerPlugin = 
 				EntityContextPlugin.getEntity(WebSecurityManagerPlugin.class);
@@ -204,8 +203,8 @@ public class PluginInstaller
 	}
 	
 	private void uninstallSecurityConfig() {
-		SecurityRegistry securityRegistry = EntityContextPlugin.getEntity(SecurityRegistry.class);
-		securityRegistry.unregisterAuthorization("CONTENT");
+		AuthorizationManager am = EntityContextPlugin.getEntity(AuthorizationManager.class);
+		am.unregisterAuthorization("CONTENT");
 	}
 	
 	public void uninstallMenu() throws Throwable {

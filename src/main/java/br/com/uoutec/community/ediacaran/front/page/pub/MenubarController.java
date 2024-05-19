@@ -35,9 +35,9 @@ import br.com.uoutec.community.ediacaran.front.page.EditMenubar;
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
+import br.com.uoutec.community.ediacaran.security.AuthorizationManager;
 import br.com.uoutec.community.ediacaran.security.RequiresPermissions;
 import br.com.uoutec.community.ediacaran.security.Role;
-import br.com.uoutec.community.ediacaran.security.SecurityRegistry;
 import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 import br.com.uoutec.pub.entity.InvalidRequestException;
@@ -57,7 +57,7 @@ public class MenubarController {
 
 	@Transient
 	@Inject
-	private SecurityRegistry securityRegistry;
+	private AuthorizationManager authorizationManager;
 	
 	@Action("/")
 	@Result("itens")
@@ -122,7 +122,7 @@ public class MenubarController {
 			}
 			
 			Map<Locale, String> langNames = editMenubar.getSupportedLocales();
-			List<Role> roles = securityRegistry.getAllRoles();
+			List<Role> roles = authorizationManager.getAllRoles();
 			
 			Map<String,Object> md = new HashMap<>();
 			md.put("path", path);
@@ -196,14 +196,14 @@ public class MenubarController {
 	
 	@Action("/new-menu")
 	@RequestMethod(RequestMethodTypes.GET)
-	@RequiresPermissions("CONTENT:MENUBAR:NEW-MENU")
+	@RequiresPermissions("CONTENT:MENUBAR:NEW_MENU")
 	public WebResultAction newMenu(
 			WebResultAction webResult){
 		
 		try {
 			
 			Map<Locale, String> langNames = editMenubar.getSupportedLocales();
-			List<Role> roles = securityRegistry.getAllRoles();
+			List<Role> roles = authorizationManager.getAllRoles();
 			
 			Map<String,Object> md = new HashMap<>();
 			
