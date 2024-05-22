@@ -16,6 +16,7 @@ import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBarManagerException;
+import br.com.uoutec.community.ediacaran.front.security.pub.AuthenticationMethodBuilder;
 import br.com.uoutec.community.ediacaran.front.security.pub.WebSecurityManagerPlugin;
 import br.com.uoutec.community.ediacaran.front.theme.PluginThemesManager;
 import br.com.uoutec.community.ediacaran.security.AuthorizationManager;
@@ -175,7 +176,9 @@ public class PluginInstaller
 				.addRole("user")
 			.addConstraint("/admin/*")
 				.addRole("user")
-			.form("/login", "/login?error=true");
+			.form()
+				.setOption(AuthenticationMethodBuilder.LOGIN_PAGE, "/login")
+				.setOption(AuthenticationMethodBuilder.ERROR_PAGE, "/login?error=true");
 		
 	}
 	
