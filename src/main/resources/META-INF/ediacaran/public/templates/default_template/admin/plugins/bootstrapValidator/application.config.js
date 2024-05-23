@@ -1,4 +1,7 @@
-$.fn.bootstrapValidator.DEFAULT_OPTIONS.excluded = [];
+$.fn.bootstrapValidator.DEFAULT_OPTIONS.excluded = [function($field, $validator) {
+	$field = $('#' + $field.attr("id"));
+    return $field.length == 0;
+}];
 
 $.AppContext.validator = {
 		
@@ -31,6 +34,7 @@ $.AppContext.validator = {
 			
 			var validator = this.createValidatorField(rules);
 			
+			$('#' + rules.form).bootstrapValidator('removeField', rules.field);	
 			$('#' + rules.form).bootstrapValidator('addField', rules.field, validator);	
 		},
 		
