@@ -153,28 +153,34 @@ public class PluginInstaller
 		
 		AuthorizationManager am = EntityContextPlugin.getEntity(AuthorizationManager.class);
 		
-		am.registerAuthorization("CONTENT", "Content - Manager", "Content Manager", null);
-		
-		am.registerAuthorization("CONTENT:PAGES",			"Page - Edit",		"Page Manager", null);
+		am.registerAuthorization("CONTENT", 				"Content - Manager","Content Manager", null);
+		am.registerAuthorization("CONTENT:PAGES",			"Page - Manager",	"Page Manager", null);
 		am.registerAuthorization("CONTENT:PAGES:LIST",		"Page - List",		"List Pages", 	null);
 		am.registerAuthorization("CONTENT:PAGES:SAVE",		"Page - Save",		"Save Pages", 	null);
 		am.registerAuthorization("CONTENT:PAGES:UPDATE",	"Page - Update",	"Update Pages", null);
 		am.registerAuthorization("CONTENT:PAGES:DELETE",	"Page - Delete",	"Delete Pages", null);
 		
 		am.registerAuthorization("CONTENT:MENUBAR",			"Menubar - Manager","Menubar Manager", 	null);
-		am.registerAuthorization("CONTENT:MENUBAR:LIST",	"Menubar - List","List Menubar", 		null);
-		am.registerAuthorization("CONTENT:MENUBAR:SAVE",	"Menubar - Save","Save Menubar", 		null);
-		am.registerAuthorization("CONTENT:MENUBAR:UPDATE",	"Menubar - Update","Update Menubar", 	null);
-		am.registerAuthorization("CONTENT:MENUBAR:DELETE",	"Menubar - Delete","Delete Menubar", 	null);
+		am.registerAuthorization("CONTENT:MENUBAR:LIST",	"Menubar - List",	"List Menubar", 	null);
+		am.registerAuthorization("CONTENT:MENUBAR:SAVE",	"Menubar - Save",	"Save Menubar", 	null);
+		am.registerAuthorization("CONTENT:MENUBAR:UPDATE",	"Menubar - Update",	"Update Menubar", 	null);
+		am.registerAuthorization("CONTENT:MENUBAR:DELETE",	"Menubar - Delete",	"Delete Menubar", 	null);
 		
 		WebSecurityManagerPlugin webSecurityManagerPlugin = 
 				EntityContextPlugin.getEntity(WebSecurityManagerPlugin.class);
 	
+		VarParser varParser = EntityContextPlugin.getEntity(VarParser.class);
+		
 		webSecurityManagerPlugin
-			.addConstraint("/admin/manager/*")
+			.addConstraint(varParser.getValue("${plugins.ediacaran.front.manager_context}/*"))
+				.addRole("manager")
+			.addConstraint(varParser.getValue("/templates/default_template${plugins.ediacaran.front.manager_context}/*"))
+				.addRole("manager")
+			.addConstraint(varParser.getValue("${plugins.ediacaran.front.admin_context}/*"))
 				.addRole("manager")
 				.addRole("user")
-			.addConstraint("/admin/*")
+			.addConstraint(varParser.getValue("/templates/default_template${plugins.ediacaran.front.admin_context}/*"))
+				.addRole("manager")
 				.addRole("user")
 			.form()
 				.setOption(AuthenticationMethodBuilder.LOGIN_PAGE, "/login")
