@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
@@ -28,6 +29,8 @@ import br.com.uoutec.community.ediacaran.front.theme.Theme;
 )
 public class IncludeTag extends SimpleTagSupport {
 	
+	private Boolean resolved;
+	
 	private String uri;
 	
 	public IncludeTag() {
@@ -35,26 +38,35 @@ public class IncludeTag extends SimpleTagSupport {
 
     public void doTag() throws JspException, IOException {
     	
-    	Component tagComponent = new Component();
-    	tagComponent.setPageContext((PageContext) getJspContext());
+    	String path;
+    	ServletContext servletContext;
+		PageContext pageContext = (PageContext) getJspContext();
     	
-    	PageContext pageContext = (PageContext) getJspContext();
-    	Theme theme             = tagComponent.getTheme();
-    	String packageName      = tagComponent.getPackageTheme();
-    	
-    	String path = theme.getTemplate(packageName) + uri;
-    	
-    	ServletContext servletContext = pageContext.getServletContext();
-    	
-    	String currentContext = servletContext.getContextPath().toLowerCase();
-    	String context = theme.getContext();
-    	String themeContext = context == null? null : context.toLowerCase();
-    	
-    	if(themeContext != null && !currentContext.equals(themeContext)) {
-    		servletContext = servletContext.getContext(context);
+    	if(resolved != null && resolved.booleanValue()) {
+    		path = uri;
+    		servletContext = pageContext.getServletContext();
+    	}
+    	else {
+	    	Component tagComponent = new Component();
+	    	tagComponent.setPageContext((PageContext) getJspContext());
+	    	
+	    	Theme theme             = tagComponent.getTheme();
+	    	String packageName      = tagComponent.getPackageTheme();
+	    	
+	    	path = theme.getTemplate(packageName) + uri;
+	    	servletContext = pageContext.getServletContext();
+	    	pageContext = (PageContext) getJspContext();
+	    	
+	    	String currentContext = servletContext.getContextPath().toLowerCase();
+	    	String context = theme.getContext();
+	    	String themeContext = context == null? null : context.toLowerCase();
+	    	
+	    	if(themeContext != null && !currentContext.equals(themeContext)) {
+	    		servletContext = servletContext.getContext(context);
+	    	}
     	}
     	
-    	ImportResponseWrapper irw = new ImportResponseWrapper(pageContext); 
+    	ImportResponseWrapper irw = new ImportResponseWrapper(pageContext, getJspContext().getOut()); 
     	
     	try {
     		boolean newContext = !servletContext.equals(pageContext.getServletContext());
@@ -86,6 +98,15 @@ public class IncludeTag extends SimpleTagSupport {
 		this.uri = uri;
 	}
 
+	public Boolean getResolved() {
+		return resolved;
+	}
+
+	@TagAttribute
+	public void setResolved(Boolean resolved) {
+		this.resolved = resolved;
+	}
+
 	private class ImportResponseWrapper extends HttpServletResponseWrapper { 
 		 
 		 private ServletOutputStream sos; 
@@ -94,18 +115,21 @@ public class IncludeTag extends SimpleTagSupport {
 		 
 		 private PageContext pageContext; 
 		  
+		 private JspWriter writter;
+		 
 		 //************************************************************ 
 		 // Constructor and methods 
 		 
 		 /** Constructs a new ImportResponseWrapper. */ 
-		 public ImportResponseWrapper(PageContext pc) { 
+		 public ImportResponseWrapper(PageContext pc, JspWriter writter) { 
 			 super((HttpServletResponse)pc.getResponse()); 
 		     this.pageContext = pc;
+		     this.writter = writter;
 		     this.sos = new ServletOutputStream() {
 				
 				@Override
 				public void write(int b) throws IOException {
-					pageContext.getOut().write(b);
+					ImportResponseWrapper.this.writter.write(b);
 				}
 
 				@Override

@@ -46,7 +46,25 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>bundle</name>
+                    <required>false</required>
+                    <type>javax.servlet.jsp.jstl.fmt.LocalizationContext</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>style</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -64,25 +82,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>id</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>bundle</name>
-                    <required>false</required>
-                    <type>javax.servlet.jsp.jstl.fmt.LocalizationContext</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>align</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -100,7 +100,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>id</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -121,7 +121,25 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>bundle</name>
+                    <required>false</required>
+                    <type>javax.servlet.jsp.jstl.fmt.LocalizationContext</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>style</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -139,25 +157,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>id</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>bundle</name>
-                    <required>false</required>
-                    <type>javax.servlet.jsp.jstl.fmt.LocalizationContext</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>align</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -175,7 +175,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>id</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -205,7 +205,25 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>bundle</name>
+                    <required>false</required>
+                    <type>javax.servlet.jsp.jstl.fmt.LocalizationContext</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>style</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -223,25 +241,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>id</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>bundle</name>
-                    <required>false</required>
-                    <type>javax.servlet.jsp.jstl.fmt.LocalizationContext</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>align</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -259,7 +259,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>id</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>

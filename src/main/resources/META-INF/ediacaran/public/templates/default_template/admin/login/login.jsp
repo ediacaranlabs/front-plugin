@@ -20,7 +20,7 @@
 
 	<ec:include uri="/includes/head.jsp"/>
 	
-	<link rel="stylesheet" href="/plugins/ediacaran/front/templates/default_template/admin/login/css/login.css">
+	<link rel="stylesheet" href="/plugins/ediacaran/front/templates/default_template/resources/admin/login/css/login.css">
 
 </head>
 

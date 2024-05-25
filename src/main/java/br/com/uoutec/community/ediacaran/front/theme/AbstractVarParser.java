@@ -15,6 +15,5 @@ public class AbstractVarParser implements VarParser{
 	public String parse() throws IOException {
 		return null;
 	}
-
 	
 }

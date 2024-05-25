@@ -28,5 +28,5 @@ public class DelegateVarParser implements VarParser{
 	public String parse() throws IOException {
 		return varParser.parse();
 	}
-
+	
 }
