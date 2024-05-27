@@ -191,7 +191,7 @@ public class Menu implements Serializable {
 	}
 
 	public String getIcon() {
-		return icon;
+		return icon == null? "circle-thin" : icon;
 	}
 
 	public Menu setIcon(String icon) {
