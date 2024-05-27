@@ -34,7 +34,12 @@ $.AppContext.validator = {
 			
 			var validator = this.createValidatorField(rules);
 			
-			$('#' + rules.form).bootstrapValidator('removeField', rules.field);	
+			try{
+				$('#' + rules.form).bootstrapValidator('removeField', rules.field);
+			}
+			catch($ex){
+			}
+				
 			$('#' + rules.form).bootstrapValidator('addField', rules.field, validator);	
 		},
 		
