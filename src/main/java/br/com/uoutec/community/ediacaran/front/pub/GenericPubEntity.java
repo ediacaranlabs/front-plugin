@@ -58,7 +58,7 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 		ptype = (Class<? extends GenericPubEntity>)(
 			clazzMap == null || type == null? 
 				getGenericType() : 
-				clazzMap.get(type)
+				clazzMap.containsKey(type)? clazzMap.get(type) : getGenericType()
 		);
 
 		GenericPubEntity p;
