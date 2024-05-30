@@ -84,6 +84,7 @@ public class AdminPubResource {
 		vars.put("config", pc);
 		vars.put("status", pluginConfigurationManager.getStatus(pc));
 		vars.put("security", securityPolicyUpdater.getPermissions(pc.getMetadata().getCode()));
+		vars.put("dependencies", pluginConfigurationManager.getDependencies(pc.getMetadata().getCode()));
 		
 		Throwable ex = pluginConfigurationManager.getError(pc);
 		

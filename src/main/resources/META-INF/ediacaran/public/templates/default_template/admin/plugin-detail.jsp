@@ -268,6 +268,63 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 				</ed:row>
 			</ec:form>
 		</ec:tabs-item>
+		<ec:tabs-item title="Dependências" icon="code-fork">
+			
+			<ec:accordion>
+				<c:forEach  items="${vars.dependencies}" var="dependency">
+				<ec:accordion-item title="${dependency.name}">
+					<ed:row>
+						<ed:col size="2">
+							Código
+						</ed:col>
+						<ed:col size="2">
+							${dependency.code}
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col size="2">
+							Fornecedor
+						</ed:col>
+						<ed:col size="2">
+							${dependency.supplier}
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col size="2">
+							Nome
+						</ed:col>
+						<ed:col size="2">
+							${dependency.name}
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col size="2">
+							Versão
+						</ed:col>
+						<ed:col size="2">
+							${dependency.version}
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col size="2">
+							Opcional
+						</ed:col>
+						<ed:col size="2">
+							${dependency.optional? 'Sim' : 'Não'}
+						</ed:col>
+					</ed:row>
+					<ed:row>
+						<ed:col size="2">
+							Status
+						</ed:col>
+						<ed:col size="2">
+							${dependency.status}
+						</ed:col>
+					</ed:row>
+				</ec:accordion-item>
+				</c:forEach>
+			</ec:accordion>
+		</ec:tabs-item>
 		<fmt:message key="tabs.uninstall.title" bundle="${messages}" var="msg_tmp"/>
 		<ec:tabs-item icon="warning" title="${msg_tmp}">
 			<ec:form method="post" id="tab3" update="enable_plugin_result_${vars.config.metadata.code}" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/uninstall">
