@@ -268,14 +268,13 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 				</ed:row>
 			</ec:form>
 		</ec:tabs-item>
-		<ec:tabs-item title="Dependências" icon="code-fork">
-			
+		<ec:tabs-item title="#{tabs.dependencies.title}" icon="code-fork" bundle="${messages}" >
 			<ec:accordion>
 				<c:forEach  items="${vars.dependencies}" var="dependency">
-				<ec:accordion-item title="${dependency.code}/${dependency.supplier} - ${dependency.version} ${empty dependency.name? '* not found' : ''}">
+				<ec:accordion-item title="${dependency.code}/${dependency.supplier} - ${dependency.version} ${empty dependency.name? '(*)' : ''}">
 					<ed:row>
 						<ed:col size="2">
-							Código
+							<fmt:message key="tabs.dependencies.tab.cols.code" bundle="${messages}"/>
 						</ed:col>
 						<ed:col size="2">
 							${dependency.code}
@@ -283,7 +282,7 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 					</ed:row>
 					<ed:row>
 						<ed:col size="2">
-							Fornecedor
+							<fmt:message key="tabs.dependencies.tab.cols.supplier" bundle="${messages}"/>
 						</ed:col>
 						<ed:col size="2">
 							${dependency.supplier}
@@ -291,7 +290,7 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 					</ed:row>
 					<ed:row>
 						<ed:col size="2">
-							Nome
+							<fmt:message key="tabs.dependencies.tab.cols.name" bundle="${messages}"/>
 						</ed:col>
 						<ed:col size="2">
 							${dependency.name}
@@ -299,7 +298,7 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 					</ed:row>
 					<ed:row>
 						<ed:col size="2">
-							Versão
+							<fmt:message key="tabs.dependencies.tab.cols.version" bundle="${messages}"/>
 						</ed:col>
 						<ed:col size="2">
 							${dependency.version}
@@ -307,18 +306,28 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 					</ed:row>
 					<ed:row>
 						<ed:col size="2">
-							Opcional
+							<fmt:message key="tabs.dependencies.tab.cols.optional" bundle="${messages}"/>
 						</ed:col>
 						<ed:col size="2">
-							${dependency.optional? 'Sim' : 'Não'}
+							<c:if test="${dependency.optional}">
+								<fmt:message key="tabs.dependencies.tab.cols.optional.yes" bundle="${messages}"/>
+							</c:if>
+							<c:if test="${!dependency.optional}">
+								<fmt:message key="tabs.dependencies.tab.cols.optional.no" bundle="${messages}"/>
+							</c:if>
 						</ed:col>
 					</ed:row>
 					<ed:row>
 						<ed:col size="2">
-							Status
+								<fmt:message key="tabs.dependencies.tab.cols.status" bundle="${messages}"/>
 						</ed:col>
 						<ed:col size="2">
-							${dependency.status}
+							<c:if test="${!empty dependency.status}">
+								${dependency.status}
+							</c:if>
+							<c:if test="${empty dependency.status}">
+								<fmt:message key="tabs.dependencies.tab.cols.status.empty" bundle="${messages}"/>
+							</c:if>
 						</ed:col>
 					</ed:row>
 				</ec:accordion-item>
