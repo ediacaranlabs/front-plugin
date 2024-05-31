@@ -272,7 +272,7 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 			
 			<ec:accordion>
 				<c:forEach  items="${vars.dependencies}" var="dependency">
-				<ec:accordion-item title="${dependency.name}">
+				<ec:accordion-item title="${dependency.code}/${dependency.supplier} - ${dependency.version} ${empty dependency.name? '* not found' : ''}">
 					<ed:row>
 						<ed:col size="2">
 							Código
