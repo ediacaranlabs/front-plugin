@@ -158,7 +158,7 @@ public class ThemeImp implements Theme{
 		List<PublicResource> resourcesType = temaPackage.getResources().get(type);
 		
 		if(resourcesType == null && logger.isTraceEnabled()) {
-			logger.trace("resource type {} not found [package={}, theme={}]", type, packageName, name);
+			logger.trace("resource type {} not found [package={}, theme={}]", new Object[] {type, packageName, name});
 		}
 		
 		return resourcesType;

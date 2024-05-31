@@ -61,7 +61,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		entry.tema = new ThemeImp(name, context, "/templates" + template, entry.packages);
 		
 		if(logger.isTraceEnabled()) {
-			logger.trace("thema created: {}[template={}, context={}]", name, template, context);
+			logger.trace("thema created: {}[template={}, context={}]", new Object[] {name, template, context});
 		}
 		
 		themes.put(name, entry);
@@ -114,7 +114,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		entry.packages.put(packageName, temaPackage);
 		
 		if(logger.isTraceEnabled()) {
-			logger.trace("package added: {}[theme={}, template={}]", packageName, name, template);
+			logger.trace("package added: {}[theme={}, template={}]", new Object[] {packageName, name, template});
 		}
 			
 		
@@ -139,7 +139,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		boolean removed = entry.packages.remove(packageName) != null;
 		
 		if(logger.isTraceEnabled()) {
-			logger.trace("{} package: {}[theme={}, template={}]", removed? "removed" : "not found", packageName, name);
+			logger.trace("{} package: {}[theme={}, template={}]", new Object[] {removed? "removed" : "not found", packageName, name});
 		}
 			
 		
@@ -167,13 +167,13 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		if(tagTemplates.put(template, tagTemplate) == null){
 			
 			if(logger.isTraceEnabled()) {
-				logger.trace("added component template: {}[template={}, package={}]", name, template, packageName);
+				logger.trace("added component template: {}[template={}, package={}]", new Object[] {name, template, packageName});
 			}
 			
 		}
 		else
 		if(logger.isTraceEnabled()) {
-			logger.trace("overridden component template: {}[template={}, package={}]", name, template, packageName);
+			logger.trace("overridden component template: {}[template={}, package={}]", new Object[] {name, template, packageName});
 		}
 		
 	}
@@ -200,7 +200,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		boolean removed = tagTemplates.remove(template) != null;
 		
 		if(logger.isTraceEnabled()) {
-			logger.trace("{} template component: {}[template={}, package={}]", removed? "removed": "fot found",name, template, packageName);
+			logger.trace("{} template component: {}[template={}, package={}]", new Object[] {removed? "removed": "fot found",name, template, packageName});
 		}
 		
 	}	
@@ -242,7 +242,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 			resources.set(index, pr);
 			
 			if(logger.isTraceEnabled()) {
-				logger.trace("overridden resource: {}[path={}, resource={}, package={}]", name, path, resource, packageName);
+				logger.trace("overridden resource: {}[path={}, resource={}, package={}]", new Object[] {name, path, resource, packageName});
 			}
 			
 		}
@@ -251,7 +251,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 			resources.add(pr);
 			
 			if(logger.isTraceEnabled()) {
-				logger.trace("added resource: {}[resource={}, resource={}, package={}]", name, path, resource, packageName);
+				logger.trace("added resource: {}[resource={}, resource={}, package={}]", new Object[] {name, path, resource, packageName});
 			}
 			
 		}
@@ -292,7 +292,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		boolean removed = resources.remove(pr);
 			
 		if(logger.isTraceEnabled()) {
-			logger.trace("{} resource: {}[path={}, resource={}, package={}]", removed? "removed" : "not found",name, path, resource, packageName);
+			logger.trace("{} resource: {}[path={}, resource={}, package={}]", new Object[] {removed? "removed" : "not found", name, path, resource, packageName});
 		}
 		
 	}
