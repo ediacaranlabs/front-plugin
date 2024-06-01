@@ -30,7 +30,9 @@
 						<ec:accordion-item title="${group}">
 							<ec:list>
 								<c:forEach items="${Controller.getPlugins(group)}" var="plugin">
-									<ec:list-item><a href="#!/plugins/ediacaran/front/admin/plugins/${plugin.metadata.code}" dest-content="plugin_body">${plugin.metadata.name}</a></ec:list-item>
+									<ec:list-item>
+										<a href="#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.manager_context}/plugins/${plugin.metadata.code}" 
+											dest-content="plugin_body">${plugin.metadata.name}</a></ec:list-item>
 								</c:forEach>
 							</ec:list>
 						</ec:accordion-item>	
@@ -44,7 +46,7 @@
 			<ec:box-body id="plugin_body">
 			
 				<ec:form method="POST" update="result-install-file" 
-					action="/plugins/ediacaran/front/admin/plugins/install-file" 
+					action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.manager_context}/plugins/install-file" 
 					enctype="multipart/form-data">
 					<ed:row>
 						<ed:col size="12">
@@ -86,7 +88,8 @@
 					</ed:row>
 				</ec:form>
 					
-				<ec:form method="POST" update="result-install-url"  action="/plugins/ediacaran/front/admin/plugins/install-url">
+				<ec:form method="POST" update="result-install-url"  
+					action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.manager_context}/plugins/install-url">
 					<ed:row>
 						<ed:col size="12">
 							<h5><fmt:message key="url_install.title" bundle="${messages}"/></h5>

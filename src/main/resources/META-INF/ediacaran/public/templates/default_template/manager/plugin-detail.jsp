@@ -6,7 +6,7 @@
 <ec:setBundle var="messages" locale="${locale}"/>
 
 <ec:form method="POST" id="status_config_fr" update="enable_plugin_result_${vars.config.metadata.code}" 
-action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/status" acceptCharset="UTF-8">
+action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.manager_context}/plugins/${vars.config.metadata.code}/status" acceptCharset="UTF-8">
 	<ed:row style="form">
 		<ed:col size="8">
 			<h3>${vars.config.metadata.name}</h3>
@@ -47,7 +47,8 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 	<ec:tabs>
 		<fmt:message key="tabs.configuration.title" bundle="${messages}" var="msg_tmp"/>
 		<ec:tabs-item active="true" icon="cog" title="${msg_tmp}">
-			<ec:form method="POST" id="tab1" update="enable_plugin_result_${vars.config.metadata.code}" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}">
+			<ec:form method="POST" id="tab1" update="enable_plugin_result_${vars.config.metadata.code}" 
+			action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.manager_context}/plugins/${vars.config.metadata.code}">
 				<ec:table style="striped">
 					<ec:table-body>
 					<c:forEach items="${vars.config.metadata.properties}" var="property">
@@ -149,7 +150,8 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 		</ec:tabs-item>
 		<fmt:message key="tabs.security.title" bundle="${messages}" var="msg_tmp"/>
 		<ec:tabs-item icon="life-saver" title="${msg_tmp}">
-			<ec:form method="POST" id="tab2" update="enable_plugin_result_${vars.config.metadata.code}" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}">
+			<ec:form method="POST" id="tab2" update="enable_plugin_result_${vars.config.metadata.code}" 
+				action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.manager_context}/plugins/${vars.config.metadata.code}">
 				<ec:table style="striped">
 					<ec:table-body>
 						<c:set var="count" value="0"/>
@@ -336,7 +338,8 @@ action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/stat
 		</ec:tabs-item>
 		<fmt:message key="tabs.uninstall.title" bundle="${messages}" var="msg_tmp"/>
 		<ec:tabs-item icon="warning" title="${msg_tmp}">
-			<ec:form method="post" id="tab3" update="enable_plugin_result_${vars.config.metadata.code}" action="/plugins/ediacaran/front/admin/plugins/${vars.config.metadata.code}/uninstall">
+			<ec:form method="post" id="tab3" update="enable_plugin_result_${vars.config.metadata.code}" 
+			action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.manager_context}/plugins/${vars.config.metadata.code}/uninstall">
 				<ed:row>
 					<ed:col size="12">
 						<fmt:message key="tabs.uninstall.description" bundle="${messages}">

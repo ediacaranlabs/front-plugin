@@ -31,6 +31,7 @@ import org.brandao.brutos.validator.ValidatorException;
 import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
+import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.page.EditMenubar;
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
@@ -163,15 +164,21 @@ public class MenubarController {
 			
 			menubarPubEntity.setEditMenubar(editMenubar);
 			MenuBar menuBar =
-					AccessController.doPrivileged((PrivilegedAction<MenuBar>)()->menubarPubEntity.rebuild(menubarPubEntity.getGid() != null, true, true));					
+					ContextSystemSecurityCheck.doPrivileged(()->{
+						return menubarPubEntity.rebuild(menubarPubEntity.getGid() != null, true, true);
+					});
 			
-			ObjectMetadata omd = editMenubar
-				.registerMenubarById(
-						menubarPubEntity.getPath(), 
-						menubarPubEntity.getId(), 
-						menubarPubEntity.getLocale(), 
-						menuBar
-				);
+			ObjectMetadata omd =
+					ContextSystemSecurityCheck.doPrivileged(()->{
+					return editMenubar
+							.registerMenubarById(
+									menubarPubEntity.getPath(), 
+									menubarPubEntity.getId(), 
+									menubarPubEntity.getLocale(), 
+									menuBar
+							);
+			});
+					
 			
 			Map<String,Object> md = new HashMap<String,Object>();
 			md.put("path", omd.getPathMetadata().getPath());

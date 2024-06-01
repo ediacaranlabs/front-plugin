@@ -13,7 +13,7 @@
 		Update success!
 		<script>
 			$.AppContext.onload(function(){
-				$.AppContext.loadContentOnPanel("/plugins/ediacaran/front/admin/plugins");
+				$.AppContext.loadContentOnPanel("${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.manager_context}/plugins");
 			});
 		</script>
 	</c:if>
