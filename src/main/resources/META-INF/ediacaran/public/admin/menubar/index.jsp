@@ -1,7 +1,7 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core"                 prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"                   prefix="c"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"                               prefix="fmt"%> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"                    prefix="fmt"%> 
 <ec:setTemplatePackage name="admin"/>
 
 <section class="inner-headline">
@@ -26,10 +26,10 @@
 				<ec:data-table id="menubar_form_search" action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/list">
 					<!-- menubar-form -->
 					<ed:row>
-						<ed:col size="6">
+						<ed:col size="8">
 							<ec:textfield name="path" placeholder="Caminho"/>
 						</ed:col>
-						<ed:col size="3" align="right">
+						<ed:col size="2" align="right">
 							<ec:select name="locale">
 								<ec:option value="" selected="true">Selecione o idioma</ec:option>
 								<c:forEach items="${locales}" var="loc">
@@ -37,17 +37,19 @@
 								</c:forEach>
 							</ec:select>
 						</ed:col>
-						<ed:col size="3">
+						<ed:col size="2">
 							<ec:button
 			    				form="menubar_form_search" 
 			    				classStyle="last-item" 
 			    				align="right" 
 								actionType="submit" 
+			    				size="sm"
 								label="Pesqusiar"/>
 							<ec:button 
 			    				classStyle="last-item" 
 			    				align="right" 
 								label="Novo"
+			    				size="sm"
 								actionType="button">
 								<ec:event type="click">
 			    					$.AppContext.utils.updateContentByID("#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/new")
@@ -60,17 +62,18 @@
 						<ec:forEach items="!{response.data}" var="item">
 							<ec:separator/>
 							<ed:row>
-								<ed:col size="6">
+								<ed:col size="8">
 									<ec:textfield value="!{item.name}" enabled="false"/>
 								</ed:col>
-								<ed:col size="3" align="right">
+								<ed:col size="2" align="right">
 									<ec:textfield value="!{item.locale.name}" enabled="false"/>
 								</ed:col>
-								<ed:col size="3">
+								<ed:col size="2">
 									<ec:button id="menubar_form_search_edit_button_!{item.index}"
 										actionType="button" 
 					    				classStyle="last-item" 
 					    				align="right" 
+					    				size="sm"
 										label="Editar">
 										<ec:event type="click">
 											var $fr = $.AppContext.utils.getById('form_menu_item');
@@ -90,6 +93,7 @@
 										actionType="submit" 
 					    				classStyle="last-item" 
 					    				align="right" 
+					    				size="sm"
 										label="Apagar">
 										<ec:event type="click">
 											var $fr = $.AppContext.utils.getById('form_menu_item');
