@@ -88,9 +88,9 @@ public class MenubarController {
 					ContextSystemSecurityCheck.doPrivileged(()->{
 						return editMenubar.list(menubarSearch.getPath(), menubarSearch.getLocale());
 					});
-			
+			Map<Locale, String> localeMap = editMenubar.getSupportedLocales();
 			int[] index = {1};
-			List<MenubarSearchResponse> result = list.stream().map((e)->new MenubarSearchResponse(index[0]++,e)).collect(Collectors.toList());
+			List<MenubarSearchResponse> result = list.stream().map((e)->new MenubarSearchResponse(index[0]++, e, localeMap)).collect(Collectors.toList());
 			return new SearchResult<MenubarSearchResponse>(-1, 1, false, result);
 		}
 		catch(Throwable ex) {
@@ -113,13 +113,12 @@ public class MenubarController {
 		
 		try {
 			
-			MenuBar menuBar =
-					AccessController.doPrivileged((PrivilegedAction<MenuBar>)()->editMenubar.getMenubarById(path, id, locale));					
+			MenuBar menuBar = ContextSystemSecurityCheck.doPrivileged(()->editMenubar.getMenubarById(path, id, locale));
 			
 			if(menuBar == null) {
 				WebFlowController
 				.redirect()
-				.to("${plugins.ediacaran.front.admin_context}/menubar/list");
+				.to("${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/list");
 			}
 			
 			Map<Locale, String> langNames = editMenubar.getSupportedLocales();

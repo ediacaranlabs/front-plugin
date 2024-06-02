@@ -2,6 +2,7 @@ package br.com.uoutec.community.ediacaran.front.page.pub;
 
 import java.io.Serializable;
 import java.util.Locale;
+import java.util.Map;
 
 import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 
@@ -17,7 +18,7 @@ public class MenubarSearchResponse implements Serializable {
 	
 	private String path;
 	
-	private Locale locale;
+	private LocaleResponse locale;
 	
 	private Integer page;
 	
@@ -26,12 +27,12 @@ public class MenubarSearchResponse implements Serializable {
 	public MenubarSearchResponse() {
 	}
 	
-	public MenubarSearchResponse(int index, ObjectMetadata e) {
+	public MenubarSearchResponse(int index, ObjectMetadata e, Map<Locale, String> localeMap) {
 		this.index = index;
 		this.id = e.getPathMetadata().getId();
-		this.name = e.getPathMetadata().getPath() + "/" + e.getPathMetadata().getId() + (e.getLocale() == null? "" : "(" + e.getLocale() + ")");
+		this.name = e.getPathMetadata().getPath() + "/" + e.getPathMetadata().getId();
 		this.path = e.getPathMetadata().getPath();
-		this.locale = e.getLocale();
+		this.locale = e.getLocale() == null? new LocaleResponse("", "") : new LocaleResponse(e.getLocale().toString(), localeMap.get(e.getLocale()));
 	}
 
 	public int getIndex() {
@@ -66,11 +67,11 @@ public class MenubarSearchResponse implements Serializable {
 		this.path = path;
 	}
 
-	public Locale getLocale() {
+	public LocaleResponse getLocale() {
 		return locale;
 	}
 
-	public void setLocale(Locale locale) {
+	public void setLocale(LocaleResponse locale) {
 		this.locale = locale;
 	}
 

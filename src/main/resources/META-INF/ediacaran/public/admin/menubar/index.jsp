@@ -26,20 +26,18 @@
 				<ec:data-table id="menubar_form_search" action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/list">
 					<!-- menubar-form -->
 					<ed:row>
-						<ed:col size="9">
-							<ec:textfield name="path" label="Caminho" />
+						<ed:col size="6">
+							<ec:textfield name="path" placeholder="Caminho"/>
 						</ed:col>
 						<ed:col size="3" align="right">
-							<ec:select name="locale" label="Idioma">
-								<ec:option value="" selected="true"></ec:option>
+							<ec:select name="locale">
+								<ec:option value="" selected="true">Selecione o idioma</ec:option>
 								<c:forEach items="${locales}" var="loc">
 								<ec:option value="${loc.key}">${loc.value}</ec:option>
 								</c:forEach>
 							</ec:select>
 						</ed:col>
-					</ed:row>
-					<ed:row>
-						<ed:col size="12">
+						<ed:col size="3">
 							<ec:button
 			    				form="menubar_form_search" 
 			    				classStyle="last-item" 
@@ -59,58 +57,55 @@
 					</ed:row>
 					<!-- /menubar-form -->
 					<ec:data-result var="response">
-						<ec:table style="striped">
-							<ec:table-header>
-								<ec:table-col cols="3">
-									<b>Caminho</b>
-								</ec:table-col>
-								<ec:table-col>
-									<b>Ações</b>
-								</ec:table-col>
-							</ec:table-header>
-							<ec:table-body>
-								<ec:forEach items="!{response.data}" var="item">
-									<ec:table-row>
-										<ec:table-col cols="3">
-											!{item.name}
-										</ec:table-col>
-										<ec:table-col>
-												<ec:button id="menubar_form_search_edit_button_!{item.index}"
-													actionType="button" 
-													label="Editar">
-													<ec:event type="click">
-														var $fr = $.AppContext.utils.getById('form_menu_item');
-														var $path = $fr.getField('path');
-														var $id = $fr.getField('id');
-														var $locale = $fr.getField('locale');
-														
-														$path.setValue('!{item.path}');
-														$id.setValue('!{item.id}');
-														$locale.setValue('!{item.locale}');
-														$fr.submit(false, '#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/edit');
-													</ec:event>
-												</ec:button>
-												<ec:button
-													id="menubar_form_search_edit_delete_!{item.index}" 
-													actionType="submit" 
-													label="Apagar">
-													<ec:event type="click">
-														var $fr = $.AppContext.utils.getById('form_menu_item');
-														var $path = $fr.getField('path');
-														var $id = $fr.getField('id');
-														var $locale = $fr.getField('locale');
-														
-														$path.setValue('!{item.path}');
-														$id.setValue('!{item.id}');
-														$locale.setValue('!{item.locale}');
-														$fr.submit(false, '#m${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/confirm-delete');
-													</ec:event>
-													</ec:button>
-										</ec:table-col>
-									</ec:table-row>										
-								</ec:forEach>
-							</ec:table-body>
-						</ec:table>
+						<ec:forEach items="!{response.data}" var="item">
+							<ec:separator/>
+							<ed:row>
+								<ed:col size="6">
+									!{item.name}
+								</ed:col>
+								<ed:col size="3" align="right">
+									!{item.locale.name}
+								</ed:col>
+								<ed:col size="3">
+									<ec:button id="menubar_form_search_edit_button_!{item.index}"
+										actionType="button" 
+					    				classStyle="last-item" 
+					    				align="right" 
+										label="Editar">
+										<ec:event type="click">
+											var $fr = $.AppContext.utils.getById('form_menu_item');
+											var $path = $fr.getField('path');
+											var $id = $fr.getField('id');
+											var $locale = $fr.getField('locale');
+											
+											$path.setValue('!{item.path}');
+											$id.setValue('!{item.id}');
+											$locale.setValue('!{item.locale.id}');
+											$fr.submit(false, '#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/edit');
+										</ec:event>
+									</ec:button>
+									<ec:button
+										id="menubar_form_search_edit_delete_!{item.index}"
+										style="danger" 
+										actionType="submit" 
+					    				classStyle="last-item" 
+					    				align="right" 
+										label="Apagar">
+										<ec:event type="click">
+											var $fr = $.AppContext.utils.getById('form_menu_item');
+											var $path = $fr.getField('path');
+											var $id = $fr.getField('id');
+											var $locale = $fr.getField('locale');
+											
+											$path.setValue('!{item.path}');
+											$id.setValue('!{item.id}');
+											$locale.setValue('!{item.locale.id}');
+											$fr.submit(false, '#m${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/menubar/confirm-delete');
+										</ec:event>
+									</ec:button>
+								</ed:col>
+							</ed:row>
+						</ec:forEach>
 					</ec:data-result>
 				</ec:data-table>
 			</ec:box-body>
