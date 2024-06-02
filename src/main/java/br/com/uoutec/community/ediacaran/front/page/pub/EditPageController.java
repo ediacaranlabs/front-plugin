@@ -1,11 +1,13 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
+import java.io.Serializable;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -14,22 +16,29 @@ import org.brandao.brutos.annotation.Action;
 import org.brandao.brutos.annotation.Basic;
 import org.brandao.brutos.annotation.Controller;
 import org.brandao.brutos.annotation.DefaultThrowSafe;
+import org.brandao.brutos.annotation.DetachedName;
 import org.brandao.brutos.annotation.MappingTypes;
+import org.brandao.brutos.annotation.ResponseType;
 import org.brandao.brutos.annotation.Result;
 import org.brandao.brutos.annotation.Transient;
+import org.brandao.brutos.annotation.web.MediaTypes;
 import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.RequestMethodTypes;
 import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
+import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplateType;
-import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.page.Page;
+import br.com.uoutec.community.ediacaran.front.page.PageManager;
+import br.com.uoutec.community.ediacaran.security.BasicRoles;
 import br.com.uoutec.community.ediacaran.security.RequiresPermissions;
+import br.com.uoutec.community.ediacaran.security.RequiresRole;
 import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectTemplate;
+import br.com.uoutec.pub.entity.InvalidRequestException;
 
 @Singleton
 @Controller(value="${plugins.ediacaran.front.admin_context}/pages", defaultActionName="/")
@@ -42,49 +51,44 @@ public class EditPageController {
 	
 	@Action("/")
 	@Result("itens")
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:LIST")
 	public WebResultAction index(WebResultAction webResult){
-		webResult = list(null, null, webResult);
 		webResult.setView("/admin/pages/index");
+		webResult.add("locales", editpage.getSupportedLocales());
 		return webResult;
 	}
 	
 	@Action("/list")
 	@RequestMethod(RequestMethodTypes.POST)
-	@Result("itens")
+	@ResponseType(MediaTypes.APPLICATION_JSON)
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:LIST")
-	public WebResultAction list(
-			@Basic(bean="path")
-			String path,
-			@Basic(bean="locale")
-			String locale,
-			WebResultAction webResult){
+	public Serializable list(
+			@DetachedName PageSearchPubEntity request){
 		
-		webResult.setView("/admin/pages/table");
+		PageSearch pageSearch;
 		
 		try {
+			pageSearch = request.rebuild(false, true, true);
+			
 			List<ObjectMetadata> list =
-					AccessController.doPrivileged(new PrivilegedAction<List<ObjectMetadata>>() {
-						
-						public List<ObjectMetadata> run() {
-							return editpage.list(path, locale);
-						};
-					});
+					ContextSystemSecurityCheck.doPrivileged(()->editpage.list(pageSearch.getPath(), pageSearch.getLocale()));
 			
-			Map<Locale, String> langNames = editpage.getSupportedLocales();
-			
-			webResult.add("itens", list);
-			webResult.add("locales", langNames);
+			Map<Locale, String> localeMap = editpage.getSupportedLocales();
+
+			int[] index = {1};
+			List<PageSearchResponse> result = list.stream().map((e)->new PageSearchResponse(index[0]++, e, localeMap)).collect(Collectors.toList());
+
+			return new SearchResult<PageSearchResponse>(-1, 1, false, result);
 		}
 		catch(Throwable ex) {
-			webResult
-			.add("exception", ex);
+			throw new InvalidRequestException("internal error: ", ex);
 		}
-			
-		return webResult;
 	}
 
 	@Action("/new")
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:CREATE")
 	public WebResultAction selectTemplate(WebResultAction webResult){
 		
@@ -104,6 +108,7 @@ public class EditPageController {
 
 	@Action("/delete")
 	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction delete(
 			@Basic(bean="gid")
@@ -144,6 +149,7 @@ public class EditPageController {
 	
 	@Action("/confirm-delete")
 	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction confirmDelete(
 			@Basic(bean="path")
@@ -177,6 +183,7 @@ public class EditPageController {
 	
 	@Action("/new")
 	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:CREATE")
 	public WebResultAction create(
 			@Basic(bean="templateName")
@@ -209,6 +216,7 @@ public class EditPageController {
 	
 	@Action("/edit")
 	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:EDIT")
 	public WebResultAction edit(
 			@Basic(bean="path")
