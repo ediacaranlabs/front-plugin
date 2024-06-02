@@ -61,10 +61,10 @@
 							<ec:separator/>
 							<ed:row>
 								<ed:col size="6">
-									!{item.name}
+									<ec:textfield value="!{item.name}" enabled="false"/>
 								</ed:col>
 								<ed:col size="3" align="right">
-									!{item.locale.name}
+									<ec:textfield value="!{item.locale.name}" enabled="false"/>
 								</ed:col>
 								<ed:col size="3">
 									<ec:button id="menubar_form_search_edit_button_!{item.index}"
