@@ -116,6 +116,26 @@ public class JavascriptConverterWriter extends EscapeWriter{
 				start = i + 1;
 			}
 			else
+			if(status == NORMAL_CONTENT && cbuf[i] == '<') {
+				o.write(cbuf, start, i - start);
+				o.write(END_CONTENT);
+				o.write(START_CODE);
+				o.write("OPEN_TAG_");
+				o.write(END_CODE);
+				o.write(START_CONTENT);
+				start = i + 1;
+			}
+			else
+			if(status == NORMAL_CONTENT && cbuf[i] == '>') {
+				o.write(cbuf, start, i - start);
+				o.write(END_CONTENT);
+				o.write(START_CODE);
+				o.write("END_TAG_");
+				o.write(END_CODE);
+				o.write(START_CONTENT);
+				start = i + 1;
+			}
+			else
 			if(status == JS_CONTENT && cbuf[i] == '}') {
 				status = NORMAL_CONTENT;
 				o.write(cbuf, start, i - start);

@@ -35,6 +35,7 @@
 	</ed:col>
 </ed:row>
 </ec:form>
+<%--
 <c:forEach items="${itens}" var="item">
 <ed:row style="form">
 	<ed:col size="12">
@@ -63,3 +64,4 @@
 	</ed:col>
 </ed:row>
 </c:forEach>
+--%>

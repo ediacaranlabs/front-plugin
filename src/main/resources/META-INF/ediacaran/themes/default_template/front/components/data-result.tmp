@@ -2,7 +2,9 @@
 	$.AppContext.onload(function()&#123;
 		
 		var $func = function({var})&#123;
-			var out_ = [];
+			var out_      = [];
+			var OPEN_TAG_ = '<';
+			var END_TAG_  = '>';
 			{content}
 			return out_.join("");
 		&#125;;

@@ -37,7 +37,9 @@ import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
 import br.com.uoutec.community.ediacaran.security.AuthorizationManager;
+import br.com.uoutec.community.ediacaran.security.BasicRoles;
 import br.com.uoutec.community.ediacaran.security.RequiresPermissions;
+import br.com.uoutec.community.ediacaran.security.RequiresRole;
 import br.com.uoutec.community.ediacaran.security.RoleEntity;
 import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
@@ -61,46 +63,44 @@ public class MenubarController {
 	private AuthorizationManager authorizationManager;
 	
 	@Action("/")
-	@Result("itens")
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:MENUBAR:LIST")
 	public WebResultAction index(WebResultAction webResult){
-		webResult = list(null, null, webResult);
 		webResult.setView("/admin/menubar/index");
+		webResult.add("locales", editMenubar.getSupportedLocales());
 		return webResult;
 	}
 	
 	@Action("/list")
 	@RequestMethod(RequestMethodTypes.POST)
-	@Result("itens")
+	@ResponseType(MediaTypes.APPLICATION_JSON)
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:MENUBAR:LIST")
-	public WebResultAction list(
-			@Basic(bean="path")
-			String path,
-			@Basic(bean="locale")
-			String locale,
-			WebResultAction webResult){
+	public Serializable list(
+			@DetachedName MenubarSearchPubEntity request
+			){
 		
-		webResult.setView("/pages/admin/table");
+		MenubarSearch menubarSearch;
 		
 		try {
+			menubarSearch = request.rebuild(false, true, true);
 			List<ObjectMetadata> list =
-					AccessController.doPrivileged((PrivilegedAction<List<ObjectMetadata>>)()->editMenubar.list(path, locale));					
-
-			Map<Locale, String> langNames = editMenubar.getSupportedLocales();
+					ContextSystemSecurityCheck.doPrivileged(()->{
+						return editMenubar.list(menubarSearch.getPath(), menubarSearch.getLocale());
+					});
 			
-			webResult.add("itens", list);
-			webResult.add("locales", langNames);
+			int[] index = {1};
+			List<MenubarSearchResponse> result = list.stream().map((e)->new MenubarSearchResponse(index[0]++,e)).collect(Collectors.toList());
+			return new SearchResult<MenubarSearchResponse>(-1, 1, false, result);
 		}
 		catch(Throwable ex) {
-			webResult
-			.add("exception", ex);
+			throw new InvalidRequestException("internal error: ", ex);
 		}
-			
-		return webResult;
 	}
 
 	@Action("/edit")
 	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:MENUBAR:EDIT")
 	public WebResultAction edit(
 			@Basic(bean="path")
@@ -151,6 +151,7 @@ public class MenubarController {
 
 	@Action("/save")
 	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:MENUBAR:SAVE")
 	@View(value="/admin/menubar/save-result")
 	@ThrowSafe(rendered=true, target=ValidatorException.class, view="/admin/menubar/validation-exception")
@@ -203,6 +204,7 @@ public class MenubarController {
 	
 	@Action("/new-menu")
 	@RequestMethod(RequestMethodTypes.GET)
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:MENUBAR:NEW_MENU")
 	public WebResultAction newMenu(
 			WebResultAction webResult){
@@ -236,6 +238,7 @@ public class MenubarController {
 
 	@Action("/new")
 	@RequestMethod(RequestMethodTypes.GET)
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:MENUBAR:NEW")
 	public WebResultAction newMenubar(
 			WebResultAction webResult){
@@ -262,6 +265,7 @@ public class MenubarController {
 	
 	@Action("/delete")
 	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction delete(
 			@Basic(bean="gid")
@@ -297,6 +301,7 @@ public class MenubarController {
 	
 	@Action("/confirm-delete")
 	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction confirmDelete(
 			@Basic(bean="path")
@@ -330,6 +335,7 @@ public class MenubarController {
 	
 	@Action("/search-resource")
 	@RequestMethod(RequestMethodTypes.POST)
+	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:MENUBAR:EDIT")
 	@SuppressWarnings("serial")
 	@AcceptRequestType(MediaTypes.APPLICATION_JSON)
