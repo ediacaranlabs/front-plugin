@@ -1,8 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
 import java.io.Serializable;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -126,15 +124,11 @@ public class EditPageController {
 			md.put("locale", locale);
 			
 			if(gid == md.hashCode()) {
-				AccessController.doPrivileged(new PrivilegedAction<List<ObjectMetadata>>() {
-					@Override
-					public List<ObjectMetadata> run() {
-						editpage.unregisterPage(path, id, locale);
-						return null;
-					}
+				ContextSystemSecurityCheck.doPrivileged(()->{
+					editpage.unregisterPage(path, id, locale);
+					return null;
 					
 				});
-						
 			}
 		}
 		catch(Throwable ex) {
@@ -228,11 +222,7 @@ public class EditPageController {
 		try {
 			
 			Page page =
-					AccessController.doPrivileged(new PrivilegedAction<Page>() {
-						public Page run() {
-							return editpage.getPageById(path, id, locale);
-						};
-					});
+					ContextSystemSecurityCheck.doPrivileged(()->editpage.getPageById(path, id, locale));
 			
 			if(page == null) {
 				WebFlowController

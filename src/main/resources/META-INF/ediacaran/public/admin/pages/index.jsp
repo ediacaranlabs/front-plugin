@@ -39,7 +39,6 @@
 						</ed:col>
 						<ed:col size="2">
 							<ec:button
-			    				form="menubar_form_search" 
 			    				classStyle="last-item" 
 			    				align="right" 
 								actionType="submit" 

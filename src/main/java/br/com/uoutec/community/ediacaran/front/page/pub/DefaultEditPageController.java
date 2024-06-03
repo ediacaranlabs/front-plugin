@@ -20,6 +20,7 @@ import org.brandao.brutos.annotation.web.RequestMethodTypes;
 import org.brandao.brutos.validator.ValidatorException;
 
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
+import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.page.Page;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 import br.com.uoutec.pub.entity.InvalidRequestException;
@@ -43,16 +44,16 @@ public class DefaultEditPageController {
 		try {
 			Page page = pageEntity.rebuild(pageEntity.getGid() != null, true, true);
 
-			ObjectMetadata omd;
-			
-			if(pageEntity.getId() != null) {
-				omd = editPage.registerPageByName(pageEntity.getPath(), 
-						pageEntity.getId(), pageEntity.getLocale(), page);
-			}
-			else {
-				omd = editPage.registerPageByTitle(pageEntity.getPath(), 
-						pageEntity.getTitle(), pageEntity.getLocale(), page);
-			}
+			ObjectMetadata omd = ContextSystemSecurityCheck.doPrivileged(()->{
+				if(pageEntity.getId() != null) {
+					return editPage.registerPageByName(pageEntity.getPath(), 
+							pageEntity.getId(), pageEntity.getLocale(), page);
+				}
+				else {
+					return editPage.registerPageByTitle(pageEntity.getPath(), 
+							pageEntity.getTitle(), pageEntity.getLocale(), page);
+				}
+			});
 			
 			Map<String,Object> md = new HashMap<String,Object>();
 			md.put("path", omd.getPathMetadata().getPath());
