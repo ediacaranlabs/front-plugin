@@ -1,7 +1,7 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core"                 prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"                   prefix="c"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"                               prefix="fmt"%> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"                    prefix="fmt"%> 
 <ec:setTemplatePackage name="admin"/>
 
 <section class="inner-headline">
@@ -18,61 +18,106 @@
 		</ed:col>
 	</ed:row>
 </section>
-<%--
+
 <ed:row>
 	<ed:col size="12">
 		<ec:box>
 			<ec:box-body>
-				<ec:form method="POST" update="pages_body">
+				<ec:data-table id="page_form_search" action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list">
+					<!-- menubar-form -->
 					<ed:row>
-						<ed:col>
-							<ec:textfield label="Nome" name="name" value="${name}"/>
+						<ed:col size="8">
+							<ec:textfield name="path" placeholder="Caminho"/>
 						</ed:col>
-						<ed:col size="3">
-							<ec:select label="Idioma" name="locale">
-								<ec:option value="" selected="true"></ec:option>
+						<ed:col size="2" align="right">
+							<ec:select name="locale">
+								<ec:option value="" selected="true">Selecione o idioma</ec:option>
 								<c:forEach items="${locales}" var="loc">
 								<ec:option value="${loc.key}">${loc.value}</ec:option>
 								</c:forEach>
 							</ec:select>
 						</ed:col>
-					</ed:row>
-					<ed:row>
-						<ed:col size="9">
-						</ed:col>
 						<ed:col size="2">
-							<ec:button 
+							<ec:button
+			    				form="menubar_form_search" 
+			    				classStyle="last-item" 
+			    				align="right" 
 								actionType="submit" 
-								action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list" 
-								label="Pesqusiar" 
-								align="right"/>
-						</ed:col>
-						<ed:col size="1">
+			    				size="sm"
+								label="Pesqusiar"/>
 							<ec:button 
-								actionType="button"
-								label="Novo" 
-								align="right">
+			    				classStyle="last-item" 
+			    				align="right" 
+								label="Novo"
+			    				size="sm"
+								actionType="button">
 								<ec:event type="click">
-									$.AppContext.utils.loadResourceContent(
-										null, 
-										"#m${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new");
+			    					$.AppContext.utils.updateContentByID("#m${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new")
 								</ec:event>
 							</ec:button>
 						</ed:col>
 					</ed:row>
-				</ec:form>
+					<!-- /menubar-form -->
+					<ec:data-result var="response">
+						<ec:forEach items="!{response.data}" var="item">
+							<ec:separator/>
+							<ed:row>
+								<ed:col size="8">
+									<ec:textfield value="!{item.name}" enabled="false"/>
+								</ed:col>
+								<ed:col size="2" align="right">
+									<ec:textfield value="!{item.locale.name}" enabled="false"/>
+								</ed:col>
+								<ed:col size="2">
+									<ec:button id="page_form_search_edit_button_!{item.index}"
+										actionType="button" 
+					    				classStyle="last-item" 
+					    				align="right" 
+					    				size="sm"
+										label="Editar">
+										<ec:event type="click">
+											var $fr = $.AppContext.utils.getById('form_page_item');
+											var $path = $fr.getField('path');
+											var $id = $fr.getField('id');
+											var $locale = $fr.getField('locale');
+											
+											$path.setValue('!{item.path}');
+											$id.setValue('!{item.id}');
+											$locale.setValue('!{item.locale.id}');
+											$fr.submit(false, '#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/edit');
+										</ec:event>
+									</ec:button>
+									<ec:button
+										id="page_form_search_edit_delete_!{item.index}"
+										style="danger" 
+										actionType="submit" 
+					    				classStyle="last-item" 
+					    				align="right" 
+					    				size="sm"
+										label="Apagar">
+										<ec:event type="click">
+											var $fr = $.AppContext.utils.getById('form_page_item');
+											var $path = $fr.getField('path');
+											var $id = $fr.getField('id');
+											var $locale = $fr.getField('locale');
+											
+											$path.setValue('!{item.path}');
+											$id.setValue('!{item.id}');
+											$locale.setValue('!{item.locale.id}');
+											$fr.submit(false, '#m${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/confirm-delete');
+										</ec:event>
+									</ec:button>
+								</ed:col>
+							</ed:row>
+						</ec:forEach>
+					</ec:data-result>
+				</ec:data-table>
 			</ec:box-body>
 		</ec:box>
-	</ed:col>
-</ed:row>
---%>
-
-<ed:row>
-	<ed:col size="12">
-		<ec:box>
-			<ec:box-body id="pages_body">
-				<jsp:include page="/admin/pages/table.jsp"/>
-			</ec:box-body>
-		</ec:box>
+		<ec:form id="form_page_item" method="POST">
+			<input type="hidden" name="path" value="">
+			<input type="hidden" name="id" value="">
+			<input type="hidden" name="locale" value="">
+		</ec:form>
 	</ed:col>
 </ed:row>

@@ -19,7 +19,6 @@ import org.brandao.brutos.annotation.DefaultThrowSafe;
 import org.brandao.brutos.annotation.DetachedName;
 import org.brandao.brutos.annotation.MappingTypes;
 import org.brandao.brutos.annotation.ResponseType;
-import org.brandao.brutos.annotation.Result;
 import org.brandao.brutos.annotation.Transient;
 import org.brandao.brutos.annotation.web.MediaTypes;
 import org.brandao.brutos.annotation.web.RequestMethod;
@@ -50,7 +49,6 @@ public class EditPageController {
 	private PageManager editpage;
 	
 	@Action("/")
-	@Result("itens")
 	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:LIST")
 	public WebResultAction index(WebResultAction webResult){
