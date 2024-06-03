@@ -9,7 +9,6 @@ import java.util.Map;
 import br.com.uoutec.application.SystemProperties;
 import br.com.uoutec.application.io.Path;
 import br.com.uoutec.application.io.Vfs;
-import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 
 public class Page {
 
@@ -107,8 +106,8 @@ public class Page {
 		
 		if(thumbnail != null) {
 			String baseWebApp = SystemProperties.getProperty("app.web");
-			Path fileBaseWebApp = ContextSystemSecurityCheck.doPrivileged(()->Vfs.getPath(baseWebApp));
-			String relative = ContextSystemSecurityCheck.doPrivileged(()->fileBaseWebApp.getRelativePath(thumbnail).getFullName());
+			Path fileBaseWebApp = Vfs.getPath(baseWebApp);
+			String relative = fileBaseWebApp.getRelativePath(thumbnail).getFullName();
 			relative = relative.replaceAll("\\+", "/");
 			return "/" + relative;
 		}

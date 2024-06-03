@@ -16,9 +16,8 @@ import org.brandao.brutos.web.HttpStatus;
 import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebResultAction;
 
-import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
+import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplateType;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectTemplate;
-import br.com.uoutec.community.ediacaran.system.repository.ObjectsTemplateManager;
 import br.com.uoutec.ediacaran.core.plugins.PublicType;
 
 @Singleton
@@ -27,7 +26,7 @@ public class PageController implements PublicType {
 
 	@Inject
 	@Transient
-	private ObjectsTemplateManager objectTemplateManager;
+	private PageManager pageManager;
 
 	@Action("{uri:(/+[a-z0-9][a-z0-9]+(-[a-z0-9]+)*)+}")
 	public WebResultAction execute(
@@ -42,15 +41,14 @@ public class PageController implements PublicType {
 		}
 		
 		try {
-			
-			Page page = (Page) objectTemplateManager.getObject( PagesObjectsManagerDriver.DRIVER_NAME + uri, locale);
+			Page page = pageManager.getPage(uri, locale);
 			
 			if(page == null && locale != null) {
-				page = (Page) objectTemplateManager.getObject( PagesObjectsManagerDriver.DRIVER_NAME + uri, null);
+				page = pageManager.getPage(uri, (String)null);
 			}
 			
 			if(page != null) {
-				ObjectTemplate pg = objectTemplateManager.getTemplate(PagesObjectsManagerDriver.DRIVER_NAME, page);
+				ObjectTemplate pg = pageManager.getTemplate(page.getTemplate(), PageObjectTemplateType.VIEW); 
 				result.setView(pg.getTemplate(), true);
 				result.setDispatcher(WebDispatcherType.FORWARD);
 				result.add("page", page);
