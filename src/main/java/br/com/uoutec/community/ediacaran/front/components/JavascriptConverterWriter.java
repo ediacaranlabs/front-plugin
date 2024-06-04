@@ -120,7 +120,7 @@ public class JavascriptConverterWriter extends EscapeWriter{
 				o.write(cbuf, start, i - start);
 				o.write(END_CONTENT);
 				o.write(START_CODE);
-				o.write("OPEN_TAG_");
+				o.write("$.AppContext.constants.OPEN_TAG_");
 				o.write(END_CODE);
 				o.write(START_CONTENT);
 				start = i + 1;
@@ -130,7 +130,7 @@ public class JavascriptConverterWriter extends EscapeWriter{
 				o.write(cbuf, start, i - start);
 				o.write(END_CONTENT);
 				o.write(START_CODE);
-				o.write("END_TAG_");
+				o.write("$.AppContext.constants.END_TAG_");
 				o.write(END_CODE);
 				o.write(START_CONTENT);
 				start = i + 1;

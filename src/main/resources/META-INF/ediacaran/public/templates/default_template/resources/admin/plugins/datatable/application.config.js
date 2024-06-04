@@ -1,3 +1,4 @@
+
 $.AppContext.dataTable = {};
 
 $.AppContext.dataTable.applyPages = function($id, $page, $totalPages, $hasNextPage = false){

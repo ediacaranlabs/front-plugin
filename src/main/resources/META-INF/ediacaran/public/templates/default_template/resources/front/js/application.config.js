@@ -1,3 +1,8 @@
+$.AppContext.constants = {};
+
+$.AppContext.constants.OPEN_TAG_ = '<';
+$.AppContext.constants.END_TAG_  = '>';
+
 $.AppContext.local = {};
 
 $.AppContext.local.resizeContent = function () {
