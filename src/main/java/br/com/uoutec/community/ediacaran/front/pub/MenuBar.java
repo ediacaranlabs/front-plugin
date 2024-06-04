@@ -86,10 +86,15 @@ public class MenuBar {
 
 			if(role == null) {
 				result.add(m);
-				continue;
 			}
-			
-			if(subject != null && subject.hasRole(role)) {
+			else
+			if(subject == null) {
+				if("@not-authenticated".equals(role)) {
+					result.add(m);
+				}
+			}
+			else
+			if(subject.hasRole(role)) {
 			
 				String permission = m.getPermission();
 
