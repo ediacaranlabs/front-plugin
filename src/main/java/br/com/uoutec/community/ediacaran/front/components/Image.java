@@ -1,10 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.components;
 
-import java.awt.AlphaComposite;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -135,7 +132,6 @@ public class Image {
 
 	public void save(int width, int height, Path file) throws IOException {
 
-		/*
 		stream()
 			.dimension(new Dimension(
 					width, 
@@ -166,8 +162,8 @@ public class Image {
 					out.flush();
 				}
 			});
-		*/
 		
+		/*
 		BufferedImage img = null;
 		
 		try(InputStream in = tmpFile.openInputStream()){
@@ -214,7 +210,7 @@ public class Image {
 			ImageIO.write(image, "png", out);
 			out.flush();
 		}
-		
+		*/
 		
 	}
 	

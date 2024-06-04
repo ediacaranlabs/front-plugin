@@ -23,7 +23,7 @@ public class ImageStream {
 	    Graphics2D g2d = ContextSystemSecurityCheck.doPrivileged(()->mask.createGraphics());
 		try {
 			q.quality(g2d);
-			g2d.fillOval(0, 0, (int)d.getWidth(), (int)d.getHeight());
+			g2d.fillOval(0, 0, (int)d.getWidth() - 1,  (int)d.getHeight() - 1);
 		}
 		finally {
 			g2d.dispose();
@@ -49,13 +49,13 @@ public class ImageStream {
 	
 	private IQuality quality = (g)->{
 		g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
-		g.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
-		g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+	    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+	    g.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+	    g.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+	    g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+	    g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+	    g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 	};
 	
 	private ILoadImage loadImage;
@@ -124,10 +124,6 @@ public class ImageStream {
 		try {
 			quality.quality(g2d);
 			
-			//g2d.setComposite(AlphaComposite.Src);
-			//g2d.setColor(Color.WHITE);
-			//g2d.fillOval(0, 0, (int)dimension.getWidth(), (int)dimension.getHeight());
-			//g2d.setComposite(AlphaComposite.SrcAtop);
 			render.render(g2d, originalImage, dimension, imageBounds);
 			
 			if(mask != null) {
