@@ -14,7 +14,7 @@ public class MenuBarObjectParser {
 		Map<String,Object> o = new HashMap<String,Object>();
 		o.put("id", menubar.getId());
 		o.put("name", menubar.getName());
-		o.put("itens", toObject(menubar.getItens()));
+		o.put("itens", toObject(menubar.getAllItens()));
 		return o;
 	}
 	

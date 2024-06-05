@@ -11,6 +11,7 @@ import java.util.Map;
 
 import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.application.security.RuntimeSecurityPermission;
+import br.com.uoutec.community.ediacaran.security.BasicRoles;
 import br.com.uoutec.community.ediacaran.security.Subject;
 import br.com.uoutec.community.ediacaran.security.SubjectProvider;
 import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
@@ -88,13 +89,13 @@ public class MenuBar {
 				result.add(m);
 			}
 			else
-			if(subject == null) {
-				if("@not-authenticated".equals(role)) {
+			if(!subject.isAuthenticated()) {
+				if(BasicRoles.NOT_AUTHENTICATED.equals(role)) {
 					result.add(m);
 				}
 			}
 			else
-			if(subject.hasRole(role)) {
+			if(subject.isAuthenticated() && subject.hasRole(role)) {
 			
 				String permission = m.getPermission();
 
