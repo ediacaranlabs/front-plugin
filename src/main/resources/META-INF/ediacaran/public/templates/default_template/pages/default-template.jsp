@@ -16,8 +16,8 @@
 <meta name="${item.key}" content="${item.value}" />
 </c:forEach>
 <title>${page.title}</title>
-<link rel="canonical" href="${plugins.ediacaran.system.website}${pageContext.request.contextPath}${uri}">
-<meta property="og:url" content="${plugins.ediacaran.system.website}${pageContext.request.contextPath}${uri}">
+<link rel="canonical" href="${plugins.ediacaran.system.website}${uri}">
+<meta property="og:url" content="${plugins.ediacaran.system.website}${uri}">
 <meta property="fb:app_id">
 <c:if test="${!empty page.thumbnailDescription}">
 <meta property="og:title" content="${page.thumbnailTitle}">
