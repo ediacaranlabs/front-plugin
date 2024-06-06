@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
-import javax.resource.spi.IllegalStateException;
 import javax.validation.constraints.Max;
 
 import org.brandao.brutos.annotation.Basic;
