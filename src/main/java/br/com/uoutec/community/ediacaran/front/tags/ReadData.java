@@ -1,7 +1,7 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -228,12 +228,12 @@ public class ReadData {
 	}
 	
 	private static String readData(Path f) throws IOException {
-		byte[] b = new byte[2048];
+		char[] b = new char[2048];
 		int l;
 		
 		StringBuilder builder = new StringBuilder();
 
-		try(InputStream fin = f.openInputStream()) {
+		try(InputStreamReader fin = new InputStreamReader(f.openInputStream(), "UTF-8")) {
 			while((l = fin.read(b)) != -1) {
 				builder.append(new String(b, 0, l));
 			}

@@ -17,8 +17,6 @@ import br.com.uoutec.community.ediacaran.front.PropertyConfig;
 
 @Singleton
 @Controller(value="/flotcharts", defaultActionName="/")
-@AcceptRequestType(MediaTypes.APPLICATION_JSON)
-@ResponseType(MediaTypes.APPLICATION_JSON)
 public class FlotChartsPubResource {
 
 	private static Random r = new Random();
@@ -30,6 +28,8 @@ public class FlotChartsPubResource {
 	}
 	
 	@Action(value="/")
+	@AcceptRequestType(MediaTypes.APPLICATION_JSON)
+	@ResponseType(MediaTypes.APPLICATION_JSON)
 	public synchronized Serializable loadData(){
 		update();
 		
@@ -78,6 +78,8 @@ public class FlotChartsPubResource {
 	}
 	
 	@Action(value="/line-chart")
+	@AcceptRequestType(MediaTypes.APPLICATION_JSON)
+	@ResponseType(MediaTypes.APPLICATION_JSON)
 	public synchronized Serializable lineChart(){
 		update();
 
@@ -112,80 +114,4 @@ public class FlotChartsPubResource {
 		return m;
 	}
 	
-/*	
-	@SuppressWarnings("serial")
-	public static class MapBuilder 
-		extends HashMap<Object,Object>{
-		
-		private Object parentName;
-		
-		private MapBuilder parent;
-		
-		public MapBuilder() {
-			this(null, null);
-		}
-		
-		public MapBuilder(Object name, MapBuilder parent) {
-			this.parent = parent;
-			this.parentName = name;
-		}
-		
-		public MapBuilder parent() {
-			return parent;
-		}
-
-		public MapBuilder add(){
-			
-			Object o = parent.get(parentName);
-			BuilderList list;
-			
-			if(o instanceof BuilderList) {
-				list = ((BuilderList)o);
-			}
-			else {
-				list = new BuilderList(this);
-				parent.put(parentName, list);
-			}
-			
-			MapBuilder m = new MapBuilder(null, this);
-			list.add(m);
-			return m;
-		}
-		
-		public MapBuilder with(Object key, Object ...value){
-			
-			if(value.length == 0) {
-				MapBuilder m = new MapBuilder(key, this);
-				put(key,m);
-				return m;
-			}
-			else
-			if(value.length == 1) {
-				put(key,value[0]);
-			}
-			else {
-				put(key, (Object)Arrays.asList(value));
-			}
-			
-			return this;
-		}
-		
-	}
-	
-	@SuppressWarnings("serial")
-	public static class BuilderList extends ArrayList<Object>{
-		
-		private MapBuilder parent;
-
-		public BuilderList(MapBuilder parent){
-			super();
-			this.parent = parent;
-		}
-
-		public MapBuilder getParent() {
-			return parent;
-		}
-		
-	}
-*/	
 }
