@@ -24,8 +24,6 @@ import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
 
 @Singleton
 @Controller(value="/autocomplete")
-@AcceptRequestType(MediaTypes.APPLICATION_JSON)
-@ResponseType(MediaTypes.APPLICATION_JSON)
 public class AutocompletePubResource {
 
 	private List<String> list;
@@ -145,6 +143,8 @@ public class AutocompletePubResource {
 	@SuppressWarnings("serial")
 	@Action(value="/search-icons")
 	@RequestMethod("POST")
+	@AcceptRequestType(MediaTypes.APPLICATION_JSON)
+	@ResponseType(MediaTypes.APPLICATION_JSON)
 	public synchronized Serializable searchIcons(@Basic(bean="value") String value){
 		
 		ThemeRegistry tr = EntityContextPlugin.getEntity(ThemeRegistry.class);
@@ -172,6 +172,8 @@ public class AutocompletePubResource {
 	@SuppressWarnings("serial")
 	@Action(value="/search")
 	@RequestMethod("POST")
+	@AcceptRequestType(MediaTypes.APPLICATION_JSON)
+	@ResponseType(MediaTypes.APPLICATION_JSON)
 	public synchronized Serializable loadData(@Basic(bean="value") String value){
 		return (Serializable)list.stream()
 			.filter(e->value != null && e.toLowerCase().contains(value.toLowerCase()))
