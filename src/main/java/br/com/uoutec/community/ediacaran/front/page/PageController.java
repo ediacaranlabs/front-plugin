@@ -16,7 +16,6 @@ import org.brandao.brutos.web.HttpStatus;
 import org.brandao.brutos.web.WebDispatcherType;
 import org.brandao.brutos.web.WebResultAction;
 
-import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplateType;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectTemplate;
 import br.com.uoutec.ediacaran.core.plugins.PublicType;
 

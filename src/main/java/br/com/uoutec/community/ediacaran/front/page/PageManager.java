@@ -15,9 +15,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplate;
-import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplateType;
-import br.com.uoutec.community.ediacaran.front.objects.PagesObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.system.i18n.I18nRegistry;
 import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;

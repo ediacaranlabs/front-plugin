@@ -26,9 +26,9 @@ import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
 import br.com.uoutec.application.security.ContextSystemSecurityCheck;
-import br.com.uoutec.community.ediacaran.front.objects.PageObjectTemplateType;
 import br.com.uoutec.community.ediacaran.front.page.Page;
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
+import br.com.uoutec.community.ediacaran.front.page.PageObjectTemplateType;
 import br.com.uoutec.community.ediacaran.security.BasicRoles;
 import br.com.uoutec.community.ediacaran.security.RequiresPermissions;
 import br.com.uoutec.community.ediacaran.security.RequiresRole;

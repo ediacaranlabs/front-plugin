@@ -1,4 +1,4 @@
-package br.com.uoutec.community.ediacaran.front.objects;
+package br.com.uoutec.community.ediacaran.front.page;
 
 import br.com.uoutec.community.ediacaran.system.repository.ObjectTemplate;
 
