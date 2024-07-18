@@ -86,7 +86,9 @@ $.AppContext.regexUtil.patterns = function(){
 	
 			ADDRESS_FORMAT:	new RegExp($.AppContext.regexUtil.constants.ADDRESS_FORMAT()),
 	
-			PASSWORD: new RegExp($.AppContext.regexUtil.constants.PASSWORD_FORMAT())
+			PASSWORD: new RegExp($.AppContext.regexUtil.constants.PASSWORD_FORMAT()),
+			
+			WORD_NUM: new RegExp($.AppContext.regexUtil.constants.WORD_NUM())
 	
 	};
 	
