@@ -13,6 +13,10 @@ body {
   color: #545454;
 }
 
+.form-control[readonly] {
+    pointer-events: none;
+}
+
 .disabled {
     pointer-events: none;
     opacity: 0.4;
