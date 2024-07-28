@@ -167,7 +167,8 @@ $.AppContext.types.Form = function($form){
 };
 
 $.AppContext.types.Form.prototype.submit = function($validate = true, $resource = null, $dest = null){
-	$.AppContext.utils.submit(this.obj,$validate, $resource, $dest);
+//	$.AppContext.utils.submit(this.obj,$validate, $resource, $dest);
+	this.obj.submit();
 };
 
 $.AppContext.types.Form.prototype.updateFieldIndex = function($group = null, $no = null){
