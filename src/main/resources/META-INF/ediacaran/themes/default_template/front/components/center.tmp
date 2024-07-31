@@ -1,0 +1,1 @@
+<span {attr} class="mx-auto d-block text-center {block} {enabled} {classStyle} {align}">{content}</span>
