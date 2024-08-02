@@ -428,6 +428,12 @@ $.AppContext.types.Field.prototype.setValue = function(value){
 	else{
 		$(this.field).val(value);
 	}
+
+	var $bv = this.form.data('bootstrapValidator');
+	
+	if($bv){
+		$bv.resetForm();
+	}
 	
 };
 
