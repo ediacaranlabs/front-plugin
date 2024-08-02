@@ -107,21 +107,25 @@ $.AppContext.autocomplete.search = function($resource, $request, $field, $fieldL
 								value: $(this).attr("value")
 				        	}
 					    };
+					    
 			    		$.AppContext.eventListeners.fireEvent($evt);
-			    								
-						$field.val($evt.data.value);
-						$fieldList.hide();
-						
-						var $evt = {
-				    		sourceID: "autocomplete.change",
-				    		type: "after",
-				    		data: {
-								id: $(this).attr("id"),
-								name: $(this).attr("name"),
-								value: $(this).attr("value")
-				        	}
-					    };
-			    		$.AppContext.eventListeners.fireEvent($evt);
+			    		
+					    try{
+							$field.val($evt.data.value);
+							$fieldList.hide();
+						}
+						finally{
+							var $evt = {
+					    		sourceID: "autocomplete.change",
+					    		type: "after",
+					    		data: {
+									id: $(this).attr("id"),
+									name: $(this).attr("name"),
+									value: $(this).attr("value")
+					        	}
+						    };
+				    		$.AppContext.eventListeners.fireEvent($evt);
+						}
 						
 					})
 					.hover(function(){

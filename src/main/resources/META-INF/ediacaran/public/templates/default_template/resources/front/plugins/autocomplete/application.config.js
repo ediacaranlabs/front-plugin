@@ -97,8 +97,35 @@ $.AppContext.autocomplete.search = function($resource, $request, $field, $fieldL
 				.each(function() {
 					
 					$(this).click(function(){
-						$field.val($(this).attr("value"));
-						$fieldList.hide();
+						
+						var $evt = {
+				    		sourceID: "autocomplete.change",
+				    		type: "before",
+				    		data: {
+								id: $(this).attr("id"),
+								name: $(this).attr("name"),
+								value: $(this).attr("value")
+				        	}
+					    };
+					    
+			    		$.AppContext.eventListeners.fireEvent($evt);
+			    		
+					    try{
+							$field.val($evt.data.value);
+							$fieldList.hide();
+						}
+						finally{
+							var $evt = {
+					    		sourceID: "autocomplete.change",
+					    		type: "after",
+					    		data: {
+									id: $(this).attr("id"),
+									name: $(this).attr("name"),
+									value: $(this).attr("value")
+					        	}
+						    };
+				    		$.AppContext.eventListeners.fireEvent($evt);
+						}
 					})
 					.hover(function(){
 						
