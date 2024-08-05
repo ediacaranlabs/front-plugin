@@ -22,6 +22,19 @@ body {
     opacity: 0.4;
 }
 
+select[readonly] {
+  background: #eee;
+  pointer-events: none;
+  touch-action: none;
+}
+
+input[readonly] {
+  background: #eee;
+  pointer-events: none;
+  touch-action: none;
+  opacity: 0.5;
+}
+
 a:active {
   outline: 0;
 }
