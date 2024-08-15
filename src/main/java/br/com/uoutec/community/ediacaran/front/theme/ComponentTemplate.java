@@ -11,6 +11,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.jsp.PageContext;
+
 public class ComponentTemplate {
 
     private String original;
@@ -421,7 +423,31 @@ public class ComponentTemplate {
 	public List<TagTemplateVar> getVars() {
 		return vars;
 	}
-    
+
+	public static interface ThemeVarParser {
+		
+		void setTheme(Theme value);
+		
+	}
+
+	public static interface PropertiesVarParser {
+		
+		void setProperties(Map<String,Object> value);
+		
+	}
+	
+	public static interface PackageThemeVarParser {
+		
+		void setPackageTheme(String value);
+		
+	}
+	
+	public static interface PageContextVarParser {
+	
+		void setPageContext(PageContext value);
+		
+	}
+	
 	public static interface VarParser{
 		
 		void parse(Writer writter) throws IOException;

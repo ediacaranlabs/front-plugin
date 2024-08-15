@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
 import br.com.uoutec.community.ediacaran.front.tags.SetTemplatePackageTag;
+import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate.PackageThemeVarParser;
+import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate.PageContextVarParser;
+import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate.PropertiesVarParser;
+import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate.ThemeVarParser;
 import br.com.uoutec.community.ediacaran.front.theme.ComponentVars;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateVarParser;
@@ -256,7 +260,28 @@ public class Component
 	}
 	
 	private Map<String,Object> getVars(Set<String> defaultProperties, Set<String> emptyProperties){
-		return componentData.getProperties(defaultProperties, emptyProperties);
+		
+		Map<String,Object> map = componentData.getProperties(defaultProperties, emptyProperties);
+		
+		Theme theme = getTheme();
+		String packageTheme = getPackageTheme();
+		
+		for(Object o: map.values()) {
+			if(o instanceof PageContextVarParser) {
+				((PageContextVarParser)o).setPageContext(pageContext);
+			}
+			if(o instanceof ThemeVarParser) {
+				((ThemeVarParser)o).setTheme(theme);
+			}
+			if(o instanceof PackageThemeVarParser) {
+				((PackageThemeVarParser)o).setPackageTheme(packageTheme);
+			}
+			if(o instanceof PropertiesVarParser) {
+				((PropertiesVarParser)o).setProperties(map);
+			}
+		}
+		
+		return map;
 	}
 	
 	public Theme getTheme() {
