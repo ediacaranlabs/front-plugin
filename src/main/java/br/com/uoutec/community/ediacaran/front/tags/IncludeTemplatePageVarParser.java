@@ -23,21 +23,15 @@ public class IncludeTemplatePageVarParser
 	
 	private HttpServletRequest request;
 	
+	@SuppressWarnings("unused")
 	private PageContext pageContext;
 	
 	private String jspTemplate;
 
-	private String context;
-	
 	private Map<String, Object> properties;
 	
-	public IncludeTemplatePageVarParser(String context, String jspTemplate) {
-		this.context = context;
+	public IncludeTemplatePageVarParser(String jspTemplate) {
 		this.jspTemplate = jspTemplate;
-	}
-	
-	protected String getContext() {
-		return context;
 	}
 	
 	protected String getJSPTemplate() {
@@ -47,8 +41,14 @@ public class IncludeTemplatePageVarParser
 	@Override
 	public void parse(Writer writter) throws IOException {
 		
-		String localContext = getContext();
 		String localJSPTemplate = getJSPTemplate();
+		String localContext     = null;
+		
+		if(localJSPTemplate.contains(":")) {
+			String[] tmp = localJSPTemplate.split(localContext, 2);
+			localContext = tmp[0];
+			localJSPTemplate = tmp[1];
+		}
 		
     	ServletContext servletContext = request.getServletContext();
     	
@@ -64,7 +64,7 @@ public class IncludeTemplatePageVarParser
     		boolean newContext = !servletContext.equals(request.getServletContext());
     		
     		request.setAttribute("newContext", newContext);
-    		request.setAttribute("jspTemplateProperties", properties);
+    		request.setAttribute("vars", properties);
     		
     		servletContext.getRequestDispatcher(localJSPTemplate).include(request, irw);
     	}

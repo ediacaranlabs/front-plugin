@@ -39,7 +39,17 @@ public class ThemeImp implements Theme{
 		TemplateComponent p = tagTemplates.get(template);
 		
 		if(p == null) {
-			throw new ThemeException("template not found: " + template);
+			if(temaPackage.getName().equals("front")) {
+				throw new ThemeException("template not found: " + template);
+			}
+			
+			temaPackage = getPackage(null);
+			tagTemplates = temaPackage.getTagTemplates();
+			p = tagTemplates.get(template);
+			
+			if(p == null) {
+				throw new ThemeException("default template not found: " + template);
+			}
 		}
 		
 		Map<String, Object> vars = new HashMap<String, Object>();
