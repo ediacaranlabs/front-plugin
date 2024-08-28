@@ -230,6 +230,9 @@ public class Component
 
 		result.put("attr", getAttrList(attributeParsers, emptyAttributes, defaultAttributes));
 		
+		Theme theme = getTheme();
+		String packageTheme = getPackageTheme();
+		
 		for(Entry<String,Object> e: vars.entrySet()) {
 			
 			String p = e.getKey();
@@ -247,6 +250,25 @@ public class Component
 			}
 			
 		}
+
+		for(Entry<String,Object> e: result.entrySet()) {
+			
+			Object v = e.getValue(); 
+			
+			if(v instanceof PageContextVarParser) {
+				((PageContextVarParser)v).setPageContext(pageContext);
+			}
+			if(v instanceof ThemeVarParser) {
+				((ThemeVarParser)v).setTheme(theme);
+			}
+			if(v instanceof PackageThemeVarParser) {
+				((PackageThemeVarParser)v).setPackageTheme(packageTheme);
+			}
+			if(v instanceof PropertiesVarParser) {
+				((PropertiesVarParser)v).setProperties(vars);
+			}
+			
+		}
 		
 		/*
 		if(result.get("id") == null) {
@@ -260,28 +282,7 @@ public class Component
 	}
 	
 	private Map<String,Object> getVars(Set<String> defaultProperties, Set<String> emptyProperties){
-		
-		Map<String,Object> map = componentData.getProperties(defaultProperties, emptyProperties);
-		
-		Theme theme = getTheme();
-		String packageTheme = getPackageTheme();
-		
-		for(Object o: map.values()) {
-			if(o instanceof PageContextVarParser) {
-				((PageContextVarParser)o).setPageContext(pageContext);
-			}
-			if(o instanceof ThemeVarParser) {
-				((ThemeVarParser)o).setTheme(theme);
-			}
-			if(o instanceof PackageThemeVarParser) {
-				((PackageThemeVarParser)o).setPackageTheme(packageTheme);
-			}
-			if(o instanceof PropertiesVarParser) {
-				((PropertiesVarParser)o).setProperties(map);
-			}
-		}
-		
-		return map;
+		return componentData.getProperties(defaultProperties, emptyProperties);
 	}
 	
 	public Theme getTheme() {

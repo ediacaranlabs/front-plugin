@@ -45,7 +45,7 @@ public class IncludeTemplatePageVarParser
 		String localContext     = null;
 		
 		if(localJSPTemplate.contains(":")) {
-			String[] tmp = localJSPTemplate.split(localContext, 2);
+			String[] tmp = localJSPTemplate.split(":", 2);
 			localContext = tmp[0];
 			localJSPTemplate = tmp[1];
 		}
