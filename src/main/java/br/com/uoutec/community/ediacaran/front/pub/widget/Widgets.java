@@ -6,14 +6,21 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import br.com.uoutec.community.ediacaran.security.BasicRoles;
+import br.com.uoutec.community.ediacaran.security.Subject;
+import br.com.uoutec.community.ediacaran.security.SubjectProvider;
 import br.com.uoutec.ediacaran.core.plugins.PublicBean;
 
 @Singleton
 public class Widgets implements PublicBean{
 
-	private PropertyChangeSupport propertyChangeSupport;
+	private final PropertyChangeSupport propertyChangeSupport;
+	
+	@Inject
+	private SubjectProvider subjectProvider;
 	
 	private List<Widget> itens;
 	
@@ -43,14 +50,14 @@ public class Widgets implements PublicBean{
 	}
 
 	public Widget getWidget(String name){
-		Widget w = new Widget(name, null, 0);
+		Widget w = new Widget(name, null, null, null, 0);
 		int index = this.itens.indexOf(w);
 		return index != -1? this.itens.get(index) : null; 
 	}
 	
 	public void removeWidget(String value) throws WidgetException{
 		
-		Widget w = new Widget(value, null, 0);
+		Widget w = new Widget(value, null, null, null, 0);
 		this.itens.remove(w);
 		
 		propertyChangeSupport.fireIndexedPropertyChange("widget", itens.size(), w, null);
@@ -58,7 +65,73 @@ public class Widgets implements PublicBean{
 	}
 
 	public List<Widget> getWidgets(){
+		
+		Subject subject = subjectProvider.getSubject();
+		
+		List<Widget> result = new ArrayList<>();
+		
+		itens.stream().forEach((e)->{
+			
+			if(e.getRole() == null) {
+				result.add(e);
+			}
+			else
+			if(!subject.isAuthenticated()) {
+				for(String role: e.getRole()) {
+					if(BasicRoles.NOT_AUTHENTICATED.equals(role)) {
+						result.add(e);
+						break;
+					}
+				}
+			}
+			else
+			if(subject.isAuthenticated() && hasRole(subject, e.getRole())) {
+			
+				if(e.getPermission() == null || isPermitted(subject, e.getPermission())) {
+					result.add(e);
+				}
+				
+			}
+			
+		});
+		
 		return this.itens;
+	}
+	
+	private boolean hasRole(Subject subject, String[] roles) {
+		
+		if(roles == null) {
+			return false;
+		}
+		
+		boolean[] values = subject.hasRoles(roles);
+
+		for(boolean test: values) {
+			
+			if(test) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	private boolean isPermitted(Subject subject, String[] permissions) {
+		
+		if(permissions == null) {
+			return false;
+		}
+		
+		boolean[] values = subject.isPermitted(permissions);
+
+		for(boolean test: values) {
+			
+			if(test) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 }

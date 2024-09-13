@@ -4,6 +4,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -55,9 +56,9 @@ public class Menu implements Serializable {
 
 	private final MenuBar parentMenuBar;
 	
-	private String role;
+	private String[] role;
 	
-	private String permission;
+	private String[] permission;
 	
 	private int order;
 
@@ -304,28 +305,28 @@ public class Menu implements Serializable {
 		
 		for(Menu m: itens) {
 			
-			String role = m.getRole();
+			String[] role = m.getRole();
 
 			if(role == null) {
 				result.add(m);
 			}
 			else
 			if(!subject.isAuthenticated()) {
-				if(BasicRoles.NOT_AUTHENTICATED.equals(role)) {
+				if(hasRole(BasicRoles.NOT_AUTHENTICATED)) {
 					result.add(m);
 				}
 			}
 			else
-			if(subject.isAuthenticated() && subject.hasRole(role)) {
+			if(subject.isAuthenticated() && hasRole(subject,role)) {
 			
-				String permission = m.getPermission();
+				String[] permission = m.getPermission();
 
 				if(permission == null) {
 					result.add(m);
 					continue;
 				}
 				
-				if(subject.isPermitted(permission)) {
+				if(isPermitted(subject,permission)) {
 					result.add(m);
 				}
 			}
@@ -333,6 +334,32 @@ public class Menu implements Serializable {
 		}
 		
 		return Collections.unmodifiableList(result);
+	}
+	
+	private boolean hasRole(Subject subject, String[] roles) {
+		
+		boolean[] hasRoles = subject.hasRoles(roles);
+		
+		for(boolean hasRole: hasRoles) {
+			if(hasRole) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	private boolean isPermitted(Subject subject, String[] permissions) {
+		
+		boolean[] isPermitted = subject.isPermitted(permissions);
+		
+		for(boolean p: isPermitted) {
+			if(p) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	public String getBadge() {
@@ -426,30 +453,30 @@ public class Menu implements Serializable {
 
     }
     
-	public String getPermission() {
+	public String[] getPermission() {
 		return permission;
 	}
 
-	public Menu setPermission(String permission) {
+	public Menu setPermission(String ... permission) {
 		
-		String oldValue = this.permission;
+		String[] oldValue = this.permission;
 		this.permission = permission;
 		propertyChangeSupport.firePropertyChange("permission", oldValue, permission);
 		
 		return this;
 	}
 
-	public String getRole() {
+	public String[] getRole() {
 		return role;
 	}
 
 	public boolean hasRole(String role) {
-		return role != null && role.equals(this.role);
+		return role != null && Arrays.binarySearch(this.role, role, (a,b)->a.compareTo(b)) >= 0;
 	}
 	
-	public Menu setRole(String role) {
+	public Menu setRole(String ... role) {
 		
-		String oldValue = this.role;
+		String[] oldValue = this.role;
 		this.role = role;
 		propertyChangeSupport.firePropertyChange("role", oldValue, role);
 		

@@ -20,6 +20,7 @@ import br.com.uoutec.community.ediacaran.front.security.pub.AuthenticationMethod
 import br.com.uoutec.community.ediacaran.front.security.pub.WebSecurityManagerPlugin;
 import br.com.uoutec.community.ediacaran.front.theme.PluginThemesManager;
 import br.com.uoutec.community.ediacaran.security.AuthorizationManager;
+import br.com.uoutec.community.ediacaran.security.BasicRoles;
 import br.com.uoutec.community.ediacaran.system.i18n.Plugini18nManager;
 import br.com.uoutec.community.ediacaran.system.repository.FileManager;
 import br.com.uoutec.community.ediacaran.system.repository.FileObjectsManagerDriver;
@@ -173,15 +174,23 @@ public class PluginInstaller
 		
 		webSecurityManagerPlugin
 			.addConstraint(varParser.getValue("${plugins.ediacaran.front.manager_context}/*"))
-				.addRole("manager")
+				.addRole(BasicRoles.MANAGER)
 			.addConstraint(varParser.getValue("/templates/default_template${plugins.ediacaran.front.manager_context}/*"))
-				.addRole("manager")
+				.addRole(BasicRoles.MANAGER)
 			.addConstraint(varParser.getValue("${plugins.ediacaran.front.admin_context}/*"))
-				.addRole("manager")
-				.addRole("user")
+				.addRole(BasicRoles.MANAGER)
+				.addRole(BasicRoles.USER)
 			.addConstraint(varParser.getValue("/templates/default_template${plugins.ediacaran.front.admin_context}/*"))
-				.addRole("manager")
-				.addRole("user")
+				.addRole(BasicRoles.MANAGER)
+				.addRole(BasicRoles.USER)
+			.addConstraint(varParser.getValue("${plugins.ediacaran.front.panel_context}/*"))
+				.addRole(BasicRoles.MANAGER)
+				.addRole(BasicRoles.USER)
+				.addRole(BasicRoles.CLIENT)
+			.addConstraint(varParser.getValue("/templates/default_template/front/${plugins.ediacaran.front.panel_context}/*"))
+				.addRole(BasicRoles.MANAGER)
+				.addRole(BasicRoles.USER)
+				.addRole(BasicRoles.CLIENT)
 			.form()
 				.setOption(AuthenticationMethodBuilder.LOGIN_PAGE, "/login")
 				.setOption(AuthenticationMethodBuilder.ERROR_PAGE, "/login?error=true");
