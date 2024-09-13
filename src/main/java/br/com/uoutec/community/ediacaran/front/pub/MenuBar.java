@@ -83,28 +83,28 @@ public class MenuBar {
 		
 		for(Menu m: list) {
 			
-			String role = m.getRole();
+			String[] role = m.getRole();
 
 			if(role == null) {
 				result.add(m);
 			}
 			else
 			if(!subject.isAuthenticated()) {
-				if(BasicRoles.NOT_AUTHENTICATED.equals(role)) {
+				if(m.hasRole(BasicRoles.NOT_AUTHENTICATED)) {
 					result.add(m);
 				}
 			}
 			else
-			if(subject.isAuthenticated() && subject.hasRole(role)) {
+			if(subject.isAuthenticated() && hasRole(subject,role)) {
 			
-				String permission = m.getPermission();
+				String[] permission = m.getPermission();
 
 				if(permission == null) {
 					result.add(m);
 					continue;
 				}
 				
-				if(subject.isPermitted(permission)) {
+				if(isPermitted(subject,permission)) {
 					result.add(m);
 				}
 			}
@@ -114,6 +114,32 @@ public class MenuBar {
 		return Collections.unmodifiableList(result);
 		
 		//return this.list;
+	}
+	
+	private boolean hasRole(Subject subject, String[] roles) {
+		
+		boolean[] hasRoles = subject.hasRoles(roles);
+		
+		for(boolean hasRole: hasRoles) {
+			if(hasRole) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	private boolean isPermitted(Subject subject, String[] permissions) {
+		
+		boolean[] isPermitted = subject.isPermitted(permissions);
+		
+		for(boolean p: isPermitted) {
+			if(p) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	public Menu addMenu(String id){
