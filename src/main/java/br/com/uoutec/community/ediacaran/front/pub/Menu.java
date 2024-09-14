@@ -471,7 +471,7 @@ public class Menu implements Serializable {
 	}
 
 	public boolean hasRole(String role) {
-		return role != null && Arrays.binarySearch(this.role, role, (a,b)->a.compareTo(b)) >= 0;
+		return this.role != null && role != null && Arrays.binarySearch(this.role, role, (a,b)->a.compareTo(b)) >= 0;
 	}
 	
 	public Menu setRole(String ... role) {

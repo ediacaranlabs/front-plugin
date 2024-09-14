@@ -62,7 +62,9 @@ public class DataMenubarParser {
 		menu.setResourceBundle(resourceBundleDTA);
 		menu.setBadgeStyle(badgeStyleDTA);
 		menu.setTemplate(templateDTA);
-		menu.setRole(roleDTA);
+		if(roleDTA != null) {
+			menu.setRole(roleDTA);
+		}
 		menu.setPermission(permissionDTA);
 		menu.setOrder(orderDTA == null? 0 : orderDTA.intValue());
 		menu.setPersistent(true);
