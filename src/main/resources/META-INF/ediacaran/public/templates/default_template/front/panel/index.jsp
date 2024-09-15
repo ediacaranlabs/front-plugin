@@ -138,6 +138,96 @@ Inner - Section: page headline
 	
 }
 
+/* panel nav */
+
+.navbar-panel .dropdown-menu {
+	border: 0px;
+	font-size: unset;
+	padding: 0 0;
+}
+
+.navbar-panel .dropdown-item {
+	padding: 0.5rem 0.5rem;	
+    background: #252525;	
+} 
+
+.navbar-panel .nav-item:hover{
+	color: #ffffff;
+}
+
+.navbar-panel .dropdown-item:hover{
+	color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar-panel .nav-link i:first-child {
+    margin-right: 5px;
+}
+
+.navbar-panel .dropdown-item  i:first-child {
+    margin-right: 5px;
+}
+
+.navbar-panel .navbar-nav .nav-link{
+	text-transform: uppercase;
+}
+
+.navbar-panel .nav-item a{
+	color: #656565;
+	text-transform: uppercase;
+}
+
+.navbar-panel .nav-item a:hover{
+	color: #ffffff;
+}
+
+.navbar-panel .dropdown-menu {
+	background: #222;
+	color: #ddd;
+	border-radius: 0;
+	border: 0px;
+	font-size: inherit;
+}
+
+.navbar-panel .dropdown-item:hover{
+	background: #F03C02;
+    color: #919191;
+}
+ 
+@media (min-width: 1200px){
+	.navbar-panel.navbar{
+		padding: 0 0;
+	}
+
+	.navbar-panel .navbar-nav{
+		margin: 0px 0px;
+	}
+	
+	.navbar-panel.nav-item a{
+		padding: 10px 15px 10px 15px;
+		color: #656565;
+		text-transform: uppercase;
+	}
+	
+	.navbar-panel .nav-item a:hover{
+		color: #ffffff;
+	}
+	
+	.navbar-panel .dropdown-menu {
+		padding: 0px 0px;
+		background: #222;
+		color: #ddd;
+		border-radius: 0;
+		margin: 0 0;
+		border: 0px;
+		font-size: inherit;
+	}
+	
+	.navbar-panel .dropdown-item:hover{
+		background: #F03C02;
+	    color: #919191;
+	}
+}
+
 </style>
 </head>
 
@@ -167,7 +257,7 @@ Inner - Section: page headline
 					<ec:menu-bar 
 						id="panel_menu" 
 						expand="xl" 
-						style="dark">
+						style="panel">
 						<ec:menu-toggler menuID="panel_menu_body">
 							<ec:icon icon="bars" />
 						</ec:menu-toggler>
