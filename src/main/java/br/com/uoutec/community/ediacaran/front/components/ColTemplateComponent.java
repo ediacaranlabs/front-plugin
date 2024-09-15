@@ -44,8 +44,8 @@ public class ColTemplateComponent extends AbstractTemplateComponent {
 						Integer order  = (Integer)component.getProperty("order");
 						
 						String sizeStyle   = size == null?   "col" : "col-sm-12 col-md-12 " + "col-lg-" + size + " col-xl-" + size;
-						String offsetStyle = offset == null? ""    : "offset-lg-" + offset + " offset-xl-" + offset;
-						String orderStyle  = order == null?  ""    : "order-lg-" + order + " order-xl-" + order;
+						String offsetStyle = offset == null? ""                        : "offset-lg-" + offset + " offset-xl-" + offset;
+						String orderStyle  = order == null?  ""                        : "order-lg-" + order + " order-xl-" + order;
 						
 						return sizeStyle + " " + offsetStyle + " " + orderStyle;
 					}
