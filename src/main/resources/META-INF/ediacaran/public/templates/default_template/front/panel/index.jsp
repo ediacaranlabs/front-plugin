@@ -338,7 +338,7 @@ Inner - Section: page headline
 	
 	<script type="text/javascript">
 		$.AppContext.onload(function(){			
-			$.AppContext.utils.loadResourceContent($.AppContext.vars.painel, '/plugins/ediacaran/front${plugins.ediacaran.front.admin_context}/dashboard')
+			$.AppContext.utils.loadResourceContent($.AppContext.vars.painel, '/plugins/ediacaran/front${plugins.ediacaran.front.panel_context}/dashboard')
 		});
 	</script>
  
