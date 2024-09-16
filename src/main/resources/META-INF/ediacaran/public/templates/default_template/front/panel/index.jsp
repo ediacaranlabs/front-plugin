@@ -140,6 +140,10 @@ Inner - Section: page headline
 
 /* panel nav */
 
+.navbar-panel .navbar-nav i {
+	display: none;
+}
+
 .navbar-panel .dropdown-menu {
 	border: 0px;
 	font-size: unset;
