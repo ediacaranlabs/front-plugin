@@ -13,6 +13,7 @@ import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.ediacaran.core.EdiacaranEventListener;
 import br.com.uoutec.ediacaran.core.EdiacaranEventObject;
 import br.com.uoutec.ediacaran.web.ContextInitializer;
+import br.com.uoutec.ediacaran.web.LocaleResolver;
 import br.com.uoutec.i18n.MessageBundleThread;
 
 @Singleton
@@ -50,7 +51,7 @@ public class LanguageRequestListener implements EdiacaranEventListener{
 
 	private void requestInitialized(ServletRequestEvent arg0) {
 		HttpServletRequest request = (HttpServletRequest) arg0.getServletRequest();
-		Locale locale = getCurrentLocale(request);
+		Locale locale = LocaleResolver.getCurrentLocale(request);//getCurrentLocale(request);
 		
 		request.setAttribute(LOCALE_VAR,           locale);
 		request.setAttribute(DEFAULT_LOCALE_VAR,   Locale.getDefault());
@@ -62,6 +63,8 @@ public class LanguageRequestListener implements EdiacaranEventListener{
 		MessageBundleThread.destroyThreadLocale();
 	}
 	
+	@SuppressWarnings("unused")
+	@Deprecated
 	private Locale getCurrentLocale(HttpServletRequest request){
 		try{
 			String langVar = null;
