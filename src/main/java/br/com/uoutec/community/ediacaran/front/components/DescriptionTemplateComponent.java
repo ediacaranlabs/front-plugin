@@ -38,7 +38,7 @@ public class DescriptionTemplateComponent  extends AbstractTemplateComponent {
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						return "text-truncate";
+						return Boolean.FALSE.equals(value)? "" : "text-truncate";
 					}
 					
 				});

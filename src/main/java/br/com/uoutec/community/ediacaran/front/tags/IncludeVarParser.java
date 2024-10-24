@@ -11,6 +11,7 @@ import javax.servlet.jsp.PageContext;
 
 import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate.VarParser;
 import br.com.uoutec.community.ediacaran.front.theme.Theme;
+import br.com.uoutec.ediacaran.web.WebUtil;
 
 public class IncludeVarParser implements VarParser{
 
@@ -45,7 +46,26 @@ public class IncludeVarParser implements VarParser{
     		path = uri;
     	}
     	else {
-	    	path 					= theme.getTemplate(packageName) + uri;
+    		
+    		if(!uri.startsWith("/")) {
+    	    	String reqID = WebUtil.getRequestPath(request);
+    	    	reqID = reqID.replaceAll("\\+", "/");
+    	    	reqID = reqID.replaceAll("/+", "/");
+    	    	
+    	    	int index = reqID.lastIndexOf("/");
+    	    	
+    	    	if(index != -1) {
+    	    		path = reqID.substring(0, index) + "/" + uri;
+    	    	}
+    	    	else {
+    	    		path = uri;
+    	    	}
+    			
+    		}
+    		else {
+    	    	path = theme.getTemplate(packageName) + uri;
+    		}
+    		
 	    	String currentContext 	= servletContext.getContextPath().toLowerCase();
 	    	String context 			= theme.getContext();
 	    	String themeContext 	= context == null? null : context.toLowerCase();
