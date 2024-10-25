@@ -107,6 +107,12 @@
 			<version>1.0.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>br.com.uoutec</groupId>
+			<artifactId>entity-filter-plugin</artifactId>
+			<version>1.0.0</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- test -->
 		<dependency>
             <groupId>org.junit.jupiter</groupId>
