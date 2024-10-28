@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
+import br.com.uoutec.filter.invoker.annotation.EnableFilters;
 
 @Singleton
 public class UserEventsProvider {
@@ -12,6 +13,7 @@ public class UserEventsProvider {
 	@Inject
 	public UserEventListenerManager userEventListenerManager;
 	
+	@EnableFilters(UserEventListenerManager.class)
 	public UserEvent[] getEvents() throws InterruptedException{
 		return userEventListenerManager.getEvents();
 	}

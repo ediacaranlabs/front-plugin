@@ -16,9 +16,7 @@ import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.RequestMethodTypes;
 import org.brandao.brutos.annotation.web.WebActionStrategyType;
 
-import br.com.uoutec.community.ediacaran.front.UserEventListenerManager;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
-import br.com.uoutec.filter.invoker.annotation.EnableFilters;
 
 @Singleton
 @Controller
@@ -33,7 +31,6 @@ public class EventPubResource {
 	
 	@Action(value="/events")
 	@RequestMethod(RequestMethodTypes.GET)
-	@EnableFilters(UserEventListenerManager.class)
 	public Serializable events() throws InterruptedException{
 		
 		UserEvent[] evts = userEventsProvider.getEvents();
