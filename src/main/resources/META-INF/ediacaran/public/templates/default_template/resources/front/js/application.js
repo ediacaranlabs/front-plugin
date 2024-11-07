@@ -859,5 +859,9 @@ $(function (){
 	$.AppContext.utils.executeAsyncLoad();
 	$.AppContext.eventListeners.init();
 	
-	$.AppContext.vars.loaded   = true;
+	var $pathIndex = location.href.indexOf("#!");
+	var $path = location.href.substring($pathIndex + 2);
+	$.AppContext.loadContentOnPanel($path);
+	
+	$.AppContext.vars.loaded = true;
 });
