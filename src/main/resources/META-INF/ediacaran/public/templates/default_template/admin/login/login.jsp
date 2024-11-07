@@ -76,8 +76,8 @@
 			    --%>
 			    <ec:box-body>
 				    <p class="box-msg"><fmt:message key="box.message" bundle="${sys_messages}"/></p>
-				<ec:form id="authForm" action="${plugins.ediacaran.front.admin_login_page}" method="POST" update="result" acceptCharset="UTF-8">
-				      <input type="hidden" name="redirectTo" value="${plugins.ediacaran.front.landing_page}">
+				<ec:form id="authForm" action="${plugins.ediacaran.front.login_page}" method="POST" update="result" acceptCharset="UTF-8">
+				      <input type="hidden" name="redirectTo" value="${param.redirectTo}">
 				      <ed:row>
 			      		<ed:col>
 					      <ec:textfield name="username" placeholder="Email"/>
@@ -107,7 +107,7 @@
 				    <a href="${plugins.ediacaran.front.user_forgot_page}"><fmt:message key="box.forgot_pass" bundle="${sys_messages}"/></a><br>
 					</c:if>
 					<c:if test="${!empty plugins.ediacaran.front.user_register_page}">
-				    <a href="${plugins.ediacaran.front.user_register_page}" class="text-center"><fmt:message key="box.register" bundle="${sys_messages}"/></a>
+				    <a href="${plugins.ediacaran.front.user_register_page}${empty param.redirectTo? '' : '?redirectTo='.concat(param.redirectTo)}" class="text-center"><fmt:message key="box.register" bundle="${sys_messages}"/></a>
 					</c:if>
 					
 			    </ec:box-body>

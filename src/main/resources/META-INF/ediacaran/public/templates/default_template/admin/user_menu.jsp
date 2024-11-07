@@ -23,9 +23,9 @@
 </ed:row>
 <ed:row style="form">
 	<ed:col size="6">
-		<a href="#!${plugins.ediacaran.front.admin_perfil_page}"><fmt:message key="perfil_button" bundle="${sys_messages}"/></a>
+		<a href="#!${plugins.ediacaran.front.perfil_page}"><fmt:message key="perfil_button" bundle="${sys_messages}"/></a>
 	</ed:col>
 	<ed:col size="6" >
-		<a href="${plugins.ediacaran.front.admin_logout_page}"><fmt:message key="logout_button" bundle="${sys_messages}"/></a>
+		<a href="${plugins.ediacaran.front.logout_page}"><fmt:message key="logout_button" bundle="${sys_messages}"/></a>
 	</ed:col>
 </ed:row>

@@ -86,7 +86,7 @@
 				    <p class="box-msg"><fmt:message key="box.message" bundle="${sys_messages}"/></p>
 					<ec:form id="registerForm" action="${plugins.ediacaran.front.user_register_page}" method="post"
 					update="result">
-						<input type="hidden" name="redirectTo" value="${plugins.ediacaran.user.admin_context}">
+						<input type="hidden" name="redirectTo" value="${param.redirectTo}">
 						<%--
 						<ed:row>
 							<ed:col classStyle="form-group has-feedback">
@@ -201,6 +201,11 @@
 							</ed:col>
 						</ed:row>
 					</ec:form>
+					
+					<c:if test="${!empty plugins.ediacaran.front.login_page}">
+				    	<a href="${plugins.ediacaran.front.login_page}${empty param.redirectTo? '' : '?redirectTo='.concat(param.redirectTo)}" class="text-center">Fazer login</a>
+					</c:if>
+					
 					<div id="success_result" style="display:none">
 				    	<ed:row style="form">
 				    		<ed:col size="12">
