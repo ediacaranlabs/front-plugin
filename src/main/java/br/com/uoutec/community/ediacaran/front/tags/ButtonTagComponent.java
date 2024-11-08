@@ -104,7 +104,7 @@ public class ButtonTagComponent extends FieldFormTagComponent {
 		return label;
 	}
 
-	@TagAttribute(required=true)
+	@TagAttribute
 	public void setLabel(String label) {
 		this.label = label;
 	}
