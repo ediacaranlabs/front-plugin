@@ -860,8 +860,10 @@ $(function (){
 	$.AppContext.eventListeners.init();
 
 	var $pathIndex = location.href.indexOf("#!");
-	var $path = location.href.substring($pathIndex + 2);
-	$.AppContext.loadContentOnPanel($path);
+	if($pathIndex > 0){
+		var $path = location.href.substring($pathIndex + 2);
+		$.AppContext.loadContentOnPanel($path);
+	}
 	
 	$.AppContext.vars.loaded   = true;
 });
