@@ -264,6 +264,15 @@ $.AppContext.utils = {
 			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
 		},
 
+		updateContent: function ($resource, $isModal = false){
+			
+			var $address     = $.AppContext.utils.getAddress($resource);
+			var $destContent = $.AppContext.utils.getDestContent($resource);
+			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
+			
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
+		},
+
 		updateContentByID: function ($resource, $destContent, $isModal = false){
 			
 			var $address     = $.AppContext.utils.getAddress($resource);
