@@ -8,9 +8,11 @@ $.AppContext.types.Object = function($ref){
 	this.obj = $ref;
 };
 
-$.AppContext.types.Object.prototype.setValue = function(name, value){
+//$.AppContext.types.Object.prototype.setValue = function(name, value){
+$.AppContext.types.Object.prototype.setValue = function(value, name = null){
 	var $id = $(this.obj).attr('id');
-	$('#' + $id + '_' + name).html(value);
+	//$('#' + $id + '_' + name).html(value);
+	$('#' + $id + (name == null? '' : '_' + name) ).html(value);
 };
 
 $.AppContext.types.Object.prototype.getValue = function(name){
@@ -432,7 +434,7 @@ $.AppContext.types.Field.prototype.setValue = function(value){
 	else{
 		$(this.field).val(value);
 	}
-
+	
 	var $bv = this.form.data('bootstrapValidator');
 	
 	if($bv){
