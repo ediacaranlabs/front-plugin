@@ -267,7 +267,7 @@ $.AppContext.types.Form.prototype.getField = function(name, type = null){
 	
 	type = type == null? '' : type;
 	
-	var $field = $(this.obj).find(type + '[name=' + name + ']');
+	var $field = $(this.obj).find(type + "[name='" + name + "']");
 	var $form = this.obj;
 	
 	if($field.length == 0){
