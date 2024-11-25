@@ -147,6 +147,14 @@ img.float-left {
 Button
 ==================================== */
 
+.btn:not(:first-child) {
+    margin-left: 10px;
+}
+
+.btn.float-right:first-child{
+    margin-left: 10px;
+}
+
 .btn-danger * {
     color: #fff !important;
 }
