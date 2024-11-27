@@ -27,7 +27,7 @@ public class IncludeTag extends AbstractSimpleTagComponent {
 	
 	@Override
 	public String getType() {
-		return "textfield";
+		return "include";
 	}
 
 	public VarParser getContent() {

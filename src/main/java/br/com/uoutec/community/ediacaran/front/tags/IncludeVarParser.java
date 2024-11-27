@@ -39,11 +39,25 @@ public class IncludeVarParser implements VarParser{
 	@Override
 	public void parse(Writer writter) throws IOException {
 		
+    	String contextName;
     	String path;
+    	
     	ServletContext servletContext = request.getServletContext();
+    	String currentContext = servletContext.getContextPath().toLowerCase();
     	
     	if(resolved) {
     		path = uri;
+    		
+    		String[] parts = path.split("\\:");
+    		
+    		if(parts.length > 1) {
+    			contextName = parts[0];
+    			path = parts[1];
+    		}
+    		else {
+    			contextName = null;
+    		}
+    		
     	}
     	else {
     		
@@ -66,13 +80,11 @@ public class IncludeVarParser implements VarParser{
     	    	path = theme.getTemplate(packageName) + uri;
     		}
     		
-	    	String currentContext 	= servletContext.getContextPath().toLowerCase();
-	    	String context 			= theme.getContext();
-	    	String themeContext 	= context == null? null : context.toLowerCase();
-	    	
-	    	if(themeContext != null && !currentContext.equals(themeContext)) {
-	    		servletContext = servletContext.getContext(context);
-	    	}
+	    	contextName	= theme.getContext();
+    	}
+
+    	if(contextName != null && !currentContext.equals(contextName)) {
+    		servletContext = servletContext.getContext(contextName);
     	}
     	
     	ImportResponseWrapper irw = new ImportResponseWrapper(response, writter); 
