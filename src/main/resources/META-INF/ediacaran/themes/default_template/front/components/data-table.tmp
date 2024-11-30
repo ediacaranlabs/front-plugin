@@ -1,6 +1,8 @@
 <form {attr} data-table="true" class="{style} {classStyle} {align}">
 	<input type="hidden" name="page" value="1">
 	{form-body}
+</form>
+<span id="{id}_result">
 	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 pagination dataTablePagination">
 	</div>
-</form>
+</span>
