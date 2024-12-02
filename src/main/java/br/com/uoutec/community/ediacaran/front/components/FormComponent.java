@@ -16,9 +16,9 @@ public class FormComponent extends Component {
 
 	public void build() throws ThemeException, IOException{
 		
-		if(getProperty(FORM) != null) {
-			throw new IllegalStateException("nested form not allowed");
-		}
+		//if(getProperty(FORM) != null) {
+		//	throw new IllegalStateException("nested form not allowed");
+		//}
 		
 		try {
 			setProperty(FORM, this);
