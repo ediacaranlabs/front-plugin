@@ -75,6 +75,43 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 		return (T) p.rebuild(instance, reload, override, validate, true);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <X extends GenericPubEntity<?>> X getType() {
+
+		String type = getCodeType();
+		
+		EntityInheritanceManager entityInheritanceUtil = 
+				EntityContextPlugin.getEntity(EntityInheritanceManager.class);
+		
+		Map<String, Class<?>> clazzMap = 
+				entityInheritanceUtil.getMap(getGenericType());
+		
+		Class<? extends GenericPubEntity> ptype;
+		
+		ptype = (Class<? extends GenericPubEntity>)(
+			clazzMap == null || type == null? 
+				null : 
+				clazzMap.containsKey(type)? clazzMap.get(type) : null
+		);
+
+		if(ptype == null) {
+			return (X) this;
+		}
+		
+		GenericPubEntity p;
+		
+		try {
+			p = ClassUtil.getInstance(ptype);
+		}
+		catch(Throwable e) {
+			throw new InvalidRequestException("invalid type: " + ptype, e);
+		}
+		
+		p.setData(data);
+		p.loadProperties(this);
+		return (X)p;
+	}
+	
 	protected abstract String getCodeType();
 	
 	protected abstract Class<?> getGenericType();
