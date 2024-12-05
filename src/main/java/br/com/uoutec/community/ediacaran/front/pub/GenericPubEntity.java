@@ -3,6 +3,7 @@ package br.com.uoutec.community.ediacaran.front.pub;
 import java.util.Map;
 
 import org.brandao.brutos.ClassUtil;
+import org.brandao.brutos.annotation.Transient;
 
 import br.com.uoutec.community.ediacaran.system.entity.EntityInheritanceManager;
 import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
@@ -76,6 +77,7 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Transient
 	public <X extends GenericPubEntity<?>> X getType() {
 
 		String type = getCodeType();

@@ -153,11 +153,21 @@ $.AppContext.types.Object.prototype.getTagName = function(){
 
 $.AppContext.types.Object.prototype.eachParent = function($filter){
 	
-	$(this.obj).parents().each(function ($o){
-		var $tmp = $.AppContext.utils.getByAdvise($o);
-		return $filter(tmp);
-	});
+	var $tag = $(this.obj).parent();
+	var $i = 0;
 	
+	while($tag != null && $i < 100 ){
+
+		var $tmp = $.AppContext.utils.getByAdvise($tag);
+		if($filter($tmp)){
+			return $tmp;
+		}
+		$tag = $tag.parent();
+		
+		$i = $i + 1;
+	} 
+	
+	return null;
 };
 
 /*---------------------------------------------------------------*/
