@@ -159,15 +159,78 @@ $.AppContext.types.Object.prototype.eachParent = function($filter){
 	while($tag != null && $i < 100 ){
 
 		var $tmp = $.AppContext.utils.getByAdvise($tag);
-		if($filter($tmp)){
+		$filter($tmp)
+		$tag = $tag.parent();
+		
+		$i = $i + 1;
+		
+	}
+	 
+};
+
+$.AppContext.types.Object.prototype.searchParent = function($filter = null){
+	
+	var $tag = $(this.obj).parent();
+	var $i = 0;
+	var $result = [];
+	
+	while($tag != null && $i < 100 ){
+
+		var $tmp = $.AppContext.utils.getByAdvise($tag);
+		
+		if($filter == null || $filter($tmp)){
+			$result.push($tmp);
+		}
+		
+		$tag = $tag.parent();
+		
+		$i = $i + 1;
+	} 
+	
+	return $result;
+};
+
+$.AppContext.types.Object.prototype.getFirstParent = function($filter = null){
+	
+	var $tag = $(this.obj).parent();
+	var $i = 0;
+	
+	while($tag != null && $i < 100 ){
+
+		var $tmp = $.AppContext.utils.getByAdvise($tag);
+		
+		if($filter == null || $filter($tmp)){
 			return $tmp;
 		}
+		
 		$tag = $tag.parent();
 		
 		$i = $i + 1;
 	} 
 	
 	return null;
+};
+
+$.AppContext.types.Object.prototype.getLastParent = function($filter = null){
+	
+	var $tag = $(this.obj).parent();
+	var $i = 0;
+	var $result = null;
+	
+	while($tag != null && $i < 100 ){
+
+		var $tmp = $.AppContext.utils.getByAdvise($tag);
+		
+		if($filter == null || $filter($tmp)){
+			$result = $tmp;
+		}
+		
+		$tag = $tag.parent();
+		
+		$i = $i + 1;
+	} 
+	
+	return $result;
 };
 
 /*---------------------------------------------------------------*/
