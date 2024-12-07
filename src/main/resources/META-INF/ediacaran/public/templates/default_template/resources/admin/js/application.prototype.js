@@ -674,9 +674,9 @@ $.AppContext.types.unregisterType = function ($name){
 $.AppContext.types.getType = function ($e){
 	for (var $prop in $.AppContext.types._map) {
 		var $val = $.AppContext.types._map[$prop];
-		alert($val);
+
 		if($val.accept($e)){
-			return $prop.type;
+			return $val.type;
 		}
 	}
 	
