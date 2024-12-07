@@ -662,17 +662,33 @@ $.AppContext.types.registerType = function ($name, $prototype){
 	}
 	
 	for (var prop in $.AppContext.types.Object.prototype) {
-		$prototype.prototype[prop] = $.AppContext.types.Object.prototype[prop];
+		$prototype.type.prototype[prop] = $.AppContext.types.Object.prototype[prop];
 	}
 	
 };
 
-$.AppContext.types.unregisterType = function ($name, $prototype){
+$.AppContext.types.unregisterType = function ($name){
 	delete $.AppContext.types._map[$name];
 };
 
-$.AppContext.types.registerType('form', $.AppContext.types.Form);
-$.AppContext.types.registerType('object', $.AppContext.types.Object);
-//$.AppContext.types._map['form'] = $.AppContext.types.Form;
-//$.AppContext.types._map['object'] = $.AppContext.types.Object;
+$.AppContext.types.getType = function ($e){
+	for (var $prop in $.AppContext.types._map) {
+		var $val = $.AppContext.types._map[$prop];
+		alert($val);
+		if($val.accept($e)){
+			return $prop.type;
+		}
+	}
+	
+	return $.AppContext.types.Object;
+};
 
+$.AppContext.types.registerType(
+	'form', 
+	{
+		type: $.AppContext.types.Form,
+		accept : function ($e){
+			return $e.getTagName() === 'form';
+		}
+	}
+);

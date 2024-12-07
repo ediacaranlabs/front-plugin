@@ -57,17 +57,11 @@ $.AppContext.utils = {
 		getByAdvise: function($obj){
 			
 			$obj = $($obj);
-			
-			var $tagNameProp = $obj.prop("tagName");
-			
-			if($tagNameProp == null){
-				return null;
-			}
-			
-			var $elementType = $tagNameProp.toLowerCase();
-			var $type = $.AppContext.types._map[$elementType];
-			
-			return $type == null? new $.AppContext.types._map['object']($obj) : new $type($obj);
+			var $e = new $.AppContext.types.Object($obj);
+			 
+			var $type = $.AppContext.types.getType($e);
+						
+			return new $type($obj);
 		},
 		
 		setContentById: function(id, value){
