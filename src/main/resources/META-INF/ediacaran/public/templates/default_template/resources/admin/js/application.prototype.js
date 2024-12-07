@@ -270,7 +270,13 @@ $.AppContext.types.Form.prototype.updateFieldIndex = function($group = null, $no
 		var $type = $o.getTagName();
 		
 		if($type == 'input' || $type == 'textarea' || $type == 'select' ){
+			
 			$o.setAttribute('formindex', $group.path);
+			
+			if(!$o.getAttribute('originalname')){
+				$o.setAttribute('originalname', $o.getAttribute('name'));
+			}
+			
 		}
 		
 		var $groupName = $o.getAttribute('formgroup');
@@ -311,13 +317,16 @@ $.AppContext.types.Form.prototype.updateFieldNames = function($no = null){
 		var $type = $o.getTagName();
 		
 		if($type == 'input' || $type == 'textarea' || $type == 'select' ){
-			var $name = $o.getAttribute('name');
+			var $name = $o.getAttribute('originalname');
 			var $formindex = $o.getAttribute('formindex');
+			
+			/*
 			var lastIndex = $name.lastIndexOf('.');
 			
 			if(lastIndex > -1){
 				$name = $name.slice(lastIndex + 1);
 			}
+			*/
 			
 			if($formindex != null){
 				$o.setAttribute('name', $formindex + '.' + $name);
@@ -325,6 +334,34 @@ $.AppContext.types.Form.prototype.updateFieldNames = function($no = null){
 			else{
 				$o.setAttribute('name', $name);
 			}
+		}
+		
+		this.updateFieldNames($o);
+		
+		$o = $o.getNext();
+
+	}
+	
+};
+
+$.AppContext.types.Form.prototype.resetFieldNames = function($no = null){
+
+	if($no == null){
+		$no = this
+	}
+	
+	var $o = $no.getFirstChild();
+	
+	while($o != null){
+		
+		var $type = $o.getTagName();
+		
+		if($type == 'input' || $type == 'textarea' || $type == 'select' ){
+			
+			if($o.getAttribute('originalname')){
+				$o.setAttribute('name', $o.getAttribute('originalname'));
+			}
+			
 		}
 		
 		this.updateFieldNames($o);
