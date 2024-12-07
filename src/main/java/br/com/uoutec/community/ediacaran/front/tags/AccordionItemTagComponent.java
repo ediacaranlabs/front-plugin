@@ -24,10 +24,12 @@ public class AccordionItemTagComponent extends AbstractSimpleTagComponent {
 	
 	private String title;
 	
+	private Boolean active;
+	
 	/* ------------ Private Prop ---------------*/
 	
 	private String parentID;
-	
+
 	public AccordionItemTagComponent() {
 	}
 	
@@ -61,6 +63,19 @@ public class AccordionItemTagComponent extends AbstractSimpleTagComponent {
 
 	public void setParentID(String parentID) {
 		this.parentID = parentID;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	@TagAttribute
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public Boolean getShow() {
+		return active;
 	}
 
 	@Override

@@ -4,7 +4,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
+import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;;
 
 public class AccordionItemTemplateComponent extends AbstractTemplateComponent {
 
@@ -30,12 +31,33 @@ public class AccordionItemTemplateComponent extends AbstractTemplateComponent {
 			add("title");
 			add("content");
 			add("parentID");
+			add("active");
+			add("show");
 			add("id");
 		}});
 	
 	
 		super.default_property_parsers = 
 			Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_property_parsers){{
+				
+				put("active", new PropertyParserImp() {
+					
+					@Override
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
+						return value == null? "false" : String.valueOf(value);
+					}
+					
+				});
+
+				put("show", new PropertyParserImp() {
+					
+					@Override
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
+						return value == null || !((Boolean)value).booleanValue()? "" : " show";
+					}
+					
+				});
+				
 			}});
 	}
 	
