@@ -676,7 +676,7 @@ $.AppContext.types.getType = function ($e){
 		var $val = $.AppContext.types._map[$prop];
 
 		if($val.accept($e)){
-			return $prop.type;
+			return $val.type;
 		}
 	}
 	

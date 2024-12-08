@@ -861,12 +861,12 @@ $(function (){
 	$.AppContext.utils.enableActions(null);
 	$.AppContext.utils.executeAsyncLoad();
 	$.AppContext.eventListeners.init();
-	
+
 	var $pathIndex = location.href.indexOf("#!");
 	if($pathIndex > 0){
 		var $path = location.href.substring($pathIndex + 2);
 		$.AppContext.loadContentOnPanel($path);
 	}
 	
-	$.AppContext.vars.loaded = true;
+	$.AppContext.vars.loaded   = true;
 });
