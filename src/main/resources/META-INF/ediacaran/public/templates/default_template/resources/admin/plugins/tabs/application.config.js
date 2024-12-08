@@ -1,10 +1,10 @@
-$.AppContext.accordion = {};
+$.AppContext.tabs = {};
 
-$.AppContext.accordion.Type = function($obj){
+$.AppContext.tabs.Type = function($obj){
 	this.obj = $obj;
 };
 
-$.AppContext.accordion.Type.prototype.select = function($id){
+$.AppContext.tabs.Type.prototype.select = function($id){
 	
 	$(this.obj).find(".card").each(function(){
 		var $card = $(this);
@@ -17,7 +17,7 @@ $.AppContext.accordion.Type.prototype.select = function($id){
 	
 };
 
-$.AppContext.accordion.Type.prototype.setEnabled = function($id, $value){
+$.AppContext.tabs.Type.prototype.setEnabled = function($id, $value){
 	
 	$(this.obj).find(".card").each(function(){
 		var $card = $(this);
@@ -35,7 +35,7 @@ $.AppContext.accordion.Type.prototype.setEnabled = function($id, $value){
 	
 };
 
-$.AppContext.accordion.Type.prototype.isEnabled = function($id){
+$.AppContext.tabs.Type.prototype.isEnabled = function($id){
 	
 	$(this.obj).find(".card").each(function(){
 		var $card = $(this);
@@ -53,11 +53,11 @@ $.AppContext.accordion.Type.prototype.isEnabled = function($id){
 $.AppContext.onload(function(){			
 
 $.AppContext.types.registerType(
-	'accordion', 
+	'tabs', 
 	{
-		type: $.AppContext.accordion.Type,
+		type: $.AppContext.tabs.Type,
 		accept : function ($e){
-			return $e.getAttribute("component-type") == "accordion";
+			return $e.getAttribute("component-type") == "tabs";
 		}
 	}
 );
