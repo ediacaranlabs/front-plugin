@@ -55,13 +55,21 @@ $.AppContext.utils = {
 		},
 
 		getByAdvise: function($obj){
-			
-			$obj = $($obj);
-			var $e = new $.AppContext.types.Object($obj);
-			 
-			var $type = $.AppContext.types.getType($e);
-						
-			return new $type($obj);
+			try{
+				$obj = $($obj);
+				
+				var $e = new $.AppContext.types.Object($obj);
+				 
+				var $type = $.AppContext.types.getType($e);
+		
+				var $o = new $type($obj);
+				$o.getTagName();
+				return $o;
+			}
+			catch($err){
+				 console.log("Error", $err.stack);
+				 return $o;
+			}
 		},
 		
 		setContentById: function(id, value){

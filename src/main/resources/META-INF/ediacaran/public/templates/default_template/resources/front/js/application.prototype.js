@@ -672,8 +672,9 @@ $.AppContext.types.registerType = function ($name, $prototype){
 		return;
 	}
 	
+
 	for (var prop in $.AppContext.types.Object.prototype) {
-		if(typeof($prototype.type.prototype[prop]) === undefined){
+		if(typeof($prototype.type.prototype[prop]) == 'undefined'){
 			$prototype.type.prototype[prop] = $.AppContext.types.Object.prototype[prop];
 		}
 	}
