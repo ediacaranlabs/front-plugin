@@ -4,7 +4,6 @@ import br.com.uoutec.community.ediacaran.front.components.Component;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
-import br.com.uoutec.community.ediacaran.front.theme.ComponentVars;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateListVarsParser;
 
 @Tag(
@@ -34,16 +33,18 @@ public class TabsTagComponent extends AbstractBodyTagComponent {
 		this.index = 0;
 	}
 	
-	public void add(ComponentVars value) {
+	public void add(Component value) {
 		index++;
 		
 		header.createNewItem(value)
 		.put("parentID", getId())
-		.put("id", index);
+		//.put("id", index);
+		.put("id", value.getId());
 		
 		content.createNewItem(value)
 		.put("parentID", getId())
-		.put("id", index);
+		//.put("id", index);
+		.put("id", value.getId());
 		
 	}
 	
