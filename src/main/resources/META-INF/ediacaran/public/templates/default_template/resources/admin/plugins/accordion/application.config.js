@@ -55,16 +55,18 @@ $.AppContext.accordion.Type.prototype.isEnabled = function($id){
 
 $.AppContext.accordion.Type.prototype.getItem = function($id){
 	
+	var $result = null;
+	
 	$(this.obj).find(".card").each(function(){
 		var $card = $(this);
 
 		if($card.attr("id") == $id){
-			return new $.AppContext.accordion_item.Type($card, this.obj); 
+			$result = new $.AppContext.accordion_item.Type($card, this.obj); 
 		}
 
 	});
 
-	return null;
+	return $result;
 		
 };
 
