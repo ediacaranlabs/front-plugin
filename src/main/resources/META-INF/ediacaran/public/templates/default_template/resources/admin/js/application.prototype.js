@@ -67,6 +67,17 @@ $.AppContext.types.Object.prototype.setVisible = function($value){
 	}
 };
 
+$.AppContext.types.Object.prototype.setEnabled = function($value){
+
+	if($value){
+		$(this.obj).removeClass("disabled");
+	}
+	else{
+		$(this.obj).addClass("disabled");
+	}
+	
+};
+
 $.AppContext.types.Object.prototype.registerEvent = function(name, handler){
 	$.AppContext.events.add($(this.obj).prop("id"), name, handler);
 };
@@ -662,7 +673,9 @@ $.AppContext.types.registerType = function ($name, $prototype){
 	}
 	
 	for (var prop in $.AppContext.types.Object.prototype) {
-		$prototype.type.prototype[prop] = $.AppContext.types.Object.prototype[prop];
+		if(typeof($prototype.type.prototype[prop]) === undefined){
+			$prototype.type.prototype[prop] = $.AppContext.types.Object.prototype[prop];
+		}
 	}
 	
 };
