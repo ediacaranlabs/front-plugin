@@ -1,3 +1,3 @@
-<div class="tab-pane {show} {active}" id="{parentID}-nav-{id}" role="tabpanel" aria-labelledby="{parentID}-nav-{id}">
+<div class="tab-pane {show} {active}" id="{id}-content" role="tabpanel" aria-labelledby="{id}-content">
 {content}
 </div>

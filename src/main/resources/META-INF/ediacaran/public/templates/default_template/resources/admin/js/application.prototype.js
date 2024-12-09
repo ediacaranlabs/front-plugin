@@ -257,6 +257,7 @@ $.AppContext.types.Form.prototype.submit = function($validate = true, $resource 
 		$.AppContext.utils.submit(this.obj,$validate, $resource, $dest);
 	}
 	else{
+		alert(this.obj);	
 		this.obj.submit();
 	}
 };
