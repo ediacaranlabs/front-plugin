@@ -5,9 +5,9 @@ import java.io.Writer;
 
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 
-public class ResponseComponent extends Component {
+public class TemplateComponent extends Component {
 
-	public static final String TEMPLATE = "/components/response";
+	public static final String TEMPLATE = "/components/template";
 
 	public String getTemplate() {
 		return TEMPLATE;

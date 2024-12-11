@@ -28,6 +28,24 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>style</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>bundle</name>
                     <required>false</required>
                     <type>javax.servlet.jsp.jstl.fmt.LocalizationContext</type>
@@ -37,34 +55,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>extAttrs</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
                     <name>id</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>style</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -82,7 +73,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>extAttrs</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -103,6 +103,24 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>style</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>bundle</name>
                     <required>false</required>
                     <type>javax.servlet.jsp.jstl.fmt.LocalizationContext</type>
@@ -112,34 +130,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>extAttrs</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
                     <name>id</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>style</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -157,7 +148,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>extAttrs</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -174,15 +174,6 @@
           <body-content>scriptless</body-content>
           <info><![CDATA[
           ]]></info>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>order</name>
-                    <required>false</required>
-                    <type>java.lang.Integer</type>
-                    <fragment>true</fragment>
-               </attribute>
                
                <attribute>
                     <description><![CDATA[
@@ -205,6 +196,33 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
+                    <name>order</name>
+                    <required>false</required>
+                    <type>java.lang.Integer</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>style</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>align</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
                     <name>bundle</name>
                     <required>false</required>
                     <type>javax.servlet.jsp.jstl.fmt.LocalizationContext</type>
@@ -214,34 +232,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>extAttrs</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
                     <name>id</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>template</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>style</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -259,7 +250,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>align</name>
+                    <name>template</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>extAttrs</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>

@@ -5,6 +5,8 @@ import java.io.Writer;
 
 public class CodeEscapeWriter extends Writer{
 
+	public static final String ESCAPE_CONTENT = CodeEscapeWriter.class.getName() + ":escape";
+	
 	private Writer o;
 	
 	public CodeEscapeWriter(Writer o) {

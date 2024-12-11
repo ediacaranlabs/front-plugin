@@ -1,0 +1,9 @@
+<div id="{id}_front_code" style="display: none" class="code-template">
+<!--
+function({var})&#123;
+	var out_ = [];
+	{content}
+	return out_.join("");
+&#125;;
+-->
+</div>

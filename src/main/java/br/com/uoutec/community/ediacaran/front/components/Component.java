@@ -147,6 +147,19 @@ public class Component
     }
     
     protected void applyTemplate(String template, Map<String, Object> vars, Writer out){
+    	
+    	boolean active = pageContext.getAttribute(JavascriptConverterVarParser.WRAPPER, PageContext.REQUEST_SCOPE) != null;
+    	
+    	if(active) {
+			try {
+				out.write(JavascriptConverterWriter.DISABLE_PARSER);
+				out.write("var component_" + uniqueID + " = $.AppContext.constants.getNextID();");
+				out.write(JavascriptConverterWriter.ENABLE_PARSER);
+			}
+			catch(IOException ex) {
+			}
+    	}
+    	
     	getTheme().buildComponent(template, getPackageTheme(), this, vars, out);
     }
     
@@ -337,16 +350,16 @@ public class Component
 	}
 
 	public String getId() {
+		
+    	boolean active = pageContext.getAttribute(JavascriptConverterVarParser.WRAPPER, PageContext.REQUEST_SCOPE) != null;
 		String id = componentData.getId();
+		
+    	if(active) {
+    		if(id == null || !id.startsWith("!{")) {
+    			return "!{component_" + uniqueID + "}";
+    		}
+    	}
 		return id == null? uniqueID : id;
-		/*
-		HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
-		
-		Long acc = (Long) request.getAttribute(ID_COUNT);
-		request.setAttribute(ID_COUNT, acc = acc == null? System.currentTimeMillis() : acc.intValue() + 1);
-		
-		return componentData.getClass().getSimpleName().toLowerCase() + "_" + Long.toHexString(acc);
-		*/
 	}
 
 }

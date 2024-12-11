@@ -2,6 +2,11 @@ $.AppContext.constants = {};
 
 $.AppContext.constants.OPEN_TAG_ = '<';
 $.AppContext.constants.END_TAG_  = '>';
+$.AppContext.constants.JS_ID = 0;
+$.AppContext.constants.getNextID = function(){
+	var $id = $.AppContext.constants.JS_ID++;
+	return "js_" + $id;
+}
 
 $.AppContext.local = {};
 
