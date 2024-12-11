@@ -151,16 +151,22 @@ public class Component
     	boolean active = pageContext.getAttribute(JavascriptConverterVarParser.WRAPPER, PageContext.REQUEST_SCOPE) != null;
     	
     	if(active) {
-			try {
-				out.write(JavascriptConverterWriter.DISABLE_PARSER);
-				out.write("var component_" + uniqueID + " = $.AppContext.constants.getNextID();");
-				out.write(JavascriptConverterWriter.ENABLE_PARSER);
-			}
-			catch(IOException ex) {
-			}
+    		registerFrontID();
     	}
     	
     	getTheme().buildComponent(template, getPackageTheme(), this, vars, out);
+    }
+    
+    private void registerFrontID() {
+		try {
+			out.write(JavascriptConverterWriter.DISABLE_PARSER);
+			out.write("\r\n");
+			out.write("/* " + componentData.getType() + " */\r\n");
+			out.write("var component_" + uniqueID + " = $.AppContext.constants.getNextID();");
+			out.write(JavascriptConverterWriter.ENABLE_PARSER);
+		}
+		catch(IOException ex) {
+		}
     }
     
     //public void setParentTag(Object tag) {
@@ -350,16 +356,27 @@ public class Component
 	}
 
 	public String getId() {
-		
     	boolean active = pageContext.getAttribute(JavascriptConverterVarParser.WRAPPER, PageContext.REQUEST_SCOPE) != null;
+    	
+		if(active) {
+			return getFrontId();
+		}
+		else {
+			return getServerID();
+		}
+	}
+	
+	public String getFrontId() {
 		String id = componentData.getId();
-		
-    	if(active) {
-    		if(id == null || !id.startsWith("!{")) {
-    			return "!{component_" + uniqueID + "}";
-    		}
-    	}
-		return id == null? uniqueID : id;
+		if(id == null || !id.startsWith("!{")) {
+			return "!{component_" + uniqueID + "}";
+		}
+		return getServerID();
 	}
 
+	private String getServerID() {
+		String id = componentData.getId();
+		return id == null? uniqueID : id;
+	}
+	
 }

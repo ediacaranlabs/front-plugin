@@ -47,10 +47,6 @@ public class JavascriptConverterWriter extends EscapeWriter{
 
 		for(int i=off;i<max;i++) {
 			
-			if(cbuf[i] == '\r' || cbuf[i] == '\n') {
-				cbuf[i] = ' ';
-			}
-			
 			if(!enabled) {
 				if(cbuf[i] == ENABLE_PARSER) {
 					enabled = true;
@@ -78,7 +74,11 @@ public class JavascriptConverterWriter extends EscapeWriter{
 				start = i + 1;
 				continue;
 			}
-				
+
+			if(cbuf[i] == '\r' || cbuf[i] == '\n') {
+				cbuf[i] = ' ';
+			}
+			
 			if(status == NORMAL_CONTENT && cbuf[i] == '!') {
 				status = FIRST_CHAR;
 				
