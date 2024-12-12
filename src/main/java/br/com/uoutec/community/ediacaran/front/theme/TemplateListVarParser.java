@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.theme;
 
-import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;

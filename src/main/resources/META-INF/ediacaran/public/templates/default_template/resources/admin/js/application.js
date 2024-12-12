@@ -46,6 +46,22 @@ $.AppContext.events = {
 
 $.AppContext.utils = {
 		
+		content: {
+
+			append: function ($local, $content){
+				$.AppContext.utils.updateContentData($local, $content, "append");
+			},
+	
+			insert: function ($local, $content){
+				$.AppContext.utils.updateContentData($local, $content, "insert");
+			},
+	
+			update: function ($local, $content){
+				$.AppContext.utils.updateContentData($local, $content, null);
+			}
+			
+		},
+		
 		toObject: function(obj){
 			return $.AppContext.utils.getById($(obj).attr('id'));
 		},
@@ -463,7 +479,7 @@ $.AppContext.utils = {
 			
 			return $data;
 		},
-		
+
 		updateContentData: function ($local, $content, $position = null){
 			
 			$content = 

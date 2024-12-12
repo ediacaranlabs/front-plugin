@@ -75,10 +75,6 @@ public class JavascriptConverterWriter extends EscapeWriter{
 				continue;
 			}
 
-			if(cbuf[i] == '\r' || cbuf[i] == '\n') {
-				cbuf[i] = ' ';
-			}
-			
 			if(status == NORMAL_CONTENT && cbuf[i] == '!') {
 				status = FIRST_CHAR;
 				
@@ -89,8 +85,9 @@ public class JavascriptConverterWriter extends EscapeWriter{
 				}
 				
 				start = i + 1;
+				continue;
 			}
-			else
+			
 			if(status == FIRST_CHAR) {
 				
 				if(cbuf[i] == '{') {
@@ -101,18 +98,27 @@ public class JavascriptConverterWriter extends EscapeWriter{
 					}
 					o.write(END_CONTENT);
 					o.write(START_CODE);
+					start = i + 1;
+					continue;
 				}
 				else {
 					o.write('!');
-					o.write(cbuf[i]);
+					//write0(cbuf[i]);
 					status = NORMAL_CONTENT;
 				}
-				start = i + 1;
 			}
-			else
+			
+			if(cbuf[i] == '\r' || cbuf[i] == '\n') {
+				cbuf[i] = ' ';
+			}
+			
 			if(status == NORMAL_CONTENT && cbuf[i] == '\"') {
 				o.write(cbuf, start, i - start);
-				o.write("\\\"");
+				o.write(END_CONTENT);
+				o.write(START_CODE);
+				o.write("$.AppContext.constants.DOUBLE_QUOTE");
+				o.write(END_CODE);
+				o.write(START_CONTENT);
 				start = i + 1;
 			}
 			else
@@ -139,6 +145,7 @@ public class JavascriptConverterWriter extends EscapeWriter{
 			if(status == JS_CONTENT && cbuf[i] == '}') {
 				status = NORMAL_CONTENT;
 				o.write(cbuf, start, i - start);
+				
 				o.write(END_CODE);
 				o.write(START_CONTENT);
 				start = i + 1;
@@ -148,7 +155,7 @@ public class JavascriptConverterWriter extends EscapeWriter{
 		
 		o.write(cbuf, start, max - start);		
 	}
-
+	
 	public void end() throws IOException {
 		if(!enabled) {
 			o.write(END_CODE);
