@@ -342,6 +342,10 @@ $.AppContext.utils = {
 				}
 			}
 			
+			$formObj = new $.AppContext.types.Form($form);
+			$formObj.updateFieldIndex();
+			$formObj.updateFieldNames();
+			
 			var $action      = $resource == null? $form.attr('action') : $resource;
 			var $modal       = $.AppContext.utils.isModal($action);
 			var $method      = $form.attr('method');
