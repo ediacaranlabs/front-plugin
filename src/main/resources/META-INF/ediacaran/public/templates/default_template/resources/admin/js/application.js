@@ -349,7 +349,7 @@ $.AppContext.utils = {
 			var $enctype     = $form.attr('enctype');
 			var $data;//        = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
 
-			$formObj = new $.AppContext.types.Form($form);
+			var $formObj = new $.AppContext.types.Form($form);
 			$formObj.updateFieldIndex();
 			$formObj.updateFieldNames();
 
@@ -366,7 +366,7 @@ $.AppContext.utils = {
 				$data = $($form).serialize();
 			}
 			
-			$formObj.resetFieldNames();
+			//$formObj.resetFieldNames();
 			
 		    $destContent = $.AppContext.utils.getDestContent($action, $destContent);
 		    $action      = $.AppContext.utils.getAddress($action);

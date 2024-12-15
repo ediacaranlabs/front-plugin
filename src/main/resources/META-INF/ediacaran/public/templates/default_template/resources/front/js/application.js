@@ -46,6 +46,22 @@ $.AppContext.events = {
 
 $.AppContext.utils = {
 		
+		content: {
+
+			append: function ($local, $content){
+				$.AppContext.utils.updateContentData($local, $content, "append");
+			},
+	
+			insert: function ($local, $content){
+				$.AppContext.utils.updateContentData($local, $content, "insert");
+			},
+	
+			update: function ($local, $content){
+				$.AppContext.utils.updateContentData($local, $content, null);
+			}
+			
+		},
+		
 		toObject: function(obj){
 			return $.AppContext.utils.getById($(obj).attr('id'));
 		},
@@ -333,6 +349,10 @@ $.AppContext.utils = {
 			var $enctype     = $form.attr('enctype');
 			var $data;//        = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
 
+			var $formObj = new $.AppContext.types.Form($form);
+			$formObj.updateFieldIndex();
+			$formObj.updateFieldNames();
+
 			if($enctype === 'multipart/form-data'){
 				$data = new FormData($form[0]);
 			}
@@ -345,6 +365,8 @@ $.AppContext.utils = {
 			else{
 				$data = $($form).serialize();
 			}
+			
+			//$formObj.resetFieldNames();
 			
 		    $destContent = $.AppContext.utils.getDestContent($action, $destContent);
 		    $action      = $.AppContext.utils.getAddress($action);
@@ -463,7 +485,7 @@ $.AppContext.utils = {
 			
 			return $data;
 		},
-		
+
 		updateContentData: function ($local, $content, $position = null){
 			
 			$content = 

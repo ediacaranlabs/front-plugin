@@ -271,7 +271,7 @@ $.AppContext.types.Form.prototype.updateFieldIndex = function($group = null, $no
 	if($group == null){
 		$group = {
 				path: null,
-				index: $no.getAttribute('formgrouptype') == 'index'? 0 : -1
+				index: []
 		};
 	}
 	
@@ -295,13 +295,21 @@ $.AppContext.types.Form.prototype.updateFieldIndex = function($group = null, $no
 		
 		if($groupName != null){
 
-			var $newGroup   = {};
-			$newGroup.path  = $group.path != null? $group.path + "." + $groupName : $groupName;
-			$newGroup.index =  $o.getAttribute('formgrouptype') == 'index'? 0 : -1;
+			if(!$group.index[$groupName]){
+				$group.index[$groupName] = $o.getAttribute('formgrouptype') == 'index'? 0 : -1;
+			}
+			
+			var $newGroup   = {
+				path: $group.path != null? $group.path + "." + $groupName : $groupName,
+				index: []
+			};
+			
+			//$newGroup.path  = $group.path != null? $group.path + "." + $groupName : $groupName;
+			//$newGroup.index =  [];
 
-			if($group.index != -1){
-				$newGroup.path = $newGroup.path + '[' + $group.index +']';
-				$group.index   = $group.index + 1;
+			if($group.index[$groupName] != -1){
+				$newGroup.path           = $newGroup.path + '[' + $group.index[$groupName] +']';
+				$group.index[$groupName] = $group.index[$groupName] + 1;
 			}
 			
 			this.updateFieldIndex($newGroup, $o);
@@ -572,6 +580,7 @@ $.AppContext.types.Field.prototype.getValue = function(){
 	if(this.type == 'checkbox' || this.type == 'radio'){
 		
 		for(var $i of this.field){
+			//alert($($i).attr('id'));
 			if($($i).prop('checked')){
 				$result = $($i).val();
 			}

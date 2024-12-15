@@ -4,10 +4,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import br.com.uoutec.community.ediacaran.front.tags.ButtonTagComponent;
+import br.com.uoutec.community.ediacaran.front.theme.EmptyVarsBuilder;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
-import br.com.uoutec.community.ediacaran.front.theme.EmptyVarsBuilder;
 import br.com.uoutec.community.ediacaran.front.theme.TemplateVarParser;
 
 public class ButtonTemplateComponent extends ComponentFormTemplateComponent {
@@ -26,6 +25,7 @@ public class ButtonTemplateComponent extends ComponentFormTemplateComponent {
 			add("target");
 			add("actionType");
 			add("update");
+			remove("enabled");
 			remove("classStyle");
 			remove("style");
 		}});
@@ -99,6 +99,7 @@ public class ButtonTemplateComponent extends ComponentFormTemplateComponent {
 			add("classStyle");
 			add("icon");
 			add("content");
+			add("enabled");
 		}});
 	
 	
@@ -134,8 +135,7 @@ public class ButtonTemplateComponent extends ComponentFormTemplateComponent {
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						Boolean enabled = ((ButtonTagComponent)component).getEnabled();
-						return enabled != null && !enabled? " disabled" : "";
+						return value != null && !(Boolean)value? " disabled" : "";
 					}
 				});
 

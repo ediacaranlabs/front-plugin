@@ -295,8 +295,8 @@ $.AppContext.types.Form.prototype.updateFieldIndex = function($group = null, $no
 		
 		if($groupName != null){
 
-			if($group.index[$groupName] == 'undefined'){
-				$group.index[$groupName] = $no.getAttribute('formgrouptype') == 'index'? 0 : -1;
+			if(!$group.index[$groupName]){
+				$group.index[$groupName] = $o.getAttribute('formgrouptype') == 'index'? 0 : -1;
 			}
 			
 			var $newGroup   = {
@@ -580,6 +580,7 @@ $.AppContext.types.Field.prototype.getValue = function(){
 	if(this.type == 'checkbox' || this.type == 'radio'){
 		
 		for(var $i of this.field){
+			//alert($($i).attr('id'));
 			if($($i).prop('checked')){
 				$result = $($i).val();
 			}

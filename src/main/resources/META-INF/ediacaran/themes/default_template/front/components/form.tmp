@@ -1,3 +1,12 @@
 <form {attr} class="{style} {classStyle} {align}">
 {form-body}
+<script language="javascript">
+	$.AppContext.onload(function()&#123;
+	
+		var $formObj = $.AppContext.utils.getById('{id}');
+		$formObj.updateFieldIndex();
+		$formObj.updateFieldNames();
+		
+	&#125;);
+</script>
 </form>
