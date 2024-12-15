@@ -342,16 +342,16 @@ $.AppContext.utils = {
 				}
 			}
 			
-			$formObj = new $.AppContext.types.Form($form);
-			$formObj.updateFieldIndex();
-			$formObj.updateFieldNames();
-			
 			var $action      = $resource == null? $form.attr('action') : $resource;
 			var $modal       = $.AppContext.utils.isModal($action);
 			var $method      = $form.attr('method');
 			var $destContent = $dest == null? $form.attr('dest-content') : $dest;
 			var $enctype     = $form.attr('enctype');
 			var $data;//        = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
+
+			$formObj = new $.AppContext.types.Form($form);
+			$formObj.updateFieldIndex();
+			$formObj.updateFieldNames();
 
 			if($enctype === 'multipart/form-data'){
 				$data = new FormData($form[0]);
@@ -365,6 +365,8 @@ $.AppContext.utils = {
 			else{
 				$data = $($form).serialize();
 			}
+			
+			$formObj.resetFieldNames();
 			
 		    $destContent = $.AppContext.utils.getDestContent($action, $destContent);
 		    $action      = $.AppContext.utils.getAddress($action);
