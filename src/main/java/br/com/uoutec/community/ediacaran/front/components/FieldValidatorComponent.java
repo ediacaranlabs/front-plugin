@@ -61,7 +61,7 @@ public class FieldValidatorComponent extends Component {
 			throw new IllegalStateException("field not found");
 		}
 	
-		return (String)fieldComponent.getAttribute("name");
+		return (String)fieldComponent.getAttribute("id");
 	}
 	
 	protected VarParser getValidators(Set<ValidatorEntity> validators) {

@@ -1,5 +1,4 @@
 <form {attr} class="{style} {classStyle} {align}">
-{form-body}
 <script language="javascript">
 	$.AppContext.onload(function()&#123;
 	
@@ -9,4 +8,5 @@
 		
 	&#125;);
 </script>
+{form-body}
 </form>

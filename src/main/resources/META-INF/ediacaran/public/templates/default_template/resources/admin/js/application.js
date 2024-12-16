@@ -366,7 +366,7 @@ $.AppContext.utils = {
 				$data = $($form).serialize();
 			}
 			
-			//$formObj.resetFieldNames();
+			$formObj.resetFieldNames();
 			
 		    $destContent = $.AppContext.utils.getDestContent($action, $destContent);
 		    $action      = $.AppContext.utils.getAddress($action);
