@@ -1,14 +1,14 @@
-$.AppContext.accordion = {};
+$.AppContext.types.components.accordion = {};
 
 /******************************************************************/
 /* Accordion Type                                                 */
 /******************************************************************/
 
-$.AppContext.accordion.Type = function($obj){
+$.AppContext.types.components.accordion.Accordion = function($obj){
 	this.obj = $obj;
 };
 
-$.AppContext.accordion.Type.prototype.select = function($id){
+$.AppContext.types.components.accordion.Accordion.prototype.select = function($id){
 	
 	$(this.obj).find(".card").each(function(){
 		var $card = $(this);
@@ -21,7 +21,7 @@ $.AppContext.accordion.Type.prototype.select = function($id){
 	
 };
 
-$.AppContext.accordion.Type.prototype.setEnabled = function($id, $value){
+$.AppContext.types.components.accordion.Accordion.prototype.setEnabled = function($id, $value){
 	
 	$(this.obj).find(".card").each(function(){
 		var $card = $(this);
@@ -39,7 +39,7 @@ $.AppContext.accordion.Type.prototype.setEnabled = function($id, $value){
 	
 };
 
-$.AppContext.accordion.Type.prototype.isEnabled = function($id){
+$.AppContext.types.components.accordion.Accordion.prototype.isEnabled = function($id){
 	
 	$(this.obj).find(".card").each(function(){
 		var $card = $(this);
@@ -53,7 +53,7 @@ $.AppContext.accordion.Type.prototype.isEnabled = function($id){
 	return false;
 };
 
-$.AppContext.accordion.Type.prototype.getItem = function($id){
+$.AppContext.types.components.accordion.Accordion.prototype.getItem = function($id){
 	
 	var $result = null;
 	
@@ -61,7 +61,7 @@ $.AppContext.accordion.Type.prototype.getItem = function($id){
 		var $card = $(this);
 
 		if($card.attr("id") == $id){
-			$result = new $.AppContext.accordion_item.Type($card, this.obj); 
+			$result = new $.AppContext.types.components.accordion.AccordionItem($card, this.obj); 
 		}
 
 	});
@@ -70,13 +70,13 @@ $.AppContext.accordion.Type.prototype.getItem = function($id){
 		
 };
 
-$.AppContext.accordion.Type.prototype.getItens = function(){
+$.AppContext.types.components.accordion.Accordion.prototype.getItens = function(){
 	
 	var $result = [];
 	
 	$(this.obj).find(".card").each(function(){
 		var $card = $(this);
-		$result.push(new $.AppContext.accordion_item.Type($card, this.obj));
+		$result.push(new $.AppContext.types.components.accordion.AccordionItem($card, this.obj));
 	});
 
 	return $result;
@@ -87,22 +87,21 @@ $.AppContext.accordion.Type.prototype.getItens = function(){
 /* Accordion-Item Type                                            */
 /******************************************************************/
 
-$.AppContext.accordion_item = {};
 
-$.AppContext.accordion_item.Type = function($item, $accordion){
+$.AppContext.types.components.accordion.AccordionItem = function($item, $accordion){
 	this.obj = $item;
 	this.accordion = $accordion;
 };
 
-$.AppContext.accordion_item.Type.prototype.select = function(){
+$.AppContext.types.components.accordion.AccordionItem.prototype.select = function(){
 	this.obj.find("[data-toggle='collapse']").click();
 };
 
-$.AppContext.accordion_item.Type.prototype.setTitle = function($value){
+$.AppContext.types.components.accordion.AccordionItem.prototype.setTitle = function($value){
 	this.obj.find("#" + this.obj.attr("id") + "_title").html($value);
 };
 
-$.AppContext.accordion_item.Type.prototype.setEnabled = function($value){
+$.AppContext.types.components.accordion.AccordionItem.prototype.setEnabled = function($value){
 
 	if($value){
 		this.obj.find("[data-toggle='collapse']").removeClass("disabled");
@@ -113,7 +112,7 @@ $.AppContext.accordion_item.Type.prototype.setEnabled = function($value){
 	
 };
 
-$.AppContext.accordion_item.Type.prototype.isEnabled = function(){
+$.AppContext.types.components.accordion.AccordionItem.prototype.isEnabled = function(){
 	return this.obj.find("[data-toggle='collapse']").hasClass("disabled");
 };
 
@@ -123,7 +122,7 @@ $.AppContext.onload(function(){
 $.AppContext.types.registerType(
 	'accordion', 
 	{
-		type: $.AppContext.accordion.Type,
+		type: $.AppContext.types.components.accordion.Accordion,
 		accept : function ($e){
 			return $e.getAttribute("component-type") == "accordion";
 		}

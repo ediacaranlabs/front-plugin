@@ -1,4 +1,5 @@
 $.AppContext.types = {};
+$.AppContext.types.components = {};
 
 /*---------------------------------------------------------------*/
 /* Object                                                        */
@@ -160,6 +161,21 @@ $.AppContext.types.Object.prototype.getFirstChild = function(){
 	return null;
 };
 
+$.AppContext.types.Object.prototype.getLastChild = function($filter = null){
+	
+	
+	var $result = null;
+	
+	$(this.obj).children().each(function () {
+		var $o = $.AppContext.utils.getByAdvise($(this));
+		if($filter == null || $filter($o)){
+			$result = $o;
+		}
+	});
+	
+	return $result;
+};
+
 $.AppContext.types.Object.prototype.getLeft = function(){
 	return $(this.obj).offset().left;
 };
@@ -260,6 +276,54 @@ $.AppContext.types.Object.prototype.getLastParent = function($filter = null){
 	} 
 	
 	return $result;
+};
+
+$.AppContext.types.Object.prototype.getForm = function(){
+	
+	var $formName = $(this.obj).attr("form");
+	
+	if($formName){
+		return $.AppContext.utils.getById($formName);
+	}
+
+	return this.getFirstParent(function($e){
+		return $e.getTagName() === 'form';
+	});
+	
+};
+
+$.AppContext.types.Object.prototype.getFormGroup = function(){
+	
+	var $group = this.getFirstParent(function($e){
+		return $e.getAttribute("formgroup") != null;
+	});
+
+	if($group != null){
+		return $group;
+	}
+	
+	return null;
+	
+};
+
+/*---------------------------------------------------------------*/
+/* Form Group                                                    */
+/*---------------------------------------------------------------*/
+
+$.AppContext.types.FormGroup = function($obj){
+	this.obj = $obj;
+};
+
+$.AppContext.types.FormGroup.prototype.getName = function(){
+	return this.obj.attr("formgroup");
+};
+
+$.AppContext.types.FormGroup.prototype.getType = function(){
+	return this.obj.attr("formgrouptype");
+};
+
+$.AppContext.types.FormGroup.prototype.getPath = function(){
+	return this.obj.attr("group-path");
 };
 
 /*---------------------------------------------------------------*/
@@ -677,17 +741,11 @@ $.AppContext.types.Option.prototype.getValue = function(){
 };
 
 $.AppContext.types.Option.prototype.setProperty = function(name, value){
-
 	$(this.option).prop(name, value);
-	
 };
 
 $.AppContext.types.Option.prototype.getProperty = function(name){
-	
-	var $result = $(this.option).prop(name);
-	
-	return result;
-	
+	return $(this.option).prop(name);
 };
 
 /* Object */
@@ -733,6 +791,16 @@ $.AppContext.types.registerType(
 		type: $.AppContext.types.Form,
 		accept : function ($e){
 			return $e.getTagName() === 'form';
+		}
+	}
+);
+
+$.AppContext.types.registerType(
+	'formgroup', 
+	{
+		type: $.AppContext.types.FormGroup,
+		accept : function ($e){
+			return $e.getAttribute("formgroup") != null;
 		}
 	}
 );
