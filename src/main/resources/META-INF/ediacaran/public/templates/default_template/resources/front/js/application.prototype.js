@@ -121,6 +121,33 @@ $.AppContext.types.Object.prototype.insertBefore = function($obj){
 	$(this.obj).insertBefore($obj.obj);
 };
 
+$.AppContext.types.Object.prototype.each = function(e){
+	
+	$(this.obj).find('*').each(function () {
+		var $o = $.AppContext.utils.getByAdvise($(this));
+	    return e($o);
+	});
+	
+};
+
+$.AppContext.types.Object.prototype.remove = function(){
+	$(this.obj).remove();
+}
+
+$.AppContext.types.Object.prototype.search = function($filter = null){
+	
+	var $result = [];
+
+	$(this.obj).find('*').each(function () {
+		var $o = $.AppContext.utils.getByAdvise($(this));
+		if($filter == null || $filter($o)){
+			$result.push($o);
+		}
+	});
+	
+	return $result;
+};
+
 $.AppContext.types.Object.prototype.getFirstChild = function(){
 	
 	var $childs = $(this.obj).children();
@@ -131,15 +158,6 @@ $.AppContext.types.Object.prototype.getFirstChild = function(){
 	}
 
 	return null;
-};
-
-$.AppContext.types.Object.prototype.each = function(e){
-	
-	$(this.obj).find('*').each(function () {
-		var $o = $.AppContext.utils.getByAdvise($(this));
-	    return e($o);
-	});
-	
 };
 
 $.AppContext.types.Object.prototype.getLeft = function(){
@@ -311,6 +329,8 @@ $.AppContext.types.Form.prototype.updateFieldIndex = function($group = null, $no
 				$newGroup.path           = $newGroup.path + '[' + $group.index[$groupName] +']';
 				$group.index[$groupName] = $group.index[$groupName] + 1;
 			}
+			
+			$o.setAttribute("group-path", $newGroup.path);
 			
 			this.updateFieldIndex($newGroup, $o);
 		}
