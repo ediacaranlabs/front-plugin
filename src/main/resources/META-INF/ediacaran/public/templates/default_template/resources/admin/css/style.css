@@ -218,6 +218,7 @@ Form Validation
 
 .form-group.has-error .help-block {
   color: #dd4b39;
+  white-space: nowrap;
 }
 
 .has-feedback .form-control-feedback {

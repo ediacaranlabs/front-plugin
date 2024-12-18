@@ -43,21 +43,6 @@ $.AppContext.validator = {
 			//}
 
 			try{
-				var $fs = $('#' + rules.form).bootstrapValidator('getFieldElements');
-				
-				for(let $x of $fs){
-						console.log("x removed: " + $x);
-					if(!document.body.contains($x)){
-						$('#' + rules.form).bootstrapValidator('removeField', $x);
-						console.log("removed: " + $x.attr("id"));
-					}
-				}
-			}
-			catch($ex){
-				console.log("fields:  " + $ex);
-			}
-			
-			try{
 				$('#' + rules.form).bootstrapValidator('removeField', $f);
 			}
 			catch($ex){
