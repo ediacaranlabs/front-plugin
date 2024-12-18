@@ -1,6 +1,7 @@
 $.fn.bootstrapValidator.DEFAULT_OPTIONS.excluded = [function($field, $validator) {
-	$field = $('#' + $field.attr("id"));
-    return !$field.length;
+	//$field = $('#' + $field.attr("id"));
+	//console.log($field.attr("id") + " " + document.body.contains($field[0]));
+    return !document.body.contains($field[0]);//!$field.length;
 }];
 
 $.AppContext.validator = {
@@ -42,17 +43,32 @@ $.AppContext.validator = {
 			//}
 
 			try{
-				$('#' + rules.form).bootstrapValidator('removeField', $f);
-				console.log("remove " + rules.field);
+				var $fs = $('#' + rules.form).bootstrapValidator('getFieldElements');
+				
+				for(let $x of $fs){
+						console.log("x removed: " + $x);
+					if(!document.body.contains($x)){
+						$('#' + rules.form).bootstrapValidator('removeField', $x);
+						console.log("removed: " + $x.attr("id"));
+					}
+				}
 			}
 			catch($ex){
+				console.log("fields:  " + $ex);
+			}
+			
+			try{
+				$('#' + rules.form).bootstrapValidator('removeField', $f);
+			}
+			catch($ex){
+				//console.log(rules.field + " " + $ex);
 			}
 
 			try{
 				$('#' + rules.form).bootstrapValidator('removeField', $f.attr("name"));
-				console.log("remove " + $f.attr("name"));
 			}
 			catch($ex){
+				//console.log(rules.field + " " + $ex);
 			}
 
 			$('#' + rules.form).bootstrapValidator('addField', $f, validator);	
