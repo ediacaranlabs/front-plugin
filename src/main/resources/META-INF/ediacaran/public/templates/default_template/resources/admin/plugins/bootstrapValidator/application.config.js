@@ -1,6 +1,6 @@
 $.fn.bootstrapValidator.DEFAULT_OPTIONS.excluded = [function($field, $validator) {
 	$field = $('#' + $field.attr("id"));
-    return $field.length == 0;
+    return !$field.length;
 }];
 
 $.AppContext.validator = {
@@ -33,17 +33,29 @@ $.AppContext.validator = {
 			}
 			
 			var validator = this.createValidatorField(rules);
+			var $f = $("#" + rules.field);
 			
-			try{
+			//try{
 				//$('#' + rules.form).bootstrapValidator('removeField', rules.field);
-				$('#' + rules.form).bootstrapValidator('removeField', $("#" + rules.field));
-				console.log("removed: " + rules.field);
+			//}
+			//catch($ex){
+			//}
+
+			try{
+				$('#' + rules.form).bootstrapValidator('removeField', $f);
+				console.log("remove " + rules.field);
 			}
 			catch($ex){
-				//console.log($ex);
 			}
-				
-			$('#' + rules.form).bootstrapValidator('addField', $("#" + rules.field), validator);	
+
+			try{
+				$('#' + rules.form).bootstrapValidator('removeField', $f.attr("name"));
+				console.log("remove " + $f.attr("name"));
+			}
+			catch($ex){
+			}
+
+			$('#' + rules.form).bootstrapValidator('addField', $f, validator);	
 		},
 		
 		createValidatorField: function(rules){

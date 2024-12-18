@@ -334,12 +334,11 @@ $.AppContext.types.Form = function($form){
 	this.obj = $form;
 };
 
-$.AppContext.types.Form.prototype.submit = function($validate = true, $resource = null, $dest = null){
+$.AppContext.types.Form.prototype.submit = function($validate = true, $resource = null, $dest = null, $success = null, $error = null){
 	if($resource != null){
-		$.AppContext.utils.submit(this.obj,$validate, $resource, $dest);
+		$.AppContext.utils.submit(this.obj,$validate, $resource, $dest, $success, $error);
 	}
 	else{
-		alert(this.obj);	
 		this.obj.submit();
 	}
 };

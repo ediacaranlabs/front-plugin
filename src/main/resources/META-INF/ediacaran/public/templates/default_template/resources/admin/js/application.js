@@ -279,7 +279,7 @@ $.AppContext.utils = {
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
 			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null, null, null);
 		},
 
 		updateContent: function ($resource, $isModal = false){
@@ -288,7 +288,7 @@ $.AppContext.utils = {
 			var $destContent = $.AppContext.utils.getDestContent($resource);
 			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null, null, null);
 		},
 
 		updateContentByID: function ($resource, $destContent, $isModal = false){
@@ -297,7 +297,7 @@ $.AppContext.utils = {
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
 			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null, null, null);
 		},
 		
 		appendContentByID: function ($resource, $destContent, $isModal = false){
@@ -306,7 +306,7 @@ $.AppContext.utils = {
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
 			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'append');
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'append', null, null);
 		},
 
 		insertContentByID: function ($resource, $destContent, $isModal = false){
@@ -315,7 +315,7 @@ $.AppContext.utils = {
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
 			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'insert');
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'insert', null, null);
 		},
 		
 		loadContent: function ($link){
@@ -324,17 +324,23 @@ $.AppContext.utils = {
 			var $destContent = $.AppContext.utils.getDestContent($link.attr("href"), $link.attr('dest-content'));
 			var $modal       = $.AppContext.utils.isModal($link.attr("href"));
 
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null);
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null, null, null);
 		},
 
 		/* send data function */
 		
-		submit: function ($form, $validate = true, $resource = null, $dest = null){
+		submit: function ($form, $validate = true, $resource = null, $dest = null, $success = null, $error = null){
 
 			var $bv = $form.data('bootstrapValidator');
 			
 			if($validate && $bv){
-				$bv.resetForm();
+				try{
+					$bv.resetForm();
+				}
+				catch($e){
+					console.log($e);
+				}
+				
 				$form.bootstrapValidator('validate');
 				
 				if($bv.getInvalidFields().length){
@@ -371,11 +377,11 @@ $.AppContext.utils = {
 		    $destContent = $.AppContext.utils.getDestContent($action, $destContent);
 		    $action      = $.AppContext.utils.getAddress($action);
 
-			$.AppContext.utils.send($method, $action, $data, $enctype, $destContent, $modal, null);
+			$.AppContext.utils.send($method, $action, $data, $enctype, $destContent, $modal, null, $success, $error);
 			
 		},
 		
-		send: function ($method, $action, $data, $enctype, $destContent, $modal, $destContentType = null){
+		send: function ($method, $action, $data, $enctype, $destContent, $modal, $destContentType = null, $success = null, $error = null){
 
 		    var opts = {
 		        type   : $method,
@@ -415,6 +421,9 @@ $.AppContext.utils = {
 				    	$.AppContext.loadListeners.executeAfter($action);
 			    	}		        	
 			    	
+			    	if($success){
+						$success($data);
+					}
 		        },
 		        error: function ($data){
 		        	
@@ -431,6 +440,10 @@ $.AppContext.utils = {
 			    	$.AppContext.eventListeners.fireEvent($evt);
 			    	
 			    	$data = $evt.data.data;
+		        	
+			    	if($error){
+						$error($data);
+					}
 		        	
 		        }
 		    };
