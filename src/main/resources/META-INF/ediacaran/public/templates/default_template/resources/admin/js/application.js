@@ -372,12 +372,34 @@ $.AppContext.utils = {
 				$data = $($form).serialize();
 			}
 			
-			$formObj.resetFieldNames();
+			//$formObj.resetFieldNames();
 			
 		    $destContent = $.AppContext.utils.getDestContent($action, $destContent);
 		    $action      = $.AppContext.utils.getAddress($action);
 
-			$.AppContext.utils.send($method, $action, $data, $enctype, $destContent, $modal, null, $success, $error);
+			var $successWrapper = function($e){
+				
+				$formObj.updateFieldIndex();
+				$formObj.updateFieldNames();
+				
+				if($success){
+					$success($e);
+				}
+				
+			};
+
+			var $errorWrapper = function($e){
+				
+				$formObj.updateFieldIndex();
+				$formObj.updateFieldNames();
+				
+				if($error){
+					$error($e);
+				}
+				
+			};
+			
+			$.AppContext.utils.send($method, $action, $data, $enctype, $destContent, $modal, null, $successWrapper, $errorWrapper);
 			
 		},
 		
