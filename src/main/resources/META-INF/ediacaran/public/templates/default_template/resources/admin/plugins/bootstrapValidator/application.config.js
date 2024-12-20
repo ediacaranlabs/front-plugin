@@ -1,7 +1,11 @@
 $.fn.bootstrapValidator.DEFAULT_OPTIONS.excluded = [function($field, $validator) {
 	//$field = $('#' + $field.attr("id"));
 	//console.log($field.attr("id") + " " + document.body.contains($field[0]));
-    return !document.body.contains($field[0]);//!$field.length;
+    //return !document.body.contains($field[0]);//!$field.length;
+    if(!document.body.contains($field[0])){
+    	console.log($field.attr("name") + " " + document.body.contains($field[0]));
+    }
+    return !document.body.contains($field[0]);
 }];
 
 $.AppContext.validator = {
@@ -56,7 +60,7 @@ $.AppContext.validator = {
 				//console.log(rules.field + " " + $ex);
 			}
 
-			$('#' + rules.form).bootstrapValidator('addField', $f, validator);	
+			$('#' + rules.form).bootstrapValidator('addField', $f, validator);
 		},
 		
 		createValidatorField: function(rules){
