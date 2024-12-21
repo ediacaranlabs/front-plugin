@@ -12,6 +12,7 @@ public class TemplateListVarParser  extends AbstractVarParser{
 	
 	private String packageName;
 	
+	@SuppressWarnings("unused")
 	private ComponentVars componentVars;
 	
 	private Theme theme;

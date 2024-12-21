@@ -76,6 +76,9 @@ public class ThemeImp implements Theme{
 		try {
 			p.build(vars, out);
 		}
+		catch(ThemeException ex) {
+			throw ex;
+		}
 		catch(Throwable ex) {
 			throw new ThemeException("unable to load template tag: " + template + "[package=" + temaPackage.getName() + "]", ex);
 		}

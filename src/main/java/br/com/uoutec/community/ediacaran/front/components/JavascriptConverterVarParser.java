@@ -3,6 +3,7 @@ package br.com.uoutec.community.ediacaran.front.components;
 import java.io.IOException;
 import java.io.Writer;
 
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspFragment;
 
@@ -32,7 +33,7 @@ public class JavascriptConverterVarParser extends AbstractVarParser{
 				}
 			}
 		}
-		catch(Throwable e) {
+		catch(JspException | IOException e) {
 			throw new IllegalStateException(e);
 		}
 		finally {

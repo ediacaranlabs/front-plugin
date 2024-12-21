@@ -46,6 +46,9 @@ public class IncludeTag extends AbstractSimpleTagComponent {
 
 	@TagAttribute
 	public void setUri(String uri) {
+		if(uri == null || uri.trim().isEmpty()) {
+			throw new IllegalStateException("uri: \'" + uri + '\'');
+		}
 		this.uri = uri;
 	}
 

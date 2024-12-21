@@ -1,6 +1,8 @@
 package br.com.uoutec.community.ediacaran.front.theme;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -326,12 +328,40 @@ public class ComponentTemplate {
 	            else
 	            	writter.write(String.valueOf(v));
             }
+            catch(ThemeException e) {
+            	throw e;
+            }
             catch(Throwable e) {
-	            throw new IllegalStateException(
+            	/*
+            	ComponentParserException x = new ComponentParserException(
 	            		"unable to resolve var " + p.getId() + ": " + 
         				(p.getStart() == null? "" : p.getStart()) + "..." + (p.getEnd() == null? "" : p.getEnd()),
         				e
 				);
+            	*/
+            	
+            	ComponentParserException x = new ComponentParserException(
+	            		"unable to resolve var " + p.getId(),
+        				e
+				);
+            	
+            	try {
+            		writter.write("<h3>Exception: </h3>\n");
+            		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+            		PrintStream pin = new PrintStream(bout);
+            		x.printStackTrace(pin);
+            		pin.flush();
+            		String stack = new String(bout.toByteArray());
+            		stack = stack.replace("\r", "").replace("\n", "<br>\n");
+            		writter.write(stack);
+            		//x.printStackTrace(new PrintWriter(writter));
+            		writter.flush();
+            	}
+            	catch(Throwable k) {
+            	}
+            	
+            	x.printStackTrace();
+            	//throw x;
             }
             
             if(p.getEnd() != null){
@@ -371,12 +401,40 @@ public class ComponentTemplate {
 	            	writter.write(String.valueOf(v));
 	            }
             }
+            catch(ThemeException e) {
+            	throw e;
+            }
             catch(Throwable e) {
-	            throw new IllegalStateException(
+            	/*
+            	ComponentParserException x = new ComponentParserException(
 	            		"unable to resolve var " + p.getId() + ": " + 
         				(p.getStart() == null? "" : p.getStart()) + "..." + (p.getEnd() == null? "" : p.getEnd()),
         				e
 				);
+            	*/
+            	
+            	ComponentParserException x = new ComponentParserException(
+	            		"unable to resolve var " + p.getId(),
+        				e
+				);
+            	
+            	try {
+            		writter.write("<h3>Exception: </h3>\n");
+            		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+            		PrintStream pin = new PrintStream(bout);
+            		x.printStackTrace(pin);
+            		pin.flush();
+            		String stack = new String(bout.toByteArray());
+            		stack = stack.replace("\r", "").replace("\n", "<br>\n");
+            		writter.write(stack);
+            		//x.printStackTrace(new PrintWriter(writter));
+            		writter.flush();
+            	}
+            	catch(Throwable k) {
+            	}
+            	
+            	x.printStackTrace();
+            	//throw x;
             }
             
             if(p.getEnd() != null){

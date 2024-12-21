@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.components;
 
+import java.io.IOException;
 import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 import br.com.uoutec.application.io.Path;
 import br.com.uoutec.application.io.Vfs;
+import br.com.uoutec.community.ediacaran.front.theme.ComponentParserException;
 import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
@@ -175,7 +177,7 @@ public abstract class AbstractTemplateComponent
 		try {
 			componentTemplate.toWriter(out, vars);
 		}
-		catch(Throwable e) {
+		catch(IOException e) {
 			throw new ThemeException(e);
 		}
 	}
@@ -185,8 +187,8 @@ public abstract class AbstractTemplateComponent
 		try {
 			componentTemplate.toWriter(out, vars);
 		}
-		catch(Throwable e) {
-			throw new ThemeException(e);
+		catch(IOException e) {
+			throw new ComponentParserException(e);
 		}
 	}
     

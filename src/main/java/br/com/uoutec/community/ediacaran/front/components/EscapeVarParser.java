@@ -3,9 +3,11 @@ package br.com.uoutec.community.ediacaran.front.components;
 import java.io.IOException;
 import java.io.Writer;
 
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.JspFragment;
 
 import br.com.uoutec.community.ediacaran.front.theme.AbstractVarParser;
+import br.com.uoutec.community.ediacaran.front.theme.ComponentParserException;
 
 public class EscapeVarParser extends AbstractVarParser{
 
@@ -22,8 +24,8 @@ public class EscapeVarParser extends AbstractVarParser{
 				jspBody.invoke(new EscapeWriter(writter));
 			}
 		}
-		catch(Throwable e) {
-			throw new IllegalStateException(e);
+		catch(JspException | IOException e) {
+			throw new ComponentParserException(e);
 		}
 	}
 

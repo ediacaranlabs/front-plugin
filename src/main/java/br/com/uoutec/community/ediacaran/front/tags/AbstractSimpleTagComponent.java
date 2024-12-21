@@ -92,7 +92,8 @@ public abstract class AbstractSimpleTagComponent
     		buildComponent(component);
     	}
 	    catch(ThemeException e) {
-	    	throw new JspException(e);
+	    	throw e;
+	    	//throw new JspException(e);
 	    }
     	finally {
     		afterBuildComponent(component);

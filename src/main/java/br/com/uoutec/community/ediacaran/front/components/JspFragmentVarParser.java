@@ -3,9 +3,11 @@ package br.com.uoutec.community.ediacaran.front.components;
 import java.io.IOException;
 import java.io.Writer;
 
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.JspFragment;
 
 import br.com.uoutec.community.ediacaran.front.theme.AbstractVarParser;
+import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 
 public class JspFragmentVarParser extends AbstractVarParser{
 
@@ -22,7 +24,10 @@ public class JspFragmentVarParser extends AbstractVarParser{
 				jspBody.invoke(writter);
 			}
 		}
-		catch(Throwable e) {
+		catch(JspException | IOException e) {
+			if(e.getCause() instanceof ThemeException) {
+				throw (ThemeException)e.getCause();
+			}
 			throw new IllegalStateException(e);
 		}
 	}
