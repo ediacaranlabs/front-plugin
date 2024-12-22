@@ -26,7 +26,7 @@ public class SetTemplatePackageTag extends SimpleTagSupport {
 
     public void doTag() throws JspException, IOException {
     	PageContext pageContext = (PageContext) getJspContext();
-    	pageContext.setAttribute(PACKAGE_NAME, name, PageContext.REQUEST_SCOPE);
+    	pageContext.setAttribute(PACKAGE_NAME, name);
     }
 
 	public String getName() {
