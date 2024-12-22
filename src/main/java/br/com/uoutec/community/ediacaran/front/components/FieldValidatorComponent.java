@@ -42,11 +42,13 @@ public class FieldValidatorComponent extends Component {
 		
 		FormComponent formComponent = (FormComponent)getProperty(FormComponent.FORM);
 
+		/*
 		if(formComponent == null) {
 			throw new IllegalStateException("form not found");
 		}
-	
-		return formComponent.getId();
+		*/
+		
+		return formComponent == null? null : formComponent.getId();
 	}
 
 	protected String getField(String field) {

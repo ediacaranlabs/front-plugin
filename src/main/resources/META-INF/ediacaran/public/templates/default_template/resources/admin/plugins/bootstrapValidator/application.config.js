@@ -33,6 +33,25 @@ $.AppContext.validator = {
 		
 		addRules: function (rules){
 			
+			let $field = $.AppContext.utils.getById(rules.field);
+			
+			if($field == null){
+				console.log("field not found: " + rules.field);
+				return;
+			}
+			
+			if(rules.form == null || rules.form == ""){
+				let $form = $field.getForm();
+				
+				if($form == null){
+					console.log("form not exist for field " + rules.field);
+					return;
+				}
+				
+				rules.form = $form.getAttribute("id");
+				 
+			}
+			
 			if(!this.isConfigured(rules.form)){
 				this.configureForm(rules.form);
 			}

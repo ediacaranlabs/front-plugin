@@ -314,8 +314,8 @@ public class Component
 	}
 	
     public Object setProperty(String name, Object newValue) {
-		Object old = pageContext.getAttribute(name);
-		pageContext.setAttribute(name, newValue);
+		Object old = pageContext.getAttribute(name, PageContext.REQUEST_SCOPE);
+		pageContext.setAttribute(name, newValue, PageContext.REQUEST_SCOPE);
     	return old;
     }
 
@@ -324,7 +324,7 @@ public class Component
     }
     
     public Object getProperty(String name, Object defaultValue) {
-		Object val = pageContext.getAttribute(name);
+		Object val = pageContext.getAttribute(name, PageContext.REQUEST_SCOPE);
     	return val == null? defaultValue : val;
     }
     

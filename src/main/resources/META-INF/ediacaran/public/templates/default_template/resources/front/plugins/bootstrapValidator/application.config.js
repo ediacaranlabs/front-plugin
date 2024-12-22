@@ -1,6 +1,11 @@
 $.fn.bootstrapValidator.DEFAULT_OPTIONS.excluded = [function($field, $validator) {
-	$field = $('#' + $field.attr("id"));
-    return $field.length == 0;
+	//$field = $('#' + $field.attr("id"));
+	//console.log($field.attr("id") + " " + document.body.contains($field[0]));
+    //return !document.body.contains($field[0]);//!$field.length;
+    if(!document.body.contains($field[0])){
+    	console.log($field.attr("name") + " " + document.body.contains($field[0]));
+    }
+    return !document.body.contains($field[0]);
 }];
 
 $.AppContext.validator = {
@@ -28,19 +33,53 @@ $.AppContext.validator = {
 		
 		addRules: function (rules){
 			
+			let $field = $.AppContext.utils.getById(rules.field);
+			
+			if($field == null){
+				console.log("field not found: " + rules.field);
+				return;
+			}
+			
+			if(rules.form == null || rules.form == ""){
+				let $form = $field.getForm();
+				
+				if($form == null){
+					console.log("form not exist for field " + rules.field);
+					return;
+				}
+				
+				rules.form = $form.getAttribute("id");
+				 
+			}
+			
 			if(!this.isConfigured(rules.form)){
 				this.configureForm(rules.form);
 			}
 			
 			var validator = this.createValidatorField(rules);
+			var $f = $("#" + rules.field);
 			
+			//try{
+				//$('#' + rules.form).bootstrapValidator('removeField', rules.field);
+			//}
+			//catch($ex){
+			//}
+
 			try{
-				$('#' + rules.form).bootstrapValidator('removeField', rules.field);
+				$('#' + rules.form).bootstrapValidator('removeField', $f);
 			}
 			catch($ex){
+				//console.log(rules.field + " " + $ex);
 			}
-				
-			$('#' + rules.form).bootstrapValidator('addField', rules.field, validator);	
+
+			try{
+				$('#' + rules.form).bootstrapValidator('removeField', $f.attr("name"));
+			}
+			catch($ex){
+				//console.log(rules.field + " " + $ex);
+			}
+
+			$('#' + rules.form).bootstrapValidator('addField', $f, validator);
 		},
 		
 		createValidatorField: function(rules){
