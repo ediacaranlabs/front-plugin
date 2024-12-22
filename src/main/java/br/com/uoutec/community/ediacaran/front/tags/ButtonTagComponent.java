@@ -32,6 +32,8 @@ public class ButtonTagComponent extends FieldFormTagComponent {
 	private String label;
 	
 	private String icon;
+
+	private String icon2;
 	
 	private String size;
 	
@@ -107,6 +109,15 @@ public class ButtonTagComponent extends FieldFormTagComponent {
 	@TagAttribute
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public String getIcon2() {
+		return icon2;
+	}
+
+	@TagAttribute
+	public void setIcon2(String icon2) {
+		this.icon2 = icon2;
 	}
 
 	public String getSize() {

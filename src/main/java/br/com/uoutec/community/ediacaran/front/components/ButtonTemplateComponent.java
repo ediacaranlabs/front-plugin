@@ -98,6 +98,7 @@ public class ButtonTemplateComponent extends ComponentFormTemplateComponent {
 			add("outline");
 			add("classStyle");
 			add("icon");
+			add("icon2");
 			add("content");
 			add("enabled");
 		}});
@@ -140,6 +141,15 @@ public class ButtonTemplateComponent extends ComponentFormTemplateComponent {
 				});
 
 				put("icon", new PropertyParserImp() {
+					
+					@Override
+					public Object toValue(Object value, PropertiesComponentTemplate component) {
+						return value == null? "" : new TemplateVarParser("/components/icon", component.getPackageTheme(), 
+								new EmptyVarsBuilder(), component.getTheme()).put("icon", value);
+					}
+				});
+
+				put("icon2", new PropertyParserImp() {
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
