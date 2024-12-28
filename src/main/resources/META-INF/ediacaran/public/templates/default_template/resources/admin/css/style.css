@@ -149,6 +149,10 @@ img.float-left {
 Button
 ==================================== */
 
+.btn {
+	font-size: 14px;	
+}
+
 .btn:not(:first-child) {
     margin-left: 10px;
 }
@@ -761,6 +765,7 @@ Sidebar
 .sidebar-group .sidebar .dropdown-item {
     padding-right: 1rem;
     padding-left: 1rem;
+    font-size: 14px;
 }
 
 .sidebar-group .sidebar .dropdown-item i:first-child{
