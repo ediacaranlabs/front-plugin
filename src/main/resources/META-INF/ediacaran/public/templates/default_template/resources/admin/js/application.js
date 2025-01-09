@@ -356,6 +356,7 @@ $.AppContext.utils = {
 			var $data;//        = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
 
 			var $formObj = new $.AppContext.types.Form($form);
+
 			$formObj.updateFieldIndex();
 			$formObj.updateFieldNames();
 
