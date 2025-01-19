@@ -56,12 +56,13 @@ $.AppContext.types.components.accordion.Accordion.prototype.isEnabled = function
 $.AppContext.types.components.accordion.Accordion.prototype.getItem = function($id){
 	
 	var $result = null;
+	var $localAccordion = this.obj;
 	
-	$(this.obj).find(".card").each(function(){
+	$($localAccordion).find(".card").each(function(){
 		var $card = $(this);
 
 		if($card.attr("id") == $id){
-			$result = new $.AppContext.types.components.accordion.AccordionItem($card, this.obj); 
+			$result = new $.AppContext.types.components.accordion.AccordionItem($card, $localAccordion);
 		}
 
 	});
@@ -116,6 +117,50 @@ $.AppContext.types.components.accordion.AccordionItem.prototype.isEnabled = func
 	return this.obj.find("[data-toggle='collapse']").hasClass("disabled");
 };
 
+$.AppContext.types.components.accordion.AccordionItem.prototype.getNext = function(){
+	
+	var $result = null;
+	var $selectNext = false;
+	var $localAccordion = this.accordion;
+	var $localItem = this.obj;
+	
+	$($localAccordion).find(".card").each(function(){
+		
+		var $card = $(this);
+		
+		if($selectNext && $result == null){
+			$result =  new $.AppContext.types.components.accordion.AccordionItem($card, $localAccordion); 
+		}
+
+		if($card.attr("id") == $localItem.attr("id")){
+			$selectNext = true;
+		}
+	});
+
+	return $result;	
+};
+
+$.AppContext.types.components.accordion.AccordionItem.prototype.getPrevious = function(){
+
+	var $result = null;
+	var $previous = null;
+	var $localAccordion = this.accordion;
+	var $localItem = this.obj;
+	
+	$($localAccordion).find(".card").each(function(){
+		var $card = $(this);
+		
+		if($card.attr("id") == $localItem.attr("id") && $result == null){
+			$result = $previous;
+		}
+		
+		$previous = new $.AppContext.types.components.accordion.AccordionItem($card, $localAccordion); 
+
+	});
+
+	return $result;
+
+};
 
 $.AppContext.onload(function(){			
 
