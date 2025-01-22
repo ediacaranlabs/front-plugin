@@ -77,7 +77,6 @@ $.AppContext.utils = {
 				var $e = new $.AppContext.types.Object($obj);
 				 
 				var $type = $.AppContext.types.getType($e);
-		
 				var $o = new $type($obj);
 				$o.getTagName();
 				return $o;
@@ -356,6 +355,7 @@ $.AppContext.utils = {
 			var $data;//        = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
 
 			var $formObj = new $.AppContext.types.Form($form);
+
 			$formObj.updateFieldIndex();
 			$formObj.updateFieldNames();
 
