@@ -374,6 +374,7 @@ Inner - Section: page headline
   margin: 0;
   padding: 0;
   color: #fefefe;
+  margin-bottom: 12px;
 }
 
 .inner-headline .inner-heading h2 {
