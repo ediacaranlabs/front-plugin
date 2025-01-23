@@ -273,49 +273,49 @@ $.AppContext.utils = {
 		
 		/* load content functions */
 		
-		loadResourceContent: function ($destContent, $resource, $isModal = false){
+		loadResourceContent: function ($destContent, $resource, $isModal = false, $success = null, $error = null){
 			
 			var $address     = $.AppContext.utils.getAddress($resource);
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
 			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null, null, null);
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null, $success, $error);
 		},
 
-		updateContent: function ($resource, $isModal = false){
+		updateContent: function ($resource, $isModal = false, $success = null, $error = null){
 			
 			var $address     = $.AppContext.utils.getAddress($resource);
 			var $destContent = $.AppContext.utils.getDestContent($resource);
 			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null, null, null);
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null, $success, $error);
 		},
 
-		updateContentByID: function ($resource, $destContent, $isModal = false){
+		updateContentByID: function ($resource, $destContent, $isModal = false, $success = null, $error = null){
 			
 			var $address     = $.AppContext.utils.getAddress($resource);
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
 			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null, null, null);
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, null, $success, $error);
 		},
 		
-		appendContentByID: function ($resource, $destContent, $isModal = false){
+		appendContentByID: function ($resource, $destContent, $isModal = false, $success = null, $error = null){
 			
 			var $address     = $.AppContext.utils.getAddress($resource);
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
 			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'append', null, null);
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'append', $success, $error);
 		},
 
-		insertContentByID: function ($resource, $destContent, $isModal = false){
+		insertContentByID: function ($resource, $destContent, $isModal = false, $success = null, $error = null){
 			
 			var $address     = $.AppContext.utils.getAddress($resource);
 			var $destContent = $.AppContext.utils.getDestContent($resource, $destContent);
 			var $modal       = $isModal? true : $.AppContext.utils.isModal($resource);
 			
-			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'insert', null, null);
+			$.AppContext.utils.send('GET', $.AppContext.vars.contextPath + $address, null, null, $destContent, $modal, 'insert', $success, $error);
 		},
 		
 		loadContent: function ($link){

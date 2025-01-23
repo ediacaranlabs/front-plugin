@@ -150,6 +150,7 @@ $.AppContext.types.components.accordion.AccordionItem.prototype.getPrevious = fu
 	$($localAccordion).find(".card").each(function(){
 		var $card = $(this);
 		
+		
 		if($card.attr("id") == $localItem.attr("id") && $result == null){
 			$result = $previous;
 		}
@@ -161,6 +162,8 @@ $.AppContext.types.components.accordion.AccordionItem.prototype.getPrevious = fu
 	return $result;
 
 };
+
+$.AppContext.types.extends($.AppContext.types.components.accordion.AccordionItem, $.AppContext.types.Object);
 
 //$.AppContext.onload(function(){			
 

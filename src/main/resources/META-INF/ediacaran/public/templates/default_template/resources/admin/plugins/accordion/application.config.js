@@ -150,6 +150,7 @@ $.AppContext.types.components.accordion.AccordionItem.prototype.getPrevious = fu
 	$($localAccordion).find(".card").each(function(){
 		var $card = $(this);
 		
+		
 		if($card.attr("id") == $localItem.attr("id") && $result == null){
 			$result = $previous;
 		}
@@ -162,16 +163,18 @@ $.AppContext.types.components.accordion.AccordionItem.prototype.getPrevious = fu
 
 };
 
-$.AppContext.onload(function(){			
+$.AppContext.types.extends($.AppContext.types.components.accordion.AccordionItem, $.AppContext.types.Object);
 
-$.AppContext.types.registerType(
-	'accordion', 
-	{
-		type: $.AppContext.types.components.accordion.Accordion,
-		accept : function ($e){
-			return $e.getAttribute("component-type") == "accordion";
+//$.AppContext.onload(function(){			
+
+	$.AppContext.types.registerType(
+		'accordion', 
+		{
+			type: $.AppContext.types.components.accordion.Accordion,
+			accept : function ($e){
+				return $e.getAttribute("component-type") == "accordion";
+			}
 		}
-	}
-);
+	);
 	
-});
+//});

@@ -751,6 +751,16 @@ $.AppContext.types.Option.prototype.getProperty = function(name){
 
 $.AppContext.types._map = {};
 
+$.AppContext.types.extends = function ($type, $superType){
+
+	for (var prop in $superType.prototype) {
+		if(typeof($type.prototype[prop]) == 'undefined'){
+			$type.prototype[prop] = $superType.prototype[prop];
+		}
+	}
+	
+};
+
 $.AppContext.types.registerType = function ($name, $prototype){
 
 	$.AppContext.types._map[$name] = $prototype;
@@ -759,11 +769,15 @@ $.AppContext.types.registerType = function ($name, $prototype){
 		return;
 	}
 	
+	$.AppContext.types.extends($prototype.type, $.AppContext.types.Object);
+	
+	/*
 	for (var prop in $.AppContext.types.Object.prototype) {
 		if(typeof($prototype.type.prototype[prop]) == 'undefined'){
 			$prototype.type.prototype[prop] = $.AppContext.types.Object.prototype[prop];
 		}
 	}
+	*/
 	
 };
 
