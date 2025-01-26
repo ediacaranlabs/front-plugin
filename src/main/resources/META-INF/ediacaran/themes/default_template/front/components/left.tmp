@@ -1,0 +1,1 @@
+<span {attr} class="float-left {block} {enabled} {classStyle} {align}">{content}</span>
