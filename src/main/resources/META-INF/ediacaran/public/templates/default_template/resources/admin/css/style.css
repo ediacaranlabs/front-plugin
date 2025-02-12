@@ -153,11 +153,7 @@ Button
 	font-size: 14px;	
 }
 
-.btn:not(:first-child) {
-    margin-left: 10px;
-}
-
-.btn.float-right:first-child{
+:not(.btn-group) .btn.float-right:first-child{
     margin-left: 10px;
 }
 

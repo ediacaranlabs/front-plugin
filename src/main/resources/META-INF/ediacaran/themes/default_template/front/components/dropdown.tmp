@@ -1,4 +1,4 @@
-<button {attr} class="btn {style} {size} {variation} {align} dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<button {attr} class="btn {style} {size} {variation} dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     {label}
 </button>
 <div class="dropdown-menu" aria-labelledby="{id}">
