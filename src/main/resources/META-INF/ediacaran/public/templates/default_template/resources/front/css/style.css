@@ -103,6 +103,10 @@ Button
     color: #fff !important;
 }
 
+.btn-group {
+	border-radius: 0.25rem;
+}
+
 /* ===================================
 Form Validation
 ==================================== */
