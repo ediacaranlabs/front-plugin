@@ -9,7 +9,7 @@ $.AppContext.sidebar.getSideBar = function ($ref) {
 	var loop = 0;
 	while(!$ref.is('body')){
 		
-		console.log($ref.attr("id"));
+		//console.log($ref.attr("id"));
 		
 		if($ref.hasClass('sidebar-group')){
 			return $ref;
@@ -31,7 +31,7 @@ $.AppContext.sidebar.apply = function($id){
 		var $bar = $(this);
 		var $body = $($bar).parent()
 		var $content = $($body).find(".sidebar-content");
-		console.log($($content).height());
+		//console.log($($content).height());
 		
 		var bodyHeight = $($body).outerHeight();
 		var barHeight = $($bar).outerHeight();

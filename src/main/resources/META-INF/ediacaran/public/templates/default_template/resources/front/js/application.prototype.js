@@ -193,7 +193,8 @@ $.AppContext.types.Object.prototype.getWidth = function(){
 };
 
 $.AppContext.types.Object.prototype.getTagName = function(){
-	return $(this.obj).prop("tagName").toLowerCase();
+	var $prop = $(this.obj).prop("tagName");
+	return $prop? $prop.toLowerCase() : $prop;
 };
 
 $.AppContext.types.Object.prototype.eachParent = function($filter){

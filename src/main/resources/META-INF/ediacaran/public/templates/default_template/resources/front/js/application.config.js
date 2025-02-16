@@ -20,7 +20,7 @@ $.AppContext.local.resizeContent = function () {
 	
 	$("#content-body").css('min-height', height + "px");
 	
-	console.log("window.height: " + $(document).height());
+	//console.log("window.height: " + $(document).height());
 	
 };
 
@@ -55,7 +55,7 @@ $.AppContext.onload(function(){
 	});
 
 	$(window).resize(function(){
-		console.log("window.height: " + $(window).height());
+		//console.log("window.height: " + $(window).height());
 		$.AppContext.local.resizeContent();
 	});
 	
