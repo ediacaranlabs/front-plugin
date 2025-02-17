@@ -51,9 +51,12 @@ $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $d
 	var $croppie   = $root.find(".croppie-image");
 	var $button    = $('#' + $id + "_button");//$root.find("button[type='button']");
 	var $fileField = $root.find("input[type='file']");
+	var $fieldName = $fileField.attr("name");
 	var $border    = $root.find("input[name='" + $name + ".border']");
 	var $url       = $default;
-	
+
+	$fieldName = $fieldName.substring(0, $fieldName.length - '.file'.length);
+	 	
 	$border.val($type);
 	 
 	//$croppie.width($width);
@@ -81,23 +84,12 @@ $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $d
 		showZoomer: false
 	});
 
-	/*
-	setTimeout(function(){
-		$croppieObj.croppie(
-				'bind',{
-					url: $default
-		});
-		
-	},
-	500);
-	*/
-	
 	$croppieObj.on('update.croppie', function(ev, cropData) {
 		
-		var $x1 = $($root).find("input[name='" + $name + ".x1']");
-		var $x2 = $($root).find("input[name='" + $name + ".x2']");
-		var $y1 = $($root).find("input[name='" + $name + ".y1']");
-		var $y2 = $($root).find("input[name='" + $name + ".y2']");
+		var $x1 = $($root).find("input[name='" + $fieldName + ".x1']");
+		var $x2 = $($root).find("input[name='" + $fieldName + ".x2']");
+		var $y1 = $($root).find("input[name='" + $fieldName + ".y1']");
+		var $y2 = $($root).find("input[name='" + $fieldName + ".y2']");
 
 		$x1.val(cropData.points[0]);
 		$y1.val(cropData.points[1]);
@@ -105,54 +97,37 @@ $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $d
 		$x2.val(cropData.points[2]);
 		$y2.val(cropData.points[3]);
 
+		$opts = $croppieObj.croppie('get');
+		console.log("zoom: " + JSON.stringify($opts));
 	});
 
 
 	$($fileField).on('change', function(event){
 		$url = URL.createObjectURL(event.target.files[0]);
-		
+
 		$croppieObj.croppie('bind', {
-			url: $url,
+			url: $url
 		});
-		
+		console.log("change");
 	});
 	
 	$button.click(function(){
 		$fileField.click();
 	});
 	
-	$croppieObj.croppie(
-			'bind',{
-				url: $url
-	});
-
-	$root.show('slow', function(){
-		
+	$croppie.show(function(){
 		setTimeout(function(){
-			
-			var $croppieWidth = $($root).width();
-			var $croppieHeight = $($root).width()*($height/$width);
-			
-			$croppieObj.croppie(
-					'bind',{
-						viewport: {
-							width: $croppieWidth,
-							height: $croppieHeight,
-							type: $type
-						},
-						boundary: {
-							width: $croppieWidth,
-							height: $croppieHeight
-						},
-						url: $url
+
+			$croppieObj.croppie('bind', {
+				url: $url
 			});
 			
-		},
-		100);
+		}, 200)
 		
-		console.log("show croppie: " + $id);
+		console.log("show: " + $id);
 	});
 
+	
 	$root.bind('resize', function(){
 
 		var $croppieWidth = $($root).width();
@@ -161,7 +136,7 @@ $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $d
 		var $f = function(){
 
 			$opts = $croppieObj.croppie('get');
-				
+			
 			var $croppiePoints      = $opts.points;
 			var $croppieZoom        = $opts.zoom;
 			var $croppieOrientation = $opts.orientation;
@@ -189,11 +164,13 @@ $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $d
 						zoom: $croppieOrientation
 			});
 			
-			console.log("resize croppie: " + $id + " > " + $croppieWidth + "x" + $croppieHeight);
-			
+			//console.log("resize croppie: " + $id + " > " + $croppieWidth + "x" + $croppieHeight);
+			console.log("resize: " + JSON.stringify($opts));
+
 		};
 		
 		$.AppContext.imageField.resizeQueue.push({ func: $f, id: $id });
     });
+
 	
 };
