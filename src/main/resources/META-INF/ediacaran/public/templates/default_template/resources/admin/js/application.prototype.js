@@ -68,6 +68,10 @@ $.AppContext.types.Object.prototype.setVisible = function($value){
 	}
 };
 
+$.AppContext.types.Object.prototype.isVisible = function(){
+	return !$(this.obj).is(":hidden");
+};
+
 $.AppContext.types.Object.prototype.setEnabled = function($value){
 
 	if($value){

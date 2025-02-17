@@ -45,6 +45,10 @@ $.AppContext.imageField.resizeQueueProccess = function(){
 	 
 setTimeout($.AppContext.imageField.resizeQueueProccess(), 300);
 
+$.AppContext.imageField.resize = function(){
+	
+};
+
 $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $default){
 	
 	var $root      = $('#' + $id)
@@ -54,32 +58,22 @@ $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $d
 	var $fieldName = $fileField.attr("name");
 	var $border    = $root.find("input[name='" + $name + ".border']");
 	var $url       = $default;
-
+	
 	$fieldName = $fieldName.substring(0, $fieldName.length - '.file'.length);
 	 	
 	$border.val($type);
 	 
-	//$croppie.width($width);
-	//$croppie.height($height);
-
-	var $croppieWidth = $($root).width();
-	var $croppieHeight = $($root).width()*($height/$width);
-	
-	//$croppie.width($croppieWidth);
-	//$croppie.height($croppieHeight);
-
-	//$root.width($($croppie).outerWidth());
 	$root.height('auto');
 	
 	var $croppieObj = $($croppie).croppie({
 		viewport: {
-			width: $croppieWidth,
-			height: $croppieHeight,
+			width: $width,
+			height: $height,
 			type: $type
 		},
 		boundary: {
-			width: $croppieWidth,
-			height: $croppieHeight
+			width: $width,
+			height: $height
 		},
 		showZoomer: false
 	});
@@ -115,21 +109,62 @@ $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $d
 		$fileField.click();
 	});
 	
-	$croppie.show(function(){
-		setTimeout(function(){
-
-			$croppieObj.croppie('bind', {
-				url: $url
-			});
-			
-		}, 200)
+	
+	var $enableResize = false;
+	
+	var $show = function(){
 		
-		console.log("show: " + $id);
+		var $objRoot = $.AppContext.utils.getById($id);
+		
+		console.log("root: " + $objRoot);
+		
+		if($objRoot == null){
+			return;
+		}
+		
+		var $invisibleObj = $objRoot.getFirstParent(function($e){
+			return !$e.isVisible();
+		});
+
+		console.log("inv: " + $invisibleObj);
+		
+		if($invisibleObj != null){
+			console.log("inv: " + $invisibleObj.getAttribute("id"));
+			setTimeout(function(){$show()}, 500);
+		}
+		else{
+			var $croppieWidth = $($root).width();
+			var $croppieHeight = $($root).width()*($height/$width);
+			
+			$croppieObj.croppie('bind', {
+					viewport: {
+						width: $croppieWidth,
+						height: $croppieHeight,
+						type: $type
+					},
+					boundary: {
+						width: $croppieWidth,
+						height: $croppieHeight
+					},
+					url: $url
+			});
+			$enableResize = true;
+			console.log("show: " + $id);
+		}
+		
+	}
+	
+	$croppie.show(function(){
+		setTimeout(function(){$show();}, 200);
 	});
 
 	
 	$root.bind('resize', function(){
 
+		if(!$enableResize){
+			return;
+		}
+		
 		var $croppieWidth = $($root).width();
 		var $croppieHeight = $($root).width()*($height/$width);
 
@@ -171,6 +206,15 @@ $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $d
 		
 		$.AppContext.imageField.resizeQueue.push({ func: $f, id: $id });
     });
-
 	
+	
+	var $objRoot = $.AppContext.utils.toObject($root);
+	
+	var $invisibleObj = $objRoot.getFirstParent(function($e){
+		return !$e.isVisible();
+	});
+	
+	if($invisibleObj){
+		
+	}
 };
