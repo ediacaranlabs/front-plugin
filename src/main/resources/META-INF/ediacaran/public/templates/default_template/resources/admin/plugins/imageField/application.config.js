@@ -4,15 +4,7 @@ $.AppContext.imageField.resizeQueue = new Array();
 
 $.AppContext.imageField.resizeQueueProccess = function(){
 	
-	/*
-	while($.AppContext.imageField.resizeQueue.length > 0){
-		var $fTmp = $.AppContext.imageField.resizeQueue.shift();
-		$fTmp();
-	}
-	*/
-	
 	var $fTmp = {};
-	var $exist = false;
 
 	while($.AppContext.imageField.resizeQueue.length > 0){
 		var $obj = $.AppContext.imageField.resizeQueue.shift();
@@ -21,32 +13,107 @@ $.AppContext.imageField.resizeQueueProccess = function(){
 	}
 	
 	for (var $id in $fTmp) {
-		$fTmp[$id]();
+		try{
+			$fTmp[$id]();
+		}
+		catch($e){
+		}	
 	}
 
-	/*if($exist){
-		setTimeout(function(){$.AppContext.imageField.resizeQueueProccess()}, 1);
-	}
-	else{*/
-		setTimeout(function(){$.AppContext.imageField.resizeQueueProccess()}, 50);
-	//}
-		
-	/*
-	if($.AppContext.imageField.resizeQueue.length > 0){
-		var $fTmp = $.AppContext.imageField.resizeQueue.shift();
-		$fTmp();
-		setTimeout(function(){$.AppContext.imageField.resizeQueueProccess()}, 10);
-	}
-	else{
-		setTimeout(function(){$.AppContext.imageField.resizeQueueProccess()}, 100);
-	}
-	*/
+	setTimeout(function(){$.AppContext.imageField.resizeQueueProccess()}, 50);
 };
 	 
 setTimeout($.AppContext.imageField.resizeQueueProccess(), 300);
 
-$.AppContext.imageField.resize = function(){
+$.AppContext.imageField.resize = function($url, $width, $height, $type, $root, $croppieObj, $croppie){
 	
+	var $objRoot = $.AppContext.utils.getById($root.attr("id"));
+	
+	if($objRoot == null){
+		return;
+	}
+	
+	var $croppieWidth = $($root).width();
+	var $croppieHeight = $($root).width()*($height/$width);
+
+	var $f = function(){
+
+		$opts = $croppieObj.croppie('get');
+		
+		var $croppiePoints      = $opts.points;
+		var $croppieZoom        = $opts.zoom;
+		var $croppieOrientation = $opts.orientation;
+		
+		$croppieObj.croppie('destroy');
+
+		$croppieObj = $($croppie).croppie({
+				viewport: {
+					width: $croppieWidth,
+					height: $croppieHeight,
+					type: $type
+				},
+				boundary: {
+					width: $croppieWidth,
+					height: $croppieHeight
+				},
+				showZoomer: false
+			});
+		
+		$croppieObj.croppie(
+				'bind',{
+					url: $url,
+					points: $croppiePoints, 
+					orientation: $croppieZoom, 
+					zoom: $croppieOrientation
+		});
+		
+		console.log("resize: " + JSON.stringify($opts));
+
+	};
+	
+	$.AppContext.imageField.resizeQueue.push({ func: $f, id: $root.attr("id") });
+		
+};
+
+$.AppContext.imageField.show = function($url, $width, $height, $type, $root, $croppieObj, $croppie){
+	
+	var $objRoot = $.AppContext.utils.getById($root.attr("id"));
+	
+	if($objRoot == null){
+		return;
+	}
+	
+	var $croppieWidth = $($root).width();
+	var $croppieHeight = $($root).width()*($height/$width);
+
+	var $f = function(){
+
+		$croppieObj.croppie('destroy');
+
+		$croppieObj = $($croppie).croppie({
+				viewport: {
+					width: $croppieWidth,
+					height: $croppieHeight,
+					type: $type
+				},
+				boundary: {
+					width: $croppieWidth,
+					height: $croppieHeight
+				},
+				showZoomer: false
+			});
+		
+		$croppieObj.croppie(
+				'bind',{
+					url: $url,
+		});
+		
+		console.log("show: " + JSON.stringify($croppieObj.croppie('get')));
+
+	};
+	
+	$.AppContext.imageField.resizeQueue.push({ func: $f, id: $root.attr("id") });
+		
 };
 
 $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $default){
@@ -133,23 +200,11 @@ $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $d
 			setTimeout(function(){$show()}, 500);
 		}
 		else{
-			var $croppieWidth = $($root).width();
-			var $croppieHeight = $($root).width()*($height/$width);
-			
-			$croppieObj.croppie('bind', {
-					viewport: {
-						width: $croppieWidth,
-						height: $croppieHeight,
-						type: $type
-					},
-					boundary: {
-						width: $croppieWidth,
-						height: $croppieHeight
-					},
-					url: $url
-			});
-			$enableResize = true;
-			console.log("show: " + $id);
+			$.AppContext.imageField.show($url, $width, $height, $type, $root, $croppieObj, $croppie);
+			setTimeout(function(){
+				$enableResize = true;
+				console.log("show: " + $id);
+			},200);
 		}
 		
 	}
@@ -165,46 +220,8 @@ $.AppContext.imageField.apply = function ($id, $name, $width, $height, $type, $d
 			return;
 		}
 		
-		var $croppieWidth = $($root).width();
-		var $croppieHeight = $($root).width()*($height/$width);
+		$.AppContext.imageField.resize($url, $width, $height, $type, $root, $croppieObj, $croppie);
 
-		var $f = function(){
-
-			$opts = $croppieObj.croppie('get');
-			
-			var $croppiePoints      = $opts.points;
-			var $croppieZoom        = $opts.zoom;
-			var $croppieOrientation = $opts.orientation;
-			
-			$croppieObj.croppie('destroy');
-
-			$croppieObj = $($croppie).croppie({
-					viewport: {
-						width: $croppieWidth,
-						height: $croppieHeight,
-						type: $type
-					},
-					boundary: {
-						width: $croppieWidth,
-						height: $croppieHeight
-					},
-					showZoomer: false
-				});
-			
-			$croppieObj.croppie(
-					'bind',{
-						url: $url,
-						points: $croppiePoints, 
-						orientation: $croppieZoom, 
-						zoom: $croppieOrientation
-			});
-			
-			//console.log("resize croppie: " + $id + " > " + $croppieWidth + "x" + $croppieHeight);
-			console.log("resize: " + JSON.stringify($opts));
-
-		};
-		
-		$.AppContext.imageField.resizeQueue.push({ func: $f, id: $id });
     });
 	
 	
