@@ -1,26 +1,39 @@
+
 $.AppContext.carousel = {};
 
 $.AppContext.carousel.apply = function($id){
-	
+
+
 	var jcarousel = $('#' + $id + ' .jcarousel');
 	
     jcarousel
         .on('jcarousel:reload jcarousel:create', function () {
         	
-            var carousel = $(this),
-                width = carousel.innerWidth();
-
         	var carousel = $(this);
-        	var width = carousel.innerWidth();
-
+        	var $width = carousel.innerWidth();
+			
+			/*
             if (width >= 992) {
                 width = width / 4;
             }
-            if (width >= 576) {
-                width = width / 2;
+            else{
+            	width = width / 3;
             }
-            
-            carousel.jcarousel('items').css('width', Math.ceil(width) + 'px');
+			*/
+			
+			if($width >= 400){	
+				var $itens = carousel.jcarousel('items').length;
+				
+				if($itens > 3){
+					$width = $width / 3;
+				}
+				else{
+					$width = $width / $itens;
+				}
+			}
+			
+			console.log("width: " + $width);
+           	carousel.jcarousel('items').css('width', Math.ceil($width) + 'px');
         })
         .jcarousel({
             wrap: 'circular'
