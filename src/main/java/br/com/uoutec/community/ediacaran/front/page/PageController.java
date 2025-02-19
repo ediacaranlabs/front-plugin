@@ -39,13 +39,23 @@ public class PageController implements PublicType {
 			return result;
 		}
 		
+		Page page;
+		
 		try {
-			Page page = pageManager.getPage(uri, locale);
+			page = pageManager.getPage(uri, locale);
 			
 			if(page == null && locale != null) {
 				page = pageManager.getPage(uri, (String)null);
 			}
-			
+		}
+		catch(Throwable ex) {
+			ex.printStackTrace();
+			result.setResponseStatus(HttpStatus.NOT_FOUND);
+			result.setReason("page can't be reached!");
+			return result;
+		}
+
+		try {
 			if(page != null) {
 				ObjectTemplate pg = pageManager.getTemplate(page.getTemplate(), PageObjectTemplateType.VIEW); 
 				result.setView(pg.getTemplate(), true);
@@ -56,12 +66,12 @@ public class PageController implements PublicType {
 				result.setResponseStatus(HttpStatus.NOT_FOUND);
 				result.setReason(uri + " not found!");
 			}
-			
 		}
 		catch(Throwable ex) {
 			ex.printStackTrace();
-			result.setResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-			result.setReason(ex.toString());
+			result.setResponseStatus(HttpStatus.NOT_FOUND);
+			result.setReason("page can't be reached!");
+			return result;
 		}
 		
 		return result;
