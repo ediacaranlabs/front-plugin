@@ -19,7 +19,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -28,7 +28,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>template</name>
+                    <name>align</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>extAttrs</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -46,7 +55,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>extAttrs</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -69,15 +78,6 @@
                     <type>javax.servlet.jsp.jstl.fmt.LocalizationContext</type>
                     <fragment>true</fragment>
                </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
-                    <fragment>true</fragment>
-               </attribute>
      </tag>
      
      <!-- /container -->
@@ -90,6 +90,15 @@
           <body-content>scriptless</body-content>
           <info><![CDATA[
           ]]></info>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>order</name>
+                    <required>false</required>
+                    <type>java.lang.Integer</type>
+                    <fragment>true</fragment>
+               </attribute>
                
                <attribute>
                     <description><![CDATA[
@@ -112,16 +121,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>order</name>
-                    <required>false</required>
-                    <type>java.lang.Integer</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -130,7 +130,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>template</name>
+                    <name>align</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>extAttrs</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -148,7 +157,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>extAttrs</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -169,15 +178,6 @@
                     <name>bundle</name>
                     <required>false</required>
                     <type>javax.servlet.jsp.jstl.fmt.LocalizationContext</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
                     <fragment>true</fragment>
                </attribute>
      </tag>
@@ -205,7 +205,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>classStyle</name>
+                    <name>template</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -214,7 +214,16 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>template</name>
+                    <name>align</name>
+                    <required>false</required>
+                    <type>java.lang.String</type>
+                    <fragment>true</fragment>
+               </attribute>
+               
+               <attribute>
+                    <description><![CDATA[
+                    ]]></description>
+                    <name>extAttrs</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -232,7 +241,7 @@
                <attribute>
                     <description><![CDATA[
                     ]]></description>
-                    <name>extAttrs</name>
+                    <name>classStyle</name>
                     <required>false</required>
                     <type>java.lang.String</type>
                     <fragment>true</fragment>
@@ -253,15 +262,6 @@
                     <name>bundle</name>
                     <required>false</required>
                     <type>javax.servlet.jsp.jstl.fmt.LocalizationContext</type>
-                    <fragment>true</fragment>
-               </attribute>
-               
-               <attribute>
-                    <description><![CDATA[
-                    ]]></description>
-                    <name>align</name>
-                    <required>false</required>
-                    <type>java.lang.String</type>
                     <fragment>true</fragment>
                </attribute>
      </tag>
