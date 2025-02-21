@@ -14,13 +14,13 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 
 	private static final long serialVersionUID = -6586803845766008609L;
 
-	private Map<String,String> data;
+	private Map<String,Object> data;
 
-	public Map<String, String> getData() {
+	public Map<String, Object> getData() {
 		return data;
 	}
 
-	public void setData(Map<String, String> data) {
+	public void setData(Map<String, Object> data) {
 		this.data = data;
 	}
 
