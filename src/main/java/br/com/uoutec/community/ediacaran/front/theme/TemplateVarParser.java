@@ -1,8 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.theme;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,19 +52,4 @@ public class TemplateVarParser  extends AbstractVarParser{
 		theme.buildComponent(template, packageName, componentVars, vars, writter);
 	}
 
-	@Override
-	public String parse() throws IOException {
-		
-		ByteArrayOutputStream bout = new ByteArrayOutputStream();
-		PrintWriter contentWriter = new PrintWriter(bout, true);
-		
-		parse(contentWriter);
-		
-		contentWriter.flush();
-		
-    	byte[] bValue = bout.toByteArray();
-    	return new String(bValue);
-    	
-	}
-	
 }

@@ -506,11 +506,11 @@ public class ComponentTemplate {
 		
 	}
 	
+	@FunctionalInterface
 	public static interface VarParser{
 		
 		void parse(Writer writter) throws IOException;
 		
-		String parse() throws IOException;
 	}
 	
 }

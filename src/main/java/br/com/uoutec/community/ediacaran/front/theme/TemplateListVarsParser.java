@@ -1,6 +1,5 @@
 package br.com.uoutec.community.ediacaran.front.theme;
 
-import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,8 +64,4 @@ public class TemplateListVarsParser  extends AbstractVarParser{
 		}
 	}
 
-	@Override
-	public String parse() throws IOException {
-		throw new UnsupportedOperationException();
-	}
 }

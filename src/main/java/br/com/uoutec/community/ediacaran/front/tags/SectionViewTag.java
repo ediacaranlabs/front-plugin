@@ -58,11 +58,6 @@ public class SectionViewTag extends AbstractSimpleTagComponent {
 					writter.write(content);
 				}
 
-				@Override
-				public String parse() throws IOException {
-					return null;
-				}
-				
 			};
 		}
 		else {
@@ -99,11 +94,6 @@ public class SectionViewTag extends AbstractSimpleTagComponent {
 					}
 				}
 
-				@Override
-				public String parse() throws IOException {
-					return null;
-				}
-				
 			};
 		}
 	}

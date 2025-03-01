@@ -11,9 +11,4 @@ public class AbstractVarParser implements VarParser{
 	public void parse(Writer writter) throws IOException {
 	}
 
-	@Override
-	public String parse() throws IOException {
-		return null;
-	}
-	
 }

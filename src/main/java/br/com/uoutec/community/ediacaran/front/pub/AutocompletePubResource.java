@@ -1,7 +1,8 @@
 package br.com.uoutec.community.ediacaran.front.pub;
 
-import java.io.IOException;
 import java.io.Serializable;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -161,12 +162,10 @@ public class AutocompletePubResource {
 	}
 	
 	private String getIcon(String name, Theme theme) {
-		try {
-			return new TemplateVarParser("/components/icon", theme).put("icon", name).put("size", 2).parse();
-		}
-		catch (IOException e) {
-			return "error";
-		}
+		Writer writer = new StringWriter();
+		TemplateVarParser t =  new TemplateVarParser("/components/icon", theme).put("icon", name).put("size", 2);
+		t.parse(writer);
+		return writer.toString();
 	}
 	
 	@SuppressWarnings("serial")

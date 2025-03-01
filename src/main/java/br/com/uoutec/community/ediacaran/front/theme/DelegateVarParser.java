@@ -24,9 +24,4 @@ public class DelegateVarParser implements VarParser{
 		}
 	}
 
-	@Override
-	public String parse() throws IOException {
-		return varParser.parse();
-	}
-	
 }

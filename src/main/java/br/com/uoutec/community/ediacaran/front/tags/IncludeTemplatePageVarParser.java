@@ -78,11 +78,6 @@ public class IncludeTemplatePageVarParser
 	}
 
 	@Override
-	public String parse() throws IOException {
-		return null;
-	}
-
-	@Override
 	public void setPageContext(PageContext value) {
 		this.pageContext = value;
 		this.request = (HttpServletRequest) value.getRequest();

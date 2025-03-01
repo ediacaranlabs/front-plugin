@@ -1,10 +1,11 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
 import br.com.uoutec.community.ediacaran.front.components.Component;
+import br.com.uoutec.community.ediacaran.front.components.TabsComponent;
+import br.com.uoutec.community.ediacaran.front.components.TabsItemComponent;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
-import br.com.uoutec.community.ediacaran.front.theme.TemplateListVarsParser;
 
 @Tag(
 	name="tabs", 
@@ -15,51 +16,65 @@ public class TabsTagComponent extends AbstractSimpleTagComponent {
 
 	//private static final long serialVersionUID = 748182107582888257L;
 
-	private static final String CONTENT_ITEM = "/components/tabs-content-item";
+	//private static final String CONTENT_ITEM = "/components/tabs-content-item";
 	
-	private static final String HEADER_ITEM = "/components/tabs-header-item";
+	//private static final String HEADER_ITEM = "/components/tabs-header-item";
 
 	public static final String TEMPLATE  = "/components/tabs";
 	
+	/*
 	private TemplateListVarsParser header;
 	
 	private TemplateListVarsParser body;
+	*/
 	
 	private String style;
 	
-	private int index;
+	//private int index;
 	
 	public TabsTagComponent() {
-		this.index = 0;
+		//this.index = 0;
 	}
 	
 	public void add(Component value) {
+
+		TabsComponent c = (TabsComponent) getComponent();
+		c.addItem((TabsItemComponent)value);
+		
+		/*
 		index++;
 		
 		header.createNewItem(value)
 		.put("parentID", getId())
-		//.put("id", index);
 		.put("id", value.getId());
 		
 		body.createNewItem(value)
 		.put("parentID", getId())
-		//.put("id", index);
 		.put("id", value.getId());
+		*/
 		
 	}
 	
+    protected Component createComponent() {
+    	return new TabsComponent();
+    }
+	
+	/*
 	protected void beforeBuildComponent(Component component) {
     	this.index   = 1;
 		this.header  = new TemplateListVarsParser(HEADER_ITEM, component.getPackageTheme(), component.getTheme());
 		this.body = new TemplateListVarsParser(CONTENT_ITEM, component.getPackageTheme(), component.getTheme());
 	}
-
+	*/
+	/*
 	protected void afterBuildComponent(Component component) {
     	this.index   = 0;
 		this.header  = null;
 		this.body = null;
 	}
+	*/
 	
+    @Deprecated
     public String getDefaultTemplate() {
     	return TEMPLATE;
     }
@@ -73,6 +88,7 @@ public class TabsTagComponent extends AbstractSimpleTagComponent {
 		this.style = style;
 	}
 
+	/*
 	public int getNextIndex() {
 		return ++index;
 	}
@@ -84,7 +100,8 @@ public class TabsTagComponent extends AbstractSimpleTagComponent {
 	public void setIndex(int index) {
 		this.index = index;
 	}
-
+    */
+	
 	@Override
 	public String getType() {
 		return "tabs";

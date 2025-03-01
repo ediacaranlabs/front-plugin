@@ -105,10 +105,4 @@ public class IncludeVarParser implements VarParser{
         }		
 	}
 
-	@Override
-	public String parse() throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

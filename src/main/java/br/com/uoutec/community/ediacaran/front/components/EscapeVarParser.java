@@ -29,9 +29,4 @@ public class EscapeVarParser extends AbstractVarParser{
 		}
 	}
 
-	@Override
-	public String parse() throws IOException {
-		throw new UnsupportedOperationException();
-	}
-	
 }
