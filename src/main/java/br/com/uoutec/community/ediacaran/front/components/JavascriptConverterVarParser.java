@@ -4,14 +4,13 @@ import java.io.IOException;
 import java.io.Writer;
 
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.JspFragment;
 
 import br.com.uoutec.community.ediacaran.front.theme.AbstractVarParser;
 
 public class JavascriptConverterVarParser extends AbstractVarParser{
 
-	public static final String WRAPPER = JavascriptConverterVarParser.class + ":active";
+	//public static final String WRAPPER = JavascriptConverterVarParser.class + ":active";
 	
 	private JspFragment jspBody;
 	
@@ -21,11 +20,12 @@ public class JavascriptConverterVarParser extends AbstractVarParser{
 	
 	@Override
 	public void parse(Writer writter) throws IOException {
-		boolean active = jspBody.getJspContext().getAttribute(WRAPPER, PageContext.REQUEST_SCOPE) != null;
+		boolean active = JavascriptTemplateStatus.isActive();//jspBody.getJspContext().getAttribute(WRAPPER, PageContext.REQUEST_SCOPE) != null;
 		try {
 			if(!active) {
 				if(jspBody != null) {
-					jspBody.getJspContext().setAttribute(WRAPPER, active, PageContext.REQUEST_SCOPE);
+					JavascriptTemplateStatus.active();
+					//jspBody.getJspContext().setAttribute(WRAPPER, active, PageContext.REQUEST_SCOPE);
 					JavascriptConverterWriter jscw = new JavascriptConverterWriter(writter);
 					jscw.start();
 					jspBody.invoke(jscw);
@@ -38,7 +38,8 @@ public class JavascriptConverterVarParser extends AbstractVarParser{
 		}
 		finally {
 			if(!active) {
-				jspBody.getJspContext().removeAttribute(WRAPPER, PageContext.REQUEST_SCOPE);
+				//jspBody.getJspContext().removeAttribute(WRAPPER, PageContext.REQUEST_SCOPE);
+				JavascriptTemplateStatus.deactive();
 			}
 		}
 	}

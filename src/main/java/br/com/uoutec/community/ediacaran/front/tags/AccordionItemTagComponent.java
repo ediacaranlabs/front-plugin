@@ -39,6 +39,7 @@ public class AccordionItemTagComponent extends AbstractSimpleTagComponent {
     	    protected void beforeApplyTemplate(String template, Map<String, Object> vars, Writer out) throws IOException {
     	    	Object parentTag = getParentTag();
     			parentID = parentTag == null? null : ((AccordionTagComponent)parentTag).getId();
+    	    	super.beforeApplyTemplate(template, vars, out);
     	    }
     		
     	};

@@ -11,9 +11,9 @@ import br.com.uoutec.community.ediacaran.front.theme.TemplateListVarsParser;
 	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class TabsTagComponent extends AbstractBodyTagComponent {
+public class TabsTagComponent extends AbstractSimpleTagComponent {
 
-	private static final long serialVersionUID = 748182107582888257L;
+	//private static final long serialVersionUID = 748182107582888257L;
 
 	private static final String CONTENT_ITEM = "/components/tabs-content-item";
 	
@@ -23,7 +23,7 @@ public class TabsTagComponent extends AbstractBodyTagComponent {
 	
 	private TemplateListVarsParser header;
 	
-	private TemplateListVarsParser content;
+	private TemplateListVarsParser body;
 	
 	private String style;
 	
@@ -41,7 +41,7 @@ public class TabsTagComponent extends AbstractBodyTagComponent {
 		//.put("id", index);
 		.put("id", value.getId());
 		
-		content.createNewItem(value)
+		body.createNewItem(value)
 		.put("parentID", getId())
 		//.put("id", index);
 		.put("id", value.getId());
@@ -51,13 +51,13 @@ public class TabsTagComponent extends AbstractBodyTagComponent {
 	protected void beforeBuildComponent(Component component) {
     	this.index   = 1;
 		this.header  = new TemplateListVarsParser(HEADER_ITEM, component.getPackageTheme(), component.getTheme());
-		this.content = new TemplateListVarsParser(CONTENT_ITEM, component.getPackageTheme(), component.getTheme());
+		this.body = new TemplateListVarsParser(CONTENT_ITEM, component.getPackageTheme(), component.getTheme());
 	}
 
 	protected void afterBuildComponent(Component component) {
     	this.index   = 0;
 		this.header  = null;
-		this.content = null;
+		this.body = null;
 	}
 	
     public String getDefaultTemplate() {

@@ -68,14 +68,7 @@ public class Component
 		vars.put("content",	new TemplateVarParser(contentTemplate, packageName, this, theme));
 		
 		beforeApplyTemplate(template, vars, out);
-
-    	//Object oldParent = getParentTag();
-    	//setParentTag(componentData);
-    	
 		applyTemplate(template, vars, out);
-    	
-		//setParentTag(oldParent);
-		
 		afterApplyTemplate(template, vars, out);
 		
     }
@@ -89,13 +82,7 @@ public class Component
     	String template          = getTemplate() == null? getDefaultTemplate() : getTemplate();
     	
 		beforeApplyTemplate(template, vars, out);
-
-    	//Object oldParent = getParentTag();
-    	//setParentTag(componentData);
-		
     	applyTemplate(template, vars, out);
-    	
-    	//setParentTag(oldParent);
 		afterApplyTemplate(template, vars, out);
 		
     	setProperty(componentData.getClass().getName() + ":CONTEXT", null);    	
@@ -140,6 +127,13 @@ public class Component
 
 	protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
+		
+    	boolean active = JavascriptTemplateStatus.isActive();
+    	
+    	if(active) {
+    		registerFrontID();
+    	}
+		
     }
     
     protected void afterApplyTemplate(String template, Map<String,Object> vars, 
@@ -147,13 +141,6 @@ public class Component
     }
     
     protected void applyTemplate(String template, Map<String, Object> vars, Writer out){
-    	
-    	boolean active = pageContext.getAttribute(JavascriptConverterVarParser.WRAPPER, PageContext.REQUEST_SCOPE) != null;
-    	
-    	if(active) {
-    		registerFrontID();
-    	}
-    	
     	getTheme().buildComponent(template, getPackageTheme(), this, vars, out);
     }
     
@@ -164,18 +151,11 @@ public class Component
 			out.write("/* " + componentData.getType() + " */\r\n");
 			out.write("var component_" + uniqueID + " = $.AppContext.constants.getNextID();");
 			out.write(JavascriptConverterWriter.ENABLE_PARSER);
+			out.flush();
 		}
 		catch(IOException ex) {
 		}
     }
-    
-    //public void setParentTag(Object tag) {
-    //	setProperty(PARENT_TAG, tag);
-    //}
-    
-    //public Object getParentTag() {
-    //	return getProperty(PARENT_TAG);
-    //}
     
 	protected void beforePrepareVars(Map<String, Object> vars) {
 	}
@@ -289,11 +269,8 @@ public class Component
 			
 		}
 		
-		/*
-		if(result.get("id") == null) {
-			result.put("id", getId());
-		}
-		*/
+		result.put("@id", uniqueID);
+		result.put("@type", componentData.getType());
 		
 		this.afterPrepareVars(result);
 		
@@ -356,7 +333,7 @@ public class Component
 	}
 
 	public String getId() {
-    	boolean active = pageContext.getAttribute(JavascriptConverterVarParser.WRAPPER, PageContext.REQUEST_SCOPE) != null;
+    	boolean active = JavascriptTemplateStatus.isActive();
     	
 		if(active) {
 			return getFrontId();
@@ -369,8 +346,10 @@ public class Component
 	public String getFrontId() {
 		String id = componentData.getId();
 		if(id == null || !id.startsWith("!{")) {
-			return "!{component_" + uniqueID + "}";
+			id = getServerID();
+			return "!{component_" + id + "}";
 		}
+		
 		return getServerID();
 	}
 

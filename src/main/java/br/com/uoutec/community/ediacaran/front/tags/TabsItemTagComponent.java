@@ -1,19 +1,14 @@
 package br.com.uoutec.community.ediacaran.front.tags;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Writer;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import br.com.uoutec.community.ediacaran.front.components.Component;
+import br.com.uoutec.community.ediacaran.front.components.TabsItemComponent;
 import br.com.uoutec.community.ediacaran.front.tags.doc.BodyTypes;
 import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
-import br.com.uoutec.community.ediacaran.front.theme.ComponentTemplate.VarParser;
-import br.com.uoutec.community.ediacaran.front.theme.Theme;
 import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 
 @Tag(
@@ -22,6 +17,8 @@ import br.com.uoutec.community.ediacaran.front.theme.ThemeException;
 	bodycontent=BodyTypes.SCRIPTLESS
 )
 public class TabsItemTagComponent extends AbstractSimpleTagComponent {
+	
+	public static final String TEMPLATE  = "/components/content";
 	
 	/* ------------ Attr ---------------*/
 	
@@ -33,6 +30,41 @@ public class TabsItemTagComponent extends AbstractSimpleTagComponent {
 
 	private String icon;
 	
+	/*
+    public void doTag() throws JspException, IOException {
+
+    	registerParentTag();
+    	
+    	try {
+        	Object parent = getParentTag();
+        	Component component = this.getComponent();
+        	
+        	if(parent instanceof TabsTagComponent) {
+        		((TabsTagComponent)parent).add(component);
+        	}
+        	
+    	}
+	    catch(ThemeException e) {
+	    	throw e;
+	    	//throw new JspException(e);
+	    }
+    	finally {
+    		
+    		unregisterParentTag();
+    	}
+    	
+    }
+	*/
+	
+	protected void buildComponent(Component component) throws ThemeException, IOException {
+		component.build();
+	}
+	
+    protected Component createComponent() {
+    	return new TabsItemComponent();
+    }
+    
+    
 	protected void beforeBuildComponent(Component component) {
 		
     	Object parent = getParentTag();
@@ -42,7 +74,8 @@ public class TabsItemTagComponent extends AbstractSimpleTagComponent {
     	}
 		
 	}
-
+    
+    /*
 	protected void buildComponent(Component component) throws ThemeException, IOException {
 		
 		Theme theme = component.getTheme();
@@ -70,7 +103,8 @@ public class TabsItemTagComponent extends AbstractSimpleTagComponent {
 		
 		//o componente é construido em TabsTagComponent
 	}
-	
+	*/
+    
     public Map<String, Object> getProperties(Set<String> defaultProperties, Set<String> emptyProperties){
     	Map<String,Object> props = super.getProperties(defaultProperties, emptyProperties);
     	props.put("show", Boolean.TRUE.equals(active)?  "show" : "");
@@ -104,6 +138,11 @@ public class TabsItemTagComponent extends AbstractSimpleTagComponent {
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
+	
+    public String getDefaultTemplate() {
+    	return TEMPLATE;
+    }
+
 	
 	@Override
 	public String getType() {
