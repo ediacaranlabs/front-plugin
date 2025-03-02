@@ -28,7 +28,7 @@ public class TabsTemplateComponent extends AbstractTemplateComponent {
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
 			//add("header");
 			//add("body");
-			add("content");
+			//add("content");
 			add("id");
 			add("style");
 		}});

@@ -1,4 +1,3 @@
-{content}
 <ul {attr} class="nav nav-tabs {classStyle} {style} {align}" role="tablist" component-type='tabs'>
 {header}
 </ul>

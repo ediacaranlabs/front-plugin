@@ -9,6 +9,8 @@ import java.util.concurrent.ConcurrentMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.com.uoutec.community.ediacaran.front.components.Component;
+
 public class ThemeImp implements Theme{
 
 	private static final Logger logger = LoggerFactory.getLogger(Theme.class);
@@ -74,6 +76,10 @@ public class ThemeImp implements Theme{
 		}
 
 		try {
+			if(componentVars instanceof Component) {
+				Component c = (Component)componentVars;
+				c.registerFrontID(out);
+			}
 			p.build(vars, out);
 		}
 		catch(ThemeException ex) {

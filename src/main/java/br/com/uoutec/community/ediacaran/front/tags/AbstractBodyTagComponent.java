@@ -86,7 +86,24 @@ public abstract class AbstractBodyTagComponent
 	protected void afterBuildComponent(Component component) {
 	}
 	
+    public int doStartTag() throws JspException {
+
+    	component = createComponent();
+    	this.uniqueID = component.getUniqueID();
+
+    	return super.doStartTag();
+    }
+	
+    public int doEndTag() throws JspException {
+    	this.component = null;
+    	return super.doEndTag();
+    }
+    
     public void doInitBody() throws JspException {
+
+    	component.setComponentData(this);
+    	component.setPageContext(pageContext);
+    	component.setOut(getOut());
     	
 		component.setProperty(getClass().getName() + ":CONTEXT", this);
 		
@@ -115,9 +132,12 @@ public abstract class AbstractBodyTagComponent
 		afterBuildComponent(component);
 		
     	return SKIP_BODY;
-    	
     }
-
+    
+    public Component getComponent() {
+    	return component;
+    }
+    
     public Map<String, Object> getProperties(Set<String> defaultProperties, Set<String> emptyProperties){
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -210,25 +230,24 @@ public abstract class AbstractBodyTagComponent
     
     public void setBodyContent(BodyContent b) {
     	super.setBodyContent(b);
-    	
+    	/*
     	if(component == null) {
         	component = createComponent();
         	component.setComponentData(this);
         	this.uniqueID = component.getUniqueID();
     	}
     	
-    	//component.setOut(getBodyContent().getEnclosingWriter());
     	component.setOut(getOut());
     	
     	if(uniqueID == null) {
         	this.uniqueID = component.getUniqueID();
     	}
-    	
+    	*/
     }
     
     public void setPageContext(PageContext pageContext) {
 		super.setPageContext(pageContext);
-    		
+    	/*
     	if(component == null) {
         	component = createComponent();
         	component.setComponentData(this);
@@ -239,6 +258,7 @@ public abstract class AbstractBodyTagComponent
     	if(uniqueID == null) {
         	this.uniqueID = component.getUniqueID();
     	}
+    	*/
     }
     
     public Component getTagComponent() {

@@ -128,12 +128,13 @@ public class Component
 	protected void beforeApplyTemplate(String template, Map<String,Object> vars, 
     		Writer out) throws IOException {
 		
+		/*
     	boolean active = JavascriptTemplateStatus.isActive();
     	
     	if(active) {
     		registerFrontID();
     	}
-		
+		*/
     }
     
     protected void afterApplyTemplate(String template, Map<String,Object> vars, 
@@ -144,14 +145,21 @@ public class Component
     	getTheme().buildComponent(template, getPackageTheme(), this, vars, out);
     }
     
-    private void registerFrontID() {
+    private boolean frontIDRegistered = false;
+    
+    public void registerFrontID(Writer out) {
 		try {
-			out.write(JavascriptConverterWriter.DISABLE_PARSER);
-			out.write("\r\n");
-			out.write("/* " + componentData.getType() + " */\r\n");
-			out.write("var component_" + uniqueID + " = $.AppContext.constants.getNextID();");
-			out.write(JavascriptConverterWriter.ENABLE_PARSER);
-			out.flush();
+	    	boolean active = JavascriptTemplateStatus.isActive();
+	    	
+			if(active && !frontIDRegistered) {
+				out.write(JavascriptConverterWriter.DISABLE_PARSER);
+				out.write("\r\n");
+				out.write("/* " + componentData.getType() + " */\r\n");
+				out.write("var component_" + uniqueID + " = $.AppContext.constants.getNextID();");
+				out.write(JavascriptConverterWriter.ENABLE_PARSER);
+				frontIDRegistered = true;
+				out.flush();
+			}
 		}
 		catch(IOException ex) {
 		}
