@@ -412,6 +412,58 @@ $.AppContext.types.Form.prototype.updateFieldIndex = function($group = null, $no
 	
 };
 
+$.AppContext.types.Form.prototype.toObject = function($obj = null, $no = null){
+
+	if($obj == null){
+		$obj = {};
+	}
+
+	if($no == null){
+		$no = this
+	}
+	
+	var $o = $no.getFirstChild();
+	
+	while($o != null){
+		
+		var $type = $o.getTagName();
+		
+		if($type == 'input' || $type == 'textarea' || $type == 'select' ){
+			var $f = this.getField($o.attr('name'))
+			$obj[$f.getAttribute('originalname')] = $f.getValue();
+		}
+		
+		var $groupName = $o.getAttribute('formgroup');
+		
+		if($groupName != null){
+			
+			if($o.getAttribute('formgrouptype') == 'index'){
+				var $f = $obj[$groupName];
+				
+				if($f == null){
+					$f = [];
+					$obj[$groupName] = $f;
+				}
+				
+				var $newObj = this.toObject(null, $o);
+				
+				$f.push($newObj);
+			}
+			else{
+				$obj[$groupName] = this.toObject(null, $o);
+			}
+			
+		}
+		else{
+			this.toObject($obj, $o);
+		}
+		
+		$o = $o.getNext();
+
+	}
+	
+};
+
 $.AppContext.types.Form.prototype.updateFieldNames = function($no = null){
 
 	if($no == null){
@@ -677,6 +729,18 @@ $.AppContext.types.Field.prototype.getValue = function(){
 	else
 	if(this.type == 'select' ){
 		$result = $(this.field).find('option:selected').val();
+	}
+	else
+	if(this.type == 'file'){
+		if(this.field.files){
+			var reader = new FileReader();
+			var $url = URL.createObjectURL(this.field.files[0]);
+			reader.readAsDataURL($url);
+			$result = reader.result;
+		}
+		else{
+			$result = null;
+		}		
 	}
 	else{
 		$result = $(this.field).val();

@@ -365,9 +365,15 @@ $.AppContext.utils = {
 			}
 			else
 			if($enctype === 'json'){
+				$data = $formObj.toObject();
+				$data = JSON.stringify($data);
+				/*
+				console.log("json : " + $data);
+				
 				$data = new FormData($form[0]);
 				$data = Object.fromEntries($data.entries())
 				$data = JSON.stringify($data);
+				*/
 			}
 			else{
 				$data = $($form).serialize();
