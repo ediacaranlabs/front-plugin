@@ -48,7 +48,7 @@ public class CheckboxTemplateComponent extends ComponentFormTemplateComponent {
 					}
 					else
 					if(FrontCodeUtil.isCode(String.valueOf(value))) {
-						return "!{( " + FrontCodeUtil.toRequiredCode(String.valueOf(value)) + " )? \"\" : \" checked \"}"; 
+						return "!{( " + FrontCodeUtil.toRequiredCode(String.valueOf(value)) + " )? \" checked \" : \"\"}"; 
 					}
 					
 					return "";

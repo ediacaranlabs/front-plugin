@@ -46,7 +46,7 @@ public class RadioTemplateComponent extends ComponentFormTemplateComponent {
 					}
 					else
 					if(FrontCodeUtil.isCode(String.valueOf(value))) {
-						return "!{( " + FrontCodeUtil.toRequiredCode(String.valueOf(value)) + " )? \"\" : \" checked \"}"; 
+						return "!{( " + FrontCodeUtil.toRequiredCode(String.valueOf(value)) + " )? \" checked \" : \"\"}"; 
 					}
 					
 					return "";
