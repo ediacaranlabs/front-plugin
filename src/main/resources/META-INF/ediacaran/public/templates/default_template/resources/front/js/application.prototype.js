@@ -429,8 +429,8 @@ $.AppContext.types.Form.prototype.toObject = function($obj = null, $no = null){
 		var $type = $o.getTagName();
 		
 		if($type == 'input' || $type == 'textarea' || $type == 'select' ){
-			var $f = this.getField($o.attr('name'))
-			$obj[$f.getAttribute('originalname')] = $f.getValue();
+			var $f = this.getField($o.getAttribute('name'))
+			$obj[$f.getAttribute('originalname')] = $f.getValues();
 		}
 		
 		var $groupName = $o.getAttribute('formgroup');
@@ -462,6 +462,7 @@ $.AppContext.types.Form.prototype.toObject = function($obj = null, $no = null){
 
 	}
 	
+	return $obj;
 };
 
 $.AppContext.types.Form.prototype.updateFieldNames = function($no = null){
@@ -714,21 +715,27 @@ $.AppContext.types.Field.prototype.setValue = function(value){
 };
 
 $.AppContext.types.Field.prototype.getValue = function(){
+	var $result = this.getValues();
+	return Array.isArray($result)? ($result.length > 0? $result[0] : null) : $result;
+};
 
-	$result = null;
+$.AppContext.types.Field.prototype.getValues = function(){
+
+	var $result = [];
 
 	if(this.type == 'checkbox' || this.type == 'radio'){
 		
 		for(var $i of this.field){
-			//alert($($i).attr('id'));
 			if($($i).prop('checked')){
-				$result = $($i).val();
+				$result.push($($i).val());
 			}
 		}
 	}
 	else
 	if(this.type == 'select' ){
-		$result = $(this.field).find('option:selected').val();
+		$(this.field).find('option:selected').foreach(function(){
+			$result.push($(this).val());
+		});
 	}
 	else
 	if(this.type == 'file'){
@@ -736,17 +743,23 @@ $.AppContext.types.Field.prototype.getValue = function(){
 			var reader = new FileReader();
 			var $url = URL.createObjectURL(this.field.files[0]);
 			reader.readAsDataURL($url);
-			$result = reader.result;
+			$result.push(reader.result);
 		}
-		else{
-			$result = null;
-		}		
 	}
 	else{
-		$result = $(this.field).val();
+		$result.push($(this.field).val());
 	}
 	
-	return $result;
+	if($result.length == 0){
+		return null;
+	}
+	else
+	if($result.length > 1 || this.type == 'checkbox' || this.type == 'select'){
+		return $result;
+	}
+	else{
+		return $result[0];
+	}
 	
 };
 

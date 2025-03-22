@@ -360,6 +360,7 @@ $.AppContext.utils = {
 			$formObj.updateFieldIndex();
 			$formObj.updateFieldNames();
 
+
 			if($enctype === 'multipart/form-data'){
 				$data = new FormData($form[0]);
 			}
@@ -367,13 +368,13 @@ $.AppContext.utils = {
 			if($enctype === 'json'){
 				$data = $formObj.toObject();
 				$data = JSON.stringify($data);
-				/*
-				console.log("json : " + $data);
+				//console.log("json : " + $data);
 				
-				$data = new FormData($form[0]);
-				$data = Object.fromEntries($data.entries())
-				$data = JSON.stringify($data);
-				*/
+				//$data = new FormData($form[0]);
+				//$data = Object.fromEntries($data.entries())
+				//$data = JSON.stringify($data);
+				//alert($data);
+				//console.log("json : " + $data);
 			}
 			else{
 				$data = $($form).serialize();

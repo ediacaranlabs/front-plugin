@@ -151,45 +151,50 @@ $.AppContext.dataTable.apply = function($id, $template){
     	event.preventDefault();
 
     	var $resource = $dataTableObj.attr("action");
-    	var $data = new FormData($dataTableObj[0]);
-    	var $request = Object.fromEntries($data.entries());
+    	$dataTableObj.attr("enctype", "json");
+    	$dataTableObj.attr("method", "POST");
+    	//var $data = new FormData($dataTableObj[0]);
+    	//var $request = Object.fromEntries($data.entries());
 
 	  	$dataTableObj.addClass("disabled");
 	  	$dataTableResult.addClass("disabled");
 
-    	$.AppContext.utils.postJson(
-    			$resource, 
-    			$request,
-    			function ($response){
-    				var $tag = $template($response);
-					$tag = $($tag);
-					
-					$tag.each(function() {
-						$(this).addClass("dataTableRow");
-					});
+		var $formObj = new $.AppContext.types.Form($dataTableObj);
+		$formObj.submit(
+			true, 
+			$resource,
+			null, 
+			function ($response){
+				var $tag = $template($response);
+				$tag = $($tag);
+				
+				$tag.each(function() {
+					$(this).addClass("dataTableRow");
+				});
 
-			    	$dataTableResult.find("[class*=dataTableRow]").each(function() {
-						var $dta = $(this);
-						$dta.remove();
-					});
+		    	$dataTableResult.find("[class*=dataTableRow]").each(function() {
+					var $dta = $(this);
+					$dta.remove();
+				});
 
-    				$tag.insertBefore($dataTableResultPagination);
-    				$.AppContext.utils.enableActions($dataTableResult.attr("id"));
-				  	$.AppContext.dataTable.applyPages(
-				  			$dataTableObj,
-				  			$dataTableResult,
-				  			$response.page, 
-				  			$response.maxPages,
-				  			$response.hasNextPage);
-				  	
-				  	$dataTableObj.removeClass("disabled");
-				  	$dataTableResult.removeClass("disabled");
-    			},
-    			function ($response){
-				  	$dataTableObj.removeClass("disabled");
-				  	$dataTableResult.removeClass("disabled");
-    			}
+				$tag.insertBefore($dataTableResultPagination);
+				$.AppContext.utils.enableActions($dataTableResult.attr("id"));
+			  	$.AppContext.dataTable.applyPages(
+			  			$dataTableObj,
+			  			$dataTableResult,
+			  			$response.page, 
+			  			$response.maxPages,
+			  			$response.hasNextPage);
+			  	
+			  	$dataTableObj.removeClass("disabled");
+			  	$dataTableResult.removeClass("disabled");
+			},
+			function ($response){
+			  	$dataTableObj.removeClass("disabled");
+			  	$dataTableResult.removeClass("disabled");
+			}
 		);
+		
 	});				    		
 	
 };
