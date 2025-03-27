@@ -9,6 +9,10 @@ $.AppContext.types.Object = function($ref){
 	this.obj = $ref;
 };
 
+$.AppContext.types.Object.prototype.getAdvise = function(){
+	return this.obj;
+}
+
 //$.AppContext.types.Object.prototype.setValue = function(name, value){
 $.AppContext.types.Object.prototype.setValue = function(value, name = null){
 	var $id = $(this.obj).attr('id');
@@ -716,7 +720,8 @@ $.AppContext.types.Field.prototype.setValue = function(value){
 
 $.AppContext.types.Field.prototype.getValue = function(){
 	var $result = this.getValues();
-	return Array.isArray($result)? ($result.length > 0? $result[0] : null) : $result;
+	$result = Array.isArray($result)? ($result.length > 0? $result[0] : null) : $result;
+	return $result;
 };
 
 $.AppContext.types.Field.prototype.getValues = function(){

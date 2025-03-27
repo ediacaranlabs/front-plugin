@@ -9,6 +9,10 @@ $.AppContext.types.Object = function($ref){
 	this.obj = $ref;
 };
 
+$.AppContext.types.Object.prototype.getAdvise = function(){
+	return this.obj;
+}
+
 //$.AppContext.types.Object.prototype.setValue = function(name, value){
 $.AppContext.types.Object.prototype.setValue = function(value, name = null){
 	var $id = $(this.obj).attr('id');
