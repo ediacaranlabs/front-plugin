@@ -7,14 +7,14 @@ import java.util.HashSet;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
 
-public class DatefieldTemplateComponent extends ComponentFormTemplateComponent {
+public class DateTimeFieldTemplateComponent extends ComponentFormTemplateComponent {
 
 	
 	@SuppressWarnings("serial")
 	public void loadConfiguration() {
 		super.loadConfiguration();
 
-		super.template = "/default_template/front/components/datefield.tmp";
+		super.template = "/default_template/front/components/datetimefield.tmp";
 	
 	
 		super.default_attrs = 

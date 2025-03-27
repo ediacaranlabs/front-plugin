@@ -9,11 +9,11 @@ import br.com.uoutec.community.ediacaran.front.tags.doc.Tag;
 import br.com.uoutec.community.ediacaran.front.tags.doc.TagAttribute;
 
 @Tag(
-	name="datefield", 
+	name="dateField", 
 	uri="https://www.uoutec.com.br/ediacaran/tags/components", 
 	bodycontent=BodyTypes.SCRIPTLESS
 )
-public class DatefieldTagComponent extends FieldFormTagComponent {
+public class DateFieldTagComponent extends FieldFormTagComponent {
 
 	public static final String TEMPLATE = "/components/datefield";
 	
@@ -35,7 +35,7 @@ public class DatefieldTagComponent extends FieldFormTagComponent {
 	
 	private String size;
 
-	public DatefieldTagComponent() {
+	public DateFieldTagComponent() {
 		super.setComponentType("date");
 	}
 	

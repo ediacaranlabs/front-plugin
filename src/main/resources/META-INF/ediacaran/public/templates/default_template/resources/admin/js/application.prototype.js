@@ -716,7 +716,8 @@ $.AppContext.types.Field.prototype.setValue = function(value){
 
 $.AppContext.types.Field.prototype.getValue = function(){
 	var $result = this.getValues();
-	return Array.isArray($result)? ($result.length > 0? $result[0] : null) : $result;
+	$result = Array.isArray($result)? ($result.length > 0? $result[0] : null) : $result;
+	return $result;
 };
 
 $.AppContext.types.Field.prototype.getValues = function(){
@@ -733,9 +734,10 @@ $.AppContext.types.Field.prototype.getValues = function(){
 	}
 	else
 	if(this.type == 'select' ){
-		$(this.field).find('option:selected').foreach(function(){
-			$result.push($(this).val());
-		});
+		let $opts = $(this.field).find('option:selected');
+		for (var i = 0; i < $opts.length; i++){
+		    $result.push($($opts[i]).val());
+		}		
 	}
 	else
 	if(this.type == 'file'){
