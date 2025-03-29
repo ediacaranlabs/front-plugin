@@ -34,7 +34,15 @@ $.AppContext.validator = {
 		
 		addRules: function (rules){
 			
-			let $field = $.AppContext.utils.getById(rules.field);
+			let $fields = $.AppContext.utils.getListById(rules.field);
+
+			for(let i=0;i<$fields.length;i++){
+				this.addRulesField($fields[i], rules);
+			}
+			
+		},
+
+		addRulesField: function ($field, rules){
 			
 			if($field == null){
 				console.log("field not found: " + rules.field);
@@ -58,15 +66,14 @@ $.AppContext.validator = {
 			}
 			
 			var validator = this.createValidatorField(rules);
-			var $f = $("#" + rules.field);
 			
 			try{
-				$('#' + rules.form).bootstrapValidator('removeField', $f);
+				$('#' + rules.form).bootstrapValidator('removeField', $field.getAdvise());
 			}
 			catch($ex){
 			}
 			
-			$('#' + rules.form).bootstrapValidator('addField', $f, validator);
+			$('#' + rules.form).bootstrapValidator('addField', $field.getAdvise(), validator);
 		},
 		
 		createValidatorField: function(rules){

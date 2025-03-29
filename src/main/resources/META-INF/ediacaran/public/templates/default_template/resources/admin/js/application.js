@@ -73,14 +73,30 @@ $.AppContext.utils = {
 		getByAdvise: function($obj){
 			try{
 				$obj = $($obj);
-				
 				var $e = new $.AppContext.types.Object($obj);
-				 
 				var $type = $.AppContext.types.getType($e);
-		
 				var $o = new $type($obj);
 				$o.getTagName();
 				return $o;
+			}
+			catch($err){
+				 console.log("Error", $err.stack);
+				 return $o;
+			}
+		},
+
+		getListById: function(id){
+			return $.AppContext.utils.getListByAdvise("[id='" + id + "']");
+		},
+
+		getListByAdvise: function($obj){
+			try{
+				var $objs = $($obj);
+				var $r = [];
+				for(let i=0;i<$objs.length;i++){
+					$r.push(this.getByAdvise($objs[i]));
+				}
+				return $r;
 			}
 			catch($err){
 				 console.log("Error", $err.stack);
