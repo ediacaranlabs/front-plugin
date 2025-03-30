@@ -3,8 +3,12 @@ $.fn.bootstrapValidator.DEFAULT_OPTIONS.excluded = [function($field, $validator)
 	//console.log($field.attr("id") + " " + document.body.contains($field[0]));
     //return !document.body.contains($field[0]);//!$field.length;
     if(!document.body.contains($field[0])){
-		this.removeField($field);
-    	console.log($field.attr("name") + " " + document.body.contains($field[0]));
+    	console.log($field.attr("id") + ":" + $field.attr("name") + " " + document.body.contains($field[0]));
+		try{
+			this.removeField($field[0]);
+    	}
+		catch($ex){
+		}
     }
     return !document.body.contains($field[0]);
 }];
