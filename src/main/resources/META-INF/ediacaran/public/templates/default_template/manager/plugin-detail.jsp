@@ -57,17 +57,17 @@ action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.manager_con
 								<c:choose>
 									<c:when test="${property.type == 'TEXT'}">
 										<c:if test="${property.protectedValue}">
-											<ec:passwordfield label="${property.name}" name="config.${property.code}" value="************"/>
+											<ec:passwordfield label="${property.name}" id="config.${property.code}" name="config.${property.code}" value="${vars.config.isEmpty(property.code)? '' : '************' }"/>
 										</c:if>
 										<c:if test="${property.rows > 0 && !property.protectedValue}">
-											<ec:textarea rows="${property.rows}" label="${property.name}" name="config.${property.code}">${vars.config.getRawValue(property.code)}</ec:textarea>
+											<ec:textarea rows="${property.rows}" id="config.${property.code}" label="${property.name}" name="config.${property.code}">${vars.config.getRawValue(property.code)}</ec:textarea>
 										</c:if>
 										<c:if test="${property.rows <= 0 && !property.protectedValue}">
-											<ec:textfield label="${property.name}" name="config.${property.code}" value="${vars.config.getRawValue(property.code)}"/>
+											<ec:textfield label="${property.name}" id="config.${property.code}" name="config.${property.code}" value="${vars.config.getRawValue(property.code)}"/>
 										</c:if>
 									</c:when>
 									<c:when test="${property.type == 'SELECT'}">
-										<ec:select name="config.${property.code}" label="${property.name}">
+										<ec:select id="config.${property.code}" name="config.${property.code}" label="${property.name}">
 											<c:set var="opt_selected" value="${vars.config.getRawValue(property.code)}"/>
 											<c:forEach items="${property.options}" var="opts">
 												<ec:option label="${opts.description}" selected="${opts.value == opt_selected}" value="${opts.value}"/>
@@ -75,7 +75,7 @@ action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.manager_con
 										</ec:select>
 									</c:when>
 									<c:when test="${property.type == 'MULTISELECT'}">
-										<ec:select name="config.${property.code}" label="${property.name}" multiple="true" rows="5">
+										<ec:select id="config.${property.code}" name="config.${property.code}" label="${property.name}" multiple="true" rows="5">
 											<c:forEach items="${property.options}" var="opts">
 												<ec:option label="${opts.description}" 
 													selected="${vars.config.containsRawValue(property.code, opts.value)}" value="${opts.value}"/>
@@ -86,13 +86,13 @@ action="${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.manager_con
 										<ec:label>${property.name}</ec:label><br>
 										<c:set var="opt_selected" value="${vars.config.getRawValue(property.code)}"/>
 										<c:forEach items="${property.options}" var="opts">
-											<ec:radio inline="true" name="config.${property.code}" label="${opts.description}" value="${opts.value}" selected="${opts.value == opt_selected}"/><br>
+											<ec:radio id="config.${property.code}" inline="true" name="config.${property.code}" label="${opts.description}" value="${opts.value}" selected="${opts.value == opt_selected}"/><br>
 										</c:forEach>
 									</c:when>
 									<c:when test="${property.type == 'MULTISELECT_LIST'}">
 										<ec:label>${property.name}</ec:label><br>
 										<c:forEach items="${property.options}" var="opts">
-											<ec:checkbox inline="true" name="config.${property.code}" label="${opts.description}" value="${opts.value}" 
+											<ec:checkbox id="config.${property.code}" inline="true" name="config.${property.code}" label="${opts.description}" value="${opts.value}" 
 												selected="${vars.config.containsRawValue(property.code, opts.value)}"/><br>
 										</c:forEach>
 									</c:when>
