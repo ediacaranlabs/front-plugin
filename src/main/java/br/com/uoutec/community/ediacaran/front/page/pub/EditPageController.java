@@ -83,6 +83,7 @@ public class EditPageController {
 		}
 	}
 
+	/*
 	@Action("/new")
 	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:CREATE")
@@ -101,7 +102,8 @@ public class EditPageController {
 		
 		return webResult;
 	}
-
+    */
+	
 	@Action("/delete")
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresRole(BasicRoles.USER)
@@ -171,94 +173,6 @@ public class EditPageController {
 		}
 		
 		return webResult;
-	}
-	
-	@Action("/new")
-	@RequestMethod(RequestMethodTypes.POST)
-	@RequiresRole(BasicRoles.USER)
-	@RequiresPermissions("CONTENT:PAGES:CREATE")
-	public WebResultAction create(
-			@Basic(bean="templateName")
-			String templateName, 
-			WebResultAction webResult){
-		
-		try {
-			Map<Locale, String> langNames = editpage.getSupportedLocales();
-			Map<String,ObjectTemplate> templates = editpage.getTemplates(PageObjectTemplateType.FORM);
-			ObjectTemplate template = editpage.getTemplate(templateName, PageObjectTemplateType.FORM);
-			
-			webResult.setView(template.getTemplate(), true);
-			webResult.setDispatcher(WebDispatcherType.FORWARD);
-			webResult
-				.add("templates", templates)
-				.add("locales", langNames)
-				.add("template", templateName);
-
-			return webResult;
-		}
-		catch(Throwable ex) {
-			ex.printStackTrace();
-			WebFlowController
-				.redirect()
-				.put("exception", ex)
-				.to("${plugins.ediacaran.front.admin_context}/pages/list");
-			return null;
-		}
-	}
-	
-	@Action("/edit")
-	@RequestMethod(RequestMethodTypes.POST)
-	@RequiresRole(BasicRoles.USER)
-	@RequiresPermissions("CONTENT:PAGES:EDIT")
-	public WebResultAction edit(
-			@Basic(bean="path")
-			String path,
-			@Basic(bean="id")
-			String id,
-			@Basic(bean="locale", mappingType=MappingTypes.VALUE)
-			String locale,
-			WebResultAction webResult){
-		
-		try {
-			
-			Page page =
-					ContextSystemSecurityCheck.doPrivileged(()->editpage.getPageById(path, id, locale));
-			
-			if(page == null) {
-				WebFlowController
-				.redirect()
-				.to("${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list");
-			}
-			
-			Map<Locale, String> langNames = editpage.getSupportedLocales();
-			Map<String,ObjectTemplate> templates = editpage.getTemplates(PageObjectTemplateType.FORM);
-			ObjectTemplate template = editpage.getTemplate(page.getTemplate(), PageObjectTemplateType.FORM);
-			
-			Map<String,Object> md = new HashMap<>();
-			md.put("path", path);
-			md.put("id", id);
-			md.put("locale", PluginLanguageUtils.toLocale(locale));
-			
-			webResult.setView(template.getTemplate(), true);
-			webResult.setDispatcher(WebDispatcherType.FORWARD);
-			
-			webResult
-				.add("page", page)
-				.add("templates", templates)
-				.add("metadata", md)
-				.add("locales", langNames)
-				.add("template", page.getTemplate());
-
-			return webResult;
-		}
-		catch(Throwable ex) {
-			ex.printStackTrace();
-			WebFlowController
-				.redirect()
-				.put("exception", ex)
-				.to("${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list");
-			return null;
-		}
 	}
 	
 }

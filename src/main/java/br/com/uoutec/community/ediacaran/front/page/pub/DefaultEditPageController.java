@@ -18,15 +18,20 @@ import org.brandao.brutos.annotation.View;
 import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.RequestMethodTypes;
 import org.brandao.brutos.validator.ValidatorException;
+import org.brandao.brutos.web.WebFlowController;
 
-import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.page.Page;
+import br.com.uoutec.community.ediacaran.front.page.PageManager;
+import br.com.uoutec.community.ediacaran.security.BasicRoles;
+import br.com.uoutec.community.ediacaran.security.RequiresPermissions;
+import br.com.uoutec.community.ediacaran.security.RequiresRole;
+import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 import br.com.uoutec.pub.entity.InvalidRequestException;
 
 @Singleton
-@Controller(value="${plugins.ediacaran.front.admin_context}/pages/editor/default")
+@Controller(value="${plugins.ediacaran.front.admin_context}/pages/editor/default", defaultActionName = "/")
 @DefaultThrowSafe(rendered=false)
 public class DefaultEditPageController {
 
@@ -34,6 +39,43 @@ public class DefaultEditPageController {
 	@Inject
 	public PageManager editPage;
 
+	@Action("/")
+	@View(value="/admin/pages/edit")
+	@Result("vars")
+	@RequiresRole(BasicRoles.USER)
+	@RequiresPermissions("CONTENT:PAGES:EDIT")
+	public Map<String,Object> edit(@DetachedName PagePubEntity pageEntity){
+		
+		try {
+			
+			Page page =
+					ContextSystemSecurityCheck.doPrivileged(()->editPage.getPageById(pageEntity.getPath(), pageEntity.getId(), pageEntity.getLocale()));
+
+			Map<String,Object> vars = new HashMap<>();
+			
+			if(page == null) {
+				return vars;
+			}
+			
+			Map<String,Object> md = new HashMap<>();
+			md.put("path", pageEntity.getPath());
+			md.put("id", pageEntity.getId());
+			md.put("locale", PluginLanguageUtils.toLocale(pageEntity.getLocale()));
+			
+			vars.put("page", page);
+			vars.put("md", md);
+			
+			return vars;
+		}
+		catch(Throwable ex) {
+			ex.printStackTrace();
+			WebFlowController
+				.redirect()
+				.put("exception", ex)
+				.to("${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list");
+			return null;
+		}
+	}	
 	@Action("/save")
 	@RequestMethod(RequestMethodTypes.POST)
 	@View(value="/admin/pages/save-result")

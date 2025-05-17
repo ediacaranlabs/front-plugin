@@ -57,7 +57,7 @@ public class PageController implements PublicType {
 
 		try {
 			if(page != null) {
-				ObjectTemplate pg = pageManager.getTemplate(page.getTemplate(), PageObjectTemplateType.VIEW); 
+				ObjectTemplate pg = pageManager.getTemplate(page.getTemplate()); 
 				result.setView(pg.getTemplate(), true);
 				result.setDispatcher(WebDispatcherType.FORWARD);
 				result.add("page", page);

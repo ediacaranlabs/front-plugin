@@ -106,38 +106,29 @@ public class PageManager {
 		return languageRegistry.getSupportedLocalesName();
 	}
  
-	public Map<String,ObjectTemplate> getTemplates(PageObjectTemplateType type){
+	public Map<String,ObjectTemplate> getTemplates(){
 		return objectsManager.getTemplatesIdMap(PagesObjectsManagerDriver.DRIVER_NAME)
 				.entrySet().stream()
-				.filter((r)->((PageObjectTemplate)r.getValue()).getType() == type)
-				.collect(Collectors.toMap((e)->e.getKey().split("\\;")[0], Entry::getValue));
+				.collect(Collectors.toMap((e)->e.getKey(), Entry::getValue));
 	}
 
-	public void registerTemplate(String id, String name, String template, PageObjectTemplateType type){
+	public void registerTemplate(ObjectTemplate objectTemplate){
 		
 		ObjectsTemplateManagerDriver driver = 
 				(ObjectsTemplateManagerDriver) objectsManager.getDriver(PagesObjectsManagerDriver.DRIVER_NAME);
 		
-		driver.registerTemplate( 
-				new PageObjectTemplate(
-						name + ";" + type.name().toLowerCase(), 
-						name, 
-						template,
-						type
-				)
-		);
-
+		driver.registerTemplate(objectTemplate);
 	}
 
-	public void unregisterTemplate(String id, PageObjectTemplateType type){
+	public void unregisterTemplate(String id){
 		ObjectsTemplateManagerDriver driver = 
 				(ObjectsTemplateManagerDriver) objectsManager.getDriver(PagesObjectsManagerDriver.DRIVER_NAME);
 		
-		driver.unregisterTemplate(id + ";" + type.name().toLowerCase());
+		driver.unregisterTemplate(id);
 	}
 	
-	public ObjectTemplate getTemplate(String name, PageObjectTemplateType type){
-		return objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, name + ";" + type.name().toLowerCase());
+	public ObjectTemplate getTemplate(String id){
+		return objectsManager.getTemplateById(PagesObjectsManagerDriver.DRIVER_NAME, id);
 	}
 
 	public Page getPageByName(String path, String name, String locale) {
