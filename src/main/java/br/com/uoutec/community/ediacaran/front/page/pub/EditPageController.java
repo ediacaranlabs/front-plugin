@@ -21,20 +21,16 @@ import org.brandao.brutos.annotation.Transient;
 import org.brandao.brutos.annotation.web.MediaTypes;
 import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.RequestMethodTypes;
-import org.brandao.brutos.web.WebDispatcherType;
-import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
 import br.com.uoutec.application.security.ContextSystemSecurityCheck;
-import br.com.uoutec.community.ediacaran.front.page.Page;
+import br.com.uoutec.community.ediacaran.front.page.EditablePageObjectTemplate;
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
-import br.com.uoutec.community.ediacaran.front.page.PageObjectTemplateType;
 import br.com.uoutec.community.ediacaran.security.BasicRoles;
 import br.com.uoutec.community.ediacaran.security.RequiresPermissions;
 import br.com.uoutec.community.ediacaran.security.RequiresRole;
-import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
-import br.com.uoutec.community.ediacaran.system.repository.ObjectTemplate;
+import br.com.uoutec.ediacaran.core.VarParser;
 import br.com.uoutec.pub.entity.InvalidRequestException;
 
 @Singleton
@@ -45,6 +41,10 @@ public class EditPageController {
 	@Transient
 	@Inject
 	private PageManager editpage;
+
+	@Transient
+	@Inject
+	private VarParser varParser;
 	
 	@Action("/")
 	@RequiresRole(BasicRoles.USER)
@@ -52,6 +52,16 @@ public class EditPageController {
 	public WebResultAction index(WebResultAction webResult){
 		webResult.setView("/admin/pages/index");
 		webResult.add("locales", editpage.getSupportedLocales());
+		webResult.add("templates", 
+				editpage.getTemplates().values().stream()
+					.filter(e->e instanceof EditablePageObjectTemplate)
+					.map(e->new EditablePageObjectTemplate(
+							e.getId(), 
+							e.getName(), 
+							varParser.getValue(e.getTemplate()),  
+							varParser.getValue(((EditablePageObjectTemplate)e).getEditTemplate()))
+					)
+					.collect(Collectors.toList()));
 		return webResult;
 	}
 	
@@ -60,8 +70,7 @@ public class EditPageController {
 	@ResponseType(MediaTypes.APPLICATION_JSON)
 	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:LIST")
-	public Serializable list(
-			@DetachedName PageSearchPubEntity request){
+	public Serializable list(@DetachedName PageSearchPubEntity request){
 		
 		PageSearch pageSearch;
 		
@@ -69,7 +78,9 @@ public class EditPageController {
 			pageSearch = request.rebuild(false, true, true);
 			
 			List<ObjectMetadata> list =
-					ContextSystemSecurityCheck.doPrivileged(()->editpage.list(pageSearch.getPath(), pageSearch.getLocale()));
+					ContextSystemSecurityCheck.doPrivileged(()->
+						editpage.list(pageSearch.getPath(), pageSearch.getLocale())
+					);
 			
 			Map<Locale, String> localeMap = editpage.getSupportedLocales();
 
@@ -83,27 +94,6 @@ public class EditPageController {
 		}
 	}
 
-	/*
-	@Action("/new")
-	@RequiresRole(BasicRoles.USER)
-	@RequiresPermissions("CONTENT:PAGES:CREATE")
-	public WebResultAction selectTemplate(WebResultAction webResult){
-		
-		webResult.setView("/admin/pages/select_template");
-		
-		try {
-			Map<String,ObjectTemplate> templates = editpage.getTemplates(PageObjectTemplateType.FORM);
-			webResult.add("templates", templates);
-		}
-		catch(Throwable ex) {
-			webResult
-			.add("exception", ex);
-		}
-		
-		return webResult;
-	}
-    */
-	
 	@Action("/delete")
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresRole(BasicRoles.USER)

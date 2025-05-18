@@ -49,7 +49,9 @@ public class DefaultEditPageController {
 		try {
 			
 			Page page =
-					ContextSystemSecurityCheck.doPrivileged(()->editPage.getPageById(pageEntity.getPath(), pageEntity.getId(), pageEntity.getLocale()));
+					ContextSystemSecurityCheck.doPrivileged(()->
+						editPage.getPageById(pageEntity.getPath(), pageEntity.getId(), pageEntity.getLocale())
+					);
 
 			Map<String,Object> vars = new HashMap<>();
 			
@@ -75,7 +77,8 @@ public class DefaultEditPageController {
 				.to("${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list");
 			return null;
 		}
-	}	
+	}
+	
 	@Action("/save")
 	@RequestMethod(RequestMethodTypes.POST)
 	@View(value="/admin/pages/save-result")

@@ -8,6 +8,7 @@ public class EditablePageObjectTemplate extends ObjectTemplate{
 	
 	public EditablePageObjectTemplate(String id, String name, String template, String editTemplate) {
 		super(id, name, template);
+		this.editTemplate = editTemplate;
 	}
 
 	public String getEditTemplate() {

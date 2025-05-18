@@ -42,18 +42,13 @@
 			    				classStyle="last-item" 
 			    				align="right" 
 								actionType="submit" 
-			    				size="sm"
+								style="primary"
 								label="Pesqusiar"/>
-							<ec:button 
-			    				classStyle="last-item" 
-			    				align="right" 
-								label="Novo"
-			    				size="sm"
-								actionType="button">
-								<ec:event type="click">
-			    					$.AppContext.utils.updateContentByID("#m${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/new")
-								</ec:event>
-							</ec:button>
+							<ec:dropdown label="Novo" style="primary" align="right" bundle="${messages}">
+								<c:forEach items="${templates}" var="template">
+									<ec:dropdown-item src="#!${template.editTemplate}">${template.name}</ec:dropdown-item>
+								</c:forEach>
+							</ec:dropdown>
 						</ed:col>
 					</ed:row>
 					<!-- /menubar-form -->

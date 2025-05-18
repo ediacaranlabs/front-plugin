@@ -10,8 +10,8 @@ import br.com.uoutec.application.io.VfsException;
 import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.UserEventListenerManager.UserEvent;
 import br.com.uoutec.community.ediacaran.front.objects.MenubarObjectsManagerDriver;
+import br.com.uoutec.community.ediacaran.front.page.EditablePageObjectTemplate;
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
-import br.com.uoutec.community.ediacaran.front.page.PageObjectTemplateType;
 import br.com.uoutec.community.ediacaran.front.page.PagesObjectsManagerDriver;
 import br.com.uoutec.community.ediacaran.front.pub.Menu;
 import br.com.uoutec.community.ediacaran.front.pub.MenuBar;
@@ -125,23 +125,15 @@ public class PluginInstaller
 		/* Page Templates */
 		
 		PageManager editPage = EntityContextPlugin.getEntity(PageManager.class);
-		
-		editPage
-			.registerTemplate(
-					"default", 
-					"Default Template", 
-					"${plugins.ediacaran.front.web_path}:/templates/default_template/pages/default-template.jsp", 
-					PageObjectTemplateType.VIEW
-			);
-		
-		editPage
-			.registerTemplate(
-					"default", 
-					"Default Template", 
-					"${plugins.ediacaran.front.web_path}:/admin/pages/edit.jsp", 
-					PageObjectTemplateType.FORM
-			);
-		
+		editPage.registerTemplate(
+				new EditablePageObjectTemplate(
+						"default", 
+						"Default Template", 
+						"${plugins.ediacaran.front.web_path}:/templates/default_template/pages/default-template.jsp", 
+						//"${plugins.ediacaran.front.web_path}:/admin/pages/edit.jsp"
+						"${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/editor/default"
+				)
+		);
 	}
 
 	private void installListeners() {
