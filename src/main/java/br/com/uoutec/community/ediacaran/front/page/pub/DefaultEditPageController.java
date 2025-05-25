@@ -31,7 +31,7 @@ import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 import br.com.uoutec.pub.entity.InvalidRequestException;
 
 @Singleton
-@Controller(value="${plugins.ediacaran.front.admin_context}/pages/editor/default", defaultActionName = "/")
+@Controller(value="${plugins.ediacaran.front.admin_context}/pages/default", defaultActionName = "/")
 @DefaultThrowSafe(rendered=false)
 public class DefaultEditPageController {
 
@@ -48,7 +48,8 @@ public class DefaultEditPageController {
 		
 		try {
 			
-			Page page =
+			Page page = pageEntity == null? 
+					null :
 					ContextSystemSecurityCheck.doPrivileged(()->
 						editPage.getPageById(pageEntity.getPath(), pageEntity.getId(), pageEntity.getLocale())
 					);

@@ -129,9 +129,10 @@ public class PluginInstaller
 				new EditablePageObjectTemplate(
 						"default", 
 						"Default Template", 
-						"${plugins.ediacaran.front.web_path}:/templates/default_template/pages/default-template.jsp", 
+						//"${plugins.ediacaran.front.web_path}:/templates/default_template/pages/default-template.jsp", 
+						"${plugins.ediacaran.front.web_path}:/pages/default", 
 						//"${plugins.ediacaran.front.web_path}:/admin/pages/edit.jsp"
-						"${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/editor/default"
+						"${plugins.ediacaran.front.web_path}:${plugins.ediacaran.front.admin_context}/pages/default"
 				)
 		);
 	}

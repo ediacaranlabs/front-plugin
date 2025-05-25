@@ -21,10 +21,13 @@ import org.brandao.brutos.annotation.Transient;
 import org.brandao.brutos.annotation.web.MediaTypes;
 import org.brandao.brutos.annotation.web.RequestMethod;
 import org.brandao.brutos.annotation.web.RequestMethodTypes;
+import org.brandao.brutos.web.WebDispatcherType;
+import org.brandao.brutos.web.WebFlowController;
 import org.brandao.brutos.web.WebResultAction;
 
 import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.page.EditablePageObjectTemplate;
+import br.com.uoutec.community.ediacaran.front.page.Page;
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.security.BasicRoles;
 import br.com.uoutec.community.ediacaran.security.RequiresPermissions;
@@ -42,6 +45,10 @@ public class EditPageController {
 	@Inject
 	private PageManager editpage;
 
+	@Inject
+	@Transient
+	private PageManager pageManager;
+	
 	@Transient
 	@Inject
 	private VarParser varParser;
@@ -94,6 +101,32 @@ public class EditPageController {
 		}
 	}
 
+	@Action("/edit")
+	@RequestMethod({RequestMethodTypes.POST, RequestMethodTypes.GET})
+	@RequiresRole(BasicRoles.USER)
+	@RequiresPermissions("CONTENT:PAGES:EDIT")
+	public WebResultAction edit(@DetachedName PagePubEntity pageEntity, WebResultAction result){
+		
+		try {
+			
+			Page page = pageEntity.rebuild(pageEntity.getId() != null, false, false);
+			
+			EditablePageObjectTemplate pg = (EditablePageObjectTemplate)pageManager.getTemplate(page.getTemplate()); 
+			result.setView(varParser.getValue(pg.getEditTemplate()), true);
+			result.setDispatcher(WebDispatcherType.FORWARD);
+			result.add("page", page);
+			return result;
+		}
+		catch(Throwable ex) {
+			ex.printStackTrace();
+			WebFlowController
+				.redirect()
+				.put("exception", ex)
+				.to("${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list");
+			return null;
+		}
+	}
+	
 	@Action("/delete")
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresRole(BasicRoles.USER)
