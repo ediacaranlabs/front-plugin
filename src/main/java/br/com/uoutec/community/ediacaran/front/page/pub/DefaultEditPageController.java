@@ -1,5 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,6 +60,7 @@ public class DefaultEditPageController {
 			Map<String,Object> vars = new HashMap<>();
 			vars.put("page", page);
 			vars.put("id", pageID);
+			vars.put("templates", new ArrayList<>(editPage.getTemplates().values()));
 			
 			return vars;
 		}

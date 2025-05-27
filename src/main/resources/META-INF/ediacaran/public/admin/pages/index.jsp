@@ -63,6 +63,20 @@
 									<ec:textfield value="!{item.locale.name}" enabled="false"/>
 								</ed:col>
 								<ed:col size="2">
+									<ec:button
+										actionType="button" 
+					    				classStyle="last-item" 
+					    				align="right" 
+										label="Editar">
+										<ec:event type="click">
+											var link = '#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/edit?';
+											link += 'gid=' + encodeURI('!{item.gid}');
+											link += '&path=' + encodeURI('!{item.path}');
+											link += '&id=' + encodeURI('!{item.id}');
+											link += '&locale=' + encodeURI('!{item.locale.id}');
+											$.AppContext.utils.updateContent(link);
+										</ec:event>
+									</ec:button>
 									<ec:button id="page_form_search_edit_button_!{item.index}"
 										actionType="button" 
 					    				classStyle="last-item" 

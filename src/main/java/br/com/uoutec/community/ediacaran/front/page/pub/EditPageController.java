@@ -111,6 +111,10 @@ public class EditPageController {
 		
 		try {
 			
+			if(pageEntity == null) {
+				pageEntity = new PagePubEntity();
+			}
+			
 			Page page = pageEntity.rebuild(pageEntity.getGid() != null, false, false);
 			
 			EditablePageObjectTemplate pg = (EditablePageObjectTemplate)pageManager.getTemplate(page.getTemplate());
