@@ -54,11 +54,11 @@ public class DefaultEditPageController {
 			}
 			
 			Page page = pageEntity.rebuild(pageEntity.getGid() != null, false, false);
-
-			Map<String,Object> vars = new HashMap<>();
+			PageId pageID = new PageId(pageEntity.getPath(), pageEntity.getId(), PluginLanguageUtils.toLocale(pageEntity.getLocale()));
 			
+			Map<String,Object> vars = new HashMap<>();
 			vars.put("page", page);
-			vars.put("id", new PageId(pageEntity.getPath(), pageEntity.getId(), PluginLanguageUtils.toLocale(pageEntity.getLocale())));
+			vars.put("id", pageID);
 			
 			return vars;
 		}
@@ -70,6 +70,7 @@ public class DefaultEditPageController {
 				.to("${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/list");
 			return null;
 		}
+		
 	}
 	
 	@Action("/save")

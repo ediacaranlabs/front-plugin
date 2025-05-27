@@ -28,10 +28,12 @@ import org.brandao.brutos.web.WebResultAction;
 import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.page.EditablePageObjectTemplate;
 import br.com.uoutec.community.ediacaran.front.page.Page;
+import br.com.uoutec.community.ediacaran.front.page.PageId;
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.security.BasicRoles;
 import br.com.uoutec.community.ediacaran.security.RequiresPermissions;
 import br.com.uoutec.community.ediacaran.security.RequiresRole;
+import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 import br.com.uoutec.ediacaran.core.VarParser;
 import br.com.uoutec.pub.entity.InvalidRequestException;
@@ -134,7 +136,7 @@ public class EditPageController {
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
 	public WebResultAction delete(
 			@Basic(bean="gid")
-			Long gid,
+			Integer gid,
 			@Basic(bean="path")
 			String path,
 			@Basic(bean="id")
@@ -144,12 +146,10 @@ public class EditPageController {
 			WebResultAction webResult){
 		
 		try {
-			Map<String,Object> md = new HashMap<>();
-			md.put("path", path);
-			md.put("id", id);
-			md.put("locale", locale);
 			
-			if(gid == md.hashCode()) {
+			PageId pageID = new PageId(path, id, PluginLanguageUtils.toLocale(locale));
+			
+			if(gid == pageID.toInt()) {
 				ContextSystemSecurityCheck.doPrivileged(()->{
 					editpage.unregisterPage(path, id, locale);
 					return null;
