@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Locale;
 import java.util.Map;
 
+import br.com.uoutec.community.ediacaran.front.page.PageId;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 
 public class PageSearchResponse implements Serializable {
@@ -11,6 +12,8 @@ public class PageSearchResponse implements Serializable {
 	private static final long serialVersionUID = 7674988526885634067L;
 
 	private int index;
+	
+	private int gid;
 	
 	private String id;
 	
@@ -29,10 +32,19 @@ public class PageSearchResponse implements Serializable {
 	
 	public PageSearchResponse(int index, ObjectMetadata e, Map<Locale, String> localeMap) {
 		this.index = index;
+		this.gid = new PageId(e.getPathMetadata().getPath(), e.getPathMetadata().getId(), e.getLocale()).toInt();
 		this.id = e.getPathMetadata().getId();
 		this.name = e.getPathMetadata().getPath() + "/" + e.getPathMetadata().getId();
 		this.path = e.getPathMetadata().getPath();
 		this.locale = e.getLocale() == null? new LocaleResponse("", "") : new LocaleResponse(e.getLocale().toString(), localeMap.get(e.getLocale()));
+	}
+
+	public int getGid() {
+		return gid;
+	}
+
+	public void setGid(int gid) {
+		this.gid = gid;
 	}
 
 	public int getIndex() {

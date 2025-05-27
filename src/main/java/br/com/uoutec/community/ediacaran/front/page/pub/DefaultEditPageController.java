@@ -22,6 +22,7 @@ import org.brandao.brutos.web.WebFlowController;
 
 import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.page.Page;
+import br.com.uoutec.community.ediacaran.front.page.PageId;
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.security.BasicRoles;
 import br.com.uoutec.community.ediacaran.security.RequiresPermissions;
@@ -48,25 +49,16 @@ public class DefaultEditPageController {
 		
 		try {
 			
-			Page page = pageEntity == null? 
-					null :
-					ContextSystemSecurityCheck.doPrivileged(()->
-						editPage.getPageById(pageEntity.getPath(), pageEntity.getId(), pageEntity.getLocale())
-					);
+			if(pageEntity == null) {
+				pageEntity = new PagePubEntity();
+			}
+			
+			Page page = pageEntity.rebuild(pageEntity.getGid() != null, false, false);
 
 			Map<String,Object> vars = new HashMap<>();
 			
-			if(page == null) {
-				return vars;
-			}
-			
-			Map<String,Object> md = new HashMap<>();
-			md.put("path", pageEntity.getPath());
-			md.put("id", pageEntity.getId());
-			md.put("locale", PluginLanguageUtils.toLocale(pageEntity.getLocale()));
-			
 			vars.put("page", page);
-			vars.put("md", md);
+			vars.put("id", new PageId(pageEntity.getPath(), pageEntity.getId(), PluginLanguageUtils.toLocale(pageEntity.getLocale())));
 			
 			return vars;
 		}

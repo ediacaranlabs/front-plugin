@@ -1,7 +1,6 @@
 package br.com.uoutec.community.ediacaran.front.page.pub;
 
 import java.io.CharArrayReader;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,9 +14,11 @@ import org.brandao.brutos.annotation.ScopeType;
 
 import br.com.uoutec.community.ediacaran.front.components.Image;
 import br.com.uoutec.community.ediacaran.front.page.BreadcrumbPath;
-import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.front.page.Page;
 import br.com.uoutec.community.ediacaran.front.page.PageFileManagerHandler;
+import br.com.uoutec.community.ediacaran.front.page.PageId;
+import br.com.uoutec.community.ediacaran.front.page.PageManager;
+import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.i18n.ValidationException;
 import br.com.uoutec.pub.entity.AbstractPubEntity;
 
@@ -218,16 +219,14 @@ public class PagePubEntity
 		super.validate(groups);
 		
 		if(gid != null) {
-			Map<String,Object> md = new HashMap<String,Object>();
-			md.put("path", path);
-			md.put("id", id);
-			md.put("locale", locale);
-
-			if(gid != md.hashCode()) {
+			PageId pageId = new PageId(path, id, PluginLanguageUtils.toLocale(locale));
+			
+			if(gid != pageId.toInt()) {
 				throw new ValidationException("invalid gid");
 			}
 			
 		}
+		
 		if(!editPage.isValidTemplate(template)) {
 			throw new ValidationException("invalid template");
 		}

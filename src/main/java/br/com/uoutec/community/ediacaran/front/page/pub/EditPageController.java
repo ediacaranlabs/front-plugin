@@ -109,9 +109,10 @@ public class EditPageController {
 		
 		try {
 			
-			Page page = pageEntity.rebuild(pageEntity.getId() != null, false, false);
+			Page page = pageEntity.rebuild(pageEntity.getGid() != null, false, false);
 			
-			EditablePageObjectTemplate pg = (EditablePageObjectTemplate)pageManager.getTemplate(page.getTemplate()); 
+			EditablePageObjectTemplate pg = (EditablePageObjectTemplate)pageManager.getTemplate(page.getTemplate());
+			
 			result.setView(varParser.getValue(pg.getEditTemplate()), true);
 			result.setDispatcher(WebDispatcherType.FORWARD);
 			result.add("page", page);
