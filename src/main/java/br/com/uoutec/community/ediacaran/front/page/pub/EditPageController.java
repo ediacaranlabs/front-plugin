@@ -11,11 +11,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.brandao.brutos.annotation.Action;
-import org.brandao.brutos.annotation.Basic;
 import org.brandao.brutos.annotation.Controller;
 import org.brandao.brutos.annotation.DefaultThrowSafe;
 import org.brandao.brutos.annotation.DetachedName;
-import org.brandao.brutos.annotation.MappingTypes;
 import org.brandao.brutos.annotation.ResponseType;
 import org.brandao.brutos.annotation.Transient;
 import org.brandao.brutos.annotation.web.MediaTypes;
@@ -28,12 +26,10 @@ import org.brandao.brutos.web.WebResultAction;
 import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.community.ediacaran.front.page.EditablePageObjectTemplate;
 import br.com.uoutec.community.ediacaran.front.page.Page;
-import br.com.uoutec.community.ediacaran.front.page.PageId;
 import br.com.uoutec.community.ediacaran.front.page.PageManager;
 import br.com.uoutec.community.ediacaran.security.BasicRoles;
 import br.com.uoutec.community.ediacaran.security.RequiresPermissions;
 import br.com.uoutec.community.ediacaran.security.RequiresRole;
-import br.com.uoutec.community.ediacaran.system.i18n.PluginLanguageUtils;
 import br.com.uoutec.community.ediacaran.system.repository.ObjectMetadata;
 import br.com.uoutec.ediacaran.core.VarParser;
 import br.com.uoutec.pub.entity.InvalidRequestException;
@@ -138,24 +134,28 @@ public class EditPageController {
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
-	public WebResultAction delete(
-			@Basic(bean="gid")
-			Integer gid,
-			@Basic(bean="path")
-			String path,
-			@Basic(bean="id")
-			String id, 
-			@Basic(bean="locale", mappingType=MappingTypes.VALUE)
-			String locale,
-			WebResultAction webResult){
+	public WebResultAction delete(@DetachedName PagePubEntity pageEntity, WebResultAction webResult){
+		
+		if(pageEntity == null || pageEntity.getGid() == null) {
+			return index(webResult);
+		}
+		
+		Page page;
+
+		try {
+			page = pageEntity.rebuild(pageEntity.getGid() != null, false, false);
+		}
+		catch(Throwable ex) {
+			webResult
+			.add("exception", ex);
+			return index(webResult);
+		}
 		
 		try {
-			
-			PageId pageID = new PageId(path, id, PluginLanguageUtils.toLocale(locale));
-			
-			if(gid == pageID.toInt()) {
+		
+			if(page != null) {
 				ContextSystemSecurityCheck.doPrivileged(()->{
-					editpage.unregisterPage(path, id, locale);
+					editpage.unregisterPage(pageEntity.getPath(), pageEntity.getId(), pageEntity.getLocale());
 					return null;
 					
 				});
@@ -173,23 +173,17 @@ public class EditPageController {
 	@RequestMethod(RequestMethodTypes.POST)
 	@RequiresRole(BasicRoles.USER)
 	@RequiresPermissions("CONTENT:PAGES:DELETE")
-	public WebResultAction confirmDelete(
-			@Basic(bean="path")
-			String path, 
-			@Basic(bean="id")
-			String id,
-			@Basic(bean="locale", mappingType=MappingTypes.VALUE)
-			String locale,
+	public WebResultAction confirmDelete(@DetachedName PagePubEntity pageEntity,
 			WebResultAction webResult){
-		
+
 		webResult.setView("/admin/pages/confirm_delete");
 		
 		try {
 			
 			Map<String,Object> md = new HashMap<>();
-			md.put("path", path);
-			md.put("id", id);
-			md.put("locale", locale);
+			md.put("path", pageEntity.getPath());
+			md.put("id", pageEntity.getId());
+			md.put("locale", pageEntity.getLocale());
 			
 			webResult
 				.add("metadata", md);

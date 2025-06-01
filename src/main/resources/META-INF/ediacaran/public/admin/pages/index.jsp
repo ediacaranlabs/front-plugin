@@ -29,7 +29,7 @@
 						<ed:col size="8">
 							<ec:textfield name="path" placeholder="Caminho"/>
 						</ed:col>
-						<ed:col size="2" align="right">
+						<ed:col size="4" align="right">
 							<ec:select name="locale">
 								<ec:option value="" selected="true">Selecione o idioma</ec:option>
 								<c:forEach items="${locales}" var="loc">
@@ -37,7 +37,9 @@
 								</c:forEach>
 							</ec:select>
 						</ed:col>
-						<ed:col size="2">
+					</ed:row>
+					<ed:row>
+						<ed:col size="12">
 							<ec:button
 			    				classStyle="last-item" 
 			    				align="right" 
@@ -56,13 +58,24 @@
 						<ec:forEach items="!{response.data}" var="item">
 							<ec:separator/>
 							<ed:row>
-								<ed:col size="8">
-									<ec:textfield value="!{item.name}" enabled="false"/>
+								<ed:col size="6">
+									Path
 								</ed:col>
 								<ed:col size="2" align="right">
-									<ec:textfield value="!{item.locale.name}" enabled="false"/>
+									<ec:center>Idioma</ec:center>
 								</ed:col>
-								<ed:col size="2">
+								<ed:col size="4">
+									<ec:center>Actions</ec:center>
+								</ed:col>
+							</ed:row>
+							<ed:row>
+								<ed:col size="6">
+									!{item.name}
+								</ed:col>
+								<ed:col size="2" align="right">
+									<ec:center>!{item.locale.name}</ec:center>
+								</ed:col>
+								<ed:col size="4">
 									<ec:button
 										actionType="button" 
 					    				classStyle="last-item" 
@@ -77,42 +90,19 @@
 											$.AppContext.utils.updateContent(link);
 										</ec:event>
 									</ec:button>
-									<ec:button id="page_form_search_edit_button_!{item.index}"
-										actionType="button" 
-					    				classStyle="last-item" 
-					    				align="right" 
-					    				size="sm"
-										label="Editar">
-										<ec:event type="click">
-											var $fr = $.AppContext.utils.getById('form_page_item');
-											var $path = $fr.getField('path');
-											var $id = $fr.getField('id');
-											var $locale = $fr.getField('locale');
-											
-											$path.setValue('!{item.path}');
-											$id.setValue('!{item.id}');
-											$locale.setValue('!{item.locale.id}');
-											$fr.submit(false, '#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/edit');
-										</ec:event>
-									</ec:button>
 									<ec:button
-										id="page_form_search_edit_delete_!{item.index}"
 										style="danger" 
 										actionType="submit" 
 					    				classStyle="last-item" 
 					    				align="right" 
-					    				size="sm"
 										label="Apagar">
 										<ec:event type="click">
-											var $fr = $.AppContext.utils.getById('form_page_item');
-											var $path = $fr.getField('path');
-											var $id = $fr.getField('id');
-											var $locale = $fr.getField('locale');
-											
-											$path.setValue('!{item.path}');
-											$id.setValue('!{item.id}');
-											$locale.setValue('!{item.locale.id}');
-											$fr.submit(false, '#m${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/confirm-delete');
+											var link = '#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/confirm-delete?';
+											link += 'gid=' + encodeURI('!{item.gid}');
+											link += '&path=' + encodeURI('!{item.path}');
+											link += '&id=' + encodeURI('!{item.id}');
+											link += '&locale=' + encodeURI('!{item.locale.id}');
+											$.AppContext.utils.updateContent(link);
 										</ec:event>
 									</ec:button>
 								</ed:col>
@@ -122,10 +112,5 @@
 				</ec:data-table>
 			</ec:box-body>
 		</ec:box>
-		<ec:form id="form_page_item" method="POST">
-			<input type="hidden" name="path" value="">
-			<input type="hidden" name="id" value="">
-			<input type="hidden" name="locale" value="">
-		</ec:form>
 	</ed:col>
 </ed:row>
