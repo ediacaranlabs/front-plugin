@@ -24,7 +24,6 @@
 	<ec:box-body>	
 	
 		<ec:form id="page_edit_form" method="POST" enctype="multipart/form-data" update="result_page_edit_form">
-			<input type="hidden" value="${template}" name="template">
 			<input type="hidden" value="${empty vars.id? '' : vars.id.toInt()}" name="gid">
 			<ed:row>
 				<ed:col size="12" id="result_page_edit_form">
@@ -71,9 +70,9 @@
 							</ec:textfield>
 						</ed:col>
 						<ed:col size="4">
-							<ec:select label="Template" name="Modelo" enabled="false">
+							<ec:select label="Template" name="template" readonly="true">
 								<c:forEach items="${vars.templates}" var="template">
-								<ec:option value="${template.id}" selected="${vars.page.template == template.id}">${template.name}</ec:option>
+								<ec:option value="${template.id}" selected="${vars.page.template == template.id}">${template.id} - ${template.name}</ec:option>
 								</c:forEach>
 							</ec:select>
 						</ed:col>
@@ -138,7 +137,7 @@
 				<ed:col size="12">
 					<ec:button 
 						actionType="submit" 
-						action="#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/editor/default/save" 
+						action="#!${plugins.ediacaran.front.web_path}${plugins.ediacaran.front.admin_context}/pages/default/save" 
 						label="Salvar" 
 						align="right"/>
 				</ed:col>
