@@ -27,7 +27,19 @@ public class PageController implements PublicType {
 	@Transient
 	private PageManager pageManager;
 
-	@Action("{uri:(/+[a-z0-9][a-z0-9]+(-[a-z0-9]+)*)+}")
+	@Action("{uri:/.+\\.[a-z0-9]{0,3}pag$}")
+	public WebResultAction privateAction(
+			@Basic(bean="uri") String uri, 
+			@Basic(bean="locale", scope=ScopeType.REQUEST, mappingType=MappingTypes.VALUE) Locale locale, 
+			WebResultAction result) {
+	
+		result.setResponseStatus(HttpStatus.NOT_FOUND);
+		result.setReason(uri + " not found!");
+		return result;
+	}
+	
+	//@Action("{uri:(/+[a-z0-9][a-z0-9]+(-[a-z0-9]+)*)+}")
+	@Action("{uri:(/+[a-z0-9]+([-_][a-z0-9]+)?)+}")
 	public WebResultAction execute(
 			@Basic(bean="uri") String uri, 
 			@Basic(bean="locale", scope=ScopeType.REQUEST, mappingType=MappingTypes.VALUE) Locale locale, 
