@@ -42,40 +42,22 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 		return instance;
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected T createInstance(T instance, boolean reload, 
 			boolean override, boolean validate) throws Throwable {
 
-		String type = getCodeType();
+		GenericPubEntity<T> x = getType();
+		instance = x.rebuild(instance, reload, override, validate, true);
 		
-		EntityInheritanceManager entityInheritanceUtil = 
-				EntityContextPlugin.getEntity(EntityInheritanceManager.class);
-		
-		Map<String, Class<?>> clazzMap = 
-				entityInheritanceUtil.getMap(getGenericType());
-		
-		Class<? extends GenericPubEntity> ptype;
-		
-		ptype = (Class<? extends GenericPubEntity>)(
-			clazzMap == null || type == null? 
-				getGenericType() : 
-				clazzMap.containsKey(type)? clazzMap.get(type) : getGenericType()
-		);
-
-		GenericPubEntity p;
-		
-		try {
-			p = ClassUtil.getInstance(ptype);
-		}
-		catch(Throwable e) {
-			throw new InvalidRequestException("invalid type: " + ptype, e);
+		if(override){
+			this.copyTo(instance, reload, override, validate);
 		}
 		
-		p.setData(data);
-		p.loadProperties(this);
-		return (T) p.rebuild(instance, reload, override, validate, true);
+		return instance;
 	}
 
+	protected void copyTo(T o, boolean reload, boolean override, boolean validate) throws Throwable{
+	}
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Transient
 	public <X extends GenericPubEntity<?>> X getType() {
