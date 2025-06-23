@@ -48,16 +48,9 @@ public abstract class GenericPubEntity<T> extends AbstractPubEntity<T>{
 		GenericPubEntity<T> x = getType();
 		instance = x.rebuild(instance, reload, override, validate, true);
 		
-		if(override){
-			this.copyTo(instance, reload, override, validate);
-		}
-		
 		return instance;
 	}
 
-	protected void copyTo(T o, boolean reload, boolean override, boolean validate) throws Throwable{
-	}
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Transient
 	public <X extends GenericPubEntity<?>> X getType() {
