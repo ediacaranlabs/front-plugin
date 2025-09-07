@@ -11,6 +11,8 @@ import javax.validation.constraints.Size;
 import org.brandao.brutos.annotation.Basic;
 import org.brandao.brutos.annotation.MappingTypes;
 import org.brandao.brutos.annotation.ScopeType;
+import org.brandao.brutos.annotation.Type;
+import org.brandao.brutos.type.StringType;
 
 import br.com.uoutec.community.ediacaran.front.components.Image;
 import br.com.uoutec.community.ediacaran.front.page.BreadcrumbPath;
@@ -46,6 +48,7 @@ public class PagePubEntity
 	private String title;
 	
 	@Size(max = 2097152)
+	@Type(StringType.class)
 	private String content;
 	
 	private Map<String, String> header;
