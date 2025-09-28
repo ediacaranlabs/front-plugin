@@ -6,6 +6,7 @@ import java.util.HashSet;
 
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParser;
 import br.com.uoutec.community.ediacaran.front.theme.PropertyParserImp;
+import br.com.uoutec.ediacaran.web.StringHTMLUtil;
 
 public abstract class ComponentFormTemplateComponent extends AbstractTemplateComponent {
 
@@ -30,6 +31,14 @@ public abstract class ComponentFormTemplateComponent extends AbstractTemplateCom
 	
 		super.default_attribute_parsers = 
 		Collections.unmodifiableMap(new HashMap<String, PropertyParser>(super.default_attribute_parsers){{
+
+			put("value", new PropertyParserImp() {
+				
+				@Override
+				public Object toValue(Object value, PropertiesComponentTemplate component) {
+					return value != null? StringHTMLUtil.unescapeHTML((String)value) : value;
+				}
+			});
 			
 			put("enabled", new PropertyParserImp() {
 				
