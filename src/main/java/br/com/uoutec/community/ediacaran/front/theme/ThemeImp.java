@@ -1,9 +1,11 @@
 package br.com.uoutec.community.ediacaran.front.theme;
 
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import org.slf4j.Logger;
@@ -11,48 +13,40 @@ import org.slf4j.LoggerFactory;
 
 import br.com.uoutec.community.ediacaran.front.components.Component;
 
-public class ThemeImp implements Theme{
+public class ThemeImp implements Theme {
 
 	private static final Logger logger = LoggerFactory.getLogger(Theme.class);
 	
-	public String name;
+	private String name;
 	
-	public String context;
+	private String context;
 	
-	public String path;
+	private String path;
 	
-	public ConcurrentMap<String, ThemePackage> packages;
+	private ThemeImp parent;
+	
+	private ConcurrentMap<String, ThemePackage> packages;
 	
 
-	public ThemeImp(String name, String context, String path, ConcurrentMap<String, ThemePackage> packages) {
+	public ThemeImp(String name, String context, String path, ThemeImp parent, ConcurrentMap<String, ThemePackage> packages) {
 		this.name = name;
 		this.packages = packages;
 		this.path = path;
 		this.context = context;
+		this.parent = parent;
 	}
 
 	@Override
 	public void buildComponent(String template, String packageName, ComponentVars componentVars, Map<String, Object> extVars, Writer out) throws ThemeException {
 		
-		ThemePackage temaPackage = getPackage(packageName);
-		
-		ConcurrentMap<String, TemplateComponent> tagTemplates = temaPackage.getTagTemplates();
-		
-		TemplateComponent p = tagTemplates.get(template);
-		
-		if(p == null) {
-			if(temaPackage.getName().equals("front")) {
-				throw new ThemeException("template not found: " + template);
-			}
-			
-			temaPackage = getPackage(null);
-			tagTemplates = temaPackage.getTagTemplates();
-			p = tagTemplates.get(template);
-			
-			if(p == null) {
-				throw new ThemeException("default template not found: " + template);
-			}
+		TemplateComponent parentTemplateComponent = parent == null? null : getTemplateComponent(parent, template, packageName);
+		TemplateComponent templateComponent       = getTemplateComponent(this, template, packageName);
+
+		if(parentTemplateComponent == null && templateComponent == null) {
+			throw new ThemeException("template not found: " + template);
 		}
+		
+		TemplateComponent p = templateComponent == null? parentTemplateComponent : templateComponent;
 		
 		Map<String, Object> vars = new HashMap<String, Object>();
 
@@ -67,7 +61,7 @@ public class ThemeImp implements Theme{
 			);
 		}
 		catch(Throwable ex) {
-			throw new ThemeException("unable to get tag properties: " + template + "[package=" + temaPackage.getName() + "]", ex);
+			throw new ThemeException("unable to get tag properties: " + template + "[package=" + packageName + "]", ex);
 		}
 			
 			
@@ -86,26 +80,46 @@ public class ThemeImp implements Theme{
 			throw ex;
 		}
 		catch(Throwable ex) {
-			throw new ThemeException("unable to load template tag: " + template + "[package=" + temaPackage.getName() + "]", ex);
+			throw new ThemeException("unable to load template tag: " + template + "[package=" + packageName + "]", ex);
 		}
 	}
 
 	@Override
 	public void buildComponent(String template, String packageName, Writer out, Object... vars) throws ThemeException {
+		TemplateComponent parentTemplateComponent = parent == null? null : getTemplateComponent(parent, template, packageName);
+		TemplateComponent templateComponent       = getTemplateComponent(this, template, packageName);
 		
-		ThemePackage temaPackage = getPackage(packageName);
-		
-		ConcurrentMap<String, TemplateComponent> tagTemplates = temaPackage.getTagTemplates();
-		
-		TemplateComponent p = tagTemplates.get(template);
-		
-		if(p == null) {
+		if(templateComponent != null) {
+			templateComponent.build(out, vars);
+		}
+		else
+		if(parentTemplateComponent != null) {
+			parentTemplateComponent.build(out, vars);
+		}
+		else {
 			throw new ThemeException("template not found: " + template);
 		}
-		
-		p.build(out, vars);
 	}
 
+	private TemplateComponent getTemplateComponent(ThemeImp theme, String template, String packageName) throws ThemeException {
+		
+		ThemePackage temaPackage = theme.getPackage(packageName);
+		ConcurrentMap<String, TemplateComponent> tagTemplates = temaPackage.getTagTemplates();
+		
+		if(tagTemplates == null) {
+			
+			if(temaPackage.getName().equals("front")) {
+				return null;
+			}
+
+			temaPackage = theme.getPackage(null);
+			tagTemplates = temaPackage.getTagTemplates();
+			return tagTemplates.get(template);
+		}
+		
+		return tagTemplates.get(template);
+	}
+	
 	@Override
 	public String getBasePath() {
 		return path;
@@ -118,61 +132,97 @@ public class ThemeImp implements Theme{
 
 	@Override
 	public String getTemplate(String name) {
-		ThemePackage temaPackage = getPackage(name);
-		return path + temaPackage.getPath();
+		String parentTemaPackage = parent == null? null : getTemplate(parent, name);
+		String temaPackage = getTemplate(this, name);
+		return temaPackage == null? parentTemaPackage : temaPackage;
 	}
 
-	/*
-	@Override
-	public Set<String> getAttributes(Object tag, String packageName) {
-		return null;
+	private String getTemplate(ThemeImp theme, String name) {
+		ThemePackage temaPackage = theme.getPackage(name);
+		return theme.path + temaPackage.getPath();
 	}
-
-	@Override
-	public Set<String> getEmptyAttributes(Object tag, String packageName) {
-		return null;
-	}
-
-	@Override
-	public Map<String, AttributeParser> getAttributesParser(Object tag, String packageName) {
-		return null;
-	}
-
-	@Override
-	public Set<String> getProperties(Object tag, String packageName) {
-		return null;
-	}
-
-	@Override
-	public Map<String, AttributeParser> getPropertiesParse(Object tag, String packageName) {
-		return null;
-	}
-	 */
 	
 	private ThemePackage getPackage(String name) throws ThemeException {
+		
+		ThemePackage parentThemePackage = parent == null? null : getPackage(parent, name);
+		ThemePackage themePackage = getPackage(this, name);
+		
+		if(themePackage == null && parentThemePackage == null) {
+			throw new ThemeException("theme package not found: " + name);
+		}
+		
+		ConcurrentMap<String, TemplateComponent> tagTemplates = new ConcurrentHashMap<>();
+		ConcurrentMap<String, List<PublicResource>> resources = new ConcurrentHashMap<>();
+		String path = null;
+		
+		if(parentThemePackage != null) {
+			tagTemplates.putAll(parentThemePackage.getTagTemplates());
+			resources.putAll(parentThemePackage.getResources());
+			path = parentThemePackage.getPath();
+			name = parentThemePackage.getName();
+		}
+		
+		if(themePackage != null) {
+			tagTemplates.putAll(themePackage.getTagTemplates());
+			resources.putAll(themePackage.getResources());
+			path = themePackage.getPath();
+			name = themePackage.getName();
+		}
+		
+		return new ThemePackage(name, path, tagTemplates, resources);
+	}
+
+	private ThemePackage getPackage(ThemeImp theme, String name) throws ThemeException {
 		
 		if(name == null) {
 			name = "front";
 		}
 		
-		ThemePackage temaPackage = packages.get(name);
+		ThemePackage temaPackage = theme.packages.get(name);
 		
 		if(temaPackage == null) {
-			
-			temaPackage = packages.get("front");
-			
-			if(temaPackage == null) {
-				throw new ThemeException("tema package not found: " + this.name + "/" + name);
-			}
+			temaPackage = theme.packages.get("front");
 		}
 		
 		return temaPackage;
 	}
-
+	
 	@Override
 	public List<PublicResource> getResourcesByType(String type, String packageName) {
 		
-		ThemePackage temaPackage = getPackage(packageName);
+		List<PublicResource> parentResourcesByType = parent == null? null : getResourcesByType(parent, type, packageName);
+		List<PublicResource> resourcesByType = getResourcesByType(this, type, packageName);
+		
+		Map<PublicResource, Integer> index = new HashMap<>();
+		List<PublicResource> result = new ArrayList<>();
+
+		if(parentResourcesByType != null) {
+			for(PublicResource r: parentResourcesByType) {
+				index.put(r, result.size());
+				result.add(r);
+			}
+		}
+
+		if(resourcesByType != null) {
+			for(PublicResource r: resourcesByType) {
+				Integer i = index.get(r);
+				
+				if(i != null) {
+					result.set(i, r);
+				}
+				else {
+					index.put(r, result.size());
+					result.add(r);
+				}
+			}
+		}
+		
+		return result;
+	}
+
+	private List<PublicResource> getResourcesByType(ThemeImp theme, String type, String packageName) {
+		
+		ThemePackage temaPackage = theme.getPackage(packageName);
 		
 		List<PublicResource> resourcesType = temaPackage.getResources().get(type);
 		

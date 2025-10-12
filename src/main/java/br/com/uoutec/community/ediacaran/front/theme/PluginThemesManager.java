@@ -11,7 +11,7 @@ import br.com.uoutec.application.io.Path;
 import br.com.uoutec.application.io.VfsException;
 import br.com.uoutec.application.security.ContextSystemSecurityCheck;
 import br.com.uoutec.ediacaran.core.plugins.EntityContextPlugin;
-import br.com.uoutec.ediacaran.core.plugins.PluginConfigurationMetadata;
+import br.com.uoutec.ediacaran.core.plugins.PluginConfiguration;
 import br.com.uoutec.ediacaran.core.plugins.PluginPath;
 import br.com.uoutec.ediacaran.core.plugins.PluginType;
 import br.com.uoutec.ediacaran.web.WebUtil;
@@ -24,9 +24,9 @@ public class PluginThemesManager {
 		PluginType pluginType = EntityContextPlugin.getEntity(PluginType.class);
 		ThemeRegistry themeRegistry = EntityContextPlugin.getEntity(ThemeRegistry.class);
 		
-		PluginConfigurationMetadata pmd = pluginType.getConfiguration().getMetadata();
+		PluginConfiguration pmd = pluginType.getConfiguration();
 		
-		PluginPath pp = pmd.getPath();
+		PluginPath pp = pmd.getMetadata().getPath();
 		Path base = pp.getBase();
 		base = base.getPath("themes");
 		Path packages = base.getPath("themes.properties");
@@ -38,16 +38,29 @@ public class PluginThemesManager {
 			try (InputStream i = packages.openInputStream()){
 				p.load(i);
 			}
-			
+
 			Enumeration<String> names = (Enumeration<String>) p.propertyNames();
+			String parent = null;
+			
+			while(names.hasMoreElements()) {
+				String name = names.nextElement();
+				String value = p.getProperty(name);
+				
+				if("parent".equals(name)) {
+					parent = value;
+				}
+				
+			}
+			
+			names = (Enumeration<String>) p.propertyNames();
 			
 			while(names.hasMoreElements()) {
 				String name = names.nextElement();
 				String value = p.getProperty(name);
 				
 				String[] path = name.split("/");
-				if(path.length == 1) {
-					themeRegistry.registerTheme(path[0], WebUtil.getPath(pmd), value);
+				if(path.length == 1 && !"parent".equals(path[0])) {
+					themeRegistry.registerTheme(path[0], WebUtil.getPath(pmd), value, parent);
 				}
 				
 			}

@@ -44,21 +44,26 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	
 	@Override
 	public synchronized void registerTheme(String name, String context, String template) throws ThemeException{
+		registerTheme(name, context, template, null);
+	}
+	
+	@Override
+	public synchronized void registerTheme(String name, String context, String template, String parent) throws ThemeException{
 		
 		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + name + ".register"));
 		
 		ThemeEntry entry = themes.get(name);
+		ThemeEntry parentEntry = parent == null? null : themes.get(parent);
 		
 		if(entry != null) {
 			throw new ThemeException("theme has been added: " + name);
-			
 		}	
 
 		entry = new ThemeEntry();
 		entry.name = name;
 		entry.context = context;
 		entry.packages = new ConcurrentHashMap<String, ThemePackage>();
-		entry.tema = new ThemeImp(name, context, "/templates" + template, entry.packages);
+		entry.tema = new ThemeImp(name, context, "/templates" + template, parentEntry == null? null : parentEntry.tema, entry.packages);
 		
 		if(logger.isTraceEnabled()) {
 			logger.trace("thema created: {}[template={}, context={}]", new Object[] {name, template, context});
@@ -323,7 +328,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		
 		public ConcurrentMap<String, ThemePackage> packages;
 		
-		public Theme tema;
+		public ThemeImp tema;
 		
 	}
 
