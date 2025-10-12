@@ -125,7 +125,7 @@ public class ThemeImp implements Theme {
 	@Override
 	public String getTemplate(String name) {
 		String parentTemaPackage = parent == null? null : getTemplate(parent, name);
-		String temaPackage = getTemplate(this, name);
+		String temaPackage = parentTemaPackage == null? getTemplate(this, name) : getRequiredTemplate(parent, name);
 		return temaPackage == null? parentTemaPackage : temaPackage;
 	}
 
@@ -133,11 +133,16 @@ public class ThemeImp implements Theme {
 		ThemePackage temaPackage = theme.getPackage(name);
 		return temaPackage.getThemePath() + temaPackage.getPath();
 	}
+
+	private String getRequiredTemplate(ThemeImp theme, String name) {
+		ThemePackage temaPackage = theme.getPackage(name);
+		return name == null || temaPackage.getName().equals(name)? temaPackage.getThemePath() + temaPackage.getPath() : null;
+	}
 	
 	@Override
 	public String getContext(String packageName) {
-		String parentContext = parent == null? null : getContext(parent, name);
-		String context = getContext(this, name);
+		String parentContext = parent == null? null : getContext(parent, packageName);
+		String context = parentContext == null? getContext(this, packageName) : getRequiredContext(this, packageName);
 		return context == null? parentContext : context;
 	}
 
@@ -145,9 +150,13 @@ public class ThemeImp implements Theme {
 		ThemePackage temaPackage = theme.getPackage(name);
 		return temaPackage.getContext();
 	}
+
+	private String getRequiredContext(ThemeImp theme, String name) {
+		ThemePackage temaPackage = theme.getPackage(name);
+		return name == null || temaPackage.getName().equals(name)? temaPackage.getContext() : null;
+	}
 	
 	private ThemePackage getPackage(String name) throws ThemeException {
-		
 		ThemePackage parentThemePackage = parent == null? null : getPackage(parent, name);
 		ThemePackage themePackage = getPackage(this, name);
 		

@@ -6,6 +6,8 @@
 <ec:setBundle var="sys_messages" locale="${locale}"/>
 <fmt:message key="dashboard.local" var="dashboard_local" bundle="${sys_messages}"/>
 
+<ec:setTemplatePackage name="admin" />
+
 <section class="inner-headline">
 	<ed:row>
 		<ed:col size="4">

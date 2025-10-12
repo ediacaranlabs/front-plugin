@@ -3,6 +3,7 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"                                  prefix="c"%>
+<ec:setTemplatePackage name="admin" />
 <ec:load-data file="/header.json" var="pageObjects" />
     <!-- start header -->
    <header>
