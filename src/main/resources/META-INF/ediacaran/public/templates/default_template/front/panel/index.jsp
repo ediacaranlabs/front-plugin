@@ -241,22 +241,22 @@ Inner - Section: page headline
 	
 	<section class="inner-headline">
 		<ed:container>
-			<ed:row>
-				<ed:col size="3">
+			<ed:row style="form">
+				<ed:col size="12">
 					<div class="inner-heading">
-						<h2><fmt:message key="header.title" bundle="${messages}"/></h2>
+						<ec:left><h4><fmt:message key="header.title" bundle="${messages}"/></h4></ec:left>
+						<ec:right>
+							<ec:breadcrumb title="#{header.title}" bundle="${messages}">
+								<ec:breadcrumb-path 
+									icon="home" 
+									text="" 
+									lnk="#" />
+							</ec:breadcrumb>
+						</ec:right>
 					</div>
 				</ed:col>
-				<ed:col size="9">
-					<ec:breadcrumb title="#{header.title}" bundle="${messages}">
-						<ec:breadcrumb-path 
-							icon="home" 
-							text="" 
-							lnk="#" />
-					</ec:breadcrumb>
-				</ed:col>
 			</ed:row>
-			<ed:row>
+			<ed:row style="form">
 				<ed:col>
 					<ec:menu-bar 
 						id="panel_menu" 
