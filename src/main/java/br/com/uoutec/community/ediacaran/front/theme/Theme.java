@@ -12,9 +12,9 @@ public interface Theme {
 	
 	String getBasePath();
 	
-	String getContext();
-	
 	String getTemplate(String packageName);
+
+	String getContext(String packageName);
 	
 	List<PublicResource> getResourcesByType(String type, String packageName);
 	

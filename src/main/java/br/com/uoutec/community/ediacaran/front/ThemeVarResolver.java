@@ -19,7 +19,8 @@ public class ThemeVarResolver implements VarResolver{
 				ThemeRegistry themeRegistry = EntityContextPlugin.getEntity(ThemeRegistry.class);
 				Theme theme = themeRegistry.getCurrentTheme();
 				String packagePath = theme.getTemplate(property);
-				return theme.getContext() + ":" + packagePath;
+				String packageContext = theme.getContext(property);
+				return packageContext + ":" + packagePath;
 			}
 			
 			return null;

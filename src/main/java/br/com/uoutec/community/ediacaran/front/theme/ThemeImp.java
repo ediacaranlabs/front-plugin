@@ -19,8 +19,6 @@ public class ThemeImp implements Theme {
 	
 	private String name;
 	
-	private String context;
-	
 	private String path;
 	
 	private ThemeImp parent;
@@ -28,11 +26,10 @@ public class ThemeImp implements Theme {
 	private ConcurrentMap<String, ThemePackage> packages;
 	
 
-	public ThemeImp(String name, String context, String path, ThemeImp parent, ConcurrentMap<String, ThemePackage> packages) {
+	public ThemeImp(String name, String path, ThemeImp parent, ConcurrentMap<String, ThemePackage> packages) {
 		this.name = name;
 		this.packages = packages;
 		this.path = path;
-		this.context = context;
 		this.parent = parent;
 	}
 
@@ -126,11 +123,6 @@ public class ThemeImp implements Theme {
 	}
 	
 	@Override
-	public String getContext() {
-		return context;
-	}
-
-	@Override
 	public String getTemplate(String name) {
 		String parentTemaPackage = parent == null? null : getTemplate(parent, name);
 		String temaPackage = getTemplate(this, name);
@@ -139,7 +131,19 @@ public class ThemeImp implements Theme {
 
 	private String getTemplate(ThemeImp theme, String name) {
 		ThemePackage temaPackage = theme.getPackage(name);
-		return theme.path + temaPackage.getPath();
+		return temaPackage.getThemePath() + temaPackage.getPath();
+	}
+	
+	@Override
+	public String getContext(String packageName) {
+		String parentContext = parent == null? null : getContext(parent, name);
+		String context = getContext(this, name);
+		return context == null? parentContext : context;
+	}
+
+	private String getContext(ThemeImp theme, String name) {
+		ThemePackage temaPackage = theme.getPackage(name);
+		return temaPackage.getContext();
 	}
 	
 	private ThemePackage getPackage(String name) throws ThemeException {
@@ -153,23 +157,29 @@ public class ThemeImp implements Theme {
 		
 		ConcurrentMap<String, TemplateComponent> tagTemplates = new ConcurrentHashMap<>();
 		ConcurrentMap<String, List<PublicResource>> resources = new ConcurrentHashMap<>();
+		String themePath = null;
 		String path = null;
+		String context = null;
 		
 		if(parentThemePackage != null) {
 			tagTemplates.putAll(parentThemePackage.getTagTemplates());
 			resources.putAll(parentThemePackage.getResources());
+			themePath = parentThemePackage.getThemePath();
 			path = parentThemePackage.getPath();
 			name = parentThemePackage.getName();
+			context = parentThemePackage.getContext();
 		}
 		
 		if(themePackage != null) {
 			tagTemplates.putAll(themePackage.getTagTemplates());
 			resources.putAll(themePackage.getResources());
+			themePath = themePackage.getThemePath();
 			path = themePackage.getPath();
 			name = themePackage.getName();
+			context = themePackage.getContext();
 		}
 		
-		return new ThemePackage(name, path, tagTemplates, resources);
+		return new ThemePackage(name, context, themePath, path, tagTemplates, resources);
 	}
 
 	private ThemePackage getPackage(ThemeImp theme, String name) throws ThemeException {
@@ -232,5 +242,5 @@ public class ThemeImp implements Theme {
 		
 		return resourcesType;
 	}
-	
+
 }

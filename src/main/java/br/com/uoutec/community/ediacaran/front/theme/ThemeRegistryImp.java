@@ -43,12 +43,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	}
 	
 	@Override
-	public synchronized void registerTheme(String name, String context, String template) throws ThemeException{
-		registerTheme(name, context, template, null);
-	}
-	
-	@Override
-	public synchronized void registerTheme(String name, String context, String template, String parent) throws ThemeException{
+	public synchronized void registerTheme(String name, String template, String parent) throws ThemeException{
 		
 		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + name + ".register"));
 		
@@ -60,13 +55,13 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		}	
 
 		entry = new ThemeEntry();
+		entry.template = "/templates" + template;
 		entry.name = name;
-		entry.context = context;
 		entry.packages = new ConcurrentHashMap<String, ThemePackage>();
-		entry.tema = new ThemeImp(name, context, "/templates" + template, parentEntry == null? null : parentEntry.tema, entry.packages);
+		entry.tema = new ThemeImp(name, "/templates" + template, parentEntry == null? null : parentEntry.tema, entry.packages);
 		
 		if(logger.isTraceEnabled()) {
-			logger.trace("thema created: {}[template={}, context={}]", new Object[] {name, template, context});
+			logger.trace("thema created: {}[template={}]", new Object[] {name, template});
 		}
 		
 		themes.put(name, entry);
@@ -92,7 +87,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	}
 	
 	@Override
-	public synchronized void registerPackageTheme(String name, String packageName, String template) throws ThemeException{
+	public synchronized void registerPackageTheme(String name, String packageName, String context, String template) throws ThemeException{
 
 		ContextSystemSecurityCheck.checkPermission(new RuntimeSecurityPermission(PERMISSION_PREFIX + name + ".package.register"));
 		
@@ -112,6 +107,8 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		
 		ThemePackage temaPackage = new ThemePackage(
 				packageName, 
+				context,
+				entry.template,
 				template, 
 				new ConcurrentHashMap<String, TemplateComponent>(),
 				new ConcurrentHashMap<String, List<PublicResource>>());
@@ -236,7 +233,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		}
 
 		if(!path.startsWith("/") && !path.toLowerCase().matches("^http?(s):\\/\\/.*")) {
-			path = entry.tema.getContext() + "/templates" + "/" + path;
+			path = temaPackage.getContext() + "/templates" + "/" + path;
 		}
 		
 		PublicResource pr = new PublicResource(resource, path);
@@ -289,7 +286,7 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 		}
 
 		if(!path.startsWith("/") && !path.toLowerCase().matches("^http?(s):\\/\\/.*")) {
-			path = entry.tema.getContext() + "/" + path;
+			path = temaPackage.getContext() + "/" + path;
 		}
 		
 		PublicResource pr = new PublicResource(resource, null);
@@ -323,6 +320,8 @@ public class ThemeRegistryImp implements ThemeRegistry, PublicBean{
 	private static class ThemeEntry {
 		
 		public String name;
+		
+		public String template;
 		
 		public String context;
 		

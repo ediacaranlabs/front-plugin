@@ -60,7 +60,7 @@ public class PluginThemesManager {
 				
 				String[] path = name.split("/");
 				if(path.length == 1 && !"parent".equals(path[0])) {
-					themeRegistry.registerTheme(path[0], WebUtil.getPath(pmd), value, parent);
+					themeRegistry.registerTheme(path[0], value, parent);
 				}
 				
 			}
@@ -75,7 +75,7 @@ public class PluginThemesManager {
 				String[] path = name.split("/");
 				
 				if(path.length == 2) {
-					themeRegistry.registerPackageTheme(path[0], path[1], value);
+					themeRegistry.registerPackageTheme(path[0], path[1], WebUtil.getPath(pmd), value);
 					
 				}
 			}

@@ -80,7 +80,7 @@ public class IncludeVarParser implements VarParser{
     	    	path = theme.getTemplate(packageName) + uri;
     		}
     		
-	    	contextName	= theme.getContext();
+	    	contextName	= theme.getContext(packageName);
     	}
 
     	if(contextName != null && !currentContext.equals(contextName)) {
