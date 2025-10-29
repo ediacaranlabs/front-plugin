@@ -24,6 +24,10 @@ public class PropertyConfig extends HashMap<Object,Object>{
 		return parent;
 	}
 
+	public PropertyConfig end() {
+		return parent;
+	}
+	
 	public PropertyConfig add(){
 		
 		Object o = parent.get(parentName);
