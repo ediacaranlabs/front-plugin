@@ -1,11 +1,26 @@
 package br.com.uoutec.community.ediacaran.front;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 @SuppressWarnings("serial")
 public class PropertyConfig extends HashMap<Object,Object>{
+	
+	private static final Gson gson;
+	
+	private static final Type type;
+	
+	static {
+		gson = new Gson();
+		type = new TypeToken<Map<String, Object>>() {}.getType();
+		
+	}
 	
 	private Object parentName;
 	
@@ -18,6 +33,10 @@ public class PropertyConfig extends HashMap<Object,Object>{
 	public PropertyConfig(Object name, PropertyConfig parent) {
 		this.parent = parent;
 		this.parentName = name;
+	}
+	
+	public String toString() {
+		return gson.toJson(this, type);
 	}
 	
 	public PropertyConfig parent() {
@@ -64,6 +83,7 @@ public class PropertyConfig extends HashMap<Object,Object>{
 		return this;
 	}
 
+	
 	public static class BuilderList extends ArrayList<Object>{
 	
 		private PropertyConfig parent;
