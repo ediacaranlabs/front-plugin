@@ -352,6 +352,11 @@ $.AppContext.types.Form.prototype.submit = function($validate = true, $resource 
 	}
 };
 
+$.AppContext.types.Form.prototype.updateMetadata = function(){
+	this.updateFieldIndex();
+	this.updateFieldNames();
+};
+
 $.AppContext.types.Form.prototype.updateFieldIndex = function($group = null, $no = null){
 
 	if($no == null){
