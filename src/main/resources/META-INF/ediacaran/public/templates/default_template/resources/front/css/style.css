@@ -456,7 +456,21 @@ fontawesome
 ==================================== */
 
 .fa:not([class*="fa-inverse"]) {
+	/*color: #808080;*/
+	/*color: #fff;*/
 	color: #F03C02;
+}
+
+.fa:not([class*="fa-inverse"]).icon-success {
+  color: #00a65a;
+}
+
+.fa:not([class*="fa-inverse"]).icon-warning {
+  color: #f39c12;
+}
+
+.fa:not([class*="fa-inverse"]).icon-danger {
+  color: #dd4b39;
 }
 
 /* ===================================

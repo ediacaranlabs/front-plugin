@@ -135,7 +135,7 @@ public abstract class AbstractTemplateComponent
 					
 					@Override
 					public Object toValue(Object value, PropertiesComponentTemplate component) {
-						return value == null? "" : component.getType()+ value;
+						return value == null? "" : component.getType() + "-" + value;
 					}
 				});
 				
