@@ -4,7 +4,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -45,6 +47,28 @@ public class PropertyConfig extends HashMap<Object,Object>{
 
 	public PropertyConfig end() {
 		return parent;
+	}
+
+	public <T> PropertyConfig addAll(List<T> itens, BiConsumer<T, PropertyConfig> c){
+		
+		Object o = parent.get(parentName);
+		BuilderList list;
+		
+		if(o instanceof BuilderList) {
+			list = ((BuilderList)o);
+		}
+		else {
+			list = new BuilderList(this);
+			parent.put(parentName, list);
+		}
+		
+		for(T e: itens) {
+			PropertyConfig m = new PropertyConfig(null, this);
+			c.accept(e, m);
+			list.add(m);
+		}
+		
+		return this;
 	}
 	
 	public PropertyConfig add(){
