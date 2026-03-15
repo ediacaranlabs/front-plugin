@@ -82,6 +82,14 @@ public class Image {
 		return y2;
 	}
 
+	public boolean isImage() {
+		return 
+			tmpFile != null && tmpFile.size() > 0 && 
+			x1 != null && x2 != null && y1 != null && y2 != null &&
+			(x2 - x1) > 10 && (y2 - y1) > 10
+		;
+	}
+	
 	public ImageStream stream() {
 		
 		if(x1 == null || x2 == null || y1 == null || y2 == null) {
