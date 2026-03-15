@@ -585,7 +585,7 @@ $.AppContext.utils = {
 		    
 		    if($enctype === 'multipart/form-data') {
 		    	opts.enctype = $enctype;
-		    	opts.processData = false;
+				opts.processData = false;
 		    	opts.contentType = false;		    	
 		    }
 		    else

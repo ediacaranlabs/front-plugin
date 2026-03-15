@@ -3,6 +3,7 @@
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/components" prefix="ec"%>
 <%@taglib uri="https://www.uoutec.com.br/ediacaran/tags/designer"   prefix="ed"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions"              prefix="fn"%>
+
 <%@page trimDirectiveWhitespaces="true" %>
 <ec:setBundle var="messages" locale="${locale}"/>
 <ec:import-object var="adminmenubar" id="menubar/admin/adminmenubar"/>
