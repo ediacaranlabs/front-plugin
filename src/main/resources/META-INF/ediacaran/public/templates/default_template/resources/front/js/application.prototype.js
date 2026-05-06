@@ -459,7 +459,13 @@ $.AppContext.types.Form.prototype.toObject = function($obj = null, $no = null){
 				$f.push($newObj);
 			}
 			else{
-				$obj[$groupName] = this.toObject(null, $o);
+				if($obj[$groupName] == null){
+					$obj[$groupName] = this.toObject({}, $o);	
+				}
+				else{
+					this.toObject($obj[$groupName], $o);	
+				}
+				
 			}
 			
 		}
