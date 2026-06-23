@@ -489,8 +489,12 @@ $.AppContext.utils = {
 		    $destContent = $.AppContext.utils.getDestContent($action, $destContent);
 		    $action      = $.AppContext.utils.getAddress($action);
 
+			$formObj.setEnabled(false);
+			
 			var $successWrapper = function($e){
-				
+			
+				$formObj.setEnabled(true);
+	
 				$formObj.updateFieldIndex();
 				$formObj.updateFieldNames();
 				
@@ -501,7 +505,9 @@ $.AppContext.utils = {
 			};
 
 			var $errorWrapper = function($e){
-				
+
+				$formObj.setEnabled(true);
+								
 				$formObj.updateFieldIndex();
 				$formObj.updateFieldNames();
 				
