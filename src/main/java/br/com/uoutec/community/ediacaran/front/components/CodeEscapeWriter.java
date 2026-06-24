@@ -31,6 +31,7 @@ public class CodeEscapeWriter extends Writer{
 				o.write("\\\\");
 				start = i + 1;
 			}
+			else
 			if(cbuf[i] == '<') {
 				o.write(cbuf, start, i - start);
 				o.write("&lt;");

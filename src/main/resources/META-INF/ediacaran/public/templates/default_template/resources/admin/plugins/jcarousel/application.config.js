@@ -20,12 +20,23 @@ $.AppContext.carousel.apply = function($id){
             	width = width / 3;
             }
 			*/
-			
-			if($width >= 400){	
+
+			if($width >= 1200){	
 				var $itens = carousel.jcarousel('items').length;
 				
 				if($itens > 3){
 					$width = $width / 3;
+				}
+				else{
+					$width = $width / $itens;
+				}
+			}
+			else
+			if($width >= 992){	
+				var $itens = carousel.jcarousel('items').length;
+				
+				if($itens > 2){
+					$width = $width / 2;
 				}
 				else{
 					$width = $width / $itens;
@@ -39,17 +50,17 @@ $.AppContext.carousel.apply = function($id){
             wrap: 'circular'
         });
 
-    $('.jcarousel-control-prev')
+    $('#' + $id + ' .jcarousel-control-prev')
         .jcarouselControl({
             target: '-=1'
         });
 
-    $('.jcarousel-control-next')
+    $('#' + $id + ' .jcarousel-control-next')
         .jcarouselControl({
             target: '+=1'
         });
 
-    $('.jcarousel-pagination')
+    $('#' + $id + ' .jcarousel-pagination')
         .on('jcarouselpagination:active', 'a', function() {
             $(this).addClass('active');
         })

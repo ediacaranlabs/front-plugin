@@ -3,7 +3,25 @@
 		
 		var $func = function({var})&#123;
 			var out_      = [];
+			
+			out_.push($.AppContext.constants.OPEN_TAG_);
+			out_.push("script type=");
+			out_.push($.AppContext.constants.DOUBLE_QUOTE);
+			out_.push("text/javascript");
+			out_.push($.AppContext.constants.DOUBLE_QUOTE);
+			out_.push("");
+			out_.push($.AppContext.constants.END_TAG_);
+			
+			out_.push("var {var} = JSON.parse(");
+			out_.push(JSON.stringify(JSON.stringify({var})));
+			out_.push(");");
+
+			out_.push($.AppContext.constants.OPEN_TAG_);
+			out_.push("/script");
+			out_.push($.AppContext.constants.END_TAG_);
+            			
 			{content}
+			
 			return out_.join("");
 		&#125;;
 		
