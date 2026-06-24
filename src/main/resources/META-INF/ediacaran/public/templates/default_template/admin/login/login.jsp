@@ -14,7 +14,7 @@
 <ec:include uri="/includes/head.jsp"/>
 <style type="text/css">
 .box {
-    width: 360px;
+    width: 260px;
     margin: 12% auto;
 }
 
@@ -94,11 +94,8 @@
 				      	</ed:col>
 				      </ed:row>
 				      <ed:row style="form">
-			      		<ed:col size="8">
-			      		</ed:col>
-			      		<ed:col size="4">
-			      			<fmt:message key="box.sign_in_button" bundle="${sys_messages}" var="label"/>
-			      			<ec:button block="true" label="${label}" style="primary" actionType="submit"/>
+			      		<ed:col>
+			      			<ec:button align="right" label="#{box.sign_in_button}" bundle="${sys_messages}" style="primary" actionType="submit"/>
 			      		</ed:col>
 				      </ed:row>
 					</ec:form>
