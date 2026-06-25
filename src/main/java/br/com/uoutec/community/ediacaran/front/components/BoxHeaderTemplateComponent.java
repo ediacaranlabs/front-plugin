@@ -16,6 +16,7 @@ public class BoxHeaderTemplateComponent extends AbstractTemplateComponent {
 	
 		super.default_attrs = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_attrs) {{
+			remove("classStyle");
 		}});
 	
 	
@@ -26,6 +27,7 @@ public class BoxHeaderTemplateComponent extends AbstractTemplateComponent {
 	
 		super.default_props = 
 		Collections.unmodifiableSet(new HashSet<String>(super.default_props) {{
+			add("classStyle");
 			add("content");
 		}});
 	

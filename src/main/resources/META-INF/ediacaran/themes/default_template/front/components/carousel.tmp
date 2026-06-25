@@ -1,7 +1,7 @@
 <!-- carousel:{id} -->
 <div {attr} class="jcarousel-wrapper">
     <div class="jcarousel">
-        <ul>
+        <ul class="jcarousel-item">
 			{content}        
         </ul>
     </div>

@@ -1116,3 +1116,35 @@ footer .widget ul li a {
 footer .fa:not([class*="fa-inverse"]) {
 	color: inherit;
 }
+
+/* ===================================
+view mode
+==================================== */
+
+.simplified-mode {
+	display: block;
+}
+
+.full-mode {
+	display: none;
+}
+
+@media screen and (min-width: 768px){
+	
+}
+
+@media screen and (min-width: 992px){
+
+}
+
+@media screen and (min-width: 1200px){
+
+	.simplified-mode {
+		display: none;
+	}
+	
+	.full-mode {
+		display: block;
+	}
+
+}

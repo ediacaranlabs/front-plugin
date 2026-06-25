@@ -18,7 +18,7 @@
     width: 100%;
 }
 
-.jcarousel ul {
+.jcarousel ul.jcarousel-item {
     width: 10000em;
     position: relative;
     list-style: none;
@@ -26,7 +26,7 @@
     padding: 0;
 }
 
-.jcarousel li {
+.jcarousel li.jcarousel-content {
     width: 200px;
     float: left;
     border: 1px solid #fff;
@@ -57,7 +57,8 @@
     width: 30px;
     height: 30px;
     text-align: center;
-    background: #4E443C;
+    /*background: #4E443C;*/
+    background: #4e443c45;
     color: #fff;
     text-decoration: none;
     text-shadow: 0 0 1px #000;

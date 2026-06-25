@@ -12,10 +12,19 @@
 			out_.push("");
 			out_.push($.AppContext.constants.END_TAG_);
 			
-			out_.push("var {var} = JSON.parse(");
-			out_.push(JSON.stringify(JSON.stringify({var})));
-			out_.push(");");
-
+			if(typeof {var} === 'string')&#123;
+				out_.push("var {var} = " + JSON.stringify({var}) + ";");
+			&#125;
+			else
+			if({var} && typeof {var} === 'object' && {var}.constructor === Object)&#123;
+				out_.push("var {var} = JSON.parse(");
+				out_.push(JSON.stringify(JSON.stringify({var})));
+				out_.push(");");
+			&#125;
+			else&#123;
+				out_.push("var {var} = " + {var} + ";");
+			&#125;
+			
 			out_.push($.AppContext.constants.OPEN_TAG_);
 			out_.push("/script");
 			out_.push($.AppContext.constants.END_TAG_);

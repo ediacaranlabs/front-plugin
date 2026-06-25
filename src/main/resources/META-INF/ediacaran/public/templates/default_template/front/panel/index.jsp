@@ -263,9 +263,11 @@ Inner - Section: page headline
 						id="panel_menu" 
 						expand="xl" 
 						style="panel">
+						<%--
 						<ec:menu-toggler menuID="panel_menu_body">
 							<ec:icon icon="bars" />
 						</ec:menu-toggler>
+						--%>
 						<ec:menu-body collapse="true">
 							<ec:menu-itens>
 								<c:forEach items="${adminmenubar.itens}" var="menu">
@@ -336,7 +338,17 @@ Inner - Section: page headline
 	</section>
 	
 	<ed:container>
-		<div id="content-body"></div>
+		<ed:row style="form">
+			<ed:col size="12">
+ 				<ec:menu-toggler menuID="panel_menu_body">
+					<ec:icon icon="bars" size="1" />
+				</ec:menu-toggler>
+			</ed:col>
+		</ed:row>
+	
+		<div id="content-body">
+		</div>
+		
 	</ed:container>
 
 	<ec:include uri="/includes/footer.jsp"/>
