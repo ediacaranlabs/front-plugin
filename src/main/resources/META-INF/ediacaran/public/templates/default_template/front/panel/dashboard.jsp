@@ -21,14 +21,27 @@
 	</ed:row>
 </section>
 
-<div class="row">
-<c:forEach begin="0" end="${fn:length(vars.widgets)}" varStatus="loop">
-	<c:if test="${!empty vars.widgets[loop.index].resource}">
-		<div class="col-sm-6 col-md-6 col-lg-6" id="widget_${loop.index}">
-		</div>
-	</c:if>
-</c:forEach>
-</div>
+<span class="full-mode">
+	<ed:row>
+		<c:forEach begin="0" end="${fn:length(vars.widgets)}" varStatus="loop">
+			<c:if test="${!empty vars.widgets[loop.index].resource}">
+				<ed:col id="widget_${loop.index}" size="6">
+				</ed:col>
+				<ec:separator/>
+			</c:if>
+		</c:forEach>
+	</ed:row>
+</span>
+<span class="simplified-mode">
+	<c:forEach begin="0" end="${fn:length(vars.widgets)}" varStatus="loop">
+		<ed:row style="form">
+				<c:if test="${!empty vars.widgets[loop.index].resource}">
+					<ed:col id="widget1_${loop.index}">
+					</ed:col>
+				</c:if>
+		</ed:row>
+	</c:forEach>
+</span>
 
 <script type="text/javascript">
 	$.AppContext.onload(
@@ -36,6 +49,7 @@
 			<c:forEach begin="0" end="${fn:length(vars.widgets)}" varStatus="loop">
 				<c:if test="${!empty vars.widgets[loop.index].resource}">
 				$.AppContext.loadContent("widget_${loop.index}", "${vars.widgets[loop.index].resource}");		
+				$.AppContext.loadContent("widget1_${loop.index}", "${vars.widgets[loop.index].resource}");		
 				</c:if>
 			</c:forEach>
 		}

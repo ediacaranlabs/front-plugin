@@ -13,7 +13,6 @@
 
 .box .box-header {
 	background-color: transparent;
-    border-bottom: 1px solid rgba(0,0,0,.125);
     position: relative;
     padding: .75rem 0;
 }
