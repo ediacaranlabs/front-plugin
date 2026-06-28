@@ -36,7 +36,21 @@ $.AppContext.form.submitFunction = function() {
 			
 			if(actionType === '#!' || actionType === '#m'){
 		    	event.preventDefault();
-		    	$.AppContext.utils.submit($form);
+				var $objButton = $.AppContext.utils.toObject($b);
+				
+				$objButton.setEnabled(false);
+				
+		    	$.AppContext.utils.submit(
+					$form, 
+					true, 
+					null, 
+					null, 
+					function($e){
+						$objButton.setEnabled(true);
+					},
+					function($e){
+						$objButton.setEnabled(true);
+					});
 			}
 
 
@@ -232,94 +246,9 @@ $.AppContext.utils = {
 		},
 
 		enableAsyncSubmit: function (local){
-
 			var $region = local == null? '' : '#' + local;
-			
-			//$($region + " form button[type=submit]").each($.AppContext.form.submitFunction);
 			$($region + " button[type=submit]").each($.AppContext.form.submitFunction);
-						
-			/*
-			$($region + " form button[type=submit]").each(function() {
-				
-				var $e = $(this);
-				
-				if( $e.is("button") && $e.attr("type") == "submit" ) {
-			        
-					if($e.attr('asyncEnabled')){
-						return;
-					}
-					
-					$e.click(function(event){
-						
-						var $b = $(this);
-
-						var $form = $b.attr("form") !== undefined? $('#' + $b.attr("form")) : $b.parents('form:first');
-						
-						$form.attr("action",       $b.attr("formaction") !== undefined?   $b.attr("formaction")   : $form.attr("action_default")       );
-						$form.attr("enctype",      $b.attr("formenctype") !== undefined?  $b.attr("formenctype")  : $form.attr("enctype_default")      );
-						$form.attr("method",       $b.attr("formmethod") !== undefined?   $b.attr("formmethod")   : $form.attr("method_default")       );
-						$form.attr("target",       $b.attr("formtarget") !== undefined?   $b.attr("formtarget")   : $form.attr("target_default")       );
-						$form.attr("dest-content", $b.attr("dest-content") !== undefined? $b.attr("dest-content") : $form.attr("dest_content_default") );
-						
-						var $destContent = $form.attr('dest-content');
-						var $address     = $form.attr('action');
-						var actionType   = $address === undefined? "" : $address.substring(0, 2);
-						
-						if(actionType === '#!' || actionType === '#m'){
-					    	event.preventDefault();
-					    	$.AppContext.utils.submit($form);
-						}
-
-
-					});
-					
-					$e.attr('asyncEnabled', true);
-
-			    }					
-			});
-			*/
-			
 			$($region + " form").each($.AppContext.form.formFunction);
-			
-			/*
-			$($region + " form").each(function() {
-				
-				var $f = $(this);
-				
-				if($f.attr('asyncEnabled')){
-					return;
-				}
-				
-				var $destContent = $f.attr('dest-content');
-				var $address     = $f.attr('action');
-				var actionType   = $address === undefined? "" : $address.substring(0, 2);
-
-				if( (actionType !== '#!' && actionType !== '#m') && !$destContent){
-					return;
-				}
-				
-				$f.removeAttr('onsubmit');
-				$f.unbind('submit');
-				
-				$f.attr("action_default", $f.attr("action"));
-				$f.attr("enctype_default", $f.attr("enctype"));
-				$f.attr("method_default", $f.attr("method"));
-				$f.attr("target_default", $f.attr("target"));
-				$f.attr("dest_content_default", $f.attr("dest-content"));
-
-				
-				$($f).submit(function (event) {
-
-			    	var $form = $(this);
-			    	
-			    	event.preventDefault();
-			    	$.AppContext.utils.submit($form);
-				});
-					
-				$f.attr('asyncEnabled', true);
-				
-			});
-			*/
 		},
 
 		enableAsyncGet: function (local){
@@ -360,15 +289,10 @@ $.AppContext.utils = {
 			
 			$.ajax({
 			    type: 'POST',
-			    //headers: { 
-			    //    'Accept': 'application/json',
-			    //    'Content-Type': 'application/json' 
-			    //},
 			    contentType: "application/json; charset=utf-8",
 			    url: $.AppContext.vars.contextPath + resource,
 			    data: JSON.stringify(request),
 			    traditional: true,
-			    //data: request,
 			    success: success,
 			    error : error
 			});
@@ -457,7 +381,7 @@ $.AppContext.utils = {
 			var $method      = $form.attr('method');
 			var $destContent = $dest == null? $form.attr('dest-content') : $dest;
 			var $enctype     = $form.attr('enctype');
-			var $data;//        = $enctype === 'multipart/form-data'? new FormData($form[0]) : $($form).serialize();
+			var $data;
 
 			var $formObj = new $.AppContext.types.Form($form);
 
@@ -472,29 +396,16 @@ $.AppContext.utils = {
 			if($enctype === 'json'){
 				$data = $formObj.toObject();
 				$data = JSON.stringify($data);
-				//console.log("json : " + $data);
-				
-				//$data = new FormData($form[0]);
-				//$data = Object.fromEntries($data.entries())
-				//$data = JSON.stringify($data);
-				//alert($data);
-				//console.log("json : " + $data);
 			}
 			else{
 				$data = $($form).serialize();
 			}
 			
-			//$formObj.resetFieldNames();
-			
 		    $destContent = $.AppContext.utils.getDestContent($action, $destContent);
 		    $action      = $.AppContext.utils.getAddress($action);
 
-			$formObj.setEnabled(false);
-			
 			var $successWrapper = function($e){
 			
-				$formObj.setEnabled(true);
-	
 				$formObj.updateFieldIndex();
 				$formObj.updateFieldNames();
 				
@@ -506,8 +417,6 @@ $.AppContext.utils = {
 
 			var $errorWrapper = function($e){
 
-				$formObj.setEnabled(true);
-								
 				$formObj.updateFieldIndex();
 				$formObj.updateFieldNames();
 				
