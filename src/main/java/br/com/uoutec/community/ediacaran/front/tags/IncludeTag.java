@@ -60,5 +60,5 @@ public class IncludeTag extends AbstractSimpleTagComponent {
 	public void setResolved(Boolean resolved) {
 		this.resolved = resolved;
 	}
-	
+
 }
