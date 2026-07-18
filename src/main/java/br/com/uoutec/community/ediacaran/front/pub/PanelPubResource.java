@@ -35,12 +35,12 @@ public class PanelPubResource {
 	}
 
 	@Action(value="/")
-	@View(value="${plugins.ediacaran.front.template}/front/panel/index")
+	@View(value="${theme.front}/panel/index")
 	public void index() {
 	}
 	
 	@Action(value="/dashboard")
-	@View("${plugins.ediacaran.front.template}/front/panel/dashboard")
+	@View("${theme.front}/panel/dashboard")
 	@Result("vars")
 	public Map<String, Object> getDashboard(){
 		Map<String, Object> m = new HashMap<String, Object>();
