@@ -257,6 +257,11 @@ Inner - Section: page headline
 					</div>
 				</ed:col>
 			</ed:row>
+		</ed:container>
+	</section>
+
+	<section class="inner-headline panel-menu">
+		<ed:container>
 			<ed:row style="form">
 				<ed:col>
 					<ec:menu-bar 
