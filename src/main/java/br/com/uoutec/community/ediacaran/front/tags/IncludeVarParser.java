@@ -84,7 +84,13 @@ public class IncludeVarParser implements VarParser{
     	}
 
     	if(contextName != null && !currentContext.equals(contextName)) {
+    		contextName = contextName.isEmpty()? "/" : contextName;
     		servletContext = servletContext.getContext(contextName);
+    		
+        	if(servletContext == null) {
+        		throw new IOException(contextName);
+        	}
+    		
     	}
     	
     	ImportResponseWrapper irw = new ImportResponseWrapper(response, writter); 
